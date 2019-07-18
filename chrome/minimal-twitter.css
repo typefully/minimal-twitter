@@ -1,0 +1,61 @@
+header[role="banner"] {
+  align-items: start !important;
+  max-width: 100px !important;
+}
+
+main[role="main"] {
+  align-items: center !important;
+}
+
+@media all and (min-width: 1265px) {
+  main[role="main"] {
+    transform: translateX(-56px) !important;
+  }
+}
+
+div[title="Home"],
+div[title="Explore"],
+div[title="Notifications"],
+div[title="Messages"],
+div[title="Bookmarks"],
+div[title="Lists"],
+div[title="Profile"],
+div[title="More"] {
+  display: none !important;
+}
+
+a[aria-label="Tweet"][role="button"] {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  max-width: 125px;
+}
+
+header[role="banner"] > div > div > div {
+  justify-content: center !important;
+}
+
+div[data-testid="sidebarColumn"] {
+  display: none !important;
+}
+
+/* --- Use this to make columns bigger on home page
+
+div[data-testid="primaryColumn"] {
+  max-width: 750px !important;
+}
+
+div[data-testid="primaryColumn"] > div > div > div:nth-child(3) {
+  max-width: 750px !important;
+}
+
+div[data-testid="primaryColumn"]
+  > div
+  > div
+  > div:nth-child(2)
+  > div
+  > div:nth-child(2) {
+  max-width: 750px !important;
+}
+
+--- */

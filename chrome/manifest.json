@@ -1,0 +1,44 @@
+{
+  "name": "Minimal Twitter",
+  "short_name": "MinTwitter",
+  "description": "A minimal twitter theme for the new Twitter!",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "css": ["minimal-twitter.css"],
+      "matches": ["https://twitter.com/*"]
+    },
+    {
+      "js": ["removePromoted.js"],
+      "matches": ["https://twitter.com/home"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/MinimalTwitterIcon16.png",
+      "32": "images/MinimalTwitterIcon32.png",
+      "48": "images/MinimalTwitterIcon48.png",
+      "128": "images/MinimalTwitterIcon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/MinimalTwitterIcon16.png",
+    "32": "images/MinimalTwitterIcon32.png",
+    "48": "images/MinimalTwitterIcon48.png",
+    "128": "images/MinimalTwitterIcon128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T",
+        "mac": "MacCtrl+Shift+T"
+      },
+      "description": "Opens Minimal Twitter"
+    }
+  }
+}
