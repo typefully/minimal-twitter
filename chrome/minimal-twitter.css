@@ -7,23 +7,6 @@ main[role="main"] {
   align-items: center !important;
 }
 
-@media all and (min-width: 1265px) {
-  main[role="main"] {
-    transform: translateX(-56px) !important;
-  }
-}
-
-div[title="Home"],
-div[title="Explore"],
-div[title="Notifications"],
-div[title="Messages"],
-div[title="Bookmarks"],
-div[title="Lists"],
-div[title="Profile"],
-div[title="More"] {
-  display: none !important;
-}
-
 a[aria-label="Tweet"][role="button"] {
   position: fixed;
   right: 24px;
@@ -36,7 +19,22 @@ header[role="banner"] > div > div > div {
 }
 
 div[data-testid="sidebarColumn"] {
-  display: none !important;
+  visibility: hidden !important;
+  width: 125px !important;
+}
+
+form[aria-label="Search Twitter"][role="search"] {
+  visibility: visible !important;
+  position: fixed !important;
+  width: 300px !important;
+  top: 8px;
+  right: 16px;
+}
+
+@media all and (max-width: 1265px) {
+  form[aria-label="Search Twitter"][role="search"] {
+    visibility: hidden !important;
+  }
 }
 
 /* --- Use this to make columns bigger on home page
