@@ -7,5 +7,5 @@ Minimal Theme for the new Twitter UI!
 ## Download
 
 - [Chrome Extension](https://chrome.google.com/webstore/detail/minimal-twitter/dbneehiibeohpjohmhpidpnbpgljkamf)
-- Firefox Extension (tbd!)
+- [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
 - Safari Extension (tbd!)
