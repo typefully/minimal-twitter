@@ -2,7 +2,7 @@
 
 Minimal Theme for the new Twitter UI!
 
-![screenshot](./screenshot.png)
+![screenshot](./screenshot-chrome.png)
 
 ## Download
 
