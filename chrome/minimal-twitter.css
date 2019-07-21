@@ -23,6 +23,10 @@ nav[aria-label="Primary"][role="navigation"] > div > div > div:nth-child(2) {
   display: none !important;
 }
 
+div[data-testid="primaryColumn"] {
+  border-width: 0 !important;
+}
+
 div[data-testid="sidebarColumn"] {
   visibility: hidden !important;
   width: 125px !important;
