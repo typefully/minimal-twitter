@@ -20,17 +20,17 @@
   },
   "browser_action": {
     "default_icon": {
-      "16": "images/MinimalTwitterIcon16.png",
-      "32": "images/MinimalTwitterIcon32.png",
-      "48": "images/MinimalTwitterIcon48.png",
-      "128": "images/MinimalTwitterIcon128.png"
+      "16": "MinimalTwitterIcon16.png",
+      "32": "MinimalTwitterIcon32.png",
+      "48": "MinimalTwitterIcon48.png",
+      "128": "MinimalTwitterIcon128.png"
     }
   },
   "icons": {
-    "16": "images/MinimalTwitterIcon16.png",
-    "32": "images/MinimalTwitterIcon32.png",
-    "48": "images/MinimalTwitterIcon48.png",
-    "128": "images/MinimalTwitterIcon128.png"
+    "16": "MinimalTwitterIcon16.png",
+    "32": "MinimalTwitterIcon32.png",
+    "48": "MinimalTwitterIcon48.png",
+    "128": "MinimalTwitterIcon128.png"
   },
   "commands": {
     "_execute_browser_action": {
