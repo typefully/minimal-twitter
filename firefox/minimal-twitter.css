@@ -1,0 +1,64 @@
+header[role="banner"] {
+  align-items: start !important;
+  max-width: 100px !important;
+}
+
+main[role="main"] {
+  align-items: center !important;
+}
+
+a[aria-label="Tweet"][role="button"] {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  max-width: 125px;
+}
+
+header[role="banner"] > div > div > div {
+  justify-content: center !important;
+}
+
+nav[aria-label="Primary"][role="navigation"] > a > div > div:nth-child(2),
+nav[aria-label="Primary"][role="navigation"] > div > div > div:nth-child(2) {
+  display: none !important;
+}
+
+div[data-testid="sidebarColumn"] {
+  visibility: hidden !important;
+  width: 125px !important;
+}
+
+form[aria-label="Search Twitter"][role="search"] {
+  visibility: visible !important;
+  position: fixed !important;
+  width: 300px !important;
+  top: 8px;
+  right: 16px;
+}
+
+@media all and (max-width: 1265px) {
+  form[aria-label="Search Twitter"][role="search"] {
+    visibility: hidden !important;
+  }
+}
+
+/* --- Use this to make columns bigger on home page
+
+div[data-testid="primaryColumn"] {
+  max-width: 750px !important;
+}
+
+div[data-testid="primaryColumn"] > div > div > div:nth-child(3) {
+  max-width: 750px !important;
+}
+
+div[data-testid="primaryColumn"]
+  > div
+  > div
+  > div:nth-child(2)
+  > div
+  > div:nth-child(2) {
+  max-width: 750px !important;
+}
+
+--- */
