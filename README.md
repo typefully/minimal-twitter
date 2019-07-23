@@ -1,6 +1,6 @@
 # Minimal Twitter
 
-Minimal Theme for the new Twitter UI! [Download](#download).
+Minimal Theme for the new Twitter UI – [download now](#download)!
 
 ![screenshot](./screenshot-chrome.png)
 
