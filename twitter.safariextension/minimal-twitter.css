@@ -27,7 +27,16 @@ header[role="banner"] > div > div > div {
 
 nav[aria-label="Primary"][role="navigation"] > a > div > div:nth-child(2),
 nav[aria-label="Primary"][role="navigation"] > div > div > div:nth-child(2) {
-  display: none !important;
+  opacity: 0 !important;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+nav[aria-label="Primary"][role="navigation"]:hover > a > div > div:nth-child(2),
+nav[aria-label="Primary"][role="navigation"]:hover
+  > div
+  > div
+  > div:nth-child(2) {
+  opacity: 1 !important;
 }
 
 div[data-testid="primaryColumn"] {
