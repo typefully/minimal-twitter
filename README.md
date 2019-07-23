@@ -9,6 +9,8 @@
     </a>
 </h1>
 
+<br>
+
 Minimal Theme for the new Twitter UI – [install now](#installation)!
 
 ![screenshot](./screenshot-chrome.png)
