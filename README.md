@@ -1,18 +1,18 @@
 # Minimal Twitter
 
-Minimal Theme for the new Twitter UI – [download now](#download)!
+Minimal Theme for the new Twitter UI – [install now](#installation)!
 
 ![screenshot](./screenshot-chrome.png)
 
-## Download
+## Installation
 
 - [Chrome Extension](https://chrome.google.com/webstore/detail/minimal-twitter/dbneehiibeohpjohmhpidpnbpgljkamf)
 - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
-- [Safari Extension](#instructions-to-use-safari-extension) (see below for instructions)
+- [Safari Extension](#instructions-to-install-the-unofficial-safari-extension) (see below for instructions)
 
-### Instructions to use Safari Extension
+### Instructions to install the (unofficial) Safari Extension
 
-To use Minimal Twitter on Safari, just follow the below instructions:
+To install Minimal Twitter on Safari, just follow the below instructions:
 
 1. Download the [the Minimal Twitter GitHub repository](https://github.com/thomaswangio/minimal-twitter/archive/master.zip)
 2. Unzip the zipped Minimal Twitter file that you just downloaded.
