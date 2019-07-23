@@ -48,5 +48,8 @@ _Why is this unofficial? Well... Official Safari extensions require me to have A
 Feel free to clone/fork this repository and extend it to your ❤️'s delight. The following documentation is the official documentation used at time of development.
 
 - [Chrome Extensions Documentation](https://developer.chrome.com/extensions)
+  - [How to load extensions into Chrome locally](https://developer.chrome.com/extensions/getstarted#manifest)
 - [Firefox Add-ons Documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons)
+  - [How to load add-ons into Firefox locally](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Temporary_Installation_in_Firefox)
 - [Safari App Extensions Documentation](https://developer.apple.com/documentation/safariservices/safari_app_extensions)
+  - [Using the Safari Extension Builder](https://developer.apple.com/library/archive/documentation/Tools/Conceptual/SafariExtensionGuide/UsingExtensionBuilder/UsingExtensionBuilder.html)
