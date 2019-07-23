@@ -7,6 +7,12 @@ main[role="main"] {
   align-items: center !important;
 }
 
+@media all and (max-width: 987px) {
+  main[role="main"] {
+    align-items: flex-start !important;
+  }
+}
+
 a[aria-label="Tweet"][role="button"] {
   position: fixed;
   right: 24px;
@@ -29,7 +35,7 @@ div[data-testid="primaryColumn"] {
 
 div[data-testid="sidebarColumn"] {
   visibility: hidden !important;
-  width: 125px !important;
+  width: 150px !important;
 }
 
 form[aria-label="Search Twitter"][role="search"] {
@@ -41,6 +47,11 @@ form[aria-label="Search Twitter"][role="search"] {
 }
 
 @media all and (max-width: 1265px) {
+  div[data-testid="sidebarColumn"] {
+    visibility: hidden !important;
+    width: 100px !important;
+  }
+
   form[aria-label="Search Twitter"][role="search"] {
     visibility: hidden !important;
   }

@@ -7,6 +7,12 @@ main[role="main"] {
   align-items: center !important;
 }
 
+@media all and (max-width: 987px) {
+  main[role="main"] {
+    align-items: flex-start !important;
+  }
+}
+
 a[aria-label="Tweet"][role="button"] {
   position: fixed !important;
   right: 24px !important;
@@ -30,7 +36,7 @@ div[data-testid="primaryColumn"] {
 
 div[data-testid="sidebarColumn"] {
   visibility: hidden !important;
-  width: 125px !important;
+  width: 150px !important;
 }
 
 form[aria-label="Search Twitter"][role="search"] {
@@ -42,8 +48,55 @@ form[aria-label="Search Twitter"][role="search"] {
 }
 
 @media all and (max-width: 1265px) {
+  div[data-testid="sidebarColumn"] {
+    visibility: hidden !important;
+    width: 100px !important;
+  }
+
   form[aria-label="Search Twitter"][role="search"] {
     visibility: hidden !important;
+  }
+}
+
+div[data-testid="primaryColumn"]
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > form[aria-label="Search Twitter"][role="search"] {
+  visibility: visible !important;
+  position: relative !important;
+  width: auto !important;
+  top: auto;
+  right: auto;
+}
+
+@media all and (max-width: 1265px) {
+  div[data-testid="primaryColumn"]
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > form[aria-label="Search Twitter"][role="search"] {
+    visibility: visible !important;
   }
 }
 
