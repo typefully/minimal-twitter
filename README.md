@@ -42,3 +42,11 @@ To install Minimal Twitter on Safari, just follow the below instructions:
 8. Click run
 
 _Safari requires you to have Apple Developer Program membership and create a Apple developer certificate. Because Apple Developer membership costs \$99 + tax a year, unforunately, I can't add an official extension right now (too broke)._
+
+## Developing
+
+Feel free to clone/fork this repository and extend it to your ❤️'s delight. The following documentation is the official documentation used at time of development.
+
+- [Chrome Extensions Documentation](https://developer.chrome.com/extensions)
+- [Firefox Add-ons Documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons)
+- [Safari App Extensions Documentation](https://developer.apple.com/documentation/safariservices/safari_app_extensions)

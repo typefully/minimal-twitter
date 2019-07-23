@@ -46,6 +46,48 @@ form[aria-label="Search Twitter"][role="search"] {
   }
 }
 
+div[data-testid="primaryColumn"]
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > form[aria-label="Search Twitter"][role="search"] {
+  visibility: visible !important;
+  position: relative !important;
+  width: auto !important;
+  top: auto;
+  right: auto;
+}
+
+@media all and (max-width: 1265px) {
+  div[data-testid="primaryColumn"]
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > form[aria-label="Search Twitter"][role="search"] {
+    visibility: visible !important;
+  }
+}
+
 /* --- Use this to make columns bigger on home page
 
 div[data-testid="primaryColumn"] {
