@@ -20,7 +20,7 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 - Search on top right
 - Tweet button on bottom right.
 
-![screenshot](./screenshot-chrome.png)
+![screenshot gif](./minimal.gif)
 
 ## Installation
 
