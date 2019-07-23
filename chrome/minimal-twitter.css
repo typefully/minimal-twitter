@@ -1,3 +1,7 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 header[role="banner"] {
   align-items: start !important;
   max-width: 100px !important;
