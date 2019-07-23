@@ -9,9 +9,16 @@
     </a>
 </h1>
 
-<br>
-
 Minimal Theme for the new Twitter UI – [install now](#installation)!
+
+This theme aims to drastically simplify and declutter the new Twitter UI. By default:
+
+- No border on main feed
+- No navigation labels
+- Navigation pushed to left side of window
+- No trends or "Who to Follow" on Home Page
+- Search on top right
+- Tweet button on bottom right.
 
 ![screenshot](./screenshot-chrome.png)
 
