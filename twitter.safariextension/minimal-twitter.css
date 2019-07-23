@@ -14,10 +14,17 @@ main[role="main"] {
 }
 
 a[aria-label="Tweet"][role="button"] {
-  position: fixed !important;
-  right: 24px !important;
-  bottom: 24px !important;
-  max-width: 125px !important;
+  position: fixed;
+  right: 32px;
+  bottom: 24px;
+  max-width: 125px;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media all and (max-width: 800px) {
+  a[aria-label="Tweet"][role="button"] {
+    opacity: 0 !important;
+  }
 }
 
 header[role="banner"] > div > div > div {
@@ -28,7 +35,7 @@ header[role="banner"] > div > div > div {
 nav[aria-label="Primary"][role="navigation"] > a > div > div:nth-child(2),
 nav[aria-label="Primary"][role="navigation"] > div > div > div:nth-child(2) {
   opacity: 0 !important;
-  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 nav[aria-label="Primary"][role="navigation"]:hover > a > div > div:nth-child(2),
@@ -51,11 +58,23 @@ div[data-testid="sidebarColumn"] {
 form[aria-label="Search Twitter"][role="search"] {
   visibility: visible !important;
   position: fixed !important;
-  width: 300px !important;
+  max-width: 342px !important;
   top: 8px;
-  right: 16px;
+  right: 24px;
 }
 
+form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
+  background-color: transparent !important;
+}
+
+input[placeholder="Search Twitter"] {
+  width: 120px !important;
+  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+input[placeholder="Search Twitter"]:focus {
+  width: 300px !important;
+}
 @media all and (max-width: 1265px) {
   div[data-testid="sidebarColumn"] {
     visibility: hidden !important;

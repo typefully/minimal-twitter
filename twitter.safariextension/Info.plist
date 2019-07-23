@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.5</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Content</key>
@@ -40,8 +40,8 @@
 		<dict>
 			<key>Allowed Domains</key>
 			<array>
-				<string>mobile.twitter.com</string>
 				<string>twitter.com</string>
+				<string>mobile.twitter.com</string>
 			</array>
 			<key>Include Secure Pages</key>
 			<true/>
