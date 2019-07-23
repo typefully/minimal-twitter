@@ -8,11 +8,11 @@
   "content_scripts": [
     {
       "css": ["minimal-twitter.css"],
-      "matches": ["https://twitter.com/*"]
+      "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
     },
     {
       "js": ["removePromoted.js"],
-      "matches": ["https://twitter.com/home"]
+      "matches": ["https://twitter.com/home", "https://mobile.twitter.com/home"]
     }
   ],
   "background": {
