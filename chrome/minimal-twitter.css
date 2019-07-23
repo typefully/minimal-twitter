@@ -1,6 +1,6 @@
 html, body {
-    max-width: 100%;
-    overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 header[role="banner"] {
   align-items: start !important;
@@ -42,7 +42,6 @@ form[aria-label="Search Twitter"][role="search"] {
   width: 300px !important;
   top: 8px;
   right: 16px;
-    padding-right: 20px;
 }
 
 @media all and (max-width: 1265px) {
