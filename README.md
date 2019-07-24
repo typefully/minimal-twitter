@@ -43,6 +43,29 @@ To install Minimal Twitter on Safari, just follow the below instructions:
 
 _Why is this unofficial? Well... Official Safari extensions require me to have Apple Developer Program membership and create a Apple developer certificate. Because Apple Developer membership costs \$99 + tax a year, unforunately, I can't add an official extension right now (too broke)._
 
+## Chrome Customization
+
+Customization currently only available on Chrome:
+
+- Select preferred width of Twitter feed sections
+- Minimize borders between tweets, in explore, and in notifications
+- Hide retweet and/or like numbers
+
+Instructions:
+
+1. Right click or secondary click on the Minimal Twitter Extension and select "Options"
+2. Set user preferences
+3. Click "Save" button
+
+![preferences](./preferences.png)
+
+To get the latest version on Chrome without waiting for Chrome Web Store, follow these instructions:
+
+1. Open the Extension Management page by navigating to `chrome://extensions`.
+2. The Extension Management page can also be opened by clicking on the Chrome menu, hovering over **More Tools** then selecting **Extensions**.
+3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
+4. Click the **LOAD UNPACKED** button and select the extension directory.
+
 ## Developing
 
 Feel free to clone/fork this repository and extend it to your ❤️'s delight. The following documentation is the official documentation used at time of development.
