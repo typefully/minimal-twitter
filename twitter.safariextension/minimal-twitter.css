@@ -143,3 +143,23 @@ div[data-testid="primaryColumn"]
     visibility: visible !important;
   }
 }
+
+@media all and (max-width: 1300px) {
+  div[data-testid="primaryColumn"]
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > div
+    > form[aria-label="Search Twitter"][role="search"] {
+    display: block !important;
+  }
+}
