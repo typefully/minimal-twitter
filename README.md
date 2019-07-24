@@ -59,14 +59,15 @@ Instructions:
 
 ![preferences](./preferences.jpg)
 
-### Get latest
+### Get Latest Version
 
 To get the latest version on Chrome without waiting for Chrome Web Store, follow these instructions:
 
-1. Open the Extension Management page by navigating to `chrome://extensions`.
-2. The Extension Management page can also be opened by clicking on the Chrome menu, hovering over **More Tools** then selecting **Extensions**.
+1. Clone or Download this repo
+2. Open Chrome, then type in `chrome://extensions` in your address bar.
 3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
-4. Click the **LOAD UNPACKED** button and select the extension directory.
+4. Click the **LOAD UNPACKED** button
+5. Select the extension folder/directory, called `chrome` that you downloaded in this repo
 
 ## Developing
 
