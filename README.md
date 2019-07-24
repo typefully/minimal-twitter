@@ -57,7 +57,7 @@ Instructions:
 2. Set user preferences
 3. Click "Save" button
 
-![preferences](./preferences.png)
+![preferences](./preferences.jpg)
 
 To get the latest version on Chrome without waiting for Chrome Web Store, follow these instructions:
 
