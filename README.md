@@ -45,7 +45,7 @@ _Why is this unofficial? Well... Official Safari extensions require me to have A
 
 ## Chrome Customization
 
-Customization currently only available on Chrome:
+Customization currently only available in Chrome! ⚙️
 
 - Select preferred width of Twitter feed sections
 - Minimize borders between tweets, in explore, and in notifications
