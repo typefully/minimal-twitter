@@ -60,7 +60,7 @@ How to customize:
 2. Set user preferences
 3. Click "Save" button
 
-![preferences](./preferences.jpg)
+![preferences](./preferences.png)
 
 ### Get Latest Version
 
