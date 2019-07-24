@@ -14,9 +14,9 @@ Minimal Theme for the new Twitter UI – [install now](#installation)!
 This theme aims to drastically simplify and declutter the new Twitter UI. By default:
 
 - No border on main feed
-- No navigation labels
+- Hidden navigation labels (shown on hover)
 - Navigation pushed to left side of window
-- No trends or "Who to Follow" on Home Page
+- No trends or “Who to Follow” on Home Page
 - Search on top right
 - Tweet button on bottom right.
 
@@ -25,6 +25,8 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 ## Installation
 
 - [Chrome Extension](https://chrome.google.com/webstore/detail/minimal-twitter/dbneehiibeohpjohmhpidpnbpgljkamf)
+  - [How to customize](#chrome-customization)
+  - [Get Latest Version](#get-latest-version)
 - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
 - [Safari Extension](#instructions-to-install-the-unofficial-safari-extension) (see below for instructions)
 
@@ -51,7 +53,7 @@ Customization currently only available in Chrome! ⚙️
 - Minimize borders between tweets, in explore, and in notifications
 - Hide retweet and/or like numbers
 
-Instructions:
+How to customize:
 
 1. Right click or secondary click on the Minimal Twitter Extension and select "Options"
 2. Set user preferences
@@ -79,3 +81,9 @@ Feel free to clone/fork this repository and extend it to your ❤️'s delight. 
   - [How to load add-ons into Firefox locally](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Temporary_Installation_in_Firefox)
 - [Safari App Extensions Documentation](https://developer.apple.com/documentation/safariservices/safari_app_extensions)
   - [Using the Safari Extension Builder](https://developer.apple.com/library/archive/documentation/Tools/Conceptual/SafariExtensionGuide/UsingExtensionBuilder/UsingExtensionBuilder.html)
+
+## Support this project!
+
+If you found this project useful, consider supporting me on Patreon :)
+
+<a href="https://www.patreon.com/bePatron?u=21748328" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="patreon button" width="200"></a>
