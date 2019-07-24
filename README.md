@@ -81,3 +81,9 @@ Feel free to clone/fork this repository and extend it to your ❤️'s delight. 
   - [How to load add-ons into Firefox locally](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Temporary_Installation_in_Firefox)
 - [Safari App Extensions Documentation](https://developer.apple.com/documentation/safariservices/safari_app_extensions)
   - [Using the Safari Extension Builder](https://developer.apple.com/library/archive/documentation/Tools/Conceptual/SafariExtensionGuide/UsingExtensionBuilder/UsingExtensionBuilder.html)
+
+## Support this project!
+
+If you found this project useful, consider supporting me on Patreon as I look to maintain this and [my other open source projects](https://twang.dev/).
+
+<a href="https://www.patreon.com/bePatron?u=21748328" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
