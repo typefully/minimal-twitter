@@ -14,10 +14,10 @@ main[role="main"] {
 }
 
 a[aria-label="Tweet"][role="button"] {
-  position: fixed;
-  right: 32px;
-  bottom: 24px;
-  max-width: 125px;
+  position: fixed !important;
+  right: 32px !important;
+  bottom: 24px !important;
+  max-width: 125px !important;
   transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
