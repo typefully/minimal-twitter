@@ -84,6 +84,6 @@ Feel free to clone/fork this repository and extend it to your ❤️'s delight. 
 
 ## Support this project!
 
-If you found this project useful, consider supporting me on Patreon as I look to maintain this and [my other open source projects](https://twang.dev/).
+If you found this project useful, consider supporting me on Patreon to help maintain this and [my other open source projects](https://twang.dev/).
 
 <a href="https://www.patreon.com/bePatron?u=21748328" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="patreon button"></a>
