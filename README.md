@@ -59,6 +59,8 @@ Instructions:
 
 ![preferences](./preferences.jpg)
 
+### Get latest
+
 To get the latest version on Chrome without waiting for Chrome Web Store, follow these instructions:
 
 1. Open the Extension Management page by navigating to `chrome://extensions`.
