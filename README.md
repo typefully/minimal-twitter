@@ -51,6 +51,7 @@ Customization currently only available in Chrome! ⚙️
 
 - Select preferred width of Twitter feed sections
 - Minimize borders between tweets, in explore, and in notifications
+- Hide the bottom right Tweet button
 - Hide retweet and/or like numbers
 
 How to customize:
