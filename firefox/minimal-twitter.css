@@ -67,11 +67,16 @@ form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
 }
 
 input[placeholder="Search Twitter"] {
-  width: 120px !important;
+  padding-left: 34px !important;
+  margin-left: -24px !important;
+  z-index: 1 !important;
+  width: 144px !important;
   transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 input[placeholder="Search Twitter"]:focus {
+  padding-left: 10px !important;
+  margin-left: 0 !important;
   width: 300px !important;
 }
 
@@ -103,7 +108,7 @@ div[data-testid="primaryColumn"]
   > form[aria-label="Search Twitter"][role="search"] {
   visibility: visible !important;
   position: relative !important;
-  width: auto !important;
+  max-width: 100% !important;
   top: auto;
   right: auto;
 }
