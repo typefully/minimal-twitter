@@ -8,6 +8,7 @@ function addStyles(css) {
 chrome.storage.sync.get(
   {
     feedWidth: "600",
+    noTweetButton: false,
     noBorders: false,
     noLikes: false,
     noRetweets: false
@@ -43,6 +44,14 @@ chrome.storage.sync.get(
         form[aria-label="Search Twitter"][role="search"] {
           display: none !important;
         }
+      }
+      `);
+    }
+
+    if (items.noTweetButton === true) {
+      addStyles(`
+      a[aria-label="Tweet"][role="button"] {
+        display: none !important;
       }
       `);
     }
