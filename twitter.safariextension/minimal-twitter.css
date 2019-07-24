@@ -52,7 +52,11 @@ div[data-testid="primaryColumn"] {
 
 div[data-testid="sidebarColumn"] {
   visibility: hidden !important;
-  width: 150px !important;
+  width: 120px !important;
+}
+
+div[aria-label="Timeline: Trending now"] {
+  display: none;
 }
 
 form[aria-label="Search Twitter"][role="search"] {
@@ -61,6 +65,12 @@ form[aria-label="Search Twitter"][role="search"] {
   max-width: 342px !important;
   top: 8px;
   right: 24px;
+}
+
+@media all and (max-width: 1300px) {
+  form[aria-label="Search Twitter"][role="search"] {
+    display: none !important;
+  }
 }
 
 form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
@@ -133,24 +143,3 @@ div[data-testid="primaryColumn"]
     visibility: visible !important;
   }
 }
-
-/* --- Use this to make columns bigger on home page
-
-div[data-testid="primaryColumn"] {
-  max-width: 750px !important;
-}
-
-div[data-testid="primaryColumn"] > div > div > div:nth-child(3) {
-  max-width: 750px !important;
-}
-
-div[data-testid="primaryColumn"]
-  > div
-  > div
-  > div:nth-child(2)
-  > div
-  > div:nth-child(2) {
-  max-width: 750px !important;
-}
-
---- */

@@ -2,12 +2,19 @@
   "name": "Minimal Twitter",
   "short_name": "MinTwitter",
   "description": "A minimal twitter theme for the new Twitter!",
-  "version": "1.4",
+  "version": "2.0",
   "manifest_version": 2,
-  "permissions": ["activeTab"],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://twitter.com/*",
+    "https://mobile.twitter.com/*"
+  ],
   "content_scripts": [
     {
       "css": ["minimal-twitter.css"],
+      "js": ["applyOptions.js"],
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
     },
     {
@@ -40,5 +47,9 @@
       },
       "description": "Opens Minimal Twitter"
     }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
   }
 }
