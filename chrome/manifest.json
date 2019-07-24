@@ -2,7 +2,7 @@
   "name": "Minimal Twitter",
   "short_name": "MinTwitter",
   "description": "A minimal twitter theme for the new Twitter!",
-  "version": "2.0",
+  "version": "2.1",
   "manifest_version": 2,
   "permissions": [
     "activeTab",
@@ -16,10 +16,6 @@
       "css": ["minimal-twitter.css"],
       "js": ["applyOptions.js"],
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
-    },
-    {
-      "js": ["removePromoted.js"],
-      "matches": ["https://twitter.com/home", "https://mobile.twitter.com/home"]
     }
   ],
   "background": {

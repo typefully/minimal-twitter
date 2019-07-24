@@ -18,13 +18,6 @@
 	<string>1</string>
 	<key>Content</key>
 	<dict>
-		<key>Scripts</key>
-		<dict>
-			<key>Start</key>
-			<array>
-				<string>removePromoted.js</string>
-			</array>
-		</dict>
 		<key>Stylesheets</key>
 		<array>
 			<string>minimal-twitter.css</string>
