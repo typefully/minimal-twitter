@@ -53,7 +53,7 @@ Customization currently only available in Chrome! ⚙️
 - Minimize borders between tweets, in explore, and in notifications
 - Hide retweet and/or like numbers
 
-Instructions:
+How to customize:
 
 1. Right click or secondary click on the Minimal Twitter Extension and select "Options"
 2. Set user preferences
