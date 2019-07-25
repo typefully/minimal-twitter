@@ -1,7 +1,7 @@
 {
   "name": "Minimal Twitter",
   "short_name": "MinTwitter",
-  "description": "A minimal twitter theme for the new Twitter!",
+  "description": "Extends Twitter UI functionality by adding CSS to make the UI cleaner. No big labels, cluttered elements, and distracting text.",
   "version": "1.7",
   "manifest_version": 2,
   "permissions": ["activeTab"],
