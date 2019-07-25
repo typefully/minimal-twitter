@@ -80,8 +80,12 @@ input[placeholder="Search Twitter"] {
   padding-left: 34px !important;
   margin-left: -24px !important;
   z-index: 1 !important;
-  width: 144px !important;
+  width: 150px !important;
   transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+input[placeholder="Search Twitter"]::placeholder {
+  font-size: 15px !important;
 }
 
 input[placeholder="Search Twitter"]:focus {
