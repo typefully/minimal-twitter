@@ -8,6 +8,7 @@ function addStyles(css) {
 chrome.storage.sync.get(
   {
     feedWidth: "600",
+    topNavigation: false,
     noTweetButton: false,
     noBorders: false,
     noLikes: false,
@@ -44,6 +45,15 @@ chrome.storage.sync.get(
         form[aria-label="Search Twitter"][role="search"] {
           display: none !important;
         }
+      }
+      `);
+    }
+
+    if (items.topNavigation === true) {
+      addStyles(`
+      header[role="banner"] > div > div > div {
+        justify-content: flex-start !important;
+        padding-top: 6px;
       }
       `);
     }

@@ -28,7 +28,7 @@ a[aria-label="Tweet"][role="button"] {
 }
 
 header[role="banner"] > div > div > div {
-  justify-content: center !important;
+  justify-content: center;
 }
 
 nav[aria-label="Primary"][role="navigation"] > a > div > div:nth-child(2),

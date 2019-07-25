@@ -1,6 +1,7 @@
 // Saves options to chrome.storage
 function save_options() {
   var feedWidth = document.getElementById("feed-width").value;
+  var topNavigation = document.getElementById("top-navigation").checked;
   var noTweetButton = document.getElementById("tweet").checked;
   var noBorders = document.getElementById("borders").checked;
   var noLikes = document.getElementById("like").checked;
@@ -8,6 +9,7 @@ function save_options() {
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
+      topNavigation: topNavigation,
       noTweetButton: noTweetButton,
       noBorders: noBorders,
       noLikes: noLikes,
@@ -30,6 +32,7 @@ function restore_options() {
   chrome.storage.sync.get(
     {
       feedWidth: "600",
+      topNavigation: false,
       noTweetButton: false,
       noBorders: false,
       noLikes: false,
@@ -37,6 +40,7 @@ function restore_options() {
     },
     function(items) {
       document.getElementById("feed-width").value = items.feedWidth;
+      document.getElementById("top-navigation").checked = items.topNavigation;
       document.getElementById("tweet").checked = items.noTweetButton;
       document.getElementById("borders").checked = items.noBorders;
       document.getElementById("like").checked = items.noLikes;
