@@ -24,11 +24,21 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 
 ## Installation
 
-- [Chrome Extension](https://chrome.google.com/webstore/detail/minimal-twitter/dbneehiibeohpjohmhpidpnbpgljkamf)
-  - [How to customize](#chrome-customization)
-  - [Get Latest Version](#get-latest-version)
+- [Chrome Extension](https://chrome.google.com/webstore/detail/minimal-twitter/dbneehiibeohpjohmhpidpnbpgljkamf) (🚧 Chrome has been slow to approve updates in the Chrome Web Store. Use [this workaround to get latest Chrome Version](#get-latest-chrome-version))
+  - [How to customize](#chrome-preferences)
 - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
-- [Safari Extension](#instructions-to-install-the-unofficial-safari-extension) (see below for instructions)
+  - [How to customize](#firefox-preferences)
+- [Safari Extension - unofficial](#instructions-to-install-the-unofficial-safari-extension)
+
+### Get Latest Chrome Version
+
+To get the latest version on Chrome without waiting for Chrome Web Store, follow these instructions:
+
+1. Clone or Download this repo
+2. Open Chrome, then type in `chrome://extensions` in your address bar.
+3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
+4. Click the **LOAD UNPACKED** button
+5. Select the extension folder/directory, called `chrome` that you downloaded in this repo
 
 ### Instructions to install the (unofficial) Safari Extension
 
@@ -45,32 +55,28 @@ To install Minimal Twitter on Safari, just follow the below instructions:
 
 _Why is this unofficial? Well... Official Safari extensions require me to have Apple Developer Program membership and create a Apple developer certificate. Because Apple Developer membership costs \$99 + tax a year, unforunately, I can't add an official extension right now (too broke)._
 
-## Chrome Customization
+## Chrome and Firefox Preferences
 
-Customization currently only available in Chrome! ⚙️
+Customization currently available in Chrome and Firefox! ⚙️
 
 - Select preferred width of Twitter feed sections
+- Anchor navigation to top
 - Minimize borders between tweets, in explore, and in notifications
 - Hide the bottom right Tweet button
 - Hide retweet and/or like numbers
 
-How to customize:
+### Chrome Preferences
 
 1. Right click or secondary click on the Minimal Twitter Extension and select "Options"
 2. Set user preferences
 3. Click "Save" button
 
-![preferences](./preferences.png)
+### Firefox Preferences
 
-### Get Latest Version
-
-To get the latest version on Chrome without waiting for Chrome Web Store, follow these instructions:
-
-1. Clone or Download this repo
-2. Open Chrome, then type in `chrome://extensions` in your address bar.
-3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
-4. Click the **LOAD UNPACKED** button
-5. Select the extension folder/directory, called `chrome` that you downloaded in this repo
+1. Right click or secondary click on the Minimal Twitter Extension and select "Manage Extension"
+2. Go to "Preferences" tab
+3. Select preferences
+4. Click "Save" button
 
 ## Developing
 
