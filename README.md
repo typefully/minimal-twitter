@@ -71,12 +71,16 @@ Customization currently available in Chrome and Firefox! ⚙️
 2. Set user preferences
 3. Click "Save" button
 
+![Chrome Preferences](preferences-chrome.png)
+
 ### Firefox Preferences
 
 1. Right click or secondary click on the Minimal Twitter Extension and select "Manage Extension"
 2. Go to "Preferences" tab
 3. Select preferences
 4. Click "Save" button
+
+![Firefox Preferences](preferences-firefox.png)
 
 ## Developing
 
