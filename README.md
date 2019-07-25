@@ -24,15 +24,15 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 
 ## Installation
 
-- [Chrome Extension](https://chrome.google.com/webstore/detail/minimal-twitter/dbneehiibeohpjohmhpidpnbpgljkamf) (🚧 Chrome has been slow to approve updates in the Chrome Web Store. Use [this workaround](#get-latest-chrome-version-workaround))
+- [Chrome Extension](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
   - [How to set preferences](#chrome-preferences)
 - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
   - [How to set preferences](#firefox-preferences)
 - [Safari Extension - unofficial](#instructions-to-install-the-unofficial-safari-extension)
 
-### Get Latest Chrome Version (workaround)
+### Get Latest Chrome Version (workaround/backup)
 
-To get the latest version on Chrome without waiting for Chrome Web Store, follow these instructions:
+In case there are issues with the Chrome Web Store, follow these instructions to get the latest Chrome extension version:
 
 1. Clone or Download this repo
 2. Open Chrome, then type in `chrome://extensions` in your address bar.
