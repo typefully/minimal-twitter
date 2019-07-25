@@ -30,7 +30,7 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
   - [How to set preferences](#firefox-preferences)
 - [Safari Extension - unofficial](#instructions-to-install-the-unofficial-safari-extension)
 
-### Get Latest Chrome Version (workaround)
+### Get Latest Chrome Version (workaround/backup)
 
 In case there are issues with the Chrome Web Store, follow these instructions to get the latest Chrome extension version:
 
