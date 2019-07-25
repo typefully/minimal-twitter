@@ -4,10 +4,14 @@
   "description": "A minimal twitter theme for the new Twitter!",
   "version": "1.7",
   "manifest_version": 2,
-  "permissions": ["activeTab"],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
   "content_scripts": [
     {
       "css": ["minimal-twitter.css"],
+      "js": ["applyOptions.js"],
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
     }
   ],
@@ -35,6 +39,15 @@
         "mac": "MacCtrl+Shift+T"
       },
       "description": "Opens Minimal Twitter"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": false
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "min@twitter"
     }
   }
 }
