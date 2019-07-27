@@ -167,3 +167,49 @@ div[data-testid="primaryColumn"]
     display: block !important;
   }
 }
+
+div[data-testid="primaryColumn"]
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > form[aria-label="Search Twitter"][role="search"]
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > input[placeholder="Search Twitter"] {
+  width: 100% !important;
+}
+
+div[data-testid="primaryColumn"]
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > form[aria-label="Search Twitter"][role="search"]
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > input[placeholder="Search Twitter"]:focus {
+  width: 100% !important;
+}
