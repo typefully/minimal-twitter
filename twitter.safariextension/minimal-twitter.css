@@ -21,6 +21,14 @@ a[aria-label="Tweet"][role="button"] {
   transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+a[data-testid="SideNav_NewTweet_Button"] {
+  position: fixed !important;
+  right: 32px !important;
+  bottom: 24px !important;
+  max-width: 125px !important;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
 @media all and (max-width: 800px) {
   a[aria-label="Tweet"][role="button"] {
     opacity: 0 !important;
@@ -30,6 +38,53 @@ a[aria-label="Tweet"][role="button"] {
 header[role="banner"] > div > div > div {
   justify-content: center !important;
   z-index: auto !important;
+}
+
+header[role="banner"]
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > nav
+  > a
+  > div
+  > div:nth-child(2),
+header[role="banner"]
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > nav
+  > div
+  > div
+  > div:nth-child(2) {
+  opacity: 0 !important;
+  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+header[role="banner"]
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > nav:hover
+  > a
+  > div
+  > div:nth-child(2),
+header[role="banner"]
+  > div
+  > div
+  > div
+  > div
+  > div:nth-child(2)
+  > nav:hover
+  > div
+  > div
+  > div:nth-child(2) {
+  opacity: 1 !important;
 }
 
 nav[aria-label="Primary"][role="navigation"] > a > div > div:nth-child(2),
