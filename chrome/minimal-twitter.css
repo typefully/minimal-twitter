@@ -7,6 +7,10 @@ main[role="main"] {
   align-items: center !important;
 }
 
+main[role="main"] > div > div:nth-child(2) > div {
+  justify-content: center !important;
+}
+
 @media all and (max-width: 987px) {
   main[role="main"] {
     align-items: flex-start !important;
@@ -173,7 +177,6 @@ div[data-testid="primaryColumn"]
   > div
   > div
   > div
-  > div
   > form[aria-label="Search Twitter"][role="search"] {
   visibility: visible !important;
   position: relative !important;
@@ -184,7 +187,6 @@ div[data-testid="primaryColumn"]
 
 @media all and (max-width: 1265px) {
   div[data-testid="primaryColumn"]
-    > div
     > div
     > div
     > div
@@ -216,14 +218,12 @@ div[data-testid="primaryColumn"]
     > div
     > div
     > div
-    > div
     > form[aria-label="Search Twitter"][role="search"] {
     display: block !important;
   }
 }
 
 div[data-testid="primaryColumn"]
-  > div
   > div
   > div
   > div
@@ -246,7 +246,6 @@ div[data-testid="primaryColumn"]
 }
 
 div[data-testid="primaryColumn"]
-  > div
   > div
   > div
   > div

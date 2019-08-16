@@ -18,6 +18,7 @@ chrome.storage.sync.get(
     if (items.feedWidth === "700") {
       addStyles(`
       div[data-testid="primaryColumn"],
+      div[data-testid="primaryColumn"] > div > div,
       div[data-testid="primaryColumn"] > div > div > div:nth-child(2),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(3),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
@@ -34,6 +35,7 @@ chrome.storage.sync.get(
     } else if (items.feedWidth === "800") {
       addStyles(`
       div[data-testid="primaryColumn"],
+      div[data-testid="primaryColumn"] > div > div,
       div[data-testid="primaryColumn"] > div > div > div:nth-child(2),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(3),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
