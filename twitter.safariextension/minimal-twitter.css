@@ -34,8 +34,16 @@ a[data-testid="SideNav_NewTweet_Button"] {
 }
 
 @media all and (max-width: 800px) {
+  a[data-testid="SideNav_NewTweet_Button"] {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+
   a[aria-label="Tweet"][role="button"] {
-    opacity: 0 !important;
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
   }
 }
 
