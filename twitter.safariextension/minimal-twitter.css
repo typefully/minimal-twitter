@@ -7,7 +7,7 @@ main[role="main"] {
   align-items: center !important;
 }
 
-main[role="main"] > div > div:nth-child(2) > div {
+main[role="main"] > div > div > div {
   justify-content: center !important;
 }
 
