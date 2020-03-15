@@ -126,6 +126,7 @@ div[aria-label="Timeline: Trending now"] {
 }
 
 form[aria-label="Search Twitter"][role="search"] {
+  display: block !important;
   visibility: visible !important;
   position: fixed !important;
   max-width: 342px !important;
@@ -135,7 +136,7 @@ form[aria-label="Search Twitter"][role="search"] {
 
 @media all and (max-width: 1300px) {
   form[aria-label="Search Twitter"][role="search"] {
-    display: none !important;
+    display: none;
   }
 }
 
