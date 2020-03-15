@@ -9,6 +9,15 @@
     </a>
 </h1>
 
+<p align="center">
+  <a aria-label="Firefox Add-on Rating" href="https://addons.mozilla.org/en-US/firefox/addon/min-twitter/">
+    <img src="https://img.shields.io/amo/rating/min-twitter?label=Firefox%20Add-on%20Rating&style=for-the-badge" />
+  </a>
+  <a aria-label="Chrome Web Store Rating" href="https://chrome.google.com/webstore/detail/minimal-twitter/pobhoodpcipjmedfenaigbeloiidbflp">
+    <img src="https://img.shields.io/chrome-web-store/rating/pobhoodpcipjmedfenaigbeloiidbflp?label=Chrome%20Web%20Store%20Rating&style=for-the-badge" />
+  </a>
+</p>
+
 Minimal Theme for the new Twitter UI – [install now](#installation)!
 
 This theme aims to drastically simplify and declutter the new Twitter UI. By default:
@@ -95,6 +104,4 @@ Feel free to clone/fork this repository and extend it to your ❤️'s delight. 
 
 ## Support this project!
 
-If you found this project useful, consider supporting me on Patreon :)
-
-<a href="https://www.patreon.com/bePatron?u=21748328" data-patreon-widget-type="become-patron-button"><img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="patreon button" width="200"></a>
+If you found this project useful, consider supporting me on [GitHub Sponsors](https://github.com/sponsors/thomaswangio) :)
