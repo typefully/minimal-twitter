@@ -275,3 +275,20 @@ div[data-testid="primaryColumn"]
   > input[placeholder="Search Twitter"]:focus {
   width: 100% !important;
 }
+
+@media all and (max-width: 1007px) {
+  div[data-testid="SideNav_AccountSwitcher_Button"] {
+    left: 8px !important;
+  }
+}
+
+div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(2),
+div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(3) {
+  opacity: 0;
+  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+div[data-testid="SideNav_AccountSwitcher_Button"]:hover > div:nth-child(2),
+div[data-testid="SideNav_AccountSwitcher_Button"]:hover > div:nth-child(3) {
+  opacity: 1;
+}
