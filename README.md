@@ -4,7 +4,7 @@
 
 <h1 align="center">
   Minimal Twitter
-    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fthomaswang%2Fminimal-twitter&via=thomaswangio&text=Check%20out%20this%20minimal%20Twitter%20theme%20for%20the%20new%20Twitter%21%20Available%20on%20Chrome%2C%20Firefox%2C%20and%20Safari&hashtags=minimaltwitter">
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fthomaswang%2Fminimal-twitter&via=ThomasWang&text=Check%20out%20this%20minimal%20Twitter%20theme%20for%20the%20new%20Twitter%21%20Available%20on%20Chrome%2C%20Firefox%2C%20and%20Safari&hashtags=minimaltwitter">
       <img alt="Tweet" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"/>
     </a>
 </h1>
