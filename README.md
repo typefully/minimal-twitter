@@ -33,13 +33,21 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 
 ## Installation
 
-- [Chrome Extension](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
-  - [How to set preferences](#chrome-preferences)
-- [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
-  - [How to set preferences](#firefox-preferences)
-- [Safari Extension - unofficial](#instructions-to-install-the-unofficial-safari-extension)
+- [Chrome Extension](#chrome)
+- [Firefox Add-on](#firefox)
+- [Safari Extension - unofficial](#safari-extension-unofficial)
 
-### Get Latest Chrome Version (workaround/backup)
+### Chrome
+
+- [Download Chrome extension in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
+- [How to set Chrome preferences](#chrome-preferences)
+
+### Firefox
+
+- [Download Firefox add-on in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
+- [How to set Firefox preferences](#firefox-preferences)
+
+#### Workaround/Backup
 
 In case there are issues with the Chrome Web Store, follow these instructions to get the latest Chrome extension version:
 
@@ -49,7 +57,7 @@ In case there are issues with the Chrome Web Store, follow these instructions to
 4. Click the **LOAD UNPACKED** button
 5. Select the extension folder/directory, called `chrome` that you downloaded in this repo
 
-### Instructions to install the (unofficial) Safari Extension
+### Safari Extension (unofficial)
 
 To install Minimal Twitter on Safari, just follow the below instructions:
 
