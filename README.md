@@ -40,11 +40,13 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 ### Chrome
 
 [Download Chrome extension in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
+
 [How to set Chrome preferences](#chrome-preferences)
 
 ### Firefox
 
 [Download Firefox add-on in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
+
 [How to set Firefox preferences](#firefox-preferences)
 
 #### Workaround/Backup
