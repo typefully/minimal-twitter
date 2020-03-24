@@ -43,11 +43,6 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 
 [How to set Chrome preferences](#chrome-preferences)
 
-### Firefox
-
-[Download Firefox add-on in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
-
-[How to set Firefox preferences](#firefox-preferences)
 
 #### Workaround/Backup
 
@@ -58,6 +53,12 @@ In case there are issues with the Chrome Web Store, follow these instructions to
 3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
 4. Click the **LOAD UNPACKED** button
 5. Select the extension folder/directory, called `chrome` that you downloaded in this repo
+
+### Firefox
+
+[Download Firefox add-on in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
+
+[How to set Firefox preferences](#firefox-preferences)
 
 ### Safari Extension (unofficial)
 
