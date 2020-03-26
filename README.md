@@ -4,7 +4,7 @@
 
 <h1 align="center">
   Minimal Twitter
-    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fthomaswangio%2Fminimal-twitter&via=thomaswangio&text=Check%20out%20this%20minimal%20Twitter%20theme%20for%20the%20new%20Twitter%21%20Available%20on%20Chrome%2C%20Firefox%2C%20and%20Safari&hashtags=minimaltwitter">
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fthomaswang%2Fminimal-twitter&via=ThomasWang&text=Check%20out%20this%20minimal%20Twitter%20theme%20for%20the%20new%20Twitter%21%20Available%20on%20Chrome%2C%20Firefox%2C%20and%20Safari&hashtags=minimaltwitter">
       <img alt="Tweet" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"/>
     </a>
 </h1>
@@ -33,23 +33,34 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 
 ## Installation
 
-- [Chrome Extension](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
-  - [How to set preferences](#chrome-preferences)
-- [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
-  - [How to set preferences](#firefox-preferences)
-- [Safari Extension - unofficial](#instructions-to-install-the-unofficial-safari-extension)
+- [Chrome Extension](#chrome)
+- [Firefox Add-on](#firefox)
+- [Safari Extension - unofficial](#safari-extension-unofficial)
 
-### Get Latest Chrome Version (workaround/backup)
+### Chrome
+
+[Download Chrome extension in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
+
+[How to set Chrome preferences](#chrome-preferences)
+
+
+#### Workaround/Backup
 
 In case there are issues with the Chrome Web Store, follow these instructions to get the latest Chrome extension version:
 
-1. Clone or Download this repo
+1. Clone or [Download this repo](https://github.com/thomaswang/minimal-twitter/archive/master.zip)
 2. Open Chrome, then type in `chrome://extensions` in your address bar.
 3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
 4. Click the **LOAD UNPACKED** button
 5. Select the extension folder/directory, called `chrome` that you downloaded in this repo
 
-### Instructions to install the (unofficial) Safari Extension
+### Firefox
+
+[Download Firefox add-on in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
+
+[How to set Firefox preferences](#firefox-preferences)
+
+### Safari Extension (unofficial)
 
 To install Minimal Twitter on Safari, just follow the below instructions:
 
