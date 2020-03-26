@@ -1,4 +1,4 @@
-browser.browserAction.onClicked.addListener(function(activeTab) {
+browser.browserAction.onClicked.addListener(function() {
   var newURL = "https://twitter.com/";
   browser.tabs.create({ url: newURL });
 });
