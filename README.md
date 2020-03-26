@@ -48,7 +48,7 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 
 In case there are issues with the Chrome Web Store, follow these instructions to get the latest Chrome extension version:
 
-1. Clone or Download this repo
+1. Clone or [Download this repo](https://github.com/thomaswang/minimal-twitter/archive/master.zip)
 2. Open Chrome, then type in `chrome://extensions` in your address bar.
 3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
 4. Click the **LOAD UNPACKED** button
