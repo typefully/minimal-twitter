@@ -121,7 +121,8 @@ nav[aria-label="Primary"][role="navigation"]:hover
 }
 
 div[data-testid="primaryColumn"] {
-  border-width: 0 !important;
+  border-left-width: 0;
+  border-right-width: 0;
 }
 
 div[data-testid="sidebarColumn"] {

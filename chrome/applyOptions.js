@@ -80,8 +80,8 @@ chrome.storage.sync.get(
     if (items.feedBorders === true) {
       addStyles(`
       div[data-testid="primaryColumn"] {
-        border-left-width: 1px !important;
-        border-right-width: 1px !important;
+        border-left-width: 1px;
+        border-right-width: 1px;
       }
       `);
     }
