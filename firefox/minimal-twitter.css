@@ -293,3 +293,11 @@ div[data-testid="SideNav_AccountSwitcher_Button"]:hover > div:nth-child(2),
 div[data-testid="SideNav_AccountSwitcher_Button"]:hover > div:nth-child(3) {
   opacity: 1;
 }
+
+div[data-testid="primaryColumn"] > div > div:nth-child(2) > div > div {
+  max-width: 100%;
+}
+
+svg[style="left: calc(105.5px);"] {
+  left: calc(17.5px) !important;
+}
