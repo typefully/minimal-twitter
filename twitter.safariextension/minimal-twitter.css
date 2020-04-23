@@ -48,8 +48,15 @@ a[data-testid="SideNav_NewTweet_Button"] {
 }
 
 header[role="banner"] > div > div > div {
-  justify-content: center !important;
-  z-index: auto !important;
+  justify-content: center;
+}
+
+header[role="banner"] > div > div > div > div {
+  margin-top: auto;
+}
+
+header[role="banner"] > div > div > div > div:nth-child(1) {
+  padding-top: 59px;
 }
 
 header[role="banner"]
@@ -274,12 +281,6 @@ div[data-testid="primaryColumn"]
   > div:nth-child(2)
   > input[placeholder="Search Twitter"]:focus {
   width: 100% !important;
-}
-
-@media all and (max-width: 1007px) {
-  div[data-testid="SideNav_AccountSwitcher_Button"] {
-    left: 8px !important;
-  }
 }
 
 div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(2),
