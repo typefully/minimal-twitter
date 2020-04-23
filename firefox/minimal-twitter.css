@@ -51,6 +51,14 @@ header[role="banner"] > div > div > div {
   justify-content: center;
 }
 
+header[role="banner"] > div > div > div > div {
+  margin-top: auto;
+}
+
+header[role="banner"] > div > div > div > div:nth-child(1) {
+  padding-top: 59px;
+}
+
 header[role="banner"]
   > div
   > div
@@ -126,7 +134,6 @@ div[aria-label="Timeline: Trending now"] {
 }
 
 form[aria-label="Search Twitter"][role="search"] {
-  display: block !important;
   visibility: visible !important;
   position: fixed !important;
   max-width: 342px !important;
@@ -136,7 +143,7 @@ form[aria-label="Search Twitter"][role="search"] {
 
 @media all and (max-width: 1300px) {
   form[aria-label="Search Twitter"][role="search"] {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -274,12 +281,6 @@ div[data-testid="primaryColumn"]
   > div:nth-child(2)
   > input[placeholder="Search Twitter"]:focus {
   width: 100% !important;
-}
-
-@media all and (max-width: 1007px) {
-  div[data-testid="SideNav_AccountSwitcher_Button"] {
-    left: 8px !important;
-  }
 }
 
 div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(2),

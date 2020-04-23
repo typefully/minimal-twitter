@@ -10,11 +10,12 @@ chrome.storage.sync.get(
     feedWidth: "600",
     topNavigation: false,
     noTweetButton: false,
+    feedBorders: false,
     noBorders: false,
     noLikes: false,
-    noRetweets: false
+    noRetweets: false,
   },
-  function(items) {
+  function (items) {
     if (items.feedWidth === "700") {
       addStyles(`
       div[data-testid="primaryColumn"],
@@ -54,8 +55,16 @@ chrome.storage.sync.get(
     if (items.topNavigation === true) {
       addStyles(`
       header[role="banner"] > div > div > div {
-        justify-content: flex-start !important;
+        justify-content: space-between !important;
         padding-top: 6px;
+      }
+
+      header[role="banner"] > div > div > div > div {
+        margin-top: 0;
+      }
+
+      header[role="banner"] > div > div > div > div:nth-child(1) {
+        padding-top: 0;
       }
       `);
     }
@@ -68,13 +77,22 @@ chrome.storage.sync.get(
       `);
     }
 
+    if (items.feedBorders === true) {
+      addStyles(`
+      div[data-testid="primaryColumn"] {
+        border-left-width: 1px !important;
+        border-right-width: 1px !important;
+      }
+      `);
+    }
+
     if (items.noBorders === true) {
       addStyles(`
-      div[aria-label="Timeline: Your Home Timeline"] > div > div > div > div {
+      div[aria-label="Timeline: Your Home Timeline"] > div > div > div {
         border-bottom-color: transparent;
       }
 
-      div[aria-label="Timeline: Explore"] > div > div > div > div {
+      div[aria-label="Timeline: Explore"] > div > div > div {
         border-bottom-color: transparent;
       }
       `);

@@ -3,6 +3,7 @@ function save_options() {
   var feedWidth = document.getElementById("feed-width").value;
   var topNavigation = document.getElementById("top-navigation").checked;
   var noTweetButton = document.getElementById("tweet").checked;
+  var feedBorders = document.getElementById("feed-borders").checked;
   var noBorders = document.getElementById("borders").checked;
   var noLikes = document.getElementById("like").checked;
   var noRetweets = document.getElementById("retweet").checked;
@@ -11,15 +12,16 @@ function save_options() {
       feedWidth: feedWidth,
       topNavigation: topNavigation,
       noTweetButton: noTweetButton,
+      feedBorders: feedBorders,
       noBorders: noBorders,
       noLikes: noLikes,
-      noRetweets: noRetweets
+      noRetweets: noRetweets,
     },
-    function() {
+    function () {
       // Update status to let user know options were saved.
       var status = document.getElementById("status");
       status.textContent = "Options saved.";
-      setTimeout(function() {
+      setTimeout(function () {
         status.textContent = "";
       }, 750);
     }
@@ -34,14 +36,16 @@ function restore_options() {
       feedWidth: "600",
       topNavigation: false,
       noTweetButton: false,
+      feedBorders: false,
       noBorders: false,
       noLikes: false,
-      noRetweets: false
+      noRetweets: false,
     },
-    function(items) {
+    function (items) {
       document.getElementById("feed-width").value = items.feedWidth;
       document.getElementById("top-navigation").checked = items.topNavigation;
       document.getElementById("tweet").checked = items.noTweetButton;
+      document.getElementById("feed-borders").checked = items.feedBorders;
       document.getElementById("borders").checked = items.noBorders;
       document.getElementById("like").checked = items.noLikes;
       document.getElementById("retweet").checked = items.noRetweets;

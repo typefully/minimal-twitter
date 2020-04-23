@@ -51,6 +51,14 @@ header[role="banner"] > div > div > div {
   justify-content: center;
 }
 
+header[role="banner"] > div > div > div > div {
+  margin-top: auto;
+}
+
+header[role="banner"] > div > div > div > div:nth-child(1) {
+  padding-top: 59px;
+}
+
 header[role="banner"]
   > div
   > div
@@ -273,18 +281,6 @@ div[data-testid="primaryColumn"]
   > div:nth-child(2)
   > input[placeholder="Search Twitter"]:focus {
   width: 100% !important;
-}
-
-div[data-testid="SideNav_AccountSwitcher_Button"] {
-  position: fixed !important;
-  left: 16px !important;
-  bottom: 24px !important;
-}
-
-@media all and (max-width: 1007px) {
-  div[data-testid="SideNav_AccountSwitcher_Button"] {
-    left: 8px !important;
-  }
 }
 
 div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(2),
