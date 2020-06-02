@@ -142,12 +142,6 @@ form[aria-label="Search Twitter"][role="search"] {
   right: 24px;
 }
 
-@media all and (max-width: 1300px) {
-  form[aria-label="Search Twitter"][role="search"] {
-    display: none !important;
-  }
-}
-
 form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
   background-color: transparent !important;
 }

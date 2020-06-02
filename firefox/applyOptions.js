@@ -26,12 +26,6 @@ chrome.storage.sync.get(
       div[data-testid="primaryColumn"] > div > div > div:nth-child(2) > div > div {
         max-width: 700px !important;
       }
-
-      @media all and (max-width: 1400px) {
-        form[aria-label="Search Twitter"][role="search"] {
-          display: none !important;
-        }
-      }
       `);
     } else if (items.feedWidth === "800") {
       addStyles(`
@@ -42,12 +36,6 @@ chrome.storage.sync.get(
       div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(2) > div > div {
         max-width: 800px !important;
-      }
-
-      @media all and (max-width: 1500px) {
-        form[aria-label="Search Twitter"][role="search"] {
-          display: none !important;
-        }
       }
       `);
     }
