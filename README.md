@@ -115,4 +115,4 @@ Feel free to clone/fork this repository and extend it to your ❤️'s delight. 
 
 ## Support this project!
 
-If you found this project useful, consider supporting me on [GitHub Sponsors](https://github.com/sponsors/thomaswangio) :)
+If you found this project useful, consider supporting me on [GitHub Sponsors](https://github.com/sponsors/thomaswang) ❤️
