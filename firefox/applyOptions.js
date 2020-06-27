@@ -76,11 +76,13 @@ chrome.storage.sync.get(
 
     if (items.noBorders === true) {
       addStyles(`
-      div[aria-label="Timeline: Your Home Timeline"] > div > div > div {
+      div[aria-label="Timeline: Your Home Timeline"] > div > div > div,
+      div[aria-label="Timeline: Your Home Timeline"] > div > div > div > div {
         border-bottom-color: transparent;
       }
 
-      div[aria-label="Timeline: Explore"] > div > div > div {
+      div[aria-label="Timeline: Explore"] > div > div > div,
+      div[aria-label="Timeline: Explore"] > div > div > div > div {
         border-bottom-color: transparent;
       }
       `);

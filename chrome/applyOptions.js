@@ -48,11 +48,11 @@ chrome.storage.sync.get(
       }
 
       header[role="banner"] > div > div > div > div {
-        margin-top: 0;
+        margin-top: 0 !important;
       }
 
       header[role="banner"] > div > div > div > div:nth-child(1) {
-        padding-top: 0;
+        padding-top: 0 !important;
       }
       `);
     }
@@ -76,11 +76,13 @@ chrome.storage.sync.get(
 
     if (items.noBorders === true) {
       addStyles(`
-      div[aria-label="Timeline: Your Home Timeline"] > div > div > div {
+      div[aria-label="Timeline: Your Home Timeline"] > div > div > div,
+      div[aria-label="Timeline: Your Home Timeline"] > div > div > div > div {
         border-bottom-color: transparent;
       }
 
-      div[aria-label="Timeline: Explore"] > div > div > div {
+      div[aria-label="Timeline: Explore"] > div > div > div,
+      div[aria-label="Timeline: Explore"] > div > div > div > div {
         border-bottom-color: transparent;
       }
       `);
