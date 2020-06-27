@@ -48,11 +48,11 @@ chrome.storage.sync.get(
       }
 
       header[role="banner"] > div > div > div > div {
-        margin-top: 0;
+        margin-top: 0 !important;
       }
 
       header[role="banner"] > div > div > div > div:nth-child(1) {
-        padding-top: 0;
+        padding-top: 0 !important;
       }
       `);
     }
