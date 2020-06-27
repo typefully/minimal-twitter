@@ -2,7 +2,7 @@
   "name": "Minimal Twitter",
   "short_name": "MinTwitter",
   "description": "Extends Twitter UI functionality by adding CSS to make the UI cleaner. No big labels, cluttered elements, and distracting text.",
-  "version": "2.5",
+  "version": "2.50",
   "manifest_version": 2,
   "permissions": ["storage"],
   "content_scripts": [
