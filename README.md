@@ -62,6 +62,10 @@ In case there are issues with the Chrome Web Store, follow these instructions to
 
 ### Safari Extension (unofficial)
 
+_Why is this unofficial? Well... Official Safari extensions require me to have Apple Developer Program membership and create a Apple developer certificate. Because Apple Developer membership costs \$99 + tax a year, unforunately, I can't add an official extension right now, but intend to eventually!_
+
+⚠️ Safari 13 has [removed support for Legacy Safari Extensions](https://developer.apple.com/documentation/safari-release-notes/safari-13-release-notes#Removed-Features). The below instructions are for Safari 12 and below.
+
 To install Minimal Twitter on Safari, just follow the below instructions:
 
 1. Download the [the Minimal Twitter GitHub repository](https://github.com/thomaswangio/minimal-twitter/archive/master.zip)
@@ -72,8 +76,6 @@ To install Minimal Twitter on Safari, just follow the below instructions:
 6. Click the + button > Add Extension
 7. Go to the unzipped Minimal Twitter and select the `twitter.safariextension` folder.
 8. Click run
-
-_Why is this unofficial? Well... Official Safari extensions require me to have Apple Developer Program membership and create a Apple developer certificate. Because Apple Developer membership costs \$99 + tax a year, unforunately, I can't add an official extension right now (too broke)._
 
 ## Chrome and Firefox Preferences
 
