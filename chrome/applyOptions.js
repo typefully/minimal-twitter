@@ -10,6 +10,7 @@ chrome.storage.sync.get(
     feedWidth: "600",
     topNavigation: false,
     noTweetButton: false,
+    showMessageDrawer: false,
     feedBorders: false,
     noBorders: false,
     noLikes: false,
@@ -46,14 +47,6 @@ chrome.storage.sync.get(
         justify-content: space-between !important;
         padding-top: 6px;
       }
-
-      header[role="banner"] > div > div > div > div {
-        margin-top: 0 !important;
-      }
-
-      header[role="banner"] > div > div > div > div:nth-child(1) {
-        padding-top: 0 !important;
-      }
       `);
     }
 
@@ -61,6 +54,14 @@ chrome.storage.sync.get(
       addStyles(`
       a[aria-label="Tweet"][role="button"] {
         display: none !important;
+      }
+      `);
+    }
+
+    if (items.showMessageDrawer === true) {
+      addStyles(`
+      div[data-testid="DMDrawer"] {
+        display: block;
       }
       `);
     }
