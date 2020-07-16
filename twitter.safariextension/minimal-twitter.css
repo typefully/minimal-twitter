@@ -141,6 +141,7 @@ div[data-testid="primaryColumn"] {
 div[data-testid="sidebarColumn"] {
   visibility: hidden !important;
   width: 120px !important;
+  z-index: 1;
 }
 
 div[aria-label="Timeline: Trending now"] {
