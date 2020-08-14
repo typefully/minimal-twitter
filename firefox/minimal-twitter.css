@@ -320,3 +320,7 @@ svg[style="left: calc(105.5px);"] {
 div[data-testid="DMDrawer"] {
   display: none;
 }
+
+[data-testid="primaryColumn"][data-testid="placementTracking"] article {
+    display: none
+}
