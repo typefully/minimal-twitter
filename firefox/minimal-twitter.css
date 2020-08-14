@@ -321,6 +321,6 @@ div[data-testid="DMDrawer"] {
   display: none;
 }
 
-[data-testid="primaryColumn"][data-testid="placementTracking"] article {
+[data-testid="placementTracking"] article {
     display: none
 }
