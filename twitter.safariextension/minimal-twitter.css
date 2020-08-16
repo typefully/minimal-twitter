@@ -24,12 +24,6 @@ main[role="main"] > div > div > div {
   justify-content: center !important;
 }
 
-@media all and (max-width: 987px) {
-  main[role="main"] {
-    align-items: flex-start !important;
-  }
-}
-
 a[aria-label="Tweet"][role="button"] {
   position: fixed !important;
   right: 32px !important;
