@@ -61,7 +61,7 @@ chrome.storage.sync.get(
     if (items.showMessageDrawer === true) {
       addStyles(`
       div[data-testid="DMDrawer"] {
-        display: block;
+        display: block !important;
       }
       `);
     }
