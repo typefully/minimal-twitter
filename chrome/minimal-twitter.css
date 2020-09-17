@@ -306,7 +306,7 @@ svg[style="left: calc(105.5px);"] {
 }
 
 div[data-testid="DMDrawer"] {
-  display: none;
+  opacity: 0;
 }
 
 [data-testid="placementTracking"] article {
