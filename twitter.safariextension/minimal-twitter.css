@@ -306,5 +306,5 @@ svg[style="left: calc(105.5px);"] {
 }
 
 div[data-testid="DMDrawer"] {
-  opacity: 0;
+  visbility: hidden;
 }
