@@ -11,7 +11,7 @@
 
 <p align="center">
   <a aria-label="Chrome Users" href="https://chrome.google.com/webstore/detail/minimal-twitter/pobhoodpcipjmedfenaigbeloiidbflp?hl=en">
-    <img src="https://img.shields.io/chrome-web-store/users/pobhoodpcipjmedfenaigbeloiidbflp?color=red&label=Chrome%20Users&style=for-the-badge" />
+    <img src="https://img.shields.io/chrome-web-store/users/pobhoodpcipjmedfenaigbeloiidbflp?color=blue&label=Chrome%20Users&style=for-the-badge" />
   </a>
   <a aria-label="Firefox Add-on Rating" href="https://addons.mozilla.org/en-US/firefox/addon/min-twitter/">
     <img src="https://img.shields.io/amo/rating/min-twitter?label=Firefox%20Add-on%20Rating&style=for-the-badge" />
