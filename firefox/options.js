@@ -8,6 +8,10 @@ function save_options() {
   var noBorders = document.getElementById("borders").checked;
   var noLikes = document.getElementById("like").checked;
   var noRetweets = document.getElementById("retweet").checked;
+  var noExploreButton = document.getElementById("explore").checked;
+  var noNotificationsButton = document.getElementById("notifications").checked;
+  var noBookmarksButton = document.getElementById("bookmarks").checked;
+  var noListsButton = document.getElementById("lists").checked;
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -18,6 +22,10 @@ function save_options() {
       noBorders: noBorders,
       noLikes: noLikes,
       noRetweets: noRetweets,
+      noExploreButton: noExploreButton,
+      noNotificationsButton: noNotificationsButton,
+      noBookmarksButton: noBookmarksButton,
+      noListsButton: noListsButton,
     },
     function () {
       // Update status to let user know options were saved.
@@ -43,6 +51,10 @@ function restore_options() {
       noBorders: false,
       noLikes: false,
       noRetweets: false,
+      noExploreButton: false,
+      noNotificationsButton: false,
+      noBookmarksButton: false,
+      noListsButton: false,
     },
     function (items) {
       document.getElementById("feed-width").value = items.feedWidth;
@@ -53,6 +65,10 @@ function restore_options() {
       document.getElementById("borders").checked = items.noBorders;
       document.getElementById("like").checked = items.noLikes;
       document.getElementById("retweet").checked = items.noRetweets;
+      document.getElementById("explore").checked = items.noExploreButton;
+      document.getElementById("notifications").checked = items.noNotificationsButton;
+      document.getElementById("bookmarks").checked = items.noBookmarksButton;
+      document.getElementById("lists").checked = items.noListsButton;
     }
   );
 }

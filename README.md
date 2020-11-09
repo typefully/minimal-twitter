@@ -86,6 +86,9 @@ Customization currently available in Chrome and Firefox! ⚙️
 - Minimize borders between tweets, in explore, and in notifications
 - Hide the bottom right Tweet button
 - Hide retweet and/or like numbers
+- Hide explore button
+- Hide bookmarks button
+- Hide lists button
 
 ### Chrome Preferences
 
