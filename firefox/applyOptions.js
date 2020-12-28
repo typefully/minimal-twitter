@@ -15,6 +15,10 @@ chrome.storage.sync.get(
     noBorders: false,
     noLikes: false,
     noRetweets: false,
+    noExploreButton: false,
+    noNotificationsButton: false,
+    noBookmarksButton: false,
+    noListsButton: false,
   },
   function (items) {
     if (items.feedWidth === "700") {
@@ -98,6 +102,30 @@ chrome.storage.sync.get(
     if (items.noRetweets === true) {
       addStyles(`div[data-testid="retweet"] > div > div:nth-child(2) {
         visibility: hidden !important;
+      }`);
+    }
+
+    if (items.noExploreButton === true) {
+      addStyles(`a[data-testid="AppTabBar_Explore_Link"] {
+        display: none !important;
+      }`);
+    }
+
+    if (items.noNotificationsButton === true) {
+      addStyles(`a[data-testid="AppTabBar_Notifications_Link"] {
+        display: none !important;
+      }`);
+    }
+
+    if (items.noBookmarksButton === true) {
+      addStyles(`header > div > div > div > div > div:nth-child(2) > nav > a:nth-child(5) {
+        display: none !important;
+      }`);
+    }
+
+    if (items.noListsButton === true) {
+      addStyles(`header > div > div > div > div > div:nth-child(2) > nav > a:nth-child(6) {
+        display: none !important;
       }`);
     }
   }

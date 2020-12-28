@@ -2,18 +2,30 @@
   "name": "Minimal Twitter",
   "short_name": "MinTwitter",
   "description": "Extends Twitter UI functionality by adding CSS to make the UI cleaner. No big labels, cluttered elements, and distracting text.",
-  "version": "2.71",
+  "version": "2.72",
   "manifest_version": 2,
-  "permissions": ["activeTab", "storage"],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
   "content_scripts": [
     {
-      "css": ["minimal-twitter.css"],
-      "js": ["applyOptions.js"],
-      "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
+      "css": [
+        "minimal-twitter.css"
+      ],
+      "js": [
+        "applyOptions.js"
+      ],
+      "matches": [
+        "https://twitter.com/*",
+        "https://mobile.twitter.com/*"
+      ]
     }
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "browser_action": {
     "default_icon": {
