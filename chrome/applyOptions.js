@@ -19,6 +19,7 @@ chrome.storage.sync.get(
     noNotificationsButton: false,
     noBookmarksButton: false,
     noListsButton: false,
+    noDirectMessageButton: false,
   },
   function (items) {
     if (items.feedWidth === "700") {
@@ -125,6 +126,12 @@ chrome.storage.sync.get(
 
     if (items.noListsButton === true) {
       addStyles(`header > div > div > div > div > div:nth-child(2) > nav > a:nth-child(6) {
+        display: none !important;
+      }`);
+    }
+
+    if (items.noDirectMessageButton === true) {
+      addStyles(`a[data-testid="AppTabBar_DirectMessage_Link"] {
         display: none !important;
       }`);
     }
