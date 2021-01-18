@@ -312,3 +312,11 @@ div[data-testid="DMDrawer"] {
 [data-testid="placementTracking"] article {
   display: none;
 }
+
+div[data-testid="UserCell"] {
+  display: none;
+}
+
+section[aria-labelledby="accessible-list-2"] {
+  display: none;
+}
