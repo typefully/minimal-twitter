@@ -320,3 +320,8 @@ div[data-testid="UserCell"] {
 section[aria-labelledby="accessible-list-2"] {
   display: none;
 }
+
+a[class="css-4rbku5 css-18t94o4 css-901oao r-jwli3a r-1loqt21 r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-qvutc0"] {
+  display: none;
+}
+
