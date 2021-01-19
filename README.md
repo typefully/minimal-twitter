@@ -83,6 +83,7 @@ Customization currently available in Chrome and Firefox! ⚙️
 
 - Select preferred width of Twitter feed sections
 - Anchor navigation to top
+- Always show latest Tweets
 - Minimize borders between tweets, in explore, and in notifications
 - Hide the bottom right Tweet button
 - Hide retweet and/or like numbers

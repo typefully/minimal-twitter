@@ -5,10 +5,19 @@ function addStyles(css) {
   head.appendChild(style);
 }
 
+function showLatestTweets(){
+  const button = document.querySelector("div[aria-label='Top Tweets on']");
+  if(button){
+    button.click();
+    document.querySelector("div[role='menuitem'][tabindex='0']").click();
+  }
+}
+
 chrome.storage.sync.get(
   {
     feedWidth: "600",
     topNavigation: false,
+    showLatest: false,
     noTweetButton: false,
     showMessageDrawer: false,
     feedBorders: false,
@@ -52,6 +61,17 @@ chrome.storage.sync.get(
         padding-top: 6px;
       }
       `);
+    }
+
+    if (items.showLatest === true) {
+ 
+      showLatestTweets();
+
+      //Set onclick as well in case they nagivate to a non-home page when first loading the site
+      document.querySelector("a[aria-label='Home']").onclick = () => {
+        setTimeout(showLatestTweets,50);
+      };
+
     }
 
     if (items.noTweetButton === true) {

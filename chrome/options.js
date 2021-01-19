@@ -2,6 +2,7 @@
 function save_options() {
   var feedWidth = document.getElementById("feed-width").value;
   var topNavigation = document.getElementById("top-navigation").checked;
+  var showLatest = document.getElementById("latest").checked;
   var noTweetButton = document.getElementById("tweet").checked;
   var showMessageDrawer = document.getElementById("message").checked;
   var feedBorders = document.getElementById("feed-borders").checked;
@@ -16,6 +17,7 @@ function save_options() {
     {
       feedWidth: feedWidth,
       topNavigation: topNavigation,
+      showLatest: showLatest,
       noTweetButton: noTweetButton,
       showMessageDrawer: showMessageDrawer,
       feedBorders: feedBorders,
@@ -45,6 +47,7 @@ function restore_options() {
     {
       feedWidth: "600",
       topNavigation: false,
+      showLatest: false,
       noTweetButton: false,
       showMessageDrawer: false,
       feedBorders: false,
@@ -58,6 +61,7 @@ function restore_options() {
     },
     function (items) {
       document.getElementById("feed-width").value = items.feedWidth;
+      document.getElementById("latest").checked = items.showLatest;
       document.getElementById("top-navigation").checked = items.topNavigation;
       document.getElementById("tweet").checked = items.noTweetButton;
       document.getElementById("message").checked = items.showMessageDrawer;
