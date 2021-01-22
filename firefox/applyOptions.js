@@ -5,9 +5,9 @@ function addStyles(css) {
   head.appendChild(style);
 }
 
-function showLatestTweets(){
+function showLatestTweets() {
   const button = document.querySelector("div[aria-label='Top Tweets on']");
-  if(button){
+  if (button) {
     button.click();
     document.querySelector("div[role='menuitem'][tabindex='0']").click();
   }
@@ -64,14 +64,12 @@ chrome.storage.sync.get(
     }
 
     if (items.showLatest === true) {
- 
       showLatestTweets();
 
       //Set onclick as well in case they nagivate to a non-home page when first loading the site
       document.querySelector("a[aria-label='Home']").onclick = () => {
-        setTimeout(showLatestTweets,50);
+        setTimeout(showLatestTweets, 50);
       };
-
     }
 
     if (items.noTweetButton === true) {

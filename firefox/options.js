@@ -70,7 +70,8 @@ function restore_options() {
       document.getElementById("like").checked = items.noLikes;
       document.getElementById("retweet").checked = items.noRetweets;
       document.getElementById("explore").checked = items.noExploreButton;
-      document.getElementById("notifications").checked = items.noNotificationsButton;
+      document.getElementById("notifications").checked =
+        items.noNotificationsButton;
       document.getElementById("bookmarks").checked = items.noBookmarksButton;
       document.getElementById("lists").checked = items.noListsButton;
     }
