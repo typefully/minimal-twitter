@@ -32,6 +32,7 @@
       line-height: 1.563;
       color: #272727;
       caret-color: #272727;
+      min-width: 520px;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -535,79 +536,87 @@
         <option value="800">800 pixels</option>
       </select>
     </p>
-    <p>
-      <label>
-        <input type="checkbox" id="top-navigation" />
-        <span>Top align navigation</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="latest" />
-        <span>Always show latest Tweets</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="feed-borders" />
-        <span>Feed borders</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="borders" />
-        <span>Minimize borders</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="tweet" />
-        <span>Remove bottom right Tweet button</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="message" />
-        <span>Show bottom right Message Drawer</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="retweet" />
-        <span>Remove retweet count</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="like" />
-        <span>Remove like count</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="explore" />
-        <span>Remove explore button</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="notifications" />
-        <span>Remove notifications button</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="bookmarks" />
-        <span>Remove bookmarks button</span>
-      </label>
-    </p>
-    <p>
-      <label>
-        <input type="checkbox" id="lists" />
-        <span>Remove lists button</span>
-      </label>
-    </p>
-    <button id="save">Save</button>
+
+    <div style="display: flex; align-items: center;">
+      <div style="margin-right: 1rem">
+        <p>
+          <label>
+            <input type="checkbox" id="top-navigation" />
+            <span>Top align navigation</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="latest" />
+            <span>Always show latest Tweets</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="feed-borders" />
+            <span>Feed borders</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="borders" />
+            <span>Minimize borders</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="tweet" />
+            <span>Remove bottom right Tweet button</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="message" />
+            <span>Show bottom right Message Drawer</span>
+          </label>
+        </p>
+      </div>
+      <div style="margin-left: 1rem">
+        <p>
+          <label>
+            <input type="checkbox" id="retweet" />
+            <span>Remove retweet count</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="like" />
+            <span>Remove like count</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="explore" />
+            <span>Remove explore button</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="notifications" />
+            <span>Remove notifications button</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="bookmarks" />
+            <span>Remove bookmarks button</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="lists" />
+            <span>Remove lists button</span>
+          </label>
+        </p>
+      </div>
+    </div>
+
+    <button id="save" style="display: block; margin: 0 auto;">Save</button>
   </main>
   <div id="status"></div>
   <script src="options.js"></script>

@@ -6,11 +6,24 @@ function addStyles(css) {
 }
 
 function showLatestTweets() {
-  const button = document.querySelector("div[aria-label='Top Tweets on']");
-  if (button) {
-    button.click();
-    document.querySelector("div[role='menuitem'][tabindex='0']").click();
-  }
+  const run = () => {
+    const button = document.querySelector("div[aria-label='Top Tweets on']");
+    const home = document.querySelector("a[aria-label='Home']");
+
+    if (button) {
+      button.click();
+      document.querySelector("div[role='menuitem'][tabindex='0']").click();
+    }
+
+    if (home) {
+      // Set onclick as well in case they nagivate to a non-home page when first loading the site
+      home.onclick = () => {
+        setTimeout(showLatestTweets, 50);
+      };
+    }
+  };
+
+  setTimeout(run, 500);
 }
 
 chrome.storage.sync.get(
@@ -64,12 +77,11 @@ chrome.storage.sync.get(
     }
 
     if (items.showLatest === true) {
-      showLatestTweets();
-
-      //Set onclick as well in case they nagivate to a non-home page when first loading the site
-      document.querySelector("a[aria-label='Home']").onclick = () => {
-        setTimeout(showLatestTweets, 50);
-      };
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", showLatestTweets);
+      } else {
+        showLatestTweets();
+      }
     }
 
     if (items.noTweetButton === true) {
