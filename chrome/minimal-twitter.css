@@ -312,3 +312,22 @@ div[data-testid="DMDrawer"] {
 [data-testid="placementTracking"] article {
   display: none;
 }
+
+[aria-label^="Timeline"][aria-label$="s Tweets"] h2,
+[aria-label^="Timeline"][aria-label$="s Tweets"] [data-testid="UserCell"],
+[aria-label^="Timeline"][aria-label$="s Tweets"]
+  [href^="/i/connect_people?user_id="] {
+  display: none;
+}
+
+div[dir="auto"][style="-webkit-line-clamp: 2;"],
+div[aria-label="Timeline: Carousel"],
+section[aria-labelledby="accessible-list-1"],
+a[href="/i/flow/topics_selector"][role="link"] {
+  display: none;
+}
+
+[aria-label^="Timeline"][aria-label$="s Tweets"] > div > div > div > div {
+  padding-bottom: 0;
+  padding-top: 0;
+}
