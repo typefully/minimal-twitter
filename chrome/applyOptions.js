@@ -41,6 +41,7 @@ chrome.storage.sync.get(
     noNotificationsButton: false,
     noBookmarksButton: false,
     noListsButton: false,
+    noWhoToFollow: false,
   },
   function (items) {
     if (items.feedWidth === "700") {
@@ -157,6 +158,20 @@ chrome.storage.sync.get(
       addStyles(`header > div > div > div > div > div:nth-child(2) > nav > a:nth-child(6) {
         display: none !important;
       }`);
+    }
+
+    if (items.noWhoToFollow === true) {
+      addStyles(`
+        [aria-label^="Timeline"][aria-label$="s Tweets"] h2 {
+          display: none !important;
+        }
+        [aria-label^="Timeline"][aria-label$="s Tweets"] [data-testid="UserCell"] {
+          display: none !important;
+        }
+        [aria-label^="Timeline"][aria-label$="s Tweets"] [href^="/i/connect_people?user_id="] {
+          display: none !important;
+        }
+      `);
     }
   }
 );

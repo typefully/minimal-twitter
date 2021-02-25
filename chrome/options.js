@@ -13,6 +13,7 @@ function save_options() {
   var noNotificationsButton = document.getElementById("notifications").checked;
   var noBookmarksButton = document.getElementById("bookmarks").checked;
   var noListsButton = document.getElementById("lists").checked;
+  var noWhoToFollow = document.getElementById("who-to-follow").checked;
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -28,6 +29,7 @@ function save_options() {
       noNotificationsButton: noNotificationsButton,
       noBookmarksButton: noBookmarksButton,
       noListsButton: noListsButton,
+      noWhoToFollow: noWhoToFollow,
     },
     function () {
       // Update status to let user know options were saved.
@@ -58,6 +60,7 @@ function restore_options() {
       noNotificationsButton: false,
       noBookmarksButton: false,
       noListsButton: false,
+      noWhoToFollow: false,
     },
     function (items) {
       document.getElementById("feed-width").value = items.feedWidth;
@@ -74,6 +77,7 @@ function restore_options() {
         items.noNotificationsButton;
       document.getElementById("bookmarks").checked = items.noBookmarksButton;
       document.getElementById("lists").checked = items.noListsButton;
+      document.getElementById("who-to-follow").checked = items.noWhoToFollow;
     }
   );
 }
