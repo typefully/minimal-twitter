@@ -339,7 +339,7 @@ div[data-testid="DMDrawer"] {
   > div[dir="auto"][style="-webkit-line-clamp: 2;"]
   > span,
 a[href="/i/flow/topics_selector"][role="link"],
-a[href="/i/topics/picker/home"][role="link"] {
+a[href^="/i/topics/picker"][role="link"] {
   display: none;
 }
 
