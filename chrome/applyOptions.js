@@ -86,7 +86,7 @@ chrome.storage.sync.get(
 
     if (items.noTweetButton === true) {
       addStyles(`
-      a[aria-label="Tweet"][role="button"] {
+      a[aria-label="Tweet"][role="link"] {
         display: none !important;
       }
       `);
@@ -95,7 +95,7 @@ chrome.storage.sync.get(
     if (items.showMessageDrawer === true) {
       addStyles(`
       div[data-testid="DMDrawer"] {
-        visibility: hidden !important;
+        visibility: visible !important;
       }
       `);
     }
