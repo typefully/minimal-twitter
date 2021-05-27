@@ -70,8 +70,8 @@ chrome.storage.sync.get(
     if (items.topNavigation === true) {
       addStyles(`
       header[role="banner"] > div > div > div {
-        justify-content: space-between !important;
-        padding-top: 6px;
+        justify-content: center !important;
+        padding-top: 0;
       }
       `);
     }
@@ -95,7 +95,7 @@ chrome.storage.sync.get(
     if (items.showMessageDrawer === true) {
       addStyles(`
       div[data-testid="DMDrawer"] {
-        visibility: visible !important;
+        visibility: visible;
       }
       `);
     }

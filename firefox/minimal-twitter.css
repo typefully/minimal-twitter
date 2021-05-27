@@ -1,21 +1,3 @@
-header[role="banner"] {
-  align-items: start !important;
-  max-width: 100px !important;
-}
-
-header[role="banner"] > div > div > div {
-  justify-content: center;
-  padding-top: 0;
-}
-
-header[role="banner"] > div > div > div > div {
-  margin-top: 0 !important;
-}
-
-header[role="banner"] > div > div > div > div:nth-child(1) {
-  padding-top: 0 !important;
-}
-
 main[role="main"] {
   align-items: center !important;
 }
@@ -54,16 +36,22 @@ a[data-testid="SideNav_NewTweet_Button"] {
   }
 }
 
+header[role="banner"] {
+  align-items: start !important;
+  max-width: 100px !important;
+}
+
 header[role="banner"] > div > div > div {
-  justify-content: center;
+  justify-content: space-between;
+  padding-top: 6px;
 }
 
 header[role="banner"] > div > div > div > div {
-  margin-top: auto;
+  margin-top: 0 !important;
 }
 
 header[role="banner"] > div > div > div > div:nth-child(1) {
-  padding-top: 59px;
+  padding-top: 0 !important;
 }
 
 header[role="banner"]
@@ -160,11 +148,18 @@ form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
   background-color: transparent !important;
 }
 
+div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
+  width: 150px !important;
+}
+
+div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
+  width: auto !important;
+}
+
 input[placeholder="Search Twitter"] {
   padding-left: 34px !important;
   margin-left: -24px !important;
   z-index: 1 !important;
-  width: 150px !important;
   transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -175,7 +170,6 @@ input[placeholder="Search Twitter"]::placeholder {
 input[placeholder="Search Twitter"]:focus {
   padding-left: 10px !important;
   margin-left: 0 !important;
-  width: 300px !important;
 }
 
 @media all and (max-width: 1265px) {
