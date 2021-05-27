@@ -28,8 +28,8 @@ function showLatestTweets() {
 
 chrome.storage.sync.get(
   {
-    feedWidth: "600",
-    topNavigation: false,
+    feedWidth: "700",
+    centerNavigation: false,
     showLatest: false,
     noTweetButton: false,
     feedBorders: false,
@@ -66,7 +66,7 @@ chrome.storage.sync.get(
       `);
     }
 
-    if (items.topNavigation === true) {
+    if (items.centerNavigation === true) {
       addStyles(`
       header[role="banner"] > div > div > div {
         justify-content: center !important;
