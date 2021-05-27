@@ -47,36 +47,11 @@ A minimal Twitter theme that drastically simplifies and declutters the new Twitt
 
 [How to set Chrome preferences](#chrome-preferences)
 
-#### Workaround/Backup
-
-In case there are issues with the Chrome Web Store, follow these instructions to get the latest Chrome extension version:
-
-1. Clone or [Download this repo](https://github.com/thomaswang/minimal-twitter/archive/master.zip)
-2. Open Chrome, then type in `chrome://extensions` in your address bar.
-3. Enable Developer Mode by clicking the toggle switch next to **Developer** mode.
-4. Click the **LOAD UNPACKED** button
-5. Select the extension folder/directory, called `chrome` that you downloaded in this repo
-
 ### Firefox
 
 [Download Firefox add-on in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
 
 [How to set Firefox preferences](#firefox-preferences)
-
-### Safari Extension (unofficial)
-
-⚠️ Safari 13 has [removed support for Legacy Safari Extensions](https://developer.apple.com/documentation/safari-release-notes/safari-13-release-notes#Removed-Features). The below instructions are for Safari 12 and below.
-
-To install Minimal Twitter on Safari, just follow the below instructions:
-
-1. Download the [the Minimal Twitter GitHub repository](https://github.com/thomaswangio/minimal-twitter/archive/master.zip)
-2. Unzip the zipped Minimal Twitter file that you just downloaded.
-3. Go to Safari > Preferences and click on the Advanced tab.
-4. Check the box "Show Develop menu in menu bar"
-5. Now, go to Develop > Show Extension Builder
-6. Click the + button > Add Extension
-7. Go to the unzipped Minimal Twitter and select the `twitter.safariextension` folder.
-8. Click run
 
 ## Chrome and Firefox Preferences
 
