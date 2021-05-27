@@ -32,7 +32,6 @@ chrome.storage.sync.get(
     topNavigation: false,
     showLatest: false,
     noTweetButton: false,
-    showMessageDrawer: false,
     feedBorders: false,
     noBorders: false,
     noLikes: false,
@@ -88,14 +87,6 @@ chrome.storage.sync.get(
       addStyles(`
       a[aria-label="Tweet"][role="link"] {
         display: none !important;
-      }
-      `);
-    }
-
-    if (items.showMessageDrawer === true) {
-      addStyles(`
-      div[data-testid="DMDrawer"] {
-        visibility: visible !important;
       }
       `);
     }

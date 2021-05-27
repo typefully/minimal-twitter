@@ -300,7 +300,7 @@ svg[style="left: calc(105.5px);"] {
 }
 
 div[data-testid="DMDrawer"] {
-  visibility: hidden;
+  visibility: hidden !important;
 }
 
 [data-testid="placementTracking"] article {
