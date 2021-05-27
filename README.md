@@ -88,7 +88,7 @@ Customization currently available in Chrome and Firefox! ⚙️
 2. Set user preferences
 3. Click "Save" button
 
-![Chrome Preferences](preferences-chrome.png)
+![Chrome Preferences](chrome-preferences.png)
 
 ### Firefox Preferences
 
@@ -97,7 +97,7 @@ Customization currently available in Chrome and Firefox! ⚙️
 3. Select preferences
 4. Click "Save" button
 
-![Firefox Preferences](preferences-firefox.png)
+![Firefox Preferences](firefox-preferences.png)
 
 ## Sponsor
 

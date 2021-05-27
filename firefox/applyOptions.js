@@ -29,8 +29,8 @@ function showLatestTweets() {
 chrome.storage.sync.get(
   {
     feedWidth: "700",
-    centerNavigation: false,
     showLatest: false,
+    centerNavigation: false,
     noTweetButton: false,
     feedBorders: false,
     noBorders: false,
@@ -77,6 +77,14 @@ chrome.storage.sync.get(
       `);
     }
 
+    if (items.showLatest === true) {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", showLatestTweets);
+      } else {
+        showLatestTweets();
+      }
+    }
+
     if (items.centerNavigation === true) {
       addStyles(`
       header[role="banner"] > div > div > div {
@@ -84,14 +92,6 @@ chrome.storage.sync.get(
         padding-top: 0;
       }
       `);
-    }
-
-    if (items.showLatest === true) {
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", showLatestTweets);
-      } else {
-        showLatestTweets();
-      }
     }
 
     if (items.noTweetButton === true) {

@@ -1,8 +1,8 @@
 // Saves options to chrome.storage
 function save_options() {
   var feedWidth = document.getElementById("feed-width").value;
-  var centerNavigation = document.getElementById("center-navigation").checked;
   var showLatest = document.getElementById("latest").checked;
+  var centerNavigation = document.getElementById("center-navigation").checked;
   var noTweetButton = document.getElementById("tweet").checked;
   var feedBorders = document.getElementById("feed-borders").checked;
   var noBorders = document.getElementById("borders").checked;
@@ -15,8 +15,8 @@ function save_options() {
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
-      centerNavigation: centerNavigation,
       showLatest: showLatest,
+      centerNavigation: centerNavigation,
       noTweetButton: noTweetButton,
       feedBorders: feedBorders,
       noBorders: noBorders,
@@ -44,8 +44,8 @@ function restore_options() {
   chrome.storage.sync.get(
     {
       feedWidth: "700",
-      centerNavigation: false,
       showLatest: false,
+      centerNavigation: false,
       noTweetButton: false,
       feedBorders: false,
       noBorders: false,
