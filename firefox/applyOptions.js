@@ -95,7 +95,7 @@ chrome.storage.sync.get(
     if (items.showMessageDrawer === true) {
       addStyles(`
       div[data-testid="DMDrawer"] {
-        visibility: visible;
+        visibility: visible !important;
       }
       `);
     }

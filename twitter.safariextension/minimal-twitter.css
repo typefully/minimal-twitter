@@ -292,7 +292,7 @@ svg[style="left: calc(105.5px);"] {
 }
 
 div[data-testid="DMDrawer"] {
-  visbility: hidden;
+  visibility: hidden !important;
 }
 
 [aria-label^="Timeline"][aria-label$="s Tweets"] h2,
