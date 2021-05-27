@@ -115,6 +115,15 @@ nav[aria-label="Primary"][role="navigation"]:hover
   opacity: 1 !important;
 }
 
+div[data-testid="primaryColumn"],
+div[data-testid="primaryColumn"] > div > div,
+div[data-testid="primaryColumn"] > div > div > div:nth-child(2),
+div[data-testid="primaryColumn"] > div > div > div:nth-child(3),
+div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
+div[data-testid="primaryColumn"] > div > div > div:nth-child(2) > div > div {
+  max-width: 700px;
+}
+
 div[data-testid="primaryColumn"] {
   border-left-width: 0;
   border-right-width: 0;
@@ -140,6 +149,14 @@ form[aria-label="Search Twitter"][role="search"] {
 
 form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
   background-color: transparent !important;
+}
+
+div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
+  width: 150px !important;
+}
+
+div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
+  width: auto !important;
 }
 
 input[placeholder="Search Twitter"] {

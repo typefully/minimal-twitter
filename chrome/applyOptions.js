@@ -42,7 +42,7 @@ chrome.storage.sync.get(
     noListsButton: false,
   },
   function (items) {
-    if (items.feedWidth === "700") {
+    if (items.feedWidth === "600") {
       addStyles(`
       div[data-testid="primaryColumn"],
       div[data-testid="primaryColumn"] > div > div,
@@ -50,7 +50,7 @@ chrome.storage.sync.get(
       div[data-testid="primaryColumn"] > div > div > div:nth-child(3),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(2) > div > div {
-        max-width: 700px !important;
+        max-width: 600px !important;
       }
       `);
     } else if (items.feedWidth === "800") {
@@ -62,6 +62,17 @@ chrome.storage.sync.get(
       div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
       div[data-testid="primaryColumn"] > div > div > div:nth-child(2) > div > div {
         max-width: 800px !important;
+      }
+      `);
+    } else {
+      addStyles(`
+      div[data-testid="primaryColumn"],
+      div[data-testid="primaryColumn"] > div > div,
+      div[data-testid="primaryColumn"] > div > div > div:nth-child(2),
+      div[data-testid="primaryColumn"] > div > div > div:nth-child(3),
+      div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
+      div[data-testid="primaryColumn"] > div > div > div:nth-child(2) > div > div {
+        max-width: 700px !important;
       }
       `);
     }
