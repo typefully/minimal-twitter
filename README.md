@@ -4,7 +4,7 @@
 
 <h1 align="center">
   Minimal Twitter
-    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fthomaswang%2Fminimal-twitter&via=ThomasWang&text=Check%20out%20this%20minimal%20Twitter%20theme%20for%20the%20new%20Twitter%21%20Available%20on%20Chrome%2C%20Firefox%2C%20and%20Safari&hashtags=minimaltwitter">
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fthomaswang%2Fminimal-twitter&via=ThomasWang&text=Check%20out%20this%20minimal%20Twitter%20theme%20for%20the%20new%20Twitter%21%20Available%20on%20Chrome%2C%20Firefox&hashtags=minimaltwitter">
       <img alt="Tweet" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"/>
     </a>
 </h1>
@@ -42,7 +42,6 @@ This theme aims to drastically simplify and declutter the new Twitter UI. By def
 [Download Chrome extension in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
 
 [How to set Chrome preferences](#chrome-preferences)
-
 
 #### Workaround/Backup
 
@@ -118,3 +117,9 @@ Feel free to clone/fork this repository and extend it to your ❤️'s delight. 
   - [How to load add-ons into Firefox locally](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Temporary_Installation_in_Firefox)
 - [Safari App Extensions Documentation](https://developer.apple.com/documentation/safariservices/safari_app_extensions)
   - [Using the Safari Extension Builder](https://developer.apple.com/library/archive/documentation/Tools/Conceptual/SafariExtensionGuide/UsingExtensionBuilder/UsingExtensionBuilder.html)
+
+## Sponsor
+
+<a href="https://www.napkin.io/">
+  <img alt="Sponsor: Napkin" src="./NapkinLogotype.png"/>
+</a>
