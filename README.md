@@ -9,15 +9,6 @@
     </a>
 </h1>
 
-<p align="center">
-  <a aria-label="Chrome Users" href="https://chrome.google.com/webstore/detail/minimal-twitter/pobhoodpcipjmedfenaigbeloiidbflp?hl=en">
-    <img src="https://img.shields.io/chrome-web-store/users/pobhoodpcipjmedfenaigbeloiidbflp?color=blue&label=Chrome%20Users&style=for-the-badge" />
-  </a>
-  <a aria-label="Firefox Add-on Rating" href="https://addons.mozilla.org/en-US/firefox/addon/min-twitter/">
-    <img src="https://img.shields.io/amo/rating/min-twitter?label=Firefox%20Add-on%20Rating&style=for-the-badge" />
-  </a>
-</p>
-
 Minimal Theme for the new Twitter UI – [install now](#installation)!
 
 A minimal Twitter theme that drastically simplifies and declutters the new Twitter UI.
@@ -39,7 +30,7 @@ A minimal Twitter theme that drastically simplifies and declutters the new Twitt
 
 - [Chrome Extension](#chrome)
 - [Firefox Add-on](#firefox)
-- [Safari Extension - unofficial](#safari-extension-unofficial)
+- [Safari using Cascadea](#safari)
 
 ### Chrome
 
@@ -73,6 +64,10 @@ Customization currently available in Chrome and Firefox! ⚙️
 4. Click "Save" button
 
 ![Firefox Preferences](firefox-preferences.png)
+
+### Safari
+
+We recommend using [Cascadea](https://apps.apple.com/us/app/cascadea/id1432182561) to inject the [Minimal Twitter stylesheet](./twitter.safariextension/minimal-twitter.css).
 
 ## Sponsor
 
