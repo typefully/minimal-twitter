@@ -4,9 +4,6 @@
 
 <h1 align="center">
   Minimal Twitter
-    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fthomaswang%2Fminimal-twitter&via=ThomasWang&text=Check%20out%20this%20minimal%20Twitter%20theme%20for%20the%20new%20Twitter%21%20Available%20on%20Chrome%2C%20Firefox&hashtags=minimaltwitter">
-      <img alt="Tweet" src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"/>
-    </a>
 </h1>
 
 Minimal Theme for the new Twitter UI – [install now](#installation)!
@@ -44,6 +41,10 @@ A minimal Twitter theme that drastically simplifies and declutters the new Twitt
 
 [How to set Firefox preferences](#firefox-preferences)
 
+### Safari
+
+We recommend using [Cascadea](https://apps.apple.com/us/app/cascadea/id1432182561) to inject the [Minimal Twitter stylesheet](./twitter.safariextension/minimal-twitter.css).
+
 ## Chrome and Firefox Preferences
 
 Customization currently available in Chrome and Firefox! ⚙️
@@ -64,10 +65,6 @@ Customization currently available in Chrome and Firefox! ⚙️
 4. Click "Save" button
 
 ![Firefox Preferences](firefox-preferences.png)
-
-### Safari
-
-We recommend using [Cascadea](https://apps.apple.com/us/app/cascadea/id1432182561) to inject the [Minimal Twitter stylesheet](./twitter.safariextension/minimal-twitter.css).
 
 ## Sponsor
 
