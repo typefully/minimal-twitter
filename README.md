@@ -61,8 +61,6 @@ In case there are issues with the Chrome Web Store, follow these instructions to
 
 ### Safari Extension (unofficial)
 
-_Why is this unofficial? Well... Official Safari extensions require me to have Apple Developer Program membership and create a Apple developer certificate. Because Apple Developer membership costs \$99 + tax a year, unforunately, I can't add an official extension right now, but intend to eventually!_
-
 ⚠️ Safari 13 has [removed support for Legacy Safari Extensions](https://developer.apple.com/documentation/safari-release-notes/safari-13-release-notes#Removed-Features). The below instructions are for Safari 12 and below.
 
 To install Minimal Twitter on Safari, just follow the below instructions:
@@ -80,16 +78,6 @@ To install Minimal Twitter on Safari, just follow the below instructions:
 
 Customization currently available in Chrome and Firefox! ⚙️
 
-- Select preferred width of Twitter feed sections
-- Anchor navigation to top
-- Always show latest Tweets
-- Minimize borders between tweets, in explore, and in notifications
-- Hide the bottom right Tweet button
-- Hide retweet and/or like numbers
-- Hide explore button
-- Hide bookmarks button
-- Hide lists button
-
 ### Chrome Preferences
 
 1. Right click or secondary click on the Minimal Twitter Extension and select "Options"
@@ -106,17 +94,6 @@ Customization currently available in Chrome and Firefox! ⚙️
 4. Click "Save" button
 
 ![Firefox Preferences](preferences-firefox.png)
-
-## Developing
-
-Feel free to clone/fork this repository and extend it to your ❤️'s delight. The following documentation is the official documentation used at time of development.
-
-- [Chrome Extensions Documentation](https://developer.chrome.com/extensions)
-  - [How to load extensions into Chrome locally](https://developer.chrome.com/extensions/getstarted#manifest)
-- [Firefox Add-ons Documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons)
-  - [How to load add-ons into Firefox locally](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Temporary_Installation_in_Firefox)
-- [Safari App Extensions Documentation](https://developer.apple.com/documentation/safariservices/safari_app_extensions)
-  - [Using the Safari Extension Builder](https://developer.apple.com/library/archive/documentation/Tools/Conceptual/SafariExtensionGuide/UsingExtensionBuilder/UsingExtensionBuilder.html)
 
 ## Sponsor
 
