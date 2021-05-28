@@ -10,16 +10,16 @@ Minimal Theme for the new Twitter UI – [install now](#installation)!
 
 A minimal Twitter theme that drastically simplifies and declutters the new Twitter UI.
 
+- No promoted posts
 - No border on main feed
-- Hidden navigation labels (shown on hover)
-- Navigation pushed to left side of window
 - No trends or "Who to Follow" on Home Page
-- Search on top right
-- Tweet button on bottom right.
 - No message drawer
 - No "Who To Follow" in Timeline/Profiles
 - No Topics Selection
-- Promoted posts hidden
+- Hidden navigation labels (shown on hover)
+- Navigation pushed to left side of window
+- Search on top right
+- Tweet button on bottom right
 
 ![screenshot](./screenshot.png)
 
