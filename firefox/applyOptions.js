@@ -1,6 +1,6 @@
 function addStyles(css) {
-  var head = document.querySelector("head");
-  var style = document.createElement("style");
+  var head = document.querySelector('head');
+  var style = document.createElement('style');
   style.textContent = `${css}`;
   head.appendChild(style);
 }
@@ -28,7 +28,7 @@ function showLatestTweets() {
 
 chrome.storage.sync.get(
   {
-    feedWidth: "700",
+    feedWidth: '700',
     showLatest: false,
     centerNavigation: false,
     noTweetButton: false,
@@ -36,13 +36,14 @@ chrome.storage.sync.get(
     noBorders: false,
     noLikes: false,
     noRetweets: false,
+    noComment: false,
     noExploreButton: false,
     noNotificationsButton: false,
     noBookmarksButton: false,
     noListsButton: false,
   },
   function (items) {
-    if (items.feedWidth === "600") {
+    if (items.feedWidth === '600') {
       addStyles(`
       div[data-testid="primaryColumn"],
       div[data-testid="primaryColumn"] > div > div,
@@ -53,7 +54,7 @@ chrome.storage.sync.get(
         max-width: 600px !important;
       }
       `);
-    } else if (items.feedWidth === "800") {
+    } else if (items.feedWidth === '800') {
       addStyles(`
       div[data-testid="primaryColumn"],
       div[data-testid="primaryColumn"] > div > div,
@@ -78,8 +79,8 @@ chrome.storage.sync.get(
     }
 
     if (items.showLatest === true) {
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", showLatestTweets);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', showLatestTweets);
       } else {
         showLatestTweets();
       }
@@ -133,6 +134,12 @@ chrome.storage.sync.get(
 
     if (items.noRetweets === true) {
       addStyles(`div[data-testid="retweet"] > div > div:nth-child(2) {
+        visibility: hidden !important;
+      }`);
+    }
+
+    if (items.noComment === true) {
+      addStyles(`div[data-testid="reply"] > div > div:nth-child(2) {
         visibility: hidden !important;
       }`);
     }
