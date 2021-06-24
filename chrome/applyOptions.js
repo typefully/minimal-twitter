@@ -36,6 +36,7 @@ chrome.storage.sync.get(
     noBorders: false,
     noLikes: false,
     noRetweets: false,
+    noComment: false,
     noExploreButton: false,
     noNotificationsButton: false,
     noBookmarksButton: false,
@@ -133,6 +134,12 @@ chrome.storage.sync.get(
 
     if (items.noRetweets === true) {
       addStyles(`div[data-testid="retweet"] > div > div:nth-child(2) {
+        visibility: hidden !important;
+      }`);
+    }
+
+    if (items.noComment === true) {
+      addStyles(`div[data-testid="reply"] > div > div:nth-child(2) {
         visibility: hidden !important;
       }`);
     }
