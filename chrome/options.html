@@ -366,8 +366,7 @@
 
       input[type="submit"],
       input[type="reset"],
-      input[type="button"],
-      button {
+      input[type="button"] {
         background-color: white;
         border: 2px solid white;
         color: #272727;
@@ -522,6 +521,12 @@
         cursor: help;
       }
     }
+
+    button {
+      border-radius: 20px !important;
+      background-color: #1da1f2 !important;
+      border: 1px solid #1da1f2 !important;
+    }
   </style>
 </head>
 
@@ -566,7 +571,13 @@
         <p>
           <label>
             <input type="checkbox" id="tweet" />
-            <span>Remove bottom right Tweet button</span>
+            <span>Remove tweet button</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="checkbox" id="explore" />
+            <span>Remove explore button</span>
           </label>
         </p>
       </div>
@@ -586,13 +597,7 @@
         <p>
           <label>
             <input type="checkbox" id="comment" />
-            <span>Remove Reply count</span>
-          </label>
-        </p>
-        <p>
-          <label>
-            <input type="checkbox" id="explore" />
-            <span>Remove explore button</span>
+            <span>Remove reply count</span>
           </label>
         </p>
         <p>

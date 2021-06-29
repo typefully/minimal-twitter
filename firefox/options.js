@@ -8,6 +8,7 @@ function save_options() {
   var noBorders = document.getElementById("borders").checked;
   var noLikes = document.getElementById("like").checked;
   var noRetweets = document.getElementById("retweet").checked;
+  var noComment = document.getElementById("comment").checked;
   var noExploreButton = document.getElementById("explore").checked;
   var noNotificationsButton = document.getElementById("notifications").checked;
   var noBookmarksButton = document.getElementById("bookmarks").checked;
@@ -22,6 +23,7 @@ function save_options() {
       noBorders: noBorders,
       noLikes: noLikes,
       noRetweets: noRetweets,
+      noComment: noComment,
       noExploreButton: noExploreButton,
       noNotificationsButton: noNotificationsButton,
       noBookmarksButton: noBookmarksButton,
@@ -51,6 +53,7 @@ function restore_options() {
       noBorders: false,
       noLikes: false,
       noRetweets: false,
+      noComment: false,
       noExploreButton: false,
       noNotificationsButton: false,
       noBookmarksButton: false,
@@ -66,6 +69,7 @@ function restore_options() {
       document.getElementById("borders").checked = items.noBorders;
       document.getElementById("like").checked = items.noLikes;
       document.getElementById("retweet").checked = items.noRetweets;
+      document.getElementById("comment").checked = items.noComment;
       document.getElementById("explore").checked = items.noExploreButton;
       document.getElementById("notifications").checked =
         items.noNotificationsButton;
