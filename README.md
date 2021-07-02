@@ -8,8 +8,6 @@
 
 Minimal Theme for the new Twitter UI – [install now](#installation)!
 
-A minimal Twitter theme that drastically simplifies and declutters the new Twitter UI.
-
 - No promoted posts
 - No Topics Selection
 - No trends or "Who to Follow" on Home Page
