@@ -161,6 +161,10 @@ form[aria-label="Search Twitter"][role="search"] > div:nth-child(2) > div {
   left: auto !important;
 }
 
+#typeaheadDropdown-1 {
+  max-width: 100%;
+}
+
 div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
   width: 150px !important;
 }

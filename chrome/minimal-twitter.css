@@ -147,12 +147,22 @@ form[aria-label="Search Twitter"][role="search"] {
   right: 24px;
 }
 
+@media all and (max-width: 1300px) {
+  form[aria-label="Search Twitter"][role="search"] {
+    display: none !important;
+  }
+}
+
 form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
   background-color: transparent !important;
 }
 
 form[aria-label="Search Twitter"][role="search"] > div:nth-child(2) > div {
   left: auto !important;
+}
+
+#typeaheadDropdown-1 {
+  max-width: 100%;
 }
 
 div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
@@ -313,7 +323,7 @@ svg[style="left: calc(105.5px);"] {
 }
 
 div[data-testid="DMDrawer"] {
-  visibility: hidden !important;
+  visibility: hidden;
 }
 
 [data-testid="placementTracking"] article {
