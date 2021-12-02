@@ -2,8 +2,8 @@
   "name": "Minimal Twitter",
   "short_name": "MinTwitter",
   "description": "A minimal Twitter theme that drastically simplifies and declutters the new Twitter UI.",
-  "version": "3.1.6",
-  "manifest_version": 2,
+  "version": "4.0.0",
+  "manifest_version": 3,
   "permissions": [
     "storage"
   ],
@@ -34,15 +34,6 @@
     "32": "images/MinimalTwitterIcon32.png",
     "48": "images/MinimalTwitterIcon48.png",
     "128": "images/MinimalTwitterIcon128.png"
-  },
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Alt+Shift+T",
-        "mac": "MacCtrl+Shift+T"
-      },
-      "description": "Opens Minimal Twitter"
-    }
   },
   "options_ui": {
     "page": "options.html",

@@ -1,26 +1,25 @@
 // Saves options to chrome.storage
 function save_options() {
-  var feedWidth = document.getElementById("feed-width").value;
-  var showLatest = document.getElementById("latest").checked;
-  var centerNavigation = document.getElementById("center-navigation").checked;
-  var noTweetButton = document.getElementById("tweet").checked;
-  var feedBorders = document.getElementById("feed-borders").checked;
-  var noBorders = document.getElementById("borders").checked;
-  var noLikes = document.getElementById("like").checked;
-  var noRetweets = document.getElementById("retweet").checked;
-  var noComment = document.getElementById("comment").checked;
-  var noExploreButton = document.getElementById("explore").checked;
-  var noNotificationsButton = document.getElementById("notifications").checked;
-  var noBookmarksButton = document.getElementById("bookmarks").checked;
-  var noListsButton = document.getElementById("lists").checked;
+  const feedWidth = document.getElementById("feed-width").value;
+  const showLatest = document.getElementById("latest").checked;
+  const centerNavigation = document.getElementById("center-navigation").checked;
+  const noTweetButton = document.getElementById("tweet").checked;
+  const noFeedBorders = document.getElementById("feed-borders").checked;
+  const noLikes = document.getElementById("like").checked;
+  const noRetweets = document.getElementById("retweet").checked;
+  const noComment = document.getElementById("comment").checked;
+  const noExploreButton = document.getElementById("explore").checked;
+  const noNotificationsButton = document.getElementById("notifications").checked;
+  const noBookmarksButton = document.getElementById("bookmarks").checked;
+  const noListsButton = document.getElementById("lists").checked;
+  
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
       showLatest: showLatest,
       centerNavigation: centerNavigation,
       noTweetButton: noTweetButton,
-      feedBorders: feedBorders,
-      noBorders: noBorders,
+      noFeedBorders: noFeedBorders,
       noLikes: noLikes,
       noRetweets: noRetweets,
       noComment: noComment,
@@ -31,7 +30,7 @@ function save_options() {
     },
     function () {
       // Update status to let user know options were saved.
-      var status = document.getElementById("status");
+      const status = document.getElementById("status");
       status.textContent = "Options saved.";
       setTimeout(function () {
         status.textContent = "";
@@ -49,8 +48,7 @@ function restore_options() {
       showLatest: false,
       centerNavigation: false,
       noTweetButton: false,
-      feedBorders: false,
-      noBorders: false,
+      noFeedBorders: false,
       noLikes: false,
       noRetweets: false,
       noComment: false,
@@ -65,8 +63,7 @@ function restore_options() {
       document.getElementById("center-navigation").checked =
         items.centerNavigation;
       document.getElementById("tweet").checked = items.noTweetButton;
-      document.getElementById("feed-borders").checked = items.feedBorders;
-      document.getElementById("borders").checked = items.noBorders;
+      document.getElementById("feed-borders").checked = items.noFeedBorders;
       document.getElementById("like").checked = items.noLikes;
       document.getElementById("retweet").checked = items.noRetweets;
       document.getElementById("comment").checked = items.noComment;
@@ -78,5 +75,6 @@ function restore_options() {
     }
   );
 }
+
 document.addEventListener("DOMContentLoaded", restore_options);
 document.getElementById("save").addEventListener("click", save_options);

@@ -63,9 +63,3 @@ Customization currently available in Chrome and Firefox! ⚙️
 4. Click "Save" button
 
 ![Firefox Preferences](firefox-preferences.png)
-
-## Sponsor
-
-<a href="https://www.napkin.io/">
-  <img alt="Sponsor: Napkin" src="./NapkinLogotype.png"/>
-</a>

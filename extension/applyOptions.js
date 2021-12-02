@@ -1,6 +1,6 @@
 function addStyles(css) {
-  var head = document.querySelector("head");
-  var style = document.createElement("style");
+  const head = document.querySelector("head");
+  const style = document.createElement("style");
   style.textContent = `${css}`;
   head.appendChild(style);
 }
@@ -32,8 +32,7 @@ chrome.storage.sync.get(
     showLatest: false,
     centerNavigation: false,
     noTweetButton: false,
-    feedBorders: false,
-    noBorders: false,
+    noFeedBorders: false,
     noLikes: false,
     noRetweets: false,
     noComment: false,
@@ -103,25 +102,11 @@ chrome.storage.sync.get(
       `);
     }
 
-    if (items.feedBorders === true) {
+    if (items.noFeedBorders === true) {
       addStyles(`
       div[data-testid="primaryColumn"] {
         border-left-width: 1px !important;
         border-right-width: 1px !important;
-      }
-      `);
-    }
-
-    if (items.noBorders === true) {
-      addStyles(`
-      div[aria-label="Timeline: Your Home Timeline"] > div > div > div,
-      div[aria-label="Timeline: Your Home Timeline"] > div > div > div > div {
-        border-bottom-color: transparent;
-      }
-
-      div[aria-label="Timeline: Explore"] > div > div > div,
-      div[aria-label="Timeline: Explore"] > div > div > div > div {
-        border-bottom-color: transparent;
       }
       `);
     }
