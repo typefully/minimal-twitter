@@ -7,17 +7,18 @@ function addStyles(css) {
 
 function showLatestTweets() {
   const run = () => {
-    const button = document.querySelector("div[aria-label='Top Tweets on']");
-    const home = document.querySelector("a[aria-label='Home']");
+    const timelineOptionButton = document.querySelector("div[aria-label='Timeline options");
+    const homeButton = document.querySelector("a[aria-label='Home']");
 
-    if (button) {
-      button.click();
+    if (timelineOptionButton) {
+      timelineOptionButton.click();
       document.querySelector("div[role='menuitem'][tabindex='0']").click();
+      document.querySelector("div[data-testid='ScrollSnap-List'] > div:last-child > a").click();
     }
 
-    if (home) {
+    if (homeButton) {
       // Set onclick as well in case they nagivate to a non-home page when first loading the site
-      home.onclick = () => {
+      homeButton.onclick = () => {
         setTimeout(showLatestTweets, 50);
       };
     }
