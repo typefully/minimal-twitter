@@ -14,6 +14,7 @@ function save_options() {
   var noNotificationsButton = document.getElementById("notifications").checked;
   var noBookmarksButton = document.getElementById("bookmarks").checked;
   var noListsButton = document.getElementById("lists").checked;
+  var noMessagesButton = document.getElementById("messages").checked;
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -29,7 +30,8 @@ function save_options() {
       noExploreButton: noExploreButton,
       noNotificationsButton: noNotificationsButton,
       noBookmarksButton: noBookmarksButton,
-      noListsButton: noListsButton
+      noListsButton: noListsButton,
+      noMessagesButton: noMessagesButton
     },
     function () {
       // Update status to let user know options were saved.
@@ -60,7 +62,8 @@ function restore_options() {
       noExploreButton: false,
       noNotificationsButton: false,
       noBookmarksButton: false,
-      noListsButton: false
+      noListsButton: false,
+      noMessagesButton: false
     },
     function (items) {
       document.getElementById("feed-width").value = items.feedWidth;
@@ -77,6 +80,7 @@ function restore_options() {
       document.getElementById("notifications").checked = items.noNotificationsButton;
       document.getElementById("bookmarks").checked = items.noBookmarksButton;
       document.getElementById("lists").checked = items.noListsButton;
+      document.getElementById("messages").checked = items.noMessagesButton;
     }
   );
 }
