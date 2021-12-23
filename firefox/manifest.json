@@ -2,30 +2,18 @@
   "name": "Minimal Twitter",
   "short_name": "MinTwitter",
   "description": "A minimal Twitter theme that drastically simplifies and declutters the new Twitter UI.",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "manifest_version": 2,
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
+  "permissions": ["activeTab", "storage"],
   "content_scripts": [
     {
-      "css": [
-        "minimal-twitter.css"
-      ],
-      "js": [
-        "applyOptions.js"
-      ],
-      "matches": [
-        "https://twitter.com/*",
-        "https://mobile.twitter.com/*"
-      ]
+      "css": ["minimal-twitter.css"],
+      "js": ["applyOptions.js"],
+      "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
     }
   ],
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "scripts": ["background.js"]
   },
   "browser_action": {
     "default_icon": {

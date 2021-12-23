@@ -9,6 +9,7 @@ function save_options() {
   var noLikes = document.getElementById("like").checked;
   var noRetweets = document.getElementById("retweet").checked;
   var noComment = document.getElementById("comment").checked;
+  var noNavbarText = document.getElementById("navbar-text").checked;
   var noExploreButton = document.getElementById("explore").checked;
   var noNotificationsButton = document.getElementById("notifications").checked;
   var noBookmarksButton = document.getElementById("bookmarks").checked;
@@ -24,10 +25,11 @@ function save_options() {
       noLikes: noLikes,
       noRetweets: noRetweets,
       noComment: noComment,
+      noNavbarText: noNavbarText,
       noExploreButton: noExploreButton,
       noNotificationsButton: noNotificationsButton,
       noBookmarksButton: noBookmarksButton,
-      noListsButton: noListsButton,
+      noListsButton: noListsButton
     },
     function () {
       // Update status to let user know options were saved.
@@ -54,25 +56,25 @@ function restore_options() {
       noLikes: false,
       noRetweets: false,
       noComment: false,
+      noNavbarText: false,
       noExploreButton: false,
       noNotificationsButton: false,
       noBookmarksButton: false,
-      noListsButton: false,
+      noListsButton: false
     },
     function (items) {
       document.getElementById("feed-width").value = items.feedWidth;
       document.getElementById("latest").checked = items.showLatest;
-      document.getElementById("center-navigation").checked =
-        items.centerNavigation;
+      document.getElementById("center-navigation").checked = items.centerNavigation;
       document.getElementById("tweet").checked = items.noTweetButton;
       document.getElementById("feed-borders").checked = items.feedBorders;
       document.getElementById("borders").checked = items.noBorders;
       document.getElementById("like").checked = items.noLikes;
       document.getElementById("retweet").checked = items.noRetweets;
       document.getElementById("comment").checked = items.noComment;
+      document.getElementById("navbar-text").checked = items.noNavbarText;
       document.getElementById("explore").checked = items.noExploreButton;
-      document.getElementById("notifications").checked =
-        items.noNotificationsButton;
+      document.getElementById("notifications").checked = items.noNotificationsButton;
       document.getElementById("bookmarks").checked = items.noBookmarksButton;
       document.getElementById("lists").checked = items.noListsButton;
     }

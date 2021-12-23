@@ -37,10 +37,11 @@ chrome.storage.sync.get(
     noLikes: false,
     noRetweets: false,
     noComment: false,
+    noNavbarText: false,
     noExploreButton: false,
     noNotificationsButton: false,
     noBookmarksButton: false,
-    noListsButton: false,
+    noListsButton: false
   },
   function (items) {
     if (items.feedWidth === "600") {
@@ -141,6 +142,16 @@ chrome.storage.sync.get(
     if (items.noComment === true) {
       addStyles(`div[data-testid="reply"] > div > div:nth-child(2) {
         visibility: hidden !important;
+      }`);
+    }
+
+    if (items.noNavbarText === true) {
+      addStyles(`nav[aria-label="Primary"] > a {
+        width: auto;
+      }`);
+
+      addStyles(`nav[aria-label="Primary"] > * > div > div:last-child {
+        display: none !important;
       }`);
     }
 
