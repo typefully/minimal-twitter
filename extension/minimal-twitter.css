@@ -9,10 +9,9 @@
   /* Match widths for feed */
   div[data-testid="primaryColumn"] {
     width: 700px !important;
-    max-width: 700px;
     margin: 0 auto;
   }
-
+  div[data-testid="primaryColumn"],
   div[data-testid="primaryColumn"] div:not(div[role="group"]) {
     max-width: 700px;
   }
