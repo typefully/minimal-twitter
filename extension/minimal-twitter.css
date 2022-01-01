@@ -5,7 +5,7 @@
 --*/
 
 /* Core styles */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 988px) {
   /* Match widths for feed */
   div[data-testid="primaryColumn"] {
     width: 600px !important;
@@ -48,7 +48,6 @@
     position: fixed;
     top: 12px;
     right: 16px;
-    backdrop-filter: blur(12px);
   }
 
   /* Match size of input the placeholder content */
@@ -57,9 +56,11 @@
   }
 
   /* Match size of focused search container to its dropdown */
+  /* Add blur filter to search container for overlap */
   div[data-testid="sidebarColumn"]
     form[aria-label="Search Twitter"][role="search"]:focus-within {
     width: 374px;
+    backdrop-filter: blur(12px);
   }
 
   /* Match size of focused search input to its dropdown */

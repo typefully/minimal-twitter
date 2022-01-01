@@ -28,6 +28,6 @@
       "48": "images/MinimalTwitterIcon48.png"
     },
     "default_title": "Minimal Theme Preferences",
-    "default_popup": "./popup/popup.html"
+    "default_popup": "./react-popup/public/index.html"
   }
 }
