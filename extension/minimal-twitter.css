@@ -8,12 +8,12 @@
 @media only screen and (min-width: 768px) {
   /* Match widths for feed */
   div[data-testid="primaryColumn"] {
-    width: 600px !important;
+    width: 700px !important;
+    max-width: 700px;
     margin: 0 auto;
   }
-  div[data-testid="primaryColumn"],
-  div[data-testid="primaryColumn"] div:not(div[role="group"]) {
-    max-width: 600px;
+  div[data-testid="primaryColumn"] > div div:last-child {
+    max-width: unset;
   }
 
   /* Fix navigation to left */
