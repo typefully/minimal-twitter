@@ -8,12 +8,12 @@
 @media only screen and (min-width: 768px) {
   /* Match widths for feed */
   div[data-testid="primaryColumn"] {
-    width: 700px !important;
+    width: 600px !important;
     margin: 0 auto;
   }
   div[data-testid="primaryColumn"],
   div[data-testid="primaryColumn"] div:not(div[role="group"]) {
-    max-width: 700px;
+    max-width: 600px;
   }
 
   /* Move navigation to left */
@@ -42,8 +42,8 @@
     form[aria-label="Search Twitter"][role="search"] {
     visibility: visible;
     position: fixed;
-    top: 8px;
-    right: 24px;
+    top: 12px;
+    right: 12px;
     backdrop-filter: blur(12px);
   }
 
@@ -72,7 +72,7 @@
   /* Floating Tweet Button */
   a[data-testid="SideNav_NewTweet_Button"] {
     position: fixed;
-    right: 32px;
+    right: 12px;
     bottom: 24px;
   }
 
