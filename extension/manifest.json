@@ -1,40 +1,22 @@
 {
-  "name": "Minimal Twitter",
-  "short_name": "MinTwitter",
-  "description": "A minimal Twitter theme that drastically simplifies and declutters the new Twitter UI.",
+  "name": "Minimal Theme for Twitter",
+  "short_name": "MinimalTwitter",
+  "description": "Declutters the Twitter web experience.",
   "version": "4.0.0",
   "manifest_version": 3,
-  "permissions": [
-    "storage"
-  ],
-  "content_scripts": [
-    {
-      "css": [
-        "minimal-twitter.css"
-      ],
-      "js": [
-        "applyOptions.js"
-      ],
-      "matches": [
-        "https://twitter.com/*",
-        "https://mobile.twitter.com/*"
-      ]
-    }
-  ],
-  "browser_action": {
-    "default_icon": {
-      "16": "images/MinimalTwitterIcon16.png",
-      "32": "images/MinimalTwitterIcon32.png",
-      "48": "images/MinimalTwitterIcon48.png",
-      "128": "images/MinimalTwitterIcon128.png"
-    }
-  },
   "icons": {
     "16": "images/MinimalTwitterIcon16.png",
     "32": "images/MinimalTwitterIcon32.png",
     "48": "images/MinimalTwitterIcon48.png",
     "128": "images/MinimalTwitterIcon128.png"
   },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
+      "css": ["minimal-twitter.css"]
+    }
+  ],
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false

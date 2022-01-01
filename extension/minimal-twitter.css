@@ -1,375 +1,116 @@
-main[role="main"] {
-  align-items: center !important;
-}
+/*--
+- Minimal Theme for Twitter - https://www.wang.sh/minimal-twitter
+- Licensed under the MIT license - https://github.com/thomaswang/minimal-twitter/blob/main/LICENSE
+- Copyright (c) 2022 Thomas Wang
+--*/
 
-main[role="main"] > div > div > div {
-  justify-content: center !important;
-}
-
-a[aria-label="Tweet"][role="button"] {
-  position: fixed !important;
-  right: 32px !important;
-  bottom: 24px !important;
-  max-width: 125px !important;
-  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-a[data-testid="SideNav_NewTweet_Button"] {
-  position: fixed !important;
-  right: 32px !important;
-  bottom: 24px !important;
-  max-width: 125px !important;
-  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-@media all and (max-width: 800px) {
-  a[data-testid="SideNav_NewTweet_Button"] {
-    position: relative !important;
-    right: auto !important;
-    bottom: auto !important;
+/* Core styles for larger screen sizes */
+@media only screen and (min-width: 768px) {
+  /* Match widths for feed */
+  div[data-testid="primaryColumn"] {
+    width: 700px !important;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  a[aria-label="Tweet"][role="button"] {
-    position: relative !important;
-    right: auto !important;
-    bottom: auto !important;
+  div[data-testid="primaryColumn"] div:not(div[role="group"]) {
+    max-width: 700px;
   }
-}
 
-header[role="banner"] {
-  align-items: start !important;
-  max-width: 100px !important;
-}
-
-header[role="banner"] > div > div > div {
-  justify-content: space-between;
-  padding-top: 6px;
-}
-
-header[role="banner"] > div > div > div > div {
-  margin-top: 0 !important;
-}
-
-header[role="banner"] > div > div > div > div:nth-child(1) {
-  padding-top: 0 !important;
-}
-
-header[role="banner"]
-  > div
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > nav
-  > a
-  > div
-  > div:nth-child(2),
-header[role="banner"]
-  > div
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > nav
-  > div
-  > div
-  > div:nth-child(2) {
-  opacity: 0 !important;
-  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-header[role="banner"]
-  > div
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > nav:hover
-  > a
-  > div
-  > div:nth-child(2),
-header[role="banner"]
-  > div
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > nav:hover
-  > div
-  > div
-  > div:nth-child(2) {
-  opacity: 1 !important;
-}
-
-nav[aria-label="Primary"][role="navigation"] > a > div > div:nth-child(2),
-nav[aria-label="Primary"][role="navigation"] > div > div > div:nth-child(2) {
-  opacity: 0 !important;
-  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-nav[aria-label="Primary"][role="navigation"]:hover > a > div > div:nth-child(2),
-nav[aria-label="Primary"][role="navigation"]:hover
-  > div
-  > div
-  > div:nth-child(2) {
-  opacity: 1 !important;
-}
-
-div[data-testid="primaryColumn"],
-div[data-testid="primaryColumn"] > div > div,
-div[data-testid="primaryColumn"] > div > div > div:nth-child(2),
-div[data-testid="primaryColumn"] > div > div > div:nth-child(3),
-div[data-testid="primaryColumn"] > div > div > div:nth-child(4),
-div[data-testid="primaryColumn"] > div > div > div:nth-child(2) > div > div {
-  max-width: 700px;
-}
-
-div[data-testid="primaryColumn"] {
-  border-left-width: 0;
-  border-right-width: 0;
-}
-
-div[data-testid="sidebarColumn"] {
-  visibility: hidden !important;
-  width: 120px !important;
-  z-index: 1;
-}
-
-div[aria-label="Timeline: Trending now"] {
-  display: none;
-}
-
-form[aria-label="Search Twitter"][role="search"] {
-  visibility: visible !important;
-  position: fixed !important;
-  max-width: 342px !important;
-  top: 8px;
-  right: 24px;
-}
-
-@media all and (max-width: 1300px) {
-  form[aria-label="Search Twitter"][role="search"] {
-    display: none !important;
+  /* Move navigation to left */
+  header {
+    position: fixed !important;
+    left: 0;
   }
-}
 
-form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
-  background-color: transparent !important;
-}
+  /* Center the Timeline */
+  main {
+    align-items: center !important;
+  }
 
-form[aria-label="Search Twitter"][role="search"] > div:nth-child(2) > div {
-  left: auto !important;
-}
-
-div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
-  width: 150px !important;
-}
-
-div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
-  width: auto !important;
-}
-
-input[placeholder="Search Twitter"] {
-  padding-left: 34px !important;
-  margin-left: -24px !important;
-  z-index: 1 !important;
-  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-input[placeholder="Search Twitter"]::placeholder {
-  font-size: 15px !important;
-}
-
-input[placeholder="Search Twitter"]:focus {
-  padding-left: 10px !important;
-  margin-left: 0 !important;
-}
-
-@media all and (max-width: 1265px) {
+  /* Hide sidebar */
   div[data-testid="sidebarColumn"] {
-    visibility: hidden !important;
-    width: 100px !important;
+    visibility: hidden;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 1;
   }
 
-  form[aria-label="Search Twitter"][role="search"] {
-    visibility: hidden !important;
+  /* Reveal searchbar */
+  div[data-testid="sidebarColumn"]
+    form[aria-label="Search Twitter"][role="search"] {
+    visibility: visible;
+    position: fixed;
+    top: 8px;
+    right: 24px;
+    backdrop-filter: blur(12px);
   }
-}
 
-div[data-testid="primaryColumn"]
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > form[aria-label="Search Twitter"][role="search"] {
-  visibility: visible !important;
-  position: relative !important;
-  max-width: 100% !important;
-  top: auto;
-  right: auto;
-}
-
-@media all and (max-width: 1265px) {
-  div[data-testid="primaryColumn"]
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > form[aria-label="Search Twitter"][role="search"] {
-    visibility: visible !important;
+  /* Default size of input to match the placeholder content */
+  div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
+    width: 14ch;
   }
-}
 
-@media all and (max-width: 1300px) {
-  div[data-testid="primaryColumn"]
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > div
-    > form[aria-label="Search Twitter"][role="search"] {
-    display: block !important;
+  /* Match size of focused search container to its dropdown */
+  div[data-testid="sidebarColumn"]
+    form[aria-label="Search Twitter"][role="search"]:focus-within {
+    width: 374px;
   }
+
+  /* Match size of focused search input to its dropdown */
+  div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
+    width: 328px;
+  }
+
+  /* Remove left positioning align search dropdown */
+  div[aria-multiselectable="false"][role="listbox"],
+  div[style="left: -12px; width: 374px;"] {
+    left: auto !important;
+  }
+
+  /* Floating Tweet Button */
+  a[href="/compose/tweet"][aria-label="Tweet"],
+  a[data-testid="SideNav_NewTweet_Button"] {
+    position: fixed;
+    right: 32px;
+    bottom: 24px;
+  }
+
+  /* Show navigation labels on hover */
+  nav[aria-label="Primary"] * span {
+    display: none;
+  }
+  nav[aria-label="Primary"] *:hover span {
+    display: inline;
+  }
+  /* nav[aria-label="Primary"] div[dir="auto"] {
+    display: none;
+  } */
+
+  /* Show account menu label on hover */
+  div[aria-label="Account menu"] > div:not(:first-child) {
+    display: none;
+  }
+  div[aria-label="Account menu"]:hover > div:not(:first-child) {
+    display: block;
+  }
+  /* div[aria-label="Account menu"] {
+    width: fit-content;
+  }
+  div[aria-label="Account menu"] > div:not(:first-child) {
+    display: none;
+  } */
 }
 
-div[data-testid="primaryColumn"]
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > form[aria-label="Search Twitter"][role="search"]
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > input[placeholder="Search Twitter"] {
-  width: 100% !important;
-}
-
-div[data-testid="primaryColumn"]
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > form[aria-label="Search Twitter"][role="search"]
-  > div
-  > div
-  > div
-  > div:nth-child(2)
-  > input[placeholder="Search Twitter"]:focus {
-  width: 100% !important;
-}
-
-div[data-testid="primaryColumn"]
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > form[aria-label="Search Twitter"][role="search"]
-  > div:nth-child(2)
-  > div {
-  max-width: 100%;
-}
-
-div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(2),
-div[data-testid="SideNav_AccountSwitcher_Button"] > div:nth-child(3) {
-  opacity: 0;
-  transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-div[data-testid="SideNav_AccountSwitcher_Button"]:hover > div:nth-child(2),
-div[data-testid="SideNav_AccountSwitcher_Button"]:hover > div:nth-child(3) {
-  opacity: 1;
-}
-
-div[data-testid="primaryColumn"] > div > div:nth-child(2) > div > div {
-  max-width: 100%;
-}
-
-svg[style="left: calc(105.5px);"] {
-  left: calc(17.5px) !important;
-}
-
-div[data-testid="DMDrawer"] {
-  visibility: hidden;
-}
-
+/* Remove promoted posts */
 [data-testid="placementTracking"] article {
   display: none;
 }
 
-[aria-label^="Timeline"][aria-label$="s Tweets"] h2,
-[aria-label^="Timeline"][aria-label$="s Tweets"] [data-testid="UserCell"],
-[aria-label^="Timeline"][aria-label$="s Tweets"]
-  [href^="/i/connect_people?user_id="] {
-  display: none;
-}
-
-[aria-label^="Timeline"][aria-label$="s Tweets"]
-  > div
-  > div
-  > div
-  section[aria-labelledby^="accessible-list-"][role="region"],
-[aria-label^="Timeline"][aria-label$="s Tweets"]
-  > div
-  > div
-  > div
-  > div
-  > div[dir="auto"][style="-webkit-line-clamp: 2;"]
-  > span,
-a[href="/i/flow/topics_selector"][role="link"],
-a[href^="/i/topics/picker"][role="link"] {
-  display: none;
-}
-
-[aria-label^="Timeline"][aria-label$="s Tweets"] > div > div > div > div {
-  padding-bottom: 0;
-  padding-top: 0;
-}
+/* Remove borders on feed */
+/* div[data-testid="primaryColumn"] {
+  border-left-width: 0;
+  border-right-width: 0;
+} */
