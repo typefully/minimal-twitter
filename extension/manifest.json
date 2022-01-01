@@ -20,5 +20,14 @@
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/MinimalTwitterIcon16.png",
+      "32": "images/MinimalTwitterIcon32.png",
+      "48": "images/MinimalTwitterIcon48.png"
+    },
+    "default_title": "Minimal Theme Preferences",
+    "default_popup": "./popup/popup.html"
   }
 }
