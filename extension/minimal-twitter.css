@@ -43,7 +43,7 @@
     visibility: visible;
     position: fixed;
     top: 12px;
-    right: 12px;
+    right: 16px;
     backdrop-filter: blur(12px);
   }
 
@@ -72,7 +72,7 @@
   /* Floating Tweet Button */
   a[data-testid="SideNav_NewTweet_Button"] {
     position: fixed;
-    right: 12px;
+    right: 16px;
     bottom: 24px;
   }
 
