@@ -71,7 +71,6 @@
   }
 
   /* Floating Tweet Button */
-  a[href="/compose/tweet"][aria-label="Tweet"],
   a[data-testid="SideNav_NewTweet_Button"] {
     position: fixed;
     right: 32px;
@@ -90,16 +89,17 @@
   } */
 
   /* Show account menu label on hover */
-  div[aria-label="Account menu"] > div:not(:first-child) {
+  div[data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
     display: none;
   }
-  div[aria-label="Account menu"]:hover > div:not(:first-child) {
+  div[data-testid="SideNav_AccountSwitcher_Button"]:hover
+    > div:not(:first-child) {
     display: block;
   }
-  /* div[aria-label="Account menu"] {
+  /* div[data-testid="SideNav_AccountSwitcher_Button"] {
     width: fit-content;
   }
-  div[aria-label="Account menu"] > div:not(:first-child) {
+  div[data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
     display: none;
   } */
 }
