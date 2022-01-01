@@ -27,6 +27,10 @@
     align-items: center !important;
   }
 
+  h1[role="heading"] {
+    padding-top: 4px;
+  }
+
   /* Hide sidebar */
   div[data-testid="sidebarColumn"] {
     visibility: hidden;
