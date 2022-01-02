@@ -1,7 +1,7 @@
 {
   "name": "Minimal Theme for Twitter",
   "short_name": "MinimalTwitter",
-  "description": "Declutters the Twitter web experience.",
+  "description": "Declutter your Twitter web experience.",
   "version": "4.0.0",
   "manifest_version": 3,
   "icons": {
