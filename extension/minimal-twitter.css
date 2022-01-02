@@ -7,19 +7,19 @@
 /* Core styles */
 @media only screen and (min-width: 988px) {
   /* Match widths for feed */
-  div[data-testid="primaryColumn"] {
-    width: 600px !important;
-    max-width: 600px;
-    margin: 0 auto;
+  [data-testid="primaryColumn"] {
+    width: 700px !important;
+    max-width: 700px !important;
+    margin: 0 auto !important;
   }
-  div[data-testid="primaryColumn"] > div div:last-child {
-    max-width: unset;
+  [data-testid="primaryColumn"] > div div:last-child {
+    max-width: unset !important;
   }
 
   /* Fix navigation to left */
   header {
     position: fixed !important;
-    left: 0;
+    left: 0 !important;
   }
 
   /* Center the Timeline */
@@ -27,45 +27,76 @@
     align-items: center !important;
   }
 
+  /* Align Twitter navigation icon with search */
   h1[role="heading"] {
-    padding-top: 4px;
+    padding-top: 4px !important;
   }
 
+  /* Remove navigation labels */
+  /* Navigation buttons width of contents */
+  nav[aria-label="Primary"] div[dir="auto"] {
+    display: none !important;
+    width: fit-content !important;
+  }
+  /* Show navigation labels on hover */
+  /* nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
+    display: none !important;
+  }
+  nav[aria-label="Primary"] *:hover div[dir="auto"]:not([aria-label]) > span {
+    display: inline !important;
+  } */
+
+  /* Align account button with floating tweet button */
+  /* Align account button width of contents */
+  [data-testid="SideNav_AccountSwitcher_Button"] {
+    bottom: 12px !important;
+    width: fit-content !important;
+  }
+
+  /* Remove account menu label */
+  [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+    display: none !important;
+  }
+  /* Show account menu label on hover */
+  /* [data-testid="SideNav_AccountSwitcher_Button"]:hover > div:not(:first-child) {
+    display: block !important;
+  } */
+
   /* Hide sidebar */
-  div[data-testid="sidebarColumn"] {
-    visibility: hidden;
+  [data-testid="sidebarColumn"] {
+    visibility: hidden !important;
     width: 0 !important;
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    z-index: 1;
+    z-index: 1 !important;
   }
 
   /* Reveal searchbar */
-  div[data-testid="sidebarColumn"]
+  [data-testid="sidebarColumn"]
     form[aria-label="Search Twitter"][role="search"] {
-    visibility: visible;
-    position: fixed;
-    top: 12px;
-    right: 16px;
+    visibility: visible !important;
+    position: fixed !important;
+    top: 12px !important;
+    right: 16px !important;
   }
 
   /* Match size of input the placeholder content */
-  div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
-    width: 14ch;
+  [data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
+    width: 14ch !important;
   }
 
   /* Match size of focused search container to its dropdown */
   /* Add blur filter to search container for overlap */
-  div[data-testid="sidebarColumn"]
+  [data-testid="sidebarColumn"]
     form[aria-label="Search Twitter"][role="search"]:focus-within {
-    width: 374px;
-    backdrop-filter: blur(12px);
+    width: 374px !important;
+    backdrop-filter: blur(12px) !important;
   }
 
   /* Match size of focused search input to its dropdown */
-  div[data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
-    width: 328px;
+  [data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
+    width: 328px !important;
   }
 
   /* Reset left positioning to align search dropdown */
@@ -80,41 +111,20 @@
 
   /* Floating Tweet Button */
   a[data-testid="SideNav_NewTweet_Button"] {
-    position: fixed;
-    right: 16px;
-    bottom: 24px;
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 24px !important;
   }
+}
 
-  /* Show navigation labels on hover */
-  nav[aria-label="Primary"] * span {
-    display: none;
-  }
-  nav[aria-label="Primary"] *:hover span {
-    display: inline;
-  }
-  /* nav[aria-label="Primary"] div[dir="auto"] {
-    display: none;
-  } */
-
-  /* Show account menu label on hover */
-  div[data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-    display: none;
-  }
-  div[data-testid="SideNav_AccountSwitcher_Button"]:hover
-    > div:not(:first-child) {
-    display: block;
-  }
-  /* div[data-testid="SideNav_AccountSwitcher_Button"] {
-    width: fit-content;
-  }
-  div[data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-    display: none;
-  } */
+/* Hide Messages Drawer */
+[data-testid="DMDrawer"] {
+  visibility: hidden !important;
 }
 
 /* Remove promoted posts */
 [data-testid="placementTracking"] article {
-  display: none;
+  display: none !important;
 }
 
 /* Remove borders on feed */

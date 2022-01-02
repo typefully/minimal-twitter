@@ -10,4 +10,3 @@
 
 - **Chrome**: [Download in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
 - **Firefox**: [Download in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
-- **Safari**: Use [Cascadea](https://apps.apple.com/us/app/cascadea/id1432182561) to inject the [Minimal Twitter stylesheet](./extension/minimal-twitter.css)

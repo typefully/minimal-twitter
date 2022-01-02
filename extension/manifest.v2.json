@@ -3,7 +3,7 @@
   "short_name": "MinimalTwitter",
   "description": "Declutters the Twitter web experience.",
   "version": "4.0.0",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "icons": {
     "16": "images/MinimalTwitterIcon16.png",
     "32": "images/MinimalTwitterIcon32.png",
@@ -21,7 +21,7 @@
     "page": "index.html",
     "open_in_tab": false
   },
-  "action": {
+  "browser_action": {
     "default_icon": {
       "16": "images/MinimalTwitterIcon16.png",
       "32": "images/MinimalTwitterIcon32.png",
