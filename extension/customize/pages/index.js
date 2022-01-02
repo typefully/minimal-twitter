@@ -12,7 +12,7 @@ const IndexPage = () => {
   return (
     <Container>
       <Header />
-      <main className="flex flex-col p-2 space-y-4">
+      <main className="flex flex-col p-2 space-y-4 max-h-[600px] overflow-y-scroll">
         <section className="flex flex-col space-y-2">
           <label
             htmlFor="user-control-feed-width"
@@ -27,7 +27,7 @@ const IndexPage = () => {
             htmlFor="user-control-navigation-buttons"
             className="text-sm font-bold text-[#8899a6]"
           >
-            Navigation
+            Navigation Buttons
           </label>
           <MinimalNavigation id="user-control-navigation-buttons" />
         </section>

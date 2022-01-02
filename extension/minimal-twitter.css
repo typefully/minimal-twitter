@@ -34,11 +34,10 @@
     padding-top: 4px !important;
   }
 
+  /* Remove navigation labels and empty space*/
   nav[aria-label="Primary"] {
     width: fit-content !important;
   }
-
-  /* Remove navigation labels and empty space*/
   nav[aria-label="Primary"] div[dir="auto"] {
     position: absolute !important;
   }
