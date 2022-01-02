@@ -1,5 +1,5 @@
 {
-  "name": "customize-more",
+  "name": "customize",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.2",
     "@radix-ui/react-checkbox": "^0.1.4",
     "@radix-ui/react-icons": "^1.0.3",
     "@radix-ui/react-slider": "^0.1.3",

@@ -71,6 +71,10 @@ const MinimalSlider = () => {
         step={50}
         aria-label="Feed Width Slider"
       >
+        <StyledTrack>
+          <StyledRange />
+        </StyledTrack>
+        <StyledThumb title={`${userTrack}px`} />
         <span className="absolute left-0 right-0 flex items-center justify-center w-[94%] m-auto -translate-x-[6px]">
           {trackDots.map((track, key) => (
             <span
@@ -84,10 +88,6 @@ const MinimalSlider = () => {
             ></span>
           ))}
         </span>
-        <StyledTrack>
-          <StyledRange />
-        </StyledTrack>
-        <StyledThumb title={`${userTrack}px`} />
       </StyledSlider>
       <span className="text-lg font-medium">800px</span>
     </form>

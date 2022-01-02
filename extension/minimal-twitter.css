@@ -17,14 +17,16 @@
   }
 
   /* Fix navigation to left */
-  header {
+  header[role="banner"] {
     position: fixed !important;
     left: 0 !important;
   }
 
   /* Center the Timeline */
-  main {
+  /* Prevent horizontal overflow scrolling */
+  main[role="main"] {
     align-items: center !important;
+    overflow-x: hidden !important;
   }
 
   /* Align Twitter navigation icon with search */
@@ -32,19 +34,26 @@
     padding-top: 4px !important;
   }
 
-  /* Remove navigation labels */
-  /* Navigation buttons width of contents */
-  nav[aria-label="Primary"] div[dir="auto"] {
-    display: none !important;
+  nav[aria-label="Primary"] {
     width: fit-content !important;
   }
-  /* Show navigation labels on hover */
-  /* nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
+
+  /* Remove navigation labels and empty space*/
+  nav[aria-label="Primary"] div[dir="auto"] {
+    position: absolute !important;
+  }
+  nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
     display: none !important;
   }
-  nav[aria-label="Primary"] *:hover div[dir="auto"]:not([aria-label]) > span {
+  /* Show navigation labels */
+  /* nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
     display: inline !important;
   } */
+
+  /* Align account button width of contents */
+  header[role="banner"] > div > div > div > div:last-child {
+    width: fit-content;
+  }
 
   /* Align account button with floating tweet button */
   /* Align account button width of contents */
@@ -123,9 +132,9 @@
 }
 
 /* Remove promoted posts */
-[data-testid="placementTracking"] article {
+/* [data-testid="placementTracking"] article {
   display: none !important;
-}
+} */
 
 /* Remove borders on feed */
 /* div[data-testid="primaryColumn"] {
