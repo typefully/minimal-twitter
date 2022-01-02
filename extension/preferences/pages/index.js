@@ -27,6 +27,15 @@ const IndexPage = () => {
           </label>
           <MinimalNavigation id="user-control-navigation-buttons" />
         </div>
+        <div className="flex flex-col space-y-2">
+          <label
+            htmlFor="user-control-extras"
+            className="text-xs font-bold text-[#8899a6]"
+          >
+            Extras
+          </label>
+          <div id="user-control-extras"></div>
+        </div>
       </div>
     </div>
   );
