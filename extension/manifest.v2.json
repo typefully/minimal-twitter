@@ -27,7 +27,7 @@
       "32": "images/MinimalTwitterIcon32.png",
       "48": "images/MinimalTwitterIcon48.png"
     },
-    "default_title": "Preferences",
+    "default_title": "Customize",
     "default_popup": "index.html"
   }
 }

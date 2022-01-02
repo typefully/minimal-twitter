@@ -7,7 +7,7 @@ const IndexPage = () => {
     <div className="flex justify-center w-full">
       <div className="flex flex-col p-3 space-y-4 font-sans text-white w-[420px]">
         <h1 className="text-xl font-extrabold text-center">
-          <span>Customize Minimal Twitter</span>
+          <span>Customize More</span>
         </h1>
         <div className="flex flex-col space-y-2">
           <label

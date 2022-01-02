@@ -1,11 +1,11 @@
 {
-  "name": "minimal-theme-preferences",
+  "name": "customize-more",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "lint": "next lint",
-    "build": "next build && next export && mv out/_next out/assets && sed -i '' -e 's/\\/_next/\\.\\/preferences\\/out\\/assets/g' out/**.html && mv out/index.html ../",
+    "build": "next build && next export && mv out/_next out/assets && sed -i '' -e 's/\\/_next/\\.\\/customize\\/out\\/assets/g' out/**.html && mv out/index.html ../",
     "start": "next start"
   },
   "dependencies": {
