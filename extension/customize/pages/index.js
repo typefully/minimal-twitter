@@ -1,7 +1,7 @@
 import { TwitterLogoIcon } from "@radix-ui/react-icons";
-import MinimalSlider from "../components/Slider";
-import MinimalNavigation from "../components/Navigation";
-import MinimalToggle from "../components/Toggle";
+import MinimalSlider from "../components/controls/Slider";
+import MinimalNavigation from "../components/controls/Navigation";
+import MinimalToggle from "../components/controls/Toggle";
 
 const IndexPage = () => {
   return (
@@ -12,8 +12,8 @@ const IndexPage = () => {
             <span>Customize more</span>
           </h1>
           <p className="text-[#8899a6] leading-5 text-[15px] pb-5 pt-3">
-            Manage feed width, navigation, and extras. Access Twitter's main
-            display settings at{" "}
+            Manage feed width, navigation, and extras. <br />
+            Or go to display settings at{" "}
             <a
               href="https://twitter.com/i/display"
               className="text-twitterBlue hover:underline"
@@ -24,36 +24,44 @@ const IndexPage = () => {
           </p>
         </header>
         <main className="flex flex-col p-2 space-y-4">
-          <div className="flex flex-col space-y-2">
+          <section className="flex flex-col space-y-2">
             <label
               htmlFor="user-control-feed-width"
-              className="text-xs font-bold text-[#8899a6]"
+              className="text-sm font-bold text-[#8899a6]"
             >
               Feed Width
             </label>
             <MinimalSlider id="user-control-feed-width" />
-          </div>
-          <div className="flex flex-col space-y-2">
+          </section>
+          <section className="flex flex-col space-y-2">
             <label
               htmlFor="user-control-navigation-buttons"
-              className="text-xs font-bold text-[#8899a6]"
+              className="text-sm font-bold text-[#8899a6]"
             >
               Navigation
             </label>
             <MinimalNavigation id="user-control-navigation-buttons" />
-          </div>
-          <div className="flex flex-col space-y-2">
+          </section>
+          <section className="flex flex-col space-y-2">
             <label
               htmlFor="user-control-extras"
-              className="text-xs font-bold text-[#8899a6]"
+              className="text-sm font-bold text-[#8899a6]"
             >
-              Extras
+              Extras &#183; <a className="font-normal text-twitterBlue">Show</a>
             </label>
-            <div id="user-control-extras">
+            {/* <div id="user-control-extras">
               <MinimalToggle />
-            </div>
-          </div>
+            </div> */}
+          </section>
         </main>
+        <footer className="flex justify-center w-full pt-6">
+          <button
+            type="button"
+            className="inline-flex items-center px-4 py-2 text-[15px] font-bold text-white border border-transparent rounded-full shadow-sm bg-[#1d9bf0] hover:bg-[#1a8cd8] focus:outline-none w-fit"
+          >
+            Done
+          </button>
+        </footer>
       </div>
     </div>
   );
