@@ -1,5 +1,12 @@
 import { styled } from "@stitches/react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
+import * as SeparatorPrimitive from "@radix-ui/react-separator"
+
+const StyledSeparator = styled(SeparatorPrimitive.Root, {
+  backgroundColor: "#38444d",
+  "&[data-orientation=horizontal]": { height: 1, width: "100%" },
+  "&[data-orientation=vertical]": { height: "100%", width: 1 }
+})
 
 const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: "unset",
@@ -42,7 +49,7 @@ const NavigationLabels = () => {
   } */
 
   return (
-    <div className="flex items-center justify-between w-full">
+    <div className="flex items-center justify-between w-full py-4">
       <label htmlFor="showNavigationLabels" className="text-[15px] font-bold">
         Navigation Labels
       </label>
@@ -53,9 +60,21 @@ const NavigationLabels = () => {
   )
 }
 
+/* Remove promoted posts */
+/* [data-testid="placementTracking"] article {
+  display: none !important;
+} */
+
+/* Remove borders on feed */
+/* div[data-testid="primaryColumn"] {
+  border-left-width: 0;
+  border-right-width: 0;
+} */
+
 const ExtraSwitches = () => (
-  <form className="bg-[#192734] rounded-2xl py-3 px-4 flex items-center justify-between">
+  <form className="bg-[#192734] rounded-2xl px-4 flex flex-col items-center justify-between">
     <NavigationLabels />
+    <StyledSeparator />
   </form>
 )
 

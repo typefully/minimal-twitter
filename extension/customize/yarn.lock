@@ -337,6 +337,14 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-slot" "0.1.2"
 
+"@radix-ui/react-separator@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-separator/-/react-separator-0.1.3.tgz#384ebd3c99d3934936c89dbb827cb5c38763edbe"
+  integrity sha512-4T19/TwF/fp/5x8H2KjNre1htv5iJkXcXzr4QJnqEYiE/wkPwWlW/vcuTWKIY8AXDp+tAgGw0UPrajV7loU+TA==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-primitive" "0.1.3"
+
 "@radix-ui/react-slider@^0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-slider/-/react-slider-0.1.3.tgz#f3de16ca348a367dec8aac0f29af1c45459465fe"
@@ -377,6 +385,16 @@
     "@radix-ui/react-use-controllable-state" "0.1.0"
     "@radix-ui/react-use-previous" "0.1.0"
     "@radix-ui/react-use-size" "0.1.0"
+
+"@radix-ui/react-toggle@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-toggle/-/react-toggle-0.1.3.tgz#ca471d1b49bdf0c9b821f4c4e39feca70b7cde6a"
+  integrity sha512-ig2LsivpVOxbPoBpNy/6dgB5WNm0mkPMaBBgwo7yufDhlUExdp+bRCqkcWkN9EV42SEbd4etNEIrLAqppfgq3g==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "0.1.0"
+    "@radix-ui/react-primitive" "0.1.3"
+    "@radix-ui/react-use-controllable-state" "0.1.0"
 
 "@radix-ui/react-use-callback-ref@0.1.0":
   version "0.1.0"
