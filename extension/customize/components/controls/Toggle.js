@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Switch } from "@headlessui/react";
+import { useState } from "react"
+import { Switch } from "@headlessui/react"
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ")
 }
 const Example = () => {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(false)
 
   return (
     <form className="bg-[#192734] rounded-2xl p-4 flex items-center space-x-3">
@@ -35,7 +35,7 @@ const Example = () => {
         />
       </Switch>
     </form>
-  );
-};
+  )
+}
 
-export default Example;
+export default Example

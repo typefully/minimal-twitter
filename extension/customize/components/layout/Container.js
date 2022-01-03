@@ -4,6 +4,6 @@ const Container = ({ children }) => (
       {children}
     </div>
   </div>
-);
+)
 
-export default Container;
+export default Container

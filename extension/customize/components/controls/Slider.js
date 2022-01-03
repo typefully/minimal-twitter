@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { styled } from "@stitches/react";
-import * as SliderPrimitive from "@radix-ui/react-slider";
+import { useState } from "react"
+import { styled } from "@stitches/react"
+import * as SliderPrimitive from "@radix-ui/react-slider"
 
 const StyledSlider = styled(SliderPrimitive.Root, {
   position: "relative",
@@ -12,15 +12,15 @@ const StyledSlider = styled(SliderPrimitive.Root, {
   cursor: "pointer",
 
   '&[data-orientation="horizontal"]': {
-    height: 20,
+    height: 20
   },
 
   '&[data-orientation="vertical"]': {
     flexDirection: "column",
     width: 20,
-    height: 100,
-  },
-});
+    height: 100
+  }
+})
 
 const StyledTrack = styled(SliderPrimitive.Track, {
   backgroundColor: "#8ecdf8",
@@ -29,8 +29,8 @@ const StyledTrack = styled(SliderPrimitive.Track, {
   borderRadius: "9999px",
 
   '&[data-orientation="horizontal"]': { height: 4 },
-  '&[data-orientation="vertical"]': { width: 4 },
-});
+  '&[data-orientation="vertical"]': { width: 4 }
+})
 
 const StyledRange = styled(SliderPrimitive.Range, {
   position: "absolute",
@@ -38,8 +38,8 @@ const StyledRange = styled(SliderPrimitive.Range, {
   alignItems: "center",
   backgroundColor: "#1DA1F2",
   borderRadius: "9999px",
-  height: "100%",
-});
+  height: "100%"
+})
 
 const StyledThumb = styled(SliderPrimitive.Thumb, {
   all: "unset",
@@ -51,19 +51,19 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
   boxShadow:
     "rgb(101 119 134 / 20%) 0px 0px 7px, rgb(101 119 134 / 15%) 0px 1px 3px 1px",
   "&:hover": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` },
-  "&:focus": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` },
-});
+  "&:focus": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` }
+})
 
 const MinimalSlider = () => {
-  const [userTrack, setUserTrack] = useState(700);
-  const trackDots = [600, 650, 700, 750, 800];
+  const [userTrack, setUserTrack] = useState(700)
+  const trackDots = [600, 650, 700, 750, 800]
 
   return (
     <form className="bg-[#192734] rounded-2xl p-4 flex items-center space-x-3">
       <span className="text-xs font-medium">600px</span>
       <StyledSlider
         onValueChange={(value) => {
-          setUserTrack(value[0]);
+          setUserTrack(value[0])
         }}
         defaultValue={[userTrack]}
         min={600}
@@ -82,7 +82,7 @@ const MinimalSlider = () => {
               title={`${track}px`}
               style={{
                 left: `${Math.abs(((800 - track) / 200) * 100 - 100)}%`,
-                backgroundColor: track > userTrack ? "#8ecdf8" : "#1d9bf0",
+                backgroundColor: track > userTrack ? "#8ecdf8" : "#1d9bf0"
               }}
               className="absolute w-3 h-3 rounded-full"
             ></span>
@@ -91,7 +91,7 @@ const MinimalSlider = () => {
       </StyledSlider>
       <span className="text-lg font-medium">800px</span>
     </form>
-  );
-};
+  )
+}
 
-export default MinimalSlider;
+export default MinimalSlider

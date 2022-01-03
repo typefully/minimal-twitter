@@ -15,6 +15,6 @@ const Header = () => (
       .
     </p>
   </header>
-);
+)
 
-export default Header;
+export default Header
