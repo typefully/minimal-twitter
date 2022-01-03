@@ -1,6 +1,6 @@
 {
   "name": "Minimal Theme for Twitter",
-  "short_name": "MinimalTwitter",
+  "short_name": "Minimal Twitter",
   "description": "Declutter your Twitter web experience.",
   "version": "4.0.0",
   "manifest_version": 3,
@@ -18,8 +18,7 @@
     }
   ],
   "options_ui": {
-    "page": "index.html",
-    "open_in_tab": false
+    "page": "index.html"
   },
   "action": {
     "default_icon": {
