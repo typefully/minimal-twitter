@@ -9,8 +9,8 @@
   visibility: hidden !important;
 }
 
-/* 988px is Twitter web's desktop styles breakpoint */
-/* Twitter web's mobile styles (< 988px) are natively minimal */
+/* 988px is Twitter web's large screen breakpoint */
+/* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 988px) {
   /* Match widths for feed */
   [data-testid="primaryColumn"] {
@@ -51,13 +51,13 @@
     display: none !important;
   }
 
-  /* Align account button width of contents */
+  /* Set account button to width of contents */
   header[role="banner"] > div > div > div > div:last-child {
     width: fit-content !important;
   }
 
   /* Align account button with floating tweet button */
-  /* Align account button width of contents */
+  /* Set account button to width of contents */
   [data-testid="SideNav_AccountSwitcher_Button"] {
     bottom: 12px !important;
     width: fit-content !important;
