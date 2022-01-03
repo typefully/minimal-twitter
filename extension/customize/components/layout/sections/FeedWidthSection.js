@@ -1,4 +1,4 @@
-import MinimalSlider from "../../controls/Slider"
+import FeedSlider from "../../controls/FeedSlider"
 
 const FeedWidthSection = () => (
   <section className="flex flex-col space-y-2">
@@ -8,7 +8,9 @@ const FeedWidthSection = () => (
     >
       Feed Width
     </label>
-    <MinimalSlider id="user-control-feed-width" />
+    <div id="user-control-feed-width">
+      <FeedSlider />
+    </div>
   </section>
 )
 

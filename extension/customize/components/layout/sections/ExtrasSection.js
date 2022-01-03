@@ -1,4 +1,4 @@
-import MinimalToggle from "../../controls/Toggle"
+import ExtraSwitches from "../../controls/ExtraSwitches"
 
 const ExtrasSection = () => (
   <section className="flex flex-col space-y-2">
@@ -9,7 +9,7 @@ const ExtrasSection = () => (
       Extras &#183; <a className="font-normal text-twitterBlue">Show</a>
     </label>
     <div id="user-control-extras">
-      <MinimalToggle />
+      <ExtraSwitches />
     </div>
   </section>
 )

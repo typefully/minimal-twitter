@@ -54,7 +54,7 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
   "&:focus": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` }
 })
 
-const MinimalSlider = () => {
+const FeedSlider = () => {
   const [userTrack, setUserTrack] = useState(700)
   const trackDots = [600, 650, 700, 750, 800]
 
@@ -94,4 +94,4 @@ const MinimalSlider = () => {
   )
 }
 
-export default MinimalSlider
+export default FeedSlider

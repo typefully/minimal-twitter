@@ -104,7 +104,7 @@ const TopArticles = () => {
   )
 }
 
-const Navigation = () => {
+const NavigationButtons = () => {
   return (
     <form className="bg-[#192734] rounded-2xl p-3 flex items-center justify-between">
       <Explore />
@@ -116,4 +116,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation
+export default NavigationButtons

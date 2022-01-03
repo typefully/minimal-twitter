@@ -4,7 +4,13 @@
 - Copyright (c) 2022 Thomas Wang
 --*/
 
-/* Core styles */
+/* Hide Messages Drawer */
+[data-testid="DMDrawer"] {
+  visibility: hidden !important;
+}
+
+/* 988px is Twitter web's desktop styles breakpoint */
+/* Twitter web's mobile styles (< 988px) are natively minimal */
 @media only screen and (min-width: 988px) {
   /* Match widths for feed */
   [data-testid="primaryColumn"] {
@@ -44,14 +50,10 @@
   nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
     display: none !important;
   }
-  /* Show navigation labels */
-  /* nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
-    display: inline !important;
-  } */
 
   /* Align account button width of contents */
   header[role="banner"] > div > div > div > div:last-child {
-    width: fit-content;
+    width: fit-content !important;
   }
 
   /* Align account button with floating tweet button */
@@ -65,10 +67,6 @@
   [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
     display: none !important;
   }
-  /* Show account menu label on hover */
-  /* [data-testid="SideNav_AccountSwitcher_Button"]:hover > div:not(:first-child) {
-    display: block !important;
-  } */
 
   /* Hide sidebar */
   [data-testid="sidebarColumn"] {
@@ -124,19 +122,3 @@
     bottom: 24px !important;
   }
 }
-
-/* Hide Messages Drawer */
-[data-testid="DMDrawer"] {
-  visibility: hidden !important;
-}
-
-/* Remove promoted posts */
-/* [data-testid="placementTracking"] article {
-  display: none !important;
-} */
-
-/* Remove borders on feed */
-/* div[data-testid="primaryColumn"] {
-  border-left-width: 0;
-  border-right-width: 0;
-} */
