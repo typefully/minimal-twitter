@@ -18,7 +18,8 @@
     }
   ],
   "options_ui": {
-    "page": "index.html"
+    "page": "index.html",
+    "open_in_tab": true
   },
   "browser_action": {
     "default_icon": {
