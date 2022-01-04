@@ -1,6 +1,6 @@
 import * as SliderPrimitive from "@radix-ui/react-slider"
 import { styled } from "@stitches/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import { SwitchFeedBorders } from "./ExtrasSwitches"
@@ -59,47 +59,71 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
 })
 
 const FeedSlider = () => {
-  const [userTrack, setUserTrack] = useState(getStorage("feedWidth") || 700)
+  const [hasMounted, setHasMounted] = useState(false)
+  const [userTrack, setUserTrack] = useState(700)
   const trackDots = [600, 650, 700, 750, 800]
 
+  const getUserDefaultFeedWidth = async () => {
+    try {
+      const userDefaultFeedWidth = await getStorage("feedWidth")
+      userDefaultFeedWidth && setUserTrack(userDefaultFeedWidth)
+    } catch (error) {
+      console.error(error)
+    }
+
+    setHasMounted(true)
+  }
+
+  useEffect(() => {
+    getUserDefaultFeedWidth()
+  }, [])
+
   return (
-    <form className="bg-[#192734] rounded-2xl p-4 pb-0">
-      <div className="flex items-center pb-4 space-x-3">
-        <span className="text-xs font-medium">600px</span>
-        <StyledSlider
-          onValueChange={(value) => {
-            setUserTrack(value[0])
-            setStorage({ feedWidth: value[0] })
-          }}
-          defaultValue={[userTrack]}
-          min={600}
-          max={800}
-          step={50}
-          aria-label="Feed Width Slider"
-        >
-          <StyledTrack>
-            <StyledRange />
-          </StyledTrack>
-          <StyledThumb title={`${userTrack}px`} />
-          <span className="absolute left-0 right-0 flex items-center justify-center w-[94%] m-auto -translate-x-[6px]">
-            {trackDots.map((track, key) => (
-              <span
-                key={`track-${key}`}
-                title={`${track}px`}
-                style={{
-                  left: `${Math.abs(((800 - track) / 200) * 100 - 100)}%`,
-                  backgroundColor: track > userTrack ? "#8ecdf8" : "#1d9bf0"
-                }}
-                className="absolute w-3 h-3 rounded-full"
-              ></span>
-            ))}
-          </span>
-        </StyledSlider>
-        <span className="text-lg font-medium">800px</span>
-      </div>
-      <Separator />
-      <SwitchFeedBorders />
-    </form>
+    <>
+      {hasMounted ? (
+        <form className="bg-[#192734] rounded-2xl p-4 pb-0">
+          <div className="flex items-center pb-4 space-x-3">
+            <span className="text-xs font-medium">600px</span>
+            <StyledSlider
+              onValueChange={async (value) => {
+                if (value && value[0]) {
+                  setUserTrack(value[0])
+                  await setStorage({ feedWidth: value[0] })
+                }
+              }}
+              value={[userTrack]}
+              min={600}
+              max={800}
+              step={50}
+              aria-label="Feed Width Slider"
+            >
+              <StyledTrack>
+                <StyledRange />
+              </StyledTrack>
+              <StyledThumb title={`${userTrack}px`} />
+              <span className="absolute left-0 right-0 flex items-center justify-center w-[94%] m-auto -translate-x-[6px]">
+                {trackDots.map((track, key) => (
+                  <span
+                    key={`track-${key}`}
+                    title={`${track}px`}
+                    style={{
+                      left: `${Math.abs(((800 - track) / 200) * 100 - 100)}%`,
+                      backgroundColor: track > userTrack ? "#8ecdf8" : "#1d9bf0"
+                    }}
+                    className="absolute w-3 h-3 rounded-full"
+                  ></span>
+                ))}
+              </span>
+            </StyledSlider>
+            <span className="text-lg font-medium">800px</span>
+          </div>
+          <Separator />
+          <SwitchFeedBorders />
+        </form>
+      ) : (
+        <form className="bg-[#192734] rounded-2xl animate-pulse h-[115.5px]" />
+      )}
+    </>
   )
 }
 
