@@ -1,12 +1,5 @@
-import { styled } from "@stitches/react"
 import * as SwitchPrimitive from "@radix-ui/react-switch"
-import * as SeparatorPrimitive from "@radix-ui/react-separator"
-
-const StyledSeparator = styled(SeparatorPrimitive.Root, {
-  backgroundColor: "#38444d",
-  "&[data-orientation=horizontal]": { height: 1, width: "100%" },
-  "&[data-orientation=vertical]": { height: "100%", width: 1 }
-})
+import { styled } from "@stitches/react"
 
 const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: "unset",
@@ -15,9 +8,10 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   backgroundColor: "#939393",
   borderRadius: "9999px",
   position: "relative",
-  WebkitTapHighlightColor: "1DA1F2",
+  WebkitTapHighlightColor: "#1DA1F2",
   display: "flex",
   alignItems: "center",
+  cursor: "pointer",
   '&[data-state="checked"]': { backgroundColor: "#6bc9fb" }
 })
 
@@ -37,7 +31,26 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
   }
 })
 
-const NavigationLabels = () => {
+export const SwitchFeedBorders = () => {
+  /* Remove borders on feed */
+  /* div[data-testid="primaryColumn"] {
+    border-left-width: 0;
+    border-right-width: 0;
+  } */
+
+  return (
+    <div className="flex items-center justify-between w-full py-4">
+      <label htmlFor="feedBorders" className="text-[15px] font-bold">
+        Feed borders
+      </label>
+      <StyledSwitch defaultChecked id="feedBorders">
+        <StyledThumb />
+      </StyledSwitch>
+    </div>
+  )
+}
+
+export const SwitchNavigationButtonLabels = () => {
   /* Show navigation labels */
   /* nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
     display: inline !important;
@@ -51,7 +64,7 @@ const NavigationLabels = () => {
   return (
     <div className="flex items-center justify-between w-full py-4">
       <label htmlFor="showNavigationLabels" className="text-[15px] font-bold">
-        Navigation Labels
+        Button Labels
       </label>
       <StyledSwitch defaultChecked id="showNavigationLabels">
         <StyledThumb />
@@ -60,22 +73,15 @@ const NavigationLabels = () => {
   )
 }
 
-/* Remove promoted posts */
-/* [data-testid="placementTracking"] article {
-  display: none !important;
-} */
-
-/* Remove borders on feed */
-/* div[data-testid="primaryColumn"] {
-  border-left-width: 0;
-  border-right-width: 0;
-} */
-
-const ExtraSwitches = () => (
-  <form className="bg-[#192734] rounded-2xl px-4 flex flex-col items-center justify-between">
-    <NavigationLabels />
-    <StyledSeparator />
-  </form>
-)
-
-export default ExtraSwitches
+export const SwitchZenMode = () => {
+  return (
+    <div className="flex items-center justify-between w-full py-4">
+      <label htmlFor="zenMode" className="text-[15px] font-bold">
+        Zen Mode
+      </label>
+      <StyledSwitch defaultChecked id="zenMode">
+        <StyledThumb />
+      </StyledSwitch>
+    </div>
+  )
+}

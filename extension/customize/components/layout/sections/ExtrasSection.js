@@ -1,4 +1,4 @@
-import ExtraSwitches from "../../controls/ExtraSwitches"
+import Extras from "../../controls/Extras"
 
 const ExtrasSection = () => (
   <section className="flex flex-col space-y-2">
@@ -6,10 +6,10 @@ const ExtrasSection = () => (
       htmlFor="user-control-extras"
       className="text-sm font-bold text-[#8899a6]"
     >
-      Extras &#183; <a className="font-normal text-twitterBlue">Show</a>
+      Extras
     </label>
     <div id="user-control-extras">
-      <ExtraSwitches />
+      <Extras />
     </div>
   </section>
 )

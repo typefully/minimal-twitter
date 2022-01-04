@@ -1,5 +1,8 @@
-import { styled } from "@stitches/react"
 import * as TogglePrimitive from "@radix-ui/react-toggle"
+import { styled } from "@stitches/react"
+
+import { SwitchNavigationButtonLabels } from "./ExtrasSwitches"
+import Separator from "./Separator"
 
 const StyledToggle = styled(TogglePrimitive.Root, {
   "&[data-state=off]": { borderColor: "transparent", opacity: "50%" },
@@ -122,12 +125,16 @@ const TopArticles = () => {
 
 const NavigationButtons = () => {
   return (
-    <form className="bg-[#192734] rounded-2xl p-3 flex items-center justify-between">
-      <Explore />
-      <Notifications />
-      <Messages />
-      <Bookmarks />
-      <TopArticles />
+    <form className="bg-[#192734] rounded-2xl p-3 pb-0">
+      <div className="flex items-center justify-between pb-4">
+        <Explore />
+        <Notifications />
+        <Messages />
+        <Bookmarks />
+        <TopArticles />
+      </div>
+      <Separator />
+      <SwitchNavigationButtonLabels />
     </form>
   )
 }

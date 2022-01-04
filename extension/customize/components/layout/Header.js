@@ -12,7 +12,6 @@ const Header = () => (
       >
         twitter.com/i/display
       </a>
-      .
     </p>
   </header>
 )
