@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="64px" alt="Minimal Twitter Icon" src="./MinimalTwitterAppIcon.png"/>
+  <img width="64px" alt="Minimal Twitter Icon" src="./assets/MinimalTwitterAppIcon.png"/>
 </p>
 
 <h1 align="center">
