@@ -31,7 +31,10 @@ export const CheckboxRemovePromotedPosts = () => {
 
   return (
     <div className="flex items-center justify-between w-full py-1">
-      <label htmlFor="removePromotedPosts" className="tracking-normal">
+      <label
+        htmlFor="removePromotedPosts"
+        className="text-base tracking-normal"
+      >
         Remove promoted posts
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
@@ -55,7 +58,7 @@ export const CheckboxHideVanityCount = ({
 }) => {
   return (
     <div className="flex items-center justify-between w-full py-1">
-      <span className="flex items-center space-x-2 tracking-normal text-white">
+      <span className="flex items-center space-x-2 text-base tracking-normal text-white">
         <label htmlFor="hideVanityCount">Hide vanity counts</label>
         <TogglePrimitive.Root
           defaultPressed={false}
@@ -89,8 +92,8 @@ export const CheckboxHideVanityCount = ({
 export const CheckboxHideReplyCount = () => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
-      <label htmlFor="hideReplyCount">
-        <span>Hide reply count</span>
+      <label htmlFor="hideReplyCount" className="text-base">
+        Hide reply count
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
@@ -110,8 +113,8 @@ export const CheckboxHideReplyCount = () => {
 export const CheckboxHideRetweetCount = () => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
-      <label htmlFor="hideRetweetCount">
-        <span>Hide retweet count</span>
+      <label htmlFor="hideRetweetCount" className="text-base">
+        Hide retweet count
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
@@ -131,8 +134,8 @@ export const CheckboxHideRetweetCount = () => {
 export const CheckboxHideLikeCount = () => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
-      <label htmlFor="hideLikeCount">
-        <span>Hide like count</span>
+      <label htmlFor="hideLikeCount" className="text-base">
+        Hide like count
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
@@ -152,8 +155,8 @@ export const CheckboxHideLikeCount = () => {
 export const CheckboxHideFollowingCount = () => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
-      <label htmlFor="hideFollowingCount">
-        <span>Hide following count</span>
+      <label htmlFor="hideFollowingCount" className="text-base">
+        Hide following count
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
@@ -173,8 +176,8 @@ export const CheckboxHideFollowingCount = () => {
 export const CheckboxHideFollowerCount = () => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
-      <label htmlFor="hideFollowerCount">
-        <span>Hide follower count</span>
+      <label htmlFor="hideFollowerCount" className="text-base">
+        Hide follower count
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
