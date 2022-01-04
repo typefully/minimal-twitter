@@ -2,6 +2,7 @@ import * as SliderPrimitive from "@radix-ui/react-slider"
 import { styled } from "@stitches/react"
 import { useState } from "react"
 
+import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import { SwitchFeedBorders } from "./ExtrasSwitches"
 import Separator from "./Separator"
 
@@ -58,7 +59,7 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
 })
 
 const FeedSlider = () => {
-  const [userTrack, setUserTrack] = useState(700)
+  const [userTrack, setUserTrack] = useState(getStorage("feedWidth") || 700)
   const trackDots = [600, 650, 700, 750, 800]
 
   return (
@@ -68,6 +69,7 @@ const FeedSlider = () => {
         <StyledSlider
           onValueChange={(value) => {
             setUserTrack(value[0])
+            setStorage({ feedWidth: value[0] })
           }}
           defaultValue={[userTrack]}
           min={600}

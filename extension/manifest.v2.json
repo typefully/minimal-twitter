@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
-      "css": ["minimal-twitter.css"]
+      "css": ["content.css"]
     }
   ],
   "options_ui": {
