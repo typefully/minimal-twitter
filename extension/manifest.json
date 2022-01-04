@@ -13,6 +13,7 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
+      "run_at": "document_start",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
       "css": ["content.css"],
       "js": ["content.js"]

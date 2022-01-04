@@ -6,15 +6,9 @@ const addStyles = (css) => {
   head.appendChild(style);
 };
 
-/*--
-- Listen to Chrome Storage changes
-- Inject styles in respond to changes
-- Docs: https://developer.chrome.com/docs/extensions/reference/storage/#synchronous-response-to-storage-updates
---*/
-chrome.storage.onChanged.addListener((changes) => {
-  const feedWidth = changes["feedWidth"];
-
-  switch (feedWidth.newValue) {
+// Function to change feed width
+const changeFeedWidth = (feedWidth) => {
+  switch (feedWidth) {
     case 600:
       addStyles(`
       [data-testid="primaryColumn"] {
@@ -56,4 +50,30 @@ chrome.storage.onChanged.addListener((changes) => {
       `);
       break;
   }
+};
+
+/*--
+- Listen to Chrome Storage changes
+- Inject styles in respond to changes:
+  - 1. Feed Width
+  - 2. Feed Borders
+- Docs: https://developer.chrome.com/docs/extensions/reference/storage/#synchronous-response-to-storage-updates
+--*/
+chrome.storage.onChanged.addListener((changes) => {
+  // 1. Respond to feed width changes
+  const feedWidth = changes["feedWidth"];
+  changeFeedWidth(feedWidth.newValue);
+
+  // 2. Respond to feed borders changes
+  // const feedBorders = changes["feedBorders"];
+  // if (feedBorders.newValue === true) {
+  // }
 });
+
+const init = () => {
+  chrome.storage.sync.get(["feedWidth"], (result) => {
+    changeFeedWidth(result.feedWidth);
+  });
+};
+
+init();
