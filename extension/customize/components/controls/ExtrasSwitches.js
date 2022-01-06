@@ -1,5 +1,8 @@
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { styled } from "@stitches/react"
+import { useEffect, useState } from "react"
+
+import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
 const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: "unset",
@@ -32,18 +35,40 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
 })
 
 export const SwitchFeedBorders = () => {
-  /* Remove borders on feed */
-  /* div[data-testid="primaryColumn"] {
-    border-left-width: 0;
-    border-right-width: 0;
-  } */
+  const [userFeedBorders, setUserFeedBorders] = useState(false)
+
+  const getUserDefaultFeedBorders = async () => {
+    try {
+      const userDefaultFeedBorders = await getStorage("feedBorders")
+      console.log("border: " + userDefaultFeedBorders)
+      userDefaultFeedBorders &&
+        setUserFeedBorders(userDefaultFeedBorders === "on" ? true : false)
+    } catch (error) {
+      console.warn(error)
+    }
+  }
+
+  useEffect(() => {
+    getUserDefaultFeedBorders()
+  }, [])
 
   return (
     <div className="flex items-center justify-between w-full py-4">
       <label htmlFor="feedBorders" className="text-[15px] font-bold">
         Feed borders
       </label>
-      <StyledSwitch defaultChecked id="feedBorders">
+      <StyledSwitch
+        onCheckedChange={async (checked) => {
+          setUserFeedBorders(checked)
+          try {
+            await setStorage({ feedBorders: checked ? "on" : "off" })
+          } catch (error) {
+            console.warn(error)
+          }
+        }}
+        checked={userFeedBorders}
+        id="feedBorders"
+      >
         <StyledThumb />
       </StyledSwitch>
     </div>
