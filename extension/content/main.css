@@ -1,0 +1,125 @@
+/*--
+- Minimal Theme for Twitter - https://www.wang.sh/minimal-twitter
+- Licensed under the MIT license - https://github.com/thomaswang/minimal-twitter/blob/main/LICENSE
+- Copyright (c) 2022 Thomas Wang
+--*/
+
+/* Hide Messages Drawer */
+[data-testid="DMDrawer"] {
+  visibility: hidden !important;
+}
+
+/* 988px is Twitter web's large screen breakpoint */
+/* Twitter web's small screen styles (< 988px) are minimal */
+@media only screen and (min-width: 988px) {
+  /* Match widths for feed */
+  [data-testid="primaryColumn"] {
+    width: 700px !important;
+    max-width: 700px !important;
+    margin: 0 auto !important;
+  }
+  [data-testid="primaryColumn"] > div > div:last-child,
+  [data-testid="primaryColumn"] > div > div:last-child div {
+    max-width: unset !important;
+  }
+
+  /* Fix navigation to left */
+  header[role="banner"] {
+    position: fixed !important;
+    left: 0 !important;
+  }
+
+  /* Center the Timeline */
+  /* Prevent horizontal overflow scrolling */
+  main[role="main"] {
+    align-items: center !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Align Twitter navigation icon with search */
+  h1[role="heading"] {
+    padding-top: 4px !important;
+  }
+
+  /* Remove navigation labels and empty space*/
+  nav[aria-label="Primary"] {
+    width: fit-content !important;
+  }
+  nav[aria-label="Primary"] div[dir="auto"] {
+    position: absolute !important;
+  }
+  nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
+    display: none !important;
+  }
+
+  /* Set account button to width of contents */
+  header[role="banner"] > div > div > div > div:last-child {
+    width: fit-content !important;
+  }
+
+  /* Align account button with floating tweet button */
+  /* Set account button to width of contents */
+  [data-testid="SideNav_AccountSwitcher_Button"] {
+    bottom: 12px !important;
+    width: fit-content !important;
+  }
+
+  /* Remove account menu label */
+  [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+    display: none !important;
+  }
+
+  /* Hide sidebar */
+  [data-testid="sidebarColumn"] {
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 1 !important;
+  }
+
+  /* Reveal searchbar */
+  [data-testid="sidebarColumn"]
+    form[aria-label="Search Twitter"][role="search"] {
+    visibility: visible !important;
+    position: fixed !important;
+    top: 12px !important;
+    right: 16px !important;
+  }
+
+  /* Match size of input the placeholder content */
+  [data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
+    width: 14ch !important;
+  }
+
+  /* Match size of focused search container to its dropdown */
+  /* Add blur filter to search container for overlap */
+  [data-testid="sidebarColumn"]
+    form[aria-label="Search Twitter"][role="search"]:focus-within {
+    width: 374px !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  /* Match size of focused search input to its dropdown */
+  [data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
+    width: 328px !important;
+  }
+
+  /* Reset left positioning to align search dropdown */
+  div[aria-multiselectable="false"][role="listbox"],
+  div[style="left: -12px; width: 374px;"] {
+    left: auto !important;
+  }
+  div[style="left: -8px; width: 306px;"] {
+    left: auto !important;
+    width: 374px !important;
+  }
+
+  /* Floating Tweet Button */
+  a[data-testid="SideNav_NewTweet_Button"] {
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 24px !important;
+  }
+}
