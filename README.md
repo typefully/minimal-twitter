@@ -33,11 +33,13 @@ Make sure to rename `manifest.chrome.json` or `manifest.firefox.json` to `manife
 cd extension
 ```
 
-On Chrome
+#### On Chrome
 
 ```sh
 mv manifest.chrome.json manifest.json
 ```
+
+#### On Firefox
 
 ```sh
 mv manifest.firefox.json manifest.json
