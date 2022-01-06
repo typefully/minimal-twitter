@@ -15,12 +15,12 @@
     {
       "run_at": "document_start",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
-      "css": ["content.css"],
-      "js": ["contentFunctions.js", "content.js"]
+      "css": ["content/main.css"],
+      "js": ["content/main.js"]
     }
   ],
   "options_ui": {
-    "page": "index.html",
+    "page": "customize.html",
     "open_in_tab": true
   },
   "action": {
@@ -30,6 +30,6 @@
       "48": "images/MinimalTwitterIcon48.png"
     },
     "default_title": "Customize",
-    "default_popup": "index.html"
+    "default_popup": "customize.html"
   }
 }
