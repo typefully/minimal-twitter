@@ -22,6 +22,7 @@ cd customize-app
 ```
 
 ```sh
+yarn # must run yarn once first before you can build
 yarn run build
 ```
 
