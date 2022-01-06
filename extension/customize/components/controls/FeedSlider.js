@@ -63,7 +63,6 @@ const FeedSlider = () => {
   const getUserDefaultFeedWidth = async () => {
     try {
       const userDefaultFeedWidth = await getStorage("feedWidth")
-      console.log("width: " + userDefaultFeedWidth)
       userDefaultFeedWidth && setUserTrack(userDefaultFeedWidth)
     } catch (error) {
       console.warn(error)

@@ -40,7 +40,6 @@ export const SwitchFeedBorders = () => {
   const getUserDefaultFeedBorders = async () => {
     try {
       const userDefaultFeedBorders = await getStorage("feedBorders")
-      console.log("border: " + userDefaultFeedBorders)
       userDefaultFeedBorders &&
         setUserFeedBorders(userDefaultFeedBorders === "on" ? true : false)
     } catch (error) {

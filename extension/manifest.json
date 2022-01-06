@@ -16,7 +16,7 @@
       "run_at": "document_start",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
       "css": ["content.css"],
-      "js": ["content.js"]
+      "js": ["contentFunctions.js", "content.js"]
     }
   ],
   "options_ui": {

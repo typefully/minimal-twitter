@@ -13,7 +13,6 @@ import throttle from "lodash.throttle"
 export const getStorage = async (k) => {
   const promise = new Promise((resolve, _reject) => {
     chrome?.storage?.sync.get([k], (data) => {
-      console.log(data[k])
       return resolve(data[k])
     })
   })
