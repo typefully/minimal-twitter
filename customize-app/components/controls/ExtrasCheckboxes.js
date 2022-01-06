@@ -34,7 +34,7 @@ export const CheckboxPromotedPosts = () => {
       try {
         const userDefaultPromoted = await getStorage("promotedPosts")
         userDefaultPromoted &&
-          setUserZen(userDefaultPromoted === "on" ? true : false)
+          setPromoted(userDefaultPromoted === "on" ? true : false)
       } catch (error) {
         console.warn(error)
       }
