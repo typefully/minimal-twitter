@@ -2,10 +2,6 @@
   <img width="64px" alt="Minimal Twitter Icon" src="./assets/MinimalTwitterAppIcon.png"/>
 </p>
 
-<h1 align="center">
-  Minimal Theme for Twitter
-</h1>
-
 ## Install Extension
 
 - **Add to Chrome**: [Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
