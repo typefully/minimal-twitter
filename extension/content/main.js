@@ -89,10 +89,10 @@ const changefeedBorders = (feedBorders) => {
   }
 };
 
-// Function to add or remove Explore Button
+// Function to change Explore Button
 const changeExploreButton = (exploreButton) => {
   switch (exploreButton) {
-    case "remove":
+    case "off":
       addStyles(`
       [data-testid="AppTabBar_Explore_Link"] {
         display: none !important;
@@ -100,10 +100,131 @@ const changeExploreButton = (exploreButton) => {
       `);
       break;
 
-    case "add":
+    case "on":
       addStyles(`
       [data-testid="AppTabBar_Explore_Link"] {
         display: flex !important;
+      }
+      `);
+      break;
+  }
+};
+
+// Function to change Notifications Button
+const changeNotificationsButton = (notificationsButton) => {
+  switch (notificationsButton) {
+    case "off":
+      addStyles(`
+      [data-testid="AppTabBar_Notifications_Link"] {
+        display: none !important;
+      }
+      `);
+      break;
+
+    case "on":
+      addStyles(`
+      [data-testid="AppTabBar_Notifications_Link"] {
+        display: flex !important;
+      }
+      `);
+      break;
+  }
+};
+
+// Function to change Messages Button
+const changeMessagesButton = (messagesButton) => {
+  switch (messagesButton) {
+    case "off":
+      addStyles(`
+      [data-testid="AppTabBar_DirectMessage_Link"] {
+        display: none !important;
+      }
+      `);
+      break;
+
+    case "on":
+      addStyles(`
+      [data-testid="AppTabBar_DirectMessage_Link"] {
+        display: flex !important;
+      }
+      `);
+      break;
+  }
+};
+
+// Function to change Bookmarks Button
+const changeBookmarksButton = (bookmarksButton) => {
+  switch (bookmarksButton) {
+    case "off":
+      addStyles(`
+      [aria-label="Bookmarks"] {
+        display: none !important;
+      }
+      `);
+      break;
+
+    case "on":
+      addStyles(`
+      [aria-label="Bookmarks"] {
+        display: flex !important;
+      }
+      `);
+      break;
+  }
+};
+
+// Function to change Top Articles Button
+const changeTopArticlesButton = (topArticlesButton) => {
+  switch (topArticlesButton) {
+    case "off":
+      addStyles(`
+      [aria-label="Top Articles"] {
+        display: none !important;
+      }
+      `);
+      break;
+
+    case "on":
+      addStyles(`
+      [aria-label="Top Articles"] {
+        display: flex !important;
+      }
+      `);
+      break;
+  }
+};
+
+// Function to change Navigation Button Labels
+const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
+  switch (navigationButtonsLabels) {
+    case "on":
+      addStyles(`
+      @media only screen and (min-width: 988px) {
+        nav[aria-label="Primary"] div[dir="auto"] {
+          position: static !important;
+        }
+        nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
+          display: inline !important;
+        }
+        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+          display: flex !important;
+        }
+      }
+      `);
+      break;
+
+    case "off":
+      addStyles(`
+      @media only screen and (min-width: 988px) {
+        nav[aria-label="Primary"] div[dir="auto"] {
+          position: absolute !important;
+        }
+        nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
+          display: none !important;
+        }
+        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+          display: none !important;
+        }
       }
       `);
       break;
@@ -156,10 +277,10 @@ const injectAllChanges = (data) => {
     feedWidth,
     feedBorders,
     exploreButton,
-    notificationButton,
-    messageButton,
-    bookmarkButton,
-    topArticlesButtons,
+    notificationsButton,
+    messagesButton,
+    bookmarksButton,
+    topArticlesButton,
     navigationButtonsLabels,
     zenMode,
     removePromotedPosts,
@@ -172,12 +293,20 @@ const injectAllChanges = (data) => {
 
   // 1. Feed Width
   changeFeedWidth(feedWidth);
-
   // 2. Feed Borders
   changefeedBorders(feedBorders);
-
-  // 3. Navigation Button
-  // changeExploreButton(exploreButton);
+  // 3. Explore Button
+  changeExploreButton(exploreButton);
+  // 4. Notification Button
+  changeNotificationsButton(notificationsButton);
+  // 5. Message Button
+  changeMessagesButton(messagesButton);
+  // 6. Bookmark Button
+  changeBookmarksButton(bookmarksButton);
+  // 7. Top Articles Button
+  changeTopArticlesButton(topArticlesButton);
+  // 8. Navigation Buttons Labels
+  changeNavigationButtonsLabels(navigationButtonsLabels);
 };
 
 /*--
@@ -195,9 +324,28 @@ chrome.storage.onChanged.addListener((changes) => {
 - Get Chrome Storage and inject respective styles
 --*/
 const init = () => {
-  chrome.storage.sync.get(["feedWidth", "feedBorders"], (data) => {
-    injectAllChanges(data);
-  });
+  chrome.storage.sync.get(
+    [
+      "feedWidth",
+      "feedBorders",
+      "exploreButton",
+      "notificationsButton",
+      "messagesButton",
+      "bookmarksButton",
+      "topArticlesButton",
+      "navigationButtonsLabels",
+      "zenMode",
+      "removePromotedPosts",
+      "hideReplyCount",
+      "hideRetweetCount",
+      "hideLikeCount",
+      "hideFollowingCount",
+      "hideFollowerCount",
+    ],
+    (data) => {
+      injectAllChanges(data);
+    }
+  );
 };
 
 init();
