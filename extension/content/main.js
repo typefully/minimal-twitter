@@ -78,8 +78,7 @@ const changefeedBorders = (feedBorders) => {
       addStyles(`
       @media only screen and (min-width: 988px) {
         div[data-testid="primaryColumn"] {
-          border-left-width: 1px !important;
-          border-right-width: 1px !important;
+          border-style: solid;
         }
       }
       `);
@@ -89,8 +88,7 @@ const changefeedBorders = (feedBorders) => {
       addStyles(`
       @media only screen and (min-width: 988px) {
         div[data-testid="primaryColumn"] {
-          border-left-width: 0 !important;
-          border-right-width: 0 !important;
+          border-style: hidden;
         }
       }
       `);
@@ -209,8 +207,8 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
     case "on":
       addStyles(`
       @media only screen and (min-width: 988px) {
-        nav[aria-label="Primary"] div[dir="auto"] {
-          position: static !important;
+        nav[aria-label="Primary"] div[dir="auto"]:not([aria-live]) {
+          position: relative !important;
         }
         nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
           display: inline !important;
@@ -225,7 +223,7 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
     case "off":
       addStyles(`
       @media only screen and (min-width: 988px) {
-        nav[aria-label="Primary"] div[dir="auto"] {
+        nav[aria-label="Primary"] div[dir="auto"]:not([aria-live]) {
           position: absolute !important;
         }
         nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
@@ -253,8 +251,7 @@ const changeZenMode = (zenMode) => {
 
       @media only screen and (min-width: 988px) {
         div[data-testid="primaryColumn"] {
-          border-left-width: 0 !important;
-          border-right-width: 0 !important;
+          border-style: hidden;
         }
       }
       `);
@@ -270,8 +267,7 @@ const changeZenMode = (zenMode) => {
 
       @media only screen and (min-width: 988px) {
         div[data-testid="primaryColumn"] {
-          border-left-width: 0 !important;
-          border-right-width: 0 !important;
+          border-style: solid;
         }
       }
       `);
