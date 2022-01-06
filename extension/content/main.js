@@ -1,18 +1,19 @@
 // Utility function to inject CSS into page
 const addStyles = (css) => {
-  var head = document.querySelector("head");
-  var style = document.createElement("style");
+  const head = document.querySelector("head");
+  const style = document.createElement("style");
   style.textContent = `${css}`;
   head.appendChild(style);
 };
 
 // Function to add main stylesheet
 const addMainStylesheet = () => {
+  const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("content/main.css");
-  document.head.appendChild(mainStylesheet);
+  head.appendChild(mainStylesheet);
 };
 
 // Function to change Feed Width
@@ -180,12 +181,12 @@ const changeBookmarksButton = (bookmarksButton) => {
   }
 };
 
-// Function to change Top Articles Button
-const changeTopArticlesButton = (topArticlesButton) => {
-  switch (topArticlesButton) {
+// Function to change Lists Button
+const changeListsButton = (listsButton) => {
+  switch (listsButton) {
     case "off":
       addStyles(`
-      [aria-label="Top Articles"] {
+      [aria-label="Lists"] {
         display: none !important;
       }
       `);
@@ -193,7 +194,7 @@ const changeTopArticlesButton = (topArticlesButton) => {
 
     case "on":
       addStyles(`
-      [aria-label="Top Articles"] {
+      [aria-label="Lists"] {
         display: flex !important;
       }
       `);
@@ -249,10 +250,8 @@ const changeZenMode = (zenMode) => {
         display: none !important;
       }
 
-      @media only screen and (min-width: 988px) {
-        div[data-testid="primaryColumn"] {
-          border-style: hidden;
-        }
+      div[data-testid="primaryColumn"] {
+        border-style: hidden;
       }
       `);
       break;
@@ -265,10 +264,8 @@ const changeZenMode = (zenMode) => {
         display: flex !important;
       }
 
-      @media only screen and (min-width: 988px) {
-        div[data-testid="primaryColumn"] {
-          border-style: solid;
-        }
+      div[data-testid="primaryColumn"] {
+        border-style: solid;
       }
       `);
       break;
@@ -276,20 +273,20 @@ const changeZenMode = (zenMode) => {
 };
 
 // Change Promoted Posts
-const changePromotedPosts = (promotedPosts) => {
-  switch (promotedPosts) {
+const changePromotedPosts = (removePromotedPosts) => {
+  switch (removePromotedPosts) {
     case "on":
       addStyles(`
-        [data-testid="placementTracking"] article {
-          display: flex !important;
+        [data-testid="placementTracking"] {
+          display: none !important;
         }
         `);
       break;
 
     case "off":
       addStyles(`
-        [data-testid="placementTracking"] article {
-          display: none !important;
+        [data-testid="placementTracking"] {
+          display: flex !important;
         }
         `);
       break;
@@ -326,7 +323,7 @@ const constructNewData = (changes) => {
   - 4. Notification Button
   - 5. Message Button
   - 6. Bookmark Button
-  - 7. Top Articles Button
+  - 7. Lists Button
   - 8. Navigation Buttons Labels
   - 9. Zen Mode
   - 10. Remove promoted posts
@@ -345,10 +342,10 @@ const injectAllChanges = (data) => {
     notificationsButton,
     messagesButton,
     bookmarksButton,
-    topArticlesButton,
+    listsButton,
     navigationButtonsLabels,
     zenMode,
-    promotedPosts,
+    removePromotedPosts,
     // hideReplyCount,
     // hideRetweetCount,
     // hideLikeCount,
@@ -368,14 +365,14 @@ const injectAllChanges = (data) => {
   changeMessagesButton(messagesButton);
   // 6. Bookmark Button
   changeBookmarksButton(bookmarksButton);
-  // 7. Top Articles Button
-  changeTopArticlesButton(topArticlesButton);
+  // 7. Lists Button
+  changeListsButton(listsButton);
   // 8. Navigation Buttons Labels
   changeNavigationButtonsLabels(navigationButtonsLabels);
   // 9. Zen Mode
   changeZenMode(zenMode);
   // 10. Promoted Posts
-  changePromotedPosts(promotedPosts);
+  changePromotedPosts(removePromotedPosts);
 };
 
 /*--
@@ -403,10 +400,10 @@ const init = () => {
       "notificationsButton",
       "messagesButton",
       "bookmarksButton",
-      "topArticlesButton",
+      "listsButton",
       "navigationButtonsLabels",
       "zenMode",
-      "promotedPosts",
+      "removePromotedPosts",
       // "hideReplyCount",
       // "hideRetweetCount",
       // "hideLikeCount",

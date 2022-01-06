@@ -27,12 +27,12 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
 })
 
 export const CheckboxPromotedPosts = () => {
-  const [userPromoted, setPromoted] = useState(false)
+  const [userPromoted, setPromoted] = useState(true)
 
   useEffect(() => {
     const getUserDefaultPromoted = async () => {
       try {
-        const userDefaultPromoted = await getStorage("promotedPosts")
+        const userDefaultPromoted = await getStorage("removePromotedPosts")
         userDefaultPromoted &&
           setPromoted(userDefaultPromoted === "on" ? true : false)
       } catch (error) {
@@ -46,7 +46,7 @@ export const CheckboxPromotedPosts = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="promotedPosts" className="text-base tracking-normal">
-        Promoted posts
+        Remove promoted posts
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
@@ -54,14 +54,14 @@ export const CheckboxPromotedPosts = () => {
             setPromoted(checked)
             try {
               await setStorage({
-                promotedPosts: checked ? "on" : "off"
+                removePromotedPosts: checked ? "on" : "off"
               })
             } catch (error) {
               console.warn(error)
             }
           }}
           checked={userPromoted}
-          id="promotedPosts"
+          id="removePromotedPosts"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
         >
           <CheckboxPrimitive.Indicator className="text-white">

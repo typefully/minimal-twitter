@@ -9,6 +9,11 @@
   visibility: hidden !important;
 }
 
+/* Remove Promoted Posts */
+[data-testid="placementTracking"] {
+  display: none !important;
+}
+
 /* 988px is Twitter web's large screen breakpoint */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 988px) {

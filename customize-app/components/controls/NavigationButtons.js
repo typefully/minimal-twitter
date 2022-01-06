@@ -1,6 +1,7 @@
 import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { styled } from "@stitches/react"
 import { useEffect, useState } from "react"
+import startCase from "lodash.startCase"
 
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import { SwitchNavigationButtonLabels } from "./ExtrasSwitches"
@@ -39,6 +40,8 @@ const UserButton = ({ type, children }) => {
         }
       }}
       pressed={userButton}
+      title={`Toggle ${startCase(type)}`}
+      aria-label={`Toggle ${startCase(type)}`}
       className="bg-[#192734] p-3 w-fit rounded-full border-[3px] border-twitterBlue text-white"
     >
       <svg width={25} height={25} aria-hidden="true" viewBox="0 0 24 24">
@@ -84,16 +87,12 @@ const Bookmarks = () => (
   </UserButton>
 )
 
-const TopArticles = () => (
-  <UserButton type="topArticlesButton">
-    <path
-      className="fill-current"
-      d="M14.057 12.559c.289 1.042.34 2.351-.395 3.712l-.059.106c-.094.169-.617 1.015-1.717 1.068l-.074.002c-.808 0-1.162-.709-1.272-.999-.12-.327.041-.989.165-1.202.246-.375.693-.661 1.258-1.023.624-.4 1.386-.888 2.094-1.664m.177-2.805a.27.27 0 00-.244.158c-1.24 2.85-3.49 2.91-4.54 4.51-.27.41-.66 1.61-.32 2.54.414 1.099 1.368 1.984 2.68 1.984.049 0 .099-.001.15-.004 2.08-.1 2.95-1.84 2.96-1.85 1.82-3.23.21-6.2-.48-7.23a.25.25 0 00-.206-.108z"
-    ></path>
-    <path
-      className="fill-current"
-      d="M12.023 22.748c-2.11 0-4.151-.74-5.755-2.115a8.607 8.607 0 01-3.018-6.532c0-.203.018-.404.039-.617a8.476 8.476 0 011.943-4.847c.036-.047.077-.093.113-.126.031-.057.1-.149.203-.242.266-.31 1.102-1.484 1.031-2.427-.038-.572.306-.866.61-.946.623-.166 1.278.447 1.938 1.82.187.383.315.794.385 1.232a7.638 7.638 0 00.915-1.75c.406-1.114.61-2.636.557-4.172a.75.75 0 011.102-.689c.072.039 7.347 4.069 8.478 10.984a8.44 8.44 0 01-.388 4.844 8.698 8.698 0 01-8.153 5.583zM6.422 9.551l-.026.034a6.979 6.979 0 00-1.611 4.007c-.019.199-.035.354-.035.51a7.11 7.11 0 002.494 5.393c1.618 1.389 3.78 1.994 5.929 1.666a7.196 7.196 0 005.602-4.533v-.001a7.01 7.01 0 00.314-4.028c-.77-4.701-4.684-7.919-6.621-9.25-.068 1.24-.288 2.421-.633 3.368-.974 2.623-2.649 3.729-2.721 3.775a.748.748 0 01-1.142-.777c.18-.905.119-1.686-.182-2.321a6.956 6.956 0 01-1.181 1.931l-.072.082a1.96 1.96 0 01-.115.144z"
-    ></path>
+const Lists = () => (
+  <UserButton type="listsButton">
+    <g className="fill-current">
+      <path d="M19.75 22H4.25C3.01 22 2 20.99 2 19.75V4.25C2 3.01 3.01 2 4.25 2h15.5C20.99 2 22 3.01 22 4.25v15.5c0 1.24-1.01 2.25-2.25 2.25zM4.25 3.5c-.414 0-.75.337-.75.75v15.5c0 .413.336.75.75.75h15.5c.414 0 .75-.337.75-.75V4.25c0-.413-.336-.75-.75-.75H4.25z"></path>
+      <path d="M17 8.64H7c-.414 0-.75-.337-.75-.75s.336-.75.75-.75h10c.414 0 .75.335.75.75s-.336.75-.75.75zm0 4.11H7c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h10c.414 0 .75.336.75.75s-.336.75-.75.75zm-5 4.11H7c-.414 0-.75-.335-.75-.75s.336-.75.75-.75h5c.414 0 .75.337.75.75s-.336.75-.75.75z"></path>
+    </g>
   </UserButton>
 )
 
@@ -105,7 +104,7 @@ const NavigationButtons = () => {
         <Notifications />
         <Messages />
         <Bookmarks />
-        <TopArticles />
+        <Lists />
       </div>
       <Separator />
       <SwitchNavigationButtonLabels />
