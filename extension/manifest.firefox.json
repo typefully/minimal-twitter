@@ -2,8 +2,13 @@
   "name": "Minimal Theme for Twitter",
   "short_name": "Minimal Twitter",
   "description": "Declutter the Twitter web experience.",
-  "version": "4.0.0-beta.1",
-  "manifest_version": 3,
+  "version": "4.0.1",
+  "manifest_version": 2,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{e7476172-097c-4b77-b56e-f56a894adca9}"
+    }
+  },
   "icons": {
     "16": "images/MinimalTwitterIcon16.png",
     "32": "images/MinimalTwitterIcon32.png",
@@ -13,9 +18,7 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
-      "run_at": "document_start",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
-      "css": ["content/main.css"],
       "js": ["content/main.js"]
     }
   ],
@@ -23,7 +26,7 @@
     "page": "customize.html",
     "open_in_tab": true
   },
-  "action": {
+  "browser_action": {
     "default_icon": {
       "16": "images/MinimalTwitterIcon16.png",
       "32": "images/MinimalTwitterIcon32.png",

@@ -6,6 +6,15 @@ const addStyles = (css) => {
   head.appendChild(style);
 };
 
+// Function to add main stylesheet
+const addMainStylesheet = () => {
+  const mainStylesheet = document.createElement("link");
+  mainStylesheet.rel = "stylesheet";
+  mainStylesheet.type = "text/css";
+  mainStylesheet.href = chrome.runtime.getURL("content/main.css");
+  document.head.appendChild(mainStylesheet);
+};
+
 // Function to change Feed Width
 const changeFeedWidth = (feedWidth) => {
   switch (feedWidth) {
@@ -241,6 +250,13 @@ const changeZenMode = (zenMode) => {
       [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
         display: none !important;
       }
+
+      @media only screen and (min-width: 988px) {
+        div[data-testid="primaryColumn"] {
+          border-left-width: 0 !important;
+          border-right-width: 0 !important;
+        }
+      }
       `);
       break;
 
@@ -250,6 +266,13 @@ const changeZenMode = (zenMode) => {
       [data-testid="sidebarColumn"],
       [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
         display: flex !important;
+      }
+
+      @media only screen and (min-width: 988px) {
+        div[data-testid="primaryColumn"] {
+          border-left-width: 0 !important;
+          border-right-width: 0 !important;
+        }
       }
       `);
       break;
@@ -374,6 +397,8 @@ chrome.storage.onChanged.addListener((changes) => {
 - Get Chrome Storage and inject respective styles
 --*/
 const init = () => {
+  addMainStylesheet();
+
   chrome.storage.sync.get(
     [
       "feedWidth",

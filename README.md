@@ -10,3 +10,13 @@
 
 - **Chrome**: [Download in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
 - **Firefox**: [Download in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
+
+## Development
+
+### Building the Extension
+
+First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed. Then, go to `customize-app` and run the build command to build the static [Next.js](https://nextjs.org/) app which is used for the extension's customizaiton popup and options.
+
+```sh
+yarn run build
+```
