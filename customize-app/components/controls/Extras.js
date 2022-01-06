@@ -9,14 +9,14 @@ import {
   CheckboxHideReplyCount,
   CheckboxHideRetweetCount,
   CheckboxHideVanityCount,
-  CheckboxRemovePromotedPosts
+  CheckboxPromotedPosts
 } from "./ExtrasCheckboxes"
 import { SwitchZenMode } from "./ExtrasSwitches"
 import Separator from "./Separator"
 
 const Extras = () => {
   const [showCheckboxes, setShowCheckboxes] = useState(false)
-  const [showVanityCheckboxes, setShowVanityCheckboxes] = useState(false)
+  // const [showVanityCheckboxes, setShowVanityCheckboxes] = useState(false)
 
   return (
     <form className="bg-[#192734] rounded-2xl px-4 flex flex-col items-center justify-between">
@@ -24,8 +24,8 @@ const Extras = () => {
       <Separator />
       {showCheckboxes ? (
         <div className="w-full py-3">
-          <CheckboxRemovePromotedPosts />
-          <CheckboxHideVanityCount
+          <CheckboxPromotedPosts />
+          {/* <CheckboxHideVanityCount
             showVanityCheckboxes={showVanityCheckboxes}
             setShowVanityCheckboxes={setShowVanityCheckboxes}
           />
@@ -37,7 +37,7 @@ const Extras = () => {
               <CheckboxHideFollowingCount />
               <CheckboxHideFollowerCount />
             </>
-          )}
+          )} */}
           {/* <div className="flex items-center w-full pt-4 pb-2 space-x-1 text-sm">
             <LightningBoltIcon />{" "}
             <span>

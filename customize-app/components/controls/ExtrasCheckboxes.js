@@ -6,6 +6,9 @@ import {
 } from "@radix-ui/react-icons"
 import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { styled } from "@stitches/react"
+import { useEffect, useState } from "react"
+
+import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
 const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   position: "relative",
@@ -23,24 +26,42 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   }
 })
 
-export const CheckboxRemovePromotedPosts = () => {
-  /* Remove promoted posts */
-  /* [data-testid="placementTracking"] article {
-    display: none !important;
-  } */
+export const CheckboxPromotedPosts = () => {
+  const [userPromoted, setPromoted] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultPromoted = async () => {
+      try {
+        const userDefaultPromoted = await getStorage("promotedPosts")
+        userDefaultPromoted &&
+          setUserZen(userDefaultPromoted === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultPromoted()
+  }, [])
 
   return (
     <div className="flex items-center justify-between w-full py-1">
-      <label
-        htmlFor="removePromotedPosts"
-        className="text-base tracking-normal"
-      >
-        Remove promoted posts
+      <label htmlFor="promotedPosts" className="text-base tracking-normal">
+        Promoted posts
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
-          defaultChecked
-          id="removePromotedPosts"
+          onCheckedChange={async (checked) => {
+            setPromoted(checked)
+            try {
+              await setStorage({
+                promotedPosts: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userPromoted}
+          id="promotedPosts"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
         >
           <CheckboxPrimitive.Indicator className="text-white">

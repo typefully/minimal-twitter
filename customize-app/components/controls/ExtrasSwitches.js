@@ -119,12 +119,40 @@ export const SwitchNavigationButtonLabels = () => {
 }
 
 export const SwitchZenMode = () => {
+  const [userZen, setUserZen] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultZen = async () => {
+      try {
+        const userDefaultZen = await getStorage("zenMode")
+        userDefaultZen && setUserZen(userDefaultZen === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultZen()
+  }, [])
+
   return (
     <div className="flex items-center justify-between w-full py-4">
       <label htmlFor="zenMode" className="text-[15px] font-bold">
         Zen Mode
       </label>
-      <StyledSwitch defaultChecked id="zenMode">
+      <StyledSwitch
+        onCheckedChange={async (checked) => {
+          setUserZen(checked)
+          try {
+            await setStorage({
+              zenMode: checked ? "on" : "off"
+            })
+          } catch (error) {
+            console.warn(error)
+          }
+        }}
+        checked={userZen}
+        id="zenMode"
+      >
         <StyledThumb />
       </StyledSwitch>
     </div>
