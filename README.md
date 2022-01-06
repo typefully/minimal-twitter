@@ -8,8 +8,8 @@
 
 ## Install Extension
 
-- **Chrome**: [Download in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
-- **Firefox**: [Download in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
+- **Add to Chrome**: [Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
+- **Add to Firefox**: [Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
 
 ## Development
 
