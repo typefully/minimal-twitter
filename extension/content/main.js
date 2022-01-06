@@ -231,6 +231,52 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
   }
 };
 
+// Function to change Zen Mode
+const changeZenMode = (zenMode) => {
+  switch (zenMode) {
+    case "on":
+      addStyles(`
+      header[role="banner"], 
+      [data-testid="sidebarColumn"],
+      [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
+        display: none !important;
+      }
+      `);
+      break;
+
+    case "off":
+      addStyles(`
+      header[role="banner"],
+      [data-testid="sidebarColumn"],
+      [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
+        display: flex !important;
+      }
+      `);
+      break;
+  }
+};
+
+// Change Promoted Posts
+const changePromotedPosts = (promotedPosts) => {
+  switch (promotedPosts) {
+    case "on":
+      addStyles(`
+        [data-testid="placementTracking"] article {
+          display: flex !important;
+        }
+        `);
+      break;
+
+    case "off":
+      addStyles(`
+        [data-testid="placementTracking"] article {
+          display: none !important;
+        }
+        `);
+      break;
+  }
+};
+
 // Utility function to create data for `injectAllChanges()`
 const constructNewData = (changes) => {
   // Creates an array of objects from changes
@@ -283,12 +329,12 @@ const injectAllChanges = (data) => {
     topArticlesButton,
     navigationButtonsLabels,
     zenMode,
-    removePromotedPosts,
-    hideReplyCount,
-    hideRetweetCount,
-    hideLikeCount,
-    hideFollowingCount,
-    hideFollowerCount,
+    promotedPosts,
+    // hideReplyCount,
+    // hideRetweetCount,
+    // hideLikeCount,
+    // hideFollowingCount,
+    // hideFollowerCount,
   } = data;
 
   // 1. Feed Width
@@ -307,6 +353,10 @@ const injectAllChanges = (data) => {
   changeTopArticlesButton(topArticlesButton);
   // 8. Navigation Buttons Labels
   changeNavigationButtonsLabels(navigationButtonsLabels);
+  // 9. Zen Mode
+  changeZenMode(zenMode);
+  // 10. Promoted Posts
+  changePromotedPosts(promotedPosts);
 };
 
 /*--
@@ -335,12 +385,12 @@ const init = () => {
       "topArticlesButton",
       "navigationButtonsLabels",
       "zenMode",
-      "removePromotedPosts",
-      "hideReplyCount",
-      "hideRetweetCount",
-      "hideLikeCount",
-      "hideFollowingCount",
-      "hideFollowerCount",
+      "promotedPosts",
+      // "hideReplyCount",
+      // "hideRetweetCount",
+      // "hideLikeCount",
+      // "hideFollowingCount",
+      // "hideFollowerCount",
     ],
     (data) => {
       injectAllChanges(data);

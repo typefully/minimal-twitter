@@ -18,7 +18,8 @@
     max-width: 700px !important;
     margin: 0 auto !important;
   }
-  [data-testid="primaryColumn"] > div div:last-child {
+  [data-testid="primaryColumn"] > div > div:last-child,
+  [data-testid="primaryColumn"] > div > div:last-child div {
     max-width: unset !important;
   }
 
