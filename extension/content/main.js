@@ -1,7 +1,17 @@
+// Utility function to remove injected CSS
+const removeStyles = (id) => {
+  const element = document.getElementById(id);
+  element && element.remove();
+};
+
 // Utility function to inject CSS into page
-const addStyles = (css) => {
+const addStyles = (id, css) => {
+  // First remove before adding
+  removeStyles(id);
+
   const head = document.querySelector("head");
   const style = document.createElement("style");
+  style.id = id;
   style.textContent = `${css}`;
   head.appendChild(style);
 };
@@ -20,54 +30,69 @@ const addMainStylesheet = () => {
 const changeFeedWidth = (feedWidth) => {
   switch (feedWidth) {
     case 600:
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        [data-testid="primaryColumn"] {
-          width: 600px !important;
-          max-width: 600px !important;
+      addStyles(
+        "feedWidth",
+        `
+        @media only screen and (min-width: 988px) {
+          [data-testid="primaryColumn"] {
+            width: 600px !important;
+            max-width: 600px !important;
+          }
         }
-      }
-      `);
+        `
+      );
       break;
     case 650:
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        [data-testid="primaryColumn"] {
-          width: 650px !important;
-          max-width: 650px !important;
+      addStyles(
+        "feedWidth",
+        `
+        @media only screen and (min-width: 988px) {
+          [data-testid="primaryColumn"] {
+            width: 650px !important;
+            max-width: 650px !important;
+          }
         }
-      }
-      `);
+        `
+      );
       break;
     case 700:
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        [data-testid="primaryColumn"] {
-          width: 700px !important;
-          max-width: 700px !important;
+      addStyles(
+        "feedWidth",
+        `
+        @media only screen and (min-width: 988px) {
+          [data-testid="primaryColumn"] {
+            width: 700px !important;
+            max-width: 700px !important;
+          }
         }
-      }
-      `);
+        `
+      );
       break;
     case 750:
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        [data-testid="primaryColumn"] {
-          width: 750px !important;
-          max-width: 750px !important;
+      addStyles(
+        "feedWidth",
+        `
+        @media only screen and (min-width: 988px) {
+          [data-testid="primaryColumn"] {
+            width: 750px !important;
+            max-width: 750px !important;
+          }
         }
-      }
-      `);
+        `
+      );
       break;
     case 800:
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        [data-testid="primaryColumn"] {
-          width: 800px !important;
-          max-width: 800px !important;
+      addStyles(
+        "feedWidth",
+        `
+        @media only screen and (min-width: 988px) {
+          [data-testid="primaryColumn"] {
+            width: 800px !important;
+            max-width: 800px !important;
+          }
         }
-      }
-      `);
+        `
+      );
       break;
   }
 };
@@ -76,23 +101,20 @@ const changeFeedWidth = (feedWidth) => {
 const changefeedBorders = (feedBorders) => {
   switch (feedBorders) {
     case "on":
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        div[data-testid="primaryColumn"] {
-          border-style: solid;
-        }
-      }
-      `);
+      removeStyles("feedBorders");
       break;
 
     case "off":
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        div[data-testid="primaryColumn"] {
-          border-style: hidden;
+      addStyles(
+        "feedBorders",
+        `
+        @media only screen and (min-width: 988px) {
+          div[data-testid="primaryColumn"] {
+            border-style: hidden;
+          }
         }
-      }
-      `);
+        `
+      );
       break;
   }
 };
@@ -101,19 +123,18 @@ const changefeedBorders = (feedBorders) => {
 const changeExploreButton = (exploreButton) => {
   switch (exploreButton) {
     case "off":
-      addStyles(`
-      [data-testid="AppTabBar_Explore_Link"] {
-        display: none !important;
-      }
-      `);
+      addStyles(
+        "exploreButton",
+        `
+        [data-testid="AppTabBar_Explore_Link"] {
+          display: none !important;
+        }
+        `
+      );
       break;
 
     case "on":
-      addStyles(`
-      [data-testid="AppTabBar_Explore_Link"] {
-        display: flex !important;
-      }
-      `);
+      removeStyles("exploreButton");
       break;
   }
 };
@@ -122,19 +143,18 @@ const changeExploreButton = (exploreButton) => {
 const changeNotificationsButton = (notificationsButton) => {
   switch (notificationsButton) {
     case "off":
-      addStyles(`
-      [data-testid="AppTabBar_Notifications_Link"] {
-        display: none !important;
-      }
-      `);
+      addStyles(
+        "notificationsButton",
+        `
+        [data-testid="AppTabBar_Notifications_Link"] {
+          display: none !important;
+        }
+        `
+      );
       break;
 
     case "on":
-      addStyles(`
-      [data-testid="AppTabBar_Notifications_Link"] {
-        display: flex !important;
-      }
-      `);
+      removeStyles("notificationsButton");
       break;
   }
 };
@@ -143,19 +163,18 @@ const changeNotificationsButton = (notificationsButton) => {
 const changeMessagesButton = (messagesButton) => {
   switch (messagesButton) {
     case "off":
-      addStyles(`
-      [data-testid="AppTabBar_DirectMessage_Link"] {
-        display: none !important;
-      }
-      `);
+      addStyles(
+        "messagesButton",
+        `
+        [data-testid="AppTabBar_DirectMessage_Link"] {
+          display: none !important;
+        }
+        `
+      );
       break;
 
     case "on":
-      addStyles(`
-      [data-testid="AppTabBar_DirectMessage_Link"] {
-        display: flex !important;
-      }
-      `);
+      removeStyles("messagesButton");
       break;
   }
 };
@@ -164,19 +183,18 @@ const changeMessagesButton = (messagesButton) => {
 const changeBookmarksButton = (bookmarksButton) => {
   switch (bookmarksButton) {
     case "off":
-      addStyles(`
-      [aria-label="Bookmarks"] {
-        display: none !important;
-      }
-      `);
+      addStyles(
+        "bookmarksButton",
+        `
+        [aria-label="Bookmarks"] {
+          display: none !important;
+        }
+        `
+      );
       break;
 
     case "on":
-      addStyles(`
-      [aria-label="Bookmarks"] {
-        display: flex !important;
-      }
-      `);
+      removeStyles("bookmarksButton");
       break;
   }
 };
@@ -185,19 +203,18 @@ const changeBookmarksButton = (bookmarksButton) => {
 const changeListsButton = (listsButton) => {
   switch (listsButton) {
     case "off":
-      addStyles(`
-      [aria-label="Lists"] {
-        display: none !important;
-      }
-      `);
+      addStyles(
+        "listsButton",
+        `
+        [aria-label="Lists"] {
+          display: none !important;
+        }
+        `
+      );
       break;
 
     case "on":
-      addStyles(`
-      [aria-label="Lists"] {
-        display: flex !important;
-      }
-      `);
+      removeStyles("listsButton");
       break;
   }
 };
@@ -206,35 +223,26 @@ const changeListsButton = (listsButton) => {
 const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
   switch (navigationButtonsLabels) {
     case "on":
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        nav[aria-label="Primary"] div[dir="auto"]:not([aria-live]) {
-          position: relative !important;
+      addStyles(
+        "navigationButtonsLabels",
+        `
+        @media only screen and (min-width: 988px) {
+          nav[aria-label="Primary"] div[dir="auto"]:not([aria-live]) {
+            position: relative !important;
+          }
+          nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
+            display: inline !important;
+          }
+          [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+            display: flex !important;
+          }
         }
-        nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
-          display: inline !important;
-        }
-        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-          display: flex !important;
-        }
-      }
-      `);
+        `
+      );
       break;
 
     case "off":
-      addStyles(`
-      @media only screen and (min-width: 988px) {
-        nav[aria-label="Primary"] div[dir="auto"]:not([aria-live]) {
-          position: absolute !important;
-        }
-        nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
-          display: none !important;
-        }
-        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-          display: none !important;
-        }
-      }
-      `);
+      removeStyles("navigationButtonsLabels");
       break;
   }
 };
@@ -243,31 +251,24 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
 const changeZenMode = (zenMode) => {
   switch (zenMode) {
     case "on":
-      addStyles(`
-      header[role="banner"], 
-      [data-testid="sidebarColumn"],
-      [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
-        display: none !important;
-      }
+      addStyles(
+        "zenMode",
+        `
+        header[role="banner"], 
+        [data-testid="sidebarColumn"],
+        [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
+          display: none !important;
+        }
 
-      div[data-testid="primaryColumn"] {
-        border-style: hidden;
-      }
-      `);
+        div[data-testid="primaryColumn"] {
+          border-style: hidden;
+        }
+        `
+      );
       break;
 
     case "off":
-      addStyles(`
-      header[role="banner"],
-      [data-testid="sidebarColumn"],
-      [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
-        display: flex !important;
-      }
-
-      div[data-testid="primaryColumn"] {
-        border-style: solid;
-      }
-      `);
+      removeStyles("zenMode");
       break;
   }
 };
@@ -276,19 +277,18 @@ const changeZenMode = (zenMode) => {
 const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
     case "on":
-      addStyles(`
+      addStyles(
+        "removePromotedPosts",
+        `
         [data-testid="placementTracking"] article {
           display: none !important;
         }
-        `);
+        `
+      );
       break;
 
     case "off":
-      addStyles(`
-        [data-testid="placementTracking"] article {
-          display: flex !important;
-        }
-        `);
+      removeStyles("removePromotedPosts");
       break;
   }
 };
