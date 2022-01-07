@@ -277,7 +277,7 @@ const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
     case "on":
       addStyles(`
-        [data-testid="placementTracking"] {
+        [data-testid="placementTracking"] article {
           display: none !important;
         }
         `);
@@ -285,7 +285,7 @@ const changePromotedPosts = (removePromotedPosts) => {
 
     case "off":
       addStyles(`
-        [data-testid="placementTracking"] {
+        [data-testid="placementTracking"] article {
           display: flex !important;
         }
         `);

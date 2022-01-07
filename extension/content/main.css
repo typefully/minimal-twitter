@@ -10,7 +10,8 @@
 }
 
 /* Remove Promoted Posts */
-[data-testid="placementTracking"] {
+/* Keep article combinator or it will remove all videos as well */
+[data-testid="placementTracking"] article {
   display: none !important;
 }
 
