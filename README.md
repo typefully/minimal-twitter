@@ -5,6 +5,10 @@
 - **Add to Chrome**: [Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/minimal-twitter/pobhoodpcipjmedfenaigbeloiidbflp)
 - **Add to Firefox**: [Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)
 
+---
+
+Alternatively, you may copy the [base styles](extension/content/main.css) as a user style sheet manually in Firefox with the built-in [Style Editor](https://developer.mozilla.org/en-US/docs/Tools/Style_Editor), or using a tool like [Stylish for Chrome](https://chrome.google.com/webstore/detail/stylish-custom-themes-for/fjnbnpbmkenffdnngjfgmeleoegfcffe) and [Cascadea for Safari](https://apps.apple.com/app/cascadea/id1432182561)
+
 ## Development
 
 ### Building the Extension
