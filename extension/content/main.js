@@ -28,9 +28,14 @@ const addMainStylesheet = () => {
 
 // Function to replace favicon (to reduce red dots)
 const replaceFavicon = () => {
+  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
+  currentFavicons.forEach((item) => {
+    return item && item.remove();
+  });
+
   const head = document.querySelector("head");
   const faviconLink = document.createElement("link");
-  faviconLink.rel = "icon";
+  faviconLink.rel = "shortcut icon";
   faviconLink.href = chrome.runtime.getURL("content/favicon.ico");
   head.appendChild(faviconLink);
 };
