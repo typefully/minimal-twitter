@@ -47,32 +47,20 @@
     padding-top: 4px !important;
   }
 
-  /* Remove navigation labels and empty space*/
-  nav[aria-label="Primary"] {
-    width: fit-content !important;
+  /* Navigation buttons labels and Account button label on hover */
+  nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span,
+  [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+    opacity: 0 !important;
+    transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  nav[aria-label="Primary"] div[dir="auto"] {
-    position: absolute !important;
-  }
-  nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
-    display: none !important;
-  }
-
-  /* Set account button to width of contents */
-  header[role="banner"] > div > div > div > div:last-child {
-    width: fit-content !important;
+  nav[aria-label="Primary"]:hover * div[dir="auto"]:not([aria-label]) > span,
+  [data-testid="SideNav_AccountSwitcher_Button"]:hover > div:not(:first-child) {
+    opacity: 1 !important;
   }
 
   /* Align account button with floating tweet button */
-  /* Set account button to width of contents */
   [data-testid="SideNav_AccountSwitcher_Button"] {
     bottom: 12px !important;
-    width: fit-content !important;
-  }
-
-  /* Remove account menu label */
-  [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-    display: none !important;
   }
 
   /* Hide sidebar */
@@ -96,7 +84,7 @@
 
   /* Match size of input the placeholder content */
   [data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
-    width: 14ch !important;
+    width: 150px !important;
   }
 
   /* Match size of focused search container to its dropdown */
@@ -112,7 +100,10 @@
     width: 328px !important;
   }
 
-  /* Reset left positioning to align search dropdown */
+  /* Reset width and left positioning to align search dropdown */
+  div[aria-multiselectable="false"][role="listbox"] {
+    width: 100%;
+  }
   div[aria-multiselectable="false"][role="listbox"],
   div[style="left: -12px; width: 374px;"] {
     left: auto !important;
@@ -127,5 +118,17 @@
     position: fixed !important;
     right: 16px !important;
     bottom: 24px !important;
+  }
+
+  /* Search Filters Custom Class */
+  .searchFilters {
+    visibility: visible !important;
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    width: 240px;
+  }
+  .searchFilters > div > div:first-child {
+    display: none;
   }
 }

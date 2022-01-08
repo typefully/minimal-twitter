@@ -4,7 +4,10 @@ import { useEffect, useState } from "react"
 import startCase from "lodash.startCase"
 
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
-import { SwitchNavigationButtonLabels } from "./ExtrasSwitches"
+import {
+  SwitchNavigationButtonLabels,
+  SwitchNavigationCenter
+} from "./ExtrasSwitches"
 import Separator from "./Separator"
 
 const StyledToggle = styled(TogglePrimitive.Root, {
@@ -107,6 +110,7 @@ const NavigationButtons = () => {
         <Lists />
       </div>
       <Separator />
+      <SwitchNavigationCenter />
       <SwitchNavigationButtonLabels />
     </form>
   )

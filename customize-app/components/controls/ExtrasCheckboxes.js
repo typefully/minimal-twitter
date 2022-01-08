@@ -73,16 +73,77 @@ export const CheckboxPromotedPosts = () => {
   )
 }
 
+export const CheckboxTransparentSearch = () => {
+  const [userTransparent, setUserTransparent] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultTransparent = async () => {
+      try {
+        const userDefaultTransparent = await getStorage("transparentSearch")
+        userDefaultTransparent &&
+          setUserTransparent(userDefaultTransparent === "on" ? true : false)
+
+        // Check old "noBorders" value for existing extension users
+        const userDefaultNoBordersOld = await getStorage("noBorders")
+        if (
+          typeof userDefaultNoBordersOld === "boolean" ||
+          userDefaultNoBordersOld instanceof Boolean
+        ) {
+          setUserTransparent(true)
+          await setStorage({
+            transparentSearch: "on"
+          })
+        }
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultTransparent()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="transparentSearch" className="text-base tracking-normal">
+        Transparent Search Bar
+      </label>
+      <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserTransparent(checked)
+            try {
+              await setStorage({
+                transparentSearch: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userTransparent}
+          id="transparentSearch"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
 export const CheckboxHideVanityCount = ({
   showVanityCheckboxes,
-  setShowVanityCheckboxes
+  setShowVanityCheckboxes,
+  onCheckedChange,
+  hideAll
 }) => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <span className="flex items-center space-x-2 text-base tracking-normal text-white">
         <label htmlFor="hideVanityCount">Hide vanity counts</label>
         <TogglePrimitive.Root
-          defaultPressed={false}
+          pressed={showVanityCheckboxes}
           onPressedChange={(pressed) => {
             setShowVanityCheckboxes(pressed)
           }}
@@ -97,7 +158,8 @@ export const CheckboxHideVanityCount = ({
       </span>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
-          defaultChecked
+          onCheckedChange={(checked) => onCheckedChange("all", checked)}
+          checked={hideAll}
           id="hideVanityCount"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
         >
@@ -110,7 +172,7 @@ export const CheckboxHideVanityCount = ({
   )
 }
 
-export const CheckboxHideReplyCount = () => {
+export const CheckboxHideReplyCount = ({ onCheckedChange, hideReply }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideReplyCount" className="text-base">
@@ -118,7 +180,8 @@ export const CheckboxHideReplyCount = () => {
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
-          defaultChecked
+          onCheckedChange={(checked) => onCheckedChange("reply", checked)}
+          checked={hideReply}
           id="hideReplyCount"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
         >
@@ -131,7 +194,7 @@ export const CheckboxHideReplyCount = () => {
   )
 }
 
-export const CheckboxHideRetweetCount = () => {
+export const CheckboxHideRetweetCount = ({ onCheckedChange, hideRetweet }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideRetweetCount" className="text-base">
@@ -139,7 +202,8 @@ export const CheckboxHideRetweetCount = () => {
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
-          defaultChecked
+          onCheckedChange={(checked) => onCheckedChange("retweet", checked)}
+          checked={hideRetweet}
           id="hideRetweetCount"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
         >
@@ -152,7 +216,7 @@ export const CheckboxHideRetweetCount = () => {
   )
 }
 
-export const CheckboxHideLikeCount = () => {
+export const CheckboxHideLikeCount = ({ onCheckedChange, hideLike }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideLikeCount" className="text-base">
@@ -160,7 +224,8 @@ export const CheckboxHideLikeCount = () => {
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
-          defaultChecked
+          onCheckedChange={(checked) => onCheckedChange("like", checked)}
+          checked={hideLike}
           id="hideLikeCount"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
         >
@@ -173,37 +238,17 @@ export const CheckboxHideLikeCount = () => {
   )
 }
 
-export const CheckboxHideFollowingCount = () => {
+export const CheckboxHideFollowCount = ({ onCheckedChange, hideFollow }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideFollowingCount" className="text-base">
-        Hide following count
+        Hide follower/following count
       </label>
       <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
         <StyledCheckbox
-          defaultChecked
-          id="hideFollowingCount"
-          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
-        >
-          <CheckboxPrimitive.Indicator className="text-white">
-            <CheckIcon />
-          </CheckboxPrimitive.Indicator>
-        </StyledCheckbox>
-      </div>
-    </div>
-  )
-}
-
-export const CheckboxHideFollowerCount = () => {
-  return (
-    <div className="flex items-center justify-between w-full py-1 pl-4">
-      <label htmlFor="hideFollowerCount" className="text-base">
-        Hide follower count
-      </label>
-      <div className="w-9 h-9 grid place-items-center rounded-full hover:bg-[#1d9bf01a] cursor-pointer">
-        <StyledCheckbox
-          defaultChecked
-          id="hideFollowerCount"
+          onCheckedChange={(checked) => onCheckedChange("follow", checked)}
+          checked={hideFollow}
+          id="hideFollowCount"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-[#1d9bf0]"
         >
           <CheckboxPrimitive.Indicator className="text-white">

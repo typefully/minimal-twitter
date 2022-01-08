@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center w-full px-2 py-6">
+    <footer className="flex flex-col items-center w-full px-2 pt-4 pb-8">
       <button
         onClick={() => window.close()}
         type="button"

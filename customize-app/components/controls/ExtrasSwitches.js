@@ -74,6 +74,57 @@ export const SwitchFeedBorders = () => {
   )
 }
 
+export const SwitchNavigationCenter = () => {
+  const [userCenter, setUserCenter] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultButtonLabels = async () => {
+      try {
+        const userDefaultCenter = await getStorage("navigationCenter")
+        userDefaultCenter &&
+          setUserCenter(userDefaultCenter === "on" ? true : false)
+
+        // Check old "centerNavigation" value for existing extension users
+        const userDefaultCenterOld = await getStorage("centerNavigation")
+        if (userDefaultCenterOld === true) {
+          setUserCenter(true)
+          await setStorage({
+            navigationCenter: "on"
+          })
+        }
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultButtonLabels()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-4">
+      <label htmlFor="navigationCenter" className="text-[15px] font-bold">
+        Vertically Center
+      </label>
+      <StyledSwitch
+        onCheckedChange={async (checked) => {
+          setUserCenter(checked)
+          try {
+            await setStorage({
+              navigationCenter: checked ? "on" : "off"
+            })
+          } catch (error) {
+            console.warn(error)
+          }
+        }}
+        checked={userCenter}
+        id="navigationCenter"
+      >
+        <StyledThumb />
+      </StyledSwitch>
+    </div>
+  )
+}
+
 export const SwitchNavigationButtonLabels = () => {
   const [userButtonLabels, setUserButtonLabels] = useState(false)
 
@@ -96,7 +147,7 @@ export const SwitchNavigationButtonLabels = () => {
   return (
     <div className="flex items-center justify-between w-full py-4">
       <label htmlFor="showNavigationLabels" className="text-[15px] font-bold">
-        Button Labels
+        Show Labels
       </label>
       <StyledSwitch
         onCheckedChange={async (checked) => {
