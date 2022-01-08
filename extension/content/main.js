@@ -627,6 +627,7 @@ const init = () => {
       "messagesButton",
       "bookmarksButton",
       "listsButton",
+      "navigationButtonsLabelsHover",
       "navigationButtonsLabels",
       "navigationCenter",
       "zenMode",
