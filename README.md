@@ -16,7 +16,7 @@ Customizations, preferences, options! Access them by clicking the extension's ic
 _You can_ —
 
 - Control Feed / Timeline Width
-- Toggle Navigation: Buttons, Centering, Labels
+- Control Navigation UI: Buttons, Centering, Labels
 - Activate **Zen Mode**
 - ...and more!
 
