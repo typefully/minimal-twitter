@@ -4,7 +4,7 @@ const ExtrasSection = () => (
   <section className="flex flex-col space-y-2">
     <label
       htmlFor="user-control-extras"
-      className="text-sm font-bold text-[#8899a6]"
+      className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
     >
       Extras
     </label>

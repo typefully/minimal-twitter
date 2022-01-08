@@ -30,7 +30,7 @@ const Header = () => (
         <span>Customize more</span>
       </h1>
     </div>
-    <p className="text-[#8899a6] leading-5 text-[15px] pb-5 pt-3">
+    <p className="pt-3 pb-5 text-sm font-medium leading-5 dark:text-twitterAccentOneDark text-twitterAccentOne">
       Manage feed width, navigation, and extras. <br />
       Or go to display settings at{" "}
       <a

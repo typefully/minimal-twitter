@@ -10,21 +10,21 @@ const FeedSection = () => {
     <section className="flex flex-col space-y-2">
       <label
         htmlFor="user-control-feed-width"
-        className="text-sm font-bold text-[#8899a6]"
+        className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
       >
         Feed
       </label>
       {mounted ? (
         <div
           id="user-control-feed-width"
-          className="bg-[#192734] rounded-2xl p-4 pb-0"
+          className="p-4 pb-0 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl"
         >
           <FeedSlider />
           <Separator />
           <SwitchFeedBorders />
         </div>
       ) : (
-        <div className="bg-[#192734] rounded-2xl animate-pulse h-[115.5px]" />
+        <div className="dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl animate-pulse h-[115.5px]" />
       )}
     </section>
   )

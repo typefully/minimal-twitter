@@ -146,7 +146,7 @@ const Extras = () => {
   }
 
   return (
-    <form className="bg-[#192734] rounded-2xl px-4 flex flex-col items-center justify-between">
+    <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
       <SwitchZenMode />
       <Separator />
       {showCheckboxes ? (
@@ -195,9 +195,11 @@ const Extras = () => {
           onPressedChange={() => {
             setShowCheckboxes(true)
           }}
-          className="grid w-full px-2 py-4 place-items-center hover:bg-[#1d9bf01a]"
+          className="grid w-full px-2 py-4 place-items-center hover:bg-twitterAccentFour"
         >
-          <div className="text-[15px] text-[#1d9bf0]">Show More</div>
+          <div className="text-[15px] text-twitterAccentThree font-medium">
+            Show More
+          </div>
         </TogglePrimitive.Root>
       )}
     </form>

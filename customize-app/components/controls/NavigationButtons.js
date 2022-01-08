@@ -46,7 +46,7 @@ const UserButton = ({ type, children }) => {
       pressed={userButton}
       title={`Toggle ${startCase(type)}`}
       aria-label={`Toggle ${startCase(type)}`}
-      className="bg-[#192734] p-3 w-fit rounded-full border-[3px] border-twitterBlue text-white"
+      className="dark:bg-twitterBgTwoDark bg-twitterBgTwo p-3 w-fit rounded-full border-[3px] border-twitterBlue dark:text-white text-black"
     >
       <svg width={25} height={25} aria-hidden="true" viewBox="0 0 24 24">
         {children}
@@ -104,7 +104,7 @@ const NavigationButtons = () => {
   const [showSwitches, setShowSwitches] = useState(false)
 
   return (
-    <form className="bg-[#192734] rounded-2xl p-3 pb-0">
+    <form className="p-3 pb-0 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
       <div className="flex items-center justify-between pb-4">
         <Explore />
         <Notifications />
@@ -125,9 +125,11 @@ const NavigationButtons = () => {
           onPressedChange={() => {
             setShowSwitches(true)
           }}
-          className="grid w-full px-2 py-4 place-items-center hover:bg-[#1d9bf01a]"
+          className="grid w-full px-2 py-4 place-items-center hover:bg-twitterAccentFour"
         >
-          <div className="text-[15px] text-[#1d9bf0]">Show More</div>
+          <div className="text-[15px] text-twitterAccentThree font-medium">
+            Show More
+          </div>
         </TogglePrimitive.Root>
       )}
     </form>
