@@ -636,17 +636,17 @@ const injectAllChanges = (data) => {
   changePromotedPosts(removePromotedPosts);
   // 13. Always Show Latest Tweets
   // changeLatestTweets(latestTweets);
-  // 13. Transparent Search
+  // 14. Transparent Search
   changeSearchBar(transparentSearch);
-  // 14. Reply Count
+  // 15. Reply Count
   changeReplyCount(replyCount);
-  // 15. Retweet Count
+  // 16. Retweet Count
   changeRetweetCount(retweetCount);
-  // 16. Like Count
+  // 17. Like Count
   changeLikeCount(likeCount);
-  // 17. Follow Count
+  // 18. Follow Count
   changeFollowCount(followCount);
-  // 18. All Vanity Count
+  // 19. All Vanity Count
   changeVanityCount(allVanity);
 };
 
