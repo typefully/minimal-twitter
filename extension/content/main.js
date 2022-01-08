@@ -350,7 +350,7 @@ const changeZenMode = (zenMode) => {
   }
 };
 
-// Change Promoted Posts
+// Function to change Promoted Posts
 const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
     case "off":
@@ -370,7 +370,47 @@ const changePromotedPosts = (removePromotedPosts) => {
   }
 };
 
-// Change Search Bar
+/*-- 
+  Not working in my tests —@ThomasWang 
+--*/
+// Function to change Latest Tweets
+// const changeLatestTweets = (latestTweets) => {
+//   if (latestTweets === "on") {
+//     const showLatestTweets = () => {
+//       const run = () => {
+//         const timelineOptionButton = document.querySelector(
+//           "div[aria-label='Timeline options"
+//         );
+//         const homeButton = document.querySelector("a[aria-label='Home']");
+//         if (timelineOptionButton) {
+//           timelineOptionButton.click();
+//           document.querySelector("div[role='menuitem'][tabindex='0']").click();
+//           document
+//             .querySelector(
+//               "div[data-testid='ScrollSnap-List'] > div:last-child > a"
+//             )
+//             .click();
+//         }
+//         if (homeButton) {
+//           // Set onclick as well in case they nagivate to a non-home page when first loading the site
+//           homeButton.onclick = () => {
+//             setTimeout(showLatestTweets, 50);
+//           };
+//         }
+//       };
+//       setTimeout(run, 500);
+//     };
+//     if (document.readyState === "loading") {
+//       console.log("loading...");
+//       document.addEventListener("DOMContentLoaded", showLatestTweets);
+//     } else {
+//       console.log("running latest tweets...");
+//       showLatestTweets();
+//     }
+//   }
+// };
+
+// Function to change Search Bar
 const changeSearchBar = (transparentSearch) => {
   switch (transparentSearch) {
     case "on":
@@ -394,7 +434,7 @@ const changeSearchBar = (transparentSearch) => {
   }
 };
 
-// Change Reply Count
+// Function to change Reply Count
 const changeReplyCount = (replyCount) => {
   switch (replyCount) {
     case "on":
@@ -414,7 +454,7 @@ const changeReplyCount = (replyCount) => {
   }
 };
 
-// Change Retweet Count
+// Function to change Retweet Count
 const changeRetweetCount = (retweetCount) => {
   switch (retweetCount) {
     case "on":
@@ -437,7 +477,7 @@ const changeRetweetCount = (retweetCount) => {
   }
 };
 
-// Change Like Count
+// Function to change Like Count
 const changeLikeCount = (likeCount) => {
   switch (likeCount) {
     case "on":
@@ -459,7 +499,7 @@ const changeLikeCount = (likeCount) => {
   }
 };
 
-// Change Follow Count
+// Function to change Follow Count
 const changeFollowCount = (followCount) => {
   switch (followCount) {
     case "on":
@@ -480,7 +520,7 @@ const changeFollowCount = (followCount) => {
   }
 };
 
-// Change All Vanity Counts
+// Function to change All Vanity Counts
 const changeVanityCount = (allVanity) => {
   changeReplyCount(allVanity);
   changeRetweetCount(allVanity);
@@ -523,14 +563,15 @@ const constructNewData = (changes) => {
   - 9. Navigation Buttons Labels
   - 10. Center Navigation
   - 12. Zen Mode
-  - 12. Remove Promoted Posts
-  - 13. Transparent Search Bar
-  - 14. Hide vanity counts
-    - Hide reply count
-    - Hide retweet count
-    - Hide like count
-    - Hide following count
-    - Hide follower count
+  - 13. Remove Promoted Posts
+  - 14. Always Show Latest Tweets
+  - 15. Transparent Search Bar
+  - 16. Hide All Vanity Counts
+    - Hide Reply Count
+    - Hide Retweet Count
+    - Hide Like Count
+    - Hide Following Count
+    - Hide Follower Count
 --*/
 const injectAllChanges = (data) => {
   const {
@@ -546,6 +587,7 @@ const injectAllChanges = (data) => {
     navigationCenter,
     zenMode,
     removePromotedPosts,
+    // latestTweets,
     transparentSearch,
     replyCount,
     retweetCount,
@@ -578,6 +620,8 @@ const injectAllChanges = (data) => {
   changeZenMode(zenMode);
   // 12. Remove Promoted Posts
   changePromotedPosts(removePromotedPosts);
+  // 13. Always Show Latest Tweets
+  // changeLatestTweets(latestTweets);
   // 13. Transparent Search
   changeSearchBar(transparentSearch);
   // 14. Reply Count
@@ -632,6 +676,7 @@ const init = () => {
       "navigationCenter",
       "zenMode",
       "removePromotedPosts",
+      // "latestTweets",
       "transparentSearch",
       "replyCount",
       "retweetCount",
