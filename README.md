@@ -13,12 +13,11 @@ Alternatively, you may copy the [base styles](extension/content/main.css) as use
 
 Customizations, preferences, options! Access them by clicking the extension's icon as a popup or in full screen in [Options (Chrome)](https://developer.chrome.com/docs/extensions/mv3/options/) or [Preferences (Firefox)](https://support.mozilla.org/en-US/kb/firefox-options-preferences-and-settings).
 
-You can customize:
+You can:
 
-- Feed / Timeline Width
-- Feed / Timeline Borders
-- Navigation: Buttons, centering, labels
-- Zen Mode
+- Control Feed / Timeline Width
+- Toggle Navigation: Buttons, Centering, Labels
+- Activate **Zen Mode**
 - ...and more!
 
 ## Development
