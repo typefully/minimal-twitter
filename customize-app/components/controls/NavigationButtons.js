@@ -5,6 +5,7 @@ import startCase from "lodash.startCase"
 
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import {
+  SwitchNavigationButtonLabelsHover,
   SwitchNavigationButtonLabels,
   SwitchNavigationCenter
 } from "./ExtrasSwitches"
@@ -100,6 +101,8 @@ const Lists = () => (
 )
 
 const NavigationButtons = () => {
+  const [showSwitches, setShowSwitches] = useState(false)
+
   return (
     <form className="bg-[#192734] rounded-2xl p-3 pb-0">
       <div className="flex items-center justify-between pb-4">
@@ -110,8 +113,23 @@ const NavigationButtons = () => {
         <Lists />
       </div>
       <Separator />
-      <SwitchNavigationCenter />
-      <SwitchNavigationButtonLabels />
+      {showSwitches ? (
+        <>
+          <SwitchNavigationCenter />
+          <SwitchNavigationButtonLabels />
+          <SwitchNavigationButtonLabelsHover />
+        </>
+      ) : (
+        <TogglePrimitive.Root
+          defaultPressed={false}
+          onPressedChange={() => {
+            setShowSwitches(true)
+          }}
+          className="grid w-full px-2 py-4 place-items-center hover:bg-[#1d9bf01a]"
+        >
+          <div className="text-[15px] text-[#1d9bf0]">Show More</div>
+        </TogglePrimitive.Root>
+      )}
     </form>
   )
 }

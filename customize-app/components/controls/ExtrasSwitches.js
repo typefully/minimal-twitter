@@ -54,7 +54,7 @@ export const SwitchFeedBorders = () => {
   return (
     <div className="flex items-center justify-between w-full py-4">
       <label htmlFor="feedBorders" className="text-[15px] font-bold">
-        Feed borders
+        Feed Borders
       </label>
       <StyledSwitch
         onCheckedChange={async (checked) => {
@@ -103,7 +103,7 @@ export const SwitchNavigationCenter = () => {
   return (
     <div className="flex items-center justify-between w-full py-4">
       <label htmlFor="navigationCenter" className="text-[15px] font-bold">
-        Vertically Center
+        Center Vertically
       </label>
       <StyledSwitch
         onCheckedChange={async (checked) => {
@@ -145,7 +145,7 @@ export const SwitchNavigationButtonLabels = () => {
   }, [])
 
   return (
-    <div className="flex items-center justify-between w-full py-4">
+    <div className="flex items-center justify-between w-full py-0">
       <label htmlFor="showNavigationLabels" className="text-[15px] font-bold">
         Show Labels
       </label>
@@ -162,6 +162,55 @@ export const SwitchNavigationButtonLabels = () => {
         }}
         checked={userButtonLabels}
         id="showNavigationLabels"
+      >
+        <StyledThumb />
+      </StyledSwitch>
+    </div>
+  )
+}
+
+export const SwitchNavigationButtonLabelsHover = () => {
+  const [userButtonLabelsHover, setUserButtonLabelsHover] = useState(true)
+
+  useEffect(() => {
+    const getUserDefaultButtonLabelsHover = async () => {
+      try {
+        const userDefaultButtonLabelsHover = await getStorage(
+          "navigationButtonsLabelsHover"
+        )
+        userDefaultButtonLabelsHover &&
+          setUserButtonLabelsHover(
+            userDefaultButtonLabelsHover === "off" ? false : true
+          )
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultButtonLabelsHover()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-4">
+      <label
+        htmlFor="showNavigationLabelsHover"
+        className="text-[15px] font-bold"
+      >
+        Show Labels on Hover
+      </label>
+      <StyledSwitch
+        onCheckedChange={async (checked) => {
+          setUserButtonLabelsHover(checked)
+          try {
+            await setStorage({
+              navigationButtonsLabelsHover: checked ? "on" : "off"
+            })
+          } catch (error) {
+            console.warn(error)
+          }
+        }}
+        checked={userButtonLabelsHover}
+        id="showNavigationLabelsHover"
       >
         <StyledThumb />
       </StyledSwitch>

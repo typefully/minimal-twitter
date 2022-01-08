@@ -243,6 +243,45 @@ const changeListsButton = (listsButton) => {
   }
 };
 
+// Function to change Navigation Button Labels on Hover
+const changeNavigationButtonsLabelsHover = (navigationButtonsLabelsHover) => {
+  switch (navigationButtonsLabelsHover) {
+    case "off":
+      addStyles(
+        "mt-navigationButtonsLabelsHover",
+        `
+        nav[aria-label="Primary"] {
+          width: fit-content !important;
+        }
+        nav[aria-label="Primary"] div[dir="auto"] {
+          position: absolute !important;
+        }
+        nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
+          display: none !important;
+        }
+      
+        header[role="banner"] > div > div > div > div:last-child {
+          width: fit-content !important;
+        }
+      
+        [data-testid="SideNav_AccountSwitcher_Button"] {
+          bottom: 12px !important;
+          width: fit-content !important;
+        }
+      
+        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeStyles("mt-navigationButtonsLabelsHover");
+      break;
+  }
+};
+
 // Function to change Navigation Button Labels
 const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
   switch (navigationButtonsLabels) {
@@ -480,12 +519,13 @@ const constructNewData = (changes) => {
   - 5. Message Button
   - 6. Bookmark Button
   - 7. Lists Button
-  - 8. Navigation Buttons Labels
-  - 9. Center Navigation
-  - 10. Zen Mode
-  - 11. Remove Promoted Posts
-  - 12. Transparent Search Bar
-  - 13. Hide vanity counts
+  - 8. Navigation Buttons Labels on Hover
+  - 9. Navigation Buttons Labels
+  - 10. Center Navigation
+  - 12. Zen Mode
+  - 12. Remove Promoted Posts
+  - 13. Transparent Search Bar
+  - 14. Hide vanity counts
     - Hide reply count
     - Hide retweet count
     - Hide like count
@@ -501,6 +541,7 @@ const injectAllChanges = (data) => {
     messagesButton,
     bookmarksButton,
     listsButton,
+    navigationButtonsLabelsHover,
     navigationButtonsLabels,
     navigationCenter,
     zenMode,
@@ -528,24 +569,26 @@ const injectAllChanges = (data) => {
   // 7. Lists Button
   changeListsButton(listsButton);
   // 8. Navigation Buttons Labels
+  changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover);
+  // 9. Navigation Buttons Labels
   changeNavigationButtonsLabels(navigationButtonsLabels);
-  // 9. Navigation Center
+  // 10. Navigation Center
   changeNavigationCenter(navigationCenter);
-  // 9. Zen Mode
+  // 11. Zen Mode
   changeZenMode(zenMode);
-  // 10. Remove Promoted Posts
+  // 12. Remove Promoted Posts
   changePromotedPosts(removePromotedPosts);
-  // 11. Transparent Search
+  // 13. Transparent Search
   changeSearchBar(transparentSearch);
-  // 12. Reply Count
+  // 14. Reply Count
   changeReplyCount(replyCount);
-  // 13. Retweet Count
+  // 15. Retweet Count
   changeRetweetCount(retweetCount);
-  // 14. Like Count
+  // 16. Like Count
   changeLikeCount(likeCount);
-  // 15. Follow Count
+  // 17. Follow Count
   changeFollowCount(followCount);
-  // 16. All Vanity Count
+  // 18. All Vanity Count
   changeVanityCount(allVanity);
 };
 
