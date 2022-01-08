@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 
 import {
   CheckboxPromotedPosts,
+  // CheckboxAlwaysShowLatest,
   CheckboxTransparentSearch,
   CheckboxHideFollowCount,
   CheckboxHideLikeCount,
@@ -152,6 +153,7 @@ const Extras = () => {
       {showCheckboxes ? (
         <div className="w-full py-3">
           <CheckboxPromotedPosts />
+          {/* <CheckboxAlwaysShowLatest /> */}
           <CheckboxTransparentSearch />
           <CheckboxHideVanityCount
             showVanityCheckboxes={showVanityCheckboxes}
