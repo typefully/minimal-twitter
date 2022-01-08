@@ -101,15 +101,11 @@
   }
 
   /* Reset width and left positioning to align search dropdown */
-  div[aria-multiselectable="false"][role="listbox"] {
-    width: 100%;
-  }
-  div[aria-multiselectable="false"][role="listbox"],
-  div[style="left: -12px; width: 374px;"] {
-    left: auto !important;
+  div[style*="left: -12px"] {
+    left: unset !important;
   }
   div[style="left: -8px; width: 306px;"] {
-    left: auto !important;
+    left: unset !important;
     width: 374px !important;
   }
 
