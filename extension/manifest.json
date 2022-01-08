@@ -19,7 +19,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["content/main.css"],
+      "resources": ["content/main.css", "content/favicon.ico"],
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
     }
   ],

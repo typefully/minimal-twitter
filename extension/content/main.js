@@ -26,6 +26,15 @@ const addMainStylesheet = () => {
   head.appendChild(mainStylesheet);
 };
 
+// Function to replace favicon (to reduce red dots)
+const replaceFavicon = () => {
+  const head = document.querySelector("head");
+  const faviconLink = document.createElement("link");
+  faviconLink.rel = "icon";
+  faviconLink.href = chrome.runtime.getURL("content/favicon.ico");
+  head.appendChild(faviconLink);
+};
+
 // Reveal Search Filters
 const revealSearchFilters = () => {
   const observer = new MutationObserver((mutationsList) => {
@@ -652,6 +661,9 @@ chrome.storage.onChanged.addListener((changes) => {
 --*/
 const init = () => {
   addMainStylesheet();
+
+  // Replace favicon
+  replaceFavicon();
 
   // Reveal search filters
   revealSearchFilters();
