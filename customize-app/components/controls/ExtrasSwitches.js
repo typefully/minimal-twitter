@@ -180,7 +180,7 @@ export const SwitchNavigationButtonLabelsHover = () => {
         )
         userDefaultButtonLabelsHover &&
           setUserButtonLabelsHover(
-            userDefaultButtonLabelsHover === "off" && false
+            userDefaultButtonLabelsHover === "off" ? false : true
           )
       } catch (error) {
         console.warn(error)
