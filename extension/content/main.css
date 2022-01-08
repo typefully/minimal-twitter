@@ -15,9 +15,9 @@
   display: none !important;
 }
 
-/* 988px is Twitter web's large screen breakpoint */
+/* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
-@media only screen and (min-width: 988px) {
+@media only screen and (min-width: 1000px) {
   /* Match widths for feed */
   [data-testid="primaryColumn"] {
     width: 700px !important;

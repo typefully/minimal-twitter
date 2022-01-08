@@ -1,4 +1,4 @@
-// import { LightningBoltIcon } from "@radix-ui/react-icons"
+import { LightningBoltIcon } from "@radix-ui/react-icons"
 import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { useEffect, useState } from "react"
 
@@ -181,15 +181,20 @@ const Extras = () => {
               />
             </>
           )}
-          {/* <div className="flex items-center w-full pt-4 pb-2 space-x-1 text-sm">
+          <div className="flex items-center w-full pt-4 pb-2 space-x-1 text-sm">
             <LightningBoltIcon />{" "}
             <span>
-              Power user? Try Baby Blue:{" "}
-              <a href="#" className="text-twitterBlue">
-                t.wang.sh/baby-blue
+              Power user?{" "}
+              <a
+                href="https://t.wang.sh/twitter-tools"
+                target="_blank"
+                rel="noreferrer"
+                className="text-twitterBlue"
+              >
+                t.wang.sh/twitter-tools
               </a>
             </span>
-          </div> */}
+          </div>
         </div>
       ) : (
         <TogglePrimitive.Root
