@@ -9,6 +9,18 @@
 
 Alternatively, you may copy the [base styles](extension/content/main.css) as userstyles manually with [Firefox's built-in Style Editor](https://developer.mozilla.org/en-US/docs/Tools/Style_Editor), or using extensions like [Stylish for Chrome](https://chrome.google.com/webstore/detail/stylish-custom-themes-for/fjnbnpbmkenffdnngjfgmeleoegfcffe) and [Cascadea for Safari](https://apps.apple.com/app/cascadea/id1432182561).
 
+## Customize
+
+Customizations, preferences, options! Access them by clicking the extension's icon as a popup or in full screen in [Options (Chrome)](https://developer.chrome.com/docs/extensions/mv3/options/) or [Preferences (Firefox)](https://support.mozilla.org/en-US/kb/firefox-options-preferences-and-settings).
+
+You can customize:
+
+- Feed / Timeline Width
+- Feed / Timeline Borders
+- Navigation: Buttons, centering, labels
+- Zen Mode
+- ...and more!
+
 ## Development
 
 ### Building the Extension
