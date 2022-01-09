@@ -45,13 +45,10 @@ const revealSearchFilters = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
       // Get grandparent of advanced search
-      const advancedSearch = document.querySelector(
-        `[data-testid="searchFiltersAdvancedSearch"]`
-      );
+      const advancedSearch = document.querySelector(`[data-testid="searchFiltersAdvancedSearch"]`);
 
       if (advancedSearch) {
-        const searchFilters =
-          advancedSearch.parentElement.parentElement.parentElement;
+        const searchFilters = advancedSearch.parentElement.parentElement.parentElement;
         searchFilters.classList = searchFilters.classList + " searchFilters";
         return;
       }
@@ -60,7 +57,7 @@ const revealSearchFilters = () => {
 
   observer.observe(document, {
     childList: true,
-    subtree: true,
+    subtree: true
   });
 };
 
@@ -388,41 +385,44 @@ const changePromotedPosts = (removePromotedPosts) => {
   Not working in my tests —@ThomasWang 
 --*/
 // Function to change Latest Tweets
-// const changeLatestTweets = (latestTweets) => {
-//   if (latestTweets === "on") {
-//     const showLatestTweets = () => {
-//       const run = () => {
-//         const timelineOptionButton = document.querySelector(
-//           "div[aria-label='Timeline options"
-//         );
-//         const homeButton = document.querySelector("a[aria-label='Home']");
-//         if (timelineOptionButton) {
-//           timelineOptionButton.click();
-//           document.querySelector("div[role='menuitem'][tabindex='0']").click();
-//           document
-//             .querySelector(
-//               "div[data-testid='ScrollSnap-List'] > div:last-child > a"
-//             )
-//             .click();
-//         }
-//         if (homeButton) {
-//           // Set onclick as well in case they nagivate to a non-home page when first loading the site
-//           homeButton.onclick = () => {
-//             setTimeout(showLatestTweets, 50);
-//           };
-//         }
-//       };
-//       setTimeout(run, 500);
-//     };
-//     if (document.readyState === "loading") {
-//       console.log("loading...");
-//       document.addEventListener("DOMContentLoaded", showLatestTweets);
-//     } else {
-//       console.log("running latest tweets...");
-//       showLatestTweets();
-//     }
-//   }
-// };
+const changeLatestTweets = (latestTweets) => {
+  if (latestTweets === "on") {
+    const showLatestTweets = () => {
+      const run = () => {
+        //Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
+        const latestSelected = !!document.querySelector(
+          "div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']"
+        );
+
+        if (latestSelected) return;
+
+        //Check if the nav bar with "Home" and "Latest Tweets" exists
+        const optionBarExists = !!document.querySelector("div[data-testid='ScrollSnap-List']");
+
+        if (!optionBarExists) {
+          /*
+            If it doesn't, we have to get it to display
+            1. Click the Timeline Options button
+            2. Click the first option in the popup
+          */
+          document.querySelector("div[aria-label='Timeline options").click();
+          document.querySelector("div[role='menuitem'][tabindex='0']").click();
+        }
+
+        //Click the "Latest Tweets" nav bar option
+        document.querySelector("div[data-testid='ScrollSnap-List'] > div:last-child > a").click();
+      };
+      setTimeout(run, 500);
+    };
+    if (document.readyState === "loading") {
+      console.log("loading...");
+      document.addEventListener("DOMContentLoaded", showLatestTweets);
+    } else {
+      console.log("running latest tweets...");
+      showLatestTweets();
+    }
+  }
+};
 
 // Function to change Search Bar
 const changeSearchBar = (transparentSearch) => {
@@ -601,13 +601,13 @@ const injectAllChanges = (data) => {
     navigationCenter,
     zenMode,
     removePromotedPosts,
-    // latestTweets,
+    latestTweets,
     transparentSearch,
     replyCount,
     retweetCount,
     likeCount,
     followCount,
-    allVanity,
+    allVanity
   } = data;
 
   // 1. Feed Width
@@ -635,7 +635,7 @@ const injectAllChanges = (data) => {
   // 12. Remove Promoted Posts
   changePromotedPosts(removePromotedPosts);
   // 13. Always Show Latest Tweets
-  // changeLatestTweets(latestTweets);
+  changeLatestTweets(latestTweets);
   // 14. Transparent Search
   changeSearchBar(transparentSearch);
   // 15. Reply Count
@@ -693,13 +693,13 @@ const init = () => {
       "navigationCenter",
       "zenMode",
       "removePromotedPosts",
-      // "latestTweets",
+      "latestTweets",
       "transparentSearch",
       "replyCount",
       "retweetCount",
       "likeCount",
       "followCount",
-      "allVanity",
+      "allVanity"
     ],
     (data) => {
       injectAllChanges(data);

@@ -1,7 +1,7 @@
 import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { styled } from "@stitches/react"
 import { useEffect, useState } from "react"
-import startCase from "lodash.startCase"
+import startCase from "lodash.startcase"
 
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import {
