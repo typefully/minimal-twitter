@@ -1,71 +1,56 @@
-<p align="center">
-  <img alt="Minimal Twitter Icon" src="./minimal-twitter-icon.svg"/>
-</p>
+<img width="80px" alt="Minimal Theme for Twitter App Icon" src="./assets/MinimalTwitterAppIcon.png" />
 
-<h1 align="center">
-  Minimal Twitter
-</h1>
+## Install Extension
 
-Minimal Theme for the new Twitter UI – [install now](#installation)!
+- **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/minimal-twitter/pobhoodpcipjmedfenaigbeloiidbflp)**
+- **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
 
-- No promoted posts
-- No Topics Selection
-- No trends or "Who to Follow" on Home Page
-- No "Who To Follow" in Timeline/Profiles
-- No border on main feed
-- No message drawer
-- Hidden navigation labels (shown on hover)
-- Navigation pushed to left side of window
-- Search on top right
-- Tweet button on bottom right
+![Screenshots](./assets/screenshots.png)
 
-![screenshot](./screenshot.png)
+Alternatively, you may copy the [base styles](extension/content/main.css) as userstyles manually with [Firefox's built-in Style Editor](https://developer.mozilla.org/en-US/docs/Tools/Style_Editor), or using extensions like [Stylish for Chrome](https://chrome.google.com/webstore/detail/stylish-custom-themes-for/fjnbnpbmkenffdnngjfgmeleoegfcffe) and [Cascadea for Safari](https://apps.apple.com/app/cascadea/id1432182561).
 
-## Installation
+## Customize
 
-- [Chrome Extension](#chrome)
-- [Firefox Add-on](#firefox)
-- [Safari using Cascadea](#safari)
+Customizations, preferences, options! Access them by clicking the extension's icon as a popup or in full screen in [Options (Chrome)](https://developer.chrome.com/docs/extensions/mv3/options/) or [Preferences (Firefox)](https://support.mozilla.org/en-US/kb/firefox-options-preferences-and-settings).
 
-### Chrome
+_You can_ —
 
-[Download Chrome extension in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)
+- Control Feed / Timeline Width
+- Control Navigation UI: Buttons, Centering, Labels
+- Activate **Zen Mode**
+- ...and more!
 
-[How to set Chrome preferences](#chrome-preferences)
+## Development
 
-### Firefox
+### Building the Extension
 
-[Download Firefox add-on in Firefox Browser Add-ons](https://addons.mozilla.org/en-US/firefox/addon/min-twitter/)
+First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed. Then, go to [customize-app](./customize-app) and run the build command to build the static [Next.js](https://nextjs.org/) app, which is used for the extension's customization popup and options.
 
-[How to set Firefox preferences](#firefox-preferences)
+```sh
+cd customize-app
+```
 
-### Safari
+```sh
+yarn # must run yarn once first before you can build
+yarn run build
+```
 
-We recommend using [Cascadea](https://apps.apple.com/us/app/cascadea/id1432182561) to inject the [Minimal Twitter stylesheet](./twitter.safariextension/minimal-twitter.css).
+You can then go to [extension](./extension) and begin testing in `chrome://extensions` on Chrome and `about:debugging#/runtime/this-firefox` on Firefox.
 
-## Chrome and Firefox Preferences
+Make sure to rename `manifest.chrome.json` or `manifest.firefox.json` to `manifest.json` on Chrome and Firefox, respectively. The main difference is Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
 
-Customization currently available in Chrome and Firefox! ⚙️
+```sh
+cd extension
+```
 
-### Chrome Preferences
+#### Chrome
 
-1. Right click or secondary click on the Minimal Twitter Extension and select "Options"
-2. Set user preferences
-3. Click "Save" button
+```sh
+mv manifest.chrome.json manifest.json
+```
 
-![Chrome Preferences](chrome-preferences.png)
+#### Firefox
 
-### Firefox Preferences
-
-1. Right click or secondary click on the Minimal Twitter Extension and select "Manage Extension"
-2. Go to "Preferences" tab
-3. Select preferences
-4. Click "Save" button
-
-![Firefox Preferences](firefox-preferences.png)
-
-## Sponsor
-
-<a href="https://www.napkin.io/">
-  <img alt="Sponsor: Napkin" src="./NapkinLogotype.png"/>
-</a>
+```sh
+mv manifest.firefox.json manifest.json
+```
