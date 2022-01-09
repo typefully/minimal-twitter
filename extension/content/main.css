@@ -15,6 +15,15 @@
   display: none !important;
 }
 
+/* Hide sidebar */
+[data-testid="sidebarColumn"] {
+  visibility: hidden !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 1 !important;
+}
+
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
@@ -61,16 +70,6 @@
   /* Align account button with floating tweet button */
   [data-testid="SideNav_AccountSwitcher_Button"] {
     bottom: 12px !important;
-  }
-
-  /* Hide sidebar */
-  [data-testid="sidebarColumn"] {
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 1 !important;
   }
 
   /* Reveal searchbar */
