@@ -1,0 +1,39 @@
+{
+  "name": "Minimal Theme for Twitter",
+  "short_name": "Minimal Twitter",
+  "description": "Declutter the Twitter web experience.",
+  "version": "4.0.13",
+  "manifest_version": 3,
+  "icons": {
+    "16": "images/MinimalTwitterIcon16.png",
+    "32": "images/MinimalTwitterIcon32.png",
+    "48": "images/MinimalTwitterIcon48.png",
+    "128": "images/MinimalTwitterIcon128.png"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
+      "js": ["content/main.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content/main.css", "content/favicon.ico"],
+      "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
+    }
+  ],
+  "options_ui": {
+    "page": "customize.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/MinimalTwitterIcon16.png",
+      "32": "images/MinimalTwitterIcon32.png",
+      "48": "images/MinimalTwitterIcon48.png"
+    },
+    "default_title": "Customize",
+    "default_popup": "customize.html"
+  }
+}
