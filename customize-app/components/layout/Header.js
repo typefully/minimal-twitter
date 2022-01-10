@@ -1,8 +1,16 @@
-import { TwitterLogoIcon } from "@radix-ui/react-icons"
-
 const Header = () => (
   <header className="text-center">
     <div className="flex items-center justify-center">
+      <a
+        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwang.sh%2Fminimal-twitter&via=ThomasWang&hashtags=minimaltwitter&text=Minimal%20Theme%20for%20Twitter%21"
+        target="_blank"
+        rel="noreferrer"
+        className="absolute text-lg font-bold text-twitterBlue left-4"
+        aria-label="Share Tweet"
+        title="Share Tweet"
+      >
+        #
+      </a>
       <a
         href="https://twitter.com"
         target="_blank"

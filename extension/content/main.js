@@ -484,7 +484,7 @@ const changeReplyCount = (replyCount) => {
         "mt-replyCount",
         `
         article [data-testid="reply"] span { 
-          display: none !important;
+          visibility: hidden !important
         }
         `
       );
@@ -507,7 +507,7 @@ const changeRetweetCount = (retweetCount) => {
         article [href$="/retweets/with_comments"],
         article [data-testid="retweet"] span,
         article [data-testid="unretweet"] span {
-           display: none !important;
+          visibility: hidden !important
         }
         `
       );
@@ -529,7 +529,7 @@ const changeLikeCount = (likeCount) => {
         article [href$="/likes"][href*="/status/"],
         article [data-testid="like"] span,
         article [data-testid="unlike"] span {
-           display: none !important
+           visibility: hidden !important
         }
         `
       );
@@ -560,14 +560,6 @@ const changeFollowCount = (followCount) => {
       removeStyles("mt-followCount");
       break;
   }
-};
-
-// Function to change All Vanity Counts
-const changeVanityCount = (allVanity) => {
-  changeReplyCount(allVanity);
-  changeRetweetCount(allVanity);
-  changeLikeCount(allVanity);
-  changeFollowCount(allVanity);
 };
 
 // Utility function to create data for `injectAllChanges()`
@@ -635,7 +627,6 @@ const injectAllChanges = (data) => {
     retweetCount,
     likeCount,
     followCount,
-    allVanity,
   } = data;
 
   // 1. Feed Width
@@ -674,8 +665,6 @@ const injectAllChanges = (data) => {
   changeLikeCount(likeCount);
   // 18. Follow Count
   changeFollowCount(followCount);
-  // 19. All Vanity Count
-  changeVanityCount(allVanity);
 };
 
 /*--
@@ -727,7 +716,6 @@ const init = () => {
       "retweetCount",
       "likeCount",
       "followCount",
-      "allVanity",
     ],
     (data) => {
       injectAllChanges(data);

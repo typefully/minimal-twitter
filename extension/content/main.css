@@ -37,6 +37,9 @@
   [data-testid="primaryColumn"] > div > div:last-child div {
     max-width: unset !important;
   }
+  [aria-label="Share Tweet"][aria-haspopup="menu"][aria-expanded="false"][role="button"] {
+    margin-right: 80px !important;
+  }
 
   /* Fix navigation to left */
   header[role="banner"] {

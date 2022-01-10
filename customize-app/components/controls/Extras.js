@@ -31,7 +31,9 @@ const Extras = () => {
     const getUserDefaultAll = async () => {
       try {
         const userDefaultAll = await getStorage("allVanity")
-        userDefaultAll && setHideAll(userDefaultAll === "on" ? true : false)
+        if (userDefaultAll) {
+          setHideAll(userDefaultAll === "on" ? true : false)
+        }
       } catch (error) {
         console.warn(error)
       }
@@ -48,8 +50,7 @@ const Extras = () => {
     const getUserDefaultLike = async () => {
       try {
         const userDefaultLike = await getStorage("likeCount")
-        userDefaultLike &&
-          setHideRetweet(userDefaultLike === "on" ? true : false)
+        userDefaultLike && setHideLike(userDefaultLike === "on" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -58,7 +59,7 @@ const Extras = () => {
       try {
         const userDefaultRetweet = await getStorage("retweetCount")
         userDefaultRetweet &&
-          setHideLike(userDefaultRetweet === "on" ? true : false)
+          setHideRetweet(userDefaultRetweet === "on" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -90,6 +91,7 @@ const Extras = () => {
         setHideFollow(checked)
         try {
           await setStorage({
+            allVanity: checked ? "on" : "off",
             replyCount: checked ? "on" : "off",
             retweetCount: checked ? "on" : "off",
             likeCount: checked ? "on" : "off",
