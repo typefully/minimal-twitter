@@ -2,7 +2,7 @@
 
 ## Install Extension
 
-- **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/minimal-twitter/pobhoodpcipjmedfenaigbeloiidbflp)**
+- **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)**
 - **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
 
 ![Screenshots](./assets/screenshots.png)
