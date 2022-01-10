@@ -45,10 +45,13 @@ const revealSearchFilters = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
       // Get grandparent of advanced search
-      const advancedSearch = document.querySelector(`[data-testid="searchFiltersAdvancedSearch"]`);
+      const advancedSearch = document.querySelector(
+        `[data-testid="searchFiltersAdvancedSearch"]`
+      );
 
       if (advancedSearch) {
-        const searchFilters = advancedSearch.parentElement.parentElement.parentElement;
+        const searchFilters =
+          advancedSearch.parentElement.parentElement.parentElement;
         searchFilters.classList = searchFilters.classList + " searchFilters";
         return;
       }
@@ -57,7 +60,7 @@ const revealSearchFilters = () => {
 
   observer.observe(document, {
     childList: true,
-    subtree: true
+    subtree: true,
   });
 };
 
@@ -381,23 +384,22 @@ const changePromotedPosts = (removePromotedPosts) => {
   }
 };
 
-/*-- 
-  Not working in my tests —@ThomasWang 
---*/
 // Function to change Latest Tweets
 const changeLatestTweets = (latestTweets) => {
   if (latestTweets === "on") {
     const showLatestTweets = () => {
       const run = () => {
-        //Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
+        // Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
         const latestSelected = !!document.querySelector(
           "div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']"
         );
 
         if (latestSelected) return;
 
-        //Check if the nav bar with "Home" and "Latest Tweets" exists
-        const optionBarExists = !!document.querySelector("div[data-testid='ScrollSnap-List']");
+        // Check if the nav bar with "Home" and "Latest Tweets" exists
+        const optionBarExists = !!document.querySelector(
+          "div[data-testid='ScrollSnap-List']"
+        );
 
         if (!optionBarExists) {
           /*
@@ -405,12 +407,38 @@ const changeLatestTweets = (latestTweets) => {
             1. Click the Timeline Options button
             2. Click the first option in the popup
           */
-          document.querySelector("div[aria-label='Timeline options").click();
-          document.querySelector("div[role='menuitem'][tabindex='0']").click();
-        }
+          const timelineOptions = document.querySelector(
+            "div[aria-label='Timeline options']"
+          );
+          const topTweetsOn = document.querySelector(
+            "div[aria-label='Top Tweets on']"
+          );
 
-        //Click the "Latest Tweets" nav bar option
-        document.querySelector("div[data-testid='ScrollSnap-List'] > div:last-child > a").click();
+          const clickMenuButton = (isTimelineOptions) => {
+            return setTimeout(() => {
+              const menuitem = document.querySelector(
+                "div[role='menuitem'][tabindex='0']"
+              );
+              menuitem && menuitem.click();
+
+              if (isTimelineOptions) {
+                // Click the "Latest Tweets" nav bar option
+                const latestTweetsNavBarOption = document.querySelector(
+                  "div[data-testid='ScrollSnap-List'] > div:last-child > a"
+                );
+                latestTweetsNavBarOption && latestTweetsNavBarOption.click();
+              }
+            }, 100);
+          };
+
+          if (timelineOptions) {
+            timelineOptions.click();
+            clickMenuButton(true);
+          } else if (topTweetsOn) {
+            topTweetsOn.click();
+            clickMenuButton(false);
+          }
+        }
       };
       setTimeout(run, 500);
     };
@@ -607,7 +635,7 @@ const injectAllChanges = (data) => {
     retweetCount,
     likeCount,
     followCount,
-    allVanity
+    allVanity,
   } = data;
 
   // 1. Feed Width
@@ -699,7 +727,7 @@ const init = () => {
       "retweetCount",
       "likeCount",
       "followCount",
-      "allVanity"
+      "allVanity",
     ],
     (data) => {
       injectAllChanges(data);
