@@ -100,7 +100,7 @@ const Lists = () => (
   </UserButton>
 )
 
-const NavigationButtons = () => {
+const Navigation = () => {
   const [showSwitches, setShowSwitches] = useState(false)
 
   return (
@@ -136,4 +136,4 @@ const NavigationButtons = () => {
   )
 }
 
-export default NavigationButtons
+export default Navigation
