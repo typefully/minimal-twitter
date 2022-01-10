@@ -13,7 +13,7 @@ module.exports = {
         twitterBgTwoDark: "#192734",
         twitterAccentOne: "#536471",
         twitterAccentOneDark: "#8899a6",
-        twitterAccentTwo: "#1d9bf0",
+        twitterAccentTwo: "#dbe4e6",
         twitterAccentTwoDark: "#38444d",
         twitterAccentThree: "#1d9bf0",
         twitterAccentFour: "#1d9bf01a",

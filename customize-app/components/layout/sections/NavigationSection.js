@@ -1,4 +1,4 @@
-import NavigationButtons from "../../controls/NavigationButtons"
+import Navigation from "../../controls/Navigation"
 
 const NavigationSection = () => (
   <section className="flex flex-col space-y-2">
@@ -9,7 +9,7 @@ const NavigationSection = () => (
       Navigation
     </label>
     <div id="user-control-navigation">
-      <NavigationButtons />
+      <Navigation />
     </div>
   </section>
 )
