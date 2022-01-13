@@ -44,8 +44,11 @@
   [data-testid="primaryColumn"] > div > div:last-child div {
     max-width: unset !important;
   }
-  [aria-label="Share Tweet"][aria-haspopup="menu"][aria-expanded="false"][role="button"] {
-    margin-right: 80px !important;
+
+  /* Nudge engagement row 81px right */
+  /* In default feed: 506px - 425px */
+  div[aria-label][role="group"][id^="id__"] {
+    margin-right: 81px !important;
   }
 
   /* Fix navigation to left */
@@ -60,12 +63,21 @@
   }
 
   /* Navigation buttons labels and Account button label on hover */
-  nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span,
+  header[role="banner"]
+    nav[role="navigation"]
+    *
+    div[dir="auto"]:not([aria-label])
+    > span,
   [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+    display: inline-block !important;
     opacity: 0 !important;
     transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  nav[aria-label="Primary"]:hover * div[dir="auto"]:not([aria-label]) > span,
+  header[role="banner"]
+    nav[role="navigation"]:hover
+    *
+    div[dir="auto"]:not([aria-label])
+    > span,
   [data-testid="SideNav_AccountSwitcher_Button"]:hover > div:not(:first-child) {
     opacity: 1 !important;
   }
@@ -86,8 +98,7 @@
 /* Reveal searchbar and search filters at desktop breakpoint */
 @media only screen and (min-width: 1265px) {
   /* Reveal searchbar */
-  [data-testid="sidebarColumn"]
-    form[aria-label="Search Twitter"][role="search"] {
+  [data-testid="sidebarColumn"] form[role="search"] {
     visibility: visible !important;
     position: fixed !important;
     top: 12px !important;
@@ -101,8 +112,7 @@
 
   /* Match size of focused search container to its dropdown */
   /* Add blur filter to search container for overlap */
-  [data-testid="sidebarColumn"]
-    form[aria-label="Search Twitter"][role="search"]:focus-within {
+  [data-testid="sidebarColumn"] form[role="search"]:focus-within {
     width: 374px !important;
     backdrop-filter: blur(12px) !important;
   }

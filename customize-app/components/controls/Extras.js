@@ -155,8 +155,6 @@ const Extras = () => {
       <Separator />
       {showCheckboxes ? (
         <div className="w-full py-3">
-          <CheckboxPromotedPosts />
-          <CheckboxAlwaysShowLatest />
           <CheckboxTransparentSearch />
           <CheckboxMinimalFavicon />
           <CheckboxHideVanityCount
@@ -185,7 +183,12 @@ const Extras = () => {
               />
             </>
           )}
-          <div className="flex items-center w-full pt-4 pb-2 space-x-1 text-sm">
+          <CheckboxPromotedPosts />
+          <CheckboxAlwaysShowLatest />
+          <div className="flex items-center w-full pt-3 space-x-1 text-sm">
+            * Experimental and may not always work
+          </div>
+          <div className="flex items-center w-full pt-3 pb-2 space-x-1 text-sm">
             <LightningBoltIcon />{" "}
             <span>
               Power user?{" "}

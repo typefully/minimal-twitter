@@ -210,7 +210,7 @@ const changeBookmarksButton = (bookmarksButton) => {
       addStyles(
         "mt-bookmarksButton",
         `
-        [aria-label="Bookmarks"] {
+        a[href="/i/bookmarks"] {
           display: none !important;
         }
         `
@@ -230,7 +230,7 @@ const changeListsButton = (listsButton) => {
       addStyles(
         "mt-listsButton",
         `
-        [aria-label="Lists"] {
+        a[href*="/lists"] {
           display: none !important;
         }
         `
@@ -247,33 +247,37 @@ const changeListsButton = (listsButton) => {
 const changeNavigationButtonsLabelsHover = (navigationButtonsLabelsHover) => {
   switch (navigationButtonsLabelsHover) {
     case "off":
-      addStyles(
-        "mt-navigationButtonsLabelsHover",
-        `
-        nav[aria-label="Primary"] {
-          width: fit-content !important;
+      chrome.storage.sync.get(["navigationButtonsLabels"], (result) => {
+        if (result.navigationButtonsLabels !== "on") {
+          addStyles(
+            "mt-navigationButtonsLabelsHover",
+            `
+            header[role="banner"] nav[role="navigation"] {
+              width: fit-content !important;
+            }
+            header[role="banner"] nav[role="navigation"] div[dir="auto"] {
+              position: absolute !important;
+            }
+            header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span {
+              display: none !important;
+            }
+          
+            header[role="banner"] > div > div > div > div:last-child {
+              width: fit-content !important;
+            }
+          
+            [data-testid="SideNav_AccountSwitcher_Button"] {
+              bottom: 12px !important;
+              width: fit-content !important;
+            }
+          
+            [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+              display: none !important;
+            }
+            `
+          );
         }
-        nav[aria-label="Primary"] div[dir="auto"] {
-          position: absolute !important;
-        }
-        nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span {
-          display: none !important;
-        }
-      
-        header[role="banner"] > div > div > div > div:last-child {
-          width: fit-content !important;
-        }
-      
-        [data-testid="SideNav_AccountSwitcher_Button"] {
-          bottom: 12px !important;
-          width: fit-content !important;
-        }
-      
-        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-          display: none !important;
-        }
-        `
-      );
+      });
       break;
 
     case "on":
@@ -286,10 +290,11 @@ const changeNavigationButtonsLabelsHover = (navigationButtonsLabelsHover) => {
 const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
   switch (navigationButtonsLabels) {
     case "on":
+      removeElement("mt-navigationButtonsLabelsHover");
       addStyles(
         "mt-navigationButtonsLabels",
         `
-        nav[aria-label="Primary"] * div[dir="auto"]:not([aria-label]) > span,
+        header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span,
         [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
           opacity: 1 !important;
         }
@@ -445,7 +450,7 @@ const changeSearchBar = (transparentSearch) => {
       addStyles(
         "mt-transparentSearch",
         `
-        form[aria-label="Search Twitter"][role="search"] > div:nth-child(1) > div {
+        form[role="search"] > div:nth-child(1) > div {
           background-color: transparent !important;
         }
         [data-testid="sidebarColumn"] [placeholder="Search Twitter"] {

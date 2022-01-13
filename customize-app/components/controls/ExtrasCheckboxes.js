@@ -46,7 +46,7 @@ export const CheckboxPromotedPosts = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="promotedPosts" className="text-base tracking-normal">
-        Remove promoted posts
+        Remove promoted posts*
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -93,7 +93,7 @@ export const CheckboxAlwaysShowLatest = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="latestTweets" className="text-base tracking-normal">
-        Always show latest tweets
+        Always show latest tweets*
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
