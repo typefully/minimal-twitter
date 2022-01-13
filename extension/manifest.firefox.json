@@ -2,7 +2,7 @@
   "name": "Minimal Theme for Twitter",
   "short_name": "Minimal Twitter",
   "description": "Declutter the Twitter web experience.",
-  "version": "4.0.17",
+  "version": "4.0.21",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
@@ -23,7 +23,11 @@
       "js": ["content/main.js"]
     }
   ],
-  "web_accessible_resources": ["content/main.css", "content/favicon.ico"],
+  "web_accessible_resources": [
+    "content/main.css",
+    "content/twitter.ico",
+    "content/twitter-mt.ico"
+  ],
   "options_ui": {
     "page": "customize.html",
     "open_in_tab": true

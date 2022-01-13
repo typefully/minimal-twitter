@@ -4,15 +4,20 @@
 - Copyright (c) 2022 Thomas Wang
 --*/
 
-/* Hide Messages Drawer */
-[data-testid="DMDrawer"] {
-  visibility: hidden !important;
-}
-
 /* Remove Promoted Posts */
 /* Keep article combinator or it will remove all videos as well */
 [data-testid="placementTracking"] article {
   display: none !important;
+}
+
+/* Remove login prompt */
+#layers {
+  display: none;
+}
+
+/* Hide Messages Drawer */
+[data-testid="DMDrawer"] {
+  visibility: hidden !important;
 }
 
 /* Hide sidebar */
@@ -27,6 +32,13 @@
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
+  /* Center the Timeline */
+  /* Prevent horizontal scroll */
+  main[role="main"] {
+    align-items: center !important;
+    overflow-x: clip !important;
+  }
+
   /* Match widths for feed */
   [data-testid="primaryColumn"] {
     width: 700px !important;
@@ -45,13 +57,6 @@
   header[role="banner"] {
     position: fixed !important;
     left: 0 !important;
-  }
-
-  /* Center the Timeline */
-  /* Prevent horizontal overflow scrolling */
-  main[role="main"] {
-    align-items: center !important;
-    overflow-x: hidden !important;
   }
 
   /* Align Twitter navigation icon with search */
@@ -75,6 +80,28 @@
     bottom: 12px !important;
   }
 
+  /* Floating Tweet Button */
+  a[data-testid="SideNav_NewTweet_Button"] {
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 24px !important;
+  }
+
+  /* Search Filters Custom Class */
+  .searchFilters {
+    visibility: visible !important;
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    width: 240px;
+  }
+  .searchFilters > div > div:first-child {
+    display: none;
+  }
+}
+
+/* Search bar reset */
+@media only screen and (min-width: 1265px) {
   /* Reveal searchbar */
   [data-testid="sidebarColumn"]
     form[aria-label="Search Twitter"][role="search"] {
@@ -109,24 +136,5 @@
   div[style="left: -8px; width: 306px;"] {
     left: unset !important;
     width: 374px !important;
-  }
-
-  /* Floating Tweet Button */
-  a[data-testid="SideNav_NewTweet_Button"] {
-    position: fixed !important;
-    right: 16px !important;
-    bottom: 24px !important;
-  }
-
-  /* Search Filters Custom Class */
-  .searchFilters {
-    visibility: visible !important;
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    width: 240px;
-  }
-  .searchFilters > div > div:first-child {
-    display: none;
   }
 }

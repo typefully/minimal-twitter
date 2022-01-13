@@ -6,6 +6,7 @@ import {
   CheckboxPromotedPosts,
   CheckboxAlwaysShowLatest,
   CheckboxTransparentSearch,
+  CheckboxMinimalFavicon,
   CheckboxHideFollowCount,
   CheckboxHideLikeCount,
   CheckboxHideReplyCount,
@@ -157,6 +158,7 @@ const Extras = () => {
           <CheckboxPromotedPosts />
           <CheckboxAlwaysShowLatest />
           <CheckboxTransparentSearch />
+          <CheckboxMinimalFavicon />
           <CheckboxHideVanityCount
             showVanityCheckboxes={showVanityCheckboxes}
             setShowVanityCheckboxes={setShowVanityCheckboxes}

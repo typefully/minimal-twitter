@@ -179,6 +179,53 @@ export const CheckboxTransparentSearch = () => {
   )
 }
 
+export const CheckboxMinimalFavicon = () => {
+  const [userFavicon, setUserFavicon] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultFavicon = async () => {
+      try {
+        const useDefaultFavicon = await getStorage("minimalFavicon")
+        useDefaultFavicon &&
+          setUserFavicon(useDefaultFavicon === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultFavicon()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="minimalFavicon" className="text-base tracking-normal">
+        Minimal favicon
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserFavicon(checked)
+            try {
+              await setStorage({
+                minimalFavicon: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userFavicon}
+          id="minimalFavicon"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
 export const CheckboxHideVanityCount = ({
   showVanityCheckboxes,
   setShowVanityCheckboxes,

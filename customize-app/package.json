@@ -5,6 +5,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "build": "next build && next export && mv out/_next out/next && sed -i '' -e 's/\\/_next/\\.\\/next/g' out/**.html && mv out/index.html ../extension/customize.html && rsync -va --delete-after out/next/ ../extension/next/ && rm -rf out",
+    "build:linux": "next build && next export && mv out/_next out/next && sed -i 's/\\/_next/\\.\\/next/g' out/**.html && mv out/index.html ../extension/customize.html && rsync -va --delete-after out/next/ ../extension/next/ && rm -rf out",
     "start": "next start",
     "check:prettier": "npx prettier --check .",
     "write:prettier": "npx prettier --write ."

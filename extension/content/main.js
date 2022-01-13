@@ -1,5 +1,5 @@
-// Utility function to remove injected CSS
-const removeStyles = (id) => {
+// Utility function to remove DOM element
+const removeElement = (id) => {
   const element = document.getElementById(id);
   element && element.remove();
 };
@@ -7,7 +7,7 @@ const removeStyles = (id) => {
 // Utility function to inject CSS into page
 const addStyles = (id, css) => {
   // First remove before adding
-  removeStyles(id);
+  removeElement(id);
 
   const head = document.querySelector("head");
   const style = document.createElement("style");
@@ -24,20 +24,6 @@ const addMainStylesheet = () => {
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("content/main.css");
   head.appendChild(mainStylesheet);
-};
-
-// Function to replace favicon (to reduce red dots)
-const replaceFavicon = () => {
-  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
-  currentFavicons.forEach((item) => {
-    return item && item.remove();
-  });
-
-  const head = document.querySelector("head");
-  const faviconLink = document.createElement("link");
-  faviconLink.rel = "shortcut icon";
-  faviconLink.href = chrome.runtime.getURL("content/favicon.ico");
-  head.appendChild(faviconLink);
 };
 
 // Reveal Search Filters
@@ -139,7 +125,7 @@ const changeFeedWidth = (feedWidth) => {
 const changefeedBorders = (feedBorders) => {
   switch (feedBorders) {
     case "on":
-      removeStyles("mt-feedBorders");
+      removeElement("mt-feedBorders");
       break;
 
     case "off":
@@ -172,7 +158,7 @@ const changeExploreButton = (exploreButton) => {
       break;
 
     case "on":
-      removeStyles("mt-exploreButton");
+      removeElement("mt-exploreButton");
       break;
   }
 };
@@ -192,7 +178,7 @@ const changeNotificationsButton = (notificationsButton) => {
       break;
 
     case "on":
-      removeStyles("mt-notificationsButton");
+      removeElement("mt-notificationsButton");
       break;
   }
 };
@@ -212,7 +198,7 @@ const changeMessagesButton = (messagesButton) => {
       break;
 
     case "on":
-      removeStyles("mt-messagesButton");
+      removeElement("mt-messagesButton");
       break;
   }
 };
@@ -232,7 +218,7 @@ const changeBookmarksButton = (bookmarksButton) => {
       break;
 
     case "on":
-      removeStyles("mt-bookmarksButton");
+      removeElement("mt-bookmarksButton");
       break;
   }
 };
@@ -252,7 +238,7 @@ const changeListsButton = (listsButton) => {
       break;
 
     case "on":
-      removeStyles("mt-listsButton");
+      removeElement("mt-listsButton");
       break;
   }
 };
@@ -291,7 +277,7 @@ const changeNavigationButtonsLabelsHover = (navigationButtonsLabelsHover) => {
       break;
 
     case "on":
-      removeStyles("mt-navigationButtonsLabelsHover");
+      removeElement("mt-navigationButtonsLabelsHover");
       break;
   }
 };
@@ -312,7 +298,7 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
       break;
 
     case "off":
-      removeStyles("mt-navigationButtonsLabels");
+      removeElement("mt-navigationButtonsLabels");
       break;
   }
 };
@@ -333,7 +319,7 @@ const changeNavigationCenter = (navigationCenter) => {
       break;
 
     case "off":
-      removeStyles("mt-navigationCenter");
+      removeElement("mt-navigationCenter");
       break;
   }
 };
@@ -359,7 +345,7 @@ const changeZenMode = (zenMode) => {
       break;
 
     case "off":
-      removeStyles("mt-zenMode");
+      removeElement("mt-zenMode");
       break;
   }
 };
@@ -379,7 +365,7 @@ const changePromotedPosts = (removePromotedPosts) => {
       break;
 
     case "on":
-      removeStyles("mt-removePromotedPosts");
+      removeElement("mt-removePromotedPosts");
       break;
   }
 };
@@ -471,9 +457,33 @@ const changeSearchBar = (transparentSearch) => {
       break;
 
     case "off":
-      removeStyles("mt-transparentSearch");
+      removeElement("mt-transparentSearch");
       break;
   }
+};
+
+// Function to replace favicon (to reduce red dots)
+const changeFavicon = (minimalFavicon) => {
+  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
+  currentFavicons.forEach((item) => {
+    item && item.remove();
+  });
+
+  const head = document.querySelector("head");
+  const faviconLink = document.createElement("link");
+  faviconLink.id = "replacedFavicon";
+  faviconLink.rel = "shortcut icon";
+
+  switch (minimalFavicon) {
+    case "on":
+      faviconLink.href = chrome.runtime.getURL("content/twitter-mt.ico");
+      break;
+    case "off":
+      faviconLink.href = chrome.runtime.getURL("content/twitter.ico");
+      break;
+  }
+
+  head.appendChild(faviconLink);
 };
 
 // Function to change Reply Count
@@ -491,7 +501,7 @@ const changeReplyCount = (replyCount) => {
       break;
 
     case "off":
-      removeStyles("mt-replyCount");
+      removeElement("mt-replyCount");
       break;
   }
 };
@@ -514,7 +524,7 @@ const changeRetweetCount = (retweetCount) => {
       break;
 
     case "off":
-      removeStyles("mt-retweetCount");
+      removeElement("mt-retweetCount");
       break;
   }
 };
@@ -536,7 +546,7 @@ const changeLikeCount = (likeCount) => {
       break;
 
     case "off":
-      removeStyles("mt-likeCount");
+      removeElement("mt-likeCount");
       break;
   }
 };
@@ -557,7 +567,7 @@ const changeFollowCount = (followCount) => {
       break;
 
     case "off":
-      removeStyles("mt-followCount");
+      removeElement("mt-followCount");
       break;
   }
 };
@@ -623,6 +633,7 @@ const injectAllChanges = (data) => {
     removePromotedPosts,
     latestTweets,
     transparentSearch,
+    minimalFavicon,
     replyCount,
     retweetCount,
     likeCount,
@@ -657,13 +668,15 @@ const injectAllChanges = (data) => {
   changeLatestTweets(latestTweets);
   // 14. Transparent Search
   changeSearchBar(transparentSearch);
-  // 15. Reply Count
+  // 15. Minimal Favicon
+  changeFavicon(minimalFavicon);
+  // 16. Reply Count
   changeReplyCount(replyCount);
-  // 16. Retweet Count
+  // 17. Retweet Count
   changeRetweetCount(retweetCount);
-  // 17. Like Count
+  // 18. Like Count
   changeLikeCount(likeCount);
-  // 18. Follow Count
+  // 19. Follow Count
   changeFollowCount(followCount);
 };
 
@@ -684,16 +697,8 @@ chrome.storage.onChanged.addListener((changes) => {
 const init = () => {
   addMainStylesheet();
 
-  // Replace favicon
-  replaceFavicon();
-
   // Reveal search filters
   revealSearchFilters();
-  const pushState = history.pushState;
-  history.pushState = () => {
-    pushState.apply(history, revealSearchFilters);
-    fireEvents("pushState", revealSearchFilters);
-  };
 
   // Inject user preferences
   chrome.storage.sync.get(
@@ -712,6 +717,7 @@ const init = () => {
       "removePromotedPosts",
       "latestTweets",
       "transparentSearch",
+      "minimalFavicon",
       "replyCount",
       "retweetCount",
       "likeCount",
