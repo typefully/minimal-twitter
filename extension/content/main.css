@@ -86,21 +86,9 @@
     right: 16px !important;
     bottom: 24px !important;
   }
-
-  /* Search Filters Custom Class */
-  .searchFilters {
-    visibility: visible !important;
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    width: 240px;
-  }
-  .searchFilters > div > div:first-child {
-    display: none;
-  }
 }
 
-/* Search bar reset */
+/* Reveal searchbar and search filters at desktop breakpoint */
 @media only screen and (min-width: 1265px) {
   /* Reveal searchbar */
   [data-testid="sidebarColumn"]
@@ -136,5 +124,17 @@
   div[style="left: -8px; width: 306px;"] {
     left: unset !important;
     width: 374px !important;
+  }
+
+  /* Search Filters Custom Class */
+  .searchFilters {
+    visibility: visible !important;
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    width: 240px;
+  }
+  .searchFilters > div > div:first-child {
+    display: none;
   }
 }
