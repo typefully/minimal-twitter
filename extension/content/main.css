@@ -10,11 +10,6 @@
   display: none !important;
 }
 
-/* Remove login prompt */
-#layers {
-  display: none;
-}
-
 /* Hide Messages Drawer */
 [data-testid="DMDrawer"] {
   visibility: hidden !important;
