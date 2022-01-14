@@ -10,9 +10,9 @@ import {
   CheckboxHideVanityCount,
   CheckboxTopicsToFollow,
   CheckboxWhoToFollow,
+  CheckboxPromotedPosts,
   CheckboxTransparentSearch,
   CheckboxMinimalFavicon,
-  CheckboxPromotedPosts,
   CheckboxAlwaysShowLatest
 } from "./ExtrasCheckboxes"
 import { SwitchZenMode } from "./ExtrasSwitches"
@@ -35,7 +35,7 @@ const Extras = () => {
       try {
         const userDefaultAll = await getStorage("allVanity")
         if (userDefaultAll) {
-          setHideAll(userDefaultAll === "off" ? true : false)
+          setHideAll(userDefaultAll === "hide" ? true : false)
         }
       } catch (error) {
         console.warn(error)
@@ -45,7 +45,7 @@ const Extras = () => {
       try {
         const userDefaultReply = await getStorage("replyCount")
         userDefaultReply &&
-          setHideReply(userDefaultReply === "off" ? true : false)
+          setHideReply(userDefaultReply === "hide" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -53,7 +53,8 @@ const Extras = () => {
     const getUserDefaultLike = async () => {
       try {
         const userDefaultLike = await getStorage("likeCount")
-        userDefaultLike && setHideLike(userDefaultLike === "off" ? true : false)
+        userDefaultLike &&
+          setHideLike(userDefaultLike === "hide" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -62,7 +63,7 @@ const Extras = () => {
       try {
         const userDefaultRetweet = await getStorage("retweetCount")
         userDefaultRetweet &&
-          setHideRetweet(userDefaultRetweet === "off" ? true : false)
+          setHideRetweet(userDefaultRetweet === "hide" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -71,7 +72,7 @@ const Extras = () => {
       try {
         const userDefaultFollow = await getStorage("followCount")
         userDefaultFollow &&
-          setHideFollow(userDefaultFollow === "off" ? true : false)
+          setHideFollow(userDefaultFollow === "hide" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -94,11 +95,11 @@ const Extras = () => {
         setHideFollow(checked)
         try {
           await setStorage({
-            allVanity: checked ? "off" : "on",
-            replyCount: checked ? "off" : "on",
-            retweetCount: checked ? "off" : "on",
-            likeCount: checked ? "off" : "on",
-            followCount: checked ? "off" : "on"
+            allVanity: checked ? "hide" : "show",
+            replyCount: checked ? "hide" : "show",
+            retweetCount: checked ? "hide" : "show",
+            likeCount: checked ? "hide" : "show",
+            followCount: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -109,7 +110,7 @@ const Extras = () => {
         setHideReply(checked)
         try {
           await setStorage({
-            replyCount: checked ? "off" : "on"
+            replyCount: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -120,7 +121,7 @@ const Extras = () => {
         setHideRetweet(checked)
         try {
           await setStorage({
-            retweetCount: checked ? "off" : "on"
+            retweetCount: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -131,7 +132,7 @@ const Extras = () => {
         setHideLike(checked)
         try {
           await setStorage({
-            likeCount: checked ? "off" : "on"
+            likeCount: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -142,7 +143,7 @@ const Extras = () => {
         setHideFollow(checked)
         try {
           await setStorage({
-            followCount: checked ? "off" : "on"
+            followCount: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -183,14 +184,15 @@ const Extras = () => {
               />
             </>
           )}
-          <CheckboxTransparentSearch />
-          <CheckboxMinimalFavicon />
           <CheckboxWhoToFollow />
           <CheckboxTopicsToFollow />
           <CheckboxPromotedPosts />
+          <CheckboxTransparentSearch />
+          <CheckboxMinimalFavicon />
           <CheckboxAlwaysShowLatest />
+          <div className="pb-3" />
           <Separator />
-          <div className="flex items-center w-full pt-3 space-x-1 text-sm">
+          <div className="flex items-center w-full pt-4 space-x-1 text-sm">
             * Experimental — may not always work
           </div>
           <div className="flex items-center w-full pt-3 pb-2 space-x-1 text-sm">

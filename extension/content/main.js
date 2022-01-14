@@ -230,7 +230,7 @@ const changeListsButton = (listsButton) => {
       addStyles(
         "mt-listsButton",
         `
-        a[href*="/lists"] {
+        a[href*="/lists"][role="link"][aria-label] {
           display: none !important;
         }
         `
@@ -243,39 +243,44 @@ const changeListsButton = (listsButton) => {
   }
 };
 
+// Function to remove Navigation Button Labels on Hover
+const removeHover = () => {
+  addStyles(
+    "mt-navigationButtonsLabelsHover",
+    `
+    header[role="banner"] nav[role="navigation"] {
+      width: fit-content !important;
+    }
+    header[role="banner"] nav[role="navigation"] div[dir="auto"] {
+      position: absolute !important;
+    }
+    header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span {
+      display: none !important;
+    }
+  
+    header[role="banner"] > div > div > div > div:last-child {
+      width: fit-content !important;
+    }
+  
+    [data-testid="SideNav_AccountSwitcher_Button"] {
+      bottom: 12px !important;
+      width: fit-content !important;
+    }
+  
+    [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+      display: none !important;
+    }
+    `
+  );
+};
+
 // Function to change Navigation Button Labels on Hover
 const changeNavigationButtonsLabelsHover = (navigationButtonsLabelsHover) => {
   switch (navigationButtonsLabelsHover) {
     case "off":
       chrome.storage.sync.get(["navigationButtonsLabels"], (result) => {
         if (result.navigationButtonsLabels !== "on") {
-          addStyles(
-            "mt-navigationButtonsLabelsHover",
-            `
-            header[role="banner"] nav[role="navigation"] {
-              width: fit-content !important;
-            }
-            header[role="banner"] nav[role="navigation"] div[dir="auto"] {
-              position: absolute !important;
-            }
-            header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span {
-              display: none !important;
-            }
-          
-            header[role="banner"] > div > div > div > div:last-child {
-              width: fit-content !important;
-            }
-          
-            [data-testid="SideNav_AccountSwitcher_Button"] {
-              bottom: 12px !important;
-              width: fit-content !important;
-            }
-          
-            [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-              display: none !important;
-            }
-            `
-          );
+          removeHover();
         }
       });
       break;
@@ -303,6 +308,12 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
       break;
 
     case "off":
+      chrome.storage.sync.get(["navigationButtonsLabelsHover"], (result) => {
+        if (result.navigationButtonsLabelsHover === "off") {
+          removeHover();
+        }
+      });
+
       removeElement("mt-navigationButtonsLabels");
       break;
   }
@@ -355,6 +366,173 @@ const changeZenMode = (zenMode) => {
   }
 };
 
+// Function to change Reply Count
+const changeReplyCount = (replyCount) => {
+  switch (replyCount) {
+    case "hide":
+      addStyles(
+        "mt-replyCount",
+        `
+        article [data-testid="reply"] span { 
+          visibility: hidden !important
+        }
+        `
+      );
+      break;
+
+    case "show":
+      removeElement("mt-replyCount");
+      break;
+  }
+};
+
+// Function to change Retweet Count
+const changeRetweetCount = (retweetCount) => {
+  switch (retweetCount) {
+    case "hide":
+      addStyles(
+        "mt-retweetCount",
+        `
+        article [href$="/retweets"],
+        article [href$="/retweets/with_comments"],
+        article [data-testid="retweet"] span,
+        article [data-testid="unretweet"] span {
+          visibility: hidden !important
+        }
+        `
+      );
+      break;
+
+    case "show":
+      removeElement("mt-retweetCount");
+      break;
+  }
+};
+
+// Function to change Like Count
+const changeLikeCount = (likeCount) => {
+  switch (likeCount) {
+    case "hide":
+      addStyles(
+        "mt-likeCount",
+        `
+        article [href$="/likes"][href*="/status/"],
+        article [data-testid="like"] span,
+        article [data-testid="unlike"] span {
+           visibility: hidden !important
+        }
+        `
+      );
+      break;
+
+    case "show":
+      removeElement("mt-likeCount");
+      break;
+  }
+};
+
+// Function to change Follow Count
+const changeFollowCount = (followCount) => {
+  switch (followCount) {
+    case "hide":
+      addStyles(
+        "mt-followCount",
+        `
+        [href$="/following"][dir="auto"][role="link"] > span:first-child,
+        [href$="/followers"][dir="auto"][role="link"] > span:first-child {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "show":
+      removeElement("mt-followCount");
+      break;
+  }
+};
+
+// Function to change Who to Follow
+const changeWhoToFollow = (whoToFollow) => {
+  switch (whoToFollow) {
+    case "off":
+      addStyles(
+        "mt-whoToFollow",
+        `
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          a[href*="/i/connect_people?user_id="],
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          div[data-testid="UserCell"] {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-whoToFollow");
+      break;
+  }
+};
+
+// Function to change Topics to Follow
+const changeTopicsToFollow = (topicsToFollow) => {
+  switch (topicsToFollow) {
+    case "off":
+      addStyles(
+        "mt-topicsToFollow",
+        `
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          section[aria-labelledby^="accessible-list-"]
+          > div[aria-label$="Carousel"] {
+          display: none;
+        }
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          a[href*="/i/flow/topics_selector"],
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          a[href*="/i/topics/picker/home"] {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-topicsToFollow");
+      break;
+  }
+};
+
 // Function to change Promoted Posts
 const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
@@ -373,6 +551,54 @@ const changePromotedPosts = (removePromotedPosts) => {
       removeElement("mt-removePromotedPosts");
       break;
   }
+};
+
+// Function to change Search Bar
+const changeSearchBar = (transparentSearch) => {
+  switch (transparentSearch) {
+    case "on":
+      addStyles(
+        "mt-transparentSearch",
+        `
+        form[role="search"] > div:nth-child(1) > div {
+          background-color: transparent !important;
+        }
+        [data-testid="sidebarColumn"] [placeholder="Search Twitter"] {
+          padding-left: 34px !important;
+          margin-left: -24px !important;
+        }
+        `
+      );
+      break;
+
+    case "off":
+      removeElement("mt-transparentSearch");
+      break;
+  }
+};
+
+// Function to replace favicon (to reduce red dots)
+const changeFavicon = (minimalFavicon) => {
+  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
+  currentFavicons.forEach((item) => {
+    item && item.remove();
+  });
+
+  const head = document.querySelector("head");
+  const faviconLink = document.createElement("link");
+  faviconLink.id = "replacedFavicon";
+  faviconLink.rel = "shortcut icon";
+
+  switch (minimalFavicon) {
+    case "on":
+      faviconLink.href = chrome.runtime.getURL("content/twitter-mt.ico");
+      break;
+    case "off":
+      faviconLink.href = chrome.runtime.getURL("content/twitter.ico");
+      break;
+  }
+
+  head.appendChild(faviconLink);
 };
 
 // Function to change Latest Tweets
@@ -443,203 +669,6 @@ const changeLatestTweets = (latestTweets) => {
   }
 };
 
-// Function to change Search Bar
-const changeSearchBar = (transparentSearch) => {
-  switch (transparentSearch) {
-    case "on":
-      addStyles(
-        "mt-transparentSearch",
-        `
-        form[role="search"] > div:nth-child(1) > div {
-          background-color: transparent !important;
-        }
-        [data-testid="sidebarColumn"] [placeholder="Search Twitter"] {
-          padding-left: 34px !important;
-          margin-left: -24px !important;
-        }
-        `
-      );
-      break;
-
-    case "off":
-      removeElement("mt-transparentSearch");
-      break;
-  }
-};
-
-// Function to replace favicon (to reduce red dots)
-const changeFavicon = (minimalFavicon) => {
-  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
-  currentFavicons.forEach((item) => {
-    item && item.remove();
-  });
-
-  const head = document.querySelector("head");
-  const faviconLink = document.createElement("link");
-  faviconLink.id = "replacedFavicon";
-  faviconLink.rel = "shortcut icon";
-
-  switch (minimalFavicon) {
-    case "on":
-      faviconLink.href = chrome.runtime.getURL("content/twitter-mt.ico");
-      break;
-    case "off":
-      faviconLink.href = chrome.runtime.getURL("content/twitter.ico");
-      break;
-  }
-
-  head.appendChild(faviconLink);
-};
-
-// Function to change Reply Count
-const changeReplyCount = (replyCount) => {
-  switch (replyCount) {
-    case "off":
-      addStyles(
-        "mt-replyCount",
-        `
-        article [data-testid="reply"] span { 
-          visibility: hidden !important
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-replyCount");
-      break;
-  }
-};
-
-// Function to change Retweet Count
-const changeRetweetCount = (retweetCount) => {
-  switch (retweetCount) {
-    case "off":
-      addStyles(
-        "mt-retweetCount",
-        `
-        article [href$="/retweets"],
-        article [href$="/retweets/with_comments"],
-        article [data-testid="retweet"] span,
-        article [data-testid="unretweet"] span {
-          visibility: hidden !important
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-retweetCount");
-      break;
-  }
-};
-
-// Function to change Like Count
-const changeLikeCount = (likeCount) => {
-  switch (likeCount) {
-    case "off":
-      addStyles(
-        "mt-likeCount",
-        `
-        article [href$="/likes"][href*="/status/"],
-        article [data-testid="like"] span,
-        article [data-testid="unlike"] span {
-           visibility: hidden !important
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-likeCount");
-      break;
-  }
-};
-
-// Function to change Follow Count
-const changeFollowCount = (followCount) => {
-  switch (followCount) {
-    case "off":
-      addStyles(
-        "mt-followCount",
-        `
-        [href$="/following"][dir="auto"][role="link"] > span:first-child,
-        [href$="/followers"][dir="auto"][role="link"] > span:first-child {
-          display: none !important;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-followCount");
-      break;
-  }
-};
-
-// Function to change Who to Follow
-const changeWhoToFollow = (whoToFollow) => {
-  switch (whoToFollow) {
-    case "off":
-      addStyles(
-        "mt-whoToFollow",
-        `
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          a[href*="/i/connect_people?user_id="],
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          div[data-testid="UserCell"] {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-whoToFollow");
-      break;
-  }
-};
-
-// Function to change Topics to Follow
-const changeTopicsToFollow = (topicsToFollow) => {
-  switch (topicsToFollow) {
-    case "off":
-      addStyles(
-        "mt-topicsToFollow",
-        `
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          section[aria-labelledby^="accessible-list-"]
-          > div[aria-label$="Carousel"] {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-topicsToFollow");
-      break;
-  }
-};
-
 // Utility function to create data for `injectAllChanges()`
 const constructNewData = (changes) => {
   // Creates an array of objects from changes
@@ -705,11 +734,11 @@ const injectAllChanges = (data) => {
     retweetCount,
     likeCount,
     followCount,
-    transparentSearch,
-    minimalFavicon,
     whoToFollow,
     topicsToFollow,
     removePromotedPosts,
+    transparentSearch,
+    minimalFavicon,
     latestTweets,
   } = data;
 
@@ -795,11 +824,11 @@ const init = () => {
       "retweetCount",
       "likeCount",
       "followCount",
-      "transparentSearch",
-      "minimalFavicon",
       "whoToFollow",
       "topicsToFollow",
       "removePromotedPosts",
+      "transparentSearch",
+      "minimalFavicon",
       "latestTweets",
     ],
     (data) => {
