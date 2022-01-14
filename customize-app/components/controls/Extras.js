@@ -3,15 +3,17 @@ import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { useEffect, useState } from "react"
 
 import {
-  CheckboxPromotedPosts,
-  CheckboxAlwaysShowLatest,
+  CheckboxHideReplyCount,
+  CheckboxHideLikeCount,
+  CheckboxHideRetweetCount,
+  CheckboxHideFollowCount,
+  CheckboxHideVanityCount,
+  CheckboxTopicsToFollow,
+  CheckboxWhoToFollow,
   CheckboxTransparentSearch,
   CheckboxMinimalFavicon,
-  CheckboxHideFollowCount,
-  CheckboxHideLikeCount,
-  CheckboxHideReplyCount,
-  CheckboxHideRetweetCount,
-  CheckboxHideVanityCount
+  CheckboxPromotedPosts,
+  CheckboxAlwaysShowLatest
 } from "./ExtrasCheckboxes"
 import { SwitchZenMode } from "./ExtrasSwitches"
 import Separator from "./Separator"
@@ -33,7 +35,7 @@ const Extras = () => {
       try {
         const userDefaultAll = await getStorage("allVanity")
         if (userDefaultAll) {
-          setHideAll(userDefaultAll === "on" ? true : false)
+          setHideAll(userDefaultAll === "off" ? true : false)
         }
       } catch (error) {
         console.warn(error)
@@ -43,7 +45,7 @@ const Extras = () => {
       try {
         const userDefaultReply = await getStorage("replyCount")
         userDefaultReply &&
-          setHideReply(userDefaultReply === "on" ? true : false)
+          setHideReply(userDefaultReply === "off" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -51,7 +53,7 @@ const Extras = () => {
     const getUserDefaultLike = async () => {
       try {
         const userDefaultLike = await getStorage("likeCount")
-        userDefaultLike && setHideLike(userDefaultLike === "on" ? true : false)
+        userDefaultLike && setHideLike(userDefaultLike === "off" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -60,7 +62,7 @@ const Extras = () => {
       try {
         const userDefaultRetweet = await getStorage("retweetCount")
         userDefaultRetweet &&
-          setHideRetweet(userDefaultRetweet === "on" ? true : false)
+          setHideRetweet(userDefaultRetweet === "off" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -69,7 +71,7 @@ const Extras = () => {
       try {
         const userDefaultFollow = await getStorage("followCount")
         userDefaultFollow &&
-          setHideFollow(userDefaultFollow === "on" ? true : false)
+          setHideFollow(userDefaultFollow === "off" ? true : false)
       } catch (error) {
         console.warn(error)
       }
@@ -92,11 +94,11 @@ const Extras = () => {
         setHideFollow(checked)
         try {
           await setStorage({
-            allVanity: checked ? "on" : "off",
-            replyCount: checked ? "on" : "off",
-            retweetCount: checked ? "on" : "off",
-            likeCount: checked ? "on" : "off",
-            followCount: checked ? "on" : "off"
+            allVanity: checked ? "off" : "on",
+            replyCount: checked ? "off" : "on",
+            retweetCount: checked ? "off" : "on",
+            likeCount: checked ? "off" : "on",
+            followCount: checked ? "off" : "on"
           })
         } catch (error) {
           console.warn(error)
@@ -107,7 +109,7 @@ const Extras = () => {
         setHideReply(checked)
         try {
           await setStorage({
-            replyCount: checked ? "on" : "off"
+            replyCount: checked ? "off" : "on"
           })
         } catch (error) {
           console.warn(error)
@@ -118,7 +120,7 @@ const Extras = () => {
         setHideRetweet(checked)
         try {
           await setStorage({
-            retweetCount: checked ? "on" : "off"
+            retweetCount: checked ? "off" : "on"
           })
         } catch (error) {
           console.warn(error)
@@ -129,7 +131,7 @@ const Extras = () => {
         setHideLike(checked)
         try {
           await setStorage({
-            likeCount: checked ? "on" : "off"
+            likeCount: checked ? "off" : "on"
           })
         } catch (error) {
           console.warn(error)
@@ -140,7 +142,7 @@ const Extras = () => {
         setHideFollow(checked)
         try {
           await setStorage({
-            followCount: checked ? "on" : "off"
+            followCount: checked ? "off" : "on"
           })
         } catch (error) {
           console.warn(error)
@@ -155,8 +157,6 @@ const Extras = () => {
       <Separator />
       {showCheckboxes ? (
         <div className="w-full py-3">
-          <CheckboxTransparentSearch />
-          <CheckboxMinimalFavicon />
           <CheckboxHideVanityCount
             showVanityCheckboxes={showVanityCheckboxes}
             setShowVanityCheckboxes={setShowVanityCheckboxes}
@@ -183,10 +183,15 @@ const Extras = () => {
               />
             </>
           )}
+          <CheckboxTransparentSearch />
+          <CheckboxMinimalFavicon />
+          <CheckboxWhoToFollow />
+          <CheckboxTopicsToFollow />
           <CheckboxPromotedPosts />
           <CheckboxAlwaysShowLatest />
+          <Separator />
           <div className="flex items-center w-full pt-3 space-x-1 text-sm">
-            * Experimental and may not always work
+            * Experimental — may not always work
           </div>
           <div className="flex items-center w-full pt-3 pb-2 space-x-1 text-sm">
             <LightningBoltIcon />{" "}

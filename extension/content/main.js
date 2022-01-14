@@ -494,7 +494,7 @@ const changeFavicon = (minimalFavicon) => {
 // Function to change Reply Count
 const changeReplyCount = (replyCount) => {
   switch (replyCount) {
-    case "on":
+    case "off":
       addStyles(
         "mt-replyCount",
         `
@@ -505,7 +505,7 @@ const changeReplyCount = (replyCount) => {
       );
       break;
 
-    case "off":
+    case "on":
       removeElement("mt-replyCount");
       break;
   }
@@ -514,7 +514,7 @@ const changeReplyCount = (replyCount) => {
 // Function to change Retweet Count
 const changeRetweetCount = (retweetCount) => {
   switch (retweetCount) {
-    case "on":
+    case "off":
       addStyles(
         "mt-retweetCount",
         `
@@ -528,7 +528,7 @@ const changeRetweetCount = (retweetCount) => {
       );
       break;
 
-    case "off":
+    case "on":
       removeElement("mt-retweetCount");
       break;
   }
@@ -537,7 +537,7 @@ const changeRetweetCount = (retweetCount) => {
 // Function to change Like Count
 const changeLikeCount = (likeCount) => {
   switch (likeCount) {
-    case "on":
+    case "off":
       addStyles(
         "mt-likeCount",
         `
@@ -550,7 +550,7 @@ const changeLikeCount = (likeCount) => {
       );
       break;
 
-    case "off":
+    case "on":
       removeElement("mt-likeCount");
       break;
   }
@@ -559,7 +559,7 @@ const changeLikeCount = (likeCount) => {
 // Function to change Follow Count
 const changeFollowCount = (followCount) => {
   switch (followCount) {
-    case "on":
+    case "off":
       addStyles(
         "mt-followCount",
         `
@@ -571,8 +571,71 @@ const changeFollowCount = (followCount) => {
       );
       break;
 
-    case "off":
+    case "on":
       removeElement("mt-followCount");
+      break;
+  }
+};
+
+// Function to change Who to Follow
+const changeWhoToFollow = (whoToFollow) => {
+  switch (whoToFollow) {
+    case "off":
+      addStyles(
+        "mt-whoToFollow",
+        `
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          a[href*="/i/connect_people?user_id="],
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          div[data-testid="UserCell"] {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-whoToFollow");
+      break;
+  }
+};
+
+// Function to change Topics to Follow
+const changeTopicsToFollow = (topicsToFollow) => {
+  switch (topicsToFollow) {
+    case "off":
+      addStyles(
+        "mt-topicsToFollow",
+        `
+        div[data-testid="primaryColumn"]
+          > div
+          > div:nth-child(2)
+          > div
+          > div
+          > div:nth-child(3)
+          > section
+          section[aria-labelledby^="accessible-list-"]
+          > div[aria-label$="Carousel"] {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-topicsToFollow");
       break;
   }
 };
@@ -612,15 +675,18 @@ const constructNewData = (changes) => {
   - 9. Navigation Buttons Labels
   - 10. Center Navigation
   - 12. Zen Mode
-  - 13. Remove Promoted Posts
-  - 14. Always Show Latest Tweets
-  - 15. Transparent Search Bar
-  - 16. Hide All Vanity Counts
+  - 13. Hide All Vanity Counts
     - Hide Reply Count
     - Hide Retweet Count
     - Hide Like Count
     - Hide Following Count
     - Hide Follower Count
+  - 14. Who to Follow
+  - 15. Topics to Follow
+  - 16. Transparent Search Bar
+  - 17. Remove Promoted Posts
+  - 18. Always Show Latest Tweets
+
 --*/
 const injectAllChanges = (data) => {
   const {
@@ -635,14 +701,16 @@ const injectAllChanges = (data) => {
     navigationButtonsLabels,
     navigationCenter,
     zenMode,
-    removePromotedPosts,
-    latestTweets,
-    transparentSearch,
-    minimalFavicon,
     replyCount,
     retweetCount,
     likeCount,
     followCount,
+    transparentSearch,
+    minimalFavicon,
+    whoToFollow,
+    topicsToFollow,
+    removePromotedPosts,
+    latestTweets,
   } = data;
 
   // 1. Feed Width
@@ -667,22 +735,26 @@ const injectAllChanges = (data) => {
   changeNavigationCenter(navigationCenter);
   // 11. Zen Mode
   changeZenMode(zenMode);
-  // 12. Remove Promoted Posts
-  changePromotedPosts(removePromotedPosts);
-  // 13. Always Show Latest Tweets
-  changeLatestTweets(latestTweets);
-  // 14. Transparent Search
-  changeSearchBar(transparentSearch);
-  // 15. Minimal Favicon
-  changeFavicon(minimalFavicon);
-  // 16. Reply Count
+  // 12. Reply Count
   changeReplyCount(replyCount);
-  // 17. Retweet Count
+  // 13. Retweet Count
   changeRetweetCount(retweetCount);
-  // 18. Like Count
+  // 14. Like Count
   changeLikeCount(likeCount);
-  // 19. Follow Count
+  // 15. Follow Count
   changeFollowCount(followCount);
+  // 16. Transparent Search
+  changeSearchBar(transparentSearch);
+  // 17. Minimal Favicon
+  changeFavicon(minimalFavicon);
+  // 18. Who to Follow
+  changeWhoToFollow(whoToFollow);
+  // 19. Topics to Follow
+  changeTopicsToFollow(topicsToFollow);
+  // 20. Remove Promoted Posts
+  changePromotedPosts(removePromotedPosts);
+  // 21. Always Show Latest Tweets
+  changeLatestTweets(latestTweets);
 };
 
 /*--
@@ -719,14 +791,16 @@ const init = () => {
       "navigationButtonsLabels",
       "navigationCenter",
       "zenMode",
-      "removePromotedPosts",
-      "latestTweets",
-      "transparentSearch",
-      "minimalFavicon",
       "replyCount",
       "retweetCount",
       "likeCount",
       "followCount",
+      "transparentSearch",
+      "minimalFavicon",
+      "whoToFollow",
+      "topicsToFollow",
+      "removePromotedPosts",
+      "latestTweets",
     ],
     (data) => {
       injectAllChanges(data);

@@ -26,206 +26,6 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   }
 })
 
-export const CheckboxPromotedPosts = () => {
-  const [userPromoted, setPromoted] = useState(true)
-
-  useEffect(() => {
-    const getUserDefaultPromoted = async () => {
-      try {
-        const userDefaultPromoted = await getStorage("removePromotedPosts")
-        userDefaultPromoted &&
-          setPromoted(userDefaultPromoted === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultPromoted()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-1">
-      <label htmlFor="promotedPosts" className="text-base tracking-normal">
-        Remove promoted posts*
-      </label>
-      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
-        <StyledCheckbox
-          onCheckedChange={async (checked) => {
-            setPromoted(checked)
-            try {
-              await setStorage({
-                removePromotedPosts: checked ? "on" : "off"
-              })
-            } catch (error) {
-              console.warn(error)
-            }
-          }}
-          checked={userPromoted}
-          id="removePromotedPosts"
-          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
-        >
-          <CheckboxPrimitive.Indicator className="text-white">
-            <CheckIcon />
-          </CheckboxPrimitive.Indicator>
-        </StyledCheckbox>
-      </div>
-    </div>
-  )
-}
-
-export const CheckboxAlwaysShowLatest = () => {
-  const [userLatest, setUserLatest] = useState(false)
-
-  useEffect(() => {
-    const getUserDefaultLatest = async () => {
-      try {
-        const userDefaultLatest = await getStorage("latestTweets")
-        userDefaultLatest &&
-          setUserLatest(userDefaultLatest === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultLatest()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-1">
-      <label htmlFor="latestTweets" className="text-base tracking-normal">
-        Always show latest tweets*
-      </label>
-      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
-        <StyledCheckbox
-          onCheckedChange={async (checked) => {
-            setUserLatest(checked)
-            try {
-              await setStorage({
-                latestTweets: checked ? "on" : "off"
-              })
-            } catch (error) {
-              console.warn(error)
-            }
-          }}
-          checked={userLatest}
-          id="latestTweets"
-          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
-        >
-          <CheckboxPrimitive.Indicator className="text-white">
-            <CheckIcon />
-          </CheckboxPrimitive.Indicator>
-        </StyledCheckbox>
-      </div>
-    </div>
-  )
-}
-
-export const CheckboxTransparentSearch = () => {
-  const [userTransparent, setUserTransparent] = useState(false)
-
-  useEffect(() => {
-    const getUserDefaultTransparent = async () => {
-      try {
-        const userDefaultTransparent = await getStorage("transparentSearch")
-        userDefaultTransparent &&
-          setUserTransparent(userDefaultTransparent === "on" ? true : false)
-
-        // Check old "noBorders" value for existing extension users
-        const userDefaultNoBordersOld = await getStorage("noBorders")
-        if (
-          typeof userDefaultNoBordersOld === "boolean" ||
-          userDefaultNoBordersOld instanceof Boolean
-        ) {
-          setUserTransparent(true)
-          await setStorage({
-            transparentSearch: "on"
-          })
-        }
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultTransparent()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-1">
-      <label htmlFor="transparentSearch" className="text-base tracking-normal">
-        Transparent search bar
-      </label>
-      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
-        <StyledCheckbox
-          onCheckedChange={async (checked) => {
-            setUserTransparent(checked)
-            try {
-              await setStorage({
-                transparentSearch: checked ? "on" : "off"
-              })
-            } catch (error) {
-              console.warn(error)
-            }
-          }}
-          checked={userTransparent}
-          id="transparentSearch"
-          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
-        >
-          <CheckboxPrimitive.Indicator className="text-white">
-            <CheckIcon />
-          </CheckboxPrimitive.Indicator>
-        </StyledCheckbox>
-      </div>
-    </div>
-  )
-}
-
-export const CheckboxMinimalFavicon = () => {
-  const [userFavicon, setUserFavicon] = useState(false)
-
-  useEffect(() => {
-    const getUserDefaultFavicon = async () => {
-      try {
-        const useDefaultFavicon = await getStorage("minimalFavicon")
-        useDefaultFavicon &&
-          setUserFavicon(useDefaultFavicon === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultFavicon()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-1">
-      <label htmlFor="minimalFavicon" className="text-base tracking-normal">
-        Minimal favicon
-      </label>
-      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
-        <StyledCheckbox
-          onCheckedChange={async (checked) => {
-            setUserFavicon(checked)
-            try {
-              await setStorage({
-                minimalFavicon: checked ? "on" : "off"
-              })
-            } catch (error) {
-              console.warn(error)
-            }
-          }}
-          checked={userFavicon}
-          id="minimalFavicon"
-          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
-        >
-          <CheckboxPrimitive.Indicator className="text-white">
-            <CheckIcon />
-          </CheckboxPrimitive.Indicator>
-        </StyledCheckbox>
-      </div>
-    </div>
-  )
-}
-
 export const CheckboxHideVanityCount = ({
   showVanityCheckboxes,
   setShowVanityCheckboxes,
@@ -343,6 +143,299 @@ export const CheckboxHideFollowCount = ({ onCheckedChange, hideFollow }) => {
           onCheckedChange={(checked) => onCheckedChange("follow", checked)}
           checked={hideFollow}
           id="hideFollowCount"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxWhoToFollow = () => {
+  const [userWho, setUserWho] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultWho = async () => {
+      try {
+        const userDefaultWho = await getStorage("whoToFollow")
+        userDefaultWho && setUserWho(userDefaultWho === "off" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultWho()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="whoToFollow" className="text-base tracking-normal">
+        Transparent search bar
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserWho(checked)
+            try {
+              await setStorage({
+                whoToFollow: checked ? "off" : "on"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userWho}
+          id="whoToFollow"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxTopicsToFollow = () => {
+  const [userTopics, setUserTopics] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultTopics = async () => {
+      try {
+        const userDefaultTopics = await getStorage("topicsToFollow")
+        userDefaultTopics &&
+          setUserTopics(userDefaultTopics === "off" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultTopics()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="whoToFollow" className="text-base tracking-normal">
+        Transparent search bar
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserTopics(checked)
+            try {
+              await setStorage({
+                topicsToFollow: checked ? "off" : "on"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userTopics}
+          id="whoToFollow"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxTransparentSearch = () => {
+  const [userTransparent, setUserTransparent] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultTransparent = async () => {
+      try {
+        const userDefaultTransparent = await getStorage("transparentSearch")
+        userDefaultTransparent &&
+          setUserTransparent(userDefaultTransparent === "on" ? true : false)
+
+        // Check old "noBorders" value for existing extension users
+        const userDefaultNoBordersOld = await getStorage("noBorders")
+        if (
+          typeof userDefaultNoBordersOld === "boolean" ||
+          userDefaultNoBordersOld instanceof Boolean
+        ) {
+          setUserTransparent(true)
+          await setStorage({
+            transparentSearch: "on"
+          })
+        }
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultTransparent()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="transparentSearch" className="text-base tracking-normal">
+        Transparent search bar
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserTransparent(checked)
+            try {
+              await setStorage({
+                transparentSearch: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userTransparent}
+          id="transparentSearch"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxMinimalFavicon = () => {
+  const [userFavicon, setUserFavicon] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultFavicon = async () => {
+      try {
+        const useDefaultFavicon = await getStorage("minimalFavicon")
+        useDefaultFavicon &&
+          setUserFavicon(useDefaultFavicon === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultFavicon()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="minimalFavicon" className="text-base tracking-normal">
+        Minimal favicon
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserFavicon(checked)
+            try {
+              await setStorage({
+                minimalFavicon: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userFavicon}
+          id="minimalFavicon"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxPromotedPosts = () => {
+  const [userPromoted, setPromoted] = useState(true)
+
+  useEffect(() => {
+    const getUserDefaultPromoted = async () => {
+      try {
+        const userDefaultPromoted = await getStorage("removePromotedPosts")
+        userDefaultPromoted &&
+          setPromoted(userDefaultPromoted === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultPromoted()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="promotedPosts" className="text-base tracking-normal">
+        Remove promoted posts*
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setPromoted(checked)
+            try {
+              await setStorage({
+                removePromotedPosts: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userPromoted}
+          id="removePromotedPosts"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxAlwaysShowLatest = () => {
+  const [userLatest, setUserLatest] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultLatest = async () => {
+      try {
+        const userDefaultLatest = await getStorage("latestTweets")
+        userDefaultLatest &&
+          setUserLatest(userDefaultLatest === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultLatest()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="latestTweets" className="text-base tracking-normal">
+        Always show latest tweets*
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserLatest(checked)
+            try {
+              await setStorage({
+                latestTweets: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userLatest}
+          id="latestTweets"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
         >
           <CheckboxPrimitive.Indicator className="text-white">
