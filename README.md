@@ -4,6 +4,7 @@
 
 - **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)**
 - **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
+- **Add to Microsoft Edge**: **[Available as a Microsoft Edge Add-on](https://microsoftedge.microsoft.com/addons/detail/mghjldihobnccoppgcgfelpdpffmebjn)**
 
 ![Screenshots](./assets/screenshots.png)
 
@@ -35,22 +36,6 @@ yarn # must run yarn once first before you can build
 yarn run build
 ```
 
-You can then go to [extension](./extension) and begin testing in `chrome://extensions` on Chrome and `about:debugging#/runtime/this-firefox` on Firefox.
+You can then go to [extension](./extension) and begin testing in `chrome://extensions` on Chrome, `edge://extensions` on Edge, and `about:debugging#/runtime/this-firefox` on Firefox.
 
-Make sure to rename `manifest.chrome.json` or `manifest.firefox.json` to `manifest.json` on Chrome and Firefox, respectively. The main difference is Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
-
-```sh
-cd extension
-```
-
-#### Chrome
-
-```sh
-mv manifest.chrome.json manifest.json
-```
-
-#### Firefox
-
-```sh
-mv manifest.firefox.json manifest.json
-```
+Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.firefox.json` to `manifest.json`. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
