@@ -12,7 +12,7 @@ Alternatively, you can use the [base styles](extension/content/main.css) as user
 
 ## Customize
 
-Customizations, preferences, options! Access them by clicking the extension's icon as a popup or in full screen in [Options (Chrome)](https://developer.chrome.com/docs/extensions/mv3/options/) or [Preferences (Firefox)](https://support.mozilla.org/en-US/kb/firefox-options-preferences-and-settings).
+Customizations, preferences, options! Access them by clicking the extension's icon as a popup or in full screen in Options (Chrome & Edge) or Preferences (Firefox).
 
 — _You can_ —
 
