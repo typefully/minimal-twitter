@@ -36,34 +36,23 @@ yarn # must run yarn once first before you can build
 yarn run build
 ```
 
-You can then go to [extension](./extension) and begin testing in `chrome://extensions` on Chrome, `edge://extensions` on Edge, and `about:debugging#/runtime/this-firefox` on Firefox.
-
-Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.firefox.json` to `manifest.json`. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
+You can then go to [extension](./extension) and begin testing. Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.firefox.json` to `manifest.json`. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
 
 <table>
 	<tr>
-		<th>Chrome</th>
-    <th>Edge</th>
+		<th>Chrome or Edge</th>
 		<th>Firefox</th>
 	</tr>
 	<tr>
-		<td width="30%">
+		<td width="50%">
 			<ol>
-				<li>Open <code>chrome://extensions</code>
+				<li>Open <code>chrome://extensions</code> or <code>edge://extensions</code>
         <li>Turn on the <strong>Developer mode</strong> toggle
 				<li>Click on the <strong>Load unpacked</strong> button
 				<li>Select the folder <code>minimal-twitter/extension</code>
 			</ol>
 		</td>
-    <td width="30%">
-			<ol>
-				<li>Open <code>edge://extensions</code>
-        <li>Turn on the <strong>Developer mode</strong> toggle
-				<li>Click on the <strong>Load Unpacked</strong> button
-        <li>Select the folder <code>minimal-twitter/extension</code>
-			</ol>
-		</td>
-		<td width="40%">
+		<td width="50%">
 			<ol>
 				<li>Open <code>about:debugging#/runtime/this-firefox</code>
 				<li>Click on the <strong>Load Temporary Add-on...</strong> button
