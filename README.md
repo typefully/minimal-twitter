@@ -36,7 +36,9 @@ yarn # must run yarn once first before you can build
 yarn run build
 ```
 
-You can then go to [extension](./extension) and begin testing. Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.firefox.json` to `manifest.json`. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
+You can then go to [extension](./extension) and begin testing.
+
+Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.firefox.json` to `manifest.json`. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
 
 <table>
 	<tr>
