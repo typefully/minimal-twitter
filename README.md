@@ -47,7 +47,7 @@ Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.
 		<th>Firefox</th>
 	</tr>
 	<tr>
-		<td width="33.3%">
+		<td width="30%">
 			<ol>
 				<li>Open <code>chrome://extensions</code>
         <li>Turn on the <strong>Developer mode</strong> toggle
@@ -55,7 +55,7 @@ Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.
 				<li>Select the folder <code>minimal-twitter/extension</code>
 			</ol>
 		</td>
-    <td width="33.3%">
+    <td width="30%">
 			<ol>
 				<li>Open <code>edge://extensions</code>
         <li>Turn on the <strong>Developer mode</strong> toggle
@@ -63,7 +63,7 @@ Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.
         <li>Select the folder <code>minimal-twitter/extension</code>
 			</ol>
 		</td>
-		<td width="33.3%">
+		<td width="40%">
 			<ol>
 				<li>Open <code>about:debugging#/runtime/this-firefox</code>
 				<li>Click on the <strong>Load Temporary Add-on...</strong> button
