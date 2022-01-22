@@ -260,6 +260,53 @@ export const CheckboxMinimalFavicon = () => {
   )
 }
 
+export const CheckboxPromotedPosts = () => {
+  const [userPromoted, setPromoted] = useState(true)
+
+  useEffect(() => {
+    const getUserDefaultPromoted = async () => {
+      try {
+        const userDefaultPromoted = await getStorage("removePromotedPosts")
+        userDefaultPromoted &&
+          setPromoted(userDefaultPromoted === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultPromoted()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="promotedPosts" className="text-base tracking-normal">
+        Remove promoted posts*
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setPromoted(checked)
+            try {
+              await setStorage({
+                removePromotedPosts: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userPromoted}
+          id="removePromotedPosts"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
 export const CheckboxWhoToFollow = () => {
   const [userWho, setUserWho] = useState(false)
 
@@ -342,53 +389,6 @@ export const CheckboxTopicsToFollow = () => {
           }}
           checked={userTopics}
           id="topicsToFollow"
-          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
-        >
-          <CheckboxPrimitive.Indicator className="text-white">
-            <CheckIcon />
-          </CheckboxPrimitive.Indicator>
-        </StyledCheckbox>
-      </div>
-    </div>
-  )
-}
-
-export const CheckboxPromotedPosts = () => {
-  const [userPromoted, setPromoted] = useState(true)
-
-  useEffect(() => {
-    const getUserDefaultPromoted = async () => {
-      try {
-        const userDefaultPromoted = await getStorage("removePromotedPosts")
-        userDefaultPromoted &&
-          setPromoted(userDefaultPromoted === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultPromoted()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-1">
-      <label htmlFor="promotedPosts" className="text-base tracking-normal">
-        Remove promoted posts*
-      </label>
-      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
-        <StyledCheckbox
-          onCheckedChange={async (checked) => {
-            setPromoted(checked)
-            try {
-              await setStorage({
-                removePromotedPosts: checked ? "on" : "off"
-              })
-            } catch (error) {
-              console.warn(error)
-            }
-          }}
-          checked={userPromoted}
-          id="removePromotedPosts"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
         >
           <CheckboxPrimitive.Indicator className="text-white">

@@ -474,8 +474,7 @@ const changeWhoToFollow = (whoToFollow) => {
           > div
           > div:nth-child(3)
           > section
-          div[data-testid="UserCell"],
-        div[role="button"][tabindex="0"][data-testid="UserCell"] {
+          div[data-testid="UserCell"] {
           display: none;
         }
         `
