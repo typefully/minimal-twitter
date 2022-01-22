@@ -154,6 +154,53 @@ export const CheckboxHideFollowCount = ({ onCheckedChange, hideFollow }) => {
   )
 }
 
+export const CheckboxHideTweetButton = () => {
+  const [userHideTweet, setUserHideTweet] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultHideTweet = async () => {
+      try {
+        const userDefaultHideTweet = await getStorage("hideTweetButton")
+        userDefaultHideTweet &&
+          setUserHideTweet(userDefaultHideTweet === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultHideTweet()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="hideTweetButton" className="text-base tracking-normal">
+        Hide Tweet Button
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserHideTweet(checked)
+            try {
+              await setStorage({
+                hideTweetButton: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userHideTweet}
+          id="hideTweetButton"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
 export const CheckboxTransparentSearch = () => {
   const [userTransparent, setUserTransparent] = useState(false)
 
@@ -186,7 +233,7 @@ export const CheckboxTransparentSearch = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="transparentSearch" className="text-base tracking-normal">
-        Transparent search bar
+        Transparent Search Bar
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -233,7 +280,7 @@ export const CheckboxMinimalFavicon = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="minimalFavicon" className="text-base tracking-normal">
-        Minimal favicon
+        Minimal Favicon
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -280,7 +327,7 @@ export const CheckboxPromotedPosts = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="promotedPosts" className="text-base tracking-normal">
-        Remove promoted posts*
+        Remove Promoted Posts*
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -326,7 +373,7 @@ export const CheckboxWhoToFollow = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="whoToFollow" className="text-base tracking-normal">
-        Remove Who to follow*
+        Remove Who to Follow*
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -373,7 +420,7 @@ export const CheckboxTopicsToFollow = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="topicsToFollow" className="text-base tracking-normal">
-        Remove Topics to follow*
+        Remove Topics to Follow*
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -420,7 +467,7 @@ export const CheckboxAlwaysShowLatest = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="latestTweets" className="text-base tracking-normal">
-        Always show latest tweets*
+        Always Show Latest Tweets*
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox

@@ -8,6 +8,7 @@ import {
   CheckboxHideRetweetCount,
   CheckboxHideFollowCount,
   CheckboxHideVanityCount,
+  CheckboxHideTweetButton,
   CheckboxTransparentSearch,
   CheckboxMinimalFavicon,
   CheckboxPromotedPosts,
@@ -184,6 +185,7 @@ const Extras = () => {
               />
             </>
           )}
+          <CheckboxHideTweetButton />
           <CheckboxTransparentSearch />
           <CheckboxMinimalFavicon />
           <CheckboxPromotedPosts />
