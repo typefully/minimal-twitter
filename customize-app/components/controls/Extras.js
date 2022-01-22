@@ -8,11 +8,11 @@ import {
   CheckboxHideRetweetCount,
   CheckboxHideFollowCount,
   CheckboxHideVanityCount,
+  CheckboxTransparentSearch,
+  CheckboxMinimalFavicon,
   CheckboxTopicsToFollow,
   CheckboxWhoToFollow,
   CheckboxPromotedPosts,
-  CheckboxTransparentSearch,
-  CheckboxMinimalFavicon,
   CheckboxAlwaysShowLatest
 } from "./ExtrasCheckboxes"
 import { SwitchZenMode } from "./ExtrasSwitches"
@@ -184,11 +184,11 @@ const Extras = () => {
               />
             </>
           )}
+          <CheckboxTransparentSearch />
+          <CheckboxMinimalFavicon />
           <CheckboxWhoToFollow />
           <CheckboxTopicsToFollow />
           <CheckboxPromotedPosts />
-          <CheckboxTransparentSearch />
-          <CheckboxMinimalFavicon />
           <CheckboxAlwaysShowLatest />
           <div className="pb-3" />
           <Separator />
