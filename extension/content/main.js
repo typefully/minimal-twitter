@@ -452,6 +452,94 @@ const changeFollowCount = (followCount) => {
   }
 };
 
+// Function to change Tweet Button
+const changeTweetButton = (hideTweetButton) => {
+  switch (hideTweetButton) {
+    case "on":
+      addStyles(
+        "mt-hideTweetButton",
+        `
+        [data-testid="SideNav_NewTweet_Button"] {
+          visibility: hidden;
+        }
+        `
+      );
+      break;
+
+    case "off":
+      removeElement("mt-hideTweetButton");
+      break;
+  }
+};
+
+// Function to change Search Bar
+const changeSearchBar = (transparentSearch) => {
+  switch (transparentSearch) {
+    case "on":
+      addStyles(
+        "mt-transparentSearch",
+        `
+        form[role="search"] > div:nth-child(1) > div {
+          background-color: transparent !important;
+        }
+        [data-testid="sidebarColumn"] [placeholder="Search Twitter"] {
+          padding-left: 34px !important;
+          margin-left: -24px !important;
+        }
+        `
+      );
+      break;
+
+    case "off":
+      removeElement("mt-transparentSearch");
+      break;
+  }
+};
+
+// Function to replace favicon (to reduce red dots)
+const changeFavicon = (minimalFavicon) => {
+  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
+  currentFavicons.forEach((item) => {
+    item && item.remove();
+  });
+
+  const head = document.querySelector("head");
+  const faviconLink = document.createElement("link");
+  faviconLink.id = "replacedFavicon";
+  faviconLink.rel = "shortcut icon";
+
+  switch (minimalFavicon) {
+    case "on":
+      faviconLink.href = chrome.runtime.getURL("content/twitter-mt.ico");
+      break;
+    case "off":
+      faviconLink.href = chrome.runtime.getURL("content/twitter.ico");
+      break;
+  }
+
+  head.appendChild(faviconLink);
+};
+
+// Function to change Promoted Posts
+const changePromotedPosts = (removePromotedPosts) => {
+  switch (removePromotedPosts) {
+    case "off":
+      addStyles(
+        "mt-removePromotedPosts",
+        `
+        [data-testid="placementTracking"] article {
+          display: flex !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-removePromotedPosts");
+      break;
+  }
+};
+
 // Function to change Who to Follow
 const changeWhoToFollow = (whoToFollow) => {
   switch (whoToFollow) {
@@ -531,74 +619,6 @@ const changeTopicsToFollow = (topicsToFollow) => {
       removeElement("mt-topicsToFollow");
       break;
   }
-};
-
-// Function to change Promoted Posts
-const changePromotedPosts = (removePromotedPosts) => {
-  switch (removePromotedPosts) {
-    case "off":
-      addStyles(
-        "mt-removePromotedPosts",
-        `
-        [data-testid="placementTracking"] article {
-          display: flex !important;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-removePromotedPosts");
-      break;
-  }
-};
-
-// Function to change Search Bar
-const changeSearchBar = (transparentSearch) => {
-  switch (transparentSearch) {
-    case "on":
-      addStyles(
-        "mt-transparentSearch",
-        `
-        form[role="search"] > div:nth-child(1) > div {
-          background-color: transparent !important;
-        }
-        [data-testid="sidebarColumn"] [placeholder="Search Twitter"] {
-          padding-left: 34px !important;
-          margin-left: -24px !important;
-        }
-        `
-      );
-      break;
-
-    case "off":
-      removeElement("mt-transparentSearch");
-      break;
-  }
-};
-
-// Function to replace favicon (to reduce red dots)
-const changeFavicon = (minimalFavicon) => {
-  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
-  currentFavicons.forEach((item) => {
-    item && item.remove();
-  });
-
-  const head = document.querySelector("head");
-  const faviconLink = document.createElement("link");
-  faviconLink.id = "replacedFavicon";
-  faviconLink.rel = "shortcut icon";
-
-  switch (minimalFavicon) {
-    case "on":
-      faviconLink.href = chrome.runtime.getURL("content/twitter-mt.ico");
-      break;
-    case "off":
-      faviconLink.href = chrome.runtime.getURL("content/twitter.ico");
-      break;
-  }
-
-  head.appendChild(faviconLink);
 };
 
 // Function to change Latest Tweets
@@ -697,25 +717,24 @@ const constructNewData = (changes) => {
   - 2. Feed Borders
   - 3. Explore Button
   - 4. Notification Button
-  - 5. Message Button
-  - 6. Bookmark Button
+  - 5. Messages Button
+  - 6. Bookmarks Button
   - 7. Lists Button
   - 8. Navigation Buttons Labels on Hover
   - 9. Navigation Buttons Labels
   - 10. Center Navigation
-  - 12. Zen Mode
-  - 13. Hide All Vanity Counts
-    - Hide Reply Count
-    - Hide Retweet Count
-    - Hide Like Count
-    - Hide Following Count
-    - Hide Follower Count
-  - 14. Transparent Search Bar
-  - 15. Minimal Favicon
-  - 16. Remove Promoted Posts
-  - 17. Who to Follow
-  - 18. Topics to Follow
-  - 19. Always Show Latest Tweets
+  - 11. Zen Mode
+  - 12. Hide Reply Count
+  - 13. Hide Retweet Count
+  - 14. Hide Like Count
+  - 15. Hide Follow
+  - 16. Hide Tweet Button
+  - 17. Transparent Search Bar
+  - 18. Minimal Favicon
+  - 19. Remove Promoted Posts
+  - 20. Who to Follow
+  - 21. Topics to Follow
+  - 22. Always Show Latest Tweets
 --*/
 const injectAllChanges = (data) => {
   const {
@@ -734,11 +753,12 @@ const injectAllChanges = (data) => {
     retweetCount,
     likeCount,
     followCount,
-    whoToFollow,
-    topicsToFollow,
-    removePromotedPosts,
+    hideTweetButton,
     transparentSearch,
     minimalFavicon,
+    removePromotedPosts,
+    whoToFollow,
+    topicsToFollow,
     latestTweets,
   } = data;
 
@@ -772,17 +792,19 @@ const injectAllChanges = (data) => {
   changeLikeCount(likeCount);
   // 15. Follow Count
   changeFollowCount(followCount);
-  // 16. Transparent Search
+  // 16. Hide Tweet Buton
+  changeTweetButton(hideTweetButton);
+  // 17. Transparent Search
   changeSearchBar(transparentSearch);
-  // 17. Minimal Favicon
+  // 18. Minimal Favicon
   changeFavicon(minimalFavicon);
-  // 18. Remove Promoted Posts
+  // 19. Remove Promoted Posts
   changePromotedPosts(removePromotedPosts);
-  // 19. Who to Follow
+  // 20. Who to Follow
   changeWhoToFollow(whoToFollow);
-  // 20. Topics to Follow
+  // 21. Topics to Follow
   changeTopicsToFollow(topicsToFollow);
-  // 21. Always Show Latest Tweets
+  // 22. Always Show Latest Tweets
   changeLatestTweets(latestTweets);
 };
 
@@ -824,11 +846,12 @@ const init = () => {
       "retweetCount",
       "likeCount",
       "followCount",
-      "whoToFollow",
-      "topicsToFollow",
-      "removePromotedPosts",
+      "hideTweetButton",
       "transparentSearch",
       "minimalFavicon",
+      "removePromotedPosts",
+      "whoToFollow",
+      "topicsToFollow",
       "latestTweets",
     ],
     (data) => {
