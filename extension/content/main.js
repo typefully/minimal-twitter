@@ -710,12 +710,12 @@ const constructNewData = (changes) => {
     - Hide Like Count
     - Hide Following Count
     - Hide Follower Count
-  - 14. Who to Follow
-  - 15. Topics to Follow
-  - 16. Transparent Search Bar
-  - 17. Remove Promoted Posts
-  - 18. Always Show Latest Tweets
-
+  - 14. Transparent Search Bar
+  - 15. Minimal Favicon
+  - 16. Remove Promoted Posts
+  - 17. Who to Follow
+  - 18. Topics to Follow
+  - 19. Always Show Latest Tweets
 --*/
 const injectAllChanges = (data) => {
   const {
@@ -776,12 +776,12 @@ const injectAllChanges = (data) => {
   changeSearchBar(transparentSearch);
   // 17. Minimal Favicon
   changeFavicon(minimalFavicon);
-  // 18. Who to Follow
-  changeWhoToFollow(whoToFollow);
-  // 19. Topics to Follow
-  changeTopicsToFollow(topicsToFollow);
-  // 20. Remove Promoted Posts
+  // 18. Remove Promoted Posts
   changePromotedPosts(removePromotedPosts);
+  // 19. Who to Follow
+  changeWhoToFollow(whoToFollow);
+  // 20. Topics to Follow
+  changeTopicsToFollow(topicsToFollow);
   // 21. Always Show Latest Tweets
   changeLatestTweets(latestTweets);
 };
