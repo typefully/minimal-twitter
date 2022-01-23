@@ -21,6 +21,7 @@
     {
       "resources": [
         "content/main.css",
+        "content/additions.css",
         "content/twitter.ico",
         "content/twitter-mt.ico"
       ],

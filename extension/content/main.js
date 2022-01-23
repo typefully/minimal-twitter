@@ -17,30 +17,80 @@ const addStyles = (id, css) => {
 };
 
 // Function to add main stylesheet
-const addMainStylesheet = () => {
+const addStylesheets = () => {
   const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("content/main.css");
   head.appendChild(mainStylesheet);
+
+  const additionsStylesheet = document.createElement("link");
+  additionsStylesheet.rel = "stylesheet";
+  additionsStylesheet.type = "text/css";
+  additionsStylesheet.href = chrome.runtime.getURL("content/additions.css");
+  head.appendChild(additionsStylesheet);
 };
 
-// Reveal Search Filters
+// Function to reveal Search Filters
 const revealSearchFilters = () => {
+  // Get grandparent of advanced search
+  const advancedSearch = document.querySelector(
+    `[data-testid="searchFiltersAdvancedSearch"]`
+  );
+
+  if (advancedSearch) {
+    const searchFilters =
+      advancedSearch.parentElement.parentElement.parentElement;
+    if (!searchFilters.classList.contains("searchFilters")) {
+      searchFilters.classList = searchFilters.classList + " searchFilters";
+    }
+    return;
+  }
+};
+
+// Function to add "Continue Thread in Typefully"
+const addTypefullyOne = () => {
+  const tweetTextAreaOne = document.querySelector(
+    '[data-testid="tweetTextarea_1_label"]'
+  );
+
+  if (tweetTextAreaOne && !document.getElementById("typefully-link")) {
+    const typefullyLink = document.createElement("a");
+    typefullyLink.id = "typefully-link";
+    typefullyLink.href = "https://typefully.com";
+    typefullyLink.className = "typefully";
+
+    const typefullyText = document.createElement("span");
+    typefullyText.innerText = "Continue Thread in Typefully";
+
+    const typefullyMark = document.createElement("span");
+    typefullyMark.innerHTML = "";
+
+    typefullyLink.appendChild(typefullyText);
+    typefullyLink.appendChild(typefullyMark);
+
+    tweetTextAreaOne.insertAdjacentElement("afterend", typefullyLink);
+  }
+};
+
+const removeTypefullyTwo = () => {
+  const tweetTextAreaTwo = document.querySelector(
+    '[data-testid="tweetTextarea_2_label"]'
+  );
+
+  if (tweetTextAreaTwo) {
+    document.getElementById("typefully-link").style.display = "none";
+  }
+};
+
+// Function to start MutationObserver
+const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
-      // Get grandparent of advanced search
-      const advancedSearch = document.querySelector(
-        `[data-testid="searchFiltersAdvancedSearch"]`
-      );
-
-      if (advancedSearch) {
-        const searchFilters =
-          advancedSearch.parentElement.parentElement.parentElement;
-        searchFilters.classList = searchFilters.classList + " searchFilters";
-        return;
-      }
+      revealSearchFilters();
+      addTypefullyOne();
+      removeTypefullyTwo();
     }
   });
 
@@ -823,10 +873,10 @@ chrome.storage.onChanged.addListener((changes) => {
 - Get Chrome Storage and inject respective styles
 --*/
 const init = () => {
-  addMainStylesheet();
+  addStylesheets();
 
-  // Reveal search filters
-  revealSearchFilters();
+  // Start MutationObserver
+  observe();
 
   // Inject user preferences
   chrome.storage.sync.get(

@@ -1,0 +1,22 @@
+.typefully {
+  color: #1d9bf0;
+  text-decoration: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  min-height: 36px;
+  border: 1px solid #1d9bf0;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  line-height: 20px;
+  overflow-wrap: break-word;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.typefully:hover {
+  background-color: #1e9cf11a;
+}
