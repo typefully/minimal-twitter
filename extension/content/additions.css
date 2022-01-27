@@ -1,10 +1,9 @@
 .typefully {
   color: #1d9bf0;
   text-decoration: none;
-  padding-left: 16px;
-  padding-right: 16px;
-  min-height: 36px;
-  border: 1px solid #1d9bf0;
+  padding-left: 22px;
+  padding-right: 22px;
+  min-height: 40px;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 15px;
@@ -15,8 +14,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
+  background: white;
+  margin: 20px auto 0;
+  order: 99;
+}
+.typefully svg {
+  margin: 0 3px 0 -8px;
 }
 .typefully:hover {
-  background-color: #1e9cf11a;
+  background-color: hsl(204, 88%, 97%);
 }
