@@ -51,11 +51,14 @@ const revealSearchFilters = () => {
 
 // Function to add "Continue Thread in Typefully"
 const addTypefullyPlug = () => {
-  const tweetTextAreaOne = document.querySelector(
+  const modal = document.querySelector(
     '[aria-labelledby="modal-header"][role="dialog"]'
   );
+  const tweetComposeArea = modal.querySelector(
+    "div.public-DraftStyleDefault-block"
+  );
 
-  if (tweetTextAreaOne && !document.getElementById("typefully-link")) {
+  if (modal && tweetComposeArea && !document.getElementById("typefully-link")) {
     const typefullyLink = document.createElement("a");
     typefullyLink.id = "typefully-link";
     typefullyLink.href = "https://typefully.com";
@@ -75,7 +78,7 @@ const addTypefullyPlug = () => {
     typefullyLink.appendChild(typefullyLogo);
     typefullyLink.appendChild(typefullyText);
 
-    tweetTextAreaOne.appendChild(typefullyLink);
+    modal.appendChild(typefullyLink);
   }
 };
 
