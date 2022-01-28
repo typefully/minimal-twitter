@@ -50,37 +50,35 @@ const revealSearchFilters = () => {
 };
 
 // Function to add "Continue Thread in Typefully"
-const addTypefullyOne = () => {
-  const tweetTextAreaOne = document.querySelector(
-    '[data-testid="tweetTextarea_1_label"]'
+const addTypefullyPlug = () => {
+  const modal = document.querySelector(
+    '[aria-labelledby="modal-header"][role="dialog"]'
+  );
+  const tweetComposeArea = modal.querySelector(
+    "div.public-DraftStyleDefault-block"
   );
 
-  if (tweetTextAreaOne && !document.getElementById("typefully-link")) {
+  if (modal && tweetComposeArea && !document.getElementById("typefully-link")) {
     const typefullyLink = document.createElement("a");
     typefullyLink.id = "typefully-link";
     typefullyLink.href = "https://typefully.com";
     typefullyLink.className = "typefully";
 
+    const typefullyLogo = document.createElement("div");
+    typefullyLogo.innerHTML = `<svg width="20" height="20" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M99.5245 11.5985C78.3619 14.5225 58.8203 35.9628 48.5 53.157C32.5 79.814 29.7308 117.192 31.0696 117.039C31.8856 117.212 41.5 96 46.5 88C54.5 83 64 75.5 64 75.5C64 75.5 50.4269 80.1561 51.5 78.5C53.444 75.5 56.2926 72.5773 56.2926 72.5773C78.9391 65.0252 83.916 53.157 83.916 53.157C83.916 53.157 77.3237 54.812 74.6461 55.117C71.076 55.5236 68.8896 55.4107 67.5 55.117C72.6914 49.101 77.1928 45.9517 82 44.5C85.9147 43.15 93.0515 38.6801 98 34.5C102.103 27.8334 100.351 18.8543 99.5245 11.5985Z" fill="#1DA1F2"/>
+<circle cx="82.5" cy="107.5" r="8.5" fill="#1DA1F2"/>
+</svg>`;
+    typefullyLogo.style.position = "relative";
+    typefullyLogo.style.margin = "0 2px -4px 3px";
+
     const typefullyText = document.createElement("span");
-    typefullyText.innerText = "Continue Thread in Typefully";
+    typefullyText.innerText = "Continue thread in Typefully";
 
-    const typefullyMark = document.createElement("span");
-    typefullyMark.innerHTML = "";
-
+    typefullyLink.appendChild(typefullyLogo);
     typefullyLink.appendChild(typefullyText);
-    typefullyLink.appendChild(typefullyMark);
 
-    tweetTextAreaOne.insertAdjacentElement("afterend", typefullyLink);
-  }
-};
-
-const removeTypefullyTwo = () => {
-  const tweetTextAreaTwo = document.querySelector(
-    '[data-testid="tweetTextarea_2_label"]'
-  );
-
-  if (tweetTextAreaTwo) {
-    document.getElementById("typefully-link").style.display = "none";
+    modal.appendChild(typefullyLink);
   }
 };
 
@@ -89,8 +87,7 @@ const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
       revealSearchFilters();
-      addTypefullyOne();
-      removeTypefullyTwo();
+      addTypefullyPlug();
     }
   });
 
