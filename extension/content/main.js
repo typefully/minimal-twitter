@@ -54,7 +54,7 @@ const addTypefullyPlug = () => {
   const modal = document.querySelector(
     '[aria-labelledby="modal-header"][role="dialog"]'
   );
-  const tweetComposeArea = modal.querySelector(
+  const tweetComposeArea = modal?.querySelector(
     "div.public-DraftStyleDefault-block"
   );
 
