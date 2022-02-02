@@ -63,6 +63,9 @@ const addTypefullyPlug = () => {
     typefullyLink.id = "typefully-link";
     typefullyLink.href = "https://typefully.com";
     typefullyLink.className = "typefully";
+    typefullyLink.style.background = window.getComputedStyle(
+      modal.firstChild
+    ).backgroundColor;
 
     const typefullyLogo = document.createElement("div");
     typefullyLogo.innerHTML = `<svg width="20" height="20" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
