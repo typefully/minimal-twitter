@@ -1,5 +1,5 @@
 .typefully {
-  color: #1d9bf0;
+  color: white;
   text-decoration: none;
   padding-left: 22px;
   padding-right: 22px;
@@ -14,9 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
+  background-color: #1d9bf0;
   margin: 20px auto 0;
   order: 99;
+}
+.typefully:hover {
+  background-color: #1a8cd8;
 }
 .typefully svg {
   margin: 0 3px 0 -8px;
