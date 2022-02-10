@@ -83,15 +83,6 @@ export const SwitchNavigationCenter = () => {
         const userDefaultCenter = await getStorage("navigationCenter")
         userDefaultCenter &&
           setUserCenter(userDefaultCenter === "on" ? true : false)
-
-        // Check old "centerNavigation" value for existing extension users
-        const userDefaultCenterOld = await getStorage("centerNavigation")
-        if (userDefaultCenterOld === true) {
-          setUserCenter(true)
-          await setStorage({
-            navigationCenter: "on"
-          })
-        }
       } catch (error) {
         console.warn(error)
       }

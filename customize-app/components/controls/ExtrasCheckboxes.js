@@ -210,18 +210,6 @@ export const CheckboxTransparentSearch = () => {
         const userDefaultTransparent = await getStorage("transparentSearch")
         userDefaultTransparent &&
           setUserTransparent(userDefaultTransparent === "on" ? true : false)
-
-        // Check old "noBorders" value for existing extension users
-        const userDefaultNoBordersOld = await getStorage("noBorders")
-        if (
-          typeof userDefaultNoBordersOld === "boolean" ||
-          userDefaultNoBordersOld instanceof Boolean
-        ) {
-          setUserTransparent(true)
-          await setStorage({
-            transparentSearch: "on"
-          })
-        }
       } catch (error) {
         console.warn(error)
       }
