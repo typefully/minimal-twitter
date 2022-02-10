@@ -61,7 +61,7 @@ const addTypefullyPlug = () => {
   if (modal && tweetComposeArea && !document.getElementById("typefully-link")) {
     const typefullyLink = document.createElement("a");
     typefullyLink.id = "typefully-link";
-    typefullyLink.href = "https://typefully.com";
+    typefullyLink.href = "https://typefully.com/?coupon=minimal?via=thomas";
     typefullyLink.className = "typefully";
 
     const typefullyLogo = document.createElement("div");
