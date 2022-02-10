@@ -49,7 +49,7 @@ const revealSearchFilters = () => {
   }
 };
 
-// Function to add "Continue Thread in Typefully"
+// Function to add "Write Thread in Typefully"
 const addTypefullyPlug = () => {
   const modal = document.querySelector(
     '[aria-labelledby="modal-header"][role="dialog"]'
@@ -73,7 +73,7 @@ const addTypefullyPlug = () => {
     typefullyLogo.style.margin = "0 2px -4px 3px";
 
     const typefullyText = document.createElement("span");
-    typefullyText.innerText = "Continue thread in Typefully";
+    typefullyText.innerText = "Write thread in Typefully";
 
     typefullyLink.appendChild(typefullyLogo);
     typefullyLink.appendChild(typefullyText);
