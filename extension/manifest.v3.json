@@ -13,6 +13,7 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
+      "run_at": "document_end",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
       "js": ["content/main.js"]
     }
@@ -21,6 +22,7 @@
     {
       "resources": [
         "content/main.css",
+        "content/additions.css",
         "content/twitter.ico",
         "content/twitter-mt.ico"
       ],

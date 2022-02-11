@@ -17,30 +17,107 @@ const addStyles = (id, css) => {
 };
 
 // Function to add main stylesheet
-const addMainStylesheet = () => {
+const addStylesheets = () => {
   const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("content/main.css");
   head.appendChild(mainStylesheet);
+
+  const additionsStylesheet = document.createElement("link");
+  additionsStylesheet.rel = "stylesheet";
+  additionsStylesheet.type = "text/css";
+  additionsStylesheet.href = chrome.runtime.getURL("content/additions.css");
+  head.appendChild(additionsStylesheet);
 };
 
-// Reveal Search Filters
+// Function to reveal Search Filters
 const revealSearchFilters = () => {
+  // Get grandparent of advanced search
+  const advancedSearch = document.querySelector(
+    `[data-testid="searchFiltersAdvancedSearch"]`
+  );
+
+  if (advancedSearch) {
+    const searchFilters =
+      advancedSearch.parentElement.parentElement.parentElement;
+    if (!searchFilters.classList.contains("searchFilters")) {
+      searchFilters.classList = searchFilters.classList + " searchFilters";
+    }
+    return;
+  }
+};
+
+// Function to add "Continue Thread in Typefully"
+const addTypefullyPlug = () => {
+  const modal = document.querySelector(
+    '[aria-labelledby="modal-header"][role="dialog"]'
+  );
+  const tweetComposeArea = modal?.querySelector(
+    "div.public-DraftStyleDefault-block"
+  );
+
+  if (modal && tweetComposeArea && !document.getElementById("typefully-link")) {
+    const typefullyLink = document.createElement("a");
+    typefullyLink.id = "typefully-link";
+    typefullyLink.className = "typefully";
+    typefullyLink.setAttribute("role", "button");
+    typefullyLink.setAttribute("tabindex", "0");
+    typefullyLink.addEventListener("click", () => {
+      let tweetTextAreaNumber = 0;
+      let typefullyContent = "";
+      while (true) {
+        if (
+          document.querySelector(
+            `[data-testid="tweetTextarea_${tweetTextAreaNumber}"]`
+          )
+        ) {
+          if (tweetTextAreaNumber > 0) {
+            typefullyContent = `${typefullyContent}\n\n\n\n\n`;
+          }
+          document
+            .querySelectorAll(
+              `[data-testid="tweetTextarea_${tweetTextAreaNumber}"] [data-text="true"]`
+            )
+            .forEach((item) => {
+              typefullyContent = `${typefullyContent}${item.innerText}`;
+            });
+        } else {
+          break;
+        }
+        tweetTextAreaNumber = tweetTextAreaNumber + 1;
+      }
+
+      window.open(
+        `https://typefully.com/?new=${encodeURIComponent(typefullyContent)}`
+      );
+    });
+
+    const typefullyLogo = document.createElement("div");
+    typefullyLogo.innerHTML = `<svg width="20" height="20" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M99.5245 11.5985C78.3619 14.5225 58.8203 35.9628 48.5 53.157C32.5 79.814 29.7308 117.192 31.0696 117.039C31.8856 117.212 41.5 96 46.5 88C54.5 83 64 75.5 64 75.5C64 75.5 50.4269 80.1561 51.5 78.5C53.444 75.5 56.2926 72.5773 56.2926 72.5773C78.9391 65.0252 83.916 53.157 83.916 53.157C83.916 53.157 77.3237 54.812 74.6461 55.117C71.076 55.5236 68.8896 55.4107 67.5 55.117C72.6914 49.101 77.1928 45.9517 82 44.5C85.9147 43.15 93.0515 38.6801 98 34.5C102.103 27.8334 100.351 18.8543 99.5245 11.5985Z" fill="white"/>
+<circle cx="82.5" cy="107.5" r="8.5" fill="white"/>
+</svg>`;
+    typefullyLogo.style.position = "relative";
+    typefullyLogo.style.margin = "0 2px -4px 3px";
+
+    const typefullyText = document.createElement("span");
+    typefullyText.innerText = "Continue thread in Typefully";
+
+    typefullyLink.appendChild(typefullyLogo);
+    typefullyLink.appendChild(typefullyText);
+
+    modal.appendChild(typefullyLink);
+  }
+};
+
+// Function to start MutationObserver
+const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
-      // Get grandparent of advanced search
-      const advancedSearch = document.querySelector(
-        `[data-testid="searchFiltersAdvancedSearch"]`
-      );
-
-      if (advancedSearch) {
-        const searchFilters =
-          advancedSearch.parentElement.parentElement.parentElement;
-        searchFilters.classList = searchFilters.classList + " searchFilters";
-        return;
-      }
+      revealSearchFilters();
+      addTypefullyPlug();
     }
   });
 
@@ -547,22 +624,8 @@ const changeWhoToFollow = (whoToFollow) => {
       addStyles(
         "mt-whoToFollow",
         `
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          a[href*="/i/connect_people?user_id="],
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          div[data-testid="UserCell"] {
+        div[data-testid="primaryColumn"] a[href*="/i/connect_people?user_id="],
+        div[data-testid="primaryColumn"] div[data-testid="UserCell"] {
           display: none;
         }
         `
@@ -582,33 +645,9 @@ const changeTopicsToFollow = (topicsToFollow) => {
       addStyles(
         "mt-topicsToFollow",
         `
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          section[aria-labelledby^="accessible-list-"]
-          > div[aria-label$="Carousel"] {
-          display: none;
-        }
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          a[href*="/i/flow/topics_selector"],
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          a[href*="/i/topics/picker/home"] {
+        div[data-testid="primaryColumn"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
+        div[data-testid="primaryColumn"] a[href*="/i/flow/topics_selector"],
+        div[data-testid="primaryColumn"] a[href*="/i/topics/picker/home"] {
           display: none;
         }
         `
@@ -823,10 +862,10 @@ chrome.storage.onChanged.addListener((changes) => {
 - Get Chrome Storage and inject respective styles
 --*/
 const init = () => {
-  addMainStylesheet();
+  addStylesheets();
 
-  // Reveal search filters
-  revealSearchFilters();
+  // Start MutationObserver
+  observe();
 
   // Inject user preferences
   chrome.storage.sync.get(
