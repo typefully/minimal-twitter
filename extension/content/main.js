@@ -74,7 +74,7 @@ const addTypefullyPlug = () => {
           )
         ) {
           if (tweetTextAreaNumber > 0) {
-            typefullyContent = `${typefullyContent}\n\n`;
+            typefullyContent = `${typefullyContent}\n\n\n\n\n`;
           }
           document
             .querySelectorAll(
