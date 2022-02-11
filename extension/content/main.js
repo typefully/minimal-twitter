@@ -624,22 +624,8 @@ const changeWhoToFollow = (whoToFollow) => {
       addStyles(
         "mt-whoToFollow",
         `
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          a[href*="/i/connect_people?user_id="],
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          div[data-testid="UserCell"] {
+        div[data-testid="primaryColumn"] a[href*="/i/connect_people?user_id="],
+        div[data-testid="primaryColumn"] div[data-testid="UserCell"] {
           display: none;
         }
         `
@@ -659,33 +645,9 @@ const changeTopicsToFollow = (topicsToFollow) => {
       addStyles(
         "mt-topicsToFollow",
         `
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          section[aria-labelledby^="accessible-list-"]
-          > div[aria-label$="Carousel"] {
-          display: none;
-        }
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          a[href*="/i/flow/topics_selector"],
-        div[data-testid="primaryColumn"]
-          > div
-          > div:nth-child(2)
-          > div
-          > div
-          > div:nth-child(3)
-          > section
-          a[href*="/i/topics/picker/home"] {
+        div[data-testid="primaryColumn"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
+        div[data-testid="primaryColumn"] a[href*="/i/flow/topics_selector"],
+        div[data-testid="primaryColumn"] a[href*="/i/topics/picker/home"] {
           display: none;
         }
         `
