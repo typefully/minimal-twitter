@@ -112,12 +112,37 @@ const addTypefullyPlug = () => {
   }
 };
 
+// Function to check url for /following or /followers
+const checkUrlForFollow = () => {
+  if (
+    window.location.pathname.includes("followers") ||
+    window.location.pathname.includes("following")
+  ) {
+    if (!document.getElementById("mt-followOverride")) {
+      addStyles(
+        "mt-followOverride",
+        `
+        div[data-testid="primaryColumn"] a[href*="/i/connect_people?user_id="],
+        div[data-testid="primaryColumn"] div[data-testid="UserCell"] {
+          display: block;
+        }
+        `
+      );
+    }
+  } else {
+    if (document.getElementById("mt-followOverride")) {
+      removeElement("mt-followOverride");
+    }
+  }
+};
+
 // Function to start MutationObserver
 const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
       revealSearchFilters();
       addTypefullyPlug();
+      checkUrlForFollow();
     }
   });
 
