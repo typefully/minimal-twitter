@@ -57,8 +57,14 @@ const addTypefullyPlug = () => {
   const tweetComposeArea = modal?.querySelector(
     "div.public-DraftStyleDefault-block"
   );
+  const tweet2Exist = document.querySelector(`[data-testid="tweetTextarea_1"]`);
 
-  if (modal && tweetComposeArea && !document.getElementById("typefully-link")) {
+  if (
+    modal &&
+    tweet2Exist &&
+    tweetComposeArea &&
+    !document.getElementById("typefully-link")
+  ) {
     const typefullyLink = document.createElement("a");
     typefullyLink.id = "typefully-link";
     typefullyLink.className = "typefully";
