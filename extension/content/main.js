@@ -49,7 +49,7 @@ const revealSearchFilters = () => {
   }
 };
 
-// Function to add "Write Thread in Typefully"
+// Function to add "Continue Thread in Typefully"
 const addTypefullyPlug = () => {
   const modal = document.querySelector(
     '[aria-labelledby="modal-header"][role="dialog"]'
@@ -61,8 +61,38 @@ const addTypefullyPlug = () => {
   if (modal && tweetComposeArea && !document.getElementById("typefully-link")) {
     const typefullyLink = document.createElement("a");
     typefullyLink.id = "typefully-link";
-    typefullyLink.href = "https://typefully.com/?coupon=minimal?via=thomas";
     typefullyLink.className = "typefully";
+    typefullyLink.setAttribute("role", "button");
+    typefullyLink.setAttribute("tabindex", "0");
+    typefullyLink.addEventListener("click", () => {
+      let tweetTextAreaNumber = 0;
+      let typefullyContent = "";
+      while (true) {
+        if (
+          document.querySelector(
+            `[data-testid="tweetTextarea_${tweetTextAreaNumber}"]`
+          )
+        ) {
+          if (tweetTextAreaNumber > 0) {
+            typefullyContent = `${typefullyContent}\n\n`;
+          }
+          document
+            .querySelectorAll(
+              `[data-testid="tweetTextarea_${tweetTextAreaNumber}"] [data-text="true"]`
+            )
+            .forEach((item) => {
+              typefullyContent = `${typefullyContent}${item.innerText}`;
+            });
+        } else {
+          break;
+        }
+        tweetTextAreaNumber = tweetTextAreaNumber + 1;
+      }
+
+      window.open(
+        `https://typefully.com/?new=${encodeURIComponent(typefullyContent)}`
+      );
+    });
 
     const typefullyLogo = document.createElement("div");
     typefullyLogo.innerHTML = `<svg width="20" height="20" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +103,7 @@ const addTypefullyPlug = () => {
     typefullyLogo.style.margin = "0 2px -4px 3px";
 
     const typefullyText = document.createElement("span");
-    typefullyText.innerText = "Write thread in Typefully";
+    typefullyText.innerText = "Continue thread in Typefully";
 
     typefullyLink.appendChild(typefullyLogo);
     typefullyLink.appendChild(typefullyText);

@@ -17,6 +17,7 @@
   background-color: #1d9bf0;
   margin: 20px auto 0;
   order: 99;
+  cursor: pointer;
 }
 .typefully:hover {
   background-color: #1a8cd8;
