@@ -96,7 +96,7 @@ const addTypefullyPlug = () => {
       }
 
       window.open(
-        `https://typefully.com/?via=thomas?new=${encodeURIComponent(
+        `https://typefully.com/?via=thomas&new=${encodeURIComponent(
           typefullyContent
         )}`
       );
