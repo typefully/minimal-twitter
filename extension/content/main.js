@@ -548,8 +548,8 @@ const changeFollowCount = (followCount) => {
       addStyles(
         "mt-followCount",
         `
-        [href$="/following"][dir="auto"][role="link"] > span:first-child,
-        [href$="/followers"][dir="auto"][role="link"] > span:first-child {
+        [href$="/following"][dir="auto"][role="link"],
+        [href$="/followers"][dir="auto"][role="link"] {
           display: none !important;
         }
         `
