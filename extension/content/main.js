@@ -73,6 +73,7 @@ const addTypefullyPlug = () => {
     typefullyLink.addEventListener("click", () => {
       let tweetTextAreaNumber = 0;
       let typefullyContent = "";
+      
       while (true) {
         if (
           document.querySelector(
@@ -82,16 +83,39 @@ const addTypefullyPlug = () => {
           if (tweetTextAreaNumber > 0) {
             typefullyContent = `${typefullyContent}\n\n\n\n\n`;
           }
-          document
-            .querySelectorAll(
+          
+          let tweetTextItems = Array.from(
+            document.querySelectorAll(
               `[data-testid="tweetTextarea_${tweetTextAreaNumber}"] [data-text="true"]`
             )
-            .forEach((item) => {
+          );
+
+          // remove trailing newlines at end of tweets (there is always one last <br> on the first tweet DOM node)
+          tweetTextItems = tweetTextItems.filter((item, index) => !(item.tagName === "BR" && index === tweetTextItems.length-1));
+          
+          tweetTextItems.forEach((item, index) => {
               typefullyContent = `${typefullyContent}${item.innerText}`;
-            });
+              const isLastItem = index === tweetTextItems.length - 1;
+              const isTagOrMention = item => !!item.parentElement.parentElement.attributes.style;
+              
+              // handle hard break (2 newlines) within single tweet
+              if (item.tagName === "BR" && !isLastItem) {
+                typefullyContent += "\n\n";
+              } 
+              // handle regular text (<span> elements)
+              else {
+                typefullyContent = `${typefullyContent}${item.innerText}`;
+                
+                // this handles non-hard breaks (just one newline) within a single tweet
+                if (!isLastItem && !isTagOrMention(tweetTextItems[index+1])) {
+                  typefullyContent += "\n"
+                }
+              }
+          });
         } else {
           break;
         }
+        
         tweetTextAreaNumber = tweetTextAreaNumber + 1;
       }
 
