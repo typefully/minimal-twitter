@@ -21,6 +21,17 @@ Customizations, preferences, options! Access them by clicking the extension's ic
 - Activate **Zen Mode**
 - ...and more!
 
+## Sponsors
+
+Thanks to the below sponsors for supporting! If you'd like to be added as a sponsor, please reach out [via email](mailto:wang@hey.com?subject=Sponsorship).
+
+<a href="https://typefully.app/?via=thomas">
+	<img width="50px" alt="Typefully Icon" src="./assets/typefully.png" />
+</a>
+<a href="https://mailbrew.com/?aff=ThomasWang">
+	<img width="50px" alt="Mailbrew Icon" src="./assets/mailbrew.png" />
+</a>
+
 ## Development
 
 ### Building the Extension
