@@ -94,7 +94,6 @@ const addTypefullyPlug = () => {
           tweetTextItems = tweetTextItems.filter((item, index) => !(item.tagName === "BR" && index === tweetTextItems.length-1));
           
           tweetTextItems.forEach((item, index) => {
-              typefullyContent = `${typefullyContent}${item.innerText}`;
               const isLastItem = index === tweetTextItems.length - 1;
               const isTagOrMention = item => !!item.parentElement.parentElement.attributes.style;
               
