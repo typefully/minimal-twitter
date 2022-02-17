@@ -150,8 +150,9 @@ const addTypefullyPlug = () => {
 // Function to check url for /following or /followers
 const checkUrlForFollow = () => {
   if (
-    window.location.pathname.includes("followers") ||
-    window.location.pathname.includes("following")
+    window.location.pathname.includes("/followers") ||
+    window.location.pathname.includes("/following") ||
+    window.location.pathname.includes("/i/")
   ) {
     if (!document.getElementById("mt-followOverride")) {
       addStyles(
@@ -696,6 +697,8 @@ const changeWhoToFollow = (whoToFollow) => {
       removeElement("mt-whoToFollow");
       break;
   }
+
+  checkUrlForFollow();
 };
 
 // Function to change Topics to Follow
