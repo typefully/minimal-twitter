@@ -81,6 +81,9 @@
   [data-testid="SideNav_AccountSwitcher_Button"]:hover > div:not(:first-child) {
     opacity: 1 !important;
   }
+  header[role="banner"] nav[role="navigation"]:hover > * > div {
+    backdrop-filter: blur(12px) !important;
+  }
 
   /* Align account button with floating tweet button */
   [data-testid="SideNav_AccountSwitcher_Button"] {
