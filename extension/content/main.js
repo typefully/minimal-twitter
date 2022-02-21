@@ -815,6 +815,31 @@ const changeLatestTweets = (latestTweets) => {
   }
 };
 
+const titleObserver = new MutationObserver((mutationsList) => {
+  if (mutationsList) {
+    const title = document.title
+    if (title.charAt(0) === "(") {
+      document.title = title.slice(5);
+    }
+  }
+});
+
+// Function to change the title notification count
+const changeTitleNotifications = (titleNotifications) => {
+  switch (titleNotifications) {
+    case "off": 
+      titleObserver.observe(document, {
+        childList: true,
+        subtree: true,
+      });
+      break;
+
+    case "on":
+      titleObserver.disconnect();
+      break;
+  }
+};
+
 // Utility function to create data for `injectAllChanges()`
 const constructNewData = (changes) => {
   // Creates an array of objects from changes
@@ -862,6 +887,7 @@ const constructNewData = (changes) => {
   - 21. Who to Follow
   - 22. Topics to Follow
   - 23. Always Show Latest Tweets
+  - 24. Hide Title Notifications
 --*/
 const injectAllChanges = (data) => {
   const {
@@ -888,6 +914,7 @@ const injectAllChanges = (data) => {
     whoToFollow,
     topicsToFollow,
     latestTweets,
+    titleNotifications
   } = data;
   changeFeedWidth(feedWidth);
   changefeedBorders(feedBorders);
@@ -912,6 +939,7 @@ const injectAllChanges = (data) => {
   changeWhoToFollow(whoToFollow);
   changeTopicsToFollow(topicsToFollow);
   changeLatestTweets(latestTweets);
+  changeTitleNotifications(titleNotifications);
 };
 
 /*--
@@ -960,6 +988,7 @@ const init = () => {
       "whoToFollow",
       "topicsToFollow",
       "latestTweets",
+      "titleNotifications"
     ],
     (data) => {
       injectAllChanges(data);

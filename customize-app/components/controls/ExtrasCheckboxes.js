@@ -557,7 +557,7 @@ export const CheckboxHideTitleNotifications = () => {
             setUserTitle(checked)
             try {
               await setStorage({
-                titleNotification: checked ? "off" : "on"
+                titleNotifications: checked ? "off" : "on"
               })
             } catch (error) {
               console.warn(error)
