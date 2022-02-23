@@ -1,5 +1,7 @@
 # Contributing
 
+If you have a good idea, [start a discussion](https://github.com/thomaswang/minimal-twitter/discussions/new?category=ideas). For bug reports and usability issues, [submit an issue]. 
+
 ## Development / Building the Extension
 
 First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed. Then, go to [customize-app](./customize-app) and run the build command to build the static [Next.js](https://nextjs.org/) app, which is used for the extension's customization popup and options.
