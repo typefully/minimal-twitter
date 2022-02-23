@@ -1,6 +1,6 @@
 # Contributing
 
-If you have a good idea, [start a discussion](https://github.com/thomaswang/minimal-twitter/discussions/new?category=ideas). For bug reports and usability issues, [submit an issue]. 
+If you have a good idea, [start a discussion](https://github.com/thomaswang/minimal-twitter/discussions/new?category=ideas). For bug reports and usability issues, [submit an issue](https://github.com/thomaswang/minimal-twitter/issues/new). 
 
 ## Development / Building the Extension
 
