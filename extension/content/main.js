@@ -817,7 +817,7 @@ const changeLatestTweets = (latestTweets) => {
 
 // Function to change the title notification count
 const changeTitleNotifications = (titleNotifications) => {
-  if (titleNotifications === 'off') {
+  if (titleNotifications === "off") {
     const titleObserver = new MutationObserver((mutationsList) => {
       if (mutationsList) {
         if (document.title.charAt(0) === "(") {
