@@ -815,28 +815,23 @@ const changeLatestTweets = (latestTweets) => {
   }
 };
 
-const titleObserver = new MutationObserver((mutationsList) => {
-  if (mutationsList) {
-    const title = document.title
-    if (title.charAt(0) === "(") {
-      document.title = title.slice(5);
-    }
-  }
-});
-
 // Function to change the title notification count
 const changeTitleNotifications = (titleNotifications) => {
-  switch (titleNotifications) {
-    case "off": 
-      titleObserver.observe(document, {
-        childList: true,
-        subtree: true,
-      });
-      break;
-
-    case "on":
-      titleObserver.disconnect();
-      break;
+  if (titleNotifications === 'off') {
+    const titleObserver = new MutationObserver((mutationsList) => {
+      if (mutationsList) {
+        if (document.title.charAt(0) === "(") {
+          document.title = document.title.split(' ').slice(1).join(' ');
+        }
+      }
+    });
+    titleObserver.observe(document, {
+      childList: true,
+      subtree: true
+    });
+    if (document.title.charAt(0) === "(") {
+      document.title = document.title.split(' ').slice(1).join(' ');
+    }
   }
 };
 
