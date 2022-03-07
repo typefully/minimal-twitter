@@ -152,7 +152,8 @@ const checkUrlForFollow = () => {
   if (
     window.location.pathname.includes("/followers") ||
     window.location.pathname.includes("/following") ||
-    window.location.pathname.includes("/i/")
+    window.location.pathname.includes("/i/") ||
+    window.location.pathname.includes("/search")
   ) {
     if (!document.getElementById("mt-followOverride")) {
       addStyles(
@@ -612,8 +613,29 @@ const changeTweetButton = (hideTweetButton) => {
   }
 };
 
-// Function to change Search Bar
-const changeSearchBar = (transparentSearch) => {
+// Function to change Search Bar 1
+const changeSearchBar1 = (hideSearch) => {
+  switch (hideSearch) {
+    case "on":
+      addStyles(
+        "mt-hideSearch",
+        `
+        [data-testid="sidebarColumn"] form[role="search"] {
+          display: none !important;
+          visibility: hidden !important;
+        }
+        `
+      );
+      break;
+
+    case "off":
+      removeElement("mt-hideSearch");
+      break;
+  }
+};
+
+// Function to change Search Bar 2
+const changeSearchBar2 = (transparentSearch) => {
   switch (transparentSearch) {
     case "on":
       addStyles(
@@ -833,12 +855,13 @@ const constructNewData = (changes) => {
   - 14. Hide Like Count
   - 15. Hide Follow
   - 16. Hide Tweet Button
-  - 17. Transparent Search Bar
-  - 18. Minimal Favicon
-  - 19. Remove Promoted Posts
-  - 20. Who to Follow
-  - 21. Topics to Follow
-  - 22. Always Show Latest Tweets
+  - 17. Hide Search Bar
+  - 18. Transparent Search Bar
+  - 19. Minimal Favicon
+  - 20. Remove Promoted Posts
+  - 21. Who to Follow
+  - 22. Topics to Follow
+  - 23. Always Show Latest Tweets
 --*/
 const injectAllChanges = (data) => {
   const {
@@ -858,6 +881,7 @@ const injectAllChanges = (data) => {
     likeCount,
     followCount,
     hideTweetButton,
+    hideSearch,
     transparentSearch,
     minimalFavicon,
     removePromotedPosts,
@@ -865,50 +889,28 @@ const injectAllChanges = (data) => {
     topicsToFollow,
     latestTweets,
   } = data;
-
-  // 1. Feed Width
   changeFeedWidth(feedWidth);
-  // 2. Feed Borders
   changefeedBorders(feedBorders);
-  // 3. Explore Button
   changeExploreButton(exploreButton);
-  // 4. Notification Button
   changeNotificationsButton(notificationsButton);
-  // 5. Message Button
   changeMessagesButton(messagesButton);
-  // 6. Bookmark Button
   changeBookmarksButton(bookmarksButton);
-  // 7. Lists Button
   changeListsButton(listsButton);
-  // 8. Navigation Buttons Labels
   changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover);
-  // 9. Navigation Buttons Labels
   changeNavigationButtonsLabels(navigationButtonsLabels);
-  // 10. Navigation Center
   changeNavigationCenter(navigationCenter);
-  // 11. Zen Mode
   changeZenMode(zenMode);
-  // 12. Reply Count
   changeReplyCount(replyCount);
-  // 13. Retweet Count
   changeRetweetCount(retweetCount);
-  // 14. Like Count
   changeLikeCount(likeCount);
-  // 15. Follow Count
   changeFollowCount(followCount);
-  // 16. Hide Tweet Buton
   changeTweetButton(hideTweetButton);
-  // 17. Transparent Search
-  changeSearchBar(transparentSearch);
-  // 18. Minimal Favicon
+  changeSearchBar1(hideSearch);
+  changeSearchBar2(transparentSearch);
   changeFavicon(minimalFavicon);
-  // 19. Remove Promoted Posts
   changePromotedPosts(removePromotedPosts);
-  // 20. Who to Follow
   changeWhoToFollow(whoToFollow);
-  // 21. Topics to Follow
   changeTopicsToFollow(topicsToFollow);
-  // 22. Always Show Latest Tweets
   changeLatestTweets(latestTweets);
 };
 
@@ -951,6 +953,7 @@ const init = () => {
       "likeCount",
       "followCount",
       "hideTweetButton",
+      "hideSearch",
       "transparentSearch",
       "minimalFavicon",
       "removePromotedPosts",
