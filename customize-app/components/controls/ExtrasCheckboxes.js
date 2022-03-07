@@ -35,7 +35,7 @@ export const CheckboxHideVanityCount = ({
   return (
     <div className="flex items-center justify-between w-full py-1">
       <span className="flex items-center space-x-2 text-base tracking-normal text-black dark:text-white">
-        <label htmlFor="hideVanityCount">Hide vanity counts</label>
+        <label htmlFor="hideVanityCount">Hide Vanity Counts</label>
         <TogglePrimitive.Root
           pressed={showVanityCheckboxes}
           onPressedChange={(pressed) => {
@@ -190,6 +190,53 @@ export const CheckboxHideTweetButton = () => {
           }}
           checked={userHideTweet}
           id="hideTweetButton"
+          className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
+        >
+          <CheckboxPrimitive.Indicator className="text-white">
+            <CheckIcon />
+          </CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxHideSearch = () => {
+  const [userHideSearch, setUserHideSearch] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultHideSearch = async () => {
+      try {
+        const userDefaultHideSearch = await getStorage("hideSearch")
+        userDefaultHideSearch &&
+          setUserHideSearch(userDefaultHideSearch === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultHideSearch()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full py-1">
+      <label htmlFor="hideSearch" className="text-base tracking-normal">
+        Hide Search Bar
+      </label>
+      <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
+        <StyledCheckbox
+          onCheckedChange={async (checked) => {
+            setUserHideSearch(checked)
+            try {
+              await setStorage({
+                hideSearch: checked ? "on" : "off"
+              })
+            } catch (error) {
+              console.warn(error)
+            }
+          }}
+          checked={userHideSearch}
+          id="hideSearch"
           className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
         >
           <CheckboxPrimitive.Indicator className="text-white">
