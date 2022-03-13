@@ -161,7 +161,7 @@ const checkUrlForFollow = () => {
         `
         div[data-testid="primaryColumn"] a[href*="/i/connect_people?user_id="],
         div[data-testid="primaryColumn"] div[data-testid="UserCell"] {
-          display: block;
+          display: block !important;
         }
         `
       );
