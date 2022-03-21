@@ -438,11 +438,9 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
       addStyles(
         "mt-navigationButtonsLabels",
         `
-        @media all and (min-width: 1450px) {
-          header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span,
-          [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-            opacity: 1 !important;
-          }
+        header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span,
+        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+          opacity: 1 !important;
         }
         `
       );
