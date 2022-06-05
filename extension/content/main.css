@@ -6,7 +6,8 @@
 
 /* Remove Promoted Posts */
 /* Keep article combinator or it will remove all videos as well */
-[data-testid="placementTracking"] article {
+[data-testid="placementTracking"] article,
+a[href*="quick_promote_web"] {
   display: none !important;
 }
 

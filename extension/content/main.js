@@ -173,6 +173,30 @@ const checkUrlForFollow = () => {
   }
 };
 
+// Function to add Lists button
+const addListsButton = () => {
+  if (!document.querySelector('a[href$="/lists"][role="link"][aria-label]')) {
+    const profileNode = document.querySelector(
+      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+    );
+
+    if (profileNode) {
+      const profileNodeClone = profileNode.cloneNode(true);
+
+      profileNodeClone.id = "mt-listsButtonNode";
+      profileNodeClone.href += "/lists";
+      profileNodeClone.ariaLabel = "Minimal Twitter Lists";
+      profileNodeClone.removeAttribute("data-testid");
+      profileNodeClone.firstChild.firstChild.firstChild.innerHTML = `<g>
+        <path d="M19.75 22H4.25C3.01 22 2 20.99 2 19.75V4.25C2 3.01 3.01 2 4.25 2h15.5C20.99 2 22 3.01 22 4.25v15.5c0 1.24-1.01 2.25-2.25 2.25zM4.25 3.5c-.414 0-.75.337-.75.75v15.5c0 .413.336.75.75.75h15.5c.414 0 .75-.337.75-.75V4.25c0-.413-.336-.75-.75-.75H4.25z"></path>
+        <path d="M17 8.64H7c-.414 0-.75-.337-.75-.75s.336-.75.75-.75h10c.414 0 .75.335.75.75s-.336.75-.75.75zm0 4.11H7c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h10c.414 0 .75.336.75.75s-.336.75-.75.75zm-5 4.11H7c-.414 0-.75-.335-.75-.75s.336-.75.75-.75h5c.414 0 .75.337.75.75s-.336.75-.75.75z"></path>
+      </g>`;
+      profileNodeClone.firstChild.lastChild.firstChild.innerText = "Lists";
+      profileNode.insertAdjacentElement("beforebegin", profileNodeClone);
+    }
+  }
+};
+
 // Function to start MutationObserver
 const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
@@ -180,6 +204,7 @@ const observe = () => {
       revealSearchFilters();
       addTypefullyPlug();
       checkUrlForFollow();
+      addListsButton();
     }
   });
 
@@ -366,6 +391,7 @@ const changeBookmarksButton = (bookmarksButton) => {
 const changeListsButton = (listsButton) => {
   switch (listsButton) {
     case "off":
+      removeElement("mt-listsButtonNode");
       addStyles(
         "mt-listsButton",
         `
@@ -378,6 +404,8 @@ const changeListsButton = (listsButton) => {
 
     case "on":
       removeElement("mt-listsButton");
+      addListsButton();
+
       break;
   }
 };
