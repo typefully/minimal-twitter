@@ -175,7 +175,7 @@ const checkUrlForFollow = () => {
 
 // Function to add Lists button
 const addListsButton = () => {
-  if (!document.querySelector('a[href*="/lists"][role="link"][aria-label]')) {
+  if (!document.querySelector('a[href$="/lists"][role="link"][aria-label]')) {
     const profileNode = document.querySelector(
       'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
     );
