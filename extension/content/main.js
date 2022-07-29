@@ -327,6 +327,26 @@ const changeExploreButton = (exploreButton) => {
   }
 };
 
+// Function to change Communities Button
+const changeCommunitiesButton = (communitiesButton) => {
+  switch (communitiesButton) {
+    case "off":
+      addStyles(
+        "mt-communitiesbutton",
+        `
+        a[href*="/communities"][role="link"][aria-label] {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-communitiesbutton");
+      break;
+  }
+};
+
 // Function to change Notifications Button
 const changeNotificationsButton = (notificationsButton) => {
   switch (notificationsButton) {
@@ -424,16 +444,16 @@ const removeHover = () => {
     header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span {
       display: none !important;
     }
-  
+
     header[role="banner"] > div > div > div > div:last-child {
       width: fit-content !important;
     }
-  
+
     [data-testid="SideNav_AccountSwitcher_Button"] {
       bottom: 12px !important;
       width: fit-content !important;
     }
-  
+
     [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
       display: none !important;
     }
@@ -514,7 +534,7 @@ const changeZenMode = (zenMode) => {
       addStyles(
         "mt-zenMode",
         `
-        header[role="banner"], 
+        header[role="banner"],
         [data-testid="sidebarColumn"],
         [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
           display: none !important;
@@ -540,7 +560,7 @@ const changeReplyCount = (replyCount) => {
       addStyles(
         "mt-replyCount",
         `
-        article [data-testid="reply"] span { 
+        article [data-testid="reply"] span {
           visibility: hidden !important
         }
         `
@@ -863,7 +883,7 @@ const constructNewData = (changes) => {
   return newChangesData;
 };
 
-/*-- 
+/*--
 - Function to inject all changes:
   - 1. Feed Width
   - 2. Feed Borders
@@ -894,6 +914,7 @@ const injectAllChanges = (data) => {
     feedWidth,
     feedBorders,
     exploreButton,
+    communitiesButton,
     notificationsButton,
     messagesButton,
     bookmarksButton,
@@ -918,6 +939,7 @@ const injectAllChanges = (data) => {
   changeFeedWidth(feedWidth);
   changefeedBorders(feedBorders);
   changeExploreButton(exploreButton);
+  changeCommunitiesButton(communitiesButton);
   changeNotificationsButton(notificationsButton);
   changeMessagesButton(messagesButton);
   changeBookmarksButton(bookmarksButton);
@@ -966,6 +988,7 @@ const init = () => {
       "feedWidth",
       "feedBorders",
       "exploreButton",
+      "communitiesButton",
       "notificationsButton",
       "messagesButton",
       "bookmarksButton",
