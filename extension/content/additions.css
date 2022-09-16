@@ -1,9 +1,9 @@
-.typefully {
+.typefully-modal-button,
+.typefully-reply-button {
   color: white;
   text-decoration: none;
   padding-left: 22px;
   padding-right: 22px;
-  min-height: 40px;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 15px;
@@ -19,9 +19,22 @@
   order: 99;
   cursor: pointer;
 }
-.typefully:hover {
+
+.typefully-modal-button:hover,
+.typefully-reply-button:hover {
   background-color: #1a8cd8;
 }
-.typefully svg {
+
+.typefully-modal-button svg,
+.typefully-reply-button svg {
   margin: 0 3px 0 -8px;
+}
+
+
+.typefully-modal-button {
+  min-height: 40px;
+}
+
+.typefully-reply-button {
+  min-height: 36px;
 }
