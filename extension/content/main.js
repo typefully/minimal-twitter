@@ -54,10 +54,13 @@ const searchBarWidthReset = () => {
   const searchBar = document.querySelector(
     '[data-testid="SearchBox_Search_Input"]'
   );
-  const searchBarPlaceholderWidth =
-    searchBar.getAttribute("placeholder").length;
 
-  searchBar.style.width = `${searchBarPlaceholderWidth}ch`;
+  if (searchBar) {
+    const searchBarPlaceholderWidth =
+      searchBar.getAttribute("placeholder").length;
+
+    searchBar.style.width = `${searchBarPlaceholderWidth}ch`;
+  }
 };
 
 // Function to add "Continue Thread in Typefully"
@@ -212,6 +215,7 @@ const addListsButton = () => {
 const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
+      searchBarWidthReset();
       revealSearchFilters();
       addTypefullyPlug();
       checkUrlForFollow();
@@ -967,7 +971,6 @@ chrome.storage.onChanged.addListener((changes) => {
 --*/
 const init = () => {
   addStylesheets();
-  searchBarWidthReset();
 
   // Start MutationObserver
   observe();
