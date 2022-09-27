@@ -118,7 +118,7 @@ a[href*="quick_promote_web"] {
 
   /* Match size of input the placeholder content */
   [data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
-    width: 150px !important;
+    width: 150px;
   }
 
   /* Match size of focused search container to its dropdown */

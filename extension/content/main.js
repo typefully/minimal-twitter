@@ -49,6 +49,17 @@ const revealSearchFilters = () => {
   }
 };
 
+// Function to set search bar width to length of placeholder
+const searchBarWidthReset = () => {
+  const searchBar = document.querySelector(
+    '[data-testid="SearchBox_Search_Input"]'
+  );
+  const searchBarPlaceholderWidth =
+    searchBar.getAttribute("placeholder").length;
+
+  searchBar.style.width = `${searchBarPlaceholderWidth}ch`;
+};
+
 // Function to add "Continue Thread in Typefully"
 const addTypefullyPlug = () => {
   const modal = document.querySelector(
@@ -956,6 +967,7 @@ chrome.storage.onChanged.addListener((changes) => {
 --*/
 const init = () => {
   addStylesheets();
+  searchBarWidthReset();
 
   // Start MutationObserver
   observe();
