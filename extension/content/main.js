@@ -516,7 +516,7 @@ const changeZenMode = (zenMode) => {
         `
         header[role="banner"], 
         [data-testid="sidebarColumn"],
-        [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
+        [data-testid="primaryColumn"] > div > div:nth-of-type(5) {
           display: none !important;
         }
 
