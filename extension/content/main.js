@@ -49,7 +49,19 @@ const revealSearchFilters = () => {
   }
 };
 
-/* ----------------------------- Typefully Links ---------------------------- */
+// Function to set search bar width to length of placeholder
+const searchBarWidthReset = () => {
+  const searchBar = document.querySelector(
+    '[data-testid="SearchBox_Search_Input"]'
+  );
+
+  if (searchBar) {
+    const searchBarPlaceholderWidth =
+      searchBar.getAttribute("placeholder").length;
+
+    searchBar.style.width = `${searchBarPlaceholderWidth}ch`;
+  }
+};
 
 // Function to add "Continue Thread in Typefully"
 const addTypefullyPlug = () => {
@@ -287,6 +299,7 @@ const addListsButton = () => {
 const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
+      searchBarWidthReset();
       revealSearchFilters();
       addTypefullyPlug();
       saveCurrentReplyToLink();
@@ -604,7 +617,7 @@ const changeZenMode = (zenMode) => {
         `
         header[role="banner"], 
         [data-testid="sidebarColumn"],
-        [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2))  {
+        [data-testid="primaryColumn"] > div > div:not(:nth-of-type(2)):not(:nth-of-type(3)) {
           display: none !important;
         }
 
