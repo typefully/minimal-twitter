@@ -235,12 +235,12 @@ const getCurrentTextAndSendToTypefully = (replyingToLink) => {
     tweetTextAreaNumber = tweetTextAreaNumber + 1;
   }
 
-  // Refactor with parametrics URLSearchParams
+  // With URLSearchParams
   const url = new URL("https://typefully.com/");
   url.searchParams.set("via", "thomas");
-  url.searchParams.set("new", encodeURIComponent(typefullyContent));
+  url.searchParams.set("new", typefullyContent);
   if (replyingToLink) {
-    url.searchParams.set("replyTo", encodeURIComponent(replyingToLink));
+    url.searchParams.set("replyTo", replyingToLink);
   }
   window.open(url.toString());
 };
