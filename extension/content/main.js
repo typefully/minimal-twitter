@@ -55,7 +55,7 @@ const searchBarWidthReset = () => {
     '[data-testid="SearchBox_Search_Input"]'
   );
 
-  if (searchBar) {
+  if (searchBar && !window.location.pathname.includes("/search")) {
     const searchBarPlaceholderWidth =
       searchBar.getAttribute("placeholder").length;
 
