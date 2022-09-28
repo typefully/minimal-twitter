@@ -2,7 +2,7 @@
   "name": "Minimal Theme for Twitter",
   "short_name": "Minimal Twitter",
   "description": "Declutter the Twitter web experience.",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
