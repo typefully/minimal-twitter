@@ -55,7 +55,11 @@ const searchBarWidthReset = () => {
     '[data-testid="SearchBox_Search_Input"]'
   );
 
-  if (searchBar && !window.location.pathname.includes("/search")) {
+  if (
+    searchBar &&
+    !window.location.pathname.includes("/search") &&
+    !window.location.pathname.includes("/explore")
+  ) {
     const searchBarPlaceholderWidth =
       searchBar.getAttribute("placeholder").length;
 
@@ -251,7 +255,8 @@ const checkUrlForFollow = () => {
     window.location.pathname.includes("/followers") ||
     window.location.pathname.includes("/following") ||
     window.location.pathname.includes("/i/") ||
-    window.location.pathname.includes("/search")
+    window.location.pathname.includes("/search") ||
+    window.location.pathname.includes("/explore")
   ) {
     if (!document.getElementById("mt-followOverride")) {
       addStyles(
