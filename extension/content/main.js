@@ -241,7 +241,7 @@ const getCurrentTextAndSendToTypefully = (replyingToLink) => {
 
   // With URLSearchParams
   const url = new URL("https://typefully.com/");
-  url.searchParams.set("via", "thomas");
+  url.searchParams.set("ref", "minimal-twitter");
   url.searchParams.set("new", typefullyContent);
   if (replyingToLink) {
     url.searchParams.set("replyTo", replyingToLink);
