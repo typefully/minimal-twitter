@@ -1,41 +1,25 @@
+import createTweetLink from "../../utilities/createTweetLink"
+
+const tweet = {
+  text: "Love this Minimal Theme for Twitter by the @typefully team.",
+  url: "https://typefully.com/minimal-twitter"
+}
+
 const Header = () => (
   <header className="text-center">
     <div className="flex items-center justify-center">
       <a
-        href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwang.sh%2Fminimal-twitter&via=ThomasWang&hashtags=minimaltwitter&text=Minimal%20Theme%20for%20Twitter%21"
+        href={createTweetLink(tweet)}
         target="_blank"
         rel="noreferrer"
-        className="absolute text-lg font-bold text-twitterBlue left-4"
+        className="absolute text-md font-semibold text-twitterBlue right-4"
         aria-label="Share Tweet"
         title="Share Tweet"
       >
-        #
-      </a>
-      <a
-        href="https://twitter.com"
-        target="_blank"
-        rel="noreferrer"
-        className="absolute right-4 text-twitterBlue"
-        aria-label="Go to Twitter"
-        title="Go to Twitter"
-      >
-        <svg
-          width={16}
-          height={16}
-          viewBox="0 0 128 128"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M98.7377 40.737C107.839 29.3678 116.427 17.4444 114.746 14.8104C112.711 11.622 93.7602 18.4671 78.9 24.4645C72.423 21.3246 65.1232 19.5592 57.401 19.5592C30.6699 19.5592 9 40.7132 9 66.8078C9 92.9025 30.6699 114.056 57.401 114.056C84.1321 114.056 105.802 92.9025 105.802 66.8078C105.802 63.1851 105.384 59.6576 104.593 56.2688C113.072 50.1034 120.243 43.9562 118.819 41.6609C117.501 39.5377 108.706 39.7447 98.7377 40.737Z"
-            fill="#1DA1F2"
-          />
-        </svg>
+        Share
       </a>
       <h1 className="text-xl font-extrabold">
-        <span>Customize more</span>
+        <span>Customize</span>
       </h1>
     </div>
     <p className="pt-3 pb-5 text-sm font-medium leading-5 dark:text-twitterAccentOneDark text-twitterAccentOne">
