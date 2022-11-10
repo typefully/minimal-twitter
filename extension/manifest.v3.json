@@ -11,6 +11,10 @@
     "128": "images/MinimalTwitterIcon128.png"
   },
   "permissions": ["storage"],
+  "background": {
+    "service_worker": "content/background.js",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "run_at": "document_end",

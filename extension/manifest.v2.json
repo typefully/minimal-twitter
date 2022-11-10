@@ -11,6 +11,10 @@
     "128": "images/MinimalTwitterIcon128.png"
   },
   "permissions": ["storage"],
+  "background": {
+    "scripts": ["content/background.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "run_at": "document_idle",
