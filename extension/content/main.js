@@ -290,11 +290,15 @@ const addListsButton = () => {
       profileNodeClone.href += "/lists";
       profileNodeClone.ariaLabel = "Minimal Twitter Lists";
       profileNodeClone.removeAttribute("data-testid");
-      profileNodeClone.firstChild.firstChild.firstChild.innerHTML = `<g>
-        <path d="M19.75 22H4.25C3.01 22 2 20.99 2 19.75V4.25C2 3.01 3.01 2 4.25 2h15.5C20.99 2 22 3.01 22 4.25v15.5c0 1.24-1.01 2.25-2.25 2.25zM4.25 3.5c-.414 0-.75.337-.75.75v15.5c0 .413.336.75.75.75h15.5c.414 0 .75-.337.75-.75V4.25c0-.413-.336-.75-.75-.75H4.25z"></path>
-        <path d="M17 8.64H7c-.414 0-.75-.337-.75-.75s.336-.75.75-.75h10c.414 0 .75.335.75.75s-.336.75-.75.75zm0 4.11H7c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h10c.414 0 .75.336.75.75s-.336.75-.75.75zm-5 4.11H7c-.414 0-.75-.335-.75-.75s.336-.75.75-.75h5c.414 0 .75.337.75.75s-.336.75-.75.75z"></path>
-      </g>`;
+      profileNodeClone.firstChild.firstChild.firstChild.innerHTML = `<g><path d="M3 4.5C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5v15c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 22 3 20.88 3 19.5v-15zM5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-15c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2z"></path></g>`;
       profileNodeClone.firstChild.lastChild.firstChild.innerText = "Lists";
+      // toggle class .r-1ydqjzz on hover, which the class that adds the hover state background
+      profileNodeClone.onmouseover = () => {
+        profileNodeClone.firstChild.classList.add("r-1ydqjzz");
+      };
+      profileNodeClone.onmouseout = () => {
+        profileNodeClone.firstChild.classList.remove("r-1ydqjzz");
+      };
       profileNode.insertAdjacentElement("beforebegin", profileNodeClone);
     }
   }
