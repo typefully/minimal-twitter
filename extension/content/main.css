@@ -25,9 +25,9 @@ a[href*="quick_promote_web"] {
   z-index: 1 !important;
 }
 
-/* Remove list label on small screen */
+/* Remove list button on smaller screen */
 @media only screen and (max-width: 1264px) {
-  #mt-listsButtonNode > div > div:last-child {
+  #mt-listsButtonNode {
     display: none;
   }
 }
