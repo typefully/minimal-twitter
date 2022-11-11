@@ -2,7 +2,7 @@
   "name": "Minimal Theme for Twitter",
   "short_name": "Minimal Twitter",
   "description": "Declutter the Twitter web experience.",
-  "version": "4.3.3",
+  "version": "4.4.0",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
@@ -16,6 +16,10 @@
     "128": "images/MinimalTwitterIcon128.png"
   },
   "permissions": ["storage"],
+  "background": {
+    "scripts": ["content/background.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "run_at": "document_idle",
