@@ -3,10 +3,8 @@
 </p>
 
 <h1 align="center">
-  Minimal Theme for Twitter
+  Minimal Theme for Twitter by Typefully
 </h1>
-
-## Install Extension
 
 - **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)**
 - **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
