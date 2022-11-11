@@ -1,4 +1,3 @@
-import { LightningBoltIcon } from "@radix-ui/react-icons"
 import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { useEffect, useState } from "react"
 
@@ -196,20 +195,6 @@ const Extras = () => {
           <Separator />
           <div className="flex items-center w-full pt-4 space-x-1 text-sm">
             * Experimental — may not always work
-          </div>
-          <div className="flex items-center w-full pt-3 pb-2 space-x-1 text-sm">
-            <LightningBoltIcon />{" "}
-            <span>
-              Power user?{" "}
-              <a
-                href="https://t.wang.sh/twitter-tools"
-                target="_blank"
-                rel="noreferrer"
-                className="text-twitterBlue"
-              >
-                t.wang.sh/twitter-tools
-              </a>
-            </span>
           </div>
         </div>
       ) : (
