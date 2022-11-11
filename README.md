@@ -2,6 +2,8 @@
   <img width="80px" alt="Minimal Theme for Twitter App Icon" src="./assets/MinimalTwitterIcon.png" />
 </p>
 
+# Minimal Theme for Twitter
+
 ## Install Extension
 
 - **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)**
@@ -10,9 +12,7 @@
 
 ![Screenshots](./assets/screenshots.png)
 
-Minimal Theme for Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang/), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team.
-
-To contribute and/or see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
+Minimal Theme for Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team. To contribute and/or see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
 
 ## Description
 
