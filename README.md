@@ -2,7 +2,9 @@
   <img width="80px" alt="Minimal Theme for Twitter App Icon" src="./assets/MinimalTwitterIcon.png" />
 </p>
 
-# Minimal Theme for Twitter
+<h1 align="center">
+  Minimal Theme for Twitter
+</h1>
 
 ## Install Extension
 
