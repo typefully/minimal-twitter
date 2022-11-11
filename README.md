@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-  Minimal Theme for Twitter by Typefully
+  Minimal Theme for Twitter by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>
 </h1>
 
 - **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)**
