@@ -1,6 +1,6 @@
-<img width="80px" alt="Minimal Theme for Twitter App Icon" src="./assets/MinimalTwitterIcon.png" />
-
-Minimal Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang/), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team.
+<p align="center">
+  <img width="80px" alt="Minimal Theme for Twitter App Icon" src="./assets/MinimalTwitterIcon.png" />
+</p>
 
 ## Install Extension
 
@@ -9,6 +9,8 @@ Minimal Twitter is a browser extension originally made by [Thomas Wang](https://
 - **Add to Microsoft Edge**: **[Available as a Microsoft Edge Add-on](https://microsoftedge.microsoft.com/addons/detail/mghjldihobnccoppgcgfelpdpffmebjn)**
 
 ![Screenshots](./assets/screenshots.png)
+
+Minimal Theme for Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang/), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team.
 
 To contribute and/or see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
 
