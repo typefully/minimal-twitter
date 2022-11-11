@@ -3,19 +3,18 @@ import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { useEffect, useState } from "react"
 
 import {
-  CheckboxHideReplyCount,
-  CheckboxHideLikeCount,
-  CheckboxHideRetweetCount,
+  CheckboxAlwaysShowLatest,
   CheckboxHideFollowCount,
-  CheckboxHideVanityCount,
-  CheckboxHideTweetButton,
+  CheckboxHideLikeCount,
+  CheckboxHideReplyCount,
+  CheckboxHideRetweetCount,
   CheckboxHideSearch,
-  CheckboxTransparentSearch,
-  CheckboxMinimalFavicon,
+  CheckboxHideTweetButton,
+  CheckboxHideVanityCount,
   CheckboxPromotedPosts,
-  CheckboxWhoToFollow,
   CheckboxTopicsToFollow,
-  CheckboxAlwaysShowLatest
+  CheckboxTransparentSearch,
+  CheckboxWhoToFollow
 } from "./ExtrasCheckboxes"
 import { SwitchZenMode } from "./ExtrasSwitches"
 import Separator from "./Separator"
@@ -189,7 +188,6 @@ const Extras = () => {
           <CheckboxHideTweetButton />
           <CheckboxHideSearch />
           <CheckboxTransparentSearch />
-          <CheckboxMinimalFavicon />
           <CheckboxPromotedPosts />
           <CheckboxWhoToFollow />
           <CheckboxTopicsToFollow />

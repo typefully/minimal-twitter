@@ -790,30 +790,6 @@ const changeSearchBar2 = (transparentSearch) => {
   }
 };
 
-// Function to replace favicon (to reduce red dots)
-const changeFavicon = (minimalFavicon) => {
-  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
-  currentFavicons.forEach((item) => {
-    item && item.remove();
-  });
-
-  const head = document.querySelector("head");
-  const faviconLink = document.createElement("link");
-  faviconLink.id = "replacedFavicon";
-  faviconLink.rel = "shortcut icon";
-
-  switch (minimalFavicon) {
-    case "on":
-      faviconLink.href = chrome.runtime.getURL("content/twitter-mt.ico");
-      break;
-    case "off":
-      faviconLink.href = chrome.runtime.getURL("content/twitter.ico");
-      break;
-  }
-
-  head.appendChild(faviconLink);
-};
-
 // Function to change Promoted Posts
 const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
@@ -969,32 +945,6 @@ const constructNewData = (changes) => {
   return newChangesData;
 };
 
-/*-- 
-- Function to inject all changes:
-  - 1. Feed Width
-  - 2. Feed Borders
-  - 3. Explore Button
-  - 4. Notification Button
-  - 5. Messages Button
-  - 6. Bookmarks Button
-  - 7. Lists Button
-  - 8. Navigation Buttons Labels on Hover
-  - 9. Navigation Buttons Labels
-  - 10. Center Navigation
-  - 11. Zen Mode
-  - 12. Hide Reply Count
-  - 13. Hide Retweet Count
-  - 14. Hide Like Count
-  - 15. Hide Follow
-  - 16. Hide Tweet Button
-  - 17. Hide Search Bar
-  - 18. Transparent Search Bar
-  - 19. Minimal Favicon
-  - 20. Remove Promoted Posts
-  - 21. Who to Follow
-  - 22. Topics to Follow
-  - 23. Always Show Latest Tweets
---*/
 const injectAllChanges = (data) => {
   const {
     feedWidth,
@@ -1015,35 +965,33 @@ const injectAllChanges = (data) => {
     hideTweetButton,
     hideSearch,
     transparentSearch,
-    minimalFavicon,
     removePromotedPosts,
     whoToFollow,
     topicsToFollow,
     latestTweets,
   } = data;
-  changeFeedWidth(feedWidth);
-  changefeedBorders(feedBorders);
-  changeExploreButton(exploreButton);
-  changeNotificationsButton(notificationsButton);
-  changeMessagesButton(messagesButton);
-  changeBookmarksButton(bookmarksButton);
-  changeListsButton(listsButton);
-  changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover);
-  changeNavigationButtonsLabels(navigationButtonsLabels);
-  changeNavigationCenter(navigationCenter);
-  changeZenMode(zenMode);
-  changeReplyCount(replyCount);
-  changeRetweetCount(retweetCount);
-  changeLikeCount(likeCount);
-  changeFollowCount(followCount);
-  changeTweetButton(hideTweetButton);
-  changeSearchBar1(hideSearch);
-  changeSearchBar2(transparentSearch);
-  changeFavicon(minimalFavicon);
-  changePromotedPosts(removePromotedPosts);
-  changeWhoToFollow(whoToFollow);
-  changeTopicsToFollow(topicsToFollow);
-  changeLatestTweets(latestTweets);
+  changeFeedWidth(feedWidth); // Feed Width
+  changefeedBorders(feedBorders); // Feed Borders
+  changeExploreButton(exploreButton); // Explore Button
+  changeNotificationsButton(notificationsButton); // Notification Button
+  changeMessagesButton(messagesButton); // Messages Button
+  changeBookmarksButton(bookmarksButton); // Bookmarks Button
+  changeListsButton(listsButton); // Lists Button
+  changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
+  changeNavigationButtonsLabels(navigationButtonsLabels); // Navigation Buttons Labels
+  changeNavigationCenter(navigationCenter); // Center Navigation
+  changeZenMode(zenMode); // Zen Mode
+  changeReplyCount(replyCount); // Hide Reply Count
+  changeRetweetCount(retweetCount); // Hide Retweet Count
+  changeLikeCount(likeCount); // Hide Like Count
+  changeFollowCount(followCount); // Hide Follow
+  changeTweetButton(hideTweetButton); // Hide Tweet Button
+  changeSearchBar1(hideSearch); // Hide Search Bar
+  changeSearchBar2(transparentSearch); // Transparent Search Bar
+  changePromotedPosts(removePromotedPosts); // Remove Promoted Posts
+  changeWhoToFollow(whoToFollow); // Who to Follow
+  changeTopicsToFollow(topicsToFollow); // Topics to Follow
+  changeLatestTweets(latestTweets); // Always Show Latest Tweets
 };
 
 /*--
@@ -1087,7 +1035,6 @@ const init = () => {
       "hideTweetButton",
       "hideSearch",
       "transparentSearch",
-      "minimalFavicon",
       "removePromotedPosts",
       "whoToFollow",
       "topicsToFollow",
