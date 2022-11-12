@@ -1,7 +1,7 @@
 /*--
-- Minimal Theme for Twitter - https://wang.sh/minimal-twitter
-- Licensed under the MIT license - https://github.com/thomaswang/minimal-twitter/blob/main/LICENSE
-- Copyright (c) 2022 Thomas Wang
+- Minimal Theme for Twitter - https://typefully.com/minimal-twitter
+- Licensed under the MIT license - https://github.com/typefully/minimal-twitter/blob/main/LICENSE
+- Copyright (c) 2022 Mailbrew Inc.
 --*/
 
 /* Remove Promoted Posts */
@@ -23,6 +23,13 @@ a[href*="quick_promote_web"] {
   margin: 0 !important;
   padding: 0 !important;
   z-index: 1 !important;
+}
+
+/* Remove list button on smaller screen */
+@media only screen and (max-width: 1264px) {
+  #mt-listsButtonNode {
+    display: none;
+  }
 }
 
 /* Twitter has a large screen breakpoint at 1000px */

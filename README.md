@@ -1,24 +1,38 @@
-<img width="80px" alt="Minimal Theme for Twitter App Icon" src="./assets/MinimalTwitterIcon.png" />
+<p align="center">
+  <img width="80px" alt="Minimal Theme for Twitter App Icon" src="./assets/MinimalTwitterIcon.png" />
+</p>
 
-## Install Extension
+<h1 align="center">
+  Minimal Theme for Twitter by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>
+</h1>
 
 - **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)**
 - **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
 - **Add to Microsoft Edge**: **[Available as a Microsoft Edge Add-on](https://microsoftedge.microsoft.com/addons/detail/mghjldihobnccoppgcgfelpdpffmebjn)**
 
-![Screenshots](./assets/screenshots-chrome.png)
+![Screenshots](./assets/screenshots.png)
 
-Alternatively, you can use the [base styles](extension/content/main.css) as userstyles (e.g. with [Firefox's built-in Style Editor](https://developer.mozilla.org/en-US/docs/Tools/Style_Editor) or using extensions like [Stylish for Chrome](https://chrome.google.com/webstore/detail/stylish-custom-themes-for/fjnbnpbmkenffdnngjfgmeleoegfcffe) and [Cascadea for Safari](https://apps.apple.com/app/cascadea/id1432182561)).
+Minimal Theme for Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team. To contribute and/or see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
 
-To contribute and/or see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
+## Description
 
-## Customize
+Refine and clean up the Twitter interface, and customize your experience:
 
-Customizations, preferences, options! Access them by clicking the extension's icon as a popup or in full screen in Options (Chrome & Edge) or Preferences (Firefox).
+- Remove the distracting trends sidebar
+- Customize your Timeline width
+- Remove Timeline borders for a more minimal look
+- Customize the left navigation
+- Hide vanity counts under tweets
+- Remove promoted posts
+- Remove "Who to Follow" and other suggestions
+- Hide the Search Bar
+- Hide the Tweet button
+- And more...
 
-— _You can_ —
+## By the makers of Typefully
 
-- Control Feed / Timeline Width
-- Control Navigation UI: Buttons, Centering, Labels
-- Activate **Zen Mode**
-- ...and more!
+We also make [Typefully](https://typefully.com/?ref=minimal-twitter), which helps you craft better tweets &amp; threads, and grow faster on Twitter.
+
+<a href="https://typefully.com/?ref=minimal-twitter">
+  <img width="160px" alt="Typefully" src="./assets/typefully-logotype.png" />
+</a>

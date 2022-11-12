@@ -2,7 +2,7 @@
   "name": "Minimal Theme for Twitter",
   "short_name": "Minimal Twitter",
   "description": "Declutter the Twitter web experience.",
-  "version": "4.3.3",
+  "version": "4.4.0",
   "manifest_version": 3,
   "icons": {
     "16": "images/MinimalTwitterIcon16.png",
@@ -11,6 +11,10 @@
     "128": "images/MinimalTwitterIcon128.png"
   },
   "permissions": ["storage"],
+  "background": {
+    "service_worker": "content/background.js",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "run_at": "document_end",
@@ -20,12 +24,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": [
-        "content/main.css",
-        "content/additions.css",
-        "content/twitter.ico",
-        "content/twitter-mt.ico"
-      ],
+      "resources": ["content/main.css", "content/additions.css"],
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
     }
   ],

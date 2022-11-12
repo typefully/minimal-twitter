@@ -241,7 +241,7 @@ const getCurrentTextAndSendToTypefully = (replyingToLink) => {
 
   // With URLSearchParams
   const url = new URL("https://typefully.com/");
-  url.searchParams.set("via", "thomas");
+  url.searchParams.set("ref", "minimal-twitter");
   url.searchParams.set("new", typefullyContent);
   if (replyingToLink) {
     url.searchParams.set("replyTo", replyingToLink);
@@ -290,11 +290,15 @@ const addListsButton = () => {
       profileNodeClone.href += "/lists";
       profileNodeClone.ariaLabel = "Minimal Twitter Lists";
       profileNodeClone.removeAttribute("data-testid");
-      profileNodeClone.firstChild.firstChild.firstChild.innerHTML = `<g>
-        <path d="M19.75 22H4.25C3.01 22 2 20.99 2 19.75V4.25C2 3.01 3.01 2 4.25 2h15.5C20.99 2 22 3.01 22 4.25v15.5c0 1.24-1.01 2.25-2.25 2.25zM4.25 3.5c-.414 0-.75.337-.75.75v15.5c0 .413.336.75.75.75h15.5c.414 0 .75-.337.75-.75V4.25c0-.413-.336-.75-.75-.75H4.25z"></path>
-        <path d="M17 8.64H7c-.414 0-.75-.337-.75-.75s.336-.75.75-.75h10c.414 0 .75.335.75.75s-.336.75-.75.75zm0 4.11H7c-.414 0-.75-.336-.75-.75s.336-.75.75-.75h10c.414 0 .75.336.75.75s-.336.75-.75.75zm-5 4.11H7c-.414 0-.75-.335-.75-.75s.336-.75.75-.75h5c.414 0 .75.337.75.75s-.336.75-.75.75z"></path>
-      </g>`;
+      profileNodeClone.firstChild.firstChild.firstChild.innerHTML = `<g><path d="M3 4.5C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5v15c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 22 3 20.88 3 19.5v-15zM5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-15c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2z"></path></g>`;
       profileNodeClone.firstChild.lastChild.firstChild.innerText = "Lists";
+      // toggle class .r-1ydqjzz on hover, which the class that adds the hover state background
+      profileNodeClone.onmouseover = () => {
+        profileNodeClone.firstChild.classList.add("r-1ydqjzz");
+      };
+      profileNodeClone.onmouseout = () => {
+        profileNodeClone.firstChild.classList.remove("r-1ydqjzz");
+      };
       profileNode.insertAdjacentElement("beforebegin", profileNodeClone);
     }
   }
@@ -790,30 +794,6 @@ const changeSearchBar2 = (transparentSearch) => {
   }
 };
 
-// Function to replace favicon (to reduce red dots)
-const changeFavicon = (minimalFavicon) => {
-  const currentFavicons = document.querySelectorAll('[rel="shortcut icon"]');
-  currentFavicons.forEach((item) => {
-    item && item.remove();
-  });
-
-  const head = document.querySelector("head");
-  const faviconLink = document.createElement("link");
-  faviconLink.id = "replacedFavicon";
-  faviconLink.rel = "shortcut icon";
-
-  switch (minimalFavicon) {
-    case "on":
-      faviconLink.href = chrome.runtime.getURL("content/twitter-mt.ico");
-      break;
-    case "off":
-      faviconLink.href = chrome.runtime.getURL("content/twitter.ico");
-      break;
-  }
-
-  head.appendChild(faviconLink);
-};
-
 // Function to change Promoted Posts
 const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
@@ -969,32 +949,6 @@ const constructNewData = (changes) => {
   return newChangesData;
 };
 
-/*-- 
-- Function to inject all changes:
-  - 1. Feed Width
-  - 2. Feed Borders
-  - 3. Explore Button
-  - 4. Notification Button
-  - 5. Messages Button
-  - 6. Bookmarks Button
-  - 7. Lists Button
-  - 8. Navigation Buttons Labels on Hover
-  - 9. Navigation Buttons Labels
-  - 10. Center Navigation
-  - 11. Zen Mode
-  - 12. Hide Reply Count
-  - 13. Hide Retweet Count
-  - 14. Hide Like Count
-  - 15. Hide Follow
-  - 16. Hide Tweet Button
-  - 17. Hide Search Bar
-  - 18. Transparent Search Bar
-  - 19. Minimal Favicon
-  - 20. Remove Promoted Posts
-  - 21. Who to Follow
-  - 22. Topics to Follow
-  - 23. Always Show Latest Tweets
---*/
 const injectAllChanges = (data) => {
   const {
     feedWidth,
@@ -1015,35 +969,33 @@ const injectAllChanges = (data) => {
     hideTweetButton,
     hideSearch,
     transparentSearch,
-    minimalFavicon,
     removePromotedPosts,
     whoToFollow,
     topicsToFollow,
     latestTweets,
   } = data;
-  changeFeedWidth(feedWidth);
-  changefeedBorders(feedBorders);
-  changeExploreButton(exploreButton);
-  changeNotificationsButton(notificationsButton);
-  changeMessagesButton(messagesButton);
-  changeBookmarksButton(bookmarksButton);
-  changeListsButton(listsButton);
-  changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover);
-  changeNavigationButtonsLabels(navigationButtonsLabels);
-  changeNavigationCenter(navigationCenter);
-  changeZenMode(zenMode);
-  changeReplyCount(replyCount);
-  changeRetweetCount(retweetCount);
-  changeLikeCount(likeCount);
-  changeFollowCount(followCount);
-  changeTweetButton(hideTweetButton);
-  changeSearchBar1(hideSearch);
-  changeSearchBar2(transparentSearch);
-  changeFavicon(minimalFavicon);
-  changePromotedPosts(removePromotedPosts);
-  changeWhoToFollow(whoToFollow);
-  changeTopicsToFollow(topicsToFollow);
-  changeLatestTweets(latestTweets);
+  changeFeedWidth(feedWidth); // Feed Width
+  changefeedBorders(feedBorders); // Feed Borders
+  changeExploreButton(exploreButton); // Explore Button
+  changeNotificationsButton(notificationsButton); // Notification Button
+  changeMessagesButton(messagesButton); // Messages Button
+  changeBookmarksButton(bookmarksButton); // Bookmarks Button
+  changeListsButton(listsButton); // Lists Button
+  changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
+  changeNavigationButtonsLabels(navigationButtonsLabels); // Navigation Buttons Labels
+  changeNavigationCenter(navigationCenter); // Center Navigation
+  changeZenMode(zenMode); // Zen Mode
+  changeReplyCount(replyCount); // Hide Reply Count
+  changeRetweetCount(retweetCount); // Hide Retweet Count
+  changeLikeCount(likeCount); // Hide Like Count
+  changeFollowCount(followCount); // Hide Follow
+  changeTweetButton(hideTweetButton); // Hide Tweet Button
+  changeSearchBar1(hideSearch); // Hide Search Bar
+  changeSearchBar2(transparentSearch); // Transparent Search Bar
+  changePromotedPosts(removePromotedPosts); // Remove Promoted Posts
+  changeWhoToFollow(whoToFollow); // Who to Follow
+  changeTopicsToFollow(topicsToFollow); // Topics to Follow
+  changeLatestTweets(latestTweets); // Always Show Latest Tweets
 };
 
 /*--
@@ -1087,7 +1039,6 @@ const init = () => {
       "hideTweetButton",
       "hideSearch",
       "transparentSearch",
-      "minimalFavicon",
       "removePromotedPosts",
       "whoToFollow",
       "topicsToFollow",
