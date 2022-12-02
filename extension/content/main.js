@@ -292,13 +292,15 @@ const addListsButton = () => {
       profileNodeClone.removeAttribute("data-testid");
       profileNodeClone.firstChild.firstChild.firstChild.innerHTML = `<g><path d="M3 4.5C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5v15c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 22 3 20.88 3 19.5v-15zM5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-15c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2z"></path></g>`;
       profileNodeClone.firstChild.lastChild.firstChild.innerText = "Lists";
-      // toggle class .r-1ydqjzz on hover, which the class that adds the hover state background
-      profileNodeClone.onmouseover = () => {
-        profileNodeClone.firstChild.classList.add("r-1ydqjzz");
-      };
-      profileNodeClone.onmouseout = () => {
-        profileNodeClone.firstChild.classList.remove("r-1ydqjzz");
-      };
+      // add custom hover state background
+      addStyles(
+        "mt-listsButtonNode",
+        `
+        [aria-label="Minimal Twitter Lists"] > div:hover {
+          background-color: rgb(29, 155, 240, 0.1);
+        }
+        `
+      );
       profileNode.insertAdjacentElement("beforebegin", profileNodeClone);
     }
   }
