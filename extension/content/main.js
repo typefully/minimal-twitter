@@ -528,10 +528,10 @@ const removeHover = () => {
     header[role="banner"] nav[role="navigation"] {
       width: fit-content !important;
     }
-    header[role="banner"] nav[role="navigation"] div[dir="auto"] {
+    header[role="banner"] nav[role="navigation"] div[dir] {
       position: absolute !important;
     }
-    header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span {
+    header[role="banner"] nav[role="navigation"] * div[dir]:not([aria-label]) > span {
       display: none !important;
     }
   
@@ -576,7 +576,7 @@ const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
       addStyles(
         "mt-navigationButtonsLabels",
         `
-        header[role="banner"] nav[role="navigation"] * div[dir="auto"]:not([aria-label]) > span,
+        header[role="banner"] nav[role="navigation"] * div[dir]:not([aria-label]) > span,
         [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
           opacity: 1 !important;
         }
@@ -715,8 +715,8 @@ const changeFollowCount = (followCount) => {
       addStyles(
         "mt-followCount",
         `
-        [href$="/following"][dir="auto"][role="link"],
-        [href$="/followers"][dir="auto"][role="link"] {
+        [href$="/following"][dir][role="link"],
+        [href$="/followers"][dir][role="link"] {
           display: none !important;
         }
         `
