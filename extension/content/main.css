@@ -74,7 +74,7 @@ a[href*="quick_promote_web"] {
   header[role="banner"]
     nav[role="navigation"]
     *
-    div[dir="auto"]:not([aria-label])
+    div[dir]:not([aria-label])
     > span,
   [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
     display: inline-block !important;
@@ -84,7 +84,7 @@ a[href*="quick_promote_web"] {
   header[role="banner"]
     nav[role="navigation"]:hover
     *
-    div[dir="auto"]:not([aria-label])
+    div[dir]:not([aria-label])
     > span,
   [data-testid="SideNav_AccountSwitcher_Button"]:hover > div:not(:first-child) {
     opacity: 1 !important;
