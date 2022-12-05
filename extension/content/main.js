@@ -296,7 +296,7 @@ const addListsButton = () => {
       addStyles(
         "mt-listsButtonNode",
         `
-        [aria-label="Minimal Twitter Lists"] > div:hover {
+        [aria-label="Minimal Twitter Lists"]:hover > div {
           background-color: rgb(29, 155, 240, 0.1);
         }
         `
