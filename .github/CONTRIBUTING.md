@@ -12,7 +12,19 @@ cd customize-app
 
 ```sh
 yarn # must run yarn once first before you can build
-yarn run build
+yarn build
+```
+
+We also use [parcel](https://parceljs.org) to build the `content_scripts` for the extension.
+
+```sh
+cd extension/content/scripts
+```
+
+```sh
+yarn # must run yarn once first before you can build
+yarn build # to build the content_scripts
+yarn watch # watch for changes and build automatically
 ```
 
 You can then go to [extension](./extension) and begin testing.
