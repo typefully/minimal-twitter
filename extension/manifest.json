@@ -38,7 +38,7 @@
       "32": "images/MinimalTwitterIcon32.png",
       "48": "images/MinimalTwitterIcon48.png"
     },
-    "default_title": "Customize",
+    "default_title": "Minimal Twitter",
     "default_popup": "build/customize.html"
   }
 }
