@@ -1,4 +1,5 @@
 import { addStyles, removeElement } from "../utilities";
+import { checkUrlForFollow } from "../check";
 
 // Function to change Zen Mode
 export const changeZenMode = (zenMode) => {

@@ -3,7 +3,7 @@ import {
   saveCurrentReplyToLink,
   addTypefullyReplyPlug,
 } from "./typefully";
-import { checkUrlForFollow } from "./modify";
+import { checkUrlForFollow } from "./check";
 import { addListsButton } from "./options/navigation";
 
 // Function to reveal Search Filters
