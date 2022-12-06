@@ -29,7 +29,7 @@
     }
   ],
   "options_ui": {
-    "page": "customize.html",
+    "page": "build/customize.html",
     "open_in_tab": true
   },
   "action": {
@@ -39,6 +39,6 @@
       "48": "images/MinimalTwitterIcon48.png"
     },
     "default_title": "Customize",
-    "default_popup": "customize.html"
+    "default_popup": "build/customize.html"
   }
 }

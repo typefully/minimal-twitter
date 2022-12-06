@@ -299,7 +299,7 @@ const addListsButton = () => {
         "mt-listsButtonNode",
         `
         [aria-label="Minimal Twitter Lists"]:hover > div {
-          background-color: rgb(29, 155, 240, 0.1);
+          background-color: rgba(29, 155, 240, 0.1);
         }
         `
       );
