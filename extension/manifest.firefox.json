@@ -24,12 +24,12 @@
     {
       "run_at": "document_idle",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
-      "js": ["content/main.js"]
+      "js": ["content/scripts/dist/main.js"]
     }
   ],
-  "web_accessible_resources": ["content/main.css", "content/additions.css"],
+  "web_accessible_resources": ["content/main.css", "content/typefully.css"],
   "options_ui": {
-    "page": "customize.html",
+    "page": "build/customize.html",
     "open_in_tab": true
   },
   "browser_action": {
@@ -39,6 +39,6 @@
       "48": "images/MinimalTwitterIcon48.png"
     },
     "default_title": "Customize",
-    "default_popup": "customize.html"
+    "default_popup": "build/customize.html"
   }
 }

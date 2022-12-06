@@ -19,12 +19,12 @@
     {
       "run_at": "document_end",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
-      "js": ["content/main.js"]
+      "js": ["content/scripts/dist/main.js"]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["content/main.css", "content/additions.css"],
+      "resources": ["content/main.css", "content/typefully.css"],
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"]
     }
   ],
