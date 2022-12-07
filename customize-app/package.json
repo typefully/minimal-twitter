@@ -4,8 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "lint": "next lint",
-    "build": "mkdir -p ../extension/build next build && next export && mv out/_next out/next && sed -i '' -e 's/\\/_next/\\.\\/next/g' out/**.html && mv out/index.html ../extension/build/customize.html && rsync -va --delete-after out/next/ ../extension/build/next/ && rm -rf out",
-    "build:linux": "mkdir -p ../extension/build next build && next export && mv out/_next out/next && sed -i 's/\\/_next/\\.\\/next/g' out/**.html && mv out/index.html ../extension/build/customize.html && rsync -va --delete-after out/next/ ../extension/build/next/ && rm -rf out",
+    "build": "mkdir -p ../extension/build && next build && next export && mv out/_next out/next && sed -i '' -e 's/\\/_next/\\.\\/next/g' out/**.html && mv out/index.html ../extension/build/customize.html && rsync -va --delete-after out/next/ ../extension/build/next/ && rm -rf out && rm -rf next",
+    "build:linux": "mkdir -p ../extension/build && next build && next export && mv out/_next out/next && sed -i 's/\\/_next/\\.\\/next/g' out/**.html && mv out/index.html ../extension/build/customize.html && rsync -va --delete-after out/next/ ../extension/build/next/ && rm -rf out && rm -rf next",
     "start": "next start",
     "check:prettier": "npx prettier --check .",
     "write:prettier": "npx prettier --write ."

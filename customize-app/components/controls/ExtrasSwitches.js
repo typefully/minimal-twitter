@@ -34,39 +34,41 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
   }
 })
 
-export const SwitchFeedBorders = () => {
-  const [userFeedBorders, setUserFeedBorders] = useState(true)
+export const SwitchTimelineBorders = () => {
+  const [userTimelineBorders, setUserTimelineBorders] = useState(true)
 
   useEffect(() => {
-    const getUserDefaultFeedBorders = async () => {
+    const getUserDefaultTimelineBorders = async () => {
       try {
-        const userDefaultFeedBorders = await getStorage("feedBorders")
-        userDefaultFeedBorders &&
-          setUserFeedBorders(userDefaultFeedBorders === "on" ? true : false)
+        const userDefaultTimelineBorders = await getStorage("timelineBorders")
+        userDefaultTimelineBorders &&
+          setUserTimelineBorders(
+            userDefaultTimelineBorders === "on" ? true : false
+          )
       } catch (error) {
         console.warn(error)
       }
     }
 
-    getUserDefaultFeedBorders()
+    getUserDefaultTimelineBorders()
   }, [])
 
   return (
     <div className="flex items-center justify-between w-full py-4">
-      <label htmlFor="feedBorders" className="text-[15px] font-bold">
-        Feed Borders
+      <label htmlFor="timelineBorders" className="text-[15px] font-bold">
+        Timeline Borders
       </label>
       <StyledSwitch
         onCheckedChange={async (checked) => {
-          setUserFeedBorders(checked)
+          setUserTimelineBorders(checked)
           try {
-            await setStorage({ feedBorders: checked ? "on" : "off" })
+            await setStorage({ timelineBorders: checked ? "on" : "off" })
           } catch (error) {
             console.warn(error)
           }
         }}
-        checked={userFeedBorders}
-        id="feedBorders"
+        checked={userTimelineBorders}
+        id="timelineBorders"
       >
         <StyledThumb />
       </StyledSwitch>

@@ -56,21 +56,21 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
   "&:focus": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` }
 })
 
-const FeedSlider = () => {
+const TimelineSlider = () => {
   const [userTrack, setUserTrack] = useState(700)
   const trackDots = [600, 650, 700, 750, 800]
 
   useEffect(() => {
-    const getUserDefaultFeedWidth = async () => {
+    const getUserDefaultTimelineWidth = async () => {
       try {
-        const userDefaultFeedWidth = await getStorage("feedWidth")
-        userDefaultFeedWidth && setUserTrack(userDefaultFeedWidth)
+        const userDefaultTimelineWidth = await getStorage("timelineWidth")
+        userDefaultTimelineWidth && setUserTrack(userDefaultTimelineWidth)
       } catch (error) {
         console.warn(error)
       }
     }
 
-    getUserDefaultFeedWidth()
+    getUserDefaultTimelineWidth()
   }, [])
 
   return (
@@ -82,7 +82,7 @@ const FeedSlider = () => {
             if (value && value[0]) {
               setUserTrack(value[0])
               try {
-                await setStorage({ feedWidth: value[0] })
+                await setStorage({ timelineWidth: value[0] })
               } catch (error) {
                 console.warn(error)
               }
@@ -92,7 +92,7 @@ const FeedSlider = () => {
           min={600}
           max={800}
           step={50}
-          aria-label="Feed Width Slider"
+          aria-label="Timeline Width Slider"
         >
           <StyledTrack>
             <StyledRange />
@@ -118,4 +118,4 @@ const FeedSlider = () => {
   )
 }
 
-export default FeedSlider
+export default TimelineSlider

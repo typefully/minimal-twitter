@@ -42,7 +42,7 @@ a[href*="quick_promote_web"] {
     overflow-x: clip !important;
   }
 
-  /* Match widths for feed */
+  /* Match widths for timeline */
   [data-testid="primaryColumn"] {
     width: 700px !important;
     max-width: 700px !important;
@@ -54,7 +54,7 @@ a[href*="quick_promote_web"] {
   }
 
   /* Nudge engagement row 81px right */
-  /* In default feed: 506px - 425px */
+  /* In default timeline: 506px - 425px */
   div[aria-label][role="group"][id^="id__"] {
     margin-right: 81px !important;
   }

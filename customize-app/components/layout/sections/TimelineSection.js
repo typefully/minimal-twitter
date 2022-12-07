@@ -1,27 +1,27 @@
 import useMounted from "../../../utilities/hooks/useMounted"
-import { SwitchFeedBorders } from "../../controls/ExtrasSwitches"
-import FeedSlider from "../../controls/FeedSlider"
+import { SwitchTimelineBorders } from "../../controls/ExtrasSwitches"
+import TimelineSlider from "../../controls/TimelineSlider"
 import Separator from "../../controls/Separator"
 
-const FeedSection = () => {
+const TimelineSection = () => {
   const mounted = useMounted()
 
   return (
     <section className="flex flex-col space-y-2">
       <label
-        htmlFor="user-control-feed-width"
+        htmlFor="user-control-timeline-width"
         className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
       >
-        Customize Feed
+        Customize Timeline
       </label>
       {mounted ? (
         <div
-          id="user-control-feed-width"
+          id="user-control-timeline-width"
           className="p-4 pb-0 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl"
         >
-          <FeedSlider />
+          <TimelineSlider />
           <Separator />
-          <SwitchFeedBorders />
+          <SwitchTimelineBorders />
         </div>
       ) : (
         <div className="dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl animate-pulse h-[115.5px]" />
@@ -41,4 +41,4 @@ const FeedSection = () => {
     </section>
   )
 }
-export default FeedSection
+export default TimelineSection

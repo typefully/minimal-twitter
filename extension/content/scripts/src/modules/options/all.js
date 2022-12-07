@@ -1,4 +1,4 @@
-import { changeFeedWidth, changeFeedBorders } from "./feed";
+import { changeTimelineWidth, changeTimelineBorders } from "./timeline";
 import {
   changeExploreButton,
   changeNotificationsButton,
@@ -26,8 +26,8 @@ import {
 
 // Array of user preferences, passed to `injectAllChanges`
 export const userPreferences = [
-  "feedWidth", // 1
-  "feedBorders", // 2
+  "timelineWidth", // 1
+  "timelineBorders", // 2
   "exploreButton", // 3
   "notificationsButton", // 4
   "messagesButton", // 5
@@ -52,8 +52,8 @@ export const userPreferences = [
 
 export const injectAllChanges = (data) => {
   const {
-    feedWidth, // 1
-    feedBorders, // 2
+    timelineWidth, // 1
+    timelineBorders, // 2
     exploreButton, // 3
     notificationsButton, // 4
     messagesButton, // 5
@@ -75,8 +75,8 @@ export const injectAllChanges = (data) => {
     topicsToFollow, // 21
     latestTweets, // 22
   } = data;
-  changeFeedWidth(feedWidth); // Feed Width
-  changeFeedBorders(feedBorders); // Feed Borders
+  changeTimelineWidth(timelineWidth); // Timeline Width
+  changeTimelineBorders(timelineBorders); // Timeline Borders
   changeExploreButton(exploreButton); // Explore Button
   changeNotificationsButton(notificationsButton); // Notification Button
   changeMessagesButton(messagesButton); // Messages Button

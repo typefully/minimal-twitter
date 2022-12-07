@@ -1,11 +1,11 @@
 import { addStyles, removeElement } from "../utilities";
 
-// Function to change Feed Width
-export const changeFeedWidth = (feedWidth) => {
-  switch (feedWidth) {
+// Function to change Timeline Width
+export const changeTimelineWidth = (timelineWidth) => {
+  switch (timelineWidth) {
     case 600:
       addStyles(
-        "mt-feedWidth",
+        "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           [data-testid="primaryColumn"] {
@@ -18,7 +18,7 @@ export const changeFeedWidth = (feedWidth) => {
       break;
     case 650:
       addStyles(
-        "mt-feedWidth",
+        "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           [data-testid="primaryColumn"] {
@@ -31,7 +31,7 @@ export const changeFeedWidth = (feedWidth) => {
       break;
     case 700:
       addStyles(
-        "mt-feedWidth",
+        "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           [data-testid="primaryColumn"] {
@@ -44,7 +44,7 @@ export const changeFeedWidth = (feedWidth) => {
       break;
     case 750:
       addStyles(
-        "mt-feedWidth",
+        "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           [data-testid="primaryColumn"] {
@@ -57,7 +57,7 @@ export const changeFeedWidth = (feedWidth) => {
       break;
     case 800:
       addStyles(
-        "mt-feedWidth",
+        "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           [data-testid="primaryColumn"] {
@@ -71,16 +71,16 @@ export const changeFeedWidth = (feedWidth) => {
   }
 };
 
-// Function to change Feed Borders
-export const changeFeedBorders = (feedBorders) => {
-  switch (feedBorders) {
+// Function to change Timeline Borders
+export const changeTimelineBorders = (timelineBorders) => {
+  switch (timelineBorders) {
     case "on":
-      removeElement("mt-feedBorders");
+      removeElement("mt-timelineBorders");
       break;
 
     case "off":
       addStyles(
-        "mt-feedBorders",
+        "mt-timelineBorders",
         `
         @media only screen and (min-width: 988px) {
           div[data-testid="primaryColumn"] {
