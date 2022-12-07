@@ -1,6 +1,8 @@
 .typefully-modal-button,
-.typefully-reply-button {
-  color: white;
+.typefully-reply-button,
+.typefully-writermode-button {
+  color: var(--main-text-color);
+  background-color: var(--accent-color);
   text-decoration: none;
   padding-left: 22px;
   padding-right: 22px;
@@ -14,27 +16,33 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1d9bf0;
-  margin: 20px auto 0;
+  margin: 20px auto;
   order: 99;
   cursor: pointer;
 }
 
 .typefully-modal-button:hover,
-.typefully-reply-button:hover {
-  background-color: #1a8cd8;
+.typefully-reply-button:hover,
+.typefully-writermode-button:hover {
+  filter: brightness(0.5);
 }
 
 .typefully-modal-button svg,
-.typefully-reply-button svg {
+.typefully-reply-button svg,
+.typefully-writermode-button svg {
   margin: 0 3px 0 -8px;
 }
 
 
-.typefully-modal-button {
+.typefully-modal-button,
+.typefully-writermode-button {
   min-height: 40px;
 }
 
 .typefully-reply-button {
   min-height: 36px;
+}
+
+.typefully-writermode-button {
+
 }

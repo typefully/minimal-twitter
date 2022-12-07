@@ -1,5 +1,10 @@
-import { addStyles, removeElement } from "../utilities";
 import { checkUrlForFollow } from "../check";
+import {
+  createTypefullyLinkElement,
+  createTypefullyLogo,
+  getCurrentTextAndSendToTypefully,
+} from "../typefully";
+import { addStyles, removeElement } from "../utilities";
 
 // Function to change Writer Mode
 export const changeWriterMode = (writerMode) => {
@@ -8,21 +13,43 @@ export const changeWriterMode = (writerMode) => {
       addStyles(
         "mt-writerMode",
         `
+        body {
+          padding-left: 0 !important;
+        }
         header[role="banner"], 
         [data-testid="sidebarColumn"],
         [data-testid="primaryColumn"] > div > div:not(:nth-of-type(2)):not(:nth-of-type(3)) {
           display: none !important;
         }
-
         div[data-testid="primaryColumn"] {
           border-style: hidden !important;
+          padding-top: 10vh !important;
+        }
+        div[aria-labelledby="modal-header"][role="dialog"] {
+          width: 100vw !important;
+          max-width: 100vw !important;
+          top: 0 !important;
+          border-radius: 0 !important;
+        }
+        div[role="group"] > div:empty {
+          background-color: var(--body-bg-color) !important;
+        }
+        div[aria-labelledby="modal-header"][role="dialog"] > div {
+          border-radius: 0 !important;
+        }
+        div[aria-labelledby="modal-header"][role="dialog"] > div > div > div {
+          padding-bottom: 10vh !important;
         }
         `
       );
+      setTimeout(() => {
+        addTypefullyPlugToWriterMode();
+      }, 1000);
       break;
 
     case "off":
       removeElement("mt-writerMode");
+      removeTypefullyPlugFromWriterMode();
       break;
   }
 };
@@ -309,4 +336,34 @@ export const changeLatestTweets = (latestTweets) => {
       showLatestTweets();
     }
   }
+};
+
+const addTypefullyPlugToWriterMode = () => {
+  const main = document.querySelector('main[role="main"]');
+
+  if (main && !document.getElementById("typefully-writermode-link")) {
+    const typefullyLinkElement = createTypefullyLinkElement(
+      "typefully-writermode-link",
+      "typefully-writermode-button"
+    );
+    typefullyLinkElement.addEventListener("click", () => {
+      getCurrentTextAndSendToTypefully();
+    });
+
+    const typefullyLogo = createTypefullyLogo();
+    const typefullyText = document.createElement("span");
+    typefullyText.innerText = "Save draft to Typefully";
+
+    typefullyLinkElement.appendChild(typefullyLogo);
+    typefullyLinkElement.appendChild(typefullyText);
+
+    main.appendChild(typefullyLinkElement);
+  }
+};
+
+const removeTypefullyPlugFromWriterMode = () => {
+  const typefullyLinkElement = document.getElementById(
+    "typefully-writermode-link"
+  );
+  typefullyLinkElement && typefullyLinkElement.remove();
 };

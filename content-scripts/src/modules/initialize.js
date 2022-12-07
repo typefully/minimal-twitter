@@ -59,10 +59,35 @@ export const addStylesheets = () => {
 };
 
 function saveBgColorToRootVar() {
-  const body = document.querySelector("body");
-  const bodyBgColor = window.getComputedStyle(body).backgroundColor;
   const root = document.documentElement;
+
+  const bodyBgColor = window.getComputedStyle(
+    document.querySelector("body")
+  ).backgroundColor;
   root.style.setProperty("--body-bg-color", bodyBgColor);
+
+  const mainText =
+    document.querySelector("h2 > span") || document.querySelector("div > span");
+  if (mainText) {
+    const mainTextColor = window.getComputedStyle(mainText).color;
+    root.style.setProperty("--main-text-color", mainTextColor);
+  }
+
+  const secondaryText =
+    document.querySelector("a > time") ||
+    document.querySelector(
+      "[data-testid='primaryColumn'] div[aria-haspopup='menu'] > div > div > svg"
+    );
+  if (secondaryText) {
+    const secondaryTextColor = window.getComputedStyle(secondaryText).color;
+    root.style.setProperty("--secondary-text-color", secondaryTextColor);
+  }
+
+  const link = document.querySelector("a");
+  if (link) {
+    const accentColor = window.getComputedStyle(link).color;
+    root.style.setProperty("--accent-color", accentColor);
+  }
 }
 
 // Function to start MutationObserver
