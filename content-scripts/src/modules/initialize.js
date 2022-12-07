@@ -1,10 +1,11 @@
 import { checkUrlForFollow } from "./check";
-import { addListsButton } from "./options/navigation";
+import { addGrowButton, addListsButton } from "./options/navigation";
 import {
   addTypefullyPlug,
   addTypefullyReplyPlug,
   saveCurrentReplyToLink,
 } from "./typefully";
+import { removeElement } from "./utilities";
 
 // Function to reveal Search Filters
 const revealSearchFilters = () => {
@@ -101,6 +102,9 @@ export const observe = () => {
       addTypefullyReplyPlug();
       checkUrlForFollow();
       addListsButton();
+      setTimeout(() => {
+        addGrowButton();
+      });
       saveBgColorToRootVar();
     }
   });
@@ -108,5 +112,19 @@ export const observe = () => {
   observer.observe(document, {
     childList: true,
     subtree: true,
+  });
+};
+
+// On resize, remove and re-add the sidebar buttons, because their original
+// Twitter counterparts styles change programmatically based on window size,
+// so we need to re-create them when the window size changes.
+export const addResizeListener = () => {
+  window.addEventListener("resize", () => {
+    removeElement("mt-listsButtonNode");
+    removeElement("mt-typefullyGrowButton");
+    addListsButton();
+    setTimeout(() => {
+      addGrowButton();
+    });
   });
 };

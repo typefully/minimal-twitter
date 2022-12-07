@@ -6,11 +6,7 @@ import {
   CheckboxWhoToFollow
 } from "../../controls/Checkboxes"
 import Separator from "../../controls/Separator"
-import {
-  SwitchTimelineBorders,
-  SwitchTweetBorders,
-  SwitchWriterMode
-} from "../../controls/Switches"
+import SwitchControl from "../../controls/SwitchControl"
 import TimelineSlider from "../../controls/TimelineSlider"
 
 const TimelineSection = () => {
@@ -32,9 +28,12 @@ const TimelineSection = () => {
           <TimelineSlider />
           <Separator className="mb-4" />
           <div className="flex flex-col gap-y-4">
-            <SwitchWriterMode />
-            <SwitchTimelineBorders />
-            <SwitchTweetBorders />
+            <SwitchControl label="Writer Mode" storageKey="writerMode" />
+            <SwitchControl
+              label="Timeline Borders"
+              storageKey="timelineBorders"
+            />
+            <SwitchControl label="Tweet Borders" storageKey="tweetBorders" />
           </div>
           <Separator className="mt-4 mb-2" />
           <CheckboxPromotedPosts />

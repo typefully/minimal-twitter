@@ -3,43 +3,11 @@ import { styled } from "@stitches/react"
 import { useEffect, useState } from "react"
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
-export const SwitchTimelineBorders = () => {
-  return <SwitchControl label="Timeline Borders" storageKey="timelineBorders" />
-}
-
-export const SwitchTweetBorders = () => {
-  return <SwitchControl label="Tweet Borders" storageKey="tweetBorders" />
-}
-
-export const SwitchNavigationCenter = () => {
-  return (
-    <SwitchControl label="Center Vertically" storageKey="navigationCenter" />
-  )
-}
-
-export const SwitchNavigationButtonLabels = () => {
-  return (
-    <SwitchControl label="Show Labels" storageKey="navigationButtonsLabels" />
-  )
-}
-
-export const SwitchNavigationButtonLabelsHover = () => {
-  return (
-    <SwitchControl
-      label="Show Labels on Hover"
-      storageKey="navigationButtonsLabelsHover"
-      defaultState={true}
-    />
-  )
-}
-
-export const SwitchWriterMode = () => {
-  return <SwitchControl label="Writer Mode" storageKey="writerMode" />
-}
-
-/* ----------------------------------- UI ----------------------------------- */
-
-const SwitchControl = ({ label, storageKey, defaultState = false }) => {
+export default function SwitchControl({
+  label,
+  storageKey,
+  defaultState = false
+}) {
   const [localState, setLocalState] = useState(defaultState)
 
   useEffect(() => {

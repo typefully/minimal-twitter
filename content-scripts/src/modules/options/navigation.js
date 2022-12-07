@@ -1,4 +1,6 @@
-import { addStyles, removeElement } from "../utilities";
+import { showGrowTab } from "../grow-tab";
+import svgAssets from "../svgAssets";
+import { addStyles, getStorage, removeElement } from "../utilities";
 
 // Function to change Explore Button
 export const changeExploreButton = (exploreButton) => {
@@ -111,15 +113,16 @@ export const addListsButton = () => {
     );
 
     if (profileNode) {
-      const profileNodeClone = profileNode.cloneNode(true);
+      const listsButton = profileNode.cloneNode(true);
 
-      profileNodeClone.id = "mt-listsButtonNode";
-      profileNodeClone.href += "/lists";
-      profileNodeClone.ariaLabel = "Minimal Twitter Lists";
-      profileNodeClone.removeAttribute("data-testid");
-      profileNodeClone.firstChild.firstChild.firstChild.innerHTML = `<g><path d="M3 4.5C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5v15c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 22 3 20.88 3 19.5v-15zM5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-15c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2z"></path></g>`;
-      profileNodeClone.firstChild.lastChild.firstChild.innerText = "Lists";
-      profileNode.insertAdjacentElement("beforebegin", profileNodeClone);
+      listsButton.id = "mt-listsButtonNode";
+      listsButton.href += "/lists";
+      listsButton.ariaLabel = "Minimal Twitter Lists";
+      listsButton.removeAttribute("data-testid");
+      listsButton.firstChild.firstChild.firstChild.innerHTML =
+        svgAssets.lists.normal;
+      listsButton.firstChild.lastChild.firstChild.innerText = "Lists";
+      profileNode.insertAdjacentElement("beforebegin", listsButton);
 
       // add custom hover state background
       addStyles(
@@ -131,6 +134,61 @@ export const addListsButton = () => {
         `
       );
     }
+  }
+};
+
+// Function to change Grow Button
+export const changeGrowButton = (growButton) => {
+  switch (growButton) {
+    case "off":
+      removeElement("mt-typefullyGrowButton");
+    case "on":
+      addGrowButton();
+      break;
+  }
+};
+
+// Function to add Grow button
+export const addGrowButton = async () => {
+  const userSetting = await getStorage("typefullyGrowTab");
+  if (userSetting !== "on") return;
+  const exists = document.querySelector("#mt-typefullyGrowButton");
+  if (exists) return;
+
+  const profileNode = document.querySelector(
+    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+  );
+
+  if (profileNode) {
+    const growButton = document.createElement("div");
+    growButton.innerHTML = profileNode.innerHTML;
+
+    growButton.id = "mt-typefullyGrowButton";
+    growButton.ariaLabel = "Typefully Grow";
+    growButton.style.cursor = "pointer";
+    growButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.grow.normal;
+
+    growButton.onclick = () => {
+      growButton.firstChild.firstChild.firstChild.innerHTML =
+        svgAssets.grow.selected;
+      if (growButton.querySelector("span"))
+        growButton.querySelector("span").style.fontWeight = "700";
+      showGrowTab();
+    };
+
+    growButton.firstChild.lastChild.firstChild.innerText = "Grow";
+    profileNode.insertAdjacentElement("beforebegin", growButton);
+
+    // add custom hover state background
+    addStyles(
+      "mt-typefully-grow-button",
+      `
+        #mt-typefullyGrowButton:hover > div {
+          background-color: rgba(107, 114, 128, 0.2);
+        }
+        `
+    );
   }
 };
 

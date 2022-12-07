@@ -1,6 +1,10 @@
-import { addStylesheets, observe } from "./modules/initialize";
-import { constructNewData } from "./modules/utilities";
+import {
+  addResizeListener,
+  addStylesheets,
+  observe,
+} from "./modules/initialize";
 import { injectAllChanges, userPreferences } from "./modules/options/all";
+import { constructNewData } from "./modules/utilities";
 
 /*--
 - Docs: https://developer.chrome.com/docs/extensions/reference/storage/#synchronous-response-to-storage-updates
@@ -22,6 +26,9 @@ const init = () => {
 
   // Start MutationObserver
   observe();
+
+  // Watch for resize events
+  addResizeListener();
 
   // Inject user preferences
   chrome.storage.sync.get(userPreferences, (data) => {

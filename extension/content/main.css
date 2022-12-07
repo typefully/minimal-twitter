@@ -25,13 +25,6 @@ a[href*="quick_promote_web"] {
   z-index: 1 !important;
 }
 
-/* Remove list button on smaller screen */
-@media only screen and (max-width: 1264px) {
-  #mt-listsButtonNode {
-    display: none;
-  }
-}
-
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {

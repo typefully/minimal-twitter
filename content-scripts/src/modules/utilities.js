@@ -37,3 +37,35 @@ export const constructNewData = (changes) => {
 
   return newChangesData;
 };
+
+export const getCurrentTheme = () => {
+  const body = document.querySelector("body");
+  const bodyBackgroundColor = window.getComputedStyle(body).backgroundColor;
+
+  if (bodyBackgroundColor === "rgb(255, 255, 255)") {
+    return "white";
+  } else if (bodyBackgroundColor === "rgb(21, 32, 43)") {
+    return "dim";
+  } else if (bodyBackgroundColor === "rgb(0, 0, 0)") {
+    return "black";
+  }
+};
+
+/*--
+- Docs: https://developer.chrome.com/docs/extensions/reference/storage/
+- Use storage.sync to allow user to store customizations
+--*/
+
+/*
+- Get storage with storage.sync
+- k => "[key]" (String)
+- Don't need to throttle
+*/
+export const getStorage = async (k) => {
+  const promise = new Promise((resolve, _reject) => {
+    chrome?.storage?.sync.get([k], (data) => {
+      return resolve(data[k]);
+    });
+  });
+  return promise;
+};

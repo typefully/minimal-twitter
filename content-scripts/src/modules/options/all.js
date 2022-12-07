@@ -15,6 +15,7 @@ import {
 import {
   changeBookmarksButton,
   changeExploreButton,
+  changeGrowButton,
   changeListsButton,
   changeMessagesButton,
   changeNavigationButtonsLabels,
@@ -53,6 +54,7 @@ export const userPreferences = [
   "topicsToFollow", // 21
   "latestTweets", // 22
   "tweetBorders", // 23
+  "typefullyGrowTab", // 24
 ];
 
 export const injectAllChanges = (data) => {
@@ -80,6 +82,7 @@ export const injectAllChanges = (data) => {
     topicsToFollow, // 21
     latestTweets, // 22
     tweetBorders, // 23
+    typefullyGrowTab, // 24
   } = data;
   changeTimelineWidth(timelineWidth); // Timeline Width
   changeTimelineBorders(timelineBorders); // Timeline Borders
@@ -89,6 +92,7 @@ export const injectAllChanges = (data) => {
   changeMessagesButton(messagesButton); // Messages Button
   changeBookmarksButton(bookmarksButton); // Bookmarks Button
   changeListsButton(listsButton); // Lists Button
+  changeGrowButton(typefullyGrowTab); // Typefully Grow Button
   changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(navigationButtonsLabels); // Navigation Buttons Labels
   changeNavigationCenter(navigationCenter); // Center Navigation
