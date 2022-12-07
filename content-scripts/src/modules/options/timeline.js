@@ -82,11 +82,11 @@ export const changeTimelineBorders = (timelineBorders) => {
       addStyles(
         "mt-timelineBorders",
         `
-@media only screen and (min-width: 988px) {
-  div[data-testid="primaryColumn"] {
-    border-style: hidden !important;
-  }
-}
+        @media only screen and (min-width: 988px) {
+          div[data-testid="primaryColumn"] {
+            border-style: hidden !important;
+          }
+        }
         `.trim()
       );
       break;
@@ -104,13 +104,13 @@ export const changeTweetBorders = (tweetBorders) => {
       addStyles(
         "mt-tweetBorders",
         `
-main[role="main"] section > div > div > div > div {
-  border-style: hidden !important;
-}
-[data-testid="primaryColumn"] > div > div:empty {
-  background: transparent !important;
-}
-`.trim()
+        main[role="main"] section > div > div > div > div {
+          border-style: hidden !important;
+        }
+        [data-testid="primaryColumn"] > div > div:empty {
+          background: transparent !important;
+        }
+        `.trim()
       );
       break;
   }

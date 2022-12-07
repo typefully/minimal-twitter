@@ -101,7 +101,7 @@ const Lists = () => (
 )
 
 const Navigation = () => (
-  <form className="p-3 pb-0 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
+  <form className="p-3 pb-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
     <div className="flex items-center justify-between pb-4">
       <Explore />
       <Notifications />
@@ -109,10 +109,12 @@ const Navigation = () => (
       <Bookmarks />
       <Lists />
     </div>
-    <Separator />
-    <SwitchNavigationCenter />
-    <SwitchNavigationButtonLabels />
-    <SwitchNavigationButtonLabelsHover />
+    <Separator className="mb-4" />
+    <div className="flex flex-col gap-y-4">
+      <SwitchNavigationCenter />
+      <SwitchNavigationButtonLabels />
+      <SwitchNavigationButtonLabelsHover />
+    </div>
   </form>
 )
 
