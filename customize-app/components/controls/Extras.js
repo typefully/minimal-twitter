@@ -21,7 +21,6 @@ import Separator from "./Separator"
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
 const Extras = () => {
-  const [showCheckboxes, setShowCheckboxes] = useState(false)
   const [showVanityCheckboxes, setShowVanityCheckboxes] = useState(false)
 
   const [hideAll, setHideAll] = useState(false)
@@ -156,60 +155,46 @@ const Extras = () => {
     <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
       <SwitchZenMode />
       <Separator />
-      {showCheckboxes ? (
-        <div className="w-full py-3">
-          <CheckboxHideVanityCount
-            showVanityCheckboxes={showVanityCheckboxes}
-            setShowVanityCheckboxes={setShowVanityCheckboxes}
-            onCheckedChange={onCheckedChange}
-            hideAll={hideAll}
-          />
-          {showVanityCheckboxes && (
-            <>
-              <CheckboxHideReplyCount
-                onCheckedChange={onCheckedChange}
-                hideReply={hideReply}
-              />
-              <CheckboxHideRetweetCount
-                onCheckedChange={onCheckedChange}
-                hideRetweet={hideRetweet}
-              />
-              <CheckboxHideLikeCount
-                onCheckedChange={onCheckedChange}
-                hideLike={hideLike}
-              />
-              <CheckboxHideFollowCount
-                onCheckedChange={onCheckedChange}
-                hideFollow={hideFollow}
-              />
-            </>
-          )}
-          <CheckboxHideTweetButton />
-          <CheckboxHideSearch />
-          <CheckboxTransparentSearch />
-          <CheckboxPromotedPosts />
-          <CheckboxWhoToFollow />
-          <CheckboxTopicsToFollow />
-          <CheckboxAlwaysShowLatest />
-          <div className="pb-3" />
-          <Separator />
-          <div className="flex items-center w-full pt-4 space-x-1 text-sm">
-            * Experimental — may not always work
-          </div>
+      <div className="w-full py-3">
+        <CheckboxHideVanityCount
+          showVanityCheckboxes={showVanityCheckboxes}
+          setShowVanityCheckboxes={setShowVanityCheckboxes}
+          onCheckedChange={onCheckedChange}
+          hideAll={hideAll}
+        />
+        {showVanityCheckboxes && (
+          <>
+            <CheckboxHideReplyCount
+              onCheckedChange={onCheckedChange}
+              hideReply={hideReply}
+            />
+            <CheckboxHideRetweetCount
+              onCheckedChange={onCheckedChange}
+              hideRetweet={hideRetweet}
+            />
+            <CheckboxHideLikeCount
+              onCheckedChange={onCheckedChange}
+              hideLike={hideLike}
+            />
+            <CheckboxHideFollowCount
+              onCheckedChange={onCheckedChange}
+              hideFollow={hideFollow}
+            />
+          </>
+        )}
+        <CheckboxHideTweetButton />
+        <CheckboxHideSearch />
+        <CheckboxTransparentSearch />
+        <CheckboxPromotedPosts />
+        <CheckboxWhoToFollow />
+        <CheckboxTopicsToFollow />
+        <CheckboxAlwaysShowLatest />
+        <div className="pb-3" />
+        <Separator />
+        <div className="flex items-center w-full pt-4 space-x-1 text-sm">
+          * Experimental — may not always work
         </div>
-      ) : (
-        <TogglePrimitive.Root
-          defaultPressed={false}
-          onPressedChange={() => {
-            setShowCheckboxes(true)
-          }}
-          className="grid w-full px-2 py-4 place-items-center hover:bg-twitterAccentFour"
-        >
-          <div className="text-[15px] text-twitterAccentThree font-medium">
-            Show More
-          </div>
-        </TogglePrimitive.Root>
-      )}
+      </div>
     </form>
   )
 }

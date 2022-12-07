@@ -100,40 +100,20 @@ const Lists = () => (
   </UserButton>
 )
 
-const Navigation = () => {
-  const [showSwitches, setShowSwitches] = useState(false)
-
-  return (
-    <form className="p-3 pb-0 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-      <div className="flex items-center justify-between pb-4">
-        <Explore />
-        <Notifications />
-        <Messages />
-        <Bookmarks />
-        <Lists />
-      </div>
-      <Separator />
-      {showSwitches ? (
-        <>
-          <SwitchNavigationCenter />
-          <SwitchNavigationButtonLabels />
-          <SwitchNavigationButtonLabelsHover />
-        </>
-      ) : (
-        <TogglePrimitive.Root
-          defaultPressed={false}
-          onPressedChange={() => {
-            setShowSwitches(true)
-          }}
-          className="grid w-full px-2 py-4 place-items-center hover:bg-twitterAccentFour"
-        >
-          <div className="text-[15px] text-twitterAccentThree font-medium">
-            Show More
-          </div>
-        </TogglePrimitive.Root>
-      )}
-    </form>
-  )
-}
+const Navigation = () => (
+  <form className="p-3 pb-0 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
+    <div className="flex items-center justify-between pb-4">
+      <Explore />
+      <Notifications />
+      <Messages />
+      <Bookmarks />
+      <Lists />
+    </div>
+    <Separator />
+    <SwitchNavigationCenter />
+    <SwitchNavigationButtonLabels />
+    <SwitchNavigationButtonLabelsHover />
+  </form>
+)
 
 export default Navigation
