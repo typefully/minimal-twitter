@@ -24,30 +24,56 @@ import {
   changeLatestTweets,
 } from "./extras";
 
+// Array of user preferences, passed to `injectAllChanges`
+export const userPreferences = [
+  "feedWidth", // 1
+  "feedBorders", // 2
+  "exploreButton", // 3
+  "notificationsButton", // 4
+  "messagesButton", // 5
+  "bookmarksButton", // 6
+  "listsButton", // 7
+  "navigationButtonsLabelsHover", // 8
+  "navigationButtonsLabels", // 9
+  "navigationCenter", // 10
+  "zenMode", // 11
+  "replyCount", // 12
+  "retweetCount", // 13
+  "likeCount", // 14
+  "followCount", // 15
+  "hideTweetButton", // 16
+  "hideSearch", // 17
+  "transparentSearch", // 18
+  "removePromotedPosts", // 19
+  "whoToFollow", // 20
+  "topicsToFollow", // 21
+  "latestTweets", // 22
+];
+
 export const injectAllChanges = (data) => {
   const {
-    feedWidth,
-    feedBorders,
-    exploreButton,
-    notificationsButton,
-    messagesButton,
-    bookmarksButton,
-    listsButton,
-    navigationButtonsLabelsHover,
-    navigationButtonsLabels,
-    navigationCenter,
-    zenMode,
-    replyCount,
-    retweetCount,
-    likeCount,
-    followCount,
-    hideTweetButton,
-    hideSearch,
-    transparentSearch,
-    removePromotedPosts,
-    whoToFollow,
-    topicsToFollow,
-    latestTweets,
+    feedWidth, // 1
+    feedBorders, // 2
+    exploreButton, // 3
+    notificationsButton, // 4
+    messagesButton, // 5
+    bookmarksButton, // 6
+    listsButton, // 7
+    navigationButtonsLabelsHover, // 8
+    navigationButtonsLabels, // 9
+    navigationCenter, // 10
+    zenMode, // 11
+    replyCount, // 12
+    retweetCount, // 13
+    likeCount, // 14
+    followCount, // 15
+    hideTweetButton, // 16
+    hideSearch, // 17
+    transparentSearch, // 18
+    removePromotedPosts, // 19
+    whoToFollow, // 20
+    topicsToFollow, // 21
+    latestTweets, // 22
   } = data;
   changeFeedWidth(feedWidth); // Feed Width
   changeFeedBorders(feedBorders); // Feed Borders
