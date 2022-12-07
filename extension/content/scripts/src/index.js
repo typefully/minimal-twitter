@@ -43,6 +43,7 @@ chrome.storage.onChanged.addListener((changes) => {
 - Get Chrome Storage and inject respective styles
 --*/
 const init = () => {
+  // Adds main stylesheet and any additional stylesheets
   addStylesheets();
 
   // Start MutationObserver
