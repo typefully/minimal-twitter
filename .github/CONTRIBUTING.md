@@ -1,6 +1,6 @@
 # Contributing
 
-If you have a good idea, [start a discussion](https://github.com/typefully/minimal-twitter/discussions/new?category=ideas). For bug reports and usability issues, [submit an issue](https://github.com/typefully/minimal-twitter/issues/new). I do accept PRs but note that it is more likely to be accepted with an associated discussion or issue.
+If you have a good idea, [start a discussion](https://github.com/typefully/minimal-twitter/discussions/new?category=ideas). For bug reports and usability issues, [submit an issue](https://github.com/typefully/minimal-twitter/issues/new). We do accept PRs but note that it is more likely to be accepted with an associated discussion or issue.
 
 ## Development / Building the Extension
 
@@ -29,7 +29,7 @@ yarn watch # watch for changes and build automatically
 
 You can then go to [extension](./extension) and begin testing.
 
-Make sure to rename either `manifest.v3.json`, `manifest.v2.json`, or `manifest.firefox.json` to `manifest.json`. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
+Make sure to rename `manifest.firefox.json` to `manifest.json` if developing for Firefox. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
 
 <table>
 	<tr>
