@@ -24,7 +24,7 @@ export const addTypefullyPlug = () => {
 
     const typefullyLogo = createTypefullyLogo();
     const typefullyText = document.createElement("span");
-    typefullyText.innerText = "Continue thread in Typefully";
+    typefullyText.innerText = "Save draft to Typefully";
 
     typefullyLinkElement.appendChild(typefullyLogo);
     typefullyLinkElement.appendChild(typefullyText);
