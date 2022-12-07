@@ -315,7 +315,7 @@ export const CheckboxPromotedPosts = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="promotedPosts" className="text-base tracking-normal">
-        Remove Promoted Posts*
+        Remove Promoted Posts
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -361,7 +361,7 @@ export const CheckboxWhoToFollow = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="whoToFollow" className="text-base tracking-normal">
-        Remove Who to Follow*
+        Remove Who to Follow
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -408,7 +408,7 @@ export const CheckboxTopicsToFollow = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="topicsToFollow" className="text-base tracking-normal">
-        Remove Topics to Follow*
+        Remove Topics to Follow
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
@@ -455,7 +455,7 @@ export const CheckboxAlwaysShowLatest = () => {
   return (
     <div className="flex items-center justify-between w-full py-1">
       <label htmlFor="latestTweets" className="text-base tracking-normal">
-        Always Show Latest Tweets*
+        Always Show Latest Tweets
       </label>
       <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
         <StyledCheckbox
