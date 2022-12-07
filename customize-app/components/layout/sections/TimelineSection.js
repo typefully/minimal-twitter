@@ -1,16 +1,17 @@
 import useMounted from "../../../utilities/hooks/useMounted"
 import {
-  SwitchTimelineBorders,
-  SwitchWriterMode
-} from "../../controls/Switches"
-import TimelineSlider from "../../controls/TimelineSlider"
-import Separator from "../../controls/Separator"
-import {
   CheckboxAlwaysShowLatest,
   CheckboxPromotedPosts,
   CheckboxTopicsToFollow,
   CheckboxWhoToFollow
 } from "../../controls/Checkboxes"
+import Separator from "../../controls/Separator"
+import {
+  SwitchTimelineBorders,
+  SwitchTweetBorders,
+  SwitchWriterMode
+} from "../../controls/Switches"
+import TimelineSlider from "../../controls/TimelineSlider"
 
 const TimelineSection = () => {
   const mounted = useMounted()
@@ -33,6 +34,7 @@ const TimelineSection = () => {
           <div className="flex flex-col gap-y-4">
             <SwitchWriterMode />
             <SwitchTimelineBorders />
+            <SwitchTweetBorders />
           </div>
           <Separator className="mt-4 mb-2" />
           <CheckboxPromotedPosts />

@@ -1,28 +1,32 @@
-import { changeTimelineWidth, changeTimelineBorders } from "./timeline";
 import {
-  changeExploreButton,
-  changeNotificationsButton,
-  changeMessagesButton,
-  changeBookmarksButton,
-  changeListsButton,
-  changeNavigationButtonsLabelsHover,
-  changeNavigationButtonsLabels,
-  changeNavigationCenter,
-} from "./navigation";
-import {
-  changeWriterMode,
+  changeFollowCount,
+  changeLatestTweets,
+  changeLikeCount,
+  changePromotedPosts,
   changeReplyCount,
   changeRetweetCount,
-  changeLikeCount,
-  changeFollowCount,
-  changeTweetButton,
   changeSearchBar1,
   changeSearchBar2,
-  changePromotedPosts,
-  changeWhoToFollow,
   changeTopicsToFollow,
-  changeLatestTweets,
+  changeTweetButton,
+  changeWhoToFollow,
+  changeWriterMode,
 } from "./interface";
+import {
+  changeBookmarksButton,
+  changeExploreButton,
+  changeListsButton,
+  changeMessagesButton,
+  changeNavigationButtonsLabels,
+  changeNavigationButtonsLabelsHover,
+  changeNavigationCenter,
+  changeNotificationsButton,
+} from "./navigation";
+import {
+  changeTimelineBorders,
+  changeTimelineWidth,
+  changeTweetBorders,
+} from "./timeline";
 
 // Array of user preferences, passed to `injectAllChanges`
 export const userPreferences = [
@@ -48,6 +52,7 @@ export const userPreferences = [
   "whoToFollow", // 20
   "topicsToFollow", // 21
   "latestTweets", // 22
+  "tweetBorders", // 23
 ];
 
 export const injectAllChanges = (data) => {
@@ -74,9 +79,11 @@ export const injectAllChanges = (data) => {
     whoToFollow, // 20
     topicsToFollow, // 21
     latestTweets, // 22
+    tweetBorders, // 23
   } = data;
   changeTimelineWidth(timelineWidth); // Timeline Width
   changeTimelineBorders(timelineBorders); // Timeline Borders
+  changeTweetBorders(tweetBorders); // Timeline Borders
   changeExploreButton(exploreButton); // Explore Button
   changeNotificationsButton(notificationsButton); // Notification Button
   changeMessagesButton(messagesButton); // Messages Button

@@ -1,8 +1,82 @@
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { styled } from "@stitches/react"
 import { useEffect, useState } from "react"
-
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
+
+export const SwitchTimelineBorders = () => {
+  return <SwitchControl label="Timeline Borders" storageKey="timelineBorders" />
+}
+
+export const SwitchTweetBorders = () => {
+  return <SwitchControl label="Tweet Borders" storageKey="tweetBorders" />
+}
+
+export const SwitchNavigationCenter = () => {
+  return (
+    <SwitchControl label="Center Vertically" storageKey="navigationCenter" />
+  )
+}
+
+export const SwitchNavigationButtonLabels = () => {
+  return (
+    <SwitchControl label="Show Labels" storageKey="navigationButtonsLabels" />
+  )
+}
+
+export const SwitchNavigationButtonLabelsHover = () => {
+  return (
+    <SwitchControl
+      label="Show Labels on Hover"
+      storageKey="navigationButtonsLabelsHover"
+      defaultState={true}
+    />
+  )
+}
+
+export const SwitchWriterMode = () => {
+  return <SwitchControl label="Writer Mode" storageKey="writerMode" />
+}
+
+/* ----------------------------------- UI ----------------------------------- */
+
+const SwitchControl = ({ label, storageKey, defaultState = false }) => {
+  const [localState, setLocalState] = useState(defaultState)
+
+  useEffect(() => {
+    const getDefaultState = async () => {
+      try {
+        const userDefault = await getStorage(storageKey)
+        userDefault && setLocalState(userDefault === "on" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getDefaultState()
+  }, [])
+
+  return (
+    <div className="flex items-center justify-between w-full">
+      <label htmlFor={storageKey} className="text-[15px] font-bold">
+        {label}
+      </label>
+      <StyledSwitch
+        onCheckedChange={async (checked) => {
+          setLocalState(checked)
+          try {
+            await setStorage({ [storageKey]: checked ? "on" : "off" })
+          } catch (error) {
+            console.warn(error)
+          }
+        }}
+        checked={localState}
+        id={storageKey}
+      >
+        <StyledThumb />
+      </StyledSwitch>
+    </div>
+  )
+}
 
 const StyledSwitch = styled(SwitchPrimitive.Root, {
   all: "unset",
@@ -33,222 +107,3 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
     transform: "translateX(20px)"
   }
 })
-
-export const SwitchTimelineBorders = () => {
-  const [userTimelineBorders, setUserTimelineBorders] = useState(true)
-
-  useEffect(() => {
-    const getUserDefaultTimelineBorders = async () => {
-      try {
-        const userDefaultTimelineBorders = await getStorage("timelineBorders")
-        userDefaultTimelineBorders &&
-          setUserTimelineBorders(
-            userDefaultTimelineBorders === "on" ? true : false
-          )
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultTimelineBorders()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full">
-      <label htmlFor="timelineBorders" className="text-[15px] font-bold">
-        Timeline Borders
-      </label>
-      <StyledSwitch
-        onCheckedChange={async (checked) => {
-          setUserTimelineBorders(checked)
-          try {
-            await setStorage({ timelineBorders: checked ? "on" : "off" })
-          } catch (error) {
-            console.warn(error)
-          }
-        }}
-        checked={userTimelineBorders}
-        id="timelineBorders"
-      >
-        <StyledThumb />
-      </StyledSwitch>
-    </div>
-  )
-}
-
-export const SwitchNavigationCenter = () => {
-  const [userCenter, setUserCenter] = useState(false)
-
-  useEffect(() => {
-    const getUserDefaultButtonLabels = async () => {
-      try {
-        const userDefaultCenter = await getStorage("navigationCenter")
-        userDefaultCenter &&
-          setUserCenter(userDefaultCenter === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultButtonLabels()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-4">
-      <label htmlFor="navigationCenter" className="text-[15px] font-bold">
-        Center Vertically
-      </label>
-      <StyledSwitch
-        onCheckedChange={async (checked) => {
-          setUserCenter(checked)
-          try {
-            await setStorage({
-              navigationCenter: checked ? "on" : "off"
-            })
-          } catch (error) {
-            console.warn(error)
-          }
-        }}
-        checked={userCenter}
-        id="navigationCenter"
-      >
-        <StyledThumb />
-      </StyledSwitch>
-    </div>
-  )
-}
-
-export const SwitchNavigationButtonLabels = () => {
-  const [userButtonLabels, setUserButtonLabels] = useState(false)
-
-  useEffect(() => {
-    const getUserDefaultButtonLabels = async () => {
-      try {
-        const userDefaultButtonLabels = await getStorage(
-          "navigationButtonsLabels"
-        )
-        userDefaultButtonLabels &&
-          setUserButtonLabels(userDefaultButtonLabels === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultButtonLabels()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-0">
-      <label htmlFor="showNavigationLabels" className="text-[15px] font-bold">
-        Show Labels
-      </label>
-      <StyledSwitch
-        onCheckedChange={async (checked) => {
-          setUserButtonLabels(checked)
-          try {
-            await setStorage({
-              navigationButtonsLabels: checked ? "on" : "off"
-            })
-          } catch (error) {
-            console.warn(error)
-          }
-        }}
-        checked={userButtonLabels}
-        id="showNavigationLabels"
-      >
-        <StyledThumb />
-      </StyledSwitch>
-    </div>
-  )
-}
-
-export const SwitchNavigationButtonLabelsHover = () => {
-  const [userButtonLabelsHover, setUserButtonLabelsHover] = useState(true)
-
-  useEffect(() => {
-    const getUserDefaultButtonLabelsHover = async () => {
-      try {
-        const userDefaultButtonLabelsHover = await getStorage(
-          "navigationButtonsLabelsHover"
-        )
-        userDefaultButtonLabelsHover &&
-          setUserButtonLabelsHover(
-            userDefaultButtonLabelsHover === "off" ? false : true
-          )
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultButtonLabelsHover()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full py-4">
-      <label
-        htmlFor="showNavigationLabelsHover"
-        className="text-[15px] font-bold"
-      >
-        Show Labels on Hover
-      </label>
-      <StyledSwitch
-        onCheckedChange={async (checked) => {
-          setUserButtonLabelsHover(checked)
-          try {
-            await setStorage({
-              navigationButtonsLabelsHover: checked ? "on" : "off"
-            })
-          } catch (error) {
-            console.warn(error)
-          }
-        }}
-        checked={userButtonLabelsHover}
-        id="showNavigationLabelsHover"
-      >
-        <StyledThumb />
-      </StyledSwitch>
-    </div>
-  )
-}
-
-export const SwitchWriterMode = () => {
-  const [userWriter, setUserWriter] = useState(false)
-
-  useEffect(() => {
-    const getUserDefaultWriter = async () => {
-      try {
-        const userDefaultWriter = await getStorage("writerMode")
-        userDefaultWriter &&
-          setUserWriter(userDefaultWriter === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getUserDefaultWriter()
-  }, [])
-
-  return (
-    <div className="flex items-center justify-between w-full">
-      <label htmlFor="writerMode" className="text-[15px] font-bold">
-        Writer Mode
-      </label>
-      <StyledSwitch
-        onCheckedChange={async (checked) => {
-          setUserWriter(checked)
-          try {
-            await setStorage({
-              writerMode: checked ? "on" : "off"
-            })
-          } catch (error) {
-            console.warn(error)
-          }
-        }}
-        checked={userWriter}
-        id="writerMode"
-      >
-        <StyledThumb />
-      </StyledSwitch>
-    </div>
-  )
-}
