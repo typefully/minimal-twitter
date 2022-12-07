@@ -34,7 +34,7 @@ export const CheckboxHideVanityCount = ({
 }) => {
   return (
     <div className="flex items-center justify-between w-full py-1">
-      <span className="flex items-center space-x-2 text-base tracking-normal text-black dark:text-white">
+      <span className="flex items-center gap-x-2 text-base tracking-normal text-black dark:text-white">
         <label htmlFor="hideVanityCount">Hide Vanity Counts</label>
         <TogglePrimitive.Root
           pressed={showVanityCheckboxes}

@@ -10,7 +10,7 @@ import {
   changeNavigationCenter,
 } from "./navigation";
 import {
-  changeZenMode,
+  changeWriterMode,
   changeReplyCount,
   changeRetweetCount,
   changeLikeCount,
@@ -22,7 +22,7 @@ import {
   changeWhoToFollow,
   changeTopicsToFollow,
   changeLatestTweets,
-} from "./extras";
+} from "./interface";
 
 // Array of user preferences, passed to `injectAllChanges`
 export const userPreferences = [
@@ -36,7 +36,7 @@ export const userPreferences = [
   "navigationButtonsLabelsHover", // 8
   "navigationButtonsLabels", // 9
   "navigationCenter", // 10
-  "zenMode", // 11
+  "writerMode", // 11
   "replyCount", // 12
   "retweetCount", // 13
   "likeCount", // 14
@@ -62,7 +62,7 @@ export const injectAllChanges = (data) => {
     navigationButtonsLabelsHover, // 8
     navigationButtonsLabels, // 9
     navigationCenter, // 10
-    zenMode, // 11
+    writerMode, // 11
     replyCount, // 12
     retweetCount, // 13
     likeCount, // 14
@@ -85,7 +85,7 @@ export const injectAllChanges = (data) => {
   changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(navigationButtonsLabels); // Navigation Buttons Labels
   changeNavigationCenter(navigationCenter); // Center Navigation
-  changeZenMode(zenMode); // Zen Mode
+  changeWriterMode(writerMode); // Writer Mode
   changeReplyCount(replyCount); // Hide Reply Count
   changeRetweetCount(retweetCount); // Hide Retweet Count
   changeLikeCount(likeCount); // Hide Like Count

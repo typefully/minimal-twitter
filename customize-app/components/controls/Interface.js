@@ -1,8 +1,5 @@
-import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { useEffect, useState } from "react"
-
 import {
-  CheckboxAlwaysShowLatest,
   CheckboxHideFollowCount,
   CheckboxHideLikeCount,
   CheckboxHideReplyCount,
@@ -10,17 +7,12 @@ import {
   CheckboxHideSearch,
   CheckboxHideTweetButton,
   CheckboxHideVanityCount,
-  CheckboxPromotedPosts,
-  CheckboxTopicsToFollow,
-  CheckboxTransparentSearch,
-  CheckboxWhoToFollow
-} from "./ExtrasCheckboxes"
-import { SwitchZenMode } from "./ExtrasSwitches"
-import Separator from "./Separator"
+  CheckboxTransparentSearch
+} from "./Checkboxes"
 
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
-const Extras = () => {
+const Interface = () => {
   const [showVanityCheckboxes, setShowVanityCheckboxes] = useState(false)
 
   const [hideAll, setHideAll] = useState(false)
@@ -153,9 +145,7 @@ const Extras = () => {
 
   return (
     <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-      <SwitchZenMode />
-      <Separator />
-      <div className="w-full py-3">
+      <div className="w-full py-2">
         <CheckboxHideVanityCount
           showVanityCheckboxes={showVanityCheckboxes}
           setShowVanityCheckboxes={setShowVanityCheckboxes}
@@ -185,18 +175,9 @@ const Extras = () => {
         <CheckboxHideTweetButton />
         <CheckboxHideSearch />
         <CheckboxTransparentSearch />
-        <CheckboxPromotedPosts />
-        <CheckboxWhoToFollow />
-        <CheckboxTopicsToFollow />
-        <CheckboxAlwaysShowLatest />
-        <div className="pb-3" />
-        <Separator />
-        <div className="flex items-center w-full pt-4 space-x-1 text-sm">
-          * Experimental — may not always work
-        </div>
       </div>
     </form>
   )
 }
 
-export default Extras
+export default Interface

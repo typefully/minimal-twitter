@@ -18,7 +18,7 @@ yarn build
 We also use [parcel](https://parceljs.org) to build the `content_scripts` for the extension.
 
 ```sh
-cd extension/content/scripts
+cd content-scripts
 ```
 
 ```sh

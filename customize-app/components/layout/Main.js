@@ -1,12 +1,12 @@
-import ExtrasSection from "./sections/ExtrasSection"
+import InterfaceSection from "./sections/InterfaceSection"
 import TimelineSection from "./sections/TimelineSection"
 import NavigationSection from "./sections/NavigationSection"
 
 const Main = () => (
-  <main className="flex flex-col p-2 space-y-4">
+  <main className="flex flex-col p-2 gap-y-4">
     <TimelineSection />
     <NavigationSection />
-    <ExtrasSection />
+    <InterfaceSection />
   </main>
 )
 

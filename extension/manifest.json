@@ -19,7 +19,7 @@
     {
       "run_at": "document_end",
       "matches": ["https://twitter.com/*", "https://mobile.twitter.com/*"],
-      "js": ["content/scripts/dist/main.js"]
+      "js": ["dist/main.js"]
     }
   ],
   "web_accessible_resources": [

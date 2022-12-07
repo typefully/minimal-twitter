@@ -54,7 +54,7 @@ export const SwitchTimelineBorders = () => {
   }, [])
 
   return (
-    <div className="flex items-center justify-between w-full py-4">
+    <div className="flex items-center justify-between w-full">
       <label htmlFor="timelineBorders" className="text-[15px] font-bold">
         Timeline Borders
       </label>
@@ -211,40 +211,41 @@ export const SwitchNavigationButtonLabelsHover = () => {
   )
 }
 
-export const SwitchZenMode = () => {
-  const [userZen, setUserZen] = useState(false)
+export const SwitchWriterMode = () => {
+  const [userWriter, setUserWriter] = useState(false)
 
   useEffect(() => {
-    const getUserDefaultZen = async () => {
+    const getUserDefaultWriter = async () => {
       try {
-        const userDefaultZen = await getStorage("zenMode")
-        userDefaultZen && setUserZen(userDefaultZen === "on" ? true : false)
+        const userDefaultWriter = await getStorage("writerMode")
+        userDefaultWriter &&
+          setUserWriter(userDefaultWriter === "on" ? true : false)
       } catch (error) {
         console.warn(error)
       }
     }
 
-    getUserDefaultZen()
+    getUserDefaultWriter()
   }, [])
 
   return (
-    <div className="flex items-center justify-between w-full py-4">
-      <label htmlFor="zenMode" className="text-[15px] font-bold">
-        Zen Mode
+    <div className="flex items-center justify-between w-full">
+      <label htmlFor="writerMode" className="text-[15px] font-bold">
+        Writer Mode
       </label>
       <StyledSwitch
         onCheckedChange={async (checked) => {
-          setUserZen(checked)
+          setUserWriter(checked)
           try {
             await setStorage({
-              zenMode: checked ? "on" : "off"
+              writerMode: checked ? "on" : "off"
             })
           } catch (error) {
             console.warn(error)
           }
         }}
-        checked={userZen}
-        id="zenMode"
+        checked={userWriter}
+        id="writerMode"
       >
         <StyledThumb />
       </StyledSwitch>

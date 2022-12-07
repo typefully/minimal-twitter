@@ -1,12 +1,12 @@
 import { addStyles, removeElement } from "../utilities";
 import { checkUrlForFollow } from "../check";
 
-// Function to change Zen Mode
-export const changeZenMode = (zenMode) => {
-  switch (zenMode) {
+// Function to change Writer Mode
+export const changeWriterMode = (writerMode) => {
+  switch (writerMode) {
     case "on":
       addStyles(
-        "mt-zenMode",
+        "mt-writerMode",
         `
         header[role="banner"], 
         [data-testid="sidebarColumn"],
@@ -22,7 +22,7 @@ export const changeZenMode = (zenMode) => {
       break;
 
     case "off":
-      removeElement("mt-zenMode");
+      removeElement("mt-writerMode");
       break;
   }
 };

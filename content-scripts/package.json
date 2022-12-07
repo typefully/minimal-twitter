@@ -1,7 +1,7 @@
 {
   "name": "minimal-twitter-content-scripts",
   "source": "src/index.js",
-  "main": "dist/main.js",
+  "main": "../extension/dist/main.js",
   "scripts": {
     "watch": "parcel watch",
     "build": "parcel build"

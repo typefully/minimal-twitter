@@ -8,7 +8,7 @@ import {
   SwitchNavigationButtonLabelsHover,
   SwitchNavigationButtonLabels,
   SwitchNavigationCenter
-} from "./ExtrasSwitches"
+} from "./Switches"
 import Separator from "./Separator"
 
 const StyledToggle = styled(TogglePrimitive.Root, {

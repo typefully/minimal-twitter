@@ -1,27 +1,44 @@
 import useMounted from "../../../utilities/hooks/useMounted"
-import { SwitchTimelineBorders } from "../../controls/ExtrasSwitches"
+import {
+  SwitchTimelineBorders,
+  SwitchWriterMode
+} from "../../controls/Switches"
 import TimelineSlider from "../../controls/TimelineSlider"
 import Separator from "../../controls/Separator"
+import {
+  CheckboxAlwaysShowLatest,
+  CheckboxPromotedPosts,
+  CheckboxTopicsToFollow,
+  CheckboxWhoToFollow
+} from "../../controls/Checkboxes"
 
 const TimelineSection = () => {
   const mounted = useMounted()
 
   return (
-    <section className="flex flex-col space-y-2">
+    <section className="flex flex-col gap-y-2">
       <label
         htmlFor="user-control-timeline-width"
         className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
       >
-        Customize Timeline
+        Timeline
       </label>
       {mounted ? (
         <div
           id="user-control-timeline-width"
-          className="p-4 pb-0 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl"
+          className="p-4 pb-2 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl"
         >
           <TimelineSlider />
-          <Separator />
-          <SwitchTimelineBorders />
+          <Separator className="mb-4" />
+          <div className="flex flex-col gap-y-4">
+            <SwitchWriterMode />
+            <SwitchTimelineBorders />
+          </div>
+          <Separator className="mt-4 mb-2" />
+          <CheckboxPromotedPosts />
+          <CheckboxWhoToFollow />
+          <CheckboxTopicsToFollow />
+          <CheckboxAlwaysShowLatest />
         </div>
       ) : (
         <div className="dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl animate-pulse h-[115.5px]" />

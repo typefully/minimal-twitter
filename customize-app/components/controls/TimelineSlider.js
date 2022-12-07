@@ -75,7 +75,7 @@ const TimelineSlider = () => {
 
   return (
     <form>
-      <div className="flex items-center pb-4 space-x-3">
+      <div className="flex items-center pb-4 gap-x-3">
         <span className="text-xs font-medium">600px</span>
         <StyledSlider
           onValueChange={async (value) => {
