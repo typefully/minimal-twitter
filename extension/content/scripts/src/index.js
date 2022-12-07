@@ -2,6 +2,32 @@ import { addStylesheets, observe } from "./modules/initialize";
 import { constructNewData } from "./modules/utilities";
 import { injectAllChanges } from "./modules/options/all";
 
+// Array of user preferences, passed to `injectAllChanges`
+const userPreferences = [
+  "feedWidth",
+  "feedBorders",
+  "exploreButton",
+  "notificationsButton",
+  "messagesButton",
+  "bookmarksButton",
+  "listsButton",
+  "navigationButtonsLabelsHover",
+  "navigationButtonsLabels",
+  "navigationCenter",
+  "zenMode",
+  "replyCount",
+  "retweetCount",
+  "likeCount",
+  "followCount",
+  "hideTweetButton",
+  "hideSearch",
+  "transparentSearch",
+  "removePromotedPosts",
+  "whoToFollow",
+  "topicsToFollow",
+  "latestTweets",
+];
+
 /*--
 - Docs: https://developer.chrome.com/docs/extensions/reference/storage/#synchronous-response-to-storage-updates
 - Listen to Chrome Storage changes
@@ -23,35 +49,9 @@ const init = () => {
   observe();
 
   // Inject user preferences
-  chrome.storage.sync.get(
-    [
-      "feedWidth",
-      "feedBorders",
-      "exploreButton",
-      "notificationsButton",
-      "messagesButton",
-      "bookmarksButton",
-      "listsButton",
-      "navigationButtonsLabelsHover",
-      "navigationButtonsLabels",
-      "navigationCenter",
-      "zenMode",
-      "replyCount",
-      "retweetCount",
-      "likeCount",
-      "followCount",
-      "hideTweetButton",
-      "hideSearch",
-      "transparentSearch",
-      "removePromotedPosts",
-      "whoToFollow",
-      "topicsToFollow",
-      "latestTweets",
-    ],
-    (data) => {
-      injectAllChanges(data);
-    }
-  );
+  chrome.storage.sync.get(userPreferences, (data) => {
+    injectAllChanges(data);
+  });
 };
 
 init();
