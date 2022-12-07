@@ -1,10 +1,10 @@
-import {
-  addTypefullyPlug,
-  saveCurrentReplyToLink,
-  addTypefullyReplyPlug,
-} from "./typefully";
 import { checkUrlForFollow } from "./check";
 import { addListsButton } from "./options/navigation";
+import {
+  addTypefullyPlug,
+  addTypefullyReplyPlug,
+  saveCurrentReplyToLink,
+} from "./typefully";
 
 // Function to reveal Search Filters
 const revealSearchFilters = () => {
@@ -58,6 +58,13 @@ export const addStylesheets = () => {
   head.appendChild(typefullyStylesheet);
 };
 
+function saveBgColorToRootVar() {
+  const body = document.querySelector("body");
+  const bodyBgColor = window.getComputedStyle(body).backgroundColor;
+  const root = document.documentElement;
+  root.style.setProperty("--body-bg-color", bodyBgColor);
+}
+
 // Function to start MutationObserver
 export const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
@@ -69,6 +76,7 @@ export const observe = () => {
       addTypefullyReplyPlug();
       checkUrlForFollow();
       addListsButton();
+      saveBgColorToRootVar();
     }
   });
 
