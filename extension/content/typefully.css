@@ -24,7 +24,7 @@
 .typefully-modal-button:hover,
 .typefully-reply-button:hover,
 .typefully-writermode-button:hover {
-  filter: brightness(0.5);
+  filter: brightness(0.94);
 }
 
 .typefully-modal-button svg,
@@ -56,4 +56,55 @@
   #mt-typefullyGrowButton > div > div[dir] {
     display: none !important;
   }
+}
+
+#typefully-writermode-box {
+  font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Helvetica, Arial, sans-serif;
+  color: var(--main-text-color);
+  width: 409px;
+  max-width: 100%;
+  background: rgba(var(--secondary-text-color-rgb), 0.07);
+  border-radius: 20px;
+  padding: 9px 22px;
+  line-height: 1.4;
+  position: relative;
+  margin-top: 20px;
+}
+
+#typefully-writermode-box h3,
+#typefully-writermode-box p {
+  margin: 10px 0;
+}
+
+#typefully-writermode-box p,
+#typefully-writermode-box li {
+  color: var(--secondary-text-color);
+}
+
+#typefully-writermode-box ul {
+  margin: 14px 0;
+  padding-left: 5px;
+  list-style: none;
+}
+
+#typefully-writermode-box li {
+  margin: 6px 0;
+}
+
+#typefully-writermode-box a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+#typefully-writermode-box #box-close-button {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+#typefully-writermode-box #box-close-button:hover {
+  opacity: 1;
 }

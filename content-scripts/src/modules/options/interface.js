@@ -341,27 +341,70 @@ export const changeLatestTweets = (latestTweets) => {
   }
 };
 
-const addTypefullyPlugToWriterMode = () => {
+const addTypefullyPlugToWriterMode = async () => {
   const main = document.querySelector('main[role="main"]');
 
-  if (main && !document.getElementById("typefully-writermode-link")) {
-    const typefullyLinkElement = createTypefullyLinkElement(
-      "typefully-writermode-link",
-      "typefully-writermode-button"
-    );
-    typefullyLinkElement.addEventListener("click", () => {
-      getCurrentTextAndSendToTypefully();
+  if (!main) return;
+  if (document.getElementById("typefully-writermode-link")) return;
+
+  /* ---------------------------- Typefully Button ---------------------------- */
+
+  const typefullyLinkElement = createTypefullyLinkElement(
+    "typefully-writermode-link",
+    "typefully-writermode-button"
+  );
+  typefullyLinkElement.addEventListener("click", () => {
+    getCurrentTextAndSendToTypefully();
+  });
+
+  const typefullyLogo = createTypefullyLogo();
+  const typefullyText = document.createElement("span");
+  typefullyText.innerText = "Save draft to Typefully";
+
+  typefullyLinkElement.appendChild(typefullyLogo);
+  typefullyLinkElement.appendChild(typefullyText);
+
+  /* ----------------- Typefully box callout with explanation ---------------- */
+
+  const typefullyBoxSeen = await getStorage("typefullyBoxSeen");
+
+  if (typefullyBoxSeen !== "true") {
+    const typefullyBox = document.createElement("div");
+    typefullyBox.id = "typefully-writermode-box";
+    typefullyBox.className = "typefully-box";
+
+    typefullyBox.innerHTML = `
+    <h3>Save and share your drafts</h3>
+    <p><a href="https://typefully.com/?ref=minimal-twitter">Typefully</a> — the maker of this Chrome extension — is a free tool built for Twitter creators.</p>
+    <ul>
+      <li>✅ Never lose your work by syncing your drafts</li>
+      <li>💬 Share your drafts with anyone for feedback</li>
+      <li>🤖 Improve your tweets with AI</li>
+      <li>📈 Grow faster with insights and metrics</li>
+    </ul>
+    <p>Click the button below to get started:</p>
+    `;
+
+    // Create svg element for the close button
+    const closeButton = document.createElement("div");
+    closeButton.id = "box-close-button";
+    closeButton.innerHTML = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2L2 12" stroke="black" stroke-width="2"/>
+    <path d="M12 12L2 2" stroke="black" stroke-width="2"/>
+    </svg>`;
+
+    closeButton.addEventListener("click", () => {
+      setStorage({ typefullyBoxSeen: "true" }).then(() => {
+        typefullyBox.remove();
+      });
     });
 
-    const typefullyLogo = createTypefullyLogo();
-    const typefullyText = document.createElement("span");
-    typefullyText.innerText = "Save draft to Typefully";
+    typefullyBox.appendChild(closeButton);
 
-    typefullyLinkElement.appendChild(typefullyLogo);
-    typefullyLinkElement.appendChild(typefullyText);
-
-    main.appendChild(typefullyLinkElement);
+    main.appendChild(typefullyBox);
   }
+
+  main.appendChild(typefullyLinkElement);
 };
 
 const removeTypefullyPlugFromWriterMode = () => {
@@ -369,6 +412,8 @@ const removeTypefullyPlugFromWriterMode = () => {
     "typefully-writermode-link"
   );
   typefullyLinkElement && typefullyLinkElement.remove();
+  const typefullyBox = document.getElementById("typefully-writermode-box");
+  typefullyBox && typefullyBox.remove();
 };
 
 // Function to add an expand icon to the buttons in the tweet composer

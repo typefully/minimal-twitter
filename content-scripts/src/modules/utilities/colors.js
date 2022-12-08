@@ -24,6 +24,9 @@ export const extractColorsAsRootVars = () => {
   if (mainText) {
     const mainTextColor = window.getComputedStyle(mainText).color;
     root.style.setProperty("--main-text-color", mainTextColor);
+
+    const mainTextColorRgb = mainTextColor.replace("rgb(", "").replace(")", "");
+    root.style.setProperty("--main-text-color-rgb", mainTextColorRgb);
   }
 
   const secondaryText =
@@ -34,6 +37,11 @@ export const extractColorsAsRootVars = () => {
   if (secondaryText) {
     const secondaryTextColor = window.getComputedStyle(secondaryText).color;
     root.style.setProperty("--secondary-text-color", secondaryTextColor);
+
+    const secondaryTextColorRgb = secondaryTextColor
+      .replace("rgb(", "")
+      .replace(")", "");
+    root.style.setProperty("--secondary-text-color-rgb", secondaryTextColorRgb);
   }
 
   const link = document.querySelector("a");
