@@ -102,8 +102,8 @@ export const observe = () => {
       saveCurrentReplyToLink();
       addTypefullyReplyPlug();
       checkUrlForFollow();
+      addListsButton();
       setTimeout(() => {
-        addListsButton();
         addGrowButton();
       });
       saveBgColorToRootVar();
@@ -125,8 +125,8 @@ export const addResizeListener = () => {
     throttle(() => {
       removeElement("mt-listsButtonNode");
       removeElement("mt-typefullyGrowButton");
+      addListsButton();
       setTimeout(() => {
-        addListsButton();
         addGrowButton();
       });
     }, 1000)
