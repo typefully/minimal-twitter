@@ -1,11 +1,14 @@
 import { checkUrlForFollow } from "./check";
+import { addWriterModeButton } from "./options/interface";
 import { addGrowButton, addListsButton } from "./options/navigation";
 import {
   addTypefullyPlug,
   addTypefullyReplyPlug,
   saveCurrentReplyToLink,
 } from "./typefully";
-import { removeElement, throttle } from "./utilities";
+import { extractColorsAsRootVars } from "./utilities/colors";
+import removeElement from "./utilities/removeElement";
+import throttle from "./utilities/throttle";
 
 // Function to reveal Search Filters
 const revealSearchFilters = () => {
@@ -59,38 +62,6 @@ export const addStylesheets = () => {
   head.appendChild(typefullyStylesheet);
 };
 
-function saveBgColorToRootVar() {
-  const root = document.documentElement;
-
-  const bodyBgColor = window.getComputedStyle(
-    document.querySelector("body")
-  ).backgroundColor;
-  root.style.setProperty("--body-bg-color", bodyBgColor);
-
-  const mainText =
-    document.querySelector("h2 > span") || document.querySelector("div > span");
-  if (mainText) {
-    const mainTextColor = window.getComputedStyle(mainText).color;
-    root.style.setProperty("--main-text-color", mainTextColor);
-  }
-
-  const secondaryText =
-    document.querySelector("a > time") ||
-    document.querySelector(
-      "[data-testid='primaryColumn'] div[aria-haspopup='menu'] > div > div > svg"
-    );
-  if (secondaryText) {
-    const secondaryTextColor = window.getComputedStyle(secondaryText).color;
-    root.style.setProperty("--secondary-text-color", secondaryTextColor);
-  }
-
-  const link = document.querySelector("a");
-  if (link) {
-    const accentColor = window.getComputedStyle(link).color;
-    root.style.setProperty("--accent-color", accentColor);
-  }
-}
-
 // Function to start MutationObserver
 export const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
@@ -102,10 +73,11 @@ export const observe = () => {
       addTypefullyReplyPlug();
       checkUrlForFollow();
       addListsButton();
+      addWriterModeButton();
       setTimeout(() => {
         addGrowButton();
       });
-      saveBgColorToRootVar();
+      extractColorsAsRootVars();
     }
   });
 

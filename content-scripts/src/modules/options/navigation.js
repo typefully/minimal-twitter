@@ -1,6 +1,8 @@
 import { showGrowTab } from "../grow-tab";
 import svgAssets from "../svgAssets";
-import { addStyles, getStorage, removeElement } from "../utilities";
+import addStyles from "../utilities/addStyles";
+import removeElement from "../utilities/removeElement";
+import { getStorage } from "../utilities/storage";
 
 // Function to change Explore Button
 export const changeExploreButton = (exploreButton) => {

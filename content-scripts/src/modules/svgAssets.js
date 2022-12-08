@@ -7,6 +7,10 @@ const svgAssets = {
     normal: `<g><path d="M3 4.5C3 3.12 4.12 2 5.5 2h13C19.88 2 21 3.12 21 4.5v15c0 1.38-1.12 2.5-2.5 2.5h-13C4.12 22 3 20.88 3 19.5v-15zM5.5 4c-.28 0-.5.22-.5.5v15c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-15c0-.28-.22-.5-.5-.5h-13zM16 10H8V8h8v2zm-8 2h8v2H8v-2z"></path></g>`,
     selected: `<path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 2C4.12 2 3 3.12 3 4.5V19.5C3 20.88 4.12 22 5.5 22H18.5C19.88 22 21 20.88 21 19.5V4.5C21 3.12 19.88 2 18.5 2H5.5ZM8 10H16V8H8V10ZM16 12H8V14H16V12Z" />`,
   },
+  composerWriterMode: {
+    normal: `<path fill-rule="evenodd" clip-rule="evenodd" d="M5 4H4V5V13H6V7.41421L9.79289 11.2071L11.2071 9.79289L7.41421 6H13V4H5ZM19 20H20V19L20 11H18L18 16.5858L14.2071 12.7929L12.7929 14.2071L16.5858 18L11 18V20H19Z"/>`,
+    selected: `<path d="M11 11L11 3H9L9 7.58579L5.89461 4.48039L4.48039 5.89461L7.58579 9L3 9V11L11 11Z"/><path d="M13 13V21H15V16.4142L18.1054 19.5196L19.5196 18.1054L16.4142 15H21V13H13Z"/>`,
+  },
 };
 
 export default svgAssets;

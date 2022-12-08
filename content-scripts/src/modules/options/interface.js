@@ -1,10 +1,13 @@
 import { checkUrlForFollow } from "../check";
+import svgAssets from "../svgAssets";
 import {
   createTypefullyLinkElement,
   createTypefullyLogo,
   getCurrentTextAndSendToTypefully,
 } from "../typefully";
-import { addStyles, removeElement } from "../utilities";
+import addStyles from "../utilities/addStyles";
+import removeElement from "../utilities/removeElement";
+import { getStorage, setStorage } from "../utilities/storage";
 
 // Function to change Writer Mode
 export const changeWriterMode = (writerMode) => {
@@ -366,4 +369,59 @@ const removeTypefullyPlugFromWriterMode = () => {
     "typefully-writermode-link"
   );
   typefullyLinkElement && typefullyLinkElement.remove();
+};
+
+// Function to add an expand icon to the buttons in the tweet composer
+export const addWriterModeButton = () => {
+  if (document.querySelector("#mt-writer-mode-composer-button")) return;
+
+  const geoButton = document.querySelector('div[data-testid="geoButton"]');
+
+  if (!geoButton) return;
+
+  const writerModeButton = geoButton.cloneNode(true);
+
+  writerModeButton.id = "mt-writer-mode-composer-button";
+  writerModeButton.ariaLabel = "Writer Mode";
+  writerModeButton.removeAttribute("data-testid");
+  writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+    svgAssets.composerWriterMode.normal;
+  geoButton.insertAdjacentElement("afterend", writerModeButton);
+
+  writerModeButton.onclick = toggleWriterMode;
+
+  addStyles(
+    "mt-writer-mode-composer-button-style",
+    `
+  #mt-writer-mode-composer-button:hover {
+    background-color: rgba(var(--accent-color-rgb), 0.1);
+  }
+      `
+  );
+};
+
+const toggleWriterMode = async () => {
+  const userSetting = await getStorage("writerMode");
+
+  console.log({ enabled: userSetting });
+
+  const writerModeButton = document.querySelector(
+    "#mt-writer-mode-composer-button"
+  );
+
+  try {
+    await setStorage({ writerMode: userSetting === "off" ? "on" : "off" });
+  } catch (error) {
+    console.error(error);
+  }
+
+  if (!writerModeButton) return;
+
+  if (userSetting === "off") {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.selected;
+  } else {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.normal;
+  }
 };

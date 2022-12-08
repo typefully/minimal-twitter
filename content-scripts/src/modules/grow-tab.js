@@ -1,5 +1,5 @@
 import svgAssets from "./svgAssets";
-import { getCurrentTheme } from "./utilities";
+import { getCurrentTheme } from "./utilities/colors";
 
 export const showGrowTab = () => {
   const main = document.querySelector("main[role='main']");

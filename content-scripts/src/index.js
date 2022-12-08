@@ -4,7 +4,7 @@ import {
   observe,
 } from "./modules/initialize";
 import { injectAllChanges, userPreferences } from "./modules/options/all";
-import { constructNewData } from "./modules/utilities";
+import constructNewData from "./modules/utilities/constructNewData";
 
 /*--
 - Docs: https://developer.chrome.com/docs/extensions/reference/storage/#synchronous-response-to-storage-updates

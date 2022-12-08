@@ -1,4 +1,5 @@
-import { addStyles, removeElement } from "./utilities";
+import addStyles from "./utilities/addStyles";
+import removeElement from "./utilities/removeElement";
 
 // Function to check url for /following or /followers
 export const checkUrlForFollow = () => {

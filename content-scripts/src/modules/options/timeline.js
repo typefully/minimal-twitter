@@ -1,4 +1,5 @@
-import { addStyles, removeElement } from "../utilities";
+import addStyles from "../utilities/addStyles";
+import removeElement from "../utilities/removeElement";
 
 // Function to change Timeline Width
 export const changeTimelineWidth = (timelineWidth) => {
