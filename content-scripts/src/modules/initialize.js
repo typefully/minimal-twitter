@@ -6,6 +6,7 @@ import {
   saveCurrentReplyToLink,
 } from "./typefully";
 import { removeElement } from "./utilities";
+import { throttle } from "./utilities";
 
 // Function to reveal Search Filters
 const revealSearchFilters = () => {
@@ -101,8 +102,8 @@ export const observe = () => {
       saveCurrentReplyToLink();
       addTypefullyReplyPlug();
       checkUrlForFollow();
-      addListsButton();
       setTimeout(() => {
+        addListsButton();
         addGrowButton();
       });
       saveBgColorToRootVar();
@@ -119,12 +120,15 @@ export const observe = () => {
 // Twitter counterparts styles change programmatically based on window size,
 // so we need to re-create them when the window size changes.
 export const addResizeListener = () => {
-  window.addEventListener("resize", () => {
-    removeElement("mt-listsButtonNode");
-    removeElement("mt-typefullyGrowButton");
-    addListsButton();
-    setTimeout(() => {
-      addGrowButton();
-    });
-  });
+  window.addEventListener(
+    "resize",
+    throttle(() => {
+      removeElement("mt-listsButtonNode");
+      removeElement("mt-typefullyGrowButton");
+      setTimeout(() => {
+        addListsButton();
+        addGrowButton();
+      });
+    }, 1000)
+  );
 };

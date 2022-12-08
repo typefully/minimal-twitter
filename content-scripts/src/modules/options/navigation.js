@@ -128,7 +128,11 @@ export const addListsButton = () => {
       addStyles(
         "mt-listsButtonNode",
         `
-        [aria-label="Minimal Twitter Lists"]:hover > div {
+        #mt-listsButtonNode > div > div[dir] {
+          font-weight: 400 !important;
+        }
+
+        #mt-listsButtonNode:hover > div {
           background-color: rgba(107, 114, 128, 0.2);
         }
         `
@@ -184,6 +188,10 @@ export const addGrowButton = async () => {
     addStyles(
       "mt-typefully-grow-button",
       `
+        #mt-typefullyGrowButton > div > div[dir] {
+          font-weight: 400 !important;
+        }
+
         #mt-typefullyGrowButton:hover > div {
           background-color: rgba(107, 114, 128, 0.2);
         }
