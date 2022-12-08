@@ -117,7 +117,6 @@ const Navigation = () => (
       <SwitchControl
         label="Show Typefully Grow Tab"
         storageKey="typefullyGrowTab"
-        defaultState={true}
       />
     </div>
   </form>
