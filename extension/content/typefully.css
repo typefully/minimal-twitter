@@ -33,7 +33,6 @@
   margin: 0 3px 0 -8px;
 }
 
-
 .typefully-modal-button,
 .typefully-writermode-button {
   min-height: 40px;
@@ -44,5 +43,18 @@
 }
 
 .typefully-writermode-button {
+}
 
+#mt-typefullyGrowButton > div > div[dir] {
+  font-weight: 400 !important;
+}
+
+#mt-typefullyGrowButton:hover > div {
+  background-color: rgba(107, 114, 128, 0.2);
+}
+
+@media only screen and (max-width: 1264px) {
+  #mt-typefullyGrowButton > div > div[dir] {
+    display: none !important;
+  }
 }

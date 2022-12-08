@@ -123,20 +123,6 @@ export const addListsButton = () => {
         svgAssets.lists.normal;
       listsButton.firstChild.lastChild.firstChild.innerText = "Lists";
       profileNode.insertAdjacentElement("beforebegin", listsButton);
-
-      // add custom hover state background
-      addStyles(
-        "mt-listsButtonNode",
-        `
-        #mt-listsButtonNode > div > div[dir] {
-          font-weight: 400 !important;
-        }
-
-        #mt-listsButtonNode:hover > div {
-          background-color: rgba(107, 114, 128, 0.2);
-        }
-        `
-      );
     }
   }
 };
@@ -183,20 +169,6 @@ export const addGrowButton = async () => {
 
     growButton.firstChild.lastChild.firstChild.innerText = "Grow";
     profileNode.insertAdjacentElement("beforebegin", growButton);
-
-    // add custom hover state background
-    addStyles(
-      "mt-typefully-grow-button",
-      `
-        #mt-typefullyGrowButton > div > div[dir] {
-          font-weight: 400 !important;
-        }
-
-        #mt-typefullyGrowButton:hover > div {
-          background-color: rgba(107, 114, 128, 0.2);
-        }
-        `
-    );
   }
 };
 
