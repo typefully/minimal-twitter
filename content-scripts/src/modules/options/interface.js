@@ -384,6 +384,7 @@ export const addWriterModeButton = () => {
   writerModeButton.id = "mt-writer-mode-composer-button";
   writerModeButton.ariaLabel = "Writer Mode";
   writerModeButton.removeAttribute("data-testid");
+
   writerModeButton.firstChild.firstChild.firstChild.innerHTML =
     svgAssets.composerWriterMode.normal;
   geoButton.insertAdjacentElement("afterend", writerModeButton);
@@ -402,8 +403,6 @@ export const addWriterModeButton = () => {
 
 const toggleWriterMode = async () => {
   const userSetting = await getStorage("writerMode");
-
-  console.log({ enabled: userSetting });
 
   const writerModeButton = document.querySelector(
     "#mt-writer-mode-composer-button"
