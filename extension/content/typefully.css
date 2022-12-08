@@ -62,8 +62,8 @@
   font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
       Roboto, Helvetica, Arial, sans-serif;
   color: var(--main-text-color);
-  width: 409px;
-  max-width: 100%;
+  width: 409px !important;
+  max-width: 100% !important;
   background: rgba(var(--secondary-text-color-rgb), 0.07);
   border-radius: 20px;
   padding: 9px 22px;
