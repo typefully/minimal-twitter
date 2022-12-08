@@ -1,6 +1,6 @@
 import { checkUrlForFollow } from "./check";
-import { addWriterModeButton } from "./options/interface";
 import { addGrowButton, addListsButton } from "./options/navigation";
+import { addWriterModeButton } from "./options/writer-mode";
 import {
   addTypefullyPlug,
   addTypefullyReplyPlug,

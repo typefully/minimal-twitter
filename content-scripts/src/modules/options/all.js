@@ -10,7 +10,6 @@ import {
   changeTopicsToFollow,
   changeTweetButton,
   changeWhoToFollow,
-  changeWriterMode,
 } from "./interface";
 import {
   changeBookmarksButton,
@@ -28,6 +27,7 @@ import {
   changeTimelineWidth,
   changeTweetBorders,
 } from "./timeline";
+import { changeWriterMode } from "./writer-mode";
 
 // Array of user preferences, passed to `injectAllChanges`
 export const userPreferences = [
