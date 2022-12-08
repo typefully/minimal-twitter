@@ -1,7 +1,7 @@
 .typefully-modal-button,
 .typefully-reply-button,
 .typefully-writermode-button {
-  color: var(--main-text-color);
+  color: white;
   background-color: var(--accent-color);
   text-decoration: none;
   padding-left: 22px;
@@ -40,9 +40,6 @@
 
 .typefully-reply-button {
   min-height: 36px;
-}
-
-.typefully-writermode-button {
 }
 
 #mt-typefullyGrowButton {
