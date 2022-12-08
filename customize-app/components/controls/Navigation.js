@@ -107,26 +107,18 @@ const Navigation = () => (
     </div>
     <Separator className="mb-4" />
     <div className="flex flex-col gap-y-4">
-      <div className="flex flex-col gap-2 py-3">
-        <SwitchControl
-          label="Center Vertically"
-          storageKey="navigationCenter"
-        />
-        <SwitchControl
-          label="Show Labels"
-          storageKey="navigationButtonsLabels"
-        />
-        <SwitchControl
-          label="Show Labels on Hover"
-          storageKey="navigationButtonsLabelsHover"
-          defaultState={true}
-        />
-        <SwitchControl
-          label="Show Typefully Grow Tab"
-          storageKey="typefullyGrowTab"
-          defaultState={true}
-        />
-      </div>
+      <SwitchControl label="Center Vertically" storageKey="navigationCenter" />
+      <SwitchControl label="Show Labels" storageKey="navigationButtonsLabels" />
+      <SwitchControl
+        label="Show Labels on Hover"
+        storageKey="navigationButtonsLabelsHover"
+        defaultState={true}
+      />
+      <SwitchControl
+        label="Show Typefully Grow Tab"
+        storageKey="typefullyGrowTab"
+        defaultState={true}
+      />
     </div>
   </form>
 )
