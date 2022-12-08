@@ -19,6 +19,10 @@ export const changeWriterMode = (writerMode) => {
         body {
           padding-left: 0 !important;
         }
+        main[role="main"] > div {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
         header[role="banner"], 
         [data-testid="sidebarColumn"],
         [data-testid="primaryColumn"] > div > div:not(:nth-of-type(2)):not(:nth-of-type(3)) {
@@ -27,6 +31,7 @@ export const changeWriterMode = (writerMode) => {
         div[data-testid="primaryColumn"] {
           border-style: hidden !important;
           padding-top: 10vh !important;
+          margin: 0 auto;
         }
         div[aria-labelledby="modal-header"][role="dialog"] {
           width: 100vw !important;
