@@ -5,8 +5,7 @@ import {
   addTypefullyReplyPlug,
   saveCurrentReplyToLink,
 } from "./typefully";
-import { removeElement } from "./utilities";
-import { throttle } from "./utilities";
+import { removeElement, throttle } from "./utilities";
 
 // Function to reveal Search Filters
 const revealSearchFilters = () => {
