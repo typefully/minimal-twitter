@@ -14,7 +14,13 @@ const svgAssets = {
   typefullyBox: {
     arrow: `<svg width="24" height="12" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 0L12 6H0L6 0Z" fill="currentColor"/></svg>
 `,
-    close: `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 12" stroke="black" stroke-width="2"/><path d="M12 12L2 2" stroke="black" stroke-width="2"/></svg>`,
+    close: `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 12" stroke="currentColor" stroke-width="2"/><path d="M12 12L2 2" stroke="currentColor" stroke-width="2"/></svg>`,
+  },
+  typefully: {
+    logo: `<svg width="20" height="20" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M99.5245 11.5985C78.3619 14.5225 58.8203 35.9628 48.5 53.157C32.5 79.814 29.7308 117.192 31.0696 117.039C31.8856 117.212 41.5 96 46.5 88C54.5 83 64 75.5 64 75.5C64 75.5 50.4269 80.1561 51.5 78.5C53.444 75.5 56.2926 72.5773 56.2926 72.5773C78.9391 65.0252 83.916 53.157 83.916 53.157C83.916 53.157 77.3237 54.812 74.6461 55.117C71.076 55.5236 68.8896 55.4107 67.5 55.117C72.6914 49.101 77.1928 45.9517 82 44.5C85.9147 43.15 93.0515 38.6801 98 34.5C102.103 27.8334 100.351 18.8543 99.5245 11.5985Z" fill="currentColor"/>
+  <circle cx="82.5" cy="107.5" r="8.5" fill="currentColor"/>
+</svg>`,
   },
 };
 

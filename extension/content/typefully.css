@@ -27,6 +27,11 @@
   filter: brightness(0.94);
 }
 
+.typefully-writermode-button {
+  background-color: rgba(var(--accent-color-rgb), 0.1);
+  color: var(--accent-color);
+}
+
 .typefully-modal-button svg,
 .typefully-reply-button svg,
 .typefully-writermode-button svg {
@@ -109,6 +114,7 @@
   right: 18px;
   opacity: 0.4;
   cursor: pointer;
+  color: var(--secondary-text-color);
 }
 
 #typefully-writermode-box #box-close-button:hover {
