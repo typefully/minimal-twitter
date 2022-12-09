@@ -38,6 +38,10 @@
   min-height: 40px;
 }
 
+.typefully-writermode-button {
+  order: 1;
+}
+
 .typefully-reply-button {
   min-height: 36px;
 }
@@ -62,14 +66,16 @@
   font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
       Roboto, Helvetica, Arial, sans-serif;
   color: var(--main-text-color);
-  width: 409px !important;
+  width: auto !important;
   max-width: 100% !important;
-  background: rgba(var(--secondary-text-color-rgb), 0.07);
+  --bg-color: rgba(var(--secondary-text-color-rgb), 0.08);
+  background: var(--bg-color);
   border-radius: 20px;
-  padding: 9px 22px;
+  padding: 6px 20px;
   line-height: 1.4;
   position: relative;
-  margin-top: 20px;
+  margin: 8px auto 16px;
+  order: 2;
 }
 
 #typefully-writermode-box h3,
@@ -84,7 +90,7 @@
 
 #typefully-writermode-box ul {
   margin: 14px 0;
-  padding-left: 5px;
+  padding-left: 0px;
   list-style: none;
 }
 
@@ -107,4 +113,37 @@
 
 #typefully-writermode-box #box-close-button:hover {
   opacity: 1;
+}
+
+#typefully-writermode-box #box-arrow {
+  position: absolute;
+  top: -12px;
+  line-height: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--bg-color);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+#typefully-writermode-box, .typefully-writermode-button {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+#typefully-writermode-box {
+  animation-delay: 0.1s;
+}
+
+/* Animate top padding when transitioning to writer mode */
+div[data-testid="primaryColumn"] {
+  transition: padding-top 0.4s cubic-bezier(0.5, 0, 0, 1);
 }

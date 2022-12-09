@@ -23,12 +23,15 @@ export const changeWriterMode = (writerMode) => {
         }
         header[role="banner"], 
         [data-testid="sidebarColumn"],
-        [data-testid="primaryColumn"] > div > div:not(:nth-of-type(2)):not(:nth-of-type(3)) {
+        [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
           display: none !important;
+        }
+        [data-testid="primaryColumn"] > div > div:nth-of-type(1) {
+          visibility: hidden !important;
         }
         div[data-testid="primaryColumn"] {
           border-style: hidden !important;
-          padding-top: 10vh !important;
+          padding-top: 3vh !important;
           margin: 0 auto;
         }
         div[aria-labelledby="modal-header"][role="dialog"] {
@@ -92,33 +95,32 @@ const addTypefullyPlugToWriterMode = async () => {
     typefullyBox.id = "typefully-writermode-box";
     typefullyBox.className = "typefully-box";
 
-    typefullyBox.innerHTML = `
-    <h3>Save and share your drafts</h3>
-    <p><a href="https://typefully.com/?ref=minimal-twitter">Typefully</a> — the maker of this Chrome extension — is a free tool built for Twitter creators.</p>
-    <ul>
-      <li>✅ Never lose your work by syncing your drafts</li>
-      <li>💬 Share your drafts with anyone for feedback</li>
-      <li>🤖 Improve your tweets with AI</li>
-      <li>📈 Grow faster with insights and metrics</li>
-    </ul>
-    <p>Click the button below to get started:</p>
-    `;
+    typefullyBox.innerHTML = `<ul>
+  <li>💬 Share your drafts and get comments</li>
+  <li>🤖 Improve your tweets with AI</li>
+  <li>📈 Track your growth with insights and metrics</li>
+  <li>📆 Schedule for later</li>
+</ul>
+<p>Powered by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>, the makers of the Minimal Twitter extension.</p>
+`;
 
     // Create svg element for the close button
     const closeButton = document.createElement("div");
     closeButton.id = "box-close-button";
-    closeButton.innerHTML = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2L2 12" stroke="black" stroke-width="2"/>
-    <path d="M12 12L2 2" stroke="black" stroke-width="2"/>
-    </svg>`;
+    closeButton.innerHTML = svgAssets.typefullyBox.close;
+    typefullyBox.appendChild(closeButton);
+
+    // Add little arrows absolute positioned in the top center of the box
+    const arrow = document.createElement("div");
+    arrow.id = "box-arrow";
+    arrow.innerHTML = svgAssets.typefullyBox.arrow;
+    typefullyBox.appendChild(arrow);
 
     closeButton.addEventListener("click", () => {
       setStorage({ typefullyBoxSeen: "true" }).then(() => {
         typefullyBox.remove();
       });
     });
-
-    typefullyBox.appendChild(closeButton);
 
     main.appendChild(typefullyBox);
   }
