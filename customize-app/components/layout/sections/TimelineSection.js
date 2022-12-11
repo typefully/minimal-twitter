@@ -15,14 +15,14 @@ const TimelineSection = () => {
   return (
     <section className="flex flex-col gap-y-2">
       <label
-        htmlFor="user-control-timeline-width"
+        htmlFor="user-control-timeline"
         className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
       >
         Timeline
       </label>
       {mounted ? (
         <div
-          id="user-control-timeline-width"
+          id="user-control-timeline"
           className="p-4 pb-2 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl"
         >
           <TimelineSlider />
@@ -59,4 +59,5 @@ const TimelineSection = () => {
     </section>
   )
 }
+
 export default TimelineSection
