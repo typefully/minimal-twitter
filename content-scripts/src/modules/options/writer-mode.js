@@ -141,11 +141,13 @@ const removeTypefullyPlugFromWriterMode = () => {
 export const addWriterModeButton = () => {
   if (document.querySelector("#mt-writer-mode-composer-button")) return;
 
-  const geoButton = document.querySelector('div[data-testid="geoButton"]');
+  const scheduleButton = document.querySelector(
+    'div[data-testid="scheduleOption"]'
+  );
 
-  if (!geoButton) return;
+  if (!scheduleButton) return;
 
-  const writerModeButton = geoButton.cloneNode(true);
+  const writerModeButton = scheduleButton.cloneNode(true);
 
   writerModeButton.id = "mt-writer-mode-composer-button";
   writerModeButton.ariaLabel = "Writer Mode";
@@ -153,7 +155,7 @@ export const addWriterModeButton = () => {
 
   writerModeButton.firstChild.firstChild.firstChild.innerHTML =
     svgAssets.composerWriterMode.normal;
-  geoButton.insertAdjacentElement("afterend", writerModeButton);
+  scheduleButton.parentNode.appendChild(writerModeButton);
 
   writerModeButton.onclick = toggleWriterMode;
 
