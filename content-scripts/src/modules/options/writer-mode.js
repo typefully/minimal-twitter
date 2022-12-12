@@ -5,6 +5,7 @@ import {
   getCurrentTextAndSendToTypefully,
 } from "../typefully";
 import addStyles from "../utilities/addStyles";
+import addTypefullyBox from "../utilities/addTypefullyBox";
 import removeElement from "../utilities/removeElement";
 import { getStorage, setStorage } from "../utilities/storage";
 
@@ -88,42 +89,20 @@ const addTypefullyPlugToWriterMode = async () => {
 
   /* ----------------- Typefully box callout with explanation ---------------- */
 
-  const typefullyBoxSeen = await getStorage("typefullyBoxSeen");
-
-  if (typefullyBoxSeen !== "true") {
-    const typefullyBox = document.createElement("div");
-    typefullyBox.id = "typefully-writermode-box";
-    typefullyBox.className = "typefully-box";
-
-    typefullyBox.innerHTML = `<ul>
+  addTypefullyBox(
+    main,
+    "writer-mode",
+    `<ul>
   <li>💬 Share your drafts and get comments</li>
   <li>🤖 Improve your tweets with AI</li>
   <li>📈 Track your growth with insights and metrics</li>
   <li>📆 Schedule for later</li>
 </ul>
-<p>Powered by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>, the makers of the Minimal Twitter extension.</p>
-`;
-
-    // Create svg element for the close button
-    const closeButton = document.createElement("div");
-    closeButton.id = "box-close-button";
-    closeButton.innerHTML = svgAssets.typefullyBox.close;
-    typefullyBox.appendChild(closeButton);
-
-    // Add little arrows absolute positioned in the top center of the box
-    const arrow = document.createElement("div");
-    arrow.id = "box-arrow";
-    arrow.innerHTML = svgAssets.typefullyBox.arrow;
-    typefullyBox.appendChild(arrow);
-
-    closeButton.addEventListener("click", () => {
-      setStorage({ typefullyBoxSeen: "true" }).then(() => {
-        typefullyBox.remove();
-      });
-    });
-
-    main.appendChild(typefullyBox);
-  }
+<p>Powered by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>, the makers of the Minimal Twitter extension.</p>`,
+    {
+      withArrow: true,
+    }
+  );
 
   main.appendChild(typefullyLinkElement);
 };
