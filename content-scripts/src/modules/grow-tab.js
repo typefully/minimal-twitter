@@ -19,7 +19,7 @@ export const showGrowTab = () => {
     .getAttribute("href")
     .replace("/", "");
 
-  growTab.src = `https://typefully.com/grow?minimal-embed=true&mt-theme=${getCurrentTheme()}&mt-screen-name=${screenName}`;
+  growTab.src = `https://typefully.com/grow?mt-embed=true&mt-theme=${getCurrentTheme()}&mt-screen-name=${screenName}`;
 
   growTab.style = `
     position: absolute;
