@@ -117,9 +117,7 @@ const removeTypefullyPlugFromWriterMode = () => {
 };
 
 // Function to add an expand icon to the buttons in the tweet composer
-export const addWriterModeButton = () => {
-  if (document.querySelector("#mt-writer-mode-composer-button")) return;
-
+export const addWriterModeButton = async () => {
   const scheduleButton = document.querySelector(
     'div[data-testid="scheduleOption"]'
   );
@@ -132,20 +130,31 @@ export const addWriterModeButton = () => {
   writerModeButton.ariaLabel = "Writer Mode";
   writerModeButton.removeAttribute("data-testid");
 
-  writerModeButton.firstChild.firstChild.firstChild.innerHTML =
-    svgAssets.composerWriterMode.normal;
-  scheduleButton.parentNode.appendChild(writerModeButton);
-
+  const userSetting = await getStorage("writerMode");
+  if (userSetting === "on") {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.selected;
+  } else {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.normal;
+  }
   writerModeButton.onclick = toggleWriterMode;
 
-  addStyles(
-    "mt-writer-mode-composer-button-style",
-    `
-  #mt-writer-mode-composer-button:hover {
-    background-color: rgba(var(--accent-color-rgb), 0.1);
-  }
+  if (document.querySelector("#mt-writer-mode-composer-button")) {
+    writerModeButton.remove();
+    return;
+  } else {
+    scheduleButton.parentNode.appendChild(writerModeButton);
+
+    addStyles(
+      "mt-writer-mode-composer-button-style",
       `
-  );
+    #mt-writer-mode-composer-button:hover {
+      background-color: rgba(var(--accent-color-rgb), 0.1);
+    }
+        `
+    );
+  }
 };
 
 const toggleWriterMode = async () => {
@@ -169,5 +178,8 @@ const toggleWriterMode = async () => {
   } else {
     writerModeButton.firstChild.firstChild.firstChild.innerHTML =
       svgAssets.composerWriterMode.normal;
+
+    // scroll body to top
+    document.body.scrollTop = 0;
   }
 };
