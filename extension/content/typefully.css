@@ -148,8 +148,3 @@
 #typefully-writermode-box {
   animation-delay: 0.1s;
 }
-
-/* Animate top padding when transitioning to writer mode */
-div[data-testid="primaryColumn"] {
-  transition: padding-top 0.4s cubic-bezier(0.5, 0, 0, 1);
-}
