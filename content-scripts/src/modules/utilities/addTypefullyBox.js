@@ -13,8 +13,6 @@ export default async function addTypefullyBox(
 
   const seen = await getStorage(key);
 
-  console.log({ seen });
-
   if (seen !== "true") {
     const typefullyBox = document.createElement("div");
     typefullyBox.id = "typefully-writermode-box";
