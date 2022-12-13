@@ -21,7 +21,7 @@ export default function SwitchControl({
     }
 
     getDefaultState()
-  }, [])
+  }, [storageKey])
 
   return (
     <div className="flex items-center justify-between w-full">

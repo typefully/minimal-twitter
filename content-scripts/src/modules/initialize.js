@@ -53,12 +53,12 @@ export const addStylesheets = () => {
 
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
-  mainStylesheet.href = chrome.runtime.getURL("content/main.css");
+  mainStylesheet.href = chrome.runtime.getURL("css/main.css");
   head.appendChild(mainStylesheet);
 
   typefullyStylesheet.rel = "stylesheet";
   typefullyStylesheet.type = "text/css";
-  typefullyStylesheet.href = chrome.runtime.getURL("content/typefully.css");
+  typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
   head.appendChild(typefullyStylesheet);
 };
 

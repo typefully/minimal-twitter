@@ -38,4 +38,4 @@ bower_components
 node_modules
 package-lock.json
 dist
-extension/build
+bundle

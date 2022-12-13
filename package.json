@@ -1,0 +1,14 @@
+{
+  "name": "minimal-twitter",
+  "type": "module",
+  "scripts": {
+    "bundle": "node ./bundle-extension.js"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.0",
+    "node-cmd": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13"
+  }
+}
