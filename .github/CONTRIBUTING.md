@@ -2,12 +2,12 @@
 
 If you have a good idea, [start a discussion](https://github.com/typefully/minimal-twitter/discussions/new?category=ideas). For bug reports and usability issues, [submit an issue](https://github.com/typefully/minimal-twitter/issues/new). We do accept PRs but note that it is more likely to be accepted with an associated discussion or issue.
 
-## Development / Building the Extension
+## Development / Building / Bundling the Extension
 
-First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed. Then, go to [customize-app](./customize-app) and run the build command to build the static [Next.js](https://nextjs.org/) app, which is used for the extension's customization popup and options.
+First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed. Then, go to [popup](./popup) and run the build command to build the static [Next.js](https://nextjs.org/) app, which is used for the extension's customization popup and options.
 
 ```sh
-cd customize-app
+cd popup
 ```
 
 ```sh
@@ -27,9 +27,16 @@ yarn build # to build the content_scripts
 yarn watch # watch for changes and build automatically
 ```
 
-You can then go to [extension](./extension) and begin testing.
+After you have built both `popup` and `content-scripts` you can bundle the extension for `Chrome` and `Firefox`:
 
-Make sure to rename `manifest.firefox.json` to `manifest.json` if developing for Firefox. Firefox currently does not support [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/).
+```sh
+cd .. # go back to the root directory
+```
+
+```sh
+yarn # must run yarn once first before you can bundle
+yarn bundle # Runs the `bundle-extension.js` script
+```
 
 <table>
 	<tr>
