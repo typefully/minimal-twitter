@@ -47,7 +47,12 @@ const MANIFEST_CHROME = {
   ],
   web_accessible_resources: [
     {
-      resources: ["css/main.css", "css/typefully.css"],
+      resources: [
+        "css/main.css",
+        "css/typefully.css",
+        "https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/main.css",
+        "https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/typefully.css",
+      ],
       matches: ["https://twitter.com/*", "https://mobile.twitter.com/*"],
     },
   ],
@@ -81,7 +86,12 @@ const MANIFEST_FIREFOX = {
       js: ["dist/main.js"],
     },
   ],
-  web_accessible_resources: ["css/main.css", "css/typefully.css"],
+  web_accessible_resources: [
+    "css/main.css",
+    "css/typefully.css",
+    "https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/main.css",
+    "https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/typefully.css",
+  ],
   browser_action: {
     default_icon: {
       16: "images/MinimalTwitterIcon16.png",

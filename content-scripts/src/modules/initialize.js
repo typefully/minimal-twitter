@@ -50,16 +50,28 @@ export const addStylesheets = () => {
   const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
   const typefullyStylesheet = document.createElement("link");
+  const mainStylesheetGitHub = document.createElement("link");
+  const typefullyStylesheetGitHub = document.createElement("link");
 
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("css/main.css");
   head.appendChild(mainStylesheet);
 
+  mainStylesheetGitHub.rel = "stylesheet";
+  mainStylesheetGitHub.type = "text/css";
+  mainStylesheetGitHub.href = chrome.runtime.getURL("css/main.css");
+  head.appendChild(mainStylesheetGitHub);
+
   typefullyStylesheet.rel = "stylesheet";
   typefullyStylesheet.type = "text/css";
   typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
   head.appendChild(typefullyStylesheet);
+
+  typefullyStylesheetGitHub.rel = "stylesheet";
+  typefullyStylesheetGitHub.type = "text/css";
+  typefullyStylesheetGitHub.href = chrome.runtime.getURL("css/typefully.css");
+  head.appendChild(typefullyStylesheetGitHub);
 };
 
 // Function to start MutationObserver
