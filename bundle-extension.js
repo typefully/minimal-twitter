@@ -161,7 +161,7 @@ const rl = readline.createInterface({
 });
 
 rl.question(
-  "Which browser are you targetting? [Chrome / Firefox] ",
+  "Which browser would you like to bundle for? [Chrome / Firefox] ",
   async (browser) => {
     switch (browser) {
       case "Chrome":
