@@ -124,6 +124,26 @@ export const changeTopArticlesButton = (topArticlesButton) => {
   }
 };
 
+// Function to change Top Articles Button
+export const changeCommunitiesButton = (communitiesButton) => {
+  switch (communitiesButton) {
+    case "off":
+      addStyles(
+        "mt-communitiesButton",
+        `
+        a[href$=communities] {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-communitiesButton");
+      break;
+  }
+};
+
 // Function to change Profile Button
 export const changeProfileButton = (profileButton) => {
   switch (profileButton) {

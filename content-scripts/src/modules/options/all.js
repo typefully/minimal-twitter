@@ -12,18 +12,19 @@ import {
   changeWhoToFollow,
 } from "./interface";
 import {
-  changeHomeButton,
   changeBookmarksButton,
+  changeCommunitiesButton,
   changeExploreButton,
   changeGrowButton,
+  changeHomeButton,
   changeListsButton,
   changeMessagesButton,
   changeNavigationButtonsLabels,
   changeNavigationButtonsLabelsHover,
   changeNavigationCenter,
   changeNotificationsButton,
-  changeTopArticlesButton,
   changeProfileButton,
+  changeTopArticlesButton,
 } from "./navigation";
 import {
   changeTimelineBorders,
@@ -41,7 +42,8 @@ export const userPreferences = [
   "notificationsButton", //
   "messagesButton", //
   "bookmarksButton", //
-  "topArticlesButon", //
+  "topArticlesButton", //
+  "communitiesButton", //
   "listsButton", //
   "profileButton",
   "navigationButtonsLabelsHover", //
@@ -73,6 +75,7 @@ export const injectAllChanges = (data) => {
     messagesButton, //
     bookmarksButton, //
     topArticlesButton, //
+    communitiesButton, //
     listsButton, //
     profileButton,
     navigationButtonsLabelsHover, //
@@ -102,6 +105,7 @@ export const injectAllChanges = (data) => {
   changeMessagesButton(messagesButton); // Messages Button
   changeBookmarksButton(bookmarksButton); // Bookmarks Button
   changeTopArticlesButton(topArticlesButton); // Top Articles Button
+  changeCommunitiesButton(communitiesButton); // Communities Button
   changeListsButton(listsButton); // Lists Button
   changeGrowButton(typefullyGrowTab); // Typefully Grow Button
   changeProfileButton(profileButton); // Profile Button
