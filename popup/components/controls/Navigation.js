@@ -12,8 +12,8 @@ const StyledToggle = styled(TogglePrimitive.Root, {
   "&[data-state=off]:hover": { borderColor: "rgba(255, 255, 255, 0.5)" }
 })
 
-const UserButton = ({ storageKey, children }) => {
-  const [userButton, setUserButton] = useState(true)
+const UserButton = ({ storageKey, children, defaultState = true }) => {
+  const [userButton, setUserButton] = useState(defaultState)
 
   useEffect(() => {
     const getUserDefaultButton = async () => {
@@ -124,7 +124,7 @@ const Lists = () => (
 )
 
 const TypefullyGrow = () => (
-  <UserButton storageKey="typefullyGrowTab">
+  <UserButton storageKey="typefullyGrowTab" defaultState={false}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"

@@ -32,8 +32,13 @@ const TimelineSection = () => {
             <SwitchControl
               label="Timeline Borders"
               storageKey="timelineBorders"
+              defaultState={true}
             />
-            <SwitchControl label="Tweet Borders" storageKey="tweetBorders" />
+            <SwitchControl
+              label="Tweet Borders"
+              storageKey="tweetBorders"
+              defaultState={true}
+            />
           </div>
           <Separator className="mt-4 mb-2" />
           <CheckboxPromotedPosts />
