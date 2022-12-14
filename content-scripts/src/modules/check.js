@@ -29,7 +29,7 @@ export const checkUrlForFollow = () => {
   }
 };
 
-//
+// Check Home Timeline and add Writer Mode if needed
 export const checkHomeTimeline = () => {
   if (
     window.location.pathname.includes("/home") ||
