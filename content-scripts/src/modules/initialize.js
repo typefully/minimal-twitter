@@ -1,4 +1,4 @@
-import { checkUrlForFollow } from "./check";
+import { checkHomeTimeline, checkUrlForFollow } from "./check";
 import { addGrowButton, addListsButton } from "./options/navigation";
 import { addWriterModeButton } from "./options/writer-mode";
 import {
@@ -86,8 +86,9 @@ export const observe = () => {
       saveCurrentReplyToLink();
       addTypefullyReplyPlug();
       checkUrlForFollow();
-      addListsButton();
+      checkHomeTimeline();
       addWriterModeButton();
+      addListsButton();
       setTimeout(() => {
         addGrowButton();
       });
