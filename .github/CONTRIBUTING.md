@@ -12,7 +12,7 @@ cd popup
 
 ```sh
 yarn # must run yarn once first before you can build
-yarn build
+yarn build # to build and export Next.js app
 ```
 
 We also use [parcel](https://parceljs.org) to build the `content_scripts` for the extension.
