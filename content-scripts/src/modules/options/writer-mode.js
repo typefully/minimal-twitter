@@ -69,7 +69,7 @@ export const changeWriterMode = (writerMode) => {
   }
 };
 
-const addTypefullyPlugToWriterMode = async () => {
+export const addTypefullyPlugToWriterMode = async () => {
   if (
     window.location.pathname.includes("/home") ||
     window.location.pathname === "/"
