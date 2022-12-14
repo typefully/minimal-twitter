@@ -61,7 +61,7 @@ export const addStylesheets = () => {
   mainStylesheetGitHub.rel = "stylesheet";
   mainStylesheetGitHub.type = "text/css";
   mainStylesheetGitHub.href =
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter/css/main.css";
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css";
   head.appendChild(mainStylesheetGitHub);
 
   typefullyStylesheet.rel = "stylesheet";
@@ -72,7 +72,7 @@ export const addStylesheets = () => {
   typefullyStylesheetGitHub.rel = "stylesheet";
   typefullyStylesheetGitHub.type = "text/css";
   typefullyStylesheetGitHub.href =
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter/css/typefully.css";
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css";
   head.appendChild(typefullyStylesheetGitHub);
 };
 
