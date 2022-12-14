@@ -12,6 +12,7 @@ import {
   changeWhoToFollow,
 } from "./interface";
 import {
+  changeHomeButton,
   changeBookmarksButton,
   changeExploreButton,
   changeGrowButton,
@@ -21,6 +22,8 @@ import {
   changeNavigationButtonsLabelsHover,
   changeNavigationCenter,
   changeNotificationsButton,
+  changeTopArticlesButton,
+  changeProfileButton,
 } from "./navigation";
 import {
   changeTimelineBorders,
@@ -33,66 +36,75 @@ import { changeWriterMode } from "./writer-mode";
 export const userPreferences = [
   "timelineWidth", // 1
   "timelineBorders", // 2
-  "exploreButton", // 3
-  "notificationsButton", // 4
-  "messagesButton", // 5
-  "bookmarksButton", // 6
-  "listsButton", // 7
-  "navigationButtonsLabelsHover", // 8
-  "navigationButtonsLabels", // 9
-  "navigationCenter", // 10
-  "writerMode", // 11
-  "replyCount", // 12
-  "retweetCount", // 13
-  "likeCount", // 14
-  "followCount", // 15
-  "hideTweetButton", // 16
-  "hideSearch", // 17
-  "transparentSearch", // 18
-  "removePromotedPosts", // 19
-  "whoToFollow", // 20
-  "topicsToFollow", // 21
-  "latestTweets", // 22
-  "tweetBorders", // 23
-  "typefullyGrowTab", // 24
+  "homeButton", // 3
+  "exploreButton", //
+  "notificationsButton", //
+  "messagesButton", //
+  "bookmarksButton", //
+  "topArticlesButon", //
+  "listsButton", //
+  "profileButton",
+  "navigationButtonsLabelsHover", //
+  "navigationButtonsLabels", //
+  "navigationCenter", //
+  "writerMode", //
+  "replyCount", //
+  "retweetCount", //
+  "likeCount", //
+  "followCount", //
+  "hideTweetButton", //
+  "hideSearch", //
+  "transparentSearch", //
+  "removePromotedPosts", //
+  "whoToFollow", //
+  "topicsToFollow", //
+  "latestTweets", //
+  "tweetBorders", //
+  "typefullyGrowTab", //
 ];
 
 export const injectAllChanges = (data) => {
   const {
     timelineWidth, // 1
     timelineBorders, // 2
-    exploreButton, // 3
-    notificationsButton, // 4
-    messagesButton, // 5
-    bookmarksButton, // 6
-    listsButton, // 7
-    navigationButtonsLabelsHover, // 8
-    navigationButtonsLabels, // 9
-    navigationCenter, // 10
-    writerMode, // 11
-    replyCount, // 12
-    retweetCount, // 13
-    likeCount, // 14
-    followCount, // 15
-    hideTweetButton, // 16
-    hideSearch, // 17
-    transparentSearch, // 18
-    removePromotedPosts, // 19
-    whoToFollow, // 20
-    topicsToFollow, // 21
-    latestTweets, // 22
-    tweetBorders, // 23
-    typefullyGrowTab, // 24
+    homeButton, // 3
+    exploreButton, //
+    notificationsButton, //
+    messagesButton, //
+    bookmarksButton, //
+    topArticlesButton, //
+    listsButton, //
+    profileButton,
+    navigationButtonsLabelsHover, //
+    navigationButtonsLabels, //
+    navigationCenter, //
+    writerMode, //
+    replyCount, //
+    retweetCount, //
+    likeCount, //
+    followCount, //
+    hideTweetButton, //
+    hideSearch, //
+    transparentSearch, //
+    removePromotedPosts, //
+    whoToFollow, //
+    topicsToFollow, //
+    latestTweets, //
+    tweetBorders, //
+    typefullyGrowTab, //
   } = data;
   changeTimelineWidth(timelineWidth); // Timeline Width
   changeTimelineBorders(timelineBorders); // Timeline Borders
   changeTweetBorders(tweetBorders); // Timeline Borders
+  changeHomeButton(homeButton); // Home Button
   changeExploreButton(exploreButton); // Explore Button
   changeNotificationsButton(notificationsButton); // Notification Button
   changeMessagesButton(messagesButton); // Messages Button
   changeBookmarksButton(bookmarksButton); // Bookmarks Button
+  changeTopArticlesButton(topArticlesButton); // Top Articles Button
   changeListsButton(listsButton); // Lists Button
   changeGrowButton(typefullyGrowTab); // Typefully Grow Button
+  changeProfileButton(profileButton); // Profile Button
   changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(navigationButtonsLabels); // Navigation Buttons Labels
   changeNavigationCenter(navigationCenter); // Center Navigation

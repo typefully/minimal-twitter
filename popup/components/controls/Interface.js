@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+
+import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import {
   CheckboxHideFollowCount,
   CheckboxHideLikeCount,
@@ -6,11 +8,10 @@ import {
   CheckboxHideRetweetCount,
   CheckboxHideSearch,
   CheckboxHideTweetButton,
-  CheckboxHideVanityCount,
-  CheckboxTransparentSearch
+  CheckboxHideVanityCount
 } from "./Checkboxes"
-
-import { getStorage, setStorage } from "../../utilities/chromeStorage"
+import Separator from "./Separator"
+import SwitchControl from "./SwitchControl"
 
 const Interface = () => {
   const [showVanityCheckboxes, setShowVanityCheckboxes] = useState(false)
@@ -145,7 +146,12 @@ const Interface = () => {
 
   return (
     <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-      <div className="w-full py-2">
+      <div className="w-full pt-4 pb-2">
+        <SwitchControl
+          label="Transparent Search Bar"
+          storageKey="transparentSearch"
+        />
+        <Separator className="mb-2 mt-4" />
         <CheckboxHideVanityCount
           showVanityCheckboxes={showVanityCheckboxes}
           setShowVanityCheckboxes={setShowVanityCheckboxes}
@@ -174,7 +180,6 @@ const Interface = () => {
         )}
         <CheckboxHideTweetButton />
         <CheckboxHideSearch />
-        <CheckboxTransparentSearch />
       </div>
     </form>
   )

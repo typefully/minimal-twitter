@@ -4,6 +4,26 @@ import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
 import { getStorage } from "../utilities/storage";
 
+// Function to change Home Button
+export const changeHomeButton = (homeButton) => {
+  switch (homeButton) {
+    case "off":
+      addStyles(
+        "mt-homeButton",
+        `
+        [data-testid="AppTabBar_Home_Link"] {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-homeButton");
+      break;
+  }
+};
+
 // Function to change Explore Button
 export const changeExploreButton = (exploreButton) => {
   switch (exploreButton) {
@@ -80,6 +100,46 @@ export const changeBookmarksButton = (bookmarksButton) => {
 
     case "on":
       removeElement("mt-bookmarksButton");
+      break;
+  }
+};
+
+// Function to change Top Articles Button
+export const changeTopArticlesButton = (topArticlesButton) => {
+  switch (topArticlesButton) {
+    case "off":
+      addStyles(
+        "mt-topArticlesButton",
+        `
+        a[href="/i/articles"] {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-topArticlesButton");
+      break;
+  }
+};
+
+// Function to change Profile Button
+export const changeProfileButton = (profileButton) => {
+  switch (profileButton) {
+    case "off":
+      addStyles(
+        "mt-profileButton",
+        `
+        [data-testid="AppTabBar_Profile_Link"] {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-profileButton");
       break;
   }
 };
