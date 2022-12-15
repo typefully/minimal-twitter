@@ -143,7 +143,7 @@ const bundle = async (manifest, bundleDirectory) => {
     );
 
     // Done.
-    console.log(`✅ Done.`);
+    console.log(`✅ Bundled.`);
   } catch (error) {
     console.error(error);
   }
@@ -167,6 +167,7 @@ rl.question(
         break;
 
       case "Safari":
+        await bundle(MANIFEST_FIREFOX, "bundle/firefox");
         exec(
           "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari",
           (error, stdout, stderr) => {
@@ -177,6 +178,7 @@ rl.question(
             }
           }
         );
+        console.log(`✅ Converted Firefox to Safari.`);
         break;
 
       default:

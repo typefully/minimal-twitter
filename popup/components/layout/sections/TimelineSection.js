@@ -1,10 +1,5 @@
 import useMounted from "../../../utilities/hooks/useMounted"
-import {
-  CheckboxAlwaysShowLatest,
-  CheckboxPromotedPosts,
-  CheckboxTopicsToFollow,
-  CheckboxWhoToFollow
-} from "../../controls/Checkboxes"
+import CheckboxControl from "../../controls/CheckboxControl"
 import Separator from "../../controls/Separator"
 import SwitchControl from "../../controls/SwitchControl"
 import TimelineSlider from "../../controls/TimelineSlider"
@@ -41,10 +36,25 @@ const TimelineSection = () => {
             />
           </div>
           <Separator className="mt-4 mb-2" />
-          <CheckboxPromotedPosts />
-          <CheckboxWhoToFollow />
-          <CheckboxTopicsToFollow />
-          <CheckboxAlwaysShowLatest />
+          <CheckboxControl
+            label="Remove Promoted Posts"
+            storageKey="removePromotedPosts"
+            defaultState={true}
+          />
+          <CheckboxControl
+            label="Remove Who to Follow"
+            storageKey="whoToFollow"
+            checkedOff={true}
+          />
+          <CheckboxControl
+            label="Remove Topics to Follow"
+            storageKey="topicsToFollow"
+            checkedOff={true}
+          />
+          <CheckboxControl
+            label="Always Show Latest Tweets"
+            storageKey="latestTweets"
+          />
         </div>
       ) : (
         <div className="dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl animate-pulse h-[115.5px]" />

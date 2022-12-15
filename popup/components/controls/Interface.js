@@ -7,7 +7,7 @@ import {
   CheckboxHideReplyCount,
   CheckboxHideRetweetCount,
   CheckboxHideVanityCount
-} from "./Checkboxes"
+} from "./VanityCheckboxes"
 import Separator from "./Separator"
 import SwitchControl from "./SwitchControl"
 

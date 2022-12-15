@@ -1,6 +1,7 @@
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { styled } from "@stitches/react"
 import { useEffect, useState } from "react"
+
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
 export default function SwitchControl({
