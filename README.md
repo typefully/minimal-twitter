@@ -8,7 +8,8 @@
 
 - **Add to Chrome**: **[Available in the Chrome Web Store](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp)**
 - **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
-- **Add to Microsoft Edge**: **[Available as a Microsoft Edge Add-on](https://microsoftedge.microsoft.com/addons/detail/mghjldihobnccoppgcgfelpdpffmebjn)**
+- **Add to Microsoft Edge**: [NEW SOON]
+- **Add to Safari**: [NEW SOON]
 
 ![Screenshots](.github/assets/screenshots.png)
 
