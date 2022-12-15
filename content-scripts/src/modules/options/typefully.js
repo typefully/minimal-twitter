@@ -47,9 +47,7 @@ export const addGrowButton = async () => {
   const exists = document.querySelector("#mt-typefullyGrowButton");
   if (exists) return;
 
-  const profileNode = document.querySelector(
-    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-  );
+  const profileNode = document.querySelector(selectors.sidebarLinks.profile);
 
   if (profileNode) {
     const growButton = document.createElement("div");

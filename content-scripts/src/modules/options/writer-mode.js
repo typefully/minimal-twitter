@@ -22,24 +22,24 @@ export const changeWriterMode = (writerMode) => {
             body {
               padding-left: 0 !important;
             }
-            main[role="main"] > div {
-              width: 100% !important;
-              max-width: 100% !important;
-            }
-            header[role="banner"], 
-            [data-testid="sidebarColumn"],
-            [data-testid="primaryColumn"] > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
-              display: none !important;
-            }
-            [data-testid="primaryColumn"] > div > div:nth-of-type(1) {
-              visibility: hidden !important;
-            }
-            div[data-testid="primaryColumn"] {
+            ${selectors.mainColumn} {
               border-style: hidden !important;
               padding-top: 3vh !important;
               margin: 0 auto;
             }
-            div[aria-labelledby="modal-header"][role="dialog"] {
+            ${selectors.mainWrapper} > div {
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+            ${selectors.leftSidebar},
+            ${selectors.rightSidebar},
+            ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
+              display: none !important;
+            }
+            ${selectors.topHeader} {
+              visibility: hidden !important;
+            }
+            ${selectors.modalWrapper} {
               width: 100vw !important;
               max-width: 100vw !important;
               top: 0 !important;
@@ -48,10 +48,10 @@ export const changeWriterMode = (writerMode) => {
             div[role="group"] > div:empty {
               background-color: var(--body-bg-color) !important;
             }
-            div[aria-labelledby="modal-header"][role="dialog"] > div {
+            ${selectors.modalUi} {
               border-radius: 0 !important;
             }
-            div[aria-labelledby="modal-header"][role="dialog"] > div > div > div {
+            ${selectors.modalWrapper} > div > div > div {
               padding-bottom: 10vh !important;
             }
             `

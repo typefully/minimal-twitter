@@ -9,7 +9,7 @@ export const changeHomeButton = (homeButton) => {
       addStyles(
         "mt-homeButton",
         `
-        [data-testid="AppTabBar_Home_Link"] {
+        ${selectors.sidebarLinks.home} {
           display: none !important;
         }
         `
@@ -29,7 +29,7 @@ export const changeExploreButton = (exploreButton) => {
       addStyles(
         "mt-exploreButton",
         `
-        [data-testid="AppTabBar_Explore_Link"] {
+        ${selectors.sidebarLinks.explore} {
           display: none !important;
         }
         `
@@ -49,7 +49,7 @@ export const changeNotificationsButton = (notificationsButton) => {
       addStyles(
         "mt-notificationsButton",
         `
-        [data-testid="AppTabBar_Notifications_Link"] {
+        ${selectors.sidebarLinks.notifications} {
           display: none !important;
         }
         `
@@ -69,7 +69,7 @@ export const changeMessagesButton = (messagesButton) => {
       addStyles(
         "mt-messagesButton",
         `
-        [data-testid="AppTabBar_DirectMessage_Link"] {
+        ${selectors.sidebarLinks.messages} {
           display: none !important;
         }
         `
@@ -89,7 +89,7 @@ export const changeBookmarksButton = (bookmarksButton) => {
       addStyles(
         "mt-bookmarksButton",
         `
-        a[href="/i/bookmarks"] {
+        ${selectors.sidebarLinks.bookmarks} {
           display: none !important;
         }
         `
@@ -109,7 +109,7 @@ export const changeTopArticlesButton = (topArticlesButton) => {
       addStyles(
         "mt-topArticlesButton",
         `
-        a[href="/i/articles"] {
+        ${selectors.sidebarLinks.articles} {
           display: none !important;
         }
         `
@@ -129,7 +129,7 @@ export const changeCommunitiesButton = (communitiesButton) => {
       addStyles(
         "mt-communitiesButton",
         `
-        a[href$=communities] {
+        ${selectors.sidebarLinks.communities} {
           display: none !important;
         }
         `
@@ -149,7 +149,7 @@ export const changeProfileButton = (profileButton) => {
       addStyles(
         "mt-profileButton",
         `
-        [data-testid="AppTabBar_Profile_Link"] {
+        ${selectors.sidebarLinks.profile} {
           display: none !important;
         }
         `
@@ -170,7 +170,7 @@ export const changeListsButton = (listsButton) => {
       addStyles(
         "mt-listsButton",
         `
-        a[href*="/lists"][role="link"][aria-label] {
+        ${selectors.sidebarLinks.lists} {
           display: none !important;
         }
         `
@@ -187,7 +187,7 @@ export const changeListsButton = (listsButton) => {
 
 // Function to add Lists button
 export const addListsButton = () => {
-  if (!document.querySelector('a[href$="/lists"][role="link"][aria-label]')) {
+  if (!document.querySelector(selectors.sidebarLinks.lists)) {
     const profileNode = document.querySelector(
       'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
     );
@@ -212,26 +212,26 @@ const removeHover = () => {
   addStyles(
     "mt-navigationButtonsLabelsHover",
     `
-    header[role="banner"] nav[role="navigation"] {
+    ${selectors.leftSidebarLinks} {
       width: fit-content !important;
     }
-    header[role="banner"] nav[role="navigation"] div[dir] {
+    ${selectors.leftSidebarLinks} div[dir] {
       position: absolute !important;
     }
-    header[role="banner"] nav[role="navigation"] * div[dir]:not([aria-label]) > span {
+    ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span {
       display: none !important;
     }
   
-    header[role="banner"] > div > div > div > div:last-child {
+    ${selectors.leftSidebar} > div > div > div > div:last-child {
       width: fit-content !important;
     }
   
-    [data-testid="SideNav_AccountSwitcher_Button"] {
+    ${selectors.accountSwitcherButton} {
       bottom: 12px !important;
       width: fit-content !important;
     }
   
-    [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+    ${selectors.accountSwitcherButton} > div:not(:first-child) {
       display: none !important;
     }
     `
@@ -265,8 +265,8 @@ export const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
       addStyles(
         "mt-navigationButtonsLabels",
         `
-        header[role="banner"] nav[role="navigation"] * div[dir]:not([aria-label]) > span,
-        [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
+        ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span,
+        ${selectors.accountSwitcherButton} > div:not(:first-child) {
           opacity: 1 !important;
         }
         `
@@ -292,7 +292,7 @@ export const changeNavigationCenter = (navigationCenter) => {
       addStyles(
         "mt-navigationCenter",
         `
-        header[role="banner"] > div > div > div {
+        ${selectors.leftSidebar} > div > div > div {
           justify-content: center !important;
           padding-top: 0;
         }

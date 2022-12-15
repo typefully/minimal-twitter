@@ -9,7 +9,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
-          [data-testid="primaryColumn"] {
+          ${selectors.mainColumn} {
             width: 600px !important;
             max-width: 600px !important;
           }
@@ -23,7 +23,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
-          [data-testid="primaryColumn"] {
+          ${selectors.mainColumn} {
             width: 650px !important;
             max-width: 650px !important;
           }
@@ -37,7 +37,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
-          [data-testid="primaryColumn"] {
+          ${selectors.mainColumn} {
             width: 700px !important;
             max-width: 700px !important;
           }
@@ -51,7 +51,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
-          [data-testid="primaryColumn"] {
+          ${selectors.mainColumn} {
             width: 750px !important;
             max-width: 750px !important;
           }
@@ -65,7 +65,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         "mt-timelineWidth",
         `
         @media only screen and (min-width: 988px) {
-          [data-testid="primaryColumn"] {
+          ${selectors.mainColumn} {
             width: 800px !important;
             max-width: 800px !important;
           }
@@ -88,7 +88,7 @@ export const changeTimelineBorders = (timelineBorders) => {
         "mt-timelineBorders",
         `
         @media only screen and (min-width: 988px) {
-          div[data-testid="primaryColumn"] {
+          div${selectors.mainColumn} {
             border-style: hidden !important;
           }
         }
@@ -109,10 +109,10 @@ export const changeTweetBorders = (tweetBorders) => {
       addStyles(
         "mt-tweetBorders",
         `
-        main[role="main"] section > div > div > div > div {
+        ${selectors.mainWrapper} section > div > div > div > div {
           border-style: hidden !important;
         }
-        [data-testid="primaryColumn"] > div > div:empty {
+        ${selectors.mainColumn} > div > div:empty {
           background: transparent !important;
         }
         `.trim()

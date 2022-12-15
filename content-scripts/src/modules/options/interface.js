@@ -117,7 +117,7 @@ export const changeSearchBar1 = (searchBar) => {
       addStyles(
         "mt-searchBar",
         `
-        [data-testid="sidebarColumn"] form[role="search"] {
+        ${selectors.searchBox} {
           display: none !important;
           visibility: hidden !important;
         }
@@ -138,10 +138,10 @@ export const changeSearchBar2 = (transparentSearch) => {
       addStyles(
         "mt-transparentSearch",
         `
-        form[role="search"] > div:nth-child(1) > div {
+        ${selectors.searchBox} > div:nth-child(1) > div {
           background-color: transparent !important;
         }
-        [data-testid="sidebarColumn"] [placeholder="Search Twitter"] {
+        ${selectors.searchBoxInput} {
           padding-left: 34px !important;
           margin-left: -24px !important;
         }
@@ -182,8 +182,8 @@ export const changeWhoToFollow = (whoToFollow) => {
       addStyles(
         "mt-whoToFollow",
         `
-        div[data-testid="primaryColumn"] a[href*="/i/connect_people?user_id="],
-        div[data-testid="primaryColumn"] div[data-testid="UserCell"] {
+        ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
+        ${selectors.mainColumn} div[data-testid="UserCell"] {
           display: none;
         }
         `
@@ -205,9 +205,9 @@ export const changeTopicsToFollow = (topicsToFollow) => {
       addStyles(
         "mt-topicsToFollow",
         `
-        div[data-testid="primaryColumn"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
-        div[data-testid="primaryColumn"] a[href*="/i/flow/topics_selector"],
-        div[data-testid="primaryColumn"] a[href*="/i/topics/picker/home"] {
+        ${selectors.mainColumn} section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
+        ${selectors.mainColumn} a[href*="/i/flow/topics_selector"],
+        ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
           display: none;
         }
         `
