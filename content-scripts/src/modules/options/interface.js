@@ -91,11 +91,11 @@ export const changeFollowCount = (followCount) => {
 };
 
 // Function to change Tweet Button
-export const changeTweetButton = (hideTweetButton) => {
-  switch (hideTweetButton) {
-    case "on":
+export const changeTweetButton = (tweetButton) => {
+  switch (tweetButton) {
+    case "off":
       addStyles(
-        "mt-hideTweetButton",
+        "mt-tweetButton",
         `
         [data-testid="SideNav_NewTweet_Button"] {
           visibility: hidden;
@@ -104,18 +104,18 @@ export const changeTweetButton = (hideTweetButton) => {
       );
       break;
 
-    case "off":
-      removeElement("mt-hideTweetButton");
+    case "on":
+      removeElement("mt-tweetButton");
       break;
   }
 };
 
 // Function to change Search Bar 1
-export const changeSearchBar1 = (hideSearch) => {
-  switch (hideSearch) {
-    case "on":
+export const changeSearchBar1 = (searchBar) => {
+  switch (searchBar) {
+    case "off":
       addStyles(
-        "mt-hideSearch",
+        "mt-searchBar",
         `
         [data-testid="sidebarColumn"] form[role="search"] {
           display: none !important;
@@ -125,8 +125,8 @@ export const changeSearchBar1 = (hideSearch) => {
       );
       break;
 
-    case "off":
-      removeElement("mt-hideSearch");
+    case "on":
+      removeElement("mt-searchBar");
       break;
   }
 };

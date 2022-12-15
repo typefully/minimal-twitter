@@ -6,8 +6,6 @@ import {
   CheckboxHideLikeCount,
   CheckboxHideReplyCount,
   CheckboxHideRetweetCount,
-  CheckboxHideSearch,
-  CheckboxHideTweetButton,
   CheckboxHideVanityCount
 } from "./Checkboxes"
 import Separator from "./Separator"
@@ -147,10 +145,22 @@ const Interface = () => {
   return (
     <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
       <div className="w-full pt-4 pb-2">
-        <SwitchControl
-          label="Transparent Search Bar"
-          storageKey="transparentSearch"
-        />
+        <div className="flex flex-col gap-y-4">
+          <SwitchControl
+            label="Search Bar"
+            storageKey="searchBar"
+            defaultState={true}
+          />
+          <SwitchControl
+            label="Transparent Search Bar"
+            storageKey="transparentSearch"
+          />
+          <SwitchControl
+            label="Tweet Button"
+            storageKey="tweetButton"
+            defaultState={true}
+          />
+        </div>
         <Separator className="mb-2 mt-4" />
         <CheckboxHideVanityCount
           showVanityCheckboxes={showVanityCheckboxes}
@@ -178,8 +188,6 @@ const Interface = () => {
             />
           </>
         )}
-        <CheckboxHideTweetButton />
-        <CheckboxHideSearch />
       </div>
     </form>
   )

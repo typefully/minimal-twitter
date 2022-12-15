@@ -54,8 +54,8 @@ export const userPreferences = [
   "retweetCount", //
   "likeCount", //
   "followCount", //
-  "hideTweetButton", //
-  "hideSearch", //
+  "tweetButton", //
+  "searchBar", //
   "transparentSearch", //
   "removePromotedPosts", //
   "whoToFollow", //
@@ -86,8 +86,8 @@ export const injectAllChanges = (data) => {
     retweetCount, //
     likeCount, //
     followCount, //
-    hideTweetButton, //
-    hideSearch, //
+    tweetButton, //
+    searchBar, //
     transparentSearch, //
     removePromotedPosts, //
     whoToFollow, //
@@ -117,8 +117,8 @@ export const injectAllChanges = (data) => {
   changeRetweetCount(retweetCount); // Hide Retweet Count
   changeLikeCount(likeCount); // Hide Like Count
   changeFollowCount(followCount); // Hide Follow
-  changeTweetButton(hideTweetButton); // Hide Tweet Button
-  changeSearchBar1(hideSearch); // Hide Search Bar
+  changeTweetButton(tweetButton); // Hide Tweet Button
+  changeSearchBar1(searchBar); // Hide Search Bar
   changeSearchBar2(transparentSearch); // Transparent Search Bar
   changePromotedPosts(removePromotedPosts); // Remove Promoted Posts
   changeWhoToFollow(whoToFollow); // Who to Follow
