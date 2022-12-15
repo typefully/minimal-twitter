@@ -16,10 +16,9 @@ export const changeWriterMode = (writerMode) => {
   ) {
     switch (writerMode) {
       case "on":
-        setTimeout(() => {
-          addStyles(
-            "mt-writerMode",
-            `
+        addStyles(
+          "mt-writerMode",
+          `
             body {
               padding-left: 0 !important;
             }
@@ -56,8 +55,7 @@ export const changeWriterMode = (writerMode) => {
               padding-bottom: 10vh !important;
             }
             `
-          );
-        }, 500);
+        );
 
         setTimeout(() => {
           addTypefullyPlugToWriterMode();
