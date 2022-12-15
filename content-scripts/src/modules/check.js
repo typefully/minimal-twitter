@@ -1,5 +1,4 @@
 import { removeTypefullyPlugFromWriterMode } from "./options/writer-mode";
-import { addTypefullyPlugToWriterMode } from "./options/writer-mode";
 import addStyles from "./utilities/addStyles";
 import removeElement from "./utilities/removeElement";
 
@@ -41,6 +40,7 @@ export const checkHomeTimeline = () => {
 
       switch (writerMode) {
         case "on":
+          if (document.getElementById("mt-writerMode")) return;
           addStyles(
             "mt-writerMode",
             `
@@ -81,9 +81,6 @@ export const checkHomeTimeline = () => {
             }
             `
           );
-          setTimeout(() => {
-            addTypefullyPlugToWriterMode();
-          }, 1000);
           break;
 
         case "off":

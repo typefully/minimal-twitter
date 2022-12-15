@@ -1,5 +1,6 @@
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
-import { addGrowButton, addListsButton } from "./options/navigation";
+import { addListsButton } from "./options/navigation";
+import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton } from "./options/writer-mode";
 import {
   addTypefullyPlug,

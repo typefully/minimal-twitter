@@ -51,6 +51,13 @@
   min-height: 36px;
 }
 
+#typefully-link,
+#typefully-reply-link,
+#typefully-writermode-link,
+#typefully-writermode-box {
+  visibility: hidden;
+}
+
 #mt-typefullyGrowButton {
   width: 100%;
   display: flex;
@@ -69,7 +76,7 @@
 
 #typefully-writermode-box {
   font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Helvetica, Arial, sans-serif;
+    Roboto, Helvetica, Arial, sans-serif;
   color: var(--main-text-color);
   width: auto !important;
   max-width: 100% !important;
@@ -141,7 +148,8 @@
   }
 }
 
-#typefully-writermode-box, .typefully-writermode-button {
+#typefully-writermode-box,
+.typefully-writermode-button {
   animation: fadeIn 0.3s ease-out both;
 }
 

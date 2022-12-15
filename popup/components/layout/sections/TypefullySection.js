@@ -1,5 +1,4 @@
 import SwitchControl from "../../controls/SwitchControl"
-import Separator from "../../controls/Separator"
 
 const TypefullySection = () => (
   <section className="flex flex-col gap-y-2">
@@ -11,9 +10,14 @@ const TypefullySection = () => (
     </label>
     <div id="user-control-typefully">
       <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-        <div className="w-full pt-4 pb-2">
-          <SwitchControl label="Grow Tab" storageKey="typefullyGrowTab" />
-          <Separator className="mb-2 mt-4" />
+        <div className="w-full py-4">
+          <div className="flex flex-col gap-y-4">
+            <SwitchControl label="Grow Tab" storageKey="typefullyGrowTab" />
+            <SwitchControl
+              label="Composer Buttons"
+              storageKey="typefullyComposerButtons"
+            />
+          </div>
         </div>
       </form>
     </div>

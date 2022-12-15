@@ -15,7 +15,6 @@ import {
   changeBookmarksButton,
   changeCommunitiesButton,
   changeExploreButton,
-  changeGrowButton,
   changeHomeButton,
   changeListsButton,
   changeMessagesButton,
@@ -31,6 +30,7 @@ import {
   changeTimelineWidth,
   changeTweetBorders,
 } from "./timeline";
+import { changeGrowButton, changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
 
 // Array of user preferences, passed to `injectAllChanges`
@@ -63,6 +63,7 @@ export const userPreferences = [
   "latestTweets", //
   "tweetBorders", //
   "typefullyGrowTab", //
+  "typefullyComposerButtons", //
 ];
 
 export const injectAllChanges = (data) => {
@@ -95,6 +96,7 @@ export const injectAllChanges = (data) => {
     latestTweets, //
     tweetBorders, //
     typefullyGrowTab, //
+    typefullyComposerButtons, //
   } = data;
   changeTimelineWidth(timelineWidth); // Timeline Width
   changeTimelineBorders(timelineBorders); // Timeline Borders
@@ -108,6 +110,7 @@ export const injectAllChanges = (data) => {
   changeCommunitiesButton(communitiesButton); // Communities Button
   changeListsButton(listsButton); // Lists Button
   changeGrowButton(typefullyGrowTab); // Typefully Grow Button
+  changeTypefullyComposerButtons(typefullyComposerButtons); // Typefully Composer Buttons
   changeProfileButton(profileButton); // Profile Button
   changeNavigationButtonsLabelsHover(navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(navigationButtonsLabels); // Navigation Buttons Labels

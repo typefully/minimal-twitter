@@ -17,6 +17,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
       );
       break;
+
     case 650:
       addStyles(
         "mt-timelineWidth",
@@ -30,6 +31,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
       );
       break;
+
     case 700:
       addStyles(
         "mt-timelineWidth",
@@ -43,6 +45,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
       );
       break;
+
     case 750:
       addStyles(
         "mt-timelineWidth",
@@ -56,6 +59,7 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
       );
       break;
+
     case 800:
       addStyles(
         "mt-timelineWidth",
