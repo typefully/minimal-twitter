@@ -2,16 +2,10 @@
 // https://gist.github.com/webbertakken/ed82572b50f4e166562906757aede40a
 
 import { copy } from "fs-extra";
-import {
-  readdir,
-  readFile,
-  rename,
-  rm,
-  writeFile,
-  copyFile,
-} from "fs/promises";
+import { readdir, rm, writeFile, copyFile } from "fs/promises";
 import { resolve } from "path";
 import readline from "readline";
+import { exec } from "child_process";
 
 let manifest = {
   name: "Minimal Theme for Twitter",
@@ -161,7 +155,7 @@ const rl = readline.createInterface({
 });
 
 rl.question(
-  "Which browser would you like to bundle for? [Chrome / Firefox] ",
+  "Which browser would you like to bundle for? [Chrome / Firefox / Safari] ",
   async (browser) => {
     switch (browser) {
       case "Chrome":
@@ -170,6 +164,19 @@ rl.question(
 
       case "Firefox":
         await bundle(MANIFEST_FIREFOX, "bundle/firefox");
+        break;
+
+      case "Safari":
+        exec(
+          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari",
+          (error, stdout, stderr) => {
+            console.log(stdout);
+            console.log(stderr);
+            if (error !== null) {
+              console.error(`exec error: ${error}`);
+            }
+          }
+        );
         break;
 
       default:
