@@ -40,3 +40,4 @@ package-lock.json
 out
 dist
 bundle
+.vscode
