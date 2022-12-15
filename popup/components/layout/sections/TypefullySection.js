@@ -12,11 +12,12 @@ const TypefullySection = () => (
       <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
         <div className="w-full py-4">
           <div className="flex flex-col gap-y-4">
-            <SwitchControl label="Grow Tab" storageKey="typefullyGrowTab" />
             <SwitchControl
               label="Composer Buttons"
               storageKey="typefullyComposerButtons"
+              defaultState={true}
             />
+            <SwitchControl label="Grow Tab" storageKey="typefullyGrowTab" />
           </div>
         </div>
       </form>

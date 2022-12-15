@@ -55,7 +55,7 @@
 #typefully-reply-link,
 #typefully-writermode-link,
 #typefully-writermode-box {
-  visibility: hidden;
+  visibility: visible;
 }
 
 #mt-typefullyGrowButton {

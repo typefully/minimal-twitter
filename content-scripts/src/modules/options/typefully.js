@@ -8,10 +8,6 @@ import { getStorage } from "../utilities/storage";
 export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
   switch (typefullyComposerButtons) {
     case "off":
-      removeElement("mt-typefullyComposerButtons");
-      break;
-
-    case "on":
       addStyles(
         "mt-typefullyComposerButtons",
         `
@@ -19,10 +15,14 @@ export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
         #typefully-reply-link, 
         #typefully-writermode-link, 
         #typefully-writermode-box {
-          visibility: visible !important;
+          visibility: hidden !important;
         }
         `
       );
+      break;
+
+    case "on":
+      removeElement("mt-typefullyComposerButtons");
       break;
   }
 };
