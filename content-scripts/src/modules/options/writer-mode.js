@@ -142,6 +142,7 @@ export const addWriterModeButton = async () => {
 
     writerModeButton.id = "mt-writer-mode-composer-button";
     writerModeButton.ariaLabel = "Writer Mode";
+    writerModeButton.title = "Writer Mode";
     writerModeButton.removeAttribute("data-testid");
 
     const userSetting = await getStorage("writerMode");
