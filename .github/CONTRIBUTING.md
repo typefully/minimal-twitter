@@ -27,7 +27,7 @@ yarn build # to build the content_scripts
 yarn watch # watch for changes and build automatically
 ```
 
-After you have built both `popup` and `content-scripts` you can bundle the extension for `Chrome` and `Firefox`:
+After you have built both `popup` and `content-scripts` you can bundle the extension for `Chrome`, `Firefox`, and `Safari`:
 
 ```sh
 cd .. # go back to the root directory
