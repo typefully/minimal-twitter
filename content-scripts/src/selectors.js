@@ -4,6 +4,7 @@ selectors.mainWrapper = `main[role="main"]`;
 selectors.mainColumn = `[data-testid="primaryColumn"]`;
 selectors.leftSidebar = `header[role="banner"]`;
 selectors.leftSidebarLinks = `${selectors.leftSidebar} nav[role="navigation"]`;
+selectors.leftSidebarUnreadBadge = `${selectors.leftSidebarLinks} a svg + div[dir]`;
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;
 selectors.sidebarLinks = {
   home: `[data-testid="AppTabBar_Home_Link"]`,
