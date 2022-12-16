@@ -28,7 +28,7 @@ export default function CheckboxControl({
     }
 
     getDefaultState()
-  }, [storageKey])
+  }, [storageKey, checkedOff])
 
   return (
     <>
