@@ -154,8 +154,24 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+const bundleAll = async () => {
+  await bundle(MANIFEST_CHROME, "bundle/chrome");
+  await bundle(MANIFEST_FIREFOX, "bundle/firefox");
+  exec(
+    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari",
+    (error, stdout, stderr) => {
+      console.log(stdout);
+      console.log(stderr);
+      if (error !== null) {
+        console.error(`exec error: ${error}`);
+      }
+    }
+  );
+  console.log(`✅ Converted Firefox to Safari.`);
+};
+
 rl.question(
-  "Which browser would you like to bundle for? [Chrome / Firefox / Safari] ",
+  "Which browser would you like to bundle for? [All / Chrome / Firefox / Safari] ",
   async (browser) => {
     switch (browser) {
       case "Chrome":
@@ -181,8 +197,12 @@ rl.question(
         console.log(`✅ Converted Firefox to Safari.`);
         break;
 
+      case "All":
+        await bundleAll();
+        break;
+
       default:
-        console.log("❌ Must choose a valid browser.");
+        await bundleAll();
     }
 
     rl.close();
