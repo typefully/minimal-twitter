@@ -97,6 +97,9 @@ a[href*="quick_promote_web"] {
     right: 16px !important;
     bottom: 24px !important;
   }
+  header[role="banner"] > div > div > div {
+    overflow: visible; // Safari overflow issue: https://bugs.webkit.org/show_bug.cgi?id=160953
+  }
 }
 
 /* Add padding equal to navigation size when between 1000px-1265px */
