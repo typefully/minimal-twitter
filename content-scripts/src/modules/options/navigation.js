@@ -213,25 +213,19 @@ const removeHover = () => {
   addStyles(
     "mt-navigationButtonsLabelsHover",
     `
-    ${selectors.leftSidebarLinks} {
-      width: fit-content !important;
-    }
-    ${selectors.leftSidebarLinks} div[dir] {
-      position: absolute !important;
+    ${selectors.leftSidebarLinks} div + div[dir] {
+      display: none !important;
     }
     ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span {
       display: none !important;
     }
-  
     ${selectors.leftSidebar} > div > div > div > div:last-child {
       width: fit-content !important;
     }
-  
     ${selectors.accountSwitcherButton} {
       bottom: 12px !important;
       width: fit-content !important;
     }
-  
     ${selectors.accountSwitcherButton} > div:not(:first-child) {
       display: none !important;
     }
