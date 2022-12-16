@@ -81,6 +81,7 @@ export const addStylesheets = () => {
 export const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
+      extractColorsAsRootVars(); // Extract colors first
       searchBarWidthReset();
       revealSearchFilters();
       addTypefullyPlug();
@@ -93,7 +94,6 @@ export const observe = () => {
       setTimeout(() => {
         addGrowButton();
       });
-      extractColorsAsRootVars();
     }
   });
 
