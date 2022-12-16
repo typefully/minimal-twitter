@@ -1,3 +1,4 @@
+import selectors from "../selectors";
 import { removeTypefullyPlugFromWriterMode } from "./options/writer-mode";
 import addStyles from "./utilities/addStyles";
 import removeElement from "./utilities/removeElement";

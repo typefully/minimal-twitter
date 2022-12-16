@@ -1,3 +1,4 @@
+import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
