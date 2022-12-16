@@ -128,6 +128,7 @@ const TypefullyGrow = () => (
     <path
       fillRule="evenodd"
       clipRule="evenodd"
+      fill="currentColor"
       d="M5 5h14a1 1 0 011 1v.586l-8 8-3.293-3.293L8 10.586l-.707.707L4 14.586V6a1 1 0 011-1zM4 17.414V18a1 1 0 001 1h14a1 1 0 001-1V9.414l-7.293 7.293-.707.707-.707-.707L8 13.414l-4 4zM2 6a3 3 0 013-3h14a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V6z"
     />
   </UserButton>
