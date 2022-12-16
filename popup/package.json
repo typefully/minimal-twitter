@@ -1,5 +1,5 @@
 {
-  "name": "minimal-twitte-popup",
+  "name": "minimal-twitter-popup",
   "private": true,
   "scripts": {
     "dev": "next dev",
