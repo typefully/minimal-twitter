@@ -1,0 +1,17 @@
+import Navigation from "../../controls/Navigation"
+
+const NavigationSection = () => (
+  <section className="flex flex-col gap-y-2">
+    <label
+      htmlFor="user-control-navigation"
+      className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
+    >
+      Navigation
+    </label>
+    <div id="user-control-navigation">
+      <Navigation />
+    </div>
+  </section>
+)
+
+export default NavigationSection

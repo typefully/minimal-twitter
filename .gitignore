@@ -32,8 +32,12 @@ Thumbs.db
 .Trashes
 
 # Other paths to ignore
+.parcel-cache
 .awcache
 bower_components
 node_modules
 package-lock.json
+out
 dist
+bundle
+.vscode
