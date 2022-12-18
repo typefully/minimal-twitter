@@ -10,7 +10,7 @@ import { exec } from "child_process";
 let manifest = {
   name: "Minimal Theme for Twitter",
   short_name: "Minimal Twitter",
-  description: "Declutter the Twitter web experience.",
+  description: "Refine and declutter the Twitter web experience.",
   version: "5.0.0.2", // alpha version
   icons: {
     16: "images/MinimalTwitterIcon16.png",
