@@ -10,11 +10,15 @@ import addTypefullyBox from "../utilities/addTypefullyBox";
 import removeElement from "../utilities/removeElement";
 import { getStorage, setStorage } from "../utilities/storage";
 
+let t; // Typefully Plug timeout
+
 export const changeWriterMode = (writerMode) => {
   if (
     window.location.pathname.includes("/home") ||
     window.location.pathname === "/"
   ) {
+    clearTimeout(t);
+
     switch (writerMode) {
       case "on":
         addStyles(
@@ -58,9 +62,9 @@ export const changeWriterMode = (writerMode) => {
             `
         );
 
-        setTimeout(() => {
+        t = setTimeout(() => {
           addTypefullyPlugToWriterMode();
-        }, 1000);
+        }, 100);
 
         break;
 

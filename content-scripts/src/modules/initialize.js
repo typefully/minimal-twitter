@@ -194,14 +194,16 @@ const mutationIsNotRelevant = (mutationsList) => {
 // On resize, remove and re-add the sidebar buttons, because their original
 // Twitter counterparts styles change programmatically based on window size,
 // so we need to re-create them when the window size changes.
+let t;
 export const addResizeListener = () => {
   window.addEventListener(
     "resize",
     throttle(() => {
+      clearTimeout(t);
       removeElement("mt-listsButtonNode");
       removeElement("mt-typefullyGrowButton");
       addListsButton();
-      setTimeout(() => {
+      t = setTimeout(() => {
         addGrowButton();
       });
     }, 1000)
