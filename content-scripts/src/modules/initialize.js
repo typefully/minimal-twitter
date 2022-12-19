@@ -87,18 +87,24 @@ export const observe = throttle(() => {
         extractColorsAsRootVars(); // Extract colors first
       }
 
-      searchBarWidthReset();
-      revealSearchFilters();
-      addTypefullyPlug();
-      saveCurrentReplyToLink();
-      addTypefullyReplyPlug();
-      checkUrlForFollow();
-      checkHomeTimeline();
-      addWriterModeButton();
-      addListsButton();
-      setTimeout(() => {
-        addGrowButton();
-      });
+      let t;
+      const runMutations = throttle(() => {
+        clearTimeout(t);
+        searchBarWidthReset();
+        revealSearchFilters();
+        addTypefullyPlug();
+        saveCurrentReplyToLink();
+        addTypefullyReplyPlug();
+        checkUrlForFollow();
+        checkHomeTimeline();
+        addWriterModeButton();
+        addListsButton();
+        t = setTimeout(() => {
+          addGrowButton();
+        });
+      }, 500);
+
+      runMutations();
     }
   });
 
