@@ -34,6 +34,7 @@ export const checkUrlForFollow = () => {
 export const checkHomeTimeline = () => {
   if (
     window.location.pathname.includes("/home") ||
+    window.location.pathname.includes("compose/tweet") ||
     window.location.pathname === "/"
   ) {
     chrome.storage.sync.get("writerMode", (data) => {

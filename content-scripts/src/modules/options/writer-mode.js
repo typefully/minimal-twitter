@@ -21,6 +21,7 @@ export const changeWriterMode = (writerMode) => {
 
     switch (writerMode) {
       case "on":
+        document.body.classList.add("mt-writerMode-on");
         addStyles(
           "mt-writerMode",
           `
@@ -69,6 +70,7 @@ export const changeWriterMode = (writerMode) => {
         break;
 
       case "off":
+        document.body.classList.remove("mt-writerMode-on");
         removeElement("mt-writerMode");
         removeTypefullyPlugFromWriterMode();
         break;
@@ -90,7 +92,7 @@ export const addTypefullyPlugToWriterMode = async () => {
 
     const typefullyLinkElement = createTypefullyLinkElement(
       "typefully-writermode-link",
-      "typefully-writermode-button"
+      "typefully-save-draft-button"
     );
     typefullyLinkElement.addEventListener("click", () => {
       getCurrentTextAndSendToTypefully();

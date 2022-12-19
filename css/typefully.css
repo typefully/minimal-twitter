@@ -1,5 +1,5 @@
 .typefully-reply-button,
-.typefully-writermode-button {
+.typefully-save-draft-button {
   color: white;
   background-color: var(--accent-color);
   text-decoration: none;
@@ -21,25 +21,22 @@
 }
 
 .typefully-reply-button:hover,
-.typefully-writermode-button:hover {
+.typefully-save-draft-button:hover {
   filter: brightness(0.94);
 }
 
-.typefully-writermode-button {
+body.mt-writerMode-on .typefully-save-draft-button {
   background-color: rgba(var(--accent-color-rgb), 0.1);
   color: var(--accent-color);
 }
 
 .typefully-reply-button svg,
-.typefully-writermode-button svg {
+.typefully-save-draft-button svg {
   margin: 0 3px 0 -8px;
 }
 
-.typefully-writermode-button {
+.typefully-save-draft-button {
   min-height: 40px;
-}
-
-.typefully-writermode-button {
   order: 1;
 }
 
@@ -145,7 +142,7 @@
 }
 
 #typefully-writermode-box,
-.typefully-writermode-button {
+.typefully-save-draft-button {
   animation: fadeIn 0.3s ease-out both;
 }
 
