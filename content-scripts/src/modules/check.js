@@ -90,5 +90,8 @@ export const checkHomeTimeline = () => {
           break;
       }
     });
+  } else {
+    removeElement("mt-writerMode");
+    removeTypefullyPlugFromWriterMode();
   }
 };

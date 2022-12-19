@@ -78,7 +78,7 @@ export const addStylesheets = () => {
 };
 
 // Function to start MutationObserver
-export const observe = () => {
+export const observe = throttle(() => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
       if (mutationIsNotRelevant(mutationsList)) return;
@@ -106,7 +106,7 @@ export const observe = () => {
     childList: true,
     subtree: true,
   });
-};
+}, 1000);
 
 const mutationIsNotRelevant = (mutationsList) => {
   const a = mutationsList[0]?.addedNodes[0]; // First added node
