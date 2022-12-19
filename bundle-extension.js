@@ -1,17 +1,17 @@
 // Credit to @webbertakken for the gist:
 // https://gist.github.com/webbertakken/ed82572b50f4e166562906757aede40a
 
+import { exec } from "child_process";
 import { copy } from "fs-extra";
-import { readdir, rm, writeFile, copyFile } from "fs/promises";
+import { copyFile, readdir, rm, writeFile } from "fs/promises";
 import { resolve } from "path";
 import readline from "readline";
-import { exec } from "child_process";
 
 let manifest = {
   name: "Minimal Theme for Twitter",
   short_name: "Minimal Twitter",
   description: "Refine and declutter the Twitter web experience.",
-  version: "5.0.0.2", // alpha version
+  version: "5.0.0.3", // alpha version
   icons: {
     16: "images/MinimalTwitterIcon16.png",
     32: "images/MinimalTwitterIcon32.png",
