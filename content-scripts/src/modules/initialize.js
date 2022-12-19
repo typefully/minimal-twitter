@@ -7,7 +7,7 @@ import {
   addTypefullyReplyPlug,
   saveCurrentReplyToLink,
 } from "./typefully";
-import { extractColorsAsRootVars } from "./utilities/colors";
+import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
 import removeElement from "./utilities/removeElement";
 import throttle from "./utilities/throttle";
 
@@ -81,7 +81,12 @@ export const addStylesheets = () => {
 export const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
-      extractColorsAsRootVars(); // Extract colors first
+      if (mutationIsNotRelevant(mutationsList)) return;
+
+      if (!colorsAreSet()) {
+        extractColorsAsRootVars(); // Extract colors first
+      }
+
       searchBarWidthReset();
       revealSearchFilters();
       addTypefullyPlug();
@@ -101,6 +106,89 @@ export const observe = () => {
     childList: true,
     subtree: true,
   });
+};
+
+const mutationIsNotRelevant = (mutationsList) => {
+  const a = mutationsList[0]?.addedNodes[0]; // First added node
+  const r = mutationsList[0]?.removedNodes[0]; // First removed node
+  const t = mutationsList[0]?.target; // Target
+  const el = a || r; // Element
+
+  try {
+    // Engagement counts
+    if (
+      (el?.nodeName === "SPAN" &&
+        el?.firstChild?.nodeName === "SPAN" &&
+        el?.firstChild?.firstChild?.nodeName === "SPAN") ||
+      el?.parentNode?.parentNode?.getAttribute("data-testid") === "like"
+    ) {
+      return true;
+    }
+
+    // Images and videos
+    if (
+      el?.nodeName === "IMG" ||
+      t?.nodeName === "IMG" ||
+      el?.nodeName === "VIDEO" ||
+      el?.firstChild?.nodeName === "VIDEO" ||
+      el?.querySelector(":scope > img") ||
+      el?.getAttribute("data-testid") === "tweetPhoto" ||
+      el?.parentNode?.getAttribute("data-testid") === "tweetPhoto" ||
+      t?.closest("[data-testid='videoPlayer']")
+    ) {
+      return true;
+    }
+
+    // Links previews (inside a data-testid="card.wrapper")
+    if (el.closest("[data-testid='card.wrapper']")) {
+      return true;
+    }
+
+    // Added or removed scripts
+    if (el?.nodeName === "SCRIPT") return true;
+
+    // Added or removed styles
+    if (el?.nodeName === "STYLE") return true;
+
+    // DM drawer
+    if (
+      el?.closest("[data-testid='DMDrawer']") ||
+      t?.closest("[data-testid='DMDrawer']")
+    )
+      return true;
+
+    // Trends drawer
+    if (
+      el?.closest("[data-testid='sidebarColumn']") ||
+      t?.closest("[data-testid='sidebarColumn']")
+    )
+      return true;
+
+    // Ignore text only nodes
+    if (el?.nodeName === "#text") return true;
+
+    // Added or removed tweets/DMs (they have the data-testid=cellInnerDiv)
+    if (el?.getAttribute("data-testid") === "cellInnerDiv") return true;
+
+    // Ignore info button on tweets
+    // it's a > div > div > div[data-testid="caret"]
+    if (
+      el?.nodeName === "DIV" &&
+      el?.firstChild?.firstChild?.firstChild?.getAttribute("data-testid") ===
+        "caret"
+    ) {
+      return true;
+    }
+
+    // SVG changes
+    if (el?.nodeName === "path") return true;
+
+    // Minimal Twitter injected elements
+    if (el?.id?.startsWith("mt-") || el?.id?.startsWith("typefully-"))
+      return true;
+  } catch (e) {}
+
+  return false;
 };
 
 // On resize, remove and re-add the sidebar buttons, because their original

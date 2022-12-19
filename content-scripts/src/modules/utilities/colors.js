@@ -62,3 +62,26 @@ export const extractColorsAsRootVars = () => {
     root.style.setProperty("--glyphs-color-rgb", glyphsColorRgb);
   }
 };
+
+export const colorsAreSet = () => {
+  const root = document.documentElement;
+  const bodyBgColor = root.style.getPropertyValue("--body-bg-color");
+  const mainTextColor = root.style.getPropertyValue("--main-text-color");
+  const secondaryTextColor = root.style.getPropertyValue(
+    "--secondary-text-color"
+  );
+  const accentColor = root.style.getPropertyValue("--accent-color");
+  const glyphsColor = root.style.getPropertyValue("--glyphs-color");
+
+  if (
+    bodyBgColor &&
+    mainTextColor &&
+    secondaryTextColor &&
+    accentColor &&
+    glyphsColor
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
