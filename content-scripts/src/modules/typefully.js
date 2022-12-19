@@ -18,7 +18,7 @@ export const addTypefullyPlug = () => {
   ) {
     const typefullyLinkElement = createTypefullyLinkElement(
       "typefully-link",
-      "typefully-modal-button"
+      "typefully-writermode-button"
     );
     typefullyLinkElement.addEventListener("click", () => {
       getCurrentTextAndSendToTypefully();
