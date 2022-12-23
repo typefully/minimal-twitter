@@ -16,11 +16,11 @@ export default function CheckboxControl({
   useEffect(() => {
     const getDefaultState = async () => {
       try {
-        const userDefault = await getStorage(storageKey)
+        const userSetting = await getStorage(storageKey)
         if (checkedOff) {
-          userDefault && setLocalState(userDefault === "off" ? true : false)
+          userSetting && setLocalState(userSetting === "off" ? true : false)
         } else {
-          userDefault && setLocalState(userDefault === "on" ? true : false)
+          userSetting && setLocalState(userSetting === "on" ? true : false)
         }
       } catch (error) {
         console.warn(error)
