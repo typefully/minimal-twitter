@@ -7,7 +7,6 @@ export default async function hideViewCounts(passedSetting) {
     );
     if (result.hideViewCounts === "on") {
       viewCounts.forEach((el) => {
-        console.log(el);
         el.parentElement && (el.parentElement.style.display = "none");
       });
     } else {
