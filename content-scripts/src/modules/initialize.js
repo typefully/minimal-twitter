@@ -1,4 +1,5 @@
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
+import hideViewCounts from "./options/hideViewCounts";
 import { addListsButton } from "./options/navigation";
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton } from "./options/writer-mode";
@@ -99,6 +100,8 @@ export const observe = throttle(() => {
         checkHomeTimeline();
         addWriterModeButton();
         addListsButton();
+        hideViewCounts();
+
         t = setTimeout(() => {
           addGrowButton();
         });
@@ -172,9 +175,6 @@ const mutationIsNotRelevant = (mutationsList) => {
 
     // Ignore text only nodes
     if (el?.nodeName === "#text") return true;
-
-    // Added or removed tweets/DMs (they have the data-testid=cellInnerDiv)
-    if (el?.getAttribute("data-testid") === "cellInnerDiv") return true;
 
     // Ignore info button on tweets
     // it's a > div > div > div[data-testid="caret"]

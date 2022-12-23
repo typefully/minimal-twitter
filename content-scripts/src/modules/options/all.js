@@ -1,3 +1,4 @@
+import hideViewCounts from "./hideViewCounts";
 import {
   changeFollowCount,
   changeLatestTweets,
@@ -96,4 +97,5 @@ export const injectAllChanges = (data) => {
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
+  hideViewCounts(); // Hide View Counts (checks setting internally)
 };

@@ -1,3 +1,4 @@
+import hideViewCounts from "../../../../content-scripts/src/modules/options/hideViewCounts"
 import useMounted from "../../../utilities/hooks/useMounted"
 import CheckboxControl from "../../controls/CheckboxControl"
 import Separator from "../../controls/Separator"
@@ -39,6 +40,11 @@ const TimelineSection = () => {
           <CheckboxControl
             label="Remove Promoted Posts"
             storageKey="removePromotedPosts"
+            defaultState={true}
+          />
+          <CheckboxControl
+            label="Remove View Counts from Tweets"
+            storageKey="hideViewCounts"
             defaultState={true}
           />
           <CheckboxControl
