@@ -341,12 +341,24 @@ div[class="css-1dbjc4n r-kuekak r-109y4c4 r-1p6iasa"] {
   display: none;
 }
 
-div[class="css-1dbjc4n r-xoduu5 r-1udh08x"] {
+
+/* div[class="css-1dbjc4n r-xoduu5 r-1udh08x"] {
   display: none;
 
 }
 
 div[class="css-1dbjc4n r-xoduu5"] {
   display: none;
+} */
+
+span[data-testid="app-text-transition-container"] {
+  display: none;
 }
 
+a[class="css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1777fci r-bt1l66 r-1ny4l3l r-bztko3 r-lrvibr"] {
+  display: none;
+}
+
+a[class="css-4rbku5 css-18t94o4 css-901oao r-vlxjld r-1loqt21 r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0"] {
+  display: none;
+}
