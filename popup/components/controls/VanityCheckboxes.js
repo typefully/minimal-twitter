@@ -6,6 +6,9 @@ import {
 } from "@radix-ui/react-icons"
 import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { styled } from "@stitches/react"
+import { useEffect, useState } from "react"
+
+import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
 const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   position: "relative",
@@ -23,7 +26,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   }
 })
 
-export const CheckboxHideVanityCount = ({
+const CheckboxHideVanityCount = ({
   showVanityCheckboxes,
   setShowVanityCheckboxes,
   onCheckedChange,
@@ -63,7 +66,7 @@ export const CheckboxHideVanityCount = ({
   )
 }
 
-export const CheckboxHideReplyCount = ({ onCheckedChange, hideReply }) => {
+const CheckboxHideReplyCount = ({ onCheckedChange, hideReply }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideReplyCount" className="text-base">
@@ -85,7 +88,7 @@ export const CheckboxHideReplyCount = ({ onCheckedChange, hideReply }) => {
   )
 }
 
-export const CheckboxHideRetweetCount = ({ onCheckedChange, hideRetweet }) => {
+const CheckboxHideRetweetCount = ({ onCheckedChange, hideRetweet }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideRetweetCount" className="text-base">
@@ -107,7 +110,7 @@ export const CheckboxHideRetweetCount = ({ onCheckedChange, hideRetweet }) => {
   )
 }
 
-export const CheckboxHideLikeCount = ({ onCheckedChange, hideLike }) => {
+const CheckboxHideLikeCount = ({ onCheckedChange, hideLike }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideLikeCount" className="text-base">
@@ -129,7 +132,7 @@ export const CheckboxHideLikeCount = ({ onCheckedChange, hideLike }) => {
   )
 }
 
-export const CheckboxHideFollowCount = ({ onCheckedChange, hideFollow }) => {
+const CheckboxHideFollowCount = ({ onCheckedChange, hideFollow }) => {
   return (
     <div className="flex items-center justify-between w-full py-1 pl-4">
       <label htmlFor="hideFollowingCount" className="text-base">
@@ -150,3 +153,167 @@ export const CheckboxHideFollowCount = ({ onCheckedChange, hideFollow }) => {
     </div>
   )
 }
+
+const VanityCheckboxes = () => {
+  const [showVanityCheckboxes, setShowVanityCheckboxes] = useState(false)
+  const [hideAll, setHideAll] = useState(false)
+  const [hideReply, setHideReply] = useState(false)
+  const [hideRetweet, setHideRetweet] = useState(false)
+  const [hideLike, setHideLike] = useState(false)
+  const [hideFollow, setHideFollow] = useState(false)
+
+  useEffect(() => {
+    const getUserDefaultAll = async () => {
+      try {
+        const userDefaultAll = await getStorage("allVanity")
+        if (userDefaultAll) {
+          setHideAll(userDefaultAll === "hide" ? true : false)
+        }
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+    const getUserDefaultReply = async () => {
+      try {
+        const userDefaultReply = await getStorage("replyCount")
+        userDefaultReply &&
+          setHideReply(userDefaultReply === "hide" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+    const getUserDefaultLike = async () => {
+      try {
+        const userDefaultLike = await getStorage("likeCount")
+        userDefaultLike &&
+          setHideLike(userDefaultLike === "hide" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+    const getUserDefaultRetweet = async () => {
+      try {
+        const userDefaultRetweet = await getStorage("retweetCount")
+        userDefaultRetweet &&
+          setHideRetweet(userDefaultRetweet === "hide" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+    const getUserDefaultFollow = async () => {
+      try {
+        const userDefaultFollow = await getStorage("followCount")
+        userDefaultFollow &&
+          setHideFollow(userDefaultFollow === "hide" ? true : false)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getUserDefaultAll()
+    getUserDefaultReply()
+    getUserDefaultLike()
+    getUserDefaultRetweet()
+    getUserDefaultFollow()
+  }, [])
+
+  const onCheckedChange = async (type, checked) => {
+    switch (type) {
+      case "all":
+        setHideAll(checked)
+        setHideReply(checked)
+        setHideRetweet(checked)
+        setHideLike(checked)
+        setHideFollow(checked)
+        try {
+          await setStorage({
+            allVanity: checked ? "hide" : "show",
+            replyCount: checked ? "hide" : "show",
+            retweetCount: checked ? "hide" : "show",
+            likeCount: checked ? "hide" : "show",
+            followCount: checked ? "hide" : "show"
+          })
+        } catch (error) {
+          console.warn(error)
+        }
+        break
+
+      case "reply":
+        setHideReply(checked)
+        try {
+          await setStorage({
+            replyCount: checked ? "hide" : "show"
+          })
+        } catch (error) {
+          console.warn(error)
+        }
+        break
+
+      case "retweet":
+        setHideRetweet(checked)
+        try {
+          await setStorage({
+            retweetCount: checked ? "hide" : "show"
+          })
+        } catch (error) {
+          console.warn(error)
+        }
+        break
+
+      case "like":
+        setHideLike(checked)
+        try {
+          await setStorage({
+            likeCount: checked ? "hide" : "show"
+          })
+        } catch (error) {
+          console.warn(error)
+        }
+        break
+
+      case "follow":
+        setHideFollow(checked)
+        try {
+          await setStorage({
+            followCount: checked ? "hide" : "show"
+          })
+        } catch (error) {
+          console.warn(error)
+        }
+        break
+    }
+  }
+
+  return (
+    <>
+      <CheckboxHideVanityCount
+        showVanityCheckboxes={showVanityCheckboxes}
+        setShowVanityCheckboxes={setShowVanityCheckboxes}
+        onCheckedChange={onCheckedChange}
+        hideAll={hideAll}
+      />
+      {showVanityCheckboxes && (
+        <>
+          <CheckboxHideReplyCount
+            onCheckedChange={onCheckedChange}
+            hideReply={hideReply}
+          />
+          <CheckboxHideRetweetCount
+            onCheckedChange={onCheckedChange}
+            hideRetweet={hideRetweet}
+          />
+          <CheckboxHideLikeCount
+            onCheckedChange={onCheckedChange}
+            hideLike={hideLike}
+          />
+          <CheckboxHideFollowCount
+            onCheckedChange={onCheckedChange}
+            hideFollow={hideFollow}
+          />
+        </>
+      )}
+    </>
+  )
+}
+
+export default VanityCheckboxes

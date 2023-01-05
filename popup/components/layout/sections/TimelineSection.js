@@ -3,6 +3,7 @@ import CheckboxControl from "../../controls/CheckboxControl"
 import Separator from "../../controls/Separator"
 import SwitchControl from "../../controls/SwitchControl"
 import TimelineSlider from "../../controls/TimelineSlider"
+import VanityCheckboxes from "../../controls/VanityCheckboxes"
 
 const TimelineSection = () => {
   const mounted = useMounted()
@@ -46,11 +47,6 @@ const TimelineSection = () => {
             defaultState={true}
           />
           <CheckboxControl
-            label="Remove View Counts from Tweets"
-            storageKey="hideViewCounts"
-            defaultState={true}
-          />
-          <CheckboxControl
             label="Remove Who to Follow"
             storageKey="removeWhoToFollow"
           />
@@ -58,6 +54,12 @@ const TimelineSection = () => {
             label="Remove Topics to Follow"
             storageKey="removeTopicsToFollow"
           />
+          <CheckboxControl
+            label="Remove View Counts from Tweets"
+            storageKey="hideViewCounts"
+            defaultState={true}
+          />
+          <VanityCheckboxes />
         </div>
       ) : (
         <div className="dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl animate-pulse h-[115.5px]" />
