@@ -37,6 +37,10 @@ const TimelineSection = () => {
           </div>
           <Separator className="mt-4 mb-2" />
           <CheckboxControl
+            label="Always Show Latest Tweets"
+            storageKey="latestTweets"
+          />
+          <CheckboxControl
             label="Remove Promoted Posts"
             storageKey="removePromotedPosts"
             defaultState={true}
@@ -48,17 +52,11 @@ const TimelineSection = () => {
           />
           <CheckboxControl
             label="Remove Who to Follow"
-            storageKey="whoToFollow"
-            checkedOff={true}
+            storageKey="removeWhoToFollow"
           />
           <CheckboxControl
             label="Remove Topics to Follow"
-            storageKey="topicsToFollow"
-            checkedOff={true}
-          />
-          <CheckboxControl
-            label="Always Show Latest Tweets"
-            storageKey="latestTweets"
+            storageKey="removeTopicsToFollow"
           />
         </div>
       ) : (

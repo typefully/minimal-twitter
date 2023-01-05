@@ -177,22 +177,22 @@ export const changePromotedPosts = (removePromotedPosts) => {
 };
 
 // Function to change Who to Follow
-export const changeWhoToFollow = (whoToFollow) => {
-  switch (whoToFollow) {
+export const changeWhoToFollow = (removeWhoToFollow) => {
+  switch (removeWhoToFollow) {
     case "off":
-      addStyles(
-        "mt-whoToFollow",
-        `
-        ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
-        ${selectors.mainColumn} div[data-testid="UserCell"] {
-          display: none;
-        }
-        `
-      );
+      removeElement("mt-removeWhoToFollow");
       break;
 
     case "on":
-      removeElement("mt-whoToFollow");
+      addStyles(
+        "mt-removeWhoToFollow",
+        `
+          ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
+          ${selectors.mainColumn} div[data-testid="UserCell"] {
+            display: none;
+          }
+          `
+      );
       break;
   }
 
@@ -200,23 +200,23 @@ export const changeWhoToFollow = (whoToFollow) => {
 };
 
 // Function to change Topics to Follow
-export const changeTopicsToFollow = (topicsToFollow) => {
-  switch (topicsToFollow) {
+export const changeTopicsToFollow = (removeTopicsToFollow) => {
+  switch (removeTopicsToFollow) {
     case "off":
-      addStyles(
-        "mt-topicsToFollow",
-        `
-        ${selectors.mainColumn} section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
-        ${selectors.mainColumn} a[href*="/i/flow/topics_selector"],
-        ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
-          display: none;
-        }
-        `
-      );
+      removeElement("mt-removeTopicsToFollow");
       break;
 
     case "on":
-      removeElement("mt-topicsToFollow");
+      addStyles(
+        "mt-removeTopicsToFollow",
+        `
+          ${selectors.mainColumn} section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
+          ${selectors.mainColumn} a[href*="/i/flow/topics_selector"],
+          ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
+            display: none;
+          }
+          `
+      );
       break;
   }
 };

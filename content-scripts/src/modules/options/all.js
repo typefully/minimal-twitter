@@ -60,8 +60,8 @@ export const userPreferences = [
   "searchBar",
   "transparentSearch",
   "removePromotedPosts",
-  "whoToFollow",
-  "topicsToFollow",
+  "removeWhoToFollow",
+  "removeTopicsToFollow",
   "typefullyGrowTab",
   "latestTweets",
   "typefullyComposerButtons",
@@ -92,8 +92,8 @@ export const injectAllChanges = (data) => {
   changeSearchBar1(data?.searchBar); // Hide Search Bar
   changeSearchBar2(data?.transparentSearch); // Transparent Search Bar
   changePromotedPosts(data?.removePromotedPosts); // Remove Promoted Posts
-  changeWhoToFollow(data?.whoToFollow); // Who to Follow
-  changeTopicsToFollow(data?.topicsToFollow); // Topics to Follow
+  changeWhoToFollow(data?.removeWhoToFollow); // Who to Follow
+  changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
