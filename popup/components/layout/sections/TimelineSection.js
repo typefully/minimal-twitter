@@ -1,4 +1,3 @@
-import hideViewCounts from "../../../../content-scripts/src/modules/options/hideViewCounts"
 import useMounted from "../../../utilities/hooks/useMounted"
 import CheckboxControl from "../../controls/CheckboxControl"
 import Separator from "../../controls/Separator"
