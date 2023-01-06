@@ -12,7 +12,7 @@ const Header = () => (
         href={createTweetLink(tweet)}
         target="_blank"
         rel="noreferrer"
-        className="absolute text-md font-semibold text-twitterBlue right-4"
+        className="absolute text-sm font-semibold text-twitterBlue right-4"
         aria-label="Share Tweet"
         title="Share Tweet"
       >
