@@ -1,4 +1,5 @@
 import selectors from "../../selectors";
+import { checkUrlForFollow } from "../check";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
 
@@ -119,5 +120,138 @@ export const changeTweetBorders = (tweetBorders) => {
         `.trim()
       );
       break;
+  }
+};
+
+// Function to change Promoted Posts
+export const changePromotedPosts = (removePromotedPosts) => {
+  switch (removePromotedPosts) {
+    case "off":
+      addStyles(
+        "mt-removePromotedPosts",
+        `
+        [data-testid="placementTracking"] article {
+          display: flex !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-removePromotedPosts");
+      break;
+  }
+};
+
+// Function to change Who to Follow
+export const changeWhoToFollow = (removeWhoToFollow) => {
+  switch (removeWhoToFollow) {
+    case "off":
+      removeElement("mt-removeWhoToFollow");
+      break;
+
+    case "on":
+      addStyles(
+        "mt-removeWhoToFollow",
+        `
+          ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
+          ${selectors.mainColumn} div[data-testid="UserCell"] {
+            display: none;
+          }
+          `
+      );
+      break;
+  }
+
+  checkUrlForFollow();
+};
+
+// Function to change Topics to Follow
+export const changeTopicsToFollow = (removeTopicsToFollow) => {
+  switch (removeTopicsToFollow) {
+    case "off":
+      removeElement("mt-removeTopicsToFollow");
+      break;
+
+    case "on":
+      addStyles(
+        "mt-removeTopicsToFollow",
+        `
+          ${selectors.mainColumn} section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
+          ${selectors.mainColumn} a[href*="/i/flow/topics_selector"],
+          ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
+            display: none;
+          }
+          `
+      );
+      break;
+  }
+};
+
+// Function to change Latest Tweets
+export const changeLatestTweets = (latestTweets) => {
+  if (latestTweets === "on") {
+    const showLatestTweets = () => {
+      const run = () => {
+        // Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
+        const latestSelected = !!document.querySelector(
+          "div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']"
+        );
+
+        if (latestSelected) return;
+
+        // Check if the nav bar with "Home" and "Latest Tweets" exists
+        const optionBarExists = !!document.querySelector(
+          "div[data-testid='ScrollSnap-List']"
+        );
+
+        if (!optionBarExists) {
+          /*
+            If it doesn't, we have to get it to display
+            1. Click the Timeline Options button
+            2. Click the first option in the popup
+          */
+          const timelineOptions = document.querySelector(
+            "div[aria-label='Timeline options']"
+          );
+          const topTweetsOn = document.querySelector(
+            "div[aria-label='Top Tweets on']"
+          );
+
+          const clickMenuButton = (isTimelineOptions) => {
+            return setTimeout(() => {
+              const menuitem = document.querySelector(
+                "div[role='menuitem'][tabindex='0']"
+              );
+              menuitem && menuitem.click();
+
+              if (isTimelineOptions) {
+                // Click the "Latest Tweets" nav bar option
+                const latestTweetsNavBarOption = document.querySelector(
+                  "div[data-testid='ScrollSnap-List'] > div:last-child > a"
+                );
+                latestTweetsNavBarOption && latestTweetsNavBarOption.click();
+              }
+            }, 100);
+          };
+
+          if (timelineOptions) {
+            timelineOptions.click();
+            clickMenuButton(true);
+          } else if (topTweetsOn) {
+            topTweetsOn.click();
+            clickMenuButton(false);
+          }
+        }
+      };
+      setTimeout(run, 500);
+    };
+    if (document.readyState === "loading") {
+      console.log("loading...");
+      document.addEventListener("DOMContentLoaded", showLatestTweets);
+    } else {
+      console.log("running latest tweets...");
+      showLatestTweets();
+    }
   }
 };

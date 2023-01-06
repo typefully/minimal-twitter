@@ -1,16 +1,16 @@
-import hideViewCounts from "./hideViewCounts";
 import {
-  changeFollowCount,
-  changeLatestTweets,
   changeLikeCount,
-  changePromotedPosts,
   changeReplyCount,
   changeRetweetCount,
+  changeRetweetCount,
+  changeFollowCount,
+} from "./hideVanityCounts";
+import hideViewCounts from "./hideViewCounts";
+import {
   changeSearchBar1,
   changeSearchBar2,
-  changeTopicsToFollow,
   changeTweetButton,
-  changeWhoToFollow,
+  changeInterFont,
 } from "./interface";
 import {
   changeBookmarksButton,
@@ -27,9 +27,13 @@ import {
   changeTopArticlesButton,
 } from "./navigation";
 import {
+  changeLatestTweets,
+  changePromotedPosts,
   changeTimelineBorders,
   changeTimelineWidth,
+  changeTopicsToFollow,
   changeTweetBorders,
+  changeWhoToFollow,
 } from "./timeline";
 import { changeGrowButton, changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
@@ -65,6 +69,7 @@ export const userPreferences = [
   "typefullyGrowTab",
   "latestTweets",
   "typefullyComposerButtons",
+  "interFont",
 ];
 
 export const injectAllChanges = (data) => {
@@ -97,5 +102,7 @@ export const injectAllChanges = (data) => {
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
+  changeInterFont(data?.interFont); // Change `font-family` to Inter
+
   hideViewCounts(); // Hide View Counts (checks setting internally)
 };

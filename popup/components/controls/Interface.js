@@ -18,6 +18,7 @@ const Interface = () => (
           storageKey="tweetButton"
           defaultState={true}
         />
+        <SwitchControl label="Inter Font" storageKey="interFont" />
       </div>
     </div>
   </form>
