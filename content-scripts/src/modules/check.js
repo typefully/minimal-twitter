@@ -73,6 +73,10 @@ export const checkHomeTimeline = () => {
                 animation-fill-mode: forwards;
                 animation-delay: 1s;
               }
+
+              [data-testid="primaryColumn"] {
+                transform: translateX(-42px);
+              }
             }
             `
           );
