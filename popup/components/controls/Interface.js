@@ -2,7 +2,7 @@ import SwitchControl from "./SwitchControl"
 
 const Interface = () => (
   <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-    <div className="w-full pt-4 pb-2">
+    <div className="w-full py-4">
       <div className="flex flex-col gap-y-4">
         <SwitchControl
           label="Search Bar"
