@@ -77,7 +77,7 @@ export const changeSearchBar2 = (transparentSearch) => {
         }
         ${selectors.searchBoxInput} {
           transform: translateX(2ch);
-          margin-left: -2ch !important;
+          margin-left: -2.5ch !important;
         }
         `
       );
