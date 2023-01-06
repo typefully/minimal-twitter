@@ -182,6 +182,9 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
           ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
             display: none;
           }
+          [aria-label="Lists timeline"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"] {
+            display: flex !important;
+          }
           `
       );
       break;
