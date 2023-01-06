@@ -37,6 +37,49 @@ export const checkHomeTimeline = () => {
     window.location.pathname.includes("compose/tweet") ||
     window.location.pathname === "/"
   ) {
+    chrome.storage.sync.get("trendsHomeTimeline", (data) => {
+      const { trendsHomeTimeline } = data;
+
+      switch (trendsHomeTimeline) {
+        case "off":
+          removeElement("mt-trendsHomeTimeline");
+          break;
+
+        case "on":
+          addStyles(
+            "mt-trendsHomeTimeline",
+            `
+            @keyframes render {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+                transform: none;
+              }
+            }
+            @media only screen and (min-width: 1265px) {
+              ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+                visibility: visible;
+                position: fixed;
+                right: 16px;
+                border-radius: 16px;
+                border-color: rgba(var(--secondary-text-color-rgb), 0.1);
+                border-width: 1px;
+                opacity: 0;
+                will-change: opacity;
+                animation-name: render;
+                animation-duration: 0s;
+                animation-fill-mode: forwards;
+                animation-delay: 1s;
+              }
+            }
+            `
+          );
+          break;
+      }
+    });
+
     chrome.storage.sync.get("writerMode", (data) => {
       const { writerMode } = data;
 
@@ -92,6 +135,7 @@ export const checkHomeTimeline = () => {
       }
     });
   } else {
+    removeElement("mt-trendsHomeTimeline");
     removeElement("mt-writerMode");
     removeTypefullyPlugFromWriterMode();
   }

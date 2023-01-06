@@ -42,6 +42,10 @@ const TimelineSection = () => {
             storageKey="latestTweets"
           />
           <CheckboxControl
+            label="Show Trends on Home Timeline"
+            storageKey="trendsHomeTimeline"
+          />
+          <CheckboxControl
             label="Remove Promoted Posts"
             storageKey="removePromotedPosts"
             defaultState={true}

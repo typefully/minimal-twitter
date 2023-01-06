@@ -154,11 +154,11 @@ export const changeWhoToFollow = (removeWhoToFollow) => {
       addStyles(
         "mt-removeWhoToFollow",
         `
-          ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
-          ${selectors.mainColumn} div[data-testid="UserCell"] {
-            display: none;
-          }
-          `
+        ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
+        ${selectors.mainColumn} div[data-testid="UserCell"] {
+          display: none;
+        }
+        `
       );
       break;
   }
@@ -177,17 +177,64 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
       addStyles(
         "mt-removeTopicsToFollow",
         `
-          ${selectors.mainColumn} section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
-          ${selectors.mainColumn} a[href*="/i/flow/topics_selector"],
-          ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
-            display: none;
-          }
-          [aria-label="Lists timeline"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"] {
-            display: flex !important;
-          }
-          `
+        ${selectors.mainColumn} section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
+        ${selectors.mainColumn} a[href*="/i/flow/topics_selector"],
+        ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
+          display: none;
+        }
+        [aria-label="Lists timeline"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"] {
+          display: flex !important;
+        }
+        `
       );
       break;
+  }
+};
+
+// Function to change Show Trends on Home Timeline
+export const changeTrendsHomeTimeline = (trendsHomeTimeline) => {
+  if (
+    window.location.pathname.includes("/home") ||
+    window.location.pathname === "/"
+  ) {
+    switch (trendsHomeTimeline) {
+      case "off":
+        removeElement("mt-trendsHomeTimeline");
+        break;
+
+      case "on":
+        addStyles(
+          "mt-trendsHomeTimeline",
+          `
+          @keyframes render {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+              transform: none;
+            }
+          }
+          @media only screen and (min-width: 1265px) {
+            ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+              visibility: visible;
+              position: fixed;
+              right: 16px;
+              border-radius: 16px;
+              border-color: rgba(var(--secondary-text-color-rgb), 0.1);
+              border-width: 1px;
+              opacity: 0;
+              will-change: opacity;
+              animation-name: render;
+              animation-duration: 0s;
+              animation-fill-mode: forwards;
+              animation-delay: 1s;
+            }
+          }
+          `
+        );
+        break;
+    }
   }
 };
 
