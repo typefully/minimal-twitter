@@ -76,8 +76,8 @@ export const changeSearchBar2 = (transparentSearch) => {
           background-color: transparent !important;
         }
         ${selectors.searchBoxInput} {
-          padding-left: 34px !important;
-          margin-left: -24px !important;
+          transform: translateX(2ch);
+          margin-left: -2ch !important;
         }
         `
       );
