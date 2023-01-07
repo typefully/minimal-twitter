@@ -126,6 +126,7 @@ export const checkHomeTimeline = () => {
                       animation-fill-mode: forwards;
                       animation-delay: 1s;
                       width: 300px;
+                      margin-top: 4px;
                     }
       
                     [data-testid="primaryColumn"] {
