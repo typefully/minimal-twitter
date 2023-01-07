@@ -143,7 +143,7 @@ export const changeTopArticlesButton = (topArticlesButton) => {
   }
 };
 
-// Function to change Top Articles Button
+// Function to change Communities Button
 export const changeCommunitiesButton = (communitiesButton) => {
   switch (communitiesButton) {
     case "off":
@@ -159,7 +159,31 @@ export const changeCommunitiesButton = (communitiesButton) => {
 
     case "on":
       removeElement("mt-communitiesButton");
+      addCommunitiesButton();
       break;
+  }
+};
+
+// Function to add Lists button
+export const addCommunitiesButton = () => {
+  if (!document.querySelector(selectors.sidebarLinks.communities)) {
+    const profileNode = document.querySelector(
+      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+    );
+
+    if (profileNode) {
+      const communitiesButton = profileNode.cloneNode(true);
+
+      communitiesButton.id = "mt-listsButtonNode";
+      communitiesButton.href += "/communities";
+      communitiesButton.ariaLabel = "Minimal Twitter Communities";
+      communitiesButton.removeAttribute("data-testid");
+      communitiesButton.firstChild.firstChild.firstChild.innerHTML =
+        svgAssets.communities.normal;
+      communitiesButton.firstChild.lastChild.firstChild.innerText =
+        "Communities";
+      profileNode.insertAdjacentElement("beforebegin", communitiesButton);
+    }
   }
 };
 
@@ -201,7 +225,6 @@ export const changeListsButton = (listsButton) => {
     case "on":
       removeElement("mt-listsButton");
       addListsButton();
-
       break;
   }
 };

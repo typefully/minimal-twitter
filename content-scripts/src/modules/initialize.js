@@ -1,6 +1,6 @@
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
-import { addListsButton } from "./options/navigation";
+import { addListsButton, addCommunitiesButton } from "./options/navigation";
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton } from "./options/writer-mode";
 import {
@@ -100,6 +100,7 @@ export const observe = throttle(() => {
         checkHomeTimeline();
         addWriterModeButton();
         addListsButton();
+        addCommunitiesButton();
         hideViewCount();
 
         t = setTimeout(() => {
@@ -209,6 +210,7 @@ export const addResizeListener = () => {
       removeElement("mt-listsButtonNode");
       removeElement("mt-typefullyGrowButton");
       addListsButton();
+      addCommunitiesButton();
       t = setTimeout(() => {
         addGrowButton();
       });

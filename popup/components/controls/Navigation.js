@@ -152,8 +152,8 @@ const Navigation = () => (
       <Messages />
       <Bookmarks />
       <TopArticles />
-      <Communities />
       <Lists />
+      <Communities />
       <TypefullyGrow />
       <Profile />
     </div>
