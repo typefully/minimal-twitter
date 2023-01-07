@@ -127,7 +127,7 @@ const CheckboxHideLikeCount = ({ onCheckedChange, hideLike }) => (
 const CheckboxHideFollowCount = ({ onCheckedChange, hideFollow }) => (
   <div className="flex items-center justify-between w-full py-1 pl-4">
     <label htmlFor="hideFollowingCount" className="text-base">
-      Hide follower/following count
+      Hide Follower/Following Count
     </label>
     <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
       <StyledCheckbox
