@@ -26,7 +26,7 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   }
 })
 
-const CheckboxHideVanityCount = ({
+const CheckboxHideVanityCounts = ({
   showVanityCheckboxes,
   setShowVanityCheckboxes,
   onCheckedChange,
@@ -34,7 +34,7 @@ const CheckboxHideVanityCount = ({
 }) => (
   <div className="flex items-center justify-between w-full py-1">
     <span className="flex items-center gap-x-2 text-base tracking-normal text-black dark:text-white">
-      <label htmlFor="hideVanityCount">Hide Vanity Counts</label>
+      <label htmlFor="hideVanityCounts">Hide Vanity Counts</label>
       <TogglePrimitive.Root
         pressed={showVanityCheckboxes}
         onPressedChange={(pressed) => {
@@ -67,7 +67,7 @@ const CheckboxHideVanityCount = ({
 const CheckboxHideReplyCount = ({ onCheckedChange, hideReply }) => (
   <div className="flex items-center justify-between w-full py-1 pl-4">
     <label htmlFor="hideReplyCount" className="text-base">
-      Hide reply count
+      Hide Reply Count from Tweets
     </label>
     <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
       <StyledCheckbox
@@ -87,7 +87,7 @@ const CheckboxHideReplyCount = ({ onCheckedChange, hideReply }) => (
 const CheckboxHideRetweetCount = ({ onCheckedChange, hideRetweet }) => (
   <div className="flex items-center justify-between w-full py-1 pl-4">
     <label htmlFor="hideRetweetCount" className="text-base">
-      Hide retweet count
+      Hide Retweet Count from Tweets
     </label>
     <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
       <StyledCheckbox
@@ -107,7 +107,7 @@ const CheckboxHideRetweetCount = ({ onCheckedChange, hideRetweet }) => (
 const CheckboxHideLikeCount = ({ onCheckedChange, hideLike }) => (
   <div className="flex items-center justify-between w-full py-1 pl-4">
     <label htmlFor="hideLikeCount" className="text-base">
-      Hide like count
+      Hide Like Count from Tweets
     </label>
     <div className="grid rounded-full cursor-pointer w-9 h-9 place-items-center hover:bg-twitterAccentFour">
       <StyledCheckbox
@@ -276,7 +276,7 @@ const VanityCheckboxes = () => {
 
   return (
     <>
-      <CheckboxHideVanityCount
+      <CheckboxHideVanityCounts
         showVanityCheckboxes={showVanityCheckboxes}
         setShowVanityCheckboxes={setShowVanityCheckboxes}
         onCheckedChange={onCheckedChange}

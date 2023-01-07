@@ -59,8 +59,8 @@ const TimelineSection = () => {
             storageKey="removeTopicsToFollow"
           />
           <CheckboxControl
-            label="Remove View Counts from Tweets"
-            storageKey="hideViewCounts"
+            label="Remove View Count from Tweets"
+            storageKey="hideViewCount"
             defaultState={true}
           />
           <VanityCheckboxes />

@@ -23,7 +23,7 @@ Refine and clean up the Twitter interface, and customize your experience:
 - Customize your Timeline width
 - Remove Timeline borders for a more minimal look
 - Customize the left navigation
-- Hide vanity counts under tweets
+- Hide view count and vanity counts under tweets
 - Remove promoted posts
 - Remove "Who to Follow" and other suggestions
 - Hide the Search Bar

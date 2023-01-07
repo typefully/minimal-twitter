@@ -5,7 +5,7 @@ import {
   changeRetweetCount,
   changeFollowCount,
 } from "./hideVanityCounts";
-import hideViewCounts from "./hideViewCounts";
+import hideViewCount from "./hideViewCount";
 import {
   changeSearchBar1,
   changeSearchBar2,
@@ -107,5 +107,5 @@ export const injectAllChanges = (data) => {
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
   changeInterFont(data?.interFont); // Change `font-family` to Inter
 
-  hideViewCounts(); // Hide View Counts (checks setting internally)
+  hideViewCount(); // Hide View Counts (checks setting internally)
 };

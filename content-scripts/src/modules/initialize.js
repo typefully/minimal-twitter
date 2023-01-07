@@ -1,5 +1,5 @@
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
-import hideViewCounts from "./options/hideViewCounts";
+import hideViewCount from "./options/hideViewCount";
 import { addListsButton } from "./options/navigation";
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton } from "./options/writer-mode";
@@ -100,7 +100,7 @@ export const observe = throttle(() => {
         checkHomeTimeline();
         addWriterModeButton();
         addListsButton();
-        hideViewCounts();
+        hideViewCount();
 
         t = setTimeout(() => {
           addGrowButton();
