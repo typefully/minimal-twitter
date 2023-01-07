@@ -73,7 +73,7 @@ export const checkHomeTimeline = () => {
                 animation-duration: 0s;
                 animation-fill-mode: forwards;
                 animation-delay: 1s;
-                min-width: 300px;
+                width: 300px;
               }
 
               [data-testid="primaryColumn"] {
