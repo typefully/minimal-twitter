@@ -192,6 +192,7 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 };
 
 // Function to change Recent Media on Profiles
+// In progress
 export const changeRecentMediaProfiles = (recentMediaProfiles) => {
   const isProfile = document.querySelector(
     'meta[content*="twitter://user?screen_name="]'
