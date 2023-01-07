@@ -66,6 +66,7 @@ export const checkHomeTimeline = () => {
                 border-radius: 16px;
                 border-color: rgba(var(--secondary-text-color-rgb), 0.1);
                 border-width: 1px;
+                background-color: var(--body-bg-color);
                 opacity: 0;
                 will-change: opacity;
                 animation-name: render;
@@ -75,7 +76,7 @@ export const checkHomeTimeline = () => {
               }
 
               [data-testid="primaryColumn"] {
-                transform: translateX(-42px);
+                transform: translateX(-64px);
               }
             }
             `
