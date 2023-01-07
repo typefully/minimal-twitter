@@ -221,7 +221,7 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline) => {
               position: fixed;
               right: 16px;
               border-radius: 16px;
-              border-color: rgba(var(--secondary-text-color-rgb), 0.1);
+              border-color: var(--border-color);
               border-width: 1px;
               background-color: var(--body-bg-color);
               opacity: 0;

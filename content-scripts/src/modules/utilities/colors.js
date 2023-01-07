@@ -19,6 +19,11 @@ export const extractColorsAsRootVars = () => {
   ).backgroundColor;
   root.style.setProperty("--body-bg-color", bodyBgColor);
 
+  const borderColor = window.getComputedStyle(
+    document.querySelector('[data-testid="primaryColumn"]')
+  ).borderColor;
+  root.style.setProperty("--border-color", borderColor);
+
   const mainText =
     document.querySelector("h2 > span") || document.querySelector("div > span");
   if (mainText) {
