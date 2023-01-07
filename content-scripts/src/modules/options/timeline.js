@@ -191,6 +191,13 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
   }
 };
 
+// Function to change Recent Media on Profiles
+export const changeRecentMediaProfiles = (recentMediaProfiles) => {
+  const isProfile = document.querySelector(
+    'meta[content*="twitter://user?screen_name="]'
+  );
+};
+
 // Function to change Show Trends on Home Timeline
 export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
   if (writerMode === "on") {
@@ -236,6 +243,7 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
               animation-fill-mode: forwards;
               animation-delay: 1s;
               width: 300px;
+              margin-top: 4px;
             }
 
             [data-testid="primaryColumn"] {
