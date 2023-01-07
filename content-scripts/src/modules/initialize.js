@@ -208,6 +208,7 @@ export const addResizeListener = () => {
     throttle(() => {
       clearTimeout(t);
       removeElement("mt-listsButtonNode");
+      removeElement("mt-communitiesButton");
       removeElement("mt-typefullyGrowButton");
       addListsButton();
       addCommunitiesButton();

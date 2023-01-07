@@ -147,6 +147,7 @@ export const changeTopArticlesButton = (topArticlesButton) => {
 export const changeCommunitiesButton = (communitiesButton) => {
   switch (communitiesButton) {
     case "off":
+      removeElement("mt-communitiesButtonNode");
       addStyles(
         "mt-communitiesButton",
         `
@@ -174,7 +175,7 @@ export const addCommunitiesButton = () => {
     if (profileNode) {
       const communitiesButton = profileNode.cloneNode(true);
 
-      communitiesButton.id = "mt-listsButtonNode";
+      communitiesButton.id = "mt-communitiesButtonNode";
       communitiesButton.href += "/communities";
       communitiesButton.ariaLabel = "Minimal Twitter Communities";
       communitiesButton.removeAttribute("data-testid");
@@ -184,26 +185,6 @@ export const addCommunitiesButton = () => {
         "Communities";
       profileNode.insertAdjacentElement("beforebegin", communitiesButton);
     }
-  }
-};
-
-// Function to change Profile Button
-export const changeProfileButton = (profileButton) => {
-  switch (profileButton) {
-    case "off":
-      addStyles(
-        "mt-profileButton",
-        `
-        ${selectors.sidebarLinks.profile} {
-          display: none !important;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-profileButton");
-      break;
   }
 };
 
@@ -248,6 +229,26 @@ export const addListsButton = () => {
       listsButton.firstChild.lastChild.firstChild.innerText = "Lists";
       profileNode.insertAdjacentElement("beforebegin", listsButton);
     }
+  }
+};
+
+// Function to change Profile Button
+export const changeProfileButton = (profileButton) => {
+  switch (profileButton) {
+    case "off":
+      addStyles(
+        "mt-profileButton",
+        `
+        ${selectors.sidebarLinks.profile} {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-profileButton");
+      break;
   }
 };
 
