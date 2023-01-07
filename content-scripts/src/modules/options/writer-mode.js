@@ -151,8 +151,8 @@ export const addWriterModeButton = async () => {
     const writerModeButton = scheduleButton.cloneNode(true);
 
     writerModeButton.id = "mt-writer-mode-composer-button";
-    writerModeButton.ariaLabel = "Writer Mode";
-    writerModeButton.title = "Writer Mode";
+    writerModeButton.ariaLabel = "Zen Writer Mode";
+    writerModeButton.title = "Zen Writer Mode";
     writerModeButton.removeAttribute("data-testid");
 
     const userSetting = await getStorage("writerMode");

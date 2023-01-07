@@ -192,7 +192,12 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 };
 
 // Function to change Show Trends on Home Timeline
-export const changeTrendsHomeTimeline = (trendsHomeTimeline) => {
+export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
+  if (writerMode === "on") {
+    removeElement("mt-trendsHomeTimeline");
+    return;
+  }
+
   if (
     window.location.pathname.includes("/home") ||
     window.location.pathname === "/"

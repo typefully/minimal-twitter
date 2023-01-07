@@ -105,7 +105,7 @@ export const injectAllChanges = (data) => {
   changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
-  changeTrendsHomeTimeline(data?.trendsHomeTimeline); // Show Trends on Home Timeline
+  changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode); // Show Trends on Home Timeline
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
   changeInterFont(data?.interFont); // Change `font-family` to Inter
 
