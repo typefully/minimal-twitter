@@ -3,6 +3,26 @@ import svgAssets from "../svgAssets";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
 
+// Function to change Twitter Blue in Navigation
+export const changeTwitterBlueButton = (twitterBlueButton) => {
+  switch (twitterBlueButton) {
+    case "off":
+      addStyles(
+        "mt-twitterBlueButton",
+        `
+        ${selectors.sidebarLinks.twitterBlue} {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-twitterBlueButton");
+      break;
+  }
+};
+
 // Function to change Home Button
 export const changeHomeButton = (homeButton) => {
   switch (homeButton) {

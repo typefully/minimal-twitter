@@ -1,16 +1,16 @@
 import {
+  changeFollowCount,
   changeLikeCount,
   changeReplyCount,
   changeRetweetCount,
   changeRetweetCount,
-  changeFollowCount,
 } from "./hideVanityCounts";
 import hideViewCount from "./hideViewCount";
 import {
+  changeInterFont,
   changeSearchBar1,
   changeSearchBar2,
   changeTweetButton,
-  changeInterFont,
 } from "./interface";
 import {
   changeBookmarksButton,
@@ -25,14 +25,15 @@ import {
   changeNotificationsButton,
   changeProfileButton,
   changeTopArticlesButton,
+  changeTwitterBlueButton,
 } from "./navigation";
 import {
   changeLatestTweets,
-  changeTrendsHomeTimeline,
   changePromotedPosts,
   changeTimelineBorders,
   changeTimelineWidth,
   changeTopicsToFollow,
+  changeTrendsHomeTimeline,
   changeTweetBorders,
   changeWhoToFollow,
 } from "./timeline";
@@ -87,6 +88,7 @@ export const injectAllChanges = (data) => {
   changeCommunitiesButton(data?.communitiesButton); // Communities Button
   changeListsButton(data?.listsButton); // Lists Button
   changeProfileButton(data?.profileButton); // Profile Button
+  changeTwitterBlueButton(data?.twitterBlueButton); // Twitter Blue Button
   changeNavigationButtonsLabelsHover(data?.navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(data?.navigationButtonsLabels); // Navigation Buttons Labels
   changeNavigationCenter(data?.navigationCenter); // Center Navigation

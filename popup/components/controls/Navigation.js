@@ -166,6 +166,10 @@ const Navigation = () => (
         defaultState={true}
       />
       <SwitchControl label="Center Vertically" storageKey="navigationCenter" />
+      <SwitchControl
+        label="Twitter Blue Button"
+        storageKey="twitterBlueButton"
+      />
     </div>
   </form>
 )
