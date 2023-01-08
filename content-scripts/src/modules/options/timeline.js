@@ -192,11 +192,61 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 };
 
 // Function to change Recent Media on Profiles
-// In progress
-export const changeRecentMediaProfiles = (recentMediaProfiles) => {
-  const isProfile = document.querySelector(
+export const changeRecentMedia = () => {
+  const isProfilePage = document.querySelector(
     'meta[content*="twitter://user?screen_name="]'
   );
+
+  if (!isProfilePage) {
+    return;
+  }
+
+  if (
+    !document
+      .querySelector(selectors.rightSidebar)
+      .querySelector('a[href$="photo/1"][role="link"]')
+  ) {
+    return;
+  }
+
+  chrome.storage.sync.get(["recentMedia"], (result) => {
+    const { recentMedia } = result;
+    const sidebarPhotoGrid = document
+      .querySelector(selectors.rightSidebar)
+      .querySelector('a[href$="photo/1"][role="link"]').parentElement
+      .parentElement.parentElement.parentElement.parentElement
+      .parentElement.parentElement; // Grid is 7 parent elements above first photo
+
+    switch (recentMedia) {
+      case "off":
+        removeElement("mt-recentMedia");
+        sidebarPhotoGrid.classList.remove("mt-recentMedia-photoGrid");
+        break;
+
+      case "on":
+        addStyles(
+          "mt-recentMedia",
+          `
+            @media only screen and (min-width: 1265px) {
+              .mt-recentMedia-photoGrid {
+                visibility: visible !important;
+                position: fixed;
+                right: 16px;
+                top: 68px;
+                width: 300px;
+              }
+              
+              [data-testid="primaryColumn"] {
+                transform: translateX(-64px);
+              }
+            }
+            `
+        );
+        sidebarPhotoGrid.classList.add("mt-recentMedia-photoGrid");
+
+        break;
+    }
+  });
 };
 
 // Function to change Show Trends on Home Timeline

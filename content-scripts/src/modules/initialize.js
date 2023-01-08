@@ -1,6 +1,7 @@
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
-import { addListsButton, addCommunitiesButton } from "./options/navigation";
+import { addCommunitiesButton, addListsButton } from "./options/navigation";
+import { changeRecentMedia } from "./options/timeline";
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton } from "./options/writer-mode";
 import {
@@ -98,6 +99,7 @@ export const observe = throttle(() => {
         addTypefullyReplyPlug();
         checkUrlForFollow();
         checkHomeTimeline();
+        changeRecentMedia();
         addWriterModeButton();
         addListsButton();
         addCommunitiesButton();

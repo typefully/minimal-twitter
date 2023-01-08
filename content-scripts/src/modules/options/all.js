@@ -34,6 +34,7 @@ import {
   changeTimelineWidth,
   changeTopicsToFollow,
   changeTrendsHomeTimeline,
+  changeRecentMedia,
   changeTweetBorders,
   changeWhoToFollow,
 } from "./timeline";
@@ -71,6 +72,7 @@ export const userPreferences = [
   "typefullyGrowTab",
   "latestTweets",
   "trendsHomeTimeline",
+  "recentMedia",
   "typefullyComposerButtons",
   "interFont",
 ];
@@ -106,6 +108,7 @@ export const injectAllChanges = (data) => {
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
   changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode); // Show Trends on Home Timeline
+  changeRecentMedia(data?.recentMedia); // Show Recent Media on Profiles
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
   changeInterFont(data?.interFont); // Change `font-family` to Inter
 
