@@ -197,25 +197,24 @@ export const changeRecentMedia = () => {
     'meta[content*="twitter://user?screen_name="]'
   );
 
-  if (!isProfilePage) {
-    return;
-  }
-
   if (
+    !isProfilePage ||
     !document
       .querySelector(selectors.rightSidebar)
       .querySelector('a[href$="photo/1"][role="link"]')
   ) {
+    removeElement("mt-recentMedia");
     return;
   }
 
+  const sidebarPhotoGrid = document
+    .querySelector(selectors.rightSidebar)
+    .querySelector('a[href$="photo/1"][role="link"]').parentElement
+    .parentElement.parentElement.parentElement.parentElement
+    .parentElement.parentElement; // Grid is 7 parent elements above first photo
+
   chrome.storage.sync.get(["recentMedia"], (result) => {
     const { recentMedia } = result;
-    const sidebarPhotoGrid = document
-      .querySelector(selectors.rightSidebar)
-      .querySelector('a[href$="photo/1"][role="link"]').parentElement
-      .parentElement.parentElement.parentElement.parentElement
-      .parentElement.parentElement; // Grid is 7 parent elements above first photo
 
     switch (recentMedia) {
       case "off":
