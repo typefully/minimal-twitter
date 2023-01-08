@@ -37,17 +37,11 @@ const TimelineSection = () => {
             />
           </div>
           <Separator className="mt-4 mb-2" />
+          <VanityCheckboxes />
           <CheckboxControl
-            label="Always Show Latest Tweets"
-            storageKey="latestTweets"
-          />
-          <CheckboxControl
-            label="Show Trends on Home Timeline"
-            storageKey="trendsHomeTimeline"
-          />
-          <CheckboxControl
-            label="Show Recent Media on Profiles"
-            storageKey="recentMedia"
+            label="Remove View Count from Tweets"
+            storageKey="hideViewCount"
+            defaultState={true}
           />
           <CheckboxControl
             label="Remove Promoted Posts"
@@ -63,11 +57,17 @@ const TimelineSection = () => {
             storageKey="removeTopicsToFollow"
           />
           <CheckboxControl
-            label="Remove View Count from Tweets"
-            storageKey="hideViewCount"
-            defaultState={true}
+            label="Always Show Latest Tweets"
+            storageKey="latestTweets"
           />
-          <VanityCheckboxes />
+          <CheckboxControl
+            label="Show Trends on Home Timeline"
+            storageKey="trendsHomeTimeline"
+          />
+          <CheckboxControl
+            label="Show Recent Media on Profiles"
+            storageKey="recentMedia"
+          />
         </div>
       ) : (
         <div className="dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl animate-pulse h-[115.5px]" />
