@@ -13,29 +13,25 @@ export const changeTitleNotifications = (tf) => {
       });
     }
 
-    if (titleNotifications === "off") {
-      const favicon = document.querySelector('link[rel="shortcut icon"]');
+    const favicon = document.querySelector('link[rel="shortcut icon"]');
 
-      if (favicon) {
-        favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
-      }
-
-      if (document.title.charAt(0) === "(") {
-        document.title = document.title.split(" ").slice(1).join(" ");
-      }
-
-      if (document.title.charAt(0) === "(") {
-        document.title = document.title.split(" ").slice(1).join(" ");
-      }
+    if (titleNotifications === "on") {
+      favicon.setAttribute(
+        "href",
+        favicon.href.replace("twitter.ico", "twitter-pip.2.ico")
+      );
     } else {
-      const favicon = document.querySelector('link[rel="shortcut icon"]');
-
-      if (favicon && !favicon.href.includes("-pip.2")) {
-        favicon.setAttribute(
-          "href",
-          favicon.href.replace("twitter.ico", "twitter-pip.2.ico")
-        );
+      if (document.title.charAt(0) === "(") {
+        document.title = document.title.split(" ").slice(1).join(" ");
       }
+
+      if (document.title.charAt(0) === "(") {
+        document.title = document.title.split(" ").slice(1).join(" ");
+      }
+
+      setTimeout(() => {
+        favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
+      });
     }
   };
 
