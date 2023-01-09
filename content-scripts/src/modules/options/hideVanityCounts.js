@@ -8,7 +8,7 @@ export const changeReplyCount = (replyCount) => {
       addStyles(
         "mt-replyCount",
         `
-        article [data-testid="reply"] span { 
+        [data-testid="reply"] span { 
           visibility: hidden !important
         }
         `
@@ -28,10 +28,10 @@ export const changeRetweetCount = (retweetCount) => {
       addStyles(
         "mt-retweetCount",
         `
-        article [href$="/retweets"],
-        article [href$="/retweets/with_comments"],
-        article [data-testid="retweet"] span,
-        article [data-testid="unretweet"] span {
+        [href$="/retweets"],
+        [href$="/retweets/with_comments"],
+        [data-testid="retweet"] span,
+        [data-testid="unretweet"] span {
           visibility: hidden !important
         }
         `
@@ -51,9 +51,9 @@ export const changeLikeCount = (likeCount) => {
       addStyles(
         "mt-likeCount",
         `
-        article [href$="/likes"][href*="/status/"],
-        article [data-testid="like"] span,
-        article [data-testid="unlike"] span {
+        [href$="/likes"][href*="/status/"],
+        [data-testid="like"] span,
+        [data-testid="unlike"] span {
            visibility: hidden !important
         }
         `
