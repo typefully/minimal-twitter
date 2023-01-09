@@ -11,10 +11,8 @@ export default async function hideViewCount() {
       });
 
       if (window.location.pathname.includes("/status/")) {
-        const viewsElement = document.querySelector(
-          '[data-testid="analyticsButton"]'
-        );
-        viewsElement.style.display = "flex";
+        const viewsElement = document.querySelector("a[href*='/analytics']");
+        viewsElement.style.display = "";
       }
     } else {
       viewCounts.forEach((el) => {
@@ -22,9 +20,7 @@ export default async function hideViewCount() {
       });
 
       if (window.location.pathname.includes("/status/")) {
-        const viewsElement = document.querySelector(
-          '[data-testid="analyticsButton"]'
-        );
+        const viewsElement = document.querySelector("a[href*='/analytics']");
         viewsElement.style.display = "none";
       }
     }
