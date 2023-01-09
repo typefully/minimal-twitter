@@ -10,6 +10,7 @@ import {
   changeInterFont,
   changeSearchBar1,
   changeSearchBar2,
+  changeTitleNotifications,
   changeTweetButton,
 } from "./interface";
 import {
@@ -77,6 +78,7 @@ export const userPreferences = [
   "recentMedia",
   "typefullyComposerButtons",
   "interFont",
+  "titleNotifications",
 ];
 
 export const injectAllChanges = (data) => {
@@ -114,6 +116,7 @@ export const injectAllChanges = (data) => {
   changeRecentMedia(data?.recentMedia); // Show Recent Media on Profiles
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
   changeInterFont(data?.interFont); // Change `font-family` to Inter
+  changeTitleNotifications(data?.titleNotifications); // Change Title Notifications
 
   hideViewCount(); // Hide View Counts (checks setting internally)
 };

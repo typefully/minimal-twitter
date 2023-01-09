@@ -19,6 +19,10 @@ const Interface = () => (
           defaultState={true}
         />
         <SwitchControl label="Inter Font" storageKey="interFont" />
+        <SwitchControl
+          label="Notifications in Title"
+          storageKey="titleNotifications"
+        />
       </div>
     </div>
   </form>

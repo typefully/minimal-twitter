@@ -2,6 +2,54 @@ import selectors from "../../selectors";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
 
+// Function to change the title notification count
+export const changeTitleNotifications = (tf) => {
+  const run = () => {
+    let titleNotifications = tf;
+
+    if (!tf) {
+      chrome.storage.sync.get(["titleNotifications"], (result) => {
+        titleNotifications = result.titleNotifications;
+      });
+    }
+
+    if (titleNotifications === "off") {
+      const favicon = document.querySelector('link[rel="shortcut icon"]');
+
+      if (favicon) {
+        favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
+      }
+
+      if (document.title.charAt(0) === "(") {
+        document.title = document.title.split(" ").slice(1).join(" ");
+      }
+
+      if (document.title.charAt(0) === "(") {
+        document.title = document.title.split(" ").slice(1).join(" ");
+      }
+    } else {
+      const favicon = document.querySelector('link[rel="shortcut icon"]');
+
+      if (favicon && !favicon.href.includes("-pip.2")) {
+        favicon.setAttribute(
+          "href",
+          favicon.href.replace("twitter.ico", "twitter-pip.2.ico")
+        );
+      }
+    }
+  };
+
+  run();
+
+  const observer = new MutationObserver(() => {
+    run();
+  });
+  const config = { subtree: true, characterData: true, childList: true };
+  const target = document.querySelector("title");
+
+  observer.observe(target, config);
+};
+
 // Function to change to Inter Font
 export const changeInterFont = (interFont) => {
   switch (interFont) {
