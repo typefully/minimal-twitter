@@ -193,15 +193,11 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 
 // Function to change Recent Media on Profiles
 export const changeRecentMedia = () => {
-  const isProfilePage = document.querySelector(
-    'meta[content*="twitter://user?screen_name="]'
-  );
-
   if (
-    !isProfilePage ||
+    !document.querySelector('meta[content*="twitter://user?screen_name="]') ||
     !document
       .querySelector(selectors.rightSidebar)
-      .querySelector('a[href$="photo/1"][role="link"]')
+      ?.querySelector('a[href$="photo/1"][role="link"]')
   ) {
     removeElement("mt-recentMedia");
     return;
@@ -231,7 +227,7 @@ export const changeRecentMedia = () => {
                 visibility: visible !important;
                 position: fixed;
                 right: 16px;
-                top: 68px;
+                top: 70px;
                 width: 300px;
               }
               
