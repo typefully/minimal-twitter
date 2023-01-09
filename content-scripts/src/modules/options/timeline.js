@@ -291,7 +291,7 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
               animation-name: render;
               animation-duration: 0s;
               animation-fill-mode: forwards;
-              animation-delay: 1s;
+              animation-delay: 500ms;
               width: 300px;
               margin-top: 4px;
             }

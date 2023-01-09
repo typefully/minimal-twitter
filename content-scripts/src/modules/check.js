@@ -37,8 +37,61 @@ export const checkHomeTimeline = () => {
     window.location.pathname.includes("compose/tweet") ||
     window.location.pathname === "/"
   ) {
-    chrome.storage.sync.get("writerMode", (data) => {
-      const { writerMode } = data;
+    chrome.storage.sync.get("writerMode", (result) => {
+      const { writerMode } = result;
+
+      if (writerMode !== "on") {
+        chrome.storage.sync.get("trendsHomeTimeline", (result) => {
+          const { trendsHomeTimeline } = result;
+
+          switch (trendsHomeTimeline) {
+            case "off":
+              removeElement("mt-trendsHomeTimeline");
+              break;
+
+            case "on":
+              addStyles(
+                "mt-trendsHomeTimeline",
+                `
+                @keyframes render {
+                  from {
+                    opacity: 0;
+                  }
+                  to {
+                    opacity: 1;
+                    transform: none;
+                  }
+                }
+                
+                @media only screen and (min-width: 1265px) {
+                  ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+                    visibility: visible;
+                    position: fixed;
+                    right: 16px;
+                    border-radius: 16px;
+                    border-color: var(--border-color);
+                    border-width: 1px;
+                    background-color: var(--body-bg-color);
+                    opacity: 0;
+                    will-change: opacity;
+                    animation-name: render;
+                    animation-duration: 0s;
+                    animation-fill-mode: forwards;
+                    animation-delay: 500ms;
+                    width: 300px;
+                    margin-top: 4px;
+                  }
+    
+                  [data-testid="primaryColumn"] {
+                    transform: translateX(-64px);
+                  }
+                }
+                `
+              );
+              break;
+          }
+        });
+      }
 
       switch (writerMode) {
         case "on":
@@ -89,55 +142,6 @@ export const checkHomeTimeline = () => {
           removeElement("mt-writerMode");
           removeTypefullyPlugFromWriterMode();
 
-          chrome.storage.sync.get("trendsHomeTimeline", (data) => {
-            const { trendsHomeTimeline } = data;
-
-            switch (trendsHomeTimeline) {
-              case "off":
-                removeElement("mt-trendsHomeTimeline");
-                break;
-
-              case "on":
-                addStyles(
-                  "mt-trendsHomeTimeline",
-                  `
-                  @keyframes render {
-                    from {
-                      opacity: 0;
-                    }
-                    to {
-                      opacity: 1;
-                      transform: none;
-                    }
-                  }
-                  @media only screen and (min-width: 1265px) {
-                    ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
-                      visibility: visible;
-                      position: fixed;
-                      right: 16px;
-                      border-radius: 16px;
-                      border-color: var(--border-color);
-                      border-width: 1px;
-                      background-color: var(--body-bg-color);
-                      opacity: 0;
-                      will-change: opacity;
-                      animation-name: render;
-                      animation-duration: 0s;
-                      animation-fill-mode: forwards;
-                      animation-delay: 1s;
-                      width: 300px;
-                      margin-top: 4px;
-                    }
-      
-                    [data-testid="primaryColumn"] {
-                      transform: translateX(-64px);
-                    }
-                  }
-                  `
-                );
-                break;
-            }
-          });
           break;
       }
     });
