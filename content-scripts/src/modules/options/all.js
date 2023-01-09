@@ -26,15 +26,16 @@ import {
   changeProfileButton,
   changeTopArticlesButton,
   changeTwitterBlueButton,
+  changeUnreadCountBadge,
 } from "./navigation";
 import {
   changeLatestTweets,
   changePromotedPosts,
+  changeRecentMedia,
   changeTimelineBorders,
   changeTimelineWidth,
   changeTopicsToFollow,
   changeTrendsHomeTimeline,
-  changeRecentMedia,
   changeTweetBorders,
   changeWhoToFollow,
 } from "./timeline";
@@ -58,6 +59,7 @@ export const userPreferences = [
   "navigationButtonsLabelsHover",
   "navigationButtonsLabels",
   "navigationCenter",
+  "unreadCountBadge",
   "writerMode",
   "replyCount",
   "retweetCount",
@@ -94,6 +96,7 @@ export const injectAllChanges = (data) => {
   changeNavigationButtonsLabelsHover(data?.navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(data?.navigationButtonsLabels); // Navigation Buttons Labels
   changeNavigationCenter(data?.navigationCenter); // Center Navigation
+  changeUnreadCountBadge(data?.unreadCountBadge); // Unread Count Badge
   changeWriterMode(data?.writerMode); // Writer Mode
   changeReplyCount(data?.replyCount); // Hide Reply Count
   changeRetweetCount(data?.retweetCount); // Hide Retweet Count

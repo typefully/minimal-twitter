@@ -252,6 +252,26 @@ export const changeProfileButton = (profileButton) => {
   }
 };
 
+// Function to change Unread Count Badge
+export const changeUnreadCountBadge = (unreadCountBadge) => {
+  switch (unreadCountBadge) {
+    case "on":
+      removeElement("mt-unreadCountBadge");
+      break;
+
+    case "off":
+      addStyles(
+        "mt-unreadCountBadge",
+        `
+        ${selectors.leftSidebarLinks} div[dir][aria-label][aria-live] {
+          display: none !important;
+        }
+        `
+      );
+      break;
+  }
+};
+
 // Function to remove Navigation Button Labels on Hover
 const removeHover = () => {
   addStyles(

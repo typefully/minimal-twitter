@@ -159,6 +159,10 @@ const Navigation = () => (
     </div>
     <Separator className="mb-4" />
     <div className="flex flex-col gap-y-4">
+      <SwitchControl
+        label="Twitter Blue Button"
+        storageKey="twitterBlueButton"
+      />
       <SwitchControl label="Labels" storageKey="navigationButtonsLabels" />
       <SwitchControl
         label="Labels on Hover"
@@ -167,8 +171,9 @@ const Navigation = () => (
       />
       <SwitchControl label="Center Vertically" storageKey="navigationCenter" />
       <SwitchControl
-        label="Twitter Blue Button"
-        storageKey="twitterBlueButton"
+        label="Unread Count Badge"
+        storageKey="unreadCountBadge"
+        defaultState={true}
       />
     </div>
   </form>
