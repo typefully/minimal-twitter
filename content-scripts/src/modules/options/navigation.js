@@ -3,26 +3,6 @@ import svgAssets from "../svgAssets";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
 
-// Function to change Twitter Blue in Navigation
-export const changeTwitterBlueButton = (twitterBlueButton) => {
-  switch (twitterBlueButton) {
-    case "off":
-      addStyles(
-        "mt-twitterBlueButton",
-        `
-        ${selectors.sidebarLinks.twitterBlue} {
-          display: none !important;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-twitterBlueButton");
-      break;
-  }
-};
-
 // Function to change Home Button
 export const changeHomeButton = (homeButton) => {
   switch (homeButton) {
@@ -143,6 +123,53 @@ export const changeTopArticlesButton = (topArticlesButton) => {
   }
 };
 
+// Function to change Twitter Blue in Navigation
+export const changeTwitterBlueButton = (twitterBlueButton) => {
+  switch (twitterBlueButton) {
+    case "off":
+      removeElement("mt-twitterBlueButtonNode");
+      addStyles(
+        "mt-twitterBlueButton",
+        `
+        ${selectors.sidebarLinks.twitterBlue} {
+          display: none !important;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-twitterBlueButton");
+      addTwitterBlueButton();
+      break;
+  }
+};
+
+// Function to add Twitter Blue button
+export const addTwitterBlueButton = () => {
+  setTimeout(() => {
+    if (!document.querySelector(selectors.sidebarLinks.twitterBlue)) {
+      const profileNode = document.querySelector(
+        'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+      );
+
+      if (profileNode) {
+        const twitterBlueButton = profileNode.cloneNode(true);
+
+        twitterBlueButton.id = "mt-twitterBlueButtonNode";
+        twitterBlueButton.href = "https://twitter.com/settings/twitter_blue";
+        twitterBlueButton.ariaLabel = "Minimal Twitter Twitter Blue";
+        twitterBlueButton.removeAttribute("data-testid");
+        twitterBlueButton.firstChild.firstChild.firstChild.innerHTML =
+          svgAssets.twitterBlue.normal;
+        twitterBlueButton.firstChild.lastChild.firstChild.innerText =
+          "Twitter Blue";
+        profileNode.insertAdjacentElement("beforebegin", twitterBlueButton);
+      }
+    }
+  }, 500);
+};
+
 // Function to change Communities Button
 export const changeCommunitiesButton = (communitiesButton) => {
   switch (communitiesButton) {
@@ -165,7 +192,7 @@ export const changeCommunitiesButton = (communitiesButton) => {
   }
 };
 
-// Function to add Lists button
+// Function to add Communities button
 export const addCommunitiesButton = () => {
   if (!document.querySelector(selectors.sidebarLinks.communities)) {
     const profileNode = document.querySelector(
