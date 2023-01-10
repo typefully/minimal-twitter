@@ -8,7 +8,6 @@ export default function addTooltip(element, options) {
     tooltip = document.createElement("div");
     tooltip.id = id;
     tooltip.classList.add("mt-tooltip", "hidden");
-    // Span .title for title, span .description for description
     tooltip.innerHTML = `
       ${title ? `<span class="title">${title}</span>` : ""}
       ${description ? `<span class="description">${description}</span>` : ""}
@@ -22,7 +21,6 @@ export default function addTooltip(element, options) {
     `;
   }
 
-  // When the mouse enters the element, show the tooltip
   element.onmouseenter = () => {
     tooltip.classList.remove("hidden");
     const rect = element.getBoundingClientRect();
