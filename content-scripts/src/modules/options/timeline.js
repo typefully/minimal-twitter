@@ -205,9 +205,7 @@ export const changeRecentMedia = () => {
 
   const sidebarPhotoGrid = document
     .querySelector(selectors.rightSidebar)
-    .querySelector('a[href$="photo/1"][role="link"]').parentElement
-    .parentElement.parentElement.parentElement.parentElement
-    .parentElement.parentElement; // Grid is 7 parent elements above first photo
+    .querySelector('[style*="padding-bottom: 56.25%"]').parentElement;
 
   chrome.storage.sync.get(["recentMedia"], (result) => {
     const { recentMedia } = result;

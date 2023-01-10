@@ -159,19 +159,22 @@ a[href*="quick_promote_web"] {
 }
 
 #mt-listsButtonNode > div > div[dir],
-#mt-communitiesButtonNode > div > div[dir] {
+#mt-communitiesButtonNode > div > div[dir],
+#mt-twitterBlueButtonNode > div > div[dir] {
   font-weight: 400 !important;
 }
 
 #mt-listsButtonNode:hover > div,
-#mt-communitiesButtonNode:hover > div {
+#mt-communitiesButtonNode:hover > div,
+#mt-twitterBlueButtonNode:hover > div {
   background-color: rgba(var(--glyphs-color-rgb), 0.1);
 }
 
 /* Don't show label at smaller screens */
 @media only screen and (max-width: 1264px) {
   #mt-listsButtonNode > div > div[dir],
-  #mt-communitiesButtonNode > div > div[dir] {
+  #mt-communitiesButtonNode > div > div[dir],
+  #mt-twitterBlueButtonNode > div > div[dir] {
     display: none !important;
   }
 }
