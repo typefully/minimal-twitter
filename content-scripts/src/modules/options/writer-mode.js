@@ -6,6 +6,7 @@ import {
   getCurrentTextAndSendToTypefully,
 } from "../typefully";
 import addStyles from "../utilities/addStyles";
+import addTooltip from "../utilities/addTooltip";
 import addTypefullyBox from "../utilities/addTypefullyBox";
 import removeElement from "../utilities/removeElement";
 import { getStorage, setStorage } from "../utilities/storage";
@@ -151,17 +152,26 @@ export const addWriterModeButton = async () => {
     const writerModeButton = scheduleButton.cloneNode(true);
 
     writerModeButton.id = "mt-writer-mode-composer-button";
-    writerModeButton.ariaLabel = "Zen Writer Mode";
-    writerModeButton.title = "Zen Writer Mode";
     writerModeButton.removeAttribute("data-testid");
 
     const userSetting = await getStorage("writerMode");
     if (userSetting === "on") {
       writerModeButton.firstChild.firstChild.firstChild.innerHTML =
         svgAssets.composerWriterMode.selected;
+
+      addTooltip(writerModeButton, {
+        id: "writer-mode",
+        title: "Close Zen Writer Mode",
+      });
     } else {
       writerModeButton.firstChild.firstChild.firstChild.innerHTML =
         svgAssets.composerWriterMode.normal;
+
+      addTooltip(writerModeButton, {
+        id: "writer-mode",
+        title: "Zen Writer Mode",
+        description: "Added by Minimal Twitter.",
+      });
     }
     writerModeButton.onclick = toggleWriterMode;
 
@@ -201,9 +211,20 @@ const toggleWriterMode = async () => {
   if (userSetting === "off") {
     writerModeButton.firstChild.firstChild.firstChild.innerHTML =
       svgAssets.composerWriterMode.selected;
+
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Close Zen Writer Mode",
+    });
   } else {
     writerModeButton.firstChild.firstChild.firstChild.innerHTML =
       svgAssets.composerWriterMode.normal;
+
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Zen Writer Mode",
+      description: "Added by Minimal Twitter.",
+    });
 
     // scroll body to top
     document.body.scrollTop = 0;

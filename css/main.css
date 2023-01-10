@@ -178,3 +178,38 @@ a[href*="quick_promote_web"] {
     display: none !important;
   }
 }
+
+.mt-tooltip {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  background: var(--body-bg-color);
+  color: var(--main-text-color);
+  padding: 6px 8px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 2px 14px rgba(0, 0, 0, 0.08);
+  z-index: 9999;
+  font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  transition: opacity 0.15s cubic-bezier(0.3, 0, 0.1, 1), transform 0.15s cubic-bezier(0.3, 0, 0.1, 1);
+}
+
+.mt-tooltip.hidden {
+  opacity: 0;
+  transform: translateY(3px);
+  pointer-events: none;
+}
+
+.mt-tooltip .title {
+  font-weight: 500;
+  color: var(--main-text-color);
+  font-size: 13px;
+}
+
+.mt-tooltip .description {
+  color: var(--secondary-text-color);
+  font-size: 12.5px;
+}
