@@ -193,19 +193,17 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 
 // Function to change Recent Media on Profiles
 export const changeRecentMedia = () => {
-  if (
-    !document.querySelector('meta[content*="twitter://user?screen_name="]') ||
-    !document
-      .querySelector(selectors.rightSidebar)
-      ?.querySelector('a[href$="photo/1"][role="link"]')
-  ) {
+  if (!document.querySelector('meta[content*="twitter://user?screen_name="]')) {
     removeElement("mt-recentMedia");
     return;
   }
 
   const sidebarPhotoGrid = document
     .querySelector(selectors.rightSidebar)
-    .querySelector('[style*="padding-bottom: 56.25%"]').parentElement;
+    ?.querySelector('[aria-label][tabindex="0"]')
+    ?.querySelector('[style="padding-bottom: 56.25%;"]')?.parentElement;
+
+  if (!sidebarPhotoGrid) return;
 
   chrome.storage.sync.get(["recentMedia"], (result) => {
     const { recentMedia } = result;
