@@ -29,7 +29,9 @@ export const changeTitleNotifications = (tf) => {
         document.title = document.title.split(" ").slice(1).join(" ");
       }
 
-      setTimeout(() => {
+      let t;
+      clearTimeout(t);
+      t = setTimeout(() => {
         favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
       });
     }

@@ -25,6 +25,11 @@ a[href*="quick_promote_web"] {
   z-index: 1 !important;
 }
 
+/* Shrink space if there are a lot of items in left navigation */
+header[role="banner"] > div > div > div > div:first-child {
+  flex-shrink: 1;
+}
+
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
@@ -194,7 +199,8 @@ a[href*="quick_promote_web"] {
   z-index: 9999;
   font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
-  transition: opacity 0.15s cubic-bezier(0.3, 0, 0.1, 1), transform 0.15s cubic-bezier(0.3, 0, 0.1, 1);
+  transition: opacity 0.15s cubic-bezier(0.3, 0, 0.1, 1),
+    transform 0.15s cubic-bezier(0.3, 0, 0.1, 1);
 }
 
 .mt-tooltip.hidden {

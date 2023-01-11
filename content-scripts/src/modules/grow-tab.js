@@ -32,7 +32,9 @@ export const showGrowTab = () => {
   main.appendChild(growTab);
   document.body.style.overflow = "hidden";
 
-  setTimeout(() => {
+  let t;
+  clearTimeout(t);
+  t = setTimeout(() => {
     document.addEventListener("click", (e) => {
       // Don't hide if click on self
       if (e.target.closest("#mt-typefullyGrowButton")) return;

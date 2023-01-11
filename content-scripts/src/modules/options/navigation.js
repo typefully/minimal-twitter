@@ -147,6 +147,8 @@ export const changeTwitterBlueButton = (twitterBlueButton) => {
 
 // Function to add Twitter Blue button
 export const addTwitterBlueButton = () => {
+  let t;
+  clearTimeout(t);
   setTimeout(() => {
     if (!document.querySelector(selectors.sidebarLinks.twitterBlue)) {
       const profileNode = document.querySelector(

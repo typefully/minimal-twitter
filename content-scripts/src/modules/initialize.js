@@ -1,6 +1,10 @@
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
-import { addCommunitiesButton, addListsButton } from "./options/navigation";
+import {
+  addCommunitiesButton,
+  addListsButton,
+  addTwitterBlueButton,
+} from "./options/navigation";
 import { changeRecentMedia } from "./options/timeline";
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton } from "./options/writer-mode";
@@ -89,6 +93,7 @@ export const observe = throttle(() => {
         addWriterModeButton();
         addListsButton();
         addCommunitiesButton();
+        addTwitterBlueButton();
         hideViewCount();
 
         t = setTimeout(() => {
@@ -200,6 +205,7 @@ export const addResizeListener = () => {
       removeElement("mt-typefullyGrowButton");
       addListsButton();
       addCommunitiesButton();
+      addTwitterBlueButton();
       t = setTimeout(() => {
         addGrowButton();
       });

@@ -330,7 +330,9 @@ export const changeLatestTweets = (latestTweets) => {
           );
 
           const clickMenuButton = (isTimelineOptions) => {
-            return setTimeout(() => {
+            let t;
+            clearTimeout(t);
+            t = setTimeout(() => {
               const menuitem = document.querySelector(
                 "div[role='menuitem'][tabindex='0']"
               );
@@ -344,6 +346,7 @@ export const changeLatestTweets = (latestTweets) => {
                 latestTweetsNavBarOption && latestTweetsNavBarOption.click();
               }
             }, 100);
+            return t;
           };
 
           if (timelineOptions) {
@@ -355,7 +358,9 @@ export const changeLatestTweets = (latestTweets) => {
           }
         }
       };
-      setTimeout(run, 500);
+      let t;
+      clearTimeout(t);
+      t = setTimeout(run, 500);
     };
     if (document.readyState === "loading") {
       console.log("loading...");
