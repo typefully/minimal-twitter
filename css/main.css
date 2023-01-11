@@ -25,11 +25,6 @@ a[href*="quick_promote_web"] {
   z-index: 1 !important;
 }
 
-/* Shrink space if there are a lot of items in left navigation */
-header[role="banner"] > div > div > div > div:first-child {
-  flex-shrink: 1;
-}
-
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
@@ -94,6 +89,11 @@ header[role="banner"] > div > div > div > div:first-child {
   /* Align account button with floating tweet button */
   [data-testid="SideNav_AccountSwitcher_Button"] {
     bottom: 12px !important;
+  }
+
+  /* Shrink space if there are a lot of items in left navigation */
+  header[role="banner"] > div > div > div > div:first-child {
+    flex-shrink: 1;
   }
 
   /* Floating Tweet Button */

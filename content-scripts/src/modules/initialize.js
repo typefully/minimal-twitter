@@ -91,14 +91,33 @@ export const observe = throttle(() => {
         checkHomeTimeline();
         changeRecentMedia();
         addWriterModeButton();
-        addListsButton();
-        addCommunitiesButton();
-        addTwitterBlueButton();
         hideViewCount();
 
-        t = setTimeout(() => {
-          addGrowButton();
-        });
+        chrome.storage.sync.get(
+          [
+            "listsButton",
+            "communitiesButton",
+            "twitterBlueButton",
+            "typefullyGrowTab",
+          ],
+          (result) => {
+            const {
+              listsButton,
+              communitiesButton,
+              twitterBlueButton,
+              typefullyGrowTab,
+            } = result;
+
+            if (listsButton) addListsButton();
+            if (communitiesButton) addCommunitiesButton();
+            if (twitterBlueButton) addTwitterBlueButton();
+            if (typefullyGrowTab) {
+              t = setTimeout(() => {
+                addGrowButton();
+              });
+            }
+          }
+        );
       }, 500);
 
       runMutations();
@@ -203,12 +222,32 @@ export const addResizeListener = () => {
       removeElement("mt-listsButtonNode");
       removeElement("mt-communitiesButton");
       removeElement("mt-typefullyGrowButton");
-      addListsButton();
-      addCommunitiesButton();
-      addTwitterBlueButton();
-      t = setTimeout(() => {
-        addGrowButton();
-      });
+
+      chrome.storage.sync.get(
+        [
+          "listsButton",
+          "communitiesButton",
+          "twitterBlueButton",
+          "typefullyGrowTab",
+        ],
+        (result) => {
+          const {
+            listsButton,
+            communitiesButton,
+            twitterBlueButton,
+            typefullyGrowTab,
+          } = result;
+
+          if (listsButton) addListsButton();
+          if (communitiesButton) addCommunitiesButton();
+          if (twitterBlueButton) addTwitterBlueButton();
+          if (typefullyGrowTab) {
+            t = setTimeout(() => {
+              addGrowButton();
+            });
+          }
+        }
+      );
     }, 1000)
   );
 };
