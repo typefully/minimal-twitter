@@ -21,14 +21,17 @@ export default function addTooltip(element, options) {
     `;
   }
 
-  element.onmouseenter = () => {
+  function showTooltip() {
     tooltip.classList.remove("hidden");
     const rect = element.getBoundingClientRect();
     tooltip.style.top = `${rect.bottom + 10}px`;
     tooltip.style.left = `${
       rect.left + rect.width / 2 - tooltip.offsetWidth / 2
     }px`;
-  };
+  }
+
+  element.onmouseenter = showTooltip;
+  element.onmouseover = showTooltip;
 
   element.onmouseleave = () => {
     tooltip.classList.add("hidden");
