@@ -137,6 +137,14 @@ const mutationIsNotRelevant = (mutationsList) => {
   const el = a || r; // Element
 
   try {
+    // Minimal Twitter injected elements
+    if (
+      el?.id?.startsWith("mt-") ||
+      el?.id?.startsWith("typefully-") ||
+      t?.className?.startsWith("mt-") // For example .mt-tooltip ends up here
+    )
+      return true;
+
     // Engagement counts
     if (
       (el?.nodeName === "SPAN" &&
@@ -202,9 +210,7 @@ const mutationIsNotRelevant = (mutationsList) => {
     // SVG changes
     if (el?.nodeName === "path") return true;
 
-    // Minimal Twitter injected elements
-    if (el?.id?.startsWith("mt-") || el?.id?.startsWith("typefully-"))
-      return true;
+    return false;
   } catch (e) {}
 
   return false;
