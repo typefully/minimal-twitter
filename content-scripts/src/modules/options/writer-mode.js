@@ -148,7 +148,6 @@ export const removeTypefullyPlugFromWriterMode = () => {
 // Function to add an expand icon to the buttons in the tweet composer
 export const addWriterModeButton = async (scheduleButton) => {
   if (
-    !scheduleButton ||
     !window.location.pathname.includes("/home") ||
     !window.location.pathname === "/"
   ) {

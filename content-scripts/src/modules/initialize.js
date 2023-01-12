@@ -20,20 +20,17 @@ import throttle from "./utilities/throttle";
 
 // Function to reveal Search Filters
 const revealSearchFilters = (advancedSearch) => {
-  if (advancedSearch) {
-    const searchFilters =
-      advancedSearch.parentElement.parentElement.parentElement;
-    if (!searchFilters.classList.contains("searchFilters")) {
-      searchFilters.classList = searchFilters.classList + " searchFilters";
-    }
-    return;
+  const searchFilters =
+    advancedSearch.parentElement.parentElement.parentElement;
+  if (!searchFilters.classList.contains("searchFilters")) {
+    searchFilters.classList = searchFilters.classList + " searchFilters";
   }
+  return;
 };
 
 // Function to set search bar width to length of placeholder
 const searchBarWidthReset = (searchBar) => {
   if (
-    searchBar &&
     !window.location.pathname.includes("/search") &&
     !window.location.pathname.includes("/explore")
   ) {
