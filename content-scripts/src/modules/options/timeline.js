@@ -235,6 +235,22 @@ export const changeRecentMedia = (recentMedia) => {
             }
             `
         );
+        chrome.storage.sync.get("searchBar", (result) => {
+          const { searchBar } = result;
+
+          if (searchBar === "off") {
+            addStyles(
+              "mt-trendsHomeTimeline-more",
+              `
+              @media only screen and (min-width: 1265px) {
+                .mt-recentMedia-photoGrid {
+                  top: 12px !important;
+                }
+              }
+              `
+            );
+          }
+        });
         sidebarPhotoGrid.classList.add("mt-recentMedia-photoGrid");
 
         break;
@@ -306,6 +322,22 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
           }
           `
         );
+        chrome.storage.sync.get("searchBar", (result) => {
+          const { searchBar } = result;
+
+          if (searchBar === "off") {
+            addStyles(
+              "mt-trendsHomeTimeline-more",
+              `
+              @media only screen and (min-width: 1265px) {
+                ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+                  top: 12px;
+                }
+              }
+              `
+            );
+          }
+        });
         break;
     }
   }
