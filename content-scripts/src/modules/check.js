@@ -30,6 +30,9 @@ export const checkUrlForFollow = () => {
   }
 };
 
+let zt1; // Zen Writer Mode timeout 1
+let zt2; // Zen Writer Mode timeout 2
+
 // Check Home Timeline and add Writer Mode if needed
 export const checkHomeTimeline = () => {
   if (
@@ -96,6 +99,13 @@ export const checkHomeTimeline = () => {
       switch (writerMode) {
         case "on":
           if (document.getElementById("mt-writerMode")) return;
+
+          document.body.classList.add("mt-writerMode-on");
+
+          zt1 = setTimeout(() => {
+            document.title = "Zen Writer Mode / Twitter";
+          }, 500);
+
           addStyles(
             "mt-writerMode",
             `
@@ -139,6 +149,12 @@ export const checkHomeTimeline = () => {
           break;
 
         case "off":
+          document.body.classList.remove("mt-writerMode-on");
+
+          zt2 = setTimeout(() => {
+            document.title = "Home / Twitter";
+          }, 500);
+
           removeElement("mt-writerMode");
           removeTypefullyPlugFromWriterMode();
 

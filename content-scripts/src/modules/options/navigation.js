@@ -146,10 +146,10 @@ export const changeTwitterBlueButton = (twitterBlueButton) => {
 };
 
 // Function to add Twitter Blue button
+let bt; // Twitter Blue button timeout
 export const addTwitterBlueButton = () => {
-  let t;
-  clearTimeout(t);
-  setTimeout(() => {
+  clearTimeout(bt);
+  bt = setTimeout(() => {
     if (!document.querySelector(selectors.sidebarLinks.twitterBlue)) {
       const profileNode = document.querySelector(
         'a[role="link"][data-testid="AppTabBar_Profile_Link"]'

@@ -3,6 +3,7 @@ import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
 
 // Function to change the title notification count
+let nt; // Title Notifications timeout
 export const changeTitleNotifications = (tf) => {
   const run = () => {
     let titleNotifications = tf;
@@ -29,9 +30,8 @@ export const changeTitleNotifications = (tf) => {
         document.title = document.title.split(" ").slice(1).join(" ");
       }
 
-      let t;
-      clearTimeout(t);
-      t = setTimeout(() => {
+      clearTimeout(nt);
+      nt = setTimeout(() => {
         favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
       });
     }

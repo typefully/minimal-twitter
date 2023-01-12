@@ -300,6 +300,8 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
 };
 
 // Function to change Latest Tweets
+let lt1; // Latest Tweets timeout 1
+let lt2; // Latest Tweets timeout 2
 export const changeLatestTweets = (latestTweets) => {
   if (latestTweets === "on") {
     const showLatestTweets = () => {
@@ -330,9 +332,8 @@ export const changeLatestTweets = (latestTweets) => {
           );
 
           const clickMenuButton = (isTimelineOptions) => {
-            let t;
-            clearTimeout(t);
-            t = setTimeout(() => {
+            clearTimeout(lt1);
+            lt1 = setTimeout(() => {
               const menuitem = document.querySelector(
                 "div[role='menuitem'][tabindex='0']"
               );
@@ -346,7 +347,7 @@ export const changeLatestTweets = (latestTweets) => {
                 latestTweetsNavBarOption && latestTweetsNavBarOption.click();
               }
             }, 100);
-            return t;
+            return lt1;
           };
 
           if (timelineOptions) {
@@ -358,9 +359,9 @@ export const changeLatestTweets = (latestTweets) => {
           }
         }
       };
-      let t;
-      clearTimeout(t);
-      t = setTimeout(run, 500);
+
+      clearTimeout(lt2);
+      lt2 = setTimeout(run, 500);
     };
     if (document.readyState === "loading") {
       console.log("loading...");

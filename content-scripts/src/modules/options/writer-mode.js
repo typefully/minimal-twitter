@@ -12,17 +12,20 @@ import removeElement from "../utilities/removeElement";
 import { getStorage, setStorage } from "../utilities/storage";
 
 let t; // Typefully Plug timeout
-
+let zt1; // Zen Writer Mode timeout 1
+let zt2; // Zen Writer Mode timeout 2
 export const changeWriterMode = (writerMode) => {
   if (
     window.location.pathname.includes("/home") ||
     window.location.pathname === "/"
   ) {
-    clearTimeout(t);
-
     switch (writerMode) {
       case "on":
-        document.body.classList.add("mt-writerMode-on");
+        clearTimeout(zt1);
+        zt1 = setTimeout(() => {
+          document.title = "Zen Writer Mode / Twitter";
+        }, 500);
+
         addStyles(
           "mt-writerMode",
           `
@@ -64,6 +67,7 @@ export const changeWriterMode = (writerMode) => {
             `
         );
 
+        clearTimeout(t);
         t = setTimeout(() => {
           addTypefullyPlugToWriterMode();
         }, 100);
@@ -71,7 +75,11 @@ export const changeWriterMode = (writerMode) => {
         break;
 
       case "off":
-        document.body.classList.remove("mt-writerMode-on");
+        clearTimeout(zt2);
+        zt2 = setTimeout(() => {
+          document.title = "Home / Twitter";
+        }, 500);
+
         removeElement("mt-writerMode");
         removeTypefullyPlugFromWriterMode();
         break;

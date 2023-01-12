@@ -94,6 +94,7 @@ export const addStylesheets = () => {
 };
 
 // Function to start MutationObserver
+let mt; // Mutations timeout
 export const observe = throttle(() => {
   const observer = new MutationObserver((mutationsList) => {
     if (mutationsList.length) {
@@ -103,9 +104,7 @@ export const observe = throttle(() => {
         extractColorsAsRootVars(); // Extract colors first
       }
 
-      let t;
       const runMutations = throttle(() => {
-        clearTimeout(t);
         searchBarWidthReset();
         revealSearchFilters();
         addTypefullyPlug();
@@ -136,7 +135,8 @@ export const observe = throttle(() => {
             if (communitiesButton) addCommunitiesButton();
             if (twitterBlueButton) addTwitterBlueButton();
             if (typefullyGrowTab) {
-              t = setTimeout(() => {
+              clearTimeout(mt);
+              mt = setTimeout(() => {
                 addGrowButton();
               });
             }
@@ -243,12 +243,11 @@ const mutationIsNotRelevant = (mutationsList) => {
 // On resize, remove and re-add the sidebar buttons, because their original
 // Twitter counterparts styles change programmatically based on window size,
 // so we need to re-create them when the window size changes.
-let t;
+let gt; // Grow Tab timeout
 export const addResizeListener = () => {
   window.addEventListener(
     "resize",
     throttle(() => {
-      clearTimeout(t);
       removeElement("mt-listsButtonNode");
       removeElement("mt-communitiesButton");
       removeElement("mt-typefullyGrowButton");
@@ -272,7 +271,8 @@ export const addResizeListener = () => {
           if (communitiesButton) addCommunitiesButton();
           if (twitterBlueButton) addTwitterBlueButton();
           if (typefullyGrowTab) {
-            t = setTimeout(() => {
+            clearTimeout(gt);
+            gt = setTimeout(() => {
               addGrowButton();
             });
           }

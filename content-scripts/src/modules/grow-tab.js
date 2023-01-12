@@ -1,6 +1,7 @@
 import svgAssets from "./svgAssets";
 import { getCurrentTheme } from "./utilities/colors";
 
+let gt; // Grow Tab timeout
 export const showGrowTab = () => {
   const main = document.querySelector("main[role='main']");
 
@@ -32,9 +33,8 @@ export const showGrowTab = () => {
   main.appendChild(growTab);
   document.body.style.overflow = "hidden";
 
-  let t;
-  clearTimeout(t);
-  t = setTimeout(() => {
+  clearTimeout(gt);
+  gt = setTimeout(() => {
     document.addEventListener("click", (e) => {
       // Don't hide if click on self
       if (e.target.closest("#mt-typefullyGrowButton")) return;
