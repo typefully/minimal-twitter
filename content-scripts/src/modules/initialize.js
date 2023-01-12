@@ -1,3 +1,4 @@
+import selectors from "../selectors";
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
 import {
@@ -18,12 +19,7 @@ import removeElement from "./utilities/removeElement";
 import throttle from "./utilities/throttle";
 
 // Function to reveal Search Filters
-const revealSearchFilters = () => {
-  // Get grandparent of advanced search
-  const advancedSearch = document.querySelector(
-    `[data-testid="searchFiltersAdvancedSearch"]`
-  );
-
+const revealSearchFilters = (advancedSearch) => {
   if (advancedSearch) {
     const searchFilters =
       advancedSearch.parentElement.parentElement.parentElement;
@@ -35,11 +31,7 @@ const revealSearchFilters = () => {
 };
 
 // Function to set search bar width to length of placeholder
-const searchBarWidthReset = () => {
-  const searchBar = document.querySelector(
-    '[data-testid="SearchBox_Search_Input"]'
-  );
-
+const searchBarWidthReset = (searchBar) => {
   if (
     searchBar &&
     !window.location.pathname.includes("/search") &&
@@ -95,27 +87,42 @@ export const addStylesheets = () => {
 
 // Function to start MutationObserver
 let mt; // Mutations timeout
-export const observe = throttle(() => {
+export const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
-    if (mutationsList.length) {
-      if (mutationIsNotRelevant(mutationsList)) return;
+    if (!mutationsList.length) return;
+    if (mutationIsNotRelevant(mutationsList)) return;
 
-      if (!colorsAreSet()) {
-        extractColorsAsRootVars(); // Extract colors first
-      }
+    if (!colorsAreSet()) {
+      extractColorsAsRootVars(); // Extract colors first
+    }
 
-      const runMutations = throttle(() => {
-        searchBarWidthReset();
-        revealSearchFilters();
-        addTypefullyPlug();
-        saveCurrentReplyToLink();
-        addTypefullyReplyPlug();
-        checkUrlForFollow();
-        checkHomeTimeline();
-        changeRecentMedia();
-        addWriterModeButton();
-        hideViewCount();
+    const runDocumentMutations = throttle(() => {
+      addTypefullyPlug();
+      saveCurrentReplyToLink();
+      addTypefullyReplyPlug();
+      checkUrlForFollow();
+      checkHomeTimeline();
+      hideViewCount();
 
+      const searchBar = document.querySelector(
+        '[data-testid="SearchBox_Search_Input"]'
+      );
+      const advancedSearch = document.querySelector(
+        `[data-testid="searchFiltersAdvancedSearch"]`
+      );
+      const userProfile = document.querySelector(
+        'meta[content*="twitter://user?screen_name="]'
+      );
+      const scheduleButton = document.querySelector(
+        'div[data-testid="scheduleOption"]'
+      );
+      const leftSideBar = document.querySelector(selectors.leftSidebar);
+
+      if (searchBar) searchBarWidthReset(searchBar);
+      if (userProfile) changeRecentMedia(userProfile);
+      if (scheduleButton) addWriterModeButton(scheduleButton);
+      if (advancedSearch) revealSearchFilters(advancedSearch);
+      if (leftSideBar) {
         chrome.storage.sync.get(
           [
             "listsButton",
@@ -142,17 +149,17 @@ export const observe = throttle(() => {
             }
           }
         );
-      }, 500);
+      }
+    }, 500);
 
-      runMutations();
-    }
+    runDocumentMutations();
   });
 
   observer.observe(document, {
     childList: true,
     subtree: true,
   });
-}, 1000);
+};
 
 const mutationIsNotRelevant = (mutationsList) => {
   const a = mutationsList[0]?.addedNodes[0]; // First added node

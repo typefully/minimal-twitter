@@ -37,6 +37,10 @@ export const addTypefullyPlug = () => {
 
 // Function to save current reply
 export const saveCurrentReplyToLink = () => {
+  const reply = Array.from(document.querySelectorAll('[data-testid="reply"]'));
+
+  if (!reply.length) return;
+
   function logLink(ev) {
     const linkElement = ev.target;
     const tweet = linkElement.closest('[data-testid="tweet"]');
@@ -47,7 +51,7 @@ export const saveCurrentReplyToLink = () => {
     sessionStorage.setItem("typefully-replying-to", tweetLink);
   }
 
-  document.querySelectorAll('[data-testid="reply"]').forEach((replyButton) => {
+  reply.forEach((replyButton) => {
     replyButton.removeEventListener("click", logLink);
     replyButton.addEventListener("click", logLink);
   });

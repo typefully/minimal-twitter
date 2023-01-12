@@ -52,6 +52,7 @@ export const checkHomeTimeline = () => {
               break;
 
             case "on":
+              if (document.getElementById("mt-trendsHomeTimeline")) break;
               addStyles(
                 "mt-trendsHomeTimeline",
                 `
@@ -97,7 +98,7 @@ export const checkHomeTimeline = () => {
 
       switch (writerMode) {
         case "on":
-          if (document.getElementById("mt-writerMode")) return;
+          if (document.getElementById("mt-writerMode")) break;
 
           document.body.classList.add("mt-writerMode-on");
 

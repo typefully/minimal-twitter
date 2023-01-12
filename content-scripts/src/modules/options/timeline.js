@@ -192,8 +192,8 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 };
 
 // Function to change Recent Media on Profiles
-export const changeRecentMedia = () => {
-  if (!document.querySelector('meta[content*="twitter://user?screen_name="]')) {
+export const changeRecentMedia = (userProfile) => {
+  if (!userProfile) {
     removeElement("mt-recentMedia");
     return;
   }

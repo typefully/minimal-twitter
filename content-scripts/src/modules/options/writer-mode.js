@@ -146,58 +146,55 @@ export const removeTypefullyPlugFromWriterMode = () => {
 };
 
 // Function to add an expand icon to the buttons in the tweet composer
-export const addWriterModeButton = async () => {
+export const addWriterModeButton = async (scheduleButton) => {
   if (
-    window.location.pathname.includes("/home") ||
-    window.location.pathname === "/"
+    !scheduleButton ||
+    !window.location.pathname.includes("/home") ||
+    !window.location.pathname === "/"
   ) {
-    const scheduleButton = document.querySelector(
-      'div[data-testid="scheduleOption"]'
-    );
+    return;
+  }
 
-    if (!scheduleButton) return;
+  const writerModeButton = scheduleButton.cloneNode(true);
+  const userSetting = await getStorage("writerMode");
 
-    const writerModeButton = scheduleButton.cloneNode(true);
+  writerModeButton.id = "mt-writer-mode-composer-button";
+  writerModeButton.removeAttribute("data-testid");
 
-    writerModeButton.id = "mt-writer-mode-composer-button";
-    writerModeButton.removeAttribute("data-testid");
+  if (userSetting === "on") {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.selected;
 
-    const userSetting = await getStorage("writerMode");
-    if (userSetting === "on") {
-      writerModeButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.composerWriterMode.selected;
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Close Zen Writer Mode",
+    });
+  } else {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.normal;
 
-      addTooltip(writerModeButton, {
-        id: "writer-mode",
-        title: "Close Zen Writer Mode",
-      });
-    } else {
-      writerModeButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.composerWriterMode.normal;
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Zen Writer Mode",
+      description: "Added by Minimal Twitter.",
+    });
+  }
+  writerModeButton.onclick = toggleWriterMode;
 
-      addTooltip(writerModeButton, {
-        id: "writer-mode",
-        title: "Zen Writer Mode",
-        description: "Added by Minimal Twitter.",
-      });
-    }
-    writerModeButton.onclick = toggleWriterMode;
+  if (document.querySelector("#mt-writer-mode-composer-button")) {
+    writerModeButton.remove();
+    return;
+  } else {
+    scheduleButton.parentNode.appendChild(writerModeButton);
 
-    if (document.querySelector("#mt-writer-mode-composer-button")) {
-      writerModeButton.remove();
-      return;
-    } else {
-      scheduleButton.parentNode.appendChild(writerModeButton);
-
-      addStyles(
-        "mt-writer-mode-composer-button-style",
-        `
+    addStyles(
+      "mt-writer-mode-composer-button-style",
+      `
     #mt-writer-mode-composer-button:hover {
       background-color: rgba(var(--accent-color-rgb), 0.1);
     }
         `
-      );
-    }
+    );
   }
 };
 
