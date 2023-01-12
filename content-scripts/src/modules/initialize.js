@@ -103,6 +103,7 @@ export const observe = () => {
       checkUrlForFollow();
       checkHomeTimeline();
       hideViewCount();
+      changeRecentMedia();
 
       const searchBar = document.querySelector(
         '[data-testid="SearchBox_Search_Input"]'
@@ -110,16 +111,12 @@ export const observe = () => {
       const advancedSearch = document.querySelector(
         `[data-testid="searchFiltersAdvancedSearch"]`
       );
-      const userProfile = document.querySelector(
-        'meta[content*="twitter://user?screen_name="]'
-      );
       const scheduleButton = document.querySelector(
         'div[data-testid="scheduleOption"]'
       );
       const leftSideBar = document.querySelector(selectors.leftSidebar);
 
       if (searchBar) searchBarWidthReset(searchBar);
-      if (userProfile) changeRecentMedia(userProfile);
       if (scheduleButton) addWriterModeButton(scheduleButton);
       if (advancedSearch) revealSearchFilters(advancedSearch);
       if (leftSideBar) {

@@ -192,7 +192,11 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 };
 
 // Function to change Recent Media on Profiles
-export const changeRecentMedia = (userProfile) => {
+export const changeRecentMedia = (recentMedia) => {
+  const userProfile = document.querySelector(
+    'meta[content*="twitter://user?screen_name="]'
+  );
+
   if (!userProfile) {
     removeElement("mt-recentMedia");
     return;
@@ -205,10 +209,8 @@ export const changeRecentMedia = (userProfile) => {
 
   if (!sidebarPhotoGrid) return;
 
-  chrome.storage.sync.get(["recentMedia"], (result) => {
-    const { recentMedia } = result;
-
-    switch (recentMedia) {
+  const run = (rm) => {
+    switch (rm) {
       case "off":
         removeElement("mt-recentMedia");
         sidebarPhotoGrid.classList.remove("mt-recentMedia-photoGrid");
@@ -237,7 +239,17 @@ export const changeRecentMedia = (userProfile) => {
 
         break;
     }
-  });
+  };
+
+  if (recentMedia) {
+    run(recentMedia);
+  } else {
+    chrome.storage.sync.get(["recentMedia"], (result) => {
+      const { recentMedia } = result;
+
+      run(recentMedia);
+    });
+  }
 };
 
 // Function to change Show Trends on Home Timeline
