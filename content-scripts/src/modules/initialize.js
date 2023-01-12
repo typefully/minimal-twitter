@@ -61,12 +61,36 @@ export const addStylesheets = () => {
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("css/main.css");
-  head.appendChild(mainStylesheet);
 
   typefullyStylesheet.rel = "stylesheet";
   typefullyStylesheet.type = "text/css";
   typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
+
+  head.appendChild(mainStylesheet);
   head.appendChild(typefullyStylesheet);
+
+  const applyExternalStylesheets = async () => {
+    const mainStylesheet = await fetch(
+      "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css"
+    );
+    const typefullyStylesheet = await fetch(
+      "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css"
+    );
+
+    const mainText = (await mainStylesheet.text()).trim();
+    const typefullyText = (await typefullyStylesheet.text()).trim();
+
+    const styleSheetText = document.createTextNode(
+      mainText.concat("\n\n").concat(typefullyText)
+    );
+
+    const externalStylsheet = document.createElement("style");
+    externalStylsheet.id = "mt-external-stylesheet";
+    externalStylsheet.appendChild(styleSheetText);
+    head.appendChild(externalStylsheet);
+  };
+
+  applyExternalStylesheets();
 };
 
 // Function to start MutationObserver
