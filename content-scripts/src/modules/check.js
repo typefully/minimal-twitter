@@ -30,10 +30,9 @@ export const checkUrlForFollow = () => {
   }
 };
 
+// Check Home Timeline and add Writer Mode if needed
 let zt1; // Zen Writer Mode timeout 1
 let zt2; // Zen Writer Mode timeout 2
-
-// Check Home Timeline and add Writer Mode if needed
 export const checkHomeTimeline = () => {
   if (
     window.location.pathname.includes("/home") ||
@@ -102,6 +101,7 @@ export const checkHomeTimeline = () => {
 
           document.body.classList.add("mt-writerMode-on");
 
+          clearTimeout(zt1);
           zt1 = setTimeout(() => {
             document.title = "Zen Writer Mode / Twitter";
           }, 500);
@@ -151,6 +151,7 @@ export const checkHomeTimeline = () => {
         case "off":
           document.body.classList.remove("mt-writerMode-on");
 
+          clearTimeout(zt2);
           zt2 = setTimeout(() => {
             document.title = "Home / Twitter";
           }, 500);
