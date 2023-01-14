@@ -103,10 +103,30 @@ export const changeSearchBar1 = (searchBar) => {
         }
         `
       );
+      addStyles(
+        "mt-trendsHomeTimeline-more",
+        `
+        @media only screen and (min-width: 1265px) {
+          ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+            top: 12px;
+          }
+        }
+        `
+      );
       break;
 
     case "on":
       removeElement("mt-searchBar");
+      addStyles(
+        "mt-trendsHomeTimeline-more",
+        `
+        @media only screen and (min-width: 1265px) {
+          ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+            top: unset;
+          }
+        }
+        `
+      );
       break;
   }
 };
