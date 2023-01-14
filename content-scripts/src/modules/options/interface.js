@@ -110,6 +110,9 @@ export const changeSearchBar1 = (searchBar) => {
           ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
             top: 12px;
           }
+          .mt-recentMedia-photoGrid {
+            top: 12px !important;
+          }
         }
         `
       );
@@ -123,6 +126,9 @@ export const changeSearchBar1 = (searchBar) => {
         @media only screen and (min-width: 1265px) {
           ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
             top: unset;
+          }
+          .mt-recentMedia-photoGrid {
+            top: unset !important;
           }
         }
         `
