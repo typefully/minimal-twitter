@@ -33,6 +33,7 @@ import {
   changeLatestTweets,
   changePromotedPosts,
   changeRecentMedia,
+  changeStickyHeader,
   changeTimelineBorders,
   changeTimelineWidth,
   changeTopicsToFollow,
@@ -48,6 +49,7 @@ export const userPreferences = [
   "timelineWidth",
   "timelineBorders",
   "tweetBorders",
+  "stickyHeader",
   "homeButton",
   "exploreButton",
   "notificationsButton",
@@ -86,6 +88,7 @@ export const injectAllChanges = (data) => {
   changeTimelineWidth(data?.timelineWidth); // Timeline Width
   changeTimelineBorders(data?.timelineBorders); // Timeline Borders
   changeTweetBorders(data?.tweetBorders); // Timeline Borders
+  changeStickyHeader(data?.stickyHeader); // Sticky Header
   changeHomeButton(data?.homeButton); // Home Button
   changeExploreButton(data?.exploreButton); // Explore Button
   changeNotificationsButton(data?.notificationsButton); // Notification Button

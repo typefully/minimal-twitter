@@ -35,6 +35,11 @@ const TimelineSection = () => {
               storageKey="tweetBorders"
               defaultState={true}
             />
+            <SwitchControl
+              label="Sticky Header"
+              storageKey="stickyHeader"
+              defaultState={true}
+            />
           </div>
           <Separator className="mt-4 mb-2" />
           <VanityCheckboxes />

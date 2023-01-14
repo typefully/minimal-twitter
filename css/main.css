@@ -46,11 +46,6 @@ a[href*="quick_promote_web"] {
     max-width: unset !important;
   }
 
-  /*  */
-  [data-testid="primaryColumn"] > div > div {
-    position: unset !important;
-  }
-
   /* Nudge engagement row 81px right */
   /* In default timeline: 506px - 425px */
   div[aria-label][role="group"][id^="id__"] {

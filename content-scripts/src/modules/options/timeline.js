@@ -123,6 +123,26 @@ export const changeTweetBorders = (tweetBorders) => {
   }
 };
 
+// Function to change Sticky Header
+export const changeStickyHeader = (stickyHeader) => {
+  switch (stickyHeader) {
+    case "on":
+      removeElement("mt-stickyHeader");
+      break;
+
+    case "off":
+      addStyles(
+        "mt-stickyHeader",
+        `
+        ${selectors.mainColumn} > div > div {
+          position: unset !important;
+        }
+        `
+      );
+      break;
+  }
+};
+
 // Function to change Promoted Posts
 export const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
