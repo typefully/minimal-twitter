@@ -46,6 +46,7 @@ export const addTypefullyPlug = () => {
     document.getElementById("typefully-link-inline")
   ) {
     removeElement("typefully-link-inline");
+    removeElement("mt-inlinetweetbutton");
   }
 
   if (
