@@ -1,4 +1,6 @@
 import selectors from "../../selectors";
+import addStyles from "../utilities/addStyles";
+import removeElement from "../utilities/removeElement";
 
 export default async function hideViewCount() {
   const viewCounts = Array.from(document.querySelectorAll(selectors.viewCount));
@@ -14,6 +16,8 @@ export default async function hideViewCount() {
       if (window.location.pathname.includes("/status/")) {
         const viewsElement = document.querySelector("a[href*='/analytics']");
         viewsElement.style.display = "";
+
+        removeElement("mt-hideViewCount");
       }
     } else {
       viewCounts.forEach((el) => {
@@ -23,6 +27,15 @@ export default async function hideViewCount() {
       if (window.location.pathname.includes("/status/")) {
         const viewsElement = document.querySelector("a[href*='/analytics']");
         viewsElement.style.display = "none";
+
+        addStyles(
+          "mt-hideViewCount",
+          `
+          article[data-testid="tweet"] div[dir="ltr"] > div > a ~ span {
+            display: none;
+          }
+          `
+        );
       }
     }
   });
