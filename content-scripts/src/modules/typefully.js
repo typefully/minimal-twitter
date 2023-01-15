@@ -70,6 +70,7 @@ export const addTypefullyPlug = () => {
     typefullyLinkElement.appendChild(typefullyText);
     typefullyLinkElement.style.margin = "unset";
     typefullyLinkElement.style.marginLeft = "8px";
+    typefullyLinkElement.style.minHeight = "36px";
     container.appendChild(typefullyLinkElement);
   }
 };
