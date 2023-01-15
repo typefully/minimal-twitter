@@ -68,6 +68,7 @@ export const addTypefullyPlug = () => {
     typefullyText.innerText = "Save draft";
     typefullyLinkElement.appendChild(typefullyLogo);
     typefullyLinkElement.appendChild(typefullyText);
+    typefullyLinkElement.style.margin = "unset";
     typefullyLinkElement.style.marginLeft = "8px";
     container.appendChild(typefullyLinkElement);
   }
