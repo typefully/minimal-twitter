@@ -1,4 +1,5 @@
 import svgAssets from "./svgAssets";
+import removeElement from "./utilities/removeElement";
 
 // Function to add "Continue Thread in Typefully"
 export const addTypefullyPlug = () => {
@@ -9,6 +10,12 @@ export const addTypefullyPlug = () => {
     "div.public-DraftStyleDefault-block"
   );
   const tweet2Exist = document.querySelector(`[data-testid="tweetTextarea_1"]`);
+  const tweetButtonInlineDisabled = document.querySelector(
+    `[data-testid="tweetButtonInline"][aria-disabled]`
+  );
+  const tweetButtonInlineNotDisabled = document.querySelector(
+    `[data-testid="tweetButtonInline"]:not([aria-disabled])`
+  );
 
   if (
     modal &&
@@ -20,18 +27,46 @@ export const addTypefullyPlug = () => {
       "typefully-link",
       "typefully-save-draft-button"
     );
+    const typefullyLogo = createTypefullyLogo();
+    const typefullyText = document.createElement("span");
+
     typefullyLinkElement.addEventListener("click", () => {
       getCurrentTextAndSendToTypefully();
     });
 
-    const typefullyLogo = createTypefullyLogo();
-    const typefullyText = document.createElement("span");
     typefullyText.innerText = "Save draft to Typefully";
-
     typefullyLinkElement.appendChild(typefullyLogo);
     typefullyLinkElement.appendChild(typefullyText);
-
     modal.appendChild(typefullyLinkElement);
+  }
+
+  if (tweetButtonInlineDisabled && document.getElementById("typefully-link")) {
+    removeElement("typefully-link");
+  }
+
+  if (
+    tweetButtonInlineNotDisabled &&
+    !document.getElementById("typefully-link")
+  ) {
+    const tweetButtonInline = document.querySelector(
+      `[data-testid="tweetButtonInline"]`
+    );
+    const container = tweetButtonInline.parentElement;
+    const typefullyLinkElement = createTypefullyLinkElement(
+      "typefully-link",
+      "typefully-save-draft-button"
+    );
+    const typefullyLogo = createTypefullyLogo();
+    const typefullyText = document.createElement("span");
+
+    typefullyLinkElement.addEventListener("click", () => {
+      getCurrentTextAndSendToTypefully();
+    });
+    typefullyText.innerText = "Save draft";
+    typefullyLinkElement.appendChild(typefullyLogo);
+    typefullyLinkElement.appendChild(typefullyText);
+    typefullyLinkElement.style.marginLeft = "8px";
+    container.appendChild(typefullyLinkElement);
   }
 };
 
