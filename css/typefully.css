@@ -48,7 +48,7 @@ body.mt-writerMode-on .typefully-save-draft-button {
 #typefully-reply-link,
 #typefully-writermode-link,
 #typefully-writermode-box {
-  visibility: visible;
+  display: inline-flex;
 }
 
 #mt-typefullyGrowButton {

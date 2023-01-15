@@ -40,20 +40,23 @@ export const addTypefullyPlug = () => {
     modal.appendChild(typefullyLinkElement);
   }
 
-  if (tweetButtonInlineDisabled && document.getElementById("typefully-link")) {
-    removeElement("typefully-link");
+  if (
+    tweetButtonInlineDisabled &&
+    document.getElementById("typefully-link-inline")
+  ) {
+    removeElement("typefully-link-inline");
   }
 
   if (
     tweetButtonInlineNotDisabled &&
-    !document.getElementById("typefully-link")
+    !document.getElementById("typefully-link-inline")
   ) {
     const tweetButtonInline = document.querySelector(
       `[data-testid="tweetButtonInline"]`
     );
     const container = tweetButtonInline.parentElement;
     const typefullyLinkElement = createTypefullyLinkElement(
-      "typefully-link",
+      "typefully-link-inline",
       "typefully-save-draft-button"
     );
     const typefullyLogo = createTypefullyLogo();
