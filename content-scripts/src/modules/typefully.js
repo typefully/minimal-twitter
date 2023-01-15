@@ -1,4 +1,5 @@
 import svgAssets from "./svgAssets";
+import addStyles from "./utilities/addStyles";
 import removeElement from "./utilities/removeElement";
 
 // Function to add "Continue Thread in Typefully"
@@ -57,7 +58,7 @@ export const addTypefullyPlug = () => {
     const container = tweetButtonInline.parentElement;
     const typefullyLinkElement = createTypefullyLinkElement(
       "typefully-link-inline",
-      "typefully-save-draft-button"
+      "typefully-save-draft-button ghost"
     );
     const typefullyLogo = createTypefullyLogo();
     const typefullyText = document.createElement("span");
@@ -68,10 +69,17 @@ export const addTypefullyPlug = () => {
     typefullyText.innerText = "Save draft";
     typefullyLinkElement.appendChild(typefullyLogo);
     typefullyLinkElement.appendChild(typefullyText);
-    typefullyLinkElement.style.margin = "unset";
-    typefullyLinkElement.style.marginLeft = "8px";
-    typefullyLinkElement.style.minHeight = "36px";
     container.appendChild(typefullyLinkElement);
+
+    addStyles(
+      "mt-inlinetweetbutton",
+      `
+      [data-testid="tweetButtonInline"] {
+        margin-left: 8px !important;
+        order: 2;
+      }
+    `
+    );
   }
 };
 

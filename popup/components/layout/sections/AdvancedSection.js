@@ -1,26 +1,78 @@
-const AdvancedSection = () => (
-  <section className="flex flex-col gap-y-2">
-    <label
-      htmlFor="user-control-typefully"
-      className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
-    >
-      Typefully
-    </label>
-    <div id="user-control-typefully">
-      <form className="flex flex-col items-center justify-between px-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-        <div className="w-full py-4">
-          <div className="flex flex-col gap-y-4">
-            <SwitchControl
-              label="Composer Buttons"
-              storageKey="typefullyComposerButtons"
-              defaultState={true}
-            />
-            <SwitchControl label="Grow Tab" storageKey="typefullyGrowTab" />
-          </div>
+import { css } from "@codemirror/lang-css"
+import CodeMirror from "@uiw/react-codemirror"
+import { debounce } from "lodash.debounce"
+import { useCallback, useEffect, useState } from "react"
+
+const AdvancedSection = () => {
+  const [showEditor, setShowEditor] = useState(false)
+  const [cssTextMain, setCSSTextMain] = useState("")
+  const [cssTextEdited, setCSSTextEdited] = useState("")
+
+  const onChange = useCallback((value) => {
+    setCSSTextEdited(value)
+  }, [])
+
+  useEffect(() => {
+    const fetchCSS = async () => {
+      const mainStylesheet = await fetch(
+        "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css"
+      )
+
+      const mainCSS = (await mainStylesheet.text()).trim()
+
+      setCSSTextMain(mainCSS)
+    }
+
+    fetchCSS()
+  }, [])
+
+  return (
+    <section className="flex flex-col gap-y-2">
+      <label
+        htmlFor="user-control-advanced"
+        className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
+      >
+        <span>Advanced</span>
+        {!showEditor ? (
+          <>
+            <span> · </span>
+            <button
+              onClick={() => setShowEditor(true)}
+              className="text-twitterBlue"
+            >
+              Show CSS Editor
+            </button>
+          </>
+        ) : (
+          <>
+            <span> (CSS Editor)</span>
+            <span> · </span>
+            <button
+              onClick={() => setCSSTextEdited(cssTextMain)}
+              className="text-twitterBlue"
+            >
+              Reset to Default
+            </button>
+          </>
+        )}
+      </label>
+      {showEditor && (
+        <div
+          className="flex flex-col items-center justify-between dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl relative overflow-hidden"
+          id="user-control-advanced"
+        >
+          <CodeMirror
+            className="w-full"
+            theme="dark"
+            value={cssTextEdited || cssTextMain}
+            height="300px"
+            extensions={[css()]}
+            onChange={onChange}
+          />
         </div>
-      </form>
-    </div>
-  </section>
-)
+      )}
+    </section>
+  )
+}
 
 export default AdvancedSection

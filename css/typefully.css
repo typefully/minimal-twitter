@@ -19,6 +19,14 @@
   order: 99;
   cursor: pointer;
 }
+.typefully-save-draft-button.ghost {
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  margin: 0 0 0 12px;
+  min-height: 36px;
+  order: 1;
+}
 
 .typefully-reply-button:hover,
 .typefully-save-draft-button:hover {

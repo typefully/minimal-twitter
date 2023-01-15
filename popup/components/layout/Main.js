@@ -1,3 +1,4 @@
+import AdvancedSection from "./sections/AdvancedSection"
 import InterfaceSection from "./sections/InterfaceSection"
 import NavigationSection from "./sections/NavigationSection"
 import TimelineSection from "./sections/TimelineSection"
@@ -9,6 +10,7 @@ const Main = () => (
     <NavigationSection />
     <InterfaceSection />
     <TypefullySection />
+    <AdvancedSection />
   </main>
 )
 
