@@ -141,7 +141,9 @@ const bundle = async (manifest, bundleDirectory) => {
             process.stdout.clearLine();
             process.stdout.cursorTo(0);
             spinner = P[P.indexOf(spinner) + 1] || P[0];
-            process.stdout.write(`${spinner}   Building...`);
+            process.stdout.write(
+              `${spinner}   Building popup and content scripts...`
+            );
           }, 250);
         };
 
@@ -152,6 +154,7 @@ const bundle = async (manifest, bundleDirectory) => {
           clearInterval(intervalId);
           resolve();
         } catch (error) {
+          clearInterval(intervalId);
           console.error(
             `Error running build script for ${directory}: ${error}`
           );
@@ -165,7 +168,7 @@ const bundle = async (manifest, bundleDirectory) => {
 
     process.stdout.clearLine();
     process.stdout.cursorTo(0);
-    process.stdout.write("🔥  Both build scripts have completed!\n");
+    console.log("🔥  Both build scripts have completed!");
 
     // Bundle popup Next.js export
     await copy("popup/out", `${bundleDirectory}`);
@@ -198,40 +201,82 @@ const bundle = async (manifest, bundleDirectory) => {
       "utf8"
     );
 
+    // Done.
+    console.log(`📦  Bundled \`${bundleDirectory}\`.`);
+
     // Zip the directory
     zipper.sync
       .zip(`./${bundleDirectory}`)
       .compress()
-      .save(`./bundle/${bundleDirectory.replace("bundle/", "")}.zip`);
-    console.log(`🧬  Zipped \`${bundleDirectory}\`.`);
-
-    // Done.
-    console.log(`📦  Bundled \`${bundleDirectory}\`.`);
+      .save(`./zip/${bundleDirectory.replace("bundle/", "")}.zip`);
+    console.log(
+      `🧬  Zipped \`${bundleDirectory}\` to \`zip/${bundleDirectory.replace(
+        "bundle/",
+        ""
+      )}.zip\`.`
+    );
   } catch (error) {
     console.error(error);
   }
+};
+
+const zipSafari = async () => {
+  const promise = new Promise((resolve, reject) => {
+    let intervalId;
+    let spinner = "\\";
+    const startBuilding = () => {
+      let P = ["\\", "|", "/", "-"];
+      intervalId = setInterval(() => {
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        spinner = P[P.indexOf(spinner) + 1] || P[0];
+        process.stdout.write(`${spinner}   Converting to Safari...`);
+      }, 250);
+    };
+
+    startBuilding();
+
+    setTimeout(() => {
+      clearInterval(intervalId);
+
+      try {
+        zipper.sync.zip(`./bundle/safari`).compress().save(`./zip/safari.zip`);
+
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        console.log(`🍎  Converted Firefox to Safari.`);
+        console.log(`🧬  Zipped \`bundle/safari\` to \`zip/safari.zip\`.`);
+
+        resolve();
+      } catch (error) {
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        console.log(`🍎  Converted Firefox to Safari.`);
+        console.log(
+          `❌  Could not zip Firefox to Safari, try running script again.`
+        );
+
+        reject(error);
+      }
+    }, 1000);
+  });
+
+  return promise;
+};
+
+const bundleAll = async () => {
+  await bundle(MANIFEST_CHROME, "bundle/chrome");
+  await bundle(MANIFEST_FIREFOX, "bundle/firefox");
+  exec(
+    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari"
+  );
+  await zipSafari();
 };
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-
-const bundleAll = async () => {
-  await bundle(MANIFEST_CHROME, "bundle/chrome");
-  await bundle(MANIFEST_FIREFOX, "bundle/firefox");
-  exec(
-    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari",
-    (error, stdout, stderr) => {
-      console.log(stdout);
-      console.log(stderr);
-      if (error !== null) {
-        console.error(`exec error: ${error}`);
-      }
-    }
-  );
-  console.log(`🍎  Converted Firefox to Safari.`);
-};
 
 rl.question(
   "Which browser would you like to bundle for? [All / Chrome / Firefox / Safari] ",
@@ -248,16 +293,9 @@ rl.question(
       case "Safari":
         await bundle(MANIFEST_FIREFOX, "bundle/firefox");
         exec(
-          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari",
-          (error, stdout, stderr) => {
-            console.log(stdout);
-            console.log(stderr);
-            if (error !== null) {
-              console.error(`exec error: ${error}`);
-            }
-          }
+          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari"
         );
-        console.log(`✅ Converted Firefox to Safari.`);
+        await zipSafari();
         break;
 
       case "All":
@@ -275,3 +313,8 @@ rl.question(
 rl.on("close", () => {
   process.exit(0);
 });
+
+/*--- Bundle without prompting
+await bundleAll();
+process.exit(0);
+---*/

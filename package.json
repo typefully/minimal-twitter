@@ -2,6 +2,7 @@
   "name": "minimal-twitter",
   "type": "module",
   "scripts": {
+    "build": "node ./bundle-extension.js",
     "bundle": "node ./bundle-extension.js"
   },
   "dependencies": {
