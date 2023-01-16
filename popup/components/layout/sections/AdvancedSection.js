@@ -1,7 +1,9 @@
 import { css } from "@codemirror/lang-css"
 import CodeMirror from "@uiw/react-codemirror"
-import { debounce } from "lodash.debounce"
+import debounce from "lodash.debounce"
 import { useCallback, useEffect, useState } from "react"
+
+import { getStorage, setStorage } from "../../../utilities/chromeStorage"
 
 const AdvancedSection = () => {
   const [showEditor, setShowEditor] = useState(false)
@@ -9,7 +11,28 @@ const AdvancedSection = () => {
   const [cssTextEdited, setCSSTextEdited] = useState("")
 
   const onChange = useCallback((value) => {
-    setCSSTextEdited(value)
+    const saveCSSTextEdited = debounce(async () => {
+      try {
+        await setStorage({ cssTextEdited: value })
+      } catch (error) {
+        console.warn(error)
+      }
+    }, 1000)
+
+    saveCSSTextEdited()
+  }, [])
+
+  useEffect(() => {
+    const getCSSTextEdited = async () => {
+      try {
+        const userDefault = await getStorage("cssTextEdited")
+        userDefault && setCSSTextEdited(userDefault)
+      } catch (error) {
+        console.warn(error)
+      }
+    }
+
+    getCSSTextEdited()
   }, [])
 
   useEffect(() => {
@@ -62,7 +85,7 @@ const AdvancedSection = () => {
           id="user-control-advanced"
         >
           <CodeMirror
-            className="w-full"
+            className="w-full text-sm"
             theme="dark"
             value={cssTextEdited || cssTextMain}
             height="300px"

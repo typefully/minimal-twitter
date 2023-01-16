@@ -149,7 +149,8 @@ export const removeTypefullyPlugFromWriterMode = () => {
 export const addWriterModeButton = async (scheduleButton) => {
   if (
     !window.location.pathname.includes("/home") ||
-    !window.location.pathname === "/"
+    !window.location.pathname === "/" ||
+    document.getElementById("mt-writer-mode-composer-button")
   ) {
     return;
   }

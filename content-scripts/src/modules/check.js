@@ -153,9 +153,11 @@ export const checkHomeTimeline = () => {
           document.body.classList.remove("mt-writerMode-on");
 
           clearTimeout(zt2);
-          zt2 = setTimeout(() => {
-            document.title = "Home / Twitter";
-          }, 500);
+          if (document.title !== "Home / Twitter") {
+            zt2 = setTimeout(() => {
+              document.title = "Home / Twitter";
+            }, 500);
+          }
 
           removeElement("mt-writerMode");
           removeTypefullyPlugFromWriterMode();

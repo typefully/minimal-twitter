@@ -1,3 +1,4 @@
+import { changeCSSTextEdited } from "./advanced";
 import {
   changeFollowCount,
   changeLikeCount,
@@ -82,6 +83,7 @@ export const userPreferences = [
   "typefullyComposerButtons",
   "interFont",
   "titleNotifications",
+  "cssTextEdited",
 ];
 
 export const injectAllChanges = (data) => {
@@ -121,6 +123,7 @@ export const injectAllChanges = (data) => {
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
   changeInterFont(data?.interFont); // Change `font-family` to Inter
   changeTitleNotifications(data?.titleNotifications); // Change Title Notifications
+  changeCSSTextEdited(data?.cssTextEdited); // Change User Edited CSS
 
   hideViewCount(); // Hide View Counts (checks setting internally)
 };
