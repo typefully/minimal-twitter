@@ -70,7 +70,7 @@ const TimelineSection = () => {
             storageKey="recentMedia"
           />
           <CheckboxControl
-            label="Show Latest Tweets Always (if available)"
+            label="Show Latest Tweets (if available)"
             storageKey="latestTweets"
           />
         </div>

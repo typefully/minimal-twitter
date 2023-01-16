@@ -6,6 +6,19 @@ If you have a good idea, [start a discussion](https://github.com/typefully/minim
 
 First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed. Then, go to [popup](./popup) and run the build command to build the static [Next.js](https://nextjs.org/) app, which is used for the extension's customization popup and options.
 
+✨ **New**: `bundle-extension.js` now bundles and zips everything. `Run yarn && yarn build` at the root directory and you'll get a `bundle` directory that looks like this:
+
+```
+📂
+└ 📁 chrome
+	📁 firefox
+	📁 safari
+	📄 chrome.zip
+	📄 firefox.zip
+```
+
+### Popup
+
 ```sh
 cd popup
 ```
@@ -14,6 +27,8 @@ cd popup
 yarn # must run yarn once first before you can build
 yarn build # to build and export Next.js app
 ```
+
+### Content Scripts
 
 We also use [parcel](https://parceljs.org) to build the `content_scripts` for the extension.
 
@@ -29,6 +44,8 @@ yarn watch # watch for changes and build automatically
 
 After you have built both `popup` and `content-scripts` you can bundle the extension for `Chrome`, `Firefox`, and `Safari`:
 
+### Bundle Script
+
 ```sh
 cd .. # go back to the root directory
 ```
@@ -37,6 +54,8 @@ cd .. # go back to the root directory
 yarn # must run yarn once first before you can bundle
 yarn bundle # Runs the `bundle-extension.js` script
 ```
+
+## Load Extension
 
 <table>
 	<tr>
