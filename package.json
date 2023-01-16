@@ -6,7 +6,8 @@
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
-    "node-cmd": "^5.0.0"
+    "node-cmd": "^5.0.0",
+    "zip-local": "^0.3.5"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13"

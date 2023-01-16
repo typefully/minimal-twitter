@@ -1,11 +1,34 @@
 // Credit to @webbertakken for the gist:
 // https://gist.github.com/webbertakken/ed82572b50f4e166562906757aede40a
 
+import zipper from "zip-local";
 import { exec } from "child_process";
+import { createWriteStream } from "fs";
 import { copy } from "fs-extra";
 import { copyFile, readdir, rm, writeFile } from "fs/promises";
 import { resolve } from "path";
 import readline from "readline";
+
+const zipDirectory = async (sourceDir, outPath) => {
+  const archive = archiver("zip", { zlib: { level: 9 } });
+  const stream = createWriteStream(outPath);
+
+  try {
+    const promise = new Promise((resolve, reject) => {
+      archive
+        .directory(sourceDir, false)
+        .on("error", (err) => reject(err))
+        .pipe(stream);
+
+      stream.on("close", () => resolve());
+      archive.finalize();
+    });
+
+    return promise;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 let manifest = {
   name: "Minimal Theme for Twitter",
@@ -147,6 +170,13 @@ const bundle = async (manifest, bundleDirectory) => {
       Buffer.from(JSON.stringify(manifest, null, 2)),
       "utf8"
     );
+
+    // Zip the directory
+    console.log("Zipping it up...");
+    zipper.sync
+      .zip(`./${bundleDirectory}`)
+      .compress()
+      .save(`./bundle/${bundleDirectory.replace("bundle/", "")}.zip`);
 
     // Done.
     console.log(`✅ Bundled.`);
