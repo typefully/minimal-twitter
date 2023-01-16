@@ -1,4 +1,4 @@
-# Install Minimal Theme for Twitter
+# Install Manually
 
 Open the `zip` folder. Here you'll find all the packages zipped up:
 
