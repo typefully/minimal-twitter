@@ -8,6 +8,17 @@ import { copyFile, readdir, rm, writeFile } from "fs/promises";
 import { resolve } from "path";
 import readline from "readline";
 
+const runCommand = (command) =>
+  new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({ stdout, stderr });
+      }
+    });
+  });
+
 let manifest = {
   name: "Minimal Theme for Twitter",
   short_name: "Minimal Twitter",
@@ -114,6 +125,23 @@ const getFilesInDirectoryRecursively = async (directory) => {
 
 const bundle = async (manifest, bundleDirectory) => {
   try {
+    // Run both build scripts
+    const runBuildScript = async (directory) => {
+      console.log(`Building ${directory}...`);
+      try {
+        await runCommand(`cd ./${directory} && yarn && yarn build`);
+      } catch (error) {
+        console.error(`Error running build script for ${directory}: ${error}`);
+      }
+    };
+
+    await Promise.all([
+      runBuildScript("popup"),
+      runBuildScript("content-scripts"),
+    ]).then(() => {
+      console.log("Both build scripts have completed!");
+    });
+
     // Remove old bundle directory
     console.log(`Removing old ${bundleDirectory} directory...`);
     await rm(bundleDirectory, { recursive: true, force: true }); // requires node 14+
