@@ -1,12 +1,13 @@
 // Credit to @webbertakken for the gist:
 // https://gist.github.com/webbertakken/ed82572b50f4e166562906757aede40a
 
-import zipper from "zip-local";
 import { exec } from "child_process";
 import { copy } from "fs-extra";
 import { copyFile, readdir, rm, writeFile } from "fs/promises";
 import { resolve } from "path";
+import process from "process";
 import readline from "readline";
+import zipper from "zip-local";
 
 const runCommand = (command) =>
   new Promise((resolve, reject) => {
@@ -125,50 +126,70 @@ const getFilesInDirectoryRecursively = async (directory) => {
 
 const bundle = async (manifest, bundleDirectory) => {
   try {
+    // Remove old bundle directory
+    await rm(bundleDirectory, { recursive: true, force: true }); // requires node 14+
+    console.log(`🧹  Cleaned up \`${bundleDirectory}\` directory.`);
+
     // Run both build scripts
-    const runBuildScript = async (directory) => {
-      console.log(`Building ${directory}...`);
-      try {
-        await runCommand(`cd ./${directory} && yarn && yarn build`);
-      } catch (error) {
-        console.error(`Error running build script for ${directory}: ${error}`);
-      }
+    const runBuildScript = (directory) => {
+      return new Promise(async (resolve, reject) => {
+        let intervalId;
+        let spinner = "\\";
+        const startBuilding = () => {
+          let P = ["\\", "|", "/", "-"];
+          intervalId = setInterval(() => {
+            process.stdout.clearLine();
+            process.stdout.cursorTo(0);
+            spinner = P[P.indexOf(spinner) + 1] || P[0];
+            process.stdout.write(`${spinner}   Building...`);
+          }, 250);
+        };
+
+        startBuilding();
+
+        try {
+          await runCommand(`cd ./${directory} && yarn && yarn build`);
+          clearInterval(intervalId);
+          resolve();
+        } catch (error) {
+          console.error(
+            `Error running build script for ${directory}: ${error}`
+          );
+          reject(error);
+        }
+      });
     };
 
-    await Promise.all([
-      runBuildScript("popup"),
-      runBuildScript("content-scripts"),
-    ]).then(() => {
-      console.log("Both build scripts have completed!");
-    });
+    await runBuildScript("popup");
+    await runBuildScript("content-scripts");
 
-    // Remove old bundle directory
-    console.log(`Removing old ${bundleDirectory} directory...`);
-    await rm(bundleDirectory, { recursive: true, force: true }); // requires node 14+
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
+    process.stdout.write("🔥  Both build scripts have completed!\n");
 
     // Bundle popup Next.js export
-    console.log(`Moving export to bundle...`);
     await copy("popup/out", `${bundleDirectory}`);
+    console.log(`🚗  Moved export to bundle.`);
 
-    // Bundle `content-scripts`
-    console.log(`Moving content_scripts to bundle...`);
+    // Bundle content-scripts
     await copy("content-scripts/dist", `${bundleDirectory}/dist`);
+    console.log(`🚗  Moved  content_scripts to bundle.`);
 
-    // Bundle `background.js`
-    console.log(`Moving background.js to bundle...`);
+    // Bundle background.js
     await copyFile("background.js", `${bundleDirectory}/background.js`);
+    console.log(`🚗  Moved background.js to bundle.`);
 
     // Bundle css
-    console.log(`Moving css to bundle...`);
     await copy("css", `${bundleDirectory}/css`);
+    console.log(`🚗  Moved css to bundle.`);
 
     // Bundle fonts
-    console.log(`Moving fonts to bundle...`);
     await copy("fonts", `${bundleDirectory}/fonts`);
+    console.log(`🚗  Moved fonts to bundle.`);
 
-    // Bundle `images`
-    console.log(`Moving images to bundle...`);
+    // Bundle images
     await copy("images", `${bundleDirectory}/images`);
+    console.log(`🚗  Moved images to bundle.`);
 
     // Create manifest
     await writeFile(
@@ -178,14 +199,14 @@ const bundle = async (manifest, bundleDirectory) => {
     );
 
     // Zip the directory
-    console.log("Zipping it up...");
     zipper.sync
       .zip(`./${bundleDirectory}`)
       .compress()
       .save(`./bundle/${bundleDirectory.replace("bundle/", "")}.zip`);
+    console.log(`🧬  Zipped \`${bundleDirectory}\`.`);
 
     // Done.
-    console.log(`✅ Bundled.`);
+    console.log(`📦  Bundled \`${bundleDirectory}\`.`);
   } catch (error) {
     console.error(error);
   }
@@ -209,7 +230,7 @@ const bundleAll = async () => {
       }
     }
   );
-  console.log(`✅ Converted Firefox to Safari.`);
+  console.log(`🍎  Converted Firefox to Safari.`);
 };
 
 rl.question(

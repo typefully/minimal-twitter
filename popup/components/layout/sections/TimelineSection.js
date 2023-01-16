@@ -62,16 +62,16 @@ const TimelineSection = () => {
             storageKey="removeTopicsToFollow"
           />
           <CheckboxControl
-            label="Always Show Latest Tweets"
-            storageKey="latestTweets"
-          />
-          <CheckboxControl
             label="Show Trends on Home Timeline"
             storageKey="trendsHomeTimeline"
           />
           <CheckboxControl
             label="Show Recent Media on Profiles"
             storageKey="recentMedia"
+          />
+          <CheckboxControl
+            label="Show Latest Tweets Always (if available)"
+            storageKey="latestTweets"
           />
         </div>
       ) : (
