@@ -113,22 +113,22 @@ export const checkHomeTimeline = () => {
             body {
               padding-left: 0 !important;
             }
-            ${selectors.mainWrapper} > div {
-              width: 100% !important;
-              max-width: 100% !important;
-            }
-            ${selectors.leftSidebar}, 
-            ${selectors.rightSidebar},
-            ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
-              display: none !important;
-            }
-            ${selectors.topHeader} > div > div:nth-of-type(1) {
-              visibility: hidden !important;
-            }
             ${selectors.mainColumn} {
               border-style: hidden !important;
               padding-top: 3vh !important;
               margin: 0 auto;
+            }
+            ${selectors.mainWrapper} > div {
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+            ${selectors.leftSidebar},
+            ${selectors.rightSidebar},
+            ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
+              display: none !important;
+            }
+            ${selectors.topHeader} {
+              visibility: hidden !important;
             }
             ${selectors.modalWrapper} {
               width: 100vw !important;
@@ -136,7 +136,7 @@ export const checkHomeTimeline = () => {
               top: 0 !important;
               border-radius: 0 !important;
             }
-            ${selectors.modalBackground} {
+            div[role="group"] > div:empty {
               background-color: var(--body-bg-color) !important;
             }
             ${selectors.modalUi} {
