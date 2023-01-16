@@ -3,32 +3,10 @@
 
 import zipper from "zip-local";
 import { exec } from "child_process";
-import { createWriteStream } from "fs";
 import { copy } from "fs-extra";
 import { copyFile, readdir, rm, writeFile } from "fs/promises";
 import { resolve } from "path";
 import readline from "readline";
-
-const zipDirectory = async (sourceDir, outPath) => {
-  const archive = archiver("zip", { zlib: { level: 9 } });
-  const stream = createWriteStream(outPath);
-
-  try {
-    const promise = new Promise((resolve, reject) => {
-      archive
-        .directory(sourceDir, false)
-        .on("error", (err) => reject(err))
-        .pipe(stream);
-
-      stream.on("close", () => resolve());
-      archive.finalize();
-    });
-
-    return promise;
-  } catch (error) {
-    console.error(error);
-  }
-};
 
 let manifest = {
   name: "Minimal Theme for Twitter",
