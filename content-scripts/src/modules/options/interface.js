@@ -55,7 +55,12 @@ export const changeInterFont = (interFont) => {
       addStyles(
         "mt-interFont",
         `
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap');
+        @font-face {
+          font-family: 'Inter';
+          src: url('${chrome.runtime.getURL(
+            "fonts/inter-subset.woff2"
+          )}') format('woff2');
+        }
 
         * {
           font-family: Inter, TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;

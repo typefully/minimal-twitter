@@ -44,6 +44,7 @@ const MANIFEST_CHROME = {
       resources: [
         "css/main.css",
         "css/typefully.css",
+        "fonts/inter-subset.woff2",
         "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css",
         "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css",
       ],
@@ -83,6 +84,7 @@ const MANIFEST_FIREFOX = {
   web_accessible_resources: [
     "css/main.css",
     "css/typefully.css",
+    "fonts/inter-subset.woff2",
     "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css",
     "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css",
   ],
@@ -130,6 +132,10 @@ const bundle = async (manifest, bundleDirectory) => {
     // Bundle css
     console.log(`Moving css to bundle...`);
     await copy("css", `${bundleDirectory}/css`);
+
+    // Bundle fonts
+    console.log(`Moving css to bundle...`);
+    await copy("fonts", `${bundleDirectory}/fonts`);
 
     // Bundle `images`
     console.log(`Moving images to bundle...`);
