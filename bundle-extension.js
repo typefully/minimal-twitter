@@ -134,7 +134,7 @@ const bundle = async (manifest, bundleDirectory) => {
     await copy("css", `${bundleDirectory}/css`);
 
     // Bundle fonts
-    console.log(`Moving css to bundle...`);
+    console.log(`Moving fonts to bundle...`);
     await copy("fonts", `${bundleDirectory}/fonts`);
 
     // Bundle `images`
