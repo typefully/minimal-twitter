@@ -1,10 +1,10 @@
 import svgAssets from "./svgAssets";
 import { getCurrentTheme } from "./utilities/colors";
+import removeElement from "./utilities/removeElement";
 
 let gt; // Grow Tab timeout
 export const showGrowTab = () => {
   const main = document.querySelector("main[role='main']");
-
   const existingGrowTab = document.querySelector("#typefully-grow-tab");
 
   if (existingGrowTab) {
@@ -23,14 +23,12 @@ export const showGrowTab = () => {
   growTab.src = `https://typefully.com/grow?mt-embed=true&mt-theme=${getCurrentTheme()}&mt-screen-name=${screenName}`;
 
   growTab.style = `
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     border: none;
     `;
-  main.appendChild(growTab);
+  main.before(growTab);
+  main.style.display = "none";
   document.body.style.overflow = "hidden";
 
   clearTimeout(gt);
@@ -53,16 +51,22 @@ export const showGrowTab = () => {
 };
 
 export const removeGrowTab = () => {
-  document.body.style.overflow = "auto";
-
+  const main = document.querySelector("main[role='main']");
   const growTab = document.querySelector("#typefully-grow-tab");
   const growButton = document.querySelector("#mt-typefullyGrowButton");
+
+  main.style.display = "flex";
+  document.body.style.overflow = "auto";
+
   if (growTab) {
-    growTab.style.display = "none";
+    removeElement("typefully-grow-tab");
   }
+
   if (growButton && growButton.firstChild.firstChild.firstChild) {
     growButton.firstChild.firstChild.firstChild.innerHTML =
       svgAssets.grow.normal;
     growButton.querySelector("span").style.fontWeight = "400";
   }
+
+  location.reload();
 };
