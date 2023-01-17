@@ -168,7 +168,7 @@ const bundle = async (manifest, bundleDirectory) => {
 
     process.stdout.clearLine();
     process.stdout.cursorTo(0);
-    console.log("🔥  Both build scripts have completed!");
+    console.log("🔥  Built popup and content scripts.");
 
     // Bundle popup Next.js export
     await copy("popup/out", `${bundleDirectory}`);

@@ -42,10 +42,11 @@ const searchBarWidthReset = (searchBar) => {
 };
 
 // Function to add main stylesheet
-export const addStylesheets = () => {
+export const addStylesheets = async () => {
   const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
   const typefullyStylesheet = document.createElement("link");
+  const externalStylsheet = document.createElement("style");
 
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
@@ -55,31 +56,25 @@ export const addStylesheets = () => {
   typefullyStylesheet.type = "text/css";
   typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
 
+  externalStylsheet.id = "mt-external-stylesheet";
+
   head.appendChild(mainStylesheet);
   head.appendChild(typefullyStylesheet);
+  head.insertBefore(externalStylsheet, typefullyStylesheet.nextSibling);
 
-  const applyExternalStylesheets = async () => {
-    const mainStylesheet = await fetch(
-      "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css"
-    );
-    const typefullyStylesheet = await fetch(
-      "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css"
-    );
+  const mainStylesheetFromCDN = await fetch(
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css"
+  );
+  const typefullyStylesheetFromCDN = await fetch(
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css"
+  );
+  const mainText = (await mainStylesheetFromCDN.text()).trim();
+  const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
+  const styleSheetText = document.createTextNode(
+    mainText.concat("\n\n").concat(typefullyText)
+  );
 
-    const mainText = (await mainStylesheet.text()).trim();
-    const typefullyText = (await typefullyStylesheet.text()).trim();
-
-    const styleSheetText = document.createTextNode(
-      mainText.concat("\n\n").concat(typefullyText)
-    );
-
-    const externalStylsheet = document.createElement("style");
-    externalStylsheet.id = "mt-external-stylesheet";
-    externalStylsheet.appendChild(styleSheetText);
-    head.appendChild(externalStylsheet);
-  };
-
-  applyExternalStylesheets();
+  externalStylsheet.appendChild(styleSheetText);
 };
 
 // Function to start MutationObserver
