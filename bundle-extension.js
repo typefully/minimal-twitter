@@ -1,6 +1,3 @@
-// Credit to @webbertakken for the gist:
-// https://gist.github.com/webbertakken/ed82572b50f4e166562906757aede40a
-
 import { exec } from "child_process";
 import { copy } from "fs-extra";
 import { copyFile, readdir, rm, writeFile } from "fs/promises";
@@ -110,18 +107,6 @@ const MANIFEST_FIREFOX = {
     default_title: "Minimal Twitter",
     default_popup: "index.html",
   },
-};
-
-const getFilesInDirectoryRecursively = async (directory) => {
-  const dirents = await readdir(directory, { withFileTypes: true });
-
-  const files = await Promise.all(
-    dirents.map((dirent) => {
-      const res = resolve(directory, dirent.name);
-      return dirent.isDirectory() ? getFilesInDirectoryRecursively(res) : res;
-    })
-  );
-  return Array.prototype.concat(...files);
 };
 
 const bundle = async (manifest, bundleDirectory) => {
