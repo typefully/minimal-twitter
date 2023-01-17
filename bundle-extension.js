@@ -176,7 +176,7 @@ const bundle = async (manifest, bundleDirectory) => {
 
     // Bundle content-scripts
     await copy("content-scripts/dist", `${bundleDirectory}/dist`);
-    console.log(`🚗  Moved  content_scripts to bundle.`);
+    console.log(`🚗  Moved content_scripts to bundle.`);
 
     // Bundle background.js
     await copyFile("background.js", `${bundleDirectory}/background.js`);
