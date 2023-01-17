@@ -1,6 +1,6 @@
 # Install Manually
 
-Open the [bundle](./bundle) folder. Here you'll find all the packages zipped up:
+Open the [bundle](./bundle) folder. Here you'll find all the packages zipped up: [chrome.zip](./bundle/chrome.zip), [firefox.zip](./bundle/firefox.zip), [safari.zip](./bundle//safari.zip)
 
 ```
 📂 bundle
