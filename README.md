@@ -10,7 +10,7 @@
 - **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
 - **Add to Microsoft Edge**: [NEW SOON]
 - **Add to Safari**: [NEW SOON]
-- **Add Manually**: **[Manual Installation](./MANUAL_INSTALLATION.MD)**
+- **[Manual Installation](./MANUAL_INSTALLATION.MD)**
 
 ![Screenshots](.github/assets/screenshots.png)
 
