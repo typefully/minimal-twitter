@@ -8,7 +8,6 @@
 *.swp
 *.vi
 *.zip
-!zip/*.zip
 *~
 *.sass-cache
 *.ruby-version
@@ -40,5 +39,6 @@ node_modules
 package-lock.json
 out
 dist
-bundle
+bundle/*
+!bundle/*.zip
 .vscode

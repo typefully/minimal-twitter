@@ -13,6 +13,9 @@ First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/ins
 └ 📁 chrome
 └ 📁 firefox
 └ 📁 safari
+└ 📄 chrome.zip
+└ 📄 firefox.zip
+└ 📄 safari.zip
 ```
 
 ### Popup

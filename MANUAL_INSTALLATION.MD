@@ -1,9 +1,9 @@
 # Install Manually
 
-Open the `zip` folder. Here you'll find all the packages zipped up:
+Open the `bundle` folder. Here you'll find all the packages zipped up:
 
 ```
-📂 zip
+📂 bundle
 └ 📄 chrome.zip
 └ 📄 firefox.zip
 └ 📄 safari.zip

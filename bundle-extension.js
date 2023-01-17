@@ -208,9 +208,10 @@ const bundle = async (manifest, bundleDirectory) => {
     zipper.sync
       .zip(`./${bundleDirectory}`)
       .compress()
-      .save(`./zip/${bundleDirectory.replace("bundle/", "")}.zip`);
+      .save(`./bundle/${bundleDirectory.replace("bundle/", "")}.zip`);
+
     console.log(
-      `🧬  Zipped \`${bundleDirectory}\` to \`zip/${bundleDirectory.replace(
+      `🧬  Zipped \`${bundleDirectory}\` to \`bundle/${bundleDirectory.replace(
         "bundle/",
         ""
       )}.zip\`.`
@@ -240,12 +241,15 @@ const zipSafari = async () => {
       clearInterval(intervalId);
 
       try {
-        zipper.sync.zip(`./bundle/safari`).compress().save(`./zip/safari.zip`);
+        zipper.sync
+          .zip(`./bundle/safari`)
+          .compress()
+          .save(`./bundle/safari.zip`);
 
         process.stdout.clearLine();
         process.stdout.cursorTo(0);
         console.log(`🍎  Converted Firefox to Safari.`);
-        console.log(`🧬  Zipped \`bundle/safari\` to \`zip/safari.zip\`.`);
+        console.log(`🧬  Zipped \`bundle/safari\` to \`bundle/safari.zip\`.`);
 
         resolve();
       } catch (error) {
