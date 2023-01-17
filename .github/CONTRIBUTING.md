@@ -85,7 +85,7 @@ yarn bundle # Runs the `bundle-extension.js` script
 				<li>Open <code>bundle/safari/Minimal Theme for Twitter/Minimal Theme for Twitter.xcodeproj</code>
         </li>
 				<li>Click the Play button in Xcode ("start the active scheme")</li>
-				<li><a href="https://developer.apple.com/documentation/safariservices/safari_web_extensions/running_your_safari_web_extension">Configure Safari in macOS to run unsigned extensions</a></li>
+				<li><a href="https://developer.apple.com/documentation/safariservices/safari_web_extensions/running_your_safari_web_extension#3744467">Configure Safari in macOS to run unsigned extensions</a></li>
 			</ol>
 		</td>
 	</tr>
