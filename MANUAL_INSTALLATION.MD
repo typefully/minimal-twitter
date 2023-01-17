@@ -23,14 +23,14 @@ Open them and follow the instructions below based on which browser you'd like to
 				<li>Open <code>chrome://extensions</code> or <code>edge://extensions</code></li>
         <li>Turn on the <strong>Developer mode</strong> toggle</li>
 				<li>Click on the <strong>Load unpacked</strong> button</li>
-				<li>Select the folder <code>minimal-twitter/extension</code></li>
+				<li>Select the folder <code>bundle/chrome</code></li>
 			</ol>
 		</td>
 		<td width="33.33%">
 			<ol>
 				<li>Open <code>about:debugging#/runtime/this-firefox</code></li>
 				<li>Click on the <strong>Load Temporary Add-on...</strong> button</li>
-				<li>Select the file <code>minimal-twitter/extension/manifest.json</code></li>
+				<li>Select the file <code>bundle/firefox/manifest.json</code></li>
 			</ol>
 		</td>
       <td width="33.33%">
