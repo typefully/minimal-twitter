@@ -11,7 +11,7 @@ export const changeHomeButton = (homeButton) => {
         "mt-homeButton",
         `
         ${selectors.sidebarLinks.home} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -31,7 +31,7 @@ export const changeExploreButton = (exploreButton) => {
         "mt-exploreButton",
         `
         ${selectors.sidebarLinks.explore} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -51,7 +51,7 @@ export const changeNotificationsButton = (notificationsButton) => {
         "mt-notificationsButton",
         `
         ${selectors.sidebarLinks.notifications} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -71,7 +71,7 @@ export const changeMessagesButton = (messagesButton) => {
         "mt-messagesButton",
         `
         ${selectors.sidebarLinks.messages} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -91,7 +91,7 @@ export const changeBookmarksButton = (bookmarksButton) => {
         "mt-bookmarksButton",
         `
         ${selectors.sidebarLinks.bookmarks} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -111,7 +111,7 @@ export const changeTopArticlesButton = (topArticlesButton) => {
         "mt-topArticlesButton",
         `
         ${selectors.sidebarLinks.articles} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -132,7 +132,7 @@ export const changeTwitterBlueButton = (twitterBlueButton) => {
         "mt-twitterBlueButton",
         `
         ${selectors.sidebarLinks.twitterBlue} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -181,7 +181,7 @@ export const changeCommunitiesButton = (communitiesButton) => {
         "mt-communitiesButton",
         `
         ${selectors.sidebarLinks.communities} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -226,7 +226,7 @@ export const changeListsButton = (listsButton) => {
         "mt-listsButton",
         `
         ${selectors.sidebarLinks.lists} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -269,7 +269,7 @@ export const changeProfileButton = (profileButton) => {
         "mt-profileButton",
         `
         ${selectors.sidebarLinks.profile} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -293,7 +293,7 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
         "mt-unreadCountBadge",
         `
         ${selectors.leftSidebarLinks} div[dir][aria-label][aria-live] {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -307,20 +307,20 @@ const removeHover = () => {
     "mt-navigationButtonsLabelsHover",
     `
     ${selectors.leftSidebarLinks} div + div[dir] {
-      display: none !important;
+      display: none;
     }
     ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span {
-      display: none !important;
+      display: none;
     }
     ${selectors.leftSidebar} > div > div > div > div:last-child {
-      width: fit-content !important;
+      width: fit-content;
     }
     ${selectors.accountSwitcherButton} {
-      bottom: 12px !important;
-      width: fit-content !important;
+      bottom: 12px;
+      width: fit-content;
     }
     ${selectors.accountSwitcherButton} > div:not(:first-child) {
-      display: none !important;
+      display: none;
     }
     `
   );
@@ -355,7 +355,7 @@ export const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
         `
         ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span,
         ${selectors.accountSwitcherButton} > div:not(:first-child) {
-          opacity: 1 !important;
+          opacity: 1;
         }
         `
       );
@@ -381,7 +381,7 @@ export const changeNavigationCenter = (navigationCenter) => {
         "mt-navigationCenter",
         `
         ${selectors.leftSidebar} > div > div > div {
-          justify-content: center !important;
+          justify-content: center;
           padding-top: 0;
         }
         `

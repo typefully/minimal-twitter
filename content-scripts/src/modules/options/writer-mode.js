@@ -30,39 +30,39 @@ export const changeWriterMode = (writerMode) => {
           "mt-writerMode",
           `
             body {
-              padding-left: 0 !important;
+              padding-left: 0;
             }
             ${selectors.mainColumn} {
-              border-style: hidden !important;
-              padding-top: 3vh !important;
+              border-style: hidden;
+              padding-top: 3vh;
               margin: 0 auto;
             }
             ${selectors.mainWrapper} > div {
-              width: 100% !important;
-              max-width: 100% !important;
+              width: 100%;
+              max-width: 100%;
             }
             ${selectors.leftSidebar},
             ${selectors.rightSidebar},
             ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
-              display: none !important;
+              display: none;
             }
             ${selectors.topHeader} {
-              visibility: hidden !important;
+              visibility: hidden;
             }
             ${selectors.modalWrapper} {
-              width: 100vw !important;
-              max-width: 100vw !important;
-              top: 0 !important;
-              border-radius: 0 !important;
+              width: 100vw;
+              max-width: 100vw;
+              top: 0;
+              border-radius: 0;
             }
             div[role="group"] > div:empty {
-              background-color: var(--body-bg-color) !important;
+              background-color: var(--body-bg-color);
             }
             ${selectors.modalUi} {
-              border-radius: 0 !important;
+              border-radius: 0;
             }
             ${selectors.modalWrapper} > div > div > div {
-              padding-bottom: 10vh !important;
+              padding-bottom: 10vh;
             }
             `
         );
@@ -190,10 +190,10 @@ export const addWriterModeButton = async (scheduleButton) => {
     addStyles(
       "mt-writer-mode-composer-button-style",
       `
-    #mt-writer-mode-composer-button:hover {
-      background-color: rgba(var(--accent-color-rgb), 0.1);
-    }
-        `
+      #mt-writer-mode-composer-button:hover {
+        background-color: rgba(var(--accent-color-rgb), 0.1);
+      }
+      `
     );
   }
 };

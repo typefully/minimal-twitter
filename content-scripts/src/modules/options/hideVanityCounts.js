@@ -9,7 +9,7 @@ export const changeReplyCount = (replyCount) => {
         "mt-replyCount",
         `
         [data-testid="reply"] span { 
-          visibility: hidden !important
+          visibility: hidden;
         }
         `
       );
@@ -32,7 +32,7 @@ export const changeRetweetCount = (retweetCount) => {
         [href$="/retweets/with_comments"],
         [data-testid="retweet"] span,
         [data-testid="unretweet"] span {
-          visibility: hidden !important
+          visibility: hidden; 
         }
         `
       );
@@ -54,7 +54,7 @@ export const changeLikeCount = (likeCount) => {
         [href$="/likes"][href*="/status/"],
         [data-testid="like"] span,
         [data-testid="unlike"] span {
-           visibility: hidden !important
+           visibility: hidden; 
         }
         `
       );
@@ -75,7 +75,7 @@ export const changeFollowCount = (followCount) => {
         `
         [href$="/following"][dir][role="link"],
         [href$="/followers"][dir][role="link"] {
-          display: none !important;
+          display: none;
         }
         `
       );

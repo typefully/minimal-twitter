@@ -45,7 +45,7 @@ export const changeTitleNotifications = (tf) => {
   const config = { subtree: true, characterData: true, childList: true };
   const target = document.querySelector("title");
 
-  observer.observe(target, config);
+  if (target) observer.observe(target, config);
 };
 
 // Function to change to Inter Font
@@ -63,7 +63,7 @@ export const changeInterFont = (interFont) => {
         }
 
         * {
-          font-family: Inter, TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+          font-family: Inter, TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         `
       );
@@ -103,8 +103,8 @@ export const changeSearchBar1 = (searchBar) => {
         "mt-searchBar",
         `
         ${selectors.searchBox} {
-          display: none !important;
-          visibility: hidden !important;
+          display: none;
+          visibility: hidden;
         }
         `
       );
@@ -116,7 +116,7 @@ export const changeSearchBar1 = (searchBar) => {
             top: 12px;
           }
           .mt-recentMedia-photoGrid {
-            top: 12px !important;
+            top: 12px;
           }
         }
         `
@@ -133,7 +133,7 @@ export const changeSearchBar1 = (searchBar) => {
             top: unset;
           }
           .mt-recentMedia-photoGrid {
-            top: unset !important;
+            top: unset;
           }
         }
         `
@@ -150,11 +150,11 @@ export const changeSearchBar2 = (transparentSearch) => {
         "mt-transparentSearch",
         `
         ${selectors.searchBox} > div:nth-child(1) > div {
-          background-color: transparent !important;
+          background-color: transparent;
         }
         ${selectors.searchBoxInput} {
           transform: translateX(2ch);
-          margin-left: -2.5ch !important;
+          margin-left: -2.5ch;
         }
         `
       );

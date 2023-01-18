@@ -12,8 +12,8 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
-            width: 600px !important;
-            max-width: 600px !important;
+            width: 600px;
+            max-width: 600px;
           }
         }
         `
@@ -26,8 +26,8 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
-            width: 650px !important;
-            max-width: 650px !important;
+            width: 650px;
+            max-width: 650px;
           }
         }
         `
@@ -40,8 +40,8 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
-            width: 700px !important;
-            max-width: 700px !important;
+            width: 700px;
+            max-width: 700px;
           }
         }
         `
@@ -54,8 +54,8 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
-            width: 750px !important;
-            max-width: 750px !important;
+            width: 750px;
+            max-width: 750px;
           }
         }
         `
@@ -68,8 +68,8 @@ export const changeTimelineWidth = (timelineWidth) => {
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
-            width: 800px !important;
-            max-width: 800px !important;
+            width: 800px;
+            max-width: 800px;
           }
         }
         `
@@ -91,7 +91,7 @@ export const changeTimelineBorders = (timelineBorders) => {
         `
         @media only screen and (min-width: 988px) {
           div${selectors.mainColumn} {
-            border-style: hidden !important;
+            border-style: hidden;
           }
         }
         `.trim()
@@ -112,10 +112,10 @@ export const changeTweetBorders = (tweetBorders) => {
         "mt-tweetBorders",
         `
         ${selectors.mainWrapper} section > div > div > div > div {
-          border-style: hidden !important;
+          border-style: hidden;
         }
         ${selectors.mainColumn} > div > div:empty {
-          background: transparent !important;
+          background: transparent;
         }
         `.trim()
       );
@@ -135,7 +135,7 @@ export const changeStickyHeader = (stickyHeader) => {
         "mt-stickyHeader",
         `
         ${selectors.mainColumn} > div > div {
-          position: unset !important;
+          position: unset;
         }
         `
       );
@@ -151,7 +151,7 @@ export const changePromotedPosts = (removePromotedPosts) => {
         "mt-removePromotedPosts",
         `
         [data-testid="placementTracking"] article {
-          display: flex !important;
+          display: flex;
         }
         `
       );
@@ -203,7 +203,7 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
           display: none;
         }
         [aria-label="Lists timeline"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"] {
-          display: flex !important;
+          display: flex;
         }
         `
       );
@@ -242,7 +242,7 @@ export const changeRecentMedia = (recentMedia) => {
           `
             @media only screen and (min-width: 1265px) {
               .mt-recentMedia-photoGrid {
-                visibility: visible !important;
+                visibility: visible;
                 position: fixed;
                 right: 16px;
                 top: 70px;

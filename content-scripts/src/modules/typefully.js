@@ -76,7 +76,7 @@ export const addTypefullyPlug = () => {
       "mt-inlinetweetbutton",
       `
       [data-testid="tweetButtonInline"] {
-        margin-left: 8px !important;
+        margin-left: 8px;
         order: 2;
       }
     `
