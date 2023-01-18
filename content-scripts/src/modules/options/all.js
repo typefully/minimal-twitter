@@ -1,16 +1,18 @@
-import hideViewCounts from "./hideViewCounts";
+import { changeCSSTextEdited } from "./advanced";
 import {
   changeFollowCount,
-  changeLatestTweets,
   changeLikeCount,
-  changePromotedPosts,
   changeReplyCount,
   changeRetweetCount,
+  changeRetweetCount,
+} from "./hideVanityCounts";
+import hideViewCount from "./hideViewCount";
+import {
+  changeInterFont,
   changeSearchBar1,
   changeSearchBar2,
-  changeTopicsToFollow,
+  changeTitleNotifications,
   changeTweetButton,
-  changeWhoToFollow,
 } from "./interface";
 import {
   changeBookmarksButton,
@@ -25,11 +27,20 @@ import {
   changeNotificationsButton,
   changeProfileButton,
   changeTopArticlesButton,
+  changeTwitterBlueButton,
+  changeUnreadCountBadge,
 } from "./navigation";
 import {
+  changeLatestTweets,
+  changePromotedPosts,
+  changeRecentMedia,
+  changeStickyHeader,
   changeTimelineBorders,
   changeTimelineWidth,
+  changeTopicsToFollow,
+  changeTrendsHomeTimeline,
   changeTweetBorders,
+  changeWhoToFollow,
 } from "./timeline";
 import { changeGrowButton, changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
@@ -39,6 +50,7 @@ export const userPreferences = [
   "timelineWidth",
   "timelineBorders",
   "tweetBorders",
+  "stickyHeader",
   "homeButton",
   "exploreButton",
   "notificationsButton",
@@ -47,10 +59,13 @@ export const userPreferences = [
   "topArticlesButton",
   "communitiesButton",
   "listsButton",
+  "twitterBlueButton",
+  "typefullyGrowTab",
   "profileButton",
   "navigationButtonsLabelsHover",
   "navigationButtonsLabels",
   "navigationCenter",
+  "unreadCountBadge",
   "writerMode",
   "replyCount",
   "retweetCount",
@@ -60,17 +75,22 @@ export const userPreferences = [
   "searchBar",
   "transparentSearch",
   "removePromotedPosts",
-  "whoToFollow",
-  "topicsToFollow",
-  "typefullyGrowTab",
+  "removeWhoToFollow",
+  "removeTopicsToFollow",
   "latestTweets",
+  "trendsHomeTimeline",
+  "recentMedia",
   "typefullyComposerButtons",
+  "interFont",
+  "titleNotifications",
+  "cssTextEdited",
 ];
 
 export const injectAllChanges = (data) => {
   changeTimelineWidth(data?.timelineWidth); // Timeline Width
   changeTimelineBorders(data?.timelineBorders); // Timeline Borders
   changeTweetBorders(data?.tweetBorders); // Timeline Borders
+  changeStickyHeader(data?.stickyHeader); // Sticky Header
   changeHomeButton(data?.homeButton); // Home Button
   changeExploreButton(data?.exploreButton); // Explore Button
   changeNotificationsButton(data?.notificationsButton); // Notification Button
@@ -80,9 +100,11 @@ export const injectAllChanges = (data) => {
   changeCommunitiesButton(data?.communitiesButton); // Communities Button
   changeListsButton(data?.listsButton); // Lists Button
   changeProfileButton(data?.profileButton); // Profile Button
+  changeTwitterBlueButton(data?.twitterBlueButton); // Twitter Blue Button
   changeNavigationButtonsLabelsHover(data?.navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(data?.navigationButtonsLabels); // Navigation Buttons Labels
   changeNavigationCenter(data?.navigationCenter); // Center Navigation
+  changeUnreadCountBadge(data?.unreadCountBadge); // Unread Count Badge
   changeWriterMode(data?.writerMode); // Writer Mode
   changeReplyCount(data?.replyCount); // Hide Reply Count
   changeRetweetCount(data?.retweetCount); // Hide Retweet Count
@@ -92,10 +114,16 @@ export const injectAllChanges = (data) => {
   changeSearchBar1(data?.searchBar); // Hide Search Bar
   changeSearchBar2(data?.transparentSearch); // Transparent Search Bar
   changePromotedPosts(data?.removePromotedPosts); // Remove Promoted Posts
-  changeWhoToFollow(data?.whoToFollow); // Who to Follow
-  changeTopicsToFollow(data?.topicsToFollow); // Topics to Follow
+  changeWhoToFollow(data?.removeWhoToFollow); // Who to Follow
+  changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
+  changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode); // Show Trends on Home Timeline
+  changeRecentMedia(data?.recentMedia); // Show Recent Media on Profiles
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
-  hideViewCounts(); // Hide View Counts (checks setting internally)
+  changeInterFont(data?.interFont); // Change `font-family` to Inter
+  changeTitleNotifications(data?.titleNotifications); // Change Title Notifications
+  changeCSSTextEdited(data?.cssTextEdited); // Change User Edited CSS
+
+  hideViewCount(); // Hide View Counts (checks setting internally)
 };

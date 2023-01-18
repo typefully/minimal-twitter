@@ -10,10 +10,11 @@
 - **Add to Firefox**: **[Available as a Firefox Browser Add-on](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/)**
 - **Add to Microsoft Edge**: [NEW SOON]
 - **Add to Safari**: [NEW SOON]
+- **[Manual Installation](./MANUAL_INSTALLATION.MD)**
 
 ![Screenshots](.github/assets/screenshots.png)
 
-Minimal Theme for Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team. To contribute and/or see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
+Minimal Theme for Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team. To contribute / see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
 
 ## Description
 
@@ -23,7 +24,7 @@ Refine and clean up the Twitter interface, and customize your experience:
 - Customize your Timeline width
 - Remove Timeline borders for a more minimal look
 - Customize the left navigation
-- Hide vanity counts under tweets
+- Hide view count and vanity counts under tweets
 - Remove promoted posts
 - Remove "Who to Follow" and other suggestions
 - Hide the Search Bar

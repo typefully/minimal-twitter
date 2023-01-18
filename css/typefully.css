@@ -19,6 +19,14 @@
   order: 99;
   cursor: pointer;
 }
+.typefully-save-draft-button.ghost {
+  background-color: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  margin: 0 0 0 12px;
+  min-height: 36px;
+  order: 1;
+}
 
 .typefully-reply-button:hover,
 .typefully-save-draft-button:hover {
@@ -56,14 +64,14 @@ body.mt-writerMode-on .typefully-save-draft-button {
   display: flex;
 }
 #mt-typefullyGrowButton > div > div[dir] {
-  font-weight: 400 !important;
+  font-weight: 400;
 }
 #mt-typefullyGrowButton:hover > div {
   background-color: rgba(var(--glyphs-color-rgb), 0.1);
 }
 @media only screen and (max-width: 1264px) {
   #mt-typefullyGrowButton > div > div[dir] {
-    display: none !important;
+    display: none;
   }
 }
 
@@ -71,8 +79,8 @@ body.mt-writerMode-on .typefully-save-draft-button {
   font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
   color: var(--main-text-color);
-  width: auto !important;
-  max-width: 100% !important;
+  width: auto;
+  max-width: 100%;
   --bg-color: rgba(var(--secondary-text-color-rgb), 0.08);
   background: var(--bg-color);
   border-radius: 20px;

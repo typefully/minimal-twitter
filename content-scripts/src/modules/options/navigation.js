@@ -11,7 +11,7 @@ export const changeHomeButton = (homeButton) => {
         "mt-homeButton",
         `
         ${selectors.sidebarLinks.home} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -31,7 +31,7 @@ export const changeExploreButton = (exploreButton) => {
         "mt-exploreButton",
         `
         ${selectors.sidebarLinks.explore} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -51,7 +51,7 @@ export const changeNotificationsButton = (notificationsButton) => {
         "mt-notificationsButton",
         `
         ${selectors.sidebarLinks.notifications} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -71,7 +71,7 @@ export const changeMessagesButton = (messagesButton) => {
         "mt-messagesButton",
         `
         ${selectors.sidebarLinks.messages} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -91,7 +91,7 @@ export const changeBookmarksButton = (bookmarksButton) => {
         "mt-bookmarksButton",
         `
         ${selectors.sidebarLinks.bookmarks} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -111,7 +111,7 @@ export const changeTopArticlesButton = (topArticlesButton) => {
         "mt-topArticlesButton",
         `
         ${selectors.sidebarLinks.articles} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -123,15 +123,65 @@ export const changeTopArticlesButton = (topArticlesButton) => {
   }
 };
 
-// Function to change Top Articles Button
+// Function to change Twitter Blue in Navigation
+export const changeTwitterBlueButton = (twitterBlueButton) => {
+  switch (twitterBlueButton) {
+    case "off":
+      removeElement("mt-twitterBlueButtonNode");
+      addStyles(
+        "mt-twitterBlueButton",
+        `
+        ${selectors.sidebarLinks.twitterBlue} {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-twitterBlueButton");
+      addTwitterBlueButton();
+      break;
+  }
+};
+
+// Function to add Twitter Blue button
+let bt; // Twitter Blue button timeout
+export const addTwitterBlueButton = () => {
+  clearTimeout(bt);
+  bt = setTimeout(() => {
+    if (!document.querySelector(selectors.sidebarLinks.twitterBlue)) {
+      const profileNode = document.querySelector(
+        'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+      );
+
+      if (profileNode) {
+        const twitterBlueButton = profileNode.cloneNode(true);
+
+        twitterBlueButton.id = "mt-twitterBlueButtonNode";
+        twitterBlueButton.href = "https://twitter.com/settings/twitter_blue";
+        twitterBlueButton.ariaLabel = "Minimal Twitter Twitter Blue";
+        twitterBlueButton.removeAttribute("data-testid");
+        twitterBlueButton.firstChild.firstChild.firstChild.innerHTML =
+          svgAssets.twitterBlue.normal;
+        twitterBlueButton.firstChild.lastChild.firstChild.innerText =
+          "Twitter Blue";
+        profileNode.insertAdjacentElement("beforebegin", twitterBlueButton);
+      }
+    }
+  }, 500);
+};
+
+// Function to change Communities Button
 export const changeCommunitiesButton = (communitiesButton) => {
   switch (communitiesButton) {
     case "off":
+      removeElement("mt-communitiesButtonNode");
       addStyles(
         "mt-communitiesButton",
         `
         ${selectors.sidebarLinks.communities} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -139,27 +189,31 @@ export const changeCommunitiesButton = (communitiesButton) => {
 
     case "on":
       removeElement("mt-communitiesButton");
+      addCommunitiesButton();
       break;
   }
 };
 
-// Function to change Profile Button
-export const changeProfileButton = (profileButton) => {
-  switch (profileButton) {
-    case "off":
-      addStyles(
-        "mt-profileButton",
-        `
-        ${selectors.sidebarLinks.profile} {
-          display: none !important;
-        }
-        `
-      );
-      break;
+// Function to add Communities button
+export const addCommunitiesButton = () => {
+  if (!document.querySelector(selectors.sidebarLinks.communities)) {
+    const profileNode = document.querySelector(
+      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+    );
 
-    case "on":
-      removeElement("mt-profileButton");
-      break;
+    if (profileNode) {
+      const communitiesButton = profileNode.cloneNode(true);
+
+      communitiesButton.id = "mt-communitiesButtonNode";
+      communitiesButton.href += "/communities";
+      communitiesButton.ariaLabel = "Minimal Twitter Communities";
+      communitiesButton.removeAttribute("data-testid");
+      communitiesButton.firstChild.firstChild.firstChild.innerHTML =
+        svgAssets.communities.normal;
+      communitiesButton.firstChild.lastChild.firstChild.innerText =
+        "Communities";
+      profileNode.insertAdjacentElement("beforebegin", communitiesButton);
+    }
   }
 };
 
@@ -172,7 +226,7 @@ export const changeListsButton = (listsButton) => {
         "mt-listsButton",
         `
         ${selectors.sidebarLinks.lists} {
-          display: none !important;
+          display: none;
         }
         `
       );
@@ -181,7 +235,6 @@ export const changeListsButton = (listsButton) => {
     case "on":
       removeElement("mt-listsButton");
       addListsButton();
-
       break;
   }
 };
@@ -208,26 +261,66 @@ export const addListsButton = () => {
   }
 };
 
+// Function to change Profile Button
+export const changeProfileButton = (profileButton) => {
+  switch (profileButton) {
+    case "off":
+      addStyles(
+        "mt-profileButton",
+        `
+        ${selectors.sidebarLinks.profile} {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-profileButton");
+      break;
+  }
+};
+
+// Function to change Unread Count Badge
+export const changeUnreadCountBadge = (unreadCountBadge) => {
+  switch (unreadCountBadge) {
+    case "on":
+      removeElement("mt-unreadCountBadge");
+      break;
+
+    case "off":
+      addStyles(
+        "mt-unreadCountBadge",
+        `
+        ${selectors.leftSidebarLinks} div[dir][aria-label][aria-live] {
+          display: none;
+        }
+        `
+      );
+      break;
+  }
+};
+
 // Function to remove Navigation Button Labels on Hover
 const removeHover = () => {
   addStyles(
     "mt-navigationButtonsLabelsHover",
     `
     ${selectors.leftSidebarLinks} div + div[dir] {
-      display: none !important;
+      display: none;
     }
     ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span {
-      display: none !important;
+      display: none;
     }
     ${selectors.leftSidebar} > div > div > div > div:last-child {
-      width: fit-content !important;
+      width: fit-content;
     }
     ${selectors.accountSwitcherButton} {
-      bottom: 12px !important;
-      width: fit-content !important;
+      bottom: 12px;
+      width: fit-content;
     }
     ${selectors.accountSwitcherButton} > div:not(:first-child) {
-      display: none !important;
+      display: none;
     }
     `
   );
@@ -262,7 +355,7 @@ export const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
         `
         ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span,
         ${selectors.accountSwitcherButton} > div:not(:first-child) {
-          opacity: 1 !important;
+          opacity: 1;
         }
         `
       );
@@ -288,7 +381,7 @@ export const changeNavigationCenter = (navigationCenter) => {
         "mt-navigationCenter",
         `
         ${selectors.leftSidebar} > div > div > div {
-          justify-content: center !important;
+          justify-content: center;
           padding-top: 0;
         }
         `

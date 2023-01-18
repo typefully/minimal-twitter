@@ -1,17 +1,27 @@
-// Credit to @webbertakken for the gist:
-// https://gist.github.com/webbertakken/ed82572b50f4e166562906757aede40a
-
 import { exec } from "child_process";
 import { copy } from "fs-extra";
 import { copyFile, readdir, rm, writeFile } from "fs/promises";
 import { resolve } from "path";
+import process from "process";
 import readline from "readline";
+import zipper from "zip-local";
+
+const runCommand = (command) =>
+  new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({ stdout, stderr });
+      }
+    });
+  });
 
 let manifest = {
   name: "Minimal Theme for Twitter",
   short_name: "Minimal Twitter",
   description: "Refine and declutter the Twitter web experience.",
-  version: "5.0.0.4", // alpha version
+  version: "5.0.1",
   icons: {
     16: "images/MinimalTwitterIcon16.png",
     32: "images/MinimalTwitterIcon32.png",
@@ -44,6 +54,7 @@ const MANIFEST_CHROME = {
       resources: [
         "css/main.css",
         "css/typefully.css",
+        "fonts/inter-subset.woff2",
         "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css",
         "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css",
       ],
@@ -83,6 +94,7 @@ const MANIFEST_FIREFOX = {
   web_accessible_resources: [
     "css/main.css",
     "css/typefully.css",
+    "fonts/inter-subset.woff2",
     "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css",
     "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css",
   ],
@@ -97,43 +109,75 @@ const MANIFEST_FIREFOX = {
   },
 };
 
-const getFilesInDirectoryRecursively = async (directory) => {
-  const dirents = await readdir(directory, { withFileTypes: true });
-
-  const files = await Promise.all(
-    dirents.map((dirent) => {
-      const res = resolve(directory, dirent.name);
-      return dirent.isDirectory() ? getFilesInDirectoryRecursively(res) : res;
-    })
-  );
-  return Array.prototype.concat(...files);
-};
-
 const bundle = async (manifest, bundleDirectory) => {
   try {
     // Remove old bundle directory
-    console.log(`Removing old ${bundleDirectory} directory...`);
     await rm(bundleDirectory, { recursive: true, force: true }); // requires node 14+
+    console.log(`🧹  Cleaned up \`${bundleDirectory}\` directory.`);
+
+    // Run both build scripts
+    const runBuildScript = (directory) => {
+      return new Promise(async (resolve, reject) => {
+        let intervalId;
+        let spinner = "\\";
+        const startBuilding = () => {
+          let P = ["\\", "|", "/", "-"];
+          intervalId = setInterval(() => {
+            process.stdout.clearLine();
+            process.stdout.cursorTo(0);
+            spinner = P[P.indexOf(spinner) + 1] || P[0];
+            process.stdout.write(
+              `${spinner}   Building popup and content scripts...`
+            );
+          }, 250);
+        };
+
+        startBuilding();
+
+        try {
+          await runCommand(`cd ./${directory} && yarn && yarn build`);
+          clearInterval(intervalId);
+          resolve();
+        } catch (error) {
+          clearInterval(intervalId);
+          console.error(
+            `Error running build script for ${directory}: ${error}`
+          );
+          reject(error);
+        }
+      });
+    };
+
+    await runBuildScript("popup");
+    await runBuildScript("content-scripts");
+
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
+    console.log("🔥  Built popup and content scripts.");
 
     // Bundle popup Next.js export
-    console.log(`Moving export to bundle...`);
     await copy("popup/out", `${bundleDirectory}`);
+    console.log(`🚗  Moved export to bundle.`);
 
-    // Bundle `content-scripts`
-    console.log(`Moving content_scripts to bundle...`);
+    // Bundle content-scripts
     await copy("content-scripts/dist", `${bundleDirectory}/dist`);
+    console.log(`🚗  Moved content_scripts to bundle.`);
 
-    // Bundle `background.js`
-    console.log(`Moving background.js to bundle...`);
+    // Bundle background.js
     await copyFile("background.js", `${bundleDirectory}/background.js`);
+    console.log(`🚗  Moved background.js to bundle.`);
 
     // Bundle css
-    console.log(`Moving css to bundle...`);
     await copy("css", `${bundleDirectory}/css`);
+    console.log(`🚗  Moved css to bundle.`);
 
-    // Bundle `images`
-    console.log(`Moving images to bundle...`);
+    // Bundle fonts
+    await copy("fonts", `${bundleDirectory}/fonts`);
+    console.log(`🚗  Moved fonts to bundle.`);
+
+    // Bundle images
     await copy("images", `${bundleDirectory}/images`);
+    console.log(`🚗  Moved images to bundle.`);
 
     // Create manifest
     await writeFile(
@@ -143,32 +187,85 @@ const bundle = async (manifest, bundleDirectory) => {
     );
 
     // Done.
-    console.log(`✅ Bundled.`);
+    console.log(`📦  Bundled \`${bundleDirectory}\`.`);
+
+    // Zip the directory
+    zipper.sync
+      .zip(`./${bundleDirectory}`)
+      .compress()
+      .save(`./bundle/${bundleDirectory.replace("bundle/", "")}.zip`);
+
+    console.log(
+      `🧬  Zipped \`${bundleDirectory}\` to \`bundle/${bundleDirectory.replace(
+        "bundle/",
+        ""
+      )}.zip\`.`
+    );
   } catch (error) {
     console.error(error);
   }
+};
+
+const zipSafari = async () => {
+  const promise = new Promise((resolve, reject) => {
+    let intervalId;
+    let spinner = "\\";
+    const startBuilding = () => {
+      let P = ["\\", "|", "/", "-"];
+      intervalId = setInterval(() => {
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        spinner = P[P.indexOf(spinner) + 1] || P[0];
+        process.stdout.write(`${spinner}   Converting to Safari...`);
+      }, 250);
+    };
+
+    startBuilding();
+
+    setTimeout(() => {
+      clearInterval(intervalId);
+
+      try {
+        zipper.sync
+          .zip(`./bundle/safari`)
+          .compress()
+          .save(`./bundle/safari.zip`);
+
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        console.log(`🍎  Converted Firefox to Safari.`);
+        console.log(`🧬  Zipped \`bundle/safari\` to \`bundle/safari.zip\`.`);
+
+        resolve();
+      } catch (error) {
+        process.stdout.clearLine();
+        process.stdout.cursorTo(0);
+        console.log(`🍎  Converted Firefox to Safari.`);
+        console.log(
+          `❌  Could not zip Firefox to Safari, try running script again.`
+        );
+
+        reject(error);
+      }
+    }, 1000);
+  });
+
+  return promise;
+};
+
+const bundleAll = async () => {
+  await bundle(MANIFEST_CHROME, "bundle/chrome");
+  await bundle(MANIFEST_FIREFOX, "bundle/firefox");
+  exec(
+    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari"
+  );
+  await zipSafari();
 };
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-
-const bundleAll = async () => {
-  await bundle(MANIFEST_CHROME, "bundle/chrome");
-  await bundle(MANIFEST_FIREFOX, "bundle/firefox");
-  exec(
-    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari",
-    (error, stdout, stderr) => {
-      console.log(stdout);
-      console.log(stderr);
-      if (error !== null) {
-        console.error(`exec error: ${error}`);
-      }
-    }
-  );
-  console.log(`✅ Converted Firefox to Safari.`);
-};
 
 rl.question(
   "Which browser would you like to bundle for? [All / Chrome / Firefox / Safari] ",
@@ -185,16 +282,9 @@ rl.question(
       case "Safari":
         await bundle(MANIFEST_FIREFOX, "bundle/firefox");
         exec(
-          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari",
-          (error, stdout, stderr) => {
-            console.log(stdout);
-            console.log(stderr);
-            if (error !== null) {
-              console.error(`exec error: ${error}`);
-            }
-          }
+          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari"
         );
-        console.log(`✅ Converted Firefox to Safari.`);
+        await zipSafari();
         break;
 
       case "All":
@@ -212,3 +302,8 @@ rl.question(
 rl.on("close", () => {
   process.exit(0);
 });
+
+/*--- Bundle without prompting
+await bundleAll();
+process.exit(0);
+---*/

@@ -6,63 +6,68 @@ import {
   getCurrentTextAndSendToTypefully,
 } from "../typefully";
 import addStyles from "../utilities/addStyles";
+import addTooltip from "../utilities/addTooltip";
 import addTypefullyBox from "../utilities/addTypefullyBox";
 import removeElement from "../utilities/removeElement";
 import { getStorage, setStorage } from "../utilities/storage";
 
 let t; // Typefully Plug timeout
-
+let zt1; // Zen Writer Mode timeout 1
+let zt2; // Zen Writer Mode timeout 2
 export const changeWriterMode = (writerMode) => {
   if (
     window.location.pathname.includes("/home") ||
     window.location.pathname === "/"
   ) {
-    clearTimeout(t);
-
     switch (writerMode) {
       case "on":
-        document.body.classList.add("mt-writerMode-on");
+        clearTimeout(zt1);
+        zt1 = setTimeout(() => {
+          document.title = "Zen Writer Mode / Twitter";
+        }, 500);
+
         addStyles(
           "mt-writerMode",
           `
             body {
-              padding-left: 0 !important;
+              padding-left: 0;
             }
             ${selectors.mainColumn} {
-              border-style: hidden !important;
-              padding-top: 3vh !important;
+              border-style: hidden;
+              padding-top: 3vh;
               margin: 0 auto;
             }
             ${selectors.mainWrapper} > div {
-              width: 100% !important;
-              max-width: 100% !important;
+              width: 100%;
+              max-width: 100%;
             }
             ${selectors.leftSidebar},
             ${selectors.rightSidebar},
             ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
-              display: none !important;
+              display: none;
             }
             ${selectors.topHeader} {
-              visibility: hidden !important;
+              visibility: hidden;
             }
             ${selectors.modalWrapper} {
-              width: 100vw !important;
-              max-width: 100vw !important;
-              top: 0 !important;
-              border-radius: 0 !important;
+              width: 100vw;
+              max-width: 100vw;
+              top: 0;
+              border-radius: 0;
             }
             div[role="group"] > div:empty {
-              background-color: var(--body-bg-color) !important;
+              background-color: var(--body-bg-color);
             }
             ${selectors.modalUi} {
-              border-radius: 0 !important;
+              border-radius: 0;
             }
             ${selectors.modalWrapper} > div > div > div {
-              padding-bottom: 10vh !important;
+              padding-bottom: 10vh;
             }
             `
         );
 
+        clearTimeout(t);
         t = setTimeout(() => {
           addTypefullyPlugToWriterMode();
         }, 100);
@@ -70,7 +75,11 @@ export const changeWriterMode = (writerMode) => {
         break;
 
       case "off":
-        document.body.classList.remove("mt-writerMode-on");
+        clearTimeout(zt2);
+        zt2 = setTimeout(() => {
+          document.title = "Home / Twitter";
+        }, 500);
+
         removeElement("mt-writerMode");
         removeTypefullyPlugFromWriterMode();
         break;
@@ -137,49 +146,55 @@ export const removeTypefullyPlugFromWriterMode = () => {
 };
 
 // Function to add an expand icon to the buttons in the tweet composer
-export const addWriterModeButton = async () => {
+export const addWriterModeButton = async (scheduleButton) => {
   if (
-    window.location.pathname.includes("/home") ||
-    window.location.pathname === "/"
+    !window.location.pathname.includes("/home") ||
+    !window.location.pathname === "/" ||
+    document.getElementById("mt-writer-mode-composer-button")
   ) {
-    const scheduleButton = document.querySelector(
-      'div[data-testid="scheduleOption"]'
+    return;
+  }
+
+  const writerModeButton = scheduleButton.cloneNode(true);
+  const userSetting = await getStorage("writerMode");
+
+  writerModeButton.id = "mt-writer-mode-composer-button";
+  writerModeButton.removeAttribute("data-testid");
+
+  if (userSetting === "on") {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.selected;
+
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Close Zen Writer Mode",
+    });
+  } else {
+    writerModeButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.composerWriterMode.normal;
+
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Zen Writer Mode",
+      description: "Added by Minimal Twitter.",
+    });
+  }
+  writerModeButton.onclick = toggleWriterMode;
+
+  if (document.querySelector("#mt-writer-mode-composer-button")) {
+    writerModeButton.remove();
+    return;
+  } else {
+    scheduleButton.parentNode.appendChild(writerModeButton);
+
+    addStyles(
+      "mt-writer-mode-composer-button-style",
+      `
+      #mt-writer-mode-composer-button:hover {
+        background-color: rgba(var(--accent-color-rgb), 0.1);
+      }
+      `
     );
-
-    if (!scheduleButton) return;
-
-    const writerModeButton = scheduleButton.cloneNode(true);
-
-    writerModeButton.id = "mt-writer-mode-composer-button";
-    writerModeButton.ariaLabel = "Writer Mode";
-    writerModeButton.title = "Writer Mode";
-    writerModeButton.removeAttribute("data-testid");
-
-    const userSetting = await getStorage("writerMode");
-    if (userSetting === "on") {
-      writerModeButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.composerWriterMode.selected;
-    } else {
-      writerModeButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.composerWriterMode.normal;
-    }
-    writerModeButton.onclick = toggleWriterMode;
-
-    if (document.querySelector("#mt-writer-mode-composer-button")) {
-      writerModeButton.remove();
-      return;
-    } else {
-      scheduleButton.parentNode.appendChild(writerModeButton);
-
-      addStyles(
-        "mt-writer-mode-composer-button-style",
-        `
-    #mt-writer-mode-composer-button:hover {
-      background-color: rgba(var(--accent-color-rgb), 0.1);
-    }
-        `
-      );
-    }
   }
 };
 
@@ -201,9 +216,20 @@ const toggleWriterMode = async () => {
   if (userSetting === "off") {
     writerModeButton.firstChild.firstChild.firstChild.innerHTML =
       svgAssets.composerWriterMode.selected;
+
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Close Zen Writer Mode",
+    });
   } else {
     writerModeButton.firstChild.firstChild.firstChild.innerHTML =
       svgAssets.composerWriterMode.normal;
+
+    addTooltip(writerModeButton, {
+      id: "writer-mode",
+      title: "Zen Writer Mode",
+      description: "Added by Minimal Twitter.",
+    });
 
     // scroll body to top
     document.body.scrollTop = 0;

@@ -1,9 +1,9 @@
-import hideViewCounts from "../../../../content-scripts/src/modules/options/hideViewCounts"
 import useMounted from "../../../utilities/hooks/useMounted"
 import CheckboxControl from "../../controls/CheckboxControl"
 import Separator from "../../controls/Separator"
 import SwitchControl from "../../controls/SwitchControl"
 import TimelineSlider from "../../controls/TimelineSlider"
+import VanityCheckboxes from "../../controls/VanityCheckboxes"
 
 const TimelineSection = () => {
   const mounted = useMounted()
@@ -24,7 +24,7 @@ const TimelineSection = () => {
           <TimelineSlider />
           <Separator className="mb-4" />
           <div className="flex flex-col gap-y-4">
-            <SwitchControl label="Writer Mode" storageKey="writerMode" />
+            <SwitchControl label="Zen Writer Mode" storageKey="writerMode" />
             <SwitchControl
               label="Timeline Borders"
               storageKey="timelineBorders"
@@ -35,30 +35,42 @@ const TimelineSection = () => {
               storageKey="tweetBorders"
               defaultState={true}
             />
+            <SwitchControl
+              label="Sticky Header"
+              storageKey="stickyHeader"
+              defaultState={true}
+            />
           </div>
           <Separator className="mt-4 mb-2" />
+          <VanityCheckboxes />
+          <CheckboxControl
+            label="Remove View Count from Tweets"
+            storageKey="hideViewCount"
+            defaultState={true}
+          />
           <CheckboxControl
             label="Remove Promoted Posts"
             storageKey="removePromotedPosts"
             defaultState={true}
           />
           <CheckboxControl
-            label="Remove View Counts from Tweets"
-            storageKey="hideViewCounts"
-            defaultState={true}
-          />
-          <CheckboxControl
             label="Remove Who to Follow"
-            storageKey="whoToFollow"
-            checkedOff={true}
+            storageKey="removeWhoToFollow"
           />
           <CheckboxControl
             label="Remove Topics to Follow"
-            storageKey="topicsToFollow"
-            checkedOff={true}
+            storageKey="removeTopicsToFollow"
           />
           <CheckboxControl
-            label="Always Show Latest Tweets"
+            label="Show Trends on Home Timeline"
+            storageKey="trendsHomeTimeline"
+          />
+          <CheckboxControl
+            label="Show Recent Media on Profiles"
+            storageKey="recentMedia"
+          />
+          <CheckboxControl
+            label="Show Latest Tweets (if available)"
             storageKey="latestTweets"
           />
         </div>

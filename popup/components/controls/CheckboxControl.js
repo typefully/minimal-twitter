@@ -8,8 +8,7 @@ import { getStorage, setStorage } from "../../utilities/chromeStorage"
 export default function CheckboxControl({
   label,
   storageKey,
-  defaultState = false,
-  checkedOff = false
+  defaultState = false
 }) {
   const [localState, setLocalState] = useState(defaultState)
 
@@ -17,18 +16,14 @@ export default function CheckboxControl({
     const getDefaultState = async () => {
       try {
         const userSetting = await getStorage(storageKey)
-        if (checkedOff) {
-          userSetting && setLocalState(userSetting === "off" ? true : false)
-        } else {
-          userSetting && setLocalState(userSetting === "on" ? true : false)
-        }
+        userSetting && setLocalState(userSetting === "on" ? true : false)
       } catch (error) {
         console.warn(error)
       }
     }
 
     getDefaultState()
-  }, [storageKey, checkedOff])
+  }, [storageKey])
 
   return (
     <>
@@ -41,11 +36,7 @@ export default function CheckboxControl({
             onCheckedChange={async (checked) => {
               setLocalState(checked)
               try {
-                if (checkedOff) {
-                  await setStorage({ [storageKey]: checked ? "off" : "on" })
-                } else {
-                  await setStorage({ [storageKey]: checked ? "on" : "off" })
-                }
+                await setStorage({ [storageKey]: checked ? "on" : "off" })
               } catch (error) {
                 console.warn(error)
               }

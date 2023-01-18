@@ -1,6 +1,12 @@
+import selectors from "../selectors";
 import { checkHomeTimeline, checkUrlForFollow } from "./check";
-import hideViewCounts from "./options/hideViewCounts";
-import { addListsButton } from "./options/navigation";
+import hideViewCount from "./options/hideViewCount";
+import {
+  addCommunitiesButton,
+  addListsButton,
+  addTwitterBlueButton,
+} from "./options/navigation";
+import { changeRecentMedia } from "./options/timeline";
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton } from "./options/writer-mode";
 import {
@@ -13,30 +19,18 @@ import removeElement from "./utilities/removeElement";
 import throttle from "./utilities/throttle";
 
 // Function to reveal Search Filters
-const revealSearchFilters = () => {
-  // Get grandparent of advanced search
-  const advancedSearch = document.querySelector(
-    `[data-testid="searchFiltersAdvancedSearch"]`
-  );
-
-  if (advancedSearch) {
-    const searchFilters =
-      advancedSearch.parentElement.parentElement.parentElement;
-    if (!searchFilters.classList.contains("searchFilters")) {
-      searchFilters.classList = searchFilters.classList + " searchFilters";
-    }
-    return;
+const revealSearchFilters = (advancedSearch) => {
+  const searchFilters =
+    advancedSearch.parentElement.parentElement.parentElement;
+  if (!searchFilters.classList.contains("searchFilters")) {
+    searchFilters.classList = searchFilters.classList + " searchFilters";
   }
+  return;
 };
 
 // Function to set search bar width to length of placeholder
-const searchBarWidthReset = () => {
-  const searchBar = document.querySelector(
-    '[data-testid="SearchBox_Search_Input"]'
-  );
-
+const searchBarWidthReset = (searchBar) => {
   if (
-    searchBar &&
     !window.location.pathname.includes("/search") &&
     !window.location.pathname.includes("/explore")
   ) {
@@ -48,74 +42,113 @@ const searchBarWidthReset = () => {
 };
 
 // Function to add main stylesheet
-export const addStylesheets = () => {
+export const addStylesheets = async () => {
   const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
   const typefullyStylesheet = document.createElement("link");
-  const mainStylesheetGitHub = document.createElement("link");
-  const typefullyStylesheetGitHub = document.createElement("link");
+  const externalStylsheet = document.createElement("style");
 
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("css/main.css");
-  head.appendChild(mainStylesheet);
-
-  mainStylesheetGitHub.rel = "stylesheet";
-  mainStylesheetGitHub.type = "text/css";
-  mainStylesheetGitHub.href =
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css";
-  head.appendChild(mainStylesheetGitHub);
 
   typefullyStylesheet.rel = "stylesheet";
   typefullyStylesheet.type = "text/css";
   typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
-  head.appendChild(typefullyStylesheet);
 
-  typefullyStylesheetGitHub.rel = "stylesheet";
-  typefullyStylesheetGitHub.type = "text/css";
-  typefullyStylesheetGitHub.href =
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css";
-  head.appendChild(typefullyStylesheetGitHub);
+  externalStylsheet.id = "mt-external-stylesheet";
+
+  head.appendChild(mainStylesheet);
+  head.appendChild(typefullyStylesheet);
+  head.insertBefore(externalStylsheet, typefullyStylesheet.nextSibling);
+
+  const mainStylesheetFromCDN = await fetch(
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css"
+  );
+  const typefullyStylesheetFromCDN = await fetch(
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css"
+  );
+  const mainText = (await mainStylesheetFromCDN.text()).trim();
+  const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
+  const styleSheetText = document.createTextNode(
+    mainText.concat("\n\n").concat(typefullyText)
+  );
+
+  externalStylsheet.appendChild(styleSheetText);
 };
 
 // Function to start MutationObserver
-export const observe = throttle(() => {
+let mt; // Mutations timeout
+export const observe = () => {
   const observer = new MutationObserver((mutationsList) => {
-    if (mutationsList.length) {
-      if (mutationIsNotRelevant(mutationsList)) return;
+    if (!mutationsList.length) return;
+    if (mutationIsNotRelevant(mutationsList)) return;
 
-      if (!colorsAreSet()) {
-        extractColorsAsRootVars(); // Extract colors first
-      }
-
-      let t;
-      const runMutations = throttle(() => {
-        clearTimeout(t);
-        searchBarWidthReset();
-        revealSearchFilters();
-        addTypefullyPlug();
-        saveCurrentReplyToLink();
-        addTypefullyReplyPlug();
-        checkUrlForFollow();
-        checkHomeTimeline();
-        addWriterModeButton();
-        addListsButton();
-        hideViewCounts();
-
-        t = setTimeout(() => {
-          addGrowButton();
-        });
-      }, 500);
-
-      runMutations();
+    if (!colorsAreSet()) {
+      extractColorsAsRootVars(); // Extract colors first
     }
+
+    const runDocumentMutations = throttle(() => {
+      addTypefullyPlug();
+      saveCurrentReplyToLink();
+      addTypefullyReplyPlug();
+      checkUrlForFollow();
+      checkHomeTimeline();
+      hideViewCount();
+      changeRecentMedia();
+
+      const searchBar = document.querySelector(
+        '[data-testid="SearchBox_Search_Input"]'
+      );
+      const advancedSearch = document.querySelector(
+        `[data-testid="searchFiltersAdvancedSearch"]`
+      );
+      const scheduleButton = document.querySelector(
+        'div[data-testid="scheduleOption"]'
+      );
+      const leftSideBar = document.querySelector(selectors.leftSidebar);
+
+      if (searchBar) searchBarWidthReset(searchBar);
+      if (scheduleButton) addWriterModeButton(scheduleButton);
+      if (advancedSearch) revealSearchFilters(advancedSearch);
+      if (leftSideBar) {
+        chrome.storage.sync.get(
+          [
+            "listsButton",
+            "communitiesButton",
+            "twitterBlueButton",
+            "typefullyGrowTab",
+          ],
+          (result) => {
+            const {
+              listsButton,
+              communitiesButton,
+              twitterBlueButton,
+              typefullyGrowTab,
+            } = result;
+
+            if (listsButton) addListsButton();
+            if (communitiesButton) addCommunitiesButton();
+            if (twitterBlueButton) addTwitterBlueButton();
+            if (typefullyGrowTab) {
+              clearTimeout(mt);
+              mt = setTimeout(() => {
+                addGrowButton();
+              });
+            }
+          }
+        );
+      }
+    }, 500);
+
+    runDocumentMutations();
   });
 
   observer.observe(document, {
     childList: true,
     subtree: true,
   });
-}, 1000);
+};
 
 const mutationIsNotRelevant = (mutationsList) => {
   const a = mutationsList[0]?.addedNodes[0]; // First added node
@@ -124,6 +157,14 @@ const mutationIsNotRelevant = (mutationsList) => {
   const el = a || r; // Element
 
   try {
+    // Minimal Twitter injected elements
+    if (
+      el?.id?.startsWith("mt-") ||
+      el?.id?.startsWith("typefully-") ||
+      t?.className?.startsWith("mt-") // For example .mt-tooltip ends up here
+    )
+      return true;
+
     // Engagement counts
     if (
       (el?.nodeName === "SPAN" &&
@@ -189,9 +230,7 @@ const mutationIsNotRelevant = (mutationsList) => {
     // SVG changes
     if (el?.nodeName === "path") return true;
 
-    // Minimal Twitter injected elements
-    if (el?.id?.startsWith("mt-") || el?.id?.startsWith("typefully-"))
-      return true;
+    return false;
   } catch (e) {}
 
   return false;
@@ -200,18 +239,41 @@ const mutationIsNotRelevant = (mutationsList) => {
 // On resize, remove and re-add the sidebar buttons, because their original
 // Twitter counterparts styles change programmatically based on window size,
 // so we need to re-create them when the window size changes.
-let t;
+let gt; // Grow Tab timeout
 export const addResizeListener = () => {
   window.addEventListener(
     "resize",
     throttle(() => {
-      clearTimeout(t);
       removeElement("mt-listsButtonNode");
+      removeElement("mt-communitiesButton");
       removeElement("mt-typefullyGrowButton");
-      addListsButton();
-      t = setTimeout(() => {
-        addGrowButton();
-      });
+
+      chrome.storage.sync.get(
+        [
+          "listsButton",
+          "communitiesButton",
+          "twitterBlueButton",
+          "typefullyGrowTab",
+        ],
+        (result) => {
+          const {
+            listsButton,
+            communitiesButton,
+            twitterBlueButton,
+            typefullyGrowTab,
+          } = result;
+
+          if (listsButton) addListsButton();
+          if (communitiesButton) addCommunitiesButton();
+          if (twitterBlueButton) addTwitterBlueButton();
+          if (typefullyGrowTab) {
+            clearTimeout(gt);
+            gt = setTimeout(() => {
+              addGrowButton();
+            });
+          }
+        }
+      );
     }, 1000)
   );
 };

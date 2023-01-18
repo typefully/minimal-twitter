@@ -17,6 +17,7 @@ selectors.sidebarLinks = {
   communities: `a[href$=communities]`,
   profile: `[data-testid="AppTabBar_Profile_Link"]`,
   lists: `a[href*="/lists"][role="link"][aria-label]`,
+  twitterBlue: `a[href*="blue"][role="link"][aria-label]`,
 };
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;
 selectors.rightSidebar = `[data-testid="sidebarColumn"]`;

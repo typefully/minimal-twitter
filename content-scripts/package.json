@@ -8,5 +8,6 @@
   },
   "devDependencies": {
     "parcel": "^2.8.0"
-  }
+  },
+  "license": "MIT"
 }

@@ -16,7 +16,7 @@ export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
         #typefully-reply-link, 
         #typefully-writermode-link, 
         #typefully-writermode-box {
-          visibility: hidden !important;
+          display: none;
         }
         `
       );
