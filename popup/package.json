@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "lint": "next lint",
-    "build": "next build && next export && mv out/_next out/next && sed -i '' -e 's/\\/_next/\\.\\/next/g' out/**.html",
+    "build": "next build && next export && node ./sanitize.js",
     "start": "next start",
     "check:prettier": "npx prettier --check .",
     "write:prettier": "npx prettier --write ."
