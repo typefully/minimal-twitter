@@ -41,9 +41,16 @@ const TimelineSection = () => {
               defaultState={true}
             />
             <SwitchControl
-              label="Following Timeline"
+              label="Trends on Home Timeline"
+              storageKey="trendsHomeTimeline"
+            />
+            <SwitchControl
+              label="Recent Media on Profiles"
+              storageKey="recentMedia"
+            />
+            <SwitchControl
+              label="Following Tab on Home Timeline"
               storageKey="followingTimeline"
-              defaultState={false}
             />
           </div>
           <Separator className="mt-4 mb-2" />
@@ -67,15 +74,7 @@ const TimelineSection = () => {
             storageKey="removeTopicsToFollow"
           />
           <CheckboxControl
-            label="Show Trends on Home Timeline"
-            storageKey="trendsHomeTimeline"
-          />
-          <CheckboxControl
-            label="Show Recent Media on Profiles"
-            storageKey="recentMedia"
-          />
-          <CheckboxControl
-            label="Show Latest Tweets (if available)"
+            label="Always Latest Tweets (if available)"
             storageKey="latestTweets"
           />
         </div>
