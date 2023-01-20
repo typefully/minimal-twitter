@@ -31,6 +31,7 @@ import {
   changeUnreadCountBadge,
 } from "./navigation";
 import {
+  changeFollowingTimeline,
   changeLatestTweets,
   changePromotedPosts,
   changeRecentMedia,
@@ -77,6 +78,7 @@ export const userPreferences = [
   "removePromotedPosts",
   "removeWhoToFollow",
   "removeTopicsToFollow",
+  "followingTimeline",
   "latestTweets",
   "trendsHomeTimeline",
   "recentMedia",
@@ -117,6 +119,7 @@ export const injectAllChanges = (data) => {
   changeWhoToFollow(data?.removeWhoToFollow); // Who to Follow
   changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
+  changeFollowingTimeline(data?.followingTimeline); // Always Show Following Timeline
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
   changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode); // Show Trends on Home Timeline
   changeRecentMedia(data?.recentMedia); // Show Recent Media on Profiles

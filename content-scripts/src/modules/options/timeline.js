@@ -2,6 +2,7 @@ import selectors from "../../selectors";
 import { checkUrlForFollow } from "../check";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
+import { getStorage } from "../utilities/storage";
 
 // Function to change Timeline Width
 export const changeTimelineWidth = (timelineWidth) => {
@@ -212,7 +213,7 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 };
 
 // Function to change Recent Media on Profiles
-export const changeRecentMedia = (recentMedia) => {
+export const changeRecentMedia = async (recentMedia) => {
   const userProfile = document.querySelector(
     'meta[content*="twitter://user?screen_name="]'
   );
@@ -264,34 +265,34 @@ export const changeRecentMedia = (recentMedia) => {
   if (recentMedia) {
     run(recentMedia);
   } else {
-    chrome.storage.sync.get(["recentMedia"], (result) => {
-      const { recentMedia } = result;
-
-      run(recentMedia);
-    });
+    const data = await getStorage(["recentMedia"]);
+    run(data?.recentMedia);
   }
 };
 
 // Function to change Show Trends on Home Timeline
 export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
-  if (writerMode === "on") {
+  if (
+    writerMode === "on" ||
+    window.location.pathname.includes("compose/tweet") ||
+    !window.location.pathname.includes("/home") ||
+    !window.location.pathname === "/"
+  ) {
     removeElement("mt-trendsHomeTimeline");
     return;
   }
 
-  if (
-    window.location.pathname.includes("/home") ||
-    window.location.pathname === "/"
-  ) {
-    switch (trendsHomeTimeline) {
-      case "off":
-        removeElement("mt-trendsHomeTimeline");
-        break;
+  switch (trendsHomeTimeline) {
+    case "off":
+      removeElement("mt-trendsHomeTimeline");
+      break;
 
-      case "on":
-        addStyles(
-          "mt-trendsHomeTimeline",
-          `
+    case "on":
+      if (document.getElementById("mt-trendsHomeTimeline")) return;
+
+      addStyles(
+        "mt-trendsHomeTimeline",
+        `
           @keyframes render {
             from {
               opacity: 0;
@@ -325,82 +326,109 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
             }
           }
           `
-        );
-        break;
-    }
+      );
+      break;
   }
+};
+
+// Function to change Following Timeline
+export const changeFollowingTimeline = (followingTimeline) => {
+  if (followingTimeline !== "on") return;
+
+  const tablist = document.querySelector(
+    "div[data-testid='ScrollSnap-List'][role='tablist']"
+  );
+  const selectedTab = document.querySelector(
+    "div[data-testid='ScrollSnap-List'][role='tablist'] a[href='/home'][aria-selected='true']"
+  );
+
+  // Check if there's a selected tab
+  if (!tablist || !selectedTab) return;
+
+  const selectedTabText = selectedTab
+    .querySelector("div[dir='ltr'] > span")
+    .textContent.toLowerCase();
+
+  if (selectedTabText === "following") return;
+
+  const secondTab = tablist.querySelector(
+    "div[role='presentation']:nth-child(2) a"
+  );
+
+  secondTab.click(); // Following tab is second tab
 };
 
 // Function to change Latest Tweets
 let lt1; // Latest Tweets timeout 1
 let lt2; // Latest Tweets timeout 2
 export const changeLatestTweets = (latestTweets) => {
-  if (latestTweets === "on") {
-    const showLatestTweets = () => {
-      const run = () => {
-        // Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
-        const latestSelected = !!document.querySelector(
-          "div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']"
-        );
+  if (latestTweets !== "on") return;
 
-        if (latestSelected) return;
+  const showLatestTweets = () => {
+    // Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
+    const latestSelected = !!document.querySelector(
+      "div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']"
+    );
+    // Check if there's a menu button
+    const menuitem = document.querySelector(
+      "div[role='menuitem'][tabindex='0']"
+    );
 
-        // Check if the nav bar with "Home" and "Latest Tweets" exists
-        const optionBarExists = !!document.querySelector(
-          "div[data-testid='ScrollSnap-List']"
-        );
+    if (latestSelected || !menuitem) return;
 
-        if (!optionBarExists) {
-          /*
+    const run = () => {
+      // Check if the nav bar with "Home" and "Latest Tweets" exists
+      const optionBarExists = !!document.querySelector(
+        "div[data-testid='ScrollSnap-List']"
+      );
+
+      if (!optionBarExists) {
+        /*
             If it doesn't, we have to get it to display
             1. Click the Timeline Options button
             2. Click the first option in the popup
           */
-          const timelineOptions = document.querySelector(
-            "div[aria-label='Timeline options']"
-          );
-          const topTweetsOn = document.querySelector(
-            "div[aria-label='Top Tweets on']"
-          );
+        const timelineOptions = document.querySelector(
+          "div[aria-label='Timeline options']"
+        );
+        const topTweetsOn = document.querySelector(
+          "div[aria-label='Top Tweets on']"
+        );
 
-          const clickMenuButton = (isTimelineOptions) => {
-            clearTimeout(lt1);
-            lt1 = setTimeout(() => {
-              const menuitem = document.querySelector(
-                "div[role='menuitem'][tabindex='0']"
+        const clickMenuButton = (isTimelineOptions) => {
+          clearTimeout(lt1);
+          lt1 = setTimeout(() => {
+            menuitem && menuitem.click();
+
+            if (isTimelineOptions) {
+              // Click the "Latest Tweets" nav bar option
+              const latestTweetsNavBarOption = document.querySelector(
+                "div[data-testid='ScrollSnap-List'] > div:last-child > a"
               );
-              menuitem && menuitem.click();
+              latestTweetsNavBarOption && latestTweetsNavBarOption.click();
+            }
+          }, 100);
+          return lt1;
+        };
 
-              if (isTimelineOptions) {
-                // Click the "Latest Tweets" nav bar option
-                const latestTweetsNavBarOption = document.querySelector(
-                  "div[data-testid='ScrollSnap-List'] > div:last-child > a"
-                );
-                latestTweetsNavBarOption && latestTweetsNavBarOption.click();
-              }
-            }, 100);
-            return lt1;
-          };
-
-          if (timelineOptions) {
-            timelineOptions.click();
-            clickMenuButton(true);
-          } else if (topTweetsOn) {
-            topTweetsOn.click();
-            clickMenuButton(false);
-          }
+        if (timelineOptions) {
+          timelineOptions.click();
+          clickMenuButton(true);
+        } else if (topTweetsOn) {
+          topTweetsOn.click();
+          clickMenuButton(false);
         }
-      };
-
-      clearTimeout(lt2);
-      lt2 = setTimeout(run, 500);
+      }
     };
-    if (document.readyState === "loading") {
-      console.log("loading...");
-      document.addEventListener("DOMContentLoaded", showLatestTweets);
-    } else {
-      console.log("running latest tweets...");
-      showLatestTweets();
-    }
+
+    clearTimeout(lt2);
+    lt2 = setTimeout(run, 500);
+    return lt2;
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", showLatestTweets);
+  } else {
+    showLatestTweets();
   }
 };

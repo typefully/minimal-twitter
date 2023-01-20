@@ -17,10 +17,13 @@ let zt2; // Zen Writer Mode timeout 2
 export const changeWriterMode = (writerMode) => {
   if (
     window.location.pathname.includes("/home") ||
-    window.location.pathname === "/"
+    window.location.pathname === "/" ||
+    window.location.pathname.includes("/compose/tweet")
   ) {
     switch (writerMode) {
       case "on":
+        if (document.getElementById("mt-writerMode")) return;
+
         clearTimeout(zt1);
         zt1 = setTimeout(() => {
           document.title = "Zen Writer Mode / Twitter";
@@ -75,15 +78,21 @@ export const changeWriterMode = (writerMode) => {
         break;
 
       case "off":
+        if (!document.getElementById("mt-writerMode")) break;
+
         clearTimeout(zt2);
         zt2 = setTimeout(() => {
-          document.title = "Home / Twitter";
+          document.title = "Twitter";
         }, 500);
 
         removeElement("mt-writerMode");
         removeTypefullyPlugFromWriterMode();
         break;
     }
+  } else {
+    removeElement("mt-writerMode");
+    removeTypefullyPlugFromWriterMode();
+    return;
   }
 };
 

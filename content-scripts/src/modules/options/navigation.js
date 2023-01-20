@@ -2,6 +2,7 @@ import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
+import { getStorage } from "../utilities/storage";
 
 // Function to change Home Button
 export const changeHomeButton = (homeButton) => {
@@ -149,25 +150,26 @@ export const changeTwitterBlueButton = (twitterBlueButton) => {
 let bt; // Twitter Blue button timeout
 export const addTwitterBlueButton = () => {
   clearTimeout(bt);
+
+  if (document.querySelector(selectors.sidebarLinks.twitterBlue)) return;
+
   bt = setTimeout(() => {
-    if (!document.querySelector(selectors.sidebarLinks.twitterBlue)) {
-      const profileNode = document.querySelector(
-        'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-      );
+    const profileNode = document.querySelector(
+      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+    );
 
-      if (profileNode) {
-        const twitterBlueButton = profileNode.cloneNode(true);
+    if (profileNode) {
+      const twitterBlueButton = profileNode.cloneNode(true);
 
-        twitterBlueButton.id = "mt-twitterBlueButtonNode";
-        twitterBlueButton.href = "https://twitter.com/settings/twitter_blue";
-        twitterBlueButton.ariaLabel = "Minimal Twitter Twitter Blue";
-        twitterBlueButton.removeAttribute("data-testid");
-        twitterBlueButton.firstChild.firstChild.firstChild.innerHTML =
-          svgAssets.twitterBlue.normal;
-        twitterBlueButton.firstChild.lastChild.firstChild.innerText =
-          "Twitter Blue";
-        profileNode.insertAdjacentElement("beforebegin", twitterBlueButton);
-      }
+      twitterBlueButton.id = "mt-twitterBlueButtonNode";
+      twitterBlueButton.href = "https://twitter.com/settings/twitter_blue";
+      twitterBlueButton.ariaLabel = "Minimal Twitter Twitter Blue";
+      twitterBlueButton.removeAttribute("data-testid");
+      twitterBlueButton.firstChild.firstChild.firstChild.innerHTML =
+        svgAssets.twitterBlue.normal;
+      twitterBlueButton.firstChild.lastChild.firstChild.innerText =
+        "Twitter Blue";
+      profileNode.insertAdjacentElement("beforebegin", twitterBlueButton);
     }
   }, 500);
 };
@@ -196,24 +198,23 @@ export const changeCommunitiesButton = (communitiesButton) => {
 
 // Function to add Communities button
 export const addCommunitiesButton = () => {
-  if (!document.querySelector(selectors.sidebarLinks.communities)) {
-    const profileNode = document.querySelector(
-      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-    );
+  if (document.querySelector(selectors.sidebarLinks.communities)) return;
 
-    if (profileNode) {
-      const communitiesButton = profileNode.cloneNode(true);
+  const profileNode = document.querySelector(
+    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+  );
 
-      communitiesButton.id = "mt-communitiesButtonNode";
-      communitiesButton.href += "/communities";
-      communitiesButton.ariaLabel = "Minimal Twitter Communities";
-      communitiesButton.removeAttribute("data-testid");
-      communitiesButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.communities.normal;
-      communitiesButton.firstChild.lastChild.firstChild.innerText =
-        "Communities";
-      profileNode.insertAdjacentElement("beforebegin", communitiesButton);
-    }
+  if (profileNode) {
+    const communitiesButton = profileNode.cloneNode(true);
+
+    communitiesButton.id = "mt-communitiesButtonNode";
+    communitiesButton.href += "/communities";
+    communitiesButton.ariaLabel = "Minimal Twitter Communities";
+    communitiesButton.removeAttribute("data-testid");
+    communitiesButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.communities.normal;
+    communitiesButton.firstChild.lastChild.firstChild.innerText = "Communities";
+    profileNode.insertAdjacentElement("beforebegin", communitiesButton);
   }
 };
 
@@ -241,23 +242,23 @@ export const changeListsButton = (listsButton) => {
 
 // Function to add Lists button
 export const addListsButton = () => {
-  if (!document.querySelector(selectors.sidebarLinks.lists)) {
-    const profileNode = document.querySelector(
-      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-    );
+  if (document.querySelector(selectors.sidebarLinks.lists)) return;
 
-    if (profileNode) {
-      const listsButton = profileNode.cloneNode(true);
+  const profileNode = document.querySelector(
+    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+  );
 
-      listsButton.id = "mt-listsButtonNode";
-      listsButton.href += "/lists";
-      listsButton.ariaLabel = "Minimal Twitter Lists";
-      listsButton.removeAttribute("data-testid");
-      listsButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.lists.normal;
-      listsButton.firstChild.lastChild.firstChild.innerText = "Lists";
-      profileNode.insertAdjacentElement("beforebegin", listsButton);
-    }
+  if (profileNode) {
+    const listsButton = profileNode.cloneNode(true);
+
+    listsButton.id = "mt-listsButtonNode";
+    listsButton.href += "/lists";
+    listsButton.ariaLabel = "Minimal Twitter Lists";
+    listsButton.removeAttribute("data-testid");
+    listsButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.lists.normal;
+    listsButton.firstChild.lastChild.firstChild.innerText = "Lists";
+    profileNode.insertAdjacentElement("beforebegin", listsButton);
   }
 };
 
@@ -327,16 +328,17 @@ const removeHover = () => {
 };
 
 // Function to change Navigation Button Labels on Hover
-export const changeNavigationButtonsLabelsHover = (
+export const changeNavigationButtonsLabelsHover = async (
   navigationButtonsLabelsHover
 ) => {
   switch (navigationButtonsLabelsHover) {
     case "off":
-      chrome.storage.sync.get(["navigationButtonsLabels"], (result) => {
-        if (result.navigationButtonsLabels !== "on") {
-          removeHover();
-        }
-      });
+      const data = await getStorage(["navigationButtonsLabels"]);
+
+      if (data?.navigationButtonsLabels === "on") return;
+
+      removeHover();
+
       break;
 
     case "on":
@@ -346,7 +348,9 @@ export const changeNavigationButtonsLabelsHover = (
 };
 
 // Function to change Navigation Button Labels
-export const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
+export const changeNavigationButtonsLabels = async (
+  navigationButtonsLabels
+) => {
   switch (navigationButtonsLabels) {
     case "on":
       removeElement("mt-navigationButtonsLabelsHover");
@@ -362,13 +366,13 @@ export const changeNavigationButtonsLabels = (navigationButtonsLabels) => {
       break;
 
     case "off":
-      chrome.storage.sync.get(["navigationButtonsLabelsHover"], (result) => {
-        if (result.navigationButtonsLabelsHover === "off") {
-          removeHover();
-        }
-      });
+      const data = await getStorage(["navigationButtonsLabelsHover"]);
 
+      if (data?.navigationButtonsLabelsHover !== "off") return;
+
+      removeHover();
       removeElement("mt-navigationButtonsLabels");
+
       break;
   }
 };

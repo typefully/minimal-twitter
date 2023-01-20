@@ -5,6 +5,7 @@ import {
 } from "./modules/initialize";
 import { injectAllChanges, userPreferences } from "./modules/options/all";
 import constructNewData from "./modules/utilities/constructNewData";
+import { getStorage } from "./modules/utilities/storage";
 
 /*--
 - Docs: https://developer.chrome.com/docs/extensions/reference/storage/#synchronous-response-to-storage-updates
@@ -20,7 +21,7 @@ chrome.storage.onChanged.addListener((changes) => {
 - Initializing function, runs once at start
 - Get Chrome Storage and inject respective styles
 --*/
-const init = () => {
+const init = async () => {
   // Adds main stylesheet and any additional stylesheets
   addStylesheets();
 
@@ -31,9 +32,8 @@ const init = () => {
   addResizeListener();
 
   // Inject user preferences
-  chrome.storage.sync.get(userPreferences, (data) => {
-    injectAllChanges(data);
-  });
+  const data = await getStorage(userPreferences);
+  injectAllChanges(data);
 };
 
 init();

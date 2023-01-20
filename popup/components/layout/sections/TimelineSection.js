@@ -40,6 +40,11 @@ const TimelineSection = () => {
               storageKey="stickyHeader"
               defaultState={true}
             />
+            <SwitchControl
+              label="Following Timeline"
+              storageKey="followingTimeline"
+              defaultState={false}
+            />
           </div>
           <Separator className="mt-4 mb-2" />
           <VanityCheckboxes />

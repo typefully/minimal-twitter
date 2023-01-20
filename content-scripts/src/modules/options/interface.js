@@ -1,17 +1,17 @@
 import selectors from "../../selectors";
 import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
+import { getStorage } from "../utilities/storage";
 
 // Function to change the title notification count
 let nt; // Title Notifications timeout
 export const changeTitleNotifications = (tf) => {
-  const run = () => {
+  const run = async () => {
     let titleNotifications = tf;
 
     if (!tf) {
-      chrome.storage.sync.get(["titleNotifications"], (result) => {
-        titleNotifications = result.titleNotifications;
-      });
+      const data = await getStorage(["titleNotifications"]);
+      titleNotifications = data?.titleNotifications;
     }
 
     const favicon = document.querySelector('link[rel="shortcut icon"]');

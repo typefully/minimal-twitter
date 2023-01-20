@@ -1,14 +1,17 @@
-import selectors from "../selectors";
-import { checkHomeTimeline, checkUrlForFollow } from "./check";
+import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
 import {
   addCommunitiesButton,
   addListsButton,
   addTwitterBlueButton,
 } from "./options/navigation";
-import { changeRecentMedia } from "./options/timeline";
+import {
+  changeFollowingTimeline,
+  changeRecentMedia,
+  changeTrendsHomeTimeline,
+} from "./options/timeline";
 import { addGrowButton } from "./options/typefully";
-import { addWriterModeButton } from "./options/writer-mode";
+import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import {
   addTypefullyPlug,
   addTypefullyReplyPlug,
@@ -16,6 +19,7 @@ import {
 } from "./typefully";
 import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
 import removeElement from "./utilities/removeElement";
+import { getStorage } from "./utilities/storage";
 import throttle from "./utilities/throttle";
 
 // Function to reveal Search Filters
@@ -63,10 +67,10 @@ export const addStylesheets = async () => {
   head.insertBefore(externalStylsheet, typefullyStylesheet.nextSibling);
 
   const mainStylesheetFromCDN = await fetch(
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.0/css/main.css"
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css"
   );
   const typefullyStylesheetFromCDN = await fetch(
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.0/css/typefully.css"
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css"
   );
   const mainText = (await mainStylesheetFromCDN.text()).trim();
   const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
@@ -88,57 +92,57 @@ export const observe = () => {
       extractColorsAsRootVars(); // Extract colors first
     }
 
-    const runDocumentMutations = throttle(() => {
-      addTypefullyPlug();
-      saveCurrentReplyToLink();
-      addTypefullyReplyPlug();
-      checkUrlForFollow();
-      checkHomeTimeline();
-      hideViewCount();
-      changeRecentMedia();
+    const runDocumentMutations = throttle(async () => {
+      const data = await getStorage([
+        "listsButton",
+        "communitiesButton",
+        "twitterBlueButton",
+        "typefullyGrowTab",
+        "followingTimeline",
+        "trendsHomeTimeline",
+        "writerMode",
+      ]);
 
-      const searchBar = document.querySelector(
-        '[data-testid="SearchBox_Search_Input"]'
-      );
-      const advancedSearch = document.querySelector(
-        `[data-testid="searchFiltersAdvancedSearch"]`
-      );
+      if (data?.writerMode === "on") {
+        changeWriterMode(data?.writerMode);
+      } else {
+        changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode);
+        changeFollowingTimeline(data?.followingTimeline);
+
+        if (data?.listsButton === "on") addListsButton();
+        if (data?.communitiesButton === "on") addCommunitiesButton();
+        if (data?.twitterBlueButton === "on") addTwitterBlueButton();
+        if (data?.typefullyGrowTab === "on") {
+          clearTimeout(mt);
+          mt = setTimeout(() => {
+            addGrowButton();
+          });
+        }
+
+        addTypefullyPlug();
+        saveCurrentReplyToLink();
+        addTypefullyReplyPlug();
+        checkUrlForFollow();
+        hideViewCount();
+        changeRecentMedia();
+
+        const searchBar = document.querySelector(
+          '[data-testid="SearchBox_Search_Input"]'
+        );
+        const advancedSearch = document.querySelector(
+          `[data-testid="searchFiltersAdvancedSearch"]`
+        );
+
+        if (searchBar) searchBarWidthReset(searchBar);
+        if (advancedSearch) revealSearchFilters(advancedSearch);
+      }
+
       const scheduleButton = document.querySelector(
         'div[data-testid="scheduleOption"]'
       );
-      const leftSideBar = document.querySelector(selectors.leftSidebar);
-
-      if (searchBar) searchBarWidthReset(searchBar);
       if (scheduleButton) addWriterModeButton(scheduleButton);
-      if (advancedSearch) revealSearchFilters(advancedSearch);
-      if (leftSideBar) {
-        chrome.storage.sync.get(
-          [
-            "listsButton",
-            "communitiesButton",
-            "twitterBlueButton",
-            "typefullyGrowTab",
-          ],
-          (result) => {
-            const {
-              listsButton,
-              communitiesButton,
-              twitterBlueButton,
-              typefullyGrowTab,
-            } = result;
 
-            if (listsButton) addListsButton();
-            if (communitiesButton) addCommunitiesButton();
-            if (twitterBlueButton) addTwitterBlueButton();
-            if (typefullyGrowTab) {
-              clearTimeout(mt);
-              mt = setTimeout(() => {
-                addGrowButton();
-              });
-            }
-          }
-        );
-      }
+      return;
     }, 500);
 
     runDocumentMutations();
@@ -243,37 +247,27 @@ let gt; // Grow Tab timeout
 export const addResizeListener = () => {
   window.addEventListener(
     "resize",
-    throttle(() => {
+    throttle(async () => {
       removeElement("mt-listsButtonNode");
       removeElement("mt-communitiesButton");
       removeElement("mt-typefullyGrowButton");
 
-      chrome.storage.sync.get(
-        [
-          "listsButton",
-          "communitiesButton",
-          "twitterBlueButton",
-          "typefullyGrowTab",
-        ],
-        (result) => {
-          const {
-            listsButton,
-            communitiesButton,
-            twitterBlueButton,
-            typefullyGrowTab,
-          } = result;
+      const data = await getStorage([
+        "listsButton",
+        "communitiesButton",
+        "twitterBlueButton",
+        "typefullyGrowTab",
+      ]);
 
-          if (listsButton) addListsButton();
-          if (communitiesButton) addCommunitiesButton();
-          if (twitterBlueButton) addTwitterBlueButton();
-          if (typefullyGrowTab) {
-            clearTimeout(gt);
-            gt = setTimeout(() => {
-              addGrowButton();
-            });
-          }
-        }
-      );
+      if (data?.listsButton) addListsButton();
+      if (data?.communitiesButton) addCommunitiesButton();
+      if (data?.twitterBlueButton) addTwitterBlueButton();
+      if (data?.typefullyGrowTab) {
+        clearTimeout(gt);
+        gt = setTimeout(() => {
+          addGrowButton();
+        });
+      }
     }, 1000)
   );
 };

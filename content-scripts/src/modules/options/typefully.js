@@ -45,6 +45,7 @@ export const changeGrowButton = (growButton) => {
 export const addGrowButton = async () => {
   const userSetting = await getStorage("typefullyGrowTab");
   if (userSetting !== "on") return;
+
   const exists = document.querySelector("#mt-typefullyGrowButton");
   if (exists) return;
 
