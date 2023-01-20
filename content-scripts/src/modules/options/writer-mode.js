@@ -34,6 +34,7 @@ export const changeWriterMode = (writerMode) => {
           `
             body {
               padding-left: 0;
+              overflow: hidden;
             }
             ${selectors.mainColumn} {
               border-style: hidden;
@@ -47,8 +48,8 @@ export const changeWriterMode = (writerMode) => {
             ${selectors.leftSidebar},
             ${selectors.rightSidebar},
             ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
-              overflow: none;
-              visibility: hidden !important;
+              overflow: hidden;
+              visibility: hidden;
               opacity: 0;
             }
             ${selectors.topHeader} {
