@@ -41,6 +41,9 @@ export const changeWriterMode = (writerMode) => {
               padding-top: 3vh;
               margin: 0 auto;
             }
+            ${selectors.mainWrapper} {
+              flex-basis: 100%;
+            }
             ${selectors.mainWrapper} > div {
               width: 100%;
               max-width: 100%;
@@ -51,6 +54,8 @@ export const changeWriterMode = (writerMode) => {
               overflow: hidden;
               visibility: hidden;
               opacity: 0;
+              width: 0;
+              height: 0;
             }
             ${selectors.topHeader} {
               visibility: hidden;
