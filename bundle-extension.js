@@ -21,7 +21,7 @@ let manifest = {
   name: "Minimal Theme for Twitter",
   short_name: "Minimal Twitter",
   description: "Refine and declutter the Twitter web experience.",
-  version: "5.0.1",
+  version: "5.0.2",
   icons: {
     16: "images/MinimalTwitterIcon16.png",
     32: "images/MinimalTwitterIcon32.png",
