@@ -143,7 +143,7 @@ export const observe = () => {
       if (scheduleButton) addWriterModeButton(scheduleButton);
 
       return;
-    }, 500);
+    }, 1000);
 
     runDocumentMutations();
   });

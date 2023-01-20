@@ -47,7 +47,9 @@ export const changeWriterMode = (writerMode) => {
             ${selectors.leftSidebar},
             ${selectors.rightSidebar},
             ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
-              display: none;
+              overflow: none;
+              visibility: hidden !important;
+              opacity: 0;
             }
             ${selectors.topHeader} {
               visibility: hidden;
