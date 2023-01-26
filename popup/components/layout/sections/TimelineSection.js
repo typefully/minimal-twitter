@@ -74,6 +74,10 @@ const TimelineSection = () => {
             storageKey="removeTopicsToFollow"
           />
           <CheckboxControl
+            label={`Remove "For you / Following" tabs`}
+            storageKey="removeTimelineTabs"
+          />
+          <CheckboxControl
             label="Always Latest Tweets (if available)"
             storageKey="latestTweets"
           />

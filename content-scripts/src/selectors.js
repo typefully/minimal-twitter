@@ -4,6 +4,7 @@ const selectors = {};
 selectors.mainWrapper = `main[role="main"]`;
 selectors.mainColumn = `[data-testid="primaryColumn"]`;
 selectors.topHeader = `${selectors.mainColumn} > div > div:nth-of-type(1)`;
+selectors.timelineTabs = `${selectors.mainColumn} > div > div:nth-of-type(1) > div > div > nav:only-child[role="navigation"]`;
 selectors.leftSidebar = `header[role="banner"]`;
 selectors.leftSidebarLinks = `${selectors.leftSidebar} nav[role="navigation"]`;
 selectors.leftSidebarUnreadBadge = `${selectors.leftSidebarLinks} a svg + div[dir]`;

@@ -212,6 +212,25 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
   }
 };
 
+export const changeTimelineTabs = (removeTimelineTabs) => {
+  switch (removeTimelineTabs) {
+    case "off":
+      removeElement("mt-removeTimelineTabs");
+      break;
+
+    case "on":
+      addStyles(
+        "mt-removeTimelineTabs",
+        `
+        ${selectors.timelineTabs} {
+          display: none;
+        }
+        `
+      );
+      break;
+  }
+};
+
 // Function to change Recent Media on Profiles
 export const changeRecentMedia = async (recentMedia) => {
   const userProfile = document.querySelector(

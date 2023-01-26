@@ -4,7 +4,6 @@ import {
   changeLikeCount,
   changeReplyCount,
   changeRetweetCount,
-  changeRetweetCount,
 } from "./hideVanityCounts";
 import hideViewCount from "./hideViewCount";
 import {
@@ -37,6 +36,7 @@ import {
   changeRecentMedia,
   changeStickyHeader,
   changeTimelineBorders,
+  changeTimelineTabs,
   changeTimelineWidth,
   changeTopicsToFollow,
   changeTrendsHomeTimeline,
@@ -78,6 +78,7 @@ export const userPreferences = [
   "removePromotedPosts",
   "removeWhoToFollow",
   "removeTopicsToFollow",
+  "removeTimelineTabs",
   "followingTimeline",
   "latestTweets",
   "trendsHomeTimeline",
@@ -118,6 +119,7 @@ export const injectAllChanges = (data) => {
   changePromotedPosts(data?.removePromotedPosts); // Remove Promoted Posts
   changeWhoToFollow(data?.removeWhoToFollow); // Who to Follow
   changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow
+  changeTimelineTabs(data?.removeTimelineTabs); // For you / Following tabs
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeFollowingTimeline(data?.followingTimeline); // Always Show Following Timeline
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
