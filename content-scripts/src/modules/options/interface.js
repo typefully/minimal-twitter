@@ -62,8 +62,8 @@ export const changeInterFont = (interFont) => {
           )}') format('woff2');
         }
 
-        * {
-          font-family: Inter, TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        div, span, input, textarea {
+          font-family: Inter, TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
         }
         `
       );
