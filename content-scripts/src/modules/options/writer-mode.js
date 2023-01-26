@@ -6,7 +6,7 @@ import {
   getCurrentTextAndSendToTypefully,
 } from "../typefully";
 import addStyles from "../utilities/addStyles";
-import addTooltip from "../utilities/addTooltip";
+import addTooltip, { hideAllTooltips } from "../utilities/addTooltip";
 import addTypefullyBox from "../utilities/addTypefullyBox";
 import removeElement from "../utilities/removeElement";
 import { getStorage, setStorage } from "../utilities/storage";
@@ -229,6 +229,8 @@ const toggleWriterMode = async () => {
   }
 
   if (!writerModeButton) return;
+
+  hideAllTooltips();
 
   if (userSetting === "off") {
     writerModeButton.firstChild.firstChild.firstChild.innerHTML =

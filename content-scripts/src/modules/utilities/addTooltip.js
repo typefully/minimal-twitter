@@ -55,3 +55,11 @@ ${description ? `<span class="description">${description}</span>` : ""}`;
     tooltip.classList.add("hidden");
   };
 }
+
+export const hideAllTooltips = () => {
+  const tooltips = document.querySelectorAll(".mt-tooltip");
+
+  tooltips.forEach((tooltip) => {
+    tooltip.classList.add("hidden");
+  });
+};
