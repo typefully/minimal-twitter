@@ -221,32 +221,26 @@ const zipSafari = async () => {
 
     startBuilding();
 
-    setTimeout(() => {
-      clearInterval(intervalId);
+    clearInterval(intervalId);
 
-      try {
-        zipper.sync
-          .zip(`./bundle/safari`)
-          .compress()
-          .save(`./bundle/safari.zip`);
+    try {
+      zipper.sync.zip(`./bundle/safari`).compress().save(`./bundle/safari.zip`);
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      console.log(`🍎  Converted Firefox to Safari.`);
+      console.log(`🧬  Zipped \`bundle/safari\` to \`bundle/safari.zip\`.`);
 
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
-        console.log(`🍎  Converted Firefox to Safari.`);
-        console.log(`🧬  Zipped \`bundle/safari\` to \`bundle/safari.zip\`.`);
+      resolve();
+    } catch (error) {
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      console.log(`🍎  Converted Firefox to Safari.`);
+      console.log(
+        `❌  Could not zip Firefox to Safari, try running script again.`
+      );
 
-        resolve();
-      } catch (error) {
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
-        console.log(`🍎  Converted Firefox to Safari.`);
-        console.log(
-          `❌  Could not zip Firefox to Safari, try running script again.`
-        );
-
-        reject(error);
-      }
-    }, 1000);
+      reject(error);
+    }
   });
 
   return promise;
