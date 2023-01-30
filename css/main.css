@@ -139,7 +139,7 @@ a[href*="quick_promote_web"] {
 
   /* Match size of focused search input to its dropdown */
   [data-testid="sidebarColumn"] input[placeholder="Search Twitter"]:focus {
-    width: 328px;
+    width: 328px !important; /* keep !important to override inline style here */
   }
 
   /* Reset width and left positioning to align search dropdown */
