@@ -15,6 +15,7 @@ import {
 } from "./interface";
 import {
   changeBookmarksButton,
+  changeCirclesButton,
   changeCommunitiesButton,
   changeExploreButton,
   changeHomeButton,
@@ -26,6 +27,7 @@ import {
   changeNotificationsButton,
   changeProfileButton,
   changeTopArticlesButton,
+  changeTopicsButton,
   changeTwitterBlueButton,
   changeUnreadCountBadge,
 } from "./navigation";
@@ -59,6 +61,8 @@ export const userPreferences = [
   "bookmarksButton",
   "topArticlesButton",
   "communitiesButton",
+  "topicsButton",
+  "circlesButton",
   "listsButton",
   "twitterBlueButton",
   "typefullyGrowTab",
@@ -101,6 +105,8 @@ export const injectAllChanges = (data) => {
   changeBookmarksButton(data?.bookmarksButton); // Bookmarks Button
   changeTopArticlesButton(data?.topArticlesButton); // Top Articles Button
   changeCommunitiesButton(data?.communitiesButton); // Communities Button
+  changeCirclesButton(data?.circlesButton); // Circles Button
+  changeTopicsButton(data?.topicsButton); // Topics Button
   changeListsButton(data?.listsButton); // Lists Button
   changeProfileButton(data?.profileButton); // Profile Button
   changeTwitterBlueButton(data?.twitterBlueButton); // Twitter Blue Button

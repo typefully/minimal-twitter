@@ -197,6 +197,94 @@ export const changeCommunitiesButton = (communitiesButton) => {
 };
 
 // Function to add Communities button
+export const addTopicsButton = () => {
+  if (document.querySelector(selectors.sidebarLinks.topics)) return;
+
+  const profileNode = document.querySelector(
+    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+  );
+
+  if (profileNode) {
+    const topicsButton = profileNode.cloneNode(true);
+
+    topicsButton.id = "mt-topicsButtonNode";
+    topicsButton.href += "/topics";
+    topicsButton.ariaLabel = "Minimal Twitter Topics";
+    topicsButton.removeAttribute("data-testid");
+    topicsButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.topics.normal;
+    topicsButton.firstChild.lastChild.firstChild.innerText = "Topics";
+    profileNode.insertAdjacentElement("beforebegin", topicsButton);
+  }
+};
+
+// Function to change Communities Button
+export const changeTopicsButton = (topicsButton) => {
+  switch (topicsButton) {
+    case "off":
+      removeElement("mt-topicsButtonNode");
+      addStyles(
+        "mt-topicsButton",
+        `
+        ${selectors.sidebarLinks.topics} {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-topicsButton");
+      addTopicsButton();
+      break;
+  }
+};
+
+// Function to add Communities button
+export const addCirclesButton = () => {
+  if (document.querySelector(selectors.sidebarLinks.circles)) return;
+
+  const profileNode = document.querySelector(
+    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+  );
+
+  if (profileNode) {
+    const circlesButton = profileNode.cloneNode(true);
+
+    circlesButton.id = "mt-circlesButtonNode";
+    circlesButton.href = "/i/circles";
+    circlesButton.ariaLabel = "Minimal Twitter Circles";
+    circlesButton.removeAttribute("data-testid");
+    circlesButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.circles.normal;
+    circlesButton.firstChild.lastChild.firstChild.innerText = "Circles";
+    profileNode.insertAdjacentElement("beforebegin", circlesButton);
+  }
+};
+
+// Function to change Communities Button
+export const changeCirclesButton = (circlesButton) => {
+  switch (circlesButton) {
+    case "off":
+      removeElement("mt-circlesButtonNode");
+      addStyles(
+        "mt-circlesButton",
+        `
+        ${selectors.sidebarLinks.circles} {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-circlesButton");
+      addCirclesButton();
+      break;
+  }
+};
+
+// Function to add Communities button
 export const addCommunitiesButton = () => {
   if (document.querySelector(selectors.sidebarLinks.communities)) return;
 

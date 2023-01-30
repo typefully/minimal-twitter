@@ -13,11 +13,13 @@ selectors.sidebarLinks = {
   explore: `[data-testid="AppTabBar_Explore_Link"]`,
   notifications: `[data-testid="AppTabBar_Notifications_Link"]`,
   messages: `[data-testid="AppTabBar_DirectMessage_Link"]`,
-  bookmarks: `a[href="/i/bookmarks"]`,
-  articles: `a[href="/i/articles"]`,
-  communities: `a[href$=communities]`,
+  bookmarks: `a[href*="bookmarks"]`,
+  articles: `a[href*="i/articles"]`,
+  topics: `a[href*=topics]`,
+  circles: `a[href*=circles]`,
+  communities: `a[href*=communities]`,
   profile: `[data-testid="AppTabBar_Profile_Link"]`,
-  lists: `a[href*="/lists"][role="link"][aria-label]`,
+  lists: `a[href*="lists"][role="link"][aria-label]`,
   twitterBlue: `a[href*="blue"][role="link"][aria-label]`,
 };
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;

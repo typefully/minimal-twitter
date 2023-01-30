@@ -48,10 +48,6 @@ const TimelineSection = () => {
               label="Recent Media on Profiles"
               storageKey="recentMedia"
             />
-            <SwitchControl
-              label="Following Tab on Home Timeline"
-              storageKey="followingTimeline"
-            />
           </div>
           <Separator className="mt-4 mb-2" />
           <VanityCheckboxes />
@@ -74,8 +70,12 @@ const TimelineSection = () => {
             storageKey="removeTopicsToFollow"
           />
           <CheckboxControl
-            label={`Remove "For you / Following" tabs`}
+            label={`Remove "For you / Following" Tabs`}
             storageKey="removeTimelineTabs"
+          />
+          <CheckboxControl
+            label={`Always use "Following" Tab`}
+            storageKey="followingTimeline"
           />
           <CheckboxControl
             label="Always Latest Tweets (if available)"

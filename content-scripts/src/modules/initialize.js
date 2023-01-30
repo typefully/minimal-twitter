@@ -1,6 +1,8 @@
 import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
 import {
+  addCirclesButton,
+  addTopicsButton,
   addCommunitiesButton,
   addListsButton,
   addTwitterBlueButton,
@@ -96,6 +98,8 @@ export const observe = () => {
       const data = await getStorage([
         "listsButton",
         "communitiesButton",
+        "topicsButton",
+        "circlesButton",
         "twitterBlueButton",
         "typefullyGrowTab",
         "followingTimeline",
@@ -111,6 +115,8 @@ export const observe = () => {
 
         if (data?.listsButton === "on") addListsButton();
         if (data?.communitiesButton === "on") addCommunitiesButton();
+        if (data?.topicsButton === "on") addTopicsButton();
+        if (data?.circlesButton === "on") addCirclesButton();
         if (data?.twitterBlueButton === "on") addTwitterBlueButton();
         if (data?.typefullyGrowTab === "on") {
           clearTimeout(mt);
@@ -255,14 +261,18 @@ export const addResizeListener = () => {
       const data = await getStorage([
         "listsButton",
         "communitiesButton",
+        "topicsButton",
+        "circlesButton",
         "twitterBlueButton",
         "typefullyGrowTab",
       ]);
 
-      if (data?.listsButton) addListsButton();
-      if (data?.communitiesButton) addCommunitiesButton();
-      if (data?.twitterBlueButton) addTwitterBlueButton();
-      if (data?.typefullyGrowTab) {
+      if (data?.listsButton === "on") addListsButton();
+      if (data?.communitiesButton === "on") addCommunitiesButton();
+      if (data?.topicsButton === "on") addTopicsButton();
+      if (data?.circlesButton === "on") addCirclesButton();
+      if (data?.twitterBlueButton === "on") addTwitterBlueButton();
+      if (data?.typefullyGrowTab === "on") {
         clearTimeout(gt);
         gt = setTimeout(() => {
           addGrowButton();
