@@ -5,9 +5,9 @@ import process from "process";
 import readline from "readline";
 import zipper from "zip-local";
 
-const runCommand = (command) =>
+const runCommand = (command, yes) =>
   new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
+    exec(yes ? `echo "y" | ${command}` : command, (error, stdout, stderr) => {
       if (error) {
         reject(error);
       } else {
@@ -255,9 +255,28 @@ const zipSafari = async () => {
 const bundleAll = async () => {
   await bundle(MANIFEST_CHROME, "bundle/chrome");
   await bundle(MANIFEST_FIREFOX, "bundle/firefox");
-  exec(
-    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'"
+
+  let intervalId;
+  let spinner = "\\";
+  const startBuilding = () => {
+    let P = ["\\", "|", "/", "-"];
+    intervalId = setInterval(() => {
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      spinner = P[P.indexOf(spinner) + 1] || P[0];
+      process.stdout.write(`${spinner}   Bundling Safari...`);
+    }, 250);
+  };
+
+  startBuilding();
+
+  await runCommand(
+    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'",
+    true
   );
+
+  clearInterval(intervalId);
+
   await zipSafari();
 };
 
@@ -280,9 +299,28 @@ rl.question(
 
       case "Safari":
         await bundle(MANIFEST_FIREFOX, "bundle/firefox");
-        exec(
-          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'"
+
+        let intervalId;
+        let spinner = "\\";
+        const startBuilding = () => {
+          let P = ["\\", "|", "/", "-"];
+          intervalId = setInterval(() => {
+            process.stdout.clearLine();
+            process.stdout.cursorTo(0);
+            spinner = P[P.indexOf(spinner) + 1] || P[0];
+            process.stdout.write(`${spinner}   Bundling Safari...`);
+          }, 250);
+        };
+
+        startBuilding();
+
+        await runCommand(
+          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'",
+          true
         );
+
+        clearInterval(intervalId);
+
         await zipSafari();
         break;
 
