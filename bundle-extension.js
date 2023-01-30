@@ -1,7 +1,6 @@
 import { exec } from "child_process";
 import { copy } from "fs-extra";
-import { copyFile, readdir, rm, writeFile } from "fs/promises";
-import { resolve } from "path";
+import { copyFile, rm, writeFile } from "fs/promises";
 import process from "process";
 import readline from "readline";
 import zipper from "zip-local";
@@ -257,7 +256,7 @@ const bundleAll = async () => {
   await bundle(MANIFEST_CHROME, "bundle/chrome");
   await bundle(MANIFEST_FIREFOX, "bundle/firefox");
   exec(
-    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari"
+    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'"
   );
   await zipSafari();
 };
@@ -282,7 +281,7 @@ rl.question(
       case "Safari":
         await bundle(MANIFEST_FIREFOX, "bundle/firefox");
         exec(
-          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari"
+          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'"
         );
         await zipSafari();
         break;
