@@ -39,6 +39,9 @@ node_modules
 package-lock.json
 out
 dist
-bundle/*
-!bundle/*.zip
+bundle/chrome
+bundle/firefox
 .vscode
+
+# xcode project
+xcuserdata/

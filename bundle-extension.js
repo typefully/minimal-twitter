@@ -264,10 +264,8 @@ const bundleAll = async () => {
 
   startBuilding();
 
-  await runCommand(
-    "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'",
-    true
-  );
+  await runCommand(generateSafariProjectCommand, true);
+  await runCommand(fixBundleIdentifierCommand, true);
 
   clearInterval(intervalId);
 
@@ -308,10 +306,8 @@ rl.question(
 
         startBuilding();
 
-        await runCommand(
-          "xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'",
-          true
-        );
+        await runCommand(generateSafariProjectCommand, true);
+        await runCommand(fixBundleIdentifierCommand, true);
 
         clearInterval(intervalId);
 
@@ -333,6 +329,11 @@ rl.question(
 rl.on("close", () => {
   process.exit(0);
 });
+
+const generateSafariProjectCommand = `xcrun safari-web-extension-converter bundle/firefox --project-location bundle/safari --app-name 'Minimal Twitter' --bundle-identifier 'com.typefully.minimal-twitter'`;
+
+// The first command currently ignores the full --bundle-identifier flag (it still take the company name), so a replace is required to make sure it matches our bundle identifier
+const fixBundleIdentifierCommand = `find "bundle/safari/Minimal Twitter" \\( -name "*.swift" -or -name "*.pbxproj" \\) -type f -exec sed -i '' 's/com.typefully.Minimal-Twitter/com.typefully.minimal-twitter/g' {} +`;
 
 /*--- Bundle without prompting
 await bundleAll();
