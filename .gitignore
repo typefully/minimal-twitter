@@ -41,7 +41,6 @@ out
 dist
 bundle/chrome
 bundle/firefox
-bundle/safari*
 .vscode
 
 # xcode project
