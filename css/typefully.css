@@ -21,7 +21,7 @@
 }
 .typefully-save-draft-button.ghost {
   background-color: transparent;
-  border: 1px solid var(--accent-color);
+  border: 1px solid rgba(var(--accent-color-rgb), 0.3);
   color: var(--accent-color);
   margin: 0 0 0 12px;
   min-height: 36px;
@@ -157,4 +157,13 @@ body.mt-writerMode-on .typefully-save-draft-button {
 
 #typefully-writermode-box {
   animation-delay: 0.1s;
+}
+
+button .typefully-logo:not(:only-child),
+[role="button"] .typefully-logo:not(:only-child) {
+  margin: 0 2px -4px 3px;
+}
+button .typefully-logo:only-child,
+[role="button"] .typefully-logo:only-child {
+  margin: 0 -9px -4px 3px;
 }

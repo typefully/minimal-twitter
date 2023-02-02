@@ -1,5 +1,6 @@
 import svgAssets from "./svgAssets";
 import addStyles from "./utilities/addStyles";
+import addTooltip from "./utilities/addTooltip";
 import removeElement from "./utilities/removeElement";
 
 // Function to add "Continue Thread in Typefully"
@@ -62,14 +63,16 @@ export const addTypefullyPlug = () => {
       "typefully-save-draft-button ghost"
     );
     const typefullyLogo = createTypefullyLogo();
-    const typefullyText = document.createElement("span");
+
+    addTooltip(typefullyLinkElement, {
+      id: "save-draft",
+      title: "Save this draft to Typefully",
+    });
 
     typefullyLinkElement.addEventListener("click", () => {
       getCurrentTextAndSendToTypefully();
     });
-    typefullyText.innerText = "Save draft";
     typefullyLinkElement.appendChild(typefullyLogo);
-    typefullyLinkElement.appendChild(typefullyText);
     container.appendChild(typefullyLinkElement);
 
     addStyles(
@@ -165,9 +168,9 @@ export const createTypefullyLinkElement = (id, className) => {
 
 export const createTypefullyLogo = () => {
   const typefullyLogo = document.createElement("div");
+  typefullyLogo.className = "typefully-logo";
   typefullyLogo.innerHTML = svgAssets.typefully.logo;
   typefullyLogo.style.position = "relative";
-  typefullyLogo.style.margin = "0 2px -4px 3px";
   return typefullyLogo;
 };
 
