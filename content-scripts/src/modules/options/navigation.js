@@ -124,6 +124,34 @@ export const changeTopArticlesButton = (topArticlesButton) => {
   }
 };
 
+// Function to add Twitter Blue button
+let bt; // Twitter Blue button timeout
+export const addTwitterBlueButton = () => {
+  clearTimeout(bt);
+
+  if (document.querySelector(selectors.sidebarLinks.twitterBlue)) return;
+
+  bt = setTimeout(() => {
+    const profileNode = document.querySelector(
+      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+    );
+
+    if (profileNode) {
+      const twitterBlueButton = profileNode.cloneNode(true);
+
+      twitterBlueButton.id = "mt-twitterBlueButtonNode";
+      twitterBlueButton.href = "/settings/twitter_blue";
+      twitterBlueButton.ariaLabel = "Minimal Twitter Twitter Blue";
+      twitterBlueButton.removeAttribute("data-testid");
+      twitterBlueButton.firstChild.firstChild.firstChild.innerHTML =
+        svgAssets.twitterBlue.normal;
+      twitterBlueButton.firstChild.lastChild.firstChild.innerText =
+        "Twitter Blue";
+      profileNode.insertAdjacentElement("beforebegin", twitterBlueButton);
+    }
+  }, 500);
+};
+
 // Function to change Twitter Blue in Navigation
 export const changeTwitterBlueButton = (twitterBlueButton) => {
   switch (twitterBlueButton) {
@@ -142,56 +170,6 @@ export const changeTwitterBlueButton = (twitterBlueButton) => {
     case "on":
       removeElement("mt-twitterBlueButton");
       addTwitterBlueButton();
-      break;
-  }
-};
-
-// Function to add Twitter Blue button
-let bt; // Twitter Blue button timeout
-export const addTwitterBlueButton = () => {
-  clearTimeout(bt);
-
-  if (document.querySelector(selectors.sidebarLinks.twitterBlue)) return;
-
-  bt = setTimeout(() => {
-    const profileNode = document.querySelector(
-      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-    );
-
-    if (profileNode) {
-      const twitterBlueButton = profileNode.cloneNode(true);
-
-      twitterBlueButton.id = "mt-twitterBlueButtonNode";
-      twitterBlueButton.href = "https://twitter.com/settings/twitter_blue";
-      twitterBlueButton.ariaLabel = "Minimal Twitter Twitter Blue";
-      twitterBlueButton.removeAttribute("data-testid");
-      twitterBlueButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.twitterBlue.normal;
-      twitterBlueButton.firstChild.lastChild.firstChild.innerText =
-        "Twitter Blue";
-      profileNode.insertAdjacentElement("beforebegin", twitterBlueButton);
-    }
-  }, 500);
-};
-
-// Function to change Communities Button
-export const changeCommunitiesButton = (communitiesButton) => {
-  switch (communitiesButton) {
-    case "off":
-      removeElement("mt-communitiesButtonNode");
-      addStyles(
-        "mt-communitiesButton",
-        `
-        ${selectors.sidebarLinks.communities} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-communitiesButton");
-      addCommunitiesButton();
       break;
   }
 };
@@ -306,24 +284,25 @@ export const addCommunitiesButton = () => {
   }
 };
 
-// Function to change Lists Button
-export const changeListsButton = (listsButton) => {
-  switch (listsButton) {
+// Function to change Communities Button
+export const changeCommunitiesButton = (communitiesButton) => {
+  switch (communitiesButton) {
     case "off":
-      removeElement("mt-listsButtonNode");
+      removeElement("mt-communitiesButtonNode");
       addStyles(
-        "mt-listsButton",
+        "mt-communitiesButton",
+        // Add important below to override it coming back: https://github.com/typefully/minimal-twitter/issues/156#issuecomment-1412600111
         `
-        ${selectors.sidebarLinks.lists} {
-          display: none;
+        ${selectors.sidebarLinks.communities} {
+          display: none !important;  
         }
         `
       );
       break;
 
     case "on":
-      removeElement("mt-listsButton");
-      addListsButton();
+      removeElement("mt-communitiesButton");
+      addCommunitiesButton();
       break;
   }
 };
@@ -347,6 +326,28 @@ export const addListsButton = () => {
       svgAssets.lists.normal;
     listsButton.firstChild.lastChild.firstChild.innerText = "Lists";
     profileNode.insertAdjacentElement("beforebegin", listsButton);
+  }
+};
+
+// Function to change Lists Button
+export const changeListsButton = (listsButton) => {
+  switch (listsButton) {
+    case "off":
+      removeElement("mt-listsButtonNode");
+      addStyles(
+        "mt-listsButton",
+        `
+        ${selectors.sidebarLinks.lists} {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-listsButton");
+      addListsButton();
+      break;
   }
 };
 

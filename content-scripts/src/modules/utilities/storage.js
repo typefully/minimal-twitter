@@ -18,21 +18,6 @@ export const getStorage = async (k) => {
   return promise;
 };
 
-/* 
-- Get storage with storage.sync
-- k => "[key]" (String)
-- Don't need to throttle
-*/
-export const getStorageSync = async (k) => {
-  const promise = new Promise((resolve, _reject) => {
-    const storageKey = Array.isArray(k) ? k : [k];
-    chrome?.storage?.sync.get(storageKey, (data) => {
-      return resolve(Array.isArray(k) ? data : data[k]);
-    });
-  });
-  return promise;
-};
-
 /*--
 - Set storage with storage.local
 - kv => {key: value} (Single key value pair)
