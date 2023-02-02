@@ -17,6 +17,7 @@
   align-items: center;
   margin: 20px auto;
   order: 99;
+  z-index: 2;
   cursor: pointer;
 }
 .typefully-save-draft-button.ghost {
@@ -150,8 +151,7 @@ body.mt-writerMode-on .typefully-save-draft-button {
   }
 }
 
-#typefully-writermode-box,
-.typefully-save-draft-button {
+#typefully-writermode-box {
   animation: fadeIn 0.3s ease-out both;
 }
 

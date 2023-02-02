@@ -2,9 +2,9 @@ import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
 import {
   addCirclesButton,
-  addTopicsButton,
   addCommunitiesButton,
   addListsButton,
+  addTopicsButton,
   addTwitterBlueButton,
 } from "./options/navigation";
 import {
