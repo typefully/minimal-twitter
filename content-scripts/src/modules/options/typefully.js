@@ -13,6 +13,7 @@ export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
         "mt-typefullyComposerButtons",
         `
         #typefully-link, 
+        #typefully-link-inline,
         #typefully-reply-link, 
         #typefully-writermode-link, 
         #typefully-writermode-box {
