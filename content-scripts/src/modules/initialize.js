@@ -112,36 +112,36 @@ export const observe = () => {
       } else {
         changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode);
         changeFollowingTimeline(data?.followingTimeline);
-
-        if (data?.listsButton === "on") addListsButton();
-        if (data?.communitiesButton === "on") addCommunitiesButton();
-        if (data?.topicsButton === "on") addTopicsButton();
-        if (data?.circlesButton === "on") addCirclesButton();
-        if (data?.twitterBlueButton === "on") addTwitterBlueButton();
-        if (data?.typefullyGrowTab === "on") {
-          clearTimeout(mt);
-          mt = setTimeout(() => {
-            addGrowButton();
-          });
-        }
-
-        addTypefullyPlug();
-        saveCurrentReplyToLink();
-        addTypefullyReplyPlug();
-        checkUrlForFollow();
-        hideViewCount();
-        changeRecentMedia();
-
-        const searchBar = document.querySelector(
-          '[data-testid="SearchBox_Search_Input"]'
-        );
-        const advancedSearch = document.querySelector(
-          `[data-testid="searchFiltersAdvancedSearch"]`
-        );
-
-        if (searchBar) searchBarWidthReset(searchBar);
-        if (advancedSearch) revealSearchFilters(advancedSearch);
       }
+
+      if (data?.listsButton === "on") addListsButton();
+      if (data?.communitiesButton === "on") addCommunitiesButton();
+      if (data?.topicsButton === "on") addTopicsButton();
+      if (data?.circlesButton === "on") addCirclesButton();
+      if (data?.twitterBlueButton === "on") addTwitterBlueButton();
+      if (data?.typefullyGrowTab === "on") {
+        clearTimeout(mt);
+        mt = setTimeout(() => {
+          addGrowButton();
+        });
+      }
+
+      addTypefullyPlug();
+      saveCurrentReplyToLink();
+      addTypefullyReplyPlug();
+      checkUrlForFollow();
+      hideViewCount();
+      changeRecentMedia();
+
+      const searchBar = document.querySelector(
+        '[data-testid="SearchBox_Search_Input"]'
+      );
+      const advancedSearch = document.querySelector(
+        `[data-testid="searchFiltersAdvancedSearch"]`
+      );
+
+      if (searchBar) searchBarWidthReset(searchBar);
+      if (advancedSearch) revealSearchFilters(advancedSearch);
 
       const scheduleButton = document.querySelector(
         'div[data-testid="scheduleOption"]'
@@ -256,6 +256,9 @@ export const addResizeListener = () => {
     throttle(async () => {
       removeElement("mt-listsButtonNode");
       removeElement("mt-communitiesButton");
+      removeElement("mt-topicsButton");
+      removeElement("mt-circlesButton");
+      removeElement("mt-twitterBlueButton");
       removeElement("mt-typefullyGrowButton");
 
       const data = await getStorage([
