@@ -20,6 +20,12 @@ export default async function hideViewCount() {
       viewsElement.style.display = "";
 
       removeElement("mt-hideViewCount");
+
+      const metadata =
+        document.querySelector("a[href*='status']").parentElement;
+
+      // Hide the last child from the metadata
+      metadata.removeChild(metadata.lastChild);
     }
   } else {
     viewCounts.forEach((el) => {
