@@ -70,10 +70,10 @@ export const addStylesheets = async () => {
   head.insertBefore(externalStylsheet, typefullyStylesheet.nextSibling);
 
   const mainStylesheetFromCDN = await fetch(
-    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css?t=${Date.now()}`
+    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`
   );
   const typefullyStylesheetFromCDN = await fetch(
-    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css?t=${Date.now()}`
+    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css?t=${Date.now()}`
   );
   const mainText = (await mainStylesheetFromCDN.text()).trim();
   const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
