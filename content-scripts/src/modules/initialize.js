@@ -112,6 +112,7 @@ export const observe = () => {
       } else {
         changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode);
         changeFollowingTimeline(data?.followingTimeline);
+        addTypefullyPlug();
       }
 
       if (data?.listsButton === "on") addListsButton();
@@ -126,7 +127,6 @@ export const observe = () => {
         });
       }
 
-      addTypefullyPlug();
       saveCurrentReplyToLink();
       addTypefullyReplyPlug();
       checkUrlForFollow();
