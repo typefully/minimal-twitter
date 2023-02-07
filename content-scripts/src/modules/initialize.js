@@ -19,6 +19,7 @@ import {
   addTypefullyReplyPlug,
   saveCurrentReplyToLink,
 } from "./typefully";
+import { isExtensionUnpacked } from "./utilities/chrome";
 import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
 import removeElement from "./utilities/removeElement";
 import { getStorage } from "./utilities/storage";
@@ -69,10 +70,10 @@ export const addStylesheets = async () => {
   head.insertBefore(externalStylsheet, typefullyStylesheet.nextSibling);
 
   const mainStylesheetFromCDN = await fetch(
-    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`
+    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css?t=${Date.now()}`
   );
   const typefullyStylesheetFromCDN = await fetch(
-    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css?t=${Date.now()}`
+    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css?t=${Date.now()}`
   );
   const mainText = (await mainStylesheetFromCDN.text()).trim();
   const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
@@ -81,6 +82,9 @@ export const addStylesheets = async () => {
   );
 
   externalStylsheet.appendChild(styleSheetText);
+
+  const unpacked = isExtensionUnpacked();
+  if (unpacked) removeElement("mt-external-stylesheet");
 };
 
 // Function to start MutationObserver
