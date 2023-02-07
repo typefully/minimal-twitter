@@ -38,7 +38,7 @@ const AdvancedSection = () => {
   useEffect(() => {
     const fetchCSS = async () => {
       const mainStylesheet = await fetch(
-        `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css?t=${Date.now()}`
+        `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`
       )
 
       const mainCSS = (await mainStylesheet.text()).trim()

@@ -20,7 +20,7 @@ let manifest = {
   name: "Minimal Theme for Twitter",
   short_name: "Minimal Twitter",
   description: "Refine and declutter the Twitter web experience.",
-  version: "5.0.6",
+  version: "5.1.0",
   icons: {
     16: "images/MinimalTwitterIcon16.png",
     32: "images/MinimalTwitterIcon32.png",
@@ -54,8 +54,8 @@ const MANIFEST_CHROME = {
         "css/main.css",
         "css/typefully.css",
         "fonts/inter-subset.woff2",
-        "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css",
-        "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css",
+        "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css",
+        "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css",
       ],
       matches: ["https://twitter.com/*", "https://mobile.twitter.com/*"],
     },
@@ -94,8 +94,8 @@ const MANIFEST_FIREFOX = {
     "css/main.css",
     "css/typefully.css",
     "fonts/inter-subset.woff2",
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/main.css",
-    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5/css/typefully.css",
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css",
+    "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css",
   ],
   browser_action: {
     default_icon: {
