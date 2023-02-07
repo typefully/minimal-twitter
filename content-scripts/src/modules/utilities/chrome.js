@@ -1,9 +1,3 @@
-export const isExtensionUnpacked = () => {
-  return new Promise((resolve) => {
-    if (chrome.runtime.id) {
-      resolve(false);
-    } else {
-      resolve(true);
-    }
-  });
+export const isDevelopment = () => {
+  return !("update_url" in chrome.runtime.getManifest()) || !!chrome.runtime.id;
 };

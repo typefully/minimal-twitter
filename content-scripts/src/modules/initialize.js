@@ -19,7 +19,7 @@ import {
   addTypefullyReplyPlug,
   saveCurrentReplyToLink,
 } from "./typefully";
-import { isExtensionUnpacked } from "./utilities/chrome";
+import { isDevelopment } from "./utilities/chrome";
 import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
 import removeElement from "./utilities/removeElement";
 import { getStorage } from "./utilities/storage";
@@ -53,7 +53,7 @@ export const addStylesheets = async () => {
   const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
   const typefullyStylesheet = document.createElement("link");
-  const externalStylsheet = document.createElement("style");
+  const externalStylesheet = document.createElement("style");
 
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
@@ -63,11 +63,11 @@ export const addStylesheets = async () => {
   typefullyStylesheet.type = "text/css";
   typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
 
-  externalStylsheet.id = "mt-external-stylesheet";
+  externalStylesheet.id = "mt-external-stylesheet";
 
   head.appendChild(mainStylesheet);
   head.appendChild(typefullyStylesheet);
-  head.insertBefore(externalStylsheet, typefullyStylesheet.nextSibling);
+  head.insertBefore(externalStylesheet, typefullyStylesheet.nextSibling);
 
   const mainStylesheetFromCDN = await fetch(
     `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`
@@ -81,10 +81,11 @@ export const addStylesheets = async () => {
     mainText.concat("\n\n").concat(typefullyText)
   );
 
-  externalStylsheet.appendChild(styleSheetText);
+  externalStylesheet.appendChild(styleSheetText);
 
-  const unpacked = isExtensionUnpacked();
-  if (unpacked) removeElement("mt-external-stylesheet");
+  const isDev = isDevelopment();
+
+  if (isDev) removeElement("mt-external-stylesheet");
 };
 
 // Function to start MutationObserver
