@@ -205,71 +205,9 @@ const bundle = async (manifest, bundleDirectory) => {
   }
 };
 
-const zipSafari = async () => {
-  const promise = new Promise((resolve, reject) => {
-    let intervalId;
-    let spinner = "\\";
-    const startBuilding = () => {
-      let P = ["\\", "|", "/", "-"];
-      intervalId = setInterval(() => {
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
-        spinner = P[P.indexOf(spinner) + 1] || P[0];
-        process.stdout.write(`${spinner}   Converting to Safari...`);
-      }, 250);
-    };
-
-    startBuilding();
-
-    clearInterval(intervalId);
-
-    try {
-      zipper.sync.zip(`./bundle/safari`).compress().save(`./bundle/safari.zip`);
-      process.stdout.clearLine();
-      process.stdout.cursorTo(0);
-      console.log(`🍎  Converted Firefox to Safari.`);
-      console.log(`🧬  Zipped \`bundle/safari\` to \`bundle/safari.zip\`.`);
-
-      resolve();
-    } catch (error) {
-      process.stdout.clearLine();
-      process.stdout.cursorTo(0);
-      console.log(`🍎  Converted Firefox to Safari.`);
-      console.log(
-        `❌  Could not zip Firefox to Safari, try running script again.`
-      );
-
-      reject(error);
-    }
-  });
-
-  return promise;
-};
-
 const bundleAll = async () => {
   await bundle(MANIFEST_CHROME, "bundle/chrome");
   await bundle(MANIFEST_FIREFOX, "bundle/firefox");
-
-  let intervalId;
-  let spinner = "\\";
-  const startBuilding = () => {
-    let P = ["\\", "|", "/", "-"];
-    intervalId = setInterval(() => {
-      process.stdout.clearLine();
-      process.stdout.cursorTo(0);
-      spinner = P[P.indexOf(spinner) + 1] || P[0];
-      process.stdout.write(`${spinner}   Bundling Safari...`);
-    }, 250);
-  };
-
-  startBuilding();
-
-  await runCommand(generateSafariProjectCommand, true);
-  await runCommand(fixBundleIdentifierCommand, true);
-
-  clearInterval(intervalId);
-
-  await zipSafari();
 };
 
 const rl = readline.createInterface({
@@ -310,8 +248,6 @@ rl.question(
         await runCommand(fixBundleIdentifierCommand, true);
 
         clearInterval(intervalId);
-
-        await zipSafari();
         break;
 
       case "All":
