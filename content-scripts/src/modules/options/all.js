@@ -125,7 +125,7 @@ export const injectAllChanges = (data) => {
   changePromotedPosts(data?.removePromotedPosts); // Remove Promoted Posts
   changeWhoToFollow(data?.removeWhoToFollow); // Who to Follow
   changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow
-  changeTimelineTabs(data?.removeTimelineTabs); // For you / Following tabs
+  changeTimelineTabs(data?.removeTimelineTabs, data?.writerMode); // For you / Following tabs
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeFollowingTimeline(data?.followingTimeline); // Always Show Following Timeline
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets

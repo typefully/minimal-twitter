@@ -212,13 +212,25 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
   }
 };
 
-export const changeTimelineTabs = (removeTimelineTabs) => {
+export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
+  if (
+    writerMode === "on" ||
+    window.location.pathname.includes("compose/tweet") ||
+    !window.location.pathname.includes("/home") ||
+    !window.location.pathname === "/"
+  ) {
+    removeElement("mt-removeTimelineTabs");
+    return;
+  }
+
   switch (removeTimelineTabs) {
     case "off":
       removeElement("mt-removeTimelineTabs");
       break;
 
     case "on":
+      if (document.getElementById("mt-removeTimelineTabs")) return;
+
       addStyles(
         "mt-removeTimelineTabs",
         `

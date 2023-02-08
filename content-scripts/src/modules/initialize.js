@@ -10,6 +10,7 @@ import {
 import {
   changeFollowingTimeline,
   changeRecentMedia,
+  changeTimelineTabs,
   changeTrendsHomeTimeline,
 } from "./options/timeline";
 import { addGrowButton } from "./options/typefully";
@@ -19,7 +20,6 @@ import {
   addTypefullyReplyPlug,
   saveCurrentReplyToLink,
 } from "./typefully";
-import { isDevelopment } from "./utilities/chrome";
 import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
 import removeElement from "./utilities/removeElement";
 import { getStorage } from "./utilities/storage";
@@ -82,10 +82,6 @@ export const addStylesheets = async () => {
   );
 
   externalStylesheet.appendChild(styleSheetText);
-
-  const isDev = isDevelopment();
-
-  if (isDev) removeElement("mt-external-stylesheet");
 };
 
 // Function to start MutationObserver
@@ -109,12 +105,14 @@ export const observe = () => {
         "typefullyGrowTab",
         "followingTimeline",
         "trendsHomeTimeline",
+        "removeTimelineTabs",
         "writerMode",
       ]);
 
       if (data?.writerMode === "on") {
         changeWriterMode(data?.writerMode);
       } else {
+        changeTimelineTabs(data?.removeTimelineTabs, data?.writerMode);
         changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode);
         changeFollowingTimeline(data?.followingTimeline);
         addTypefullyPlug();
