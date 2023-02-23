@@ -16,9 +16,6 @@ export default async function hideViewCount() {
     });
 
     if (window.location.pathname.includes("/status/")) {
-      const viewsElement = document.querySelector("a[href*='/analytics']");
-      viewsElement.style.display = "";
-
       removeElement("mt-hideViewCount");
     }
   } else {
@@ -27,9 +24,6 @@ export default async function hideViewCount() {
     });
 
     if (window.location.pathname.includes("/status/")) {
-      const viewsElement = document.querySelector("a[href*='/analytics']");
-      viewsElement.style.display = "none";
-
       addStyles(
         "mt-hideViewCount",
         `
