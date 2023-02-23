@@ -1,6 +1,4 @@
 import selectors from "../../selectors";
-import addStyles from "../utilities/addStyles";
-import removeElement from "../utilities/removeElement";
 import { getStorage } from "../utilities/storage";
 
 export default async function hideViewCount() {
@@ -14,24 +12,9 @@ export default async function hideViewCount() {
     viewCounts.forEach((el) => {
       el.parentElement && (el.parentElement.style.display = "flex");
     });
-
-    if (window.location.pathname.includes("/status/")) {
-      removeElement("mt-hideViewCount");
-    }
   } else {
     viewCounts.forEach((el) => {
       el.parentElement && (el.parentElement.style.display = "none");
     });
-
-    if (window.location.pathname.includes("/status/")) {
-      addStyles(
-        "mt-hideViewCount",
-        `
-        article[data-testid="tweet"] div[dir="ltr"] > div > a ~ span {
-          display: none;
-        }
-        `
-      );
-    }
   }
 }
