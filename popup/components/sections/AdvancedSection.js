@@ -3,7 +3,8 @@ import CodeMirror from "@uiw/react-codemirror"
 import debounce from "lodash.debounce"
 import { useCallback, useEffect, useState } from "react"
 
-import { getStorage, setStorage } from "../../../utilities/chromeStorage"
+import { getStorage, setStorage } from "../../utilities/chromeStorage"
+import SectionLabel from "../ui/SectionLabel"
 
 const AdvancedSection = () => {
   const [showEditor, setShowEditor] = useState(false)
@@ -51,10 +52,7 @@ const AdvancedSection = () => {
 
   return (
     <section className="flex flex-col gap-y-2">
-      <label
-        htmlFor="user-control-advanced"
-        className="text-sm font-bold dark:text-twitterAccentOneDark text-twitterAccentOne"
-      >
+      <SectionLabel htmlFor="user-control-advanced">
         <span>Advanced</span>
         {!showEditor ? (
           <>
@@ -78,7 +76,7 @@ const AdvancedSection = () => {
             </button>
           </>
         )}
-      </label>
+      </SectionLabel>
       {showEditor && (
         <div
           className="flex flex-col items-center justify-between dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl relative overflow-hidden"

@@ -56,7 +56,7 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
   "&:focus": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` }
 })
 
-const TimelineSlider = () => {
+const TimelineWidthSlider = () => {
   const [userTrack, setUserTrack] = useState(700)
   const trackDots = [600, 650, 700, 750, 800]
 
@@ -75,7 +75,7 @@ const TimelineSlider = () => {
 
   return (
     <form>
-      <div className="flex items-center pb-4 gap-x-3">
+      <div className="flex items-center gap-x-3">
         <span className="text-xs font-medium">600px</span>
         <StyledSlider
           onValueChange={async (value) => {
@@ -118,4 +118,4 @@ const TimelineSlider = () => {
   )
 }
 
-export default TimelineSlider
+export default TimelineWidthSlider

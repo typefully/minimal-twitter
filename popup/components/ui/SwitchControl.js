@@ -26,7 +26,7 @@ export default function SwitchControl({
 
   return (
     <div className="flex items-center justify-between w-full">
-      <label htmlFor={storageKey} className="text-[15px] font-bold">
+      <label htmlFor={storageKey} className="text-[15px] font-medium">
         {label}
       </label>
       <StyledSwitch

@@ -2,10 +2,11 @@ import * as TogglePrimitive from "@radix-ui/react-toggle"
 import { styled } from "@stitches/react"
 import startCase from "lodash.startcase"
 import { useEffect, useState } from "react"
+import SectionLabel from "../ui/SectionLabel"
 
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
-import Separator from "./Separator"
-import SwitchControl from "./SwitchControl"
+import Separator from "../ui/Separator"
+import SwitchControl from "../ui/SwitchControl"
 
 const StyledToggle = styled(TogglePrimitive.Root, {
   "&[data-state=off]": { borderColor: "transparent", opacity: "50%" },
@@ -170,39 +171,47 @@ const TypefullyGrow = () => (
   </UserButton>
 )
 
-const Navigation = () => (
-  <form className="p-3 pb-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-    <div className="flex items-center pb-4 gap-y-3 gap-x-6 mx-auto flex-wrap">
-      <Home />
-      <Explore />
-      <Notifications />
-      <Messages />
-      <Bookmarks />
-      <TopArticles />
-      <Lists />
-      <Communities />
-      <Topics />
-      <Circles />
-      <TwitterBlue />
-      <TypefullyGrow />
-      <Profile />
+const NavigationSection = () => (
+  <section className="flex flex-col gap-y-2">
+    <SectionLabel htmlFor="user-control-navigation">Navigation</SectionLabel>
+    <div id="user-control-navigation">
+      <form className="p-3 pb-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
+        <div className="flex items-center pb-4 gap-y-3 gap-x-6 mx-auto flex-wrap">
+          <Home />
+          <Explore />
+          <Notifications />
+          <Messages />
+          <Bookmarks />
+          <TopArticles />
+          <Lists />
+          <Communities />
+          <Topics />
+          <Circles />
+          <TwitterBlue />
+          <TypefullyGrow />
+          <Profile />
+        </div>
+        <div className="flex flex-col gap-y-4">
+          <Separator />
+          <SwitchControl label="Labels" storageKey="navigationButtonsLabels" />
+          <SwitchControl
+            label="Labels on Hover"
+            storageKey="navigationButtonsLabelsHover"
+            defaultState={true}
+          />
+          <SwitchControl
+            label="Center Vertically"
+            storageKey="navigationCenter"
+          />
+          <SwitchControl
+            label="Unread Count Badge"
+            storageKey="unreadCountBadge"
+            defaultState={true}
+          />
+        </div>
+      </form>
     </div>
-    <Separator className="mb-4" />
-    <div className="flex flex-col gap-y-4">
-      <SwitchControl label="Labels" storageKey="navigationButtonsLabels" />
-      <SwitchControl
-        label="Labels on Hover"
-        storageKey="navigationButtonsLabelsHover"
-        defaultState={true}
-      />
-      <SwitchControl label="Center Vertically" storageKey="navigationCenter" />
-      <SwitchControl
-        label="Unread Count Badge"
-        storageKey="unreadCountBadge"
-        defaultState={true}
-      />
-    </div>
-  </form>
+  </section>
 )
 
-export default Navigation
+export default NavigationSection

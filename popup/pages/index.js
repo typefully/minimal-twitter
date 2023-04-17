@@ -1,7 +1,7 @@
-import Container from "../components/layout/Container"
-import Footer from "../components/layout/Footer"
-import Header from "../components/layout/Header"
-import Main from "../components/layout/Main"
+import Main from "../components/Main"
+import Footer from "../components/sections/Footer"
+import Header from "../components/sections/Header"
+import Container from "../components/ui/Container"
 
 const IndexPage = () => (
   <Container>
