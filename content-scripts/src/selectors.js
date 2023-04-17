@@ -27,6 +27,8 @@ selectors.rightSidebar = `[data-testid="sidebarColumn"]`;
 // Timeline
 selectors.tweetCounts = `[role="group"][id*="id__"]:only-child`;
 selectors.viewCount = selectors.tweetCounts + " a[href*='/analytics']";
+selectors.tweet = `[data-testid="tweet"][role="article"]`;
+selectors.tweetSpan = `${selectors.tweet} div > div:only-child > span:only-child > span`;
 // Search
 selectors.searchBox = `${selectors.rightSidebar} form[role="search"]`;
 selectors.searchBoxInput = `${selectors.searchBox} input:only-child`;

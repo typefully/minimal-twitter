@@ -463,3 +463,23 @@ export const changeLatestTweets = (latestTweets) => {
     showLatestTweets();
   }
 };
+
+export const removeTweetFormatting = (removeTweetFormatting) => {
+  switch (removeTweetFormatting) {
+    case "on":
+      addStyles(
+        "mt-removeTweetFormatting",
+        `
+        ${selectors.tweetSpan} {
+           font-weight: 400;
+           font-style: normal;
+        }
+        `
+      );
+      break;
+
+    case "off":
+      removeElement("mt-removeTweetFormatting");
+      break;
+  }
+};

@@ -81,6 +81,10 @@ const TimelineSection = () => {
             label="Always Latest Tweets (if available)"
             storageKey="latestTweets"
           />
+          <CheckboxControl
+            label="Remove Tweet Formatting"
+            storageKey="removeTweetFormatting"
+          />
         </div>
       ) : (
         <div className="dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl animate-pulse h-[115.5px]" />

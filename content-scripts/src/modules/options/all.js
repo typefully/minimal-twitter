@@ -44,6 +44,7 @@ import {
   changeTrendsHomeTimeline,
   changeTweetBorders,
   changeWhoToFollow,
+  removeTweetFormatting,
 } from "./timeline";
 import { changeGrowButton, changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
@@ -85,6 +86,7 @@ export const userPreferences = [
   "removeTimelineTabs",
   "followingTimeline",
   "latestTweets",
+  "removeTweetFormatting",
   "trendsHomeTimeline",
   "recentMedia",
   "typefullyComposerButtons",
@@ -129,6 +131,7 @@ export const injectAllChanges = (data) => {
   changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeFollowingTimeline(data?.followingTimeline); // Always Show Following Timeline
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
+  removeTweetFormatting(data?.removeTweetFormatting); // Always Show Latest Tweets
   changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode); // Show Trends on Home Timeline
   changeRecentMedia(data?.recentMedia); // Show Recent Media on Profiles
   changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
