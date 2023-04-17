@@ -41,12 +41,12 @@ const Header = () => (
       </h1>
     </div>
     <p className="pt-3 pb-3 text-sm font-medium leading-5 dark:text-twitterAccentOneDark text-twitterAccentOne">
-      Made by{" "}
+      Grow on Twitter with{" "}
       <a
         href="https://typefully.com/?ref=minimal-twitter"
         target="_blank"
         rel="noreferrer"
-        className="text-twitterBlue hover:underline font-bold cursor-pointer"
+        className="text-twitterBlue hover:underline font-bold cursor-pointer ml-1"
       >
         <TypefullyGlyph />
         Typefully
