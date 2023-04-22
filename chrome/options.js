@@ -13,6 +13,7 @@ function save_options() {
   var noBookmarksButton = document.getElementById("bookmarks").checked;
   var noListsButton = document.getElementById("lists").checked;
   var noDirectMessageButton = document.getElementById("direct-message").checked;
+  var noVerifiedOrgButton = document.getElementById("verified-org").checked;
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -28,6 +29,7 @@ function save_options() {
       noBookmarksButton: noBookmarksButton,
       noListsButton: noListsButton,
       noDirectMessageButton: noDirectMessageButton,
+      noVerifiedOrgButton: noVerifiedOrgButton,
     },
     function () {
       // Update status to let user know options were saved.
@@ -58,6 +60,7 @@ function restore_options() {
       noBookmarksButton: false,
       noListsButton: false,
       noDirectMessageButton: false,
+      noVerifiedOrgButton: false,
     },
     function (items) {
       document.getElementById("feed-width").value = items.feedWidth;
@@ -73,6 +76,7 @@ function restore_options() {
       document.getElementById("bookmarks").checked = items.noBookmarksButton;
       document.getElementById("lists").checked = items.noListsButton;
       document.getElementById("direct-message").checked = item.noDirectMessageButton;
+      document.getElementById("verified-org").checked = item.noVerifiedOrgButton;
     }
   );
 }
