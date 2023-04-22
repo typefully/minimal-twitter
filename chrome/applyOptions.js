@@ -20,6 +20,7 @@ chrome.storage.sync.get(
     noBookmarksButton: false,
     noListsButton: false,
     noDirectMessageButton: false,
+    noVerifiedOrgButton: false,
   },
   function (items) {
     if (items.feedWidth === "700") {
@@ -135,5 +136,12 @@ chrome.storage.sync.get(
         display: none !important;
       }`);
     }
+
+    if (items.noVerifiedOrgButton === true) {
+      addStyles(`a[aria-label="Verified Organizations"] {
+        display: none;
+      }`);
+    }
+
   }
 );
