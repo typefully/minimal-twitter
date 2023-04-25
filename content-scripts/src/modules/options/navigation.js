@@ -174,6 +174,26 @@ export const changeTwitterBlueButton = (twitterBlueButton) => {
   }
 };
 
+// Function to change Verified Organizations in Navigation
+export const changeVerifiedOrganizationsButton = (verifiedOrganizationsButton) => {
+  switch (verifiedOrganizationsButton) {
+    case "off":
+      addStyles(
+        "mt-verifiedOrganizationsButton",
+        `
+        ${selectors.sidebarLinks.verifiedOrganizations} {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-verifiedOrganizationsButton");
+      break;
+  }
+};
+
 // Function to add Communities button
 export const addTopicsButton = () => {
   if (document.querySelector(selectors.sidebarLinks.topics)) return;
