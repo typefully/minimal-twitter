@@ -1,13 +1,13 @@
 function addStyles(css) {
-  var head = document.querySelector("head")
-  var style = document.createElement("style")
+  var head = document.querySelector('head')
+  var style = document.createElement('style')
   style.textContent = `${css}`
   head.appendChild(style)
 }
 
 chrome.storage.sync.get(
   {
-    feedWidth: "600",
+    feedWidth: '600',
     topNavigation: false,
     noTweetButton: false,
     showMessageDrawer: false,
@@ -22,9 +22,10 @@ chrome.storage.sync.get(
     noDirectMessageButton: false,
     noVerifiedOrgButton: false,
     noBlueButton: false,
+    noVerifiedButton: false,
   },
   function (items) {
-    if (items.feedWidth === "700") {
+    if (items.feedWidth === '700') {
       addStyles(`
       div[data-testid="primaryColumn"],
       div[data-testid="primaryColumn"] > div > div,
@@ -35,7 +36,7 @@ chrome.storage.sync.get(
         max-width: 700px !important;
       }
       `)
-    } else if (items.feedWidth === "800") {
+    } else if (items.feedWidth === '800') {
       addStyles(`
       div[data-testid="primaryColumn"],
       div[data-testid="primaryColumn"] > div > div,
@@ -146,6 +147,12 @@ chrome.storage.sync.get(
 
     if (items.noBlueButton === true) {
       addStyles(`a[aria-label="Twitter Blue"] {
+        display: none;
+      }`)
+    }
+
+    if (items.noVerifiedButton === true) {
+      addStyles(`a[aria-label="Verified"] {
         display: none;
       }`)
     }
