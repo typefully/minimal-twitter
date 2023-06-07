@@ -15,12 +15,12 @@
 
       html {
         font-size: calc(1rem + 2px + ((100vw - 600px) / 250));
-        font-family: -apple-system, BlinkMacSystemFont, "avenir next", avenir,
-          "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial,
+        font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
+          'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial,
           sans-serif;
         margin: 0;
         padding: 0;
-        text-decoration-skip-ink: "auto";
+        text-decoration-skip-ink: 'auto';
       }
 
       body {
@@ -144,9 +144,9 @@
         display: flex;
       }
 
-      input[type="email"],
-      input[type="text"],
-      input[type="number"] {
+      input[type='email'],
+      input[type='text'],
+      input[type='number'] {
         padding: 0.5rem;
         font-size: 1rem;
         border: 2px solid #f6f6f6;
@@ -159,9 +159,9 @@
       }
 
       @media (prefers-color-scheme: dark) {
-        input[type="email"],
-        input[type="text"],
-        input[type="number"] {
+        input[type='email'],
+        input[type='text'],
+        input[type='number'] {
           background-color: #595859;
           border-color: #595859;
           color: white;
@@ -204,8 +204,8 @@
         background-color: #f6f6f6;
         box-sizing: border-box;
         padding: 0.5rem;
-        font-family: -apple-system, BlinkMacSystemFont, "avenir next", avenir,
-          "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial,
+        font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir,
+          'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial,
           sans-serif;
       }
 
@@ -231,7 +231,7 @@
         box-shadow: none;
       }
 
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         display: inline-block;
         height: 1rem;
         font-size: 1rem;
@@ -247,37 +247,37 @@
       }
 
       @media (prefers-color-scheme: dark) {
-        input[type="checkbox"] {
+        input[type='checkbox'] {
           background-color: #272727;
           border-color: white;
         }
       }
 
-      input[type="checkbox"]:hover {
+      input[type='checkbox']:hover {
         cursor: pointer;
       }
 
-      input[type="checkbox"]:checked {
+      input[type='checkbox']:checked {
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="78.369" height="78.369" viewBox="0 0 78.369 78.369"><path fill="white" d="M78.05 19.015l-48.592 48.59c-.428.43-1.12.43-1.548 0L.32 40.016c-.427-.426-.427-1.12 0-1.547l6.704-6.704c.428-.427 1.12-.427 1.548 0l20.113 20.112 41.113-41.113c.43-.427 1.12-.427 1.548 0l6.703 6.704c.427.427.427 1.12 0 1.548z"/></svg>');
         background-size: contain;
         background-color: #343334;
         border: 2px solid #343334;
       }
 
-      input[type="checkbox"]:focus-visible,
-      input[type="checkbox"]:checked:focus-visible {
+      input[type='checkbox']:focus-visible,
+      input[type='checkbox']:checked:focus-visible {
         border-color: #5aaafa;
       }
 
       @media (prefers-color-scheme: dark) {
-        input[type="checkbox"]:checked {
+        input[type='checkbox']:checked {
           background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="78.369" height="78.369" viewBox="0 0 78.369 78.369"><path fill="%23343434" d="M78.05 19.015l-48.592 48.59c-.428.43-1.12.43-1.548 0L.32 40.016c-.427-.426-.427-1.12 0-1.547l6.704-6.704c.428-.427 1.12-.427 1.548 0l20.113 20.112 41.113-41.113c.43-.427 1.12-.427 1.548 0l6.703 6.704c.427.427.427 1.12 0 1.548z"/></svg>');
           background-color: white;
           border: 2px solid white;
         }
       }
 
-      input[type="radio"] {
+      input[type='radio'] {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -293,34 +293,34 @@
       }
 
       @media (prefers-color-scheme: dark) {
-        input[type="radio"] {
+        input[type='radio'] {
           border: 2px solid white;
         }
       }
 
       @media (hover: hover) {
-        input[type="radio"]:hover {
+        input[type='radio']:hover {
           cursor: pointer;
         }
       }
 
-      input[type="radio"]:checked {
+      input[type='radio']:checked {
         border: 2px solid #343334;
       }
 
-      input[type="radio"]:focus-visible,
-      input[type="radio"]:checked:focus-visible {
+      input[type='radio']:focus-visible,
+      input[type='radio']:checked:focus-visible {
         border-color: #5aaafa;
       }
 
       @media (prefers-color-scheme: dark) {
-        input[type="radio"]:checked {
+        input[type='radio']:checked {
           border: 2px solid white;
         }
       }
 
-      input[type="radio"]:checked::before {
-        content: "";
+      input[type='radio']:checked::before {
+        content: '';
         width: calc(100% - 4px);
         height: calc(100% - 4px);
         background-color: #343334;
@@ -329,14 +329,14 @@
       }
 
       @media (prefers-color-scheme: dark) {
-        input[type="radio"]:checked::before {
+        input[type='radio']:checked::before {
           background-color: white;
         }
       }
 
-      input[type="submit"],
-      input[type="reset"],
-      input[type="button"],
+      input[type='submit'],
+      input[type='reset'],
+      input[type='button'],
       button {
         padding: 0.5rem 1.25rem;
         font-size: 1rem;
@@ -360,9 +360,9 @@
       }
 
       @media (prefers-color-scheme: dark) {
-        input[type="submit"],
-        input[type="reset"],
-        input[type="button"],
+        input[type='submit'],
+        input[type='reset'],
+        input[type='button'],
         button {
           background-color: white;
           border: 2px solid white;
@@ -371,18 +371,18 @@
       }
 
       @media (hover: hover) {
-        input[type="submit"]:hover,
-        input[type="reset"]:hover,
-        input[type="button"]:hover,
+        input[type='submit']:hover,
+        input[type='reset']:hover,
+        input[type='button']:hover,
         button:hover {
           cursor: pointer;
         }
       }
 
       button:focus-visible,
-      input[type="submit"]:focus-visible,
-      input[type="reset"]:focus-visible,
-      input[type="button"]:focus-visible {
+      input[type='submit']:focus-visible,
+      input[type='reset']:focus-visible,
+      input[type='button']:focus-visible {
         border-color: #5aaafa;
         outline: none;
       }
@@ -425,7 +425,7 @@
       }
 
       code {
-        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo,
           Courier, monospace;
         font-size: 0.8rem;
         white-space: nowrap;
@@ -456,7 +456,7 @@
       }
 
       pre > code::after {
-        content: " ";
+        content: ' ';
       }
 
       blockquote {
@@ -496,7 +496,7 @@
       kbd {
         display: inline-block;
         padding: 0 0.328rem;
-        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo,
           Courier, monospace;
         font-size: 0.64rem;
         color: #343334;
@@ -613,6 +613,12 @@
         <label>
           <input type="checkbox" id="twitter-blue" />
           <span>Remove Twitter Blue button</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input type="checkbox" id="verified" />
+          <span>Remove Verified button</span>
         </label>
       </p>
       <button id="save">Save</button>

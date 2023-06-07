@@ -1,20 +1,21 @@
 // Saves options to chrome.storage
 function save_options() {
-  var feedWidth = document.getElementById("feed-width").value
-  var topNavigation = document.getElementById("top-navigation").checked
-  var noTweetButton = document.getElementById("tweet").checked
-  var showMessageDrawer = document.getElementById("message").checked
-  var feedBorders = document.getElementById("feed-borders").checked
-  var noBorders = document.getElementById("borders").checked
-  var noLikes = document.getElementById("like").checked
-  var noRetweets = document.getElementById("retweet").checked
-  var noExploreButton = document.getElementById("explore").checked
-  var noNotificationsButton = document.getElementById("notifications").checked
-  var noBookmarksButton = document.getElementById("bookmarks").checked
-  var noListsButton = document.getElementById("lists").checked
-  var noDirectMessageButton = document.getElementById("direct-message").checked
-  var noVerifiedOrgButton = document.getElementById("verified-org").checked
-  var noBlueButton = document.getElementById("twitter-blue").checked
+  var feedWidth = document.getElementById('feed-width').value
+  var topNavigation = document.getElementById('top-navigation').checked
+  var noTweetButton = document.getElementById('tweet').checked
+  var showMessageDrawer = document.getElementById('message').checked
+  var feedBorders = document.getElementById('feed-borders').checked
+  var noBorders = document.getElementById('borders').checked
+  var noLikes = document.getElementById('like').checked
+  var noRetweets = document.getElementById('retweet').checked
+  var noExploreButton = document.getElementById('explore').checked
+  var noNotificationsButton = document.getElementById('notifications').checked
+  var noBookmarksButton = document.getElementById('bookmarks').checked
+  var noListsButton = document.getElementById('lists').checked
+  var noDirectMessageButton = document.getElementById('direct-message').checked
+  var noVerifiedOrgButton = document.getElementById('verified-org').checked
+  var noBlueButton = document.getElementById('twitter-blue').checked
+  var noVerifiedButton = document.getElementById('verified').checked
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -32,13 +33,14 @@ function save_options() {
       noDirectMessageButton: noDirectMessageButton,
       noVerifiedOrgButton: noVerifiedOrgButton,
       noBlueButton: noBlueButton,
+      noVerifiedButton: noVerifiedButton,
     },
     function () {
       // Update status to let user know options were saved.
-      var status = document.getElementById("status")
-      status.textContent = "Options saved."
+      var status = document.getElementById('status')
+      status.textContent = 'Options saved.'
       setTimeout(function () {
-        status.textContent = ""
+        status.textContent = ''
       }, 750)
     }
   )
@@ -49,7 +51,7 @@ function save_options() {
 function restore_options() {
   chrome.storage.sync.get(
     {
-      feedWidth: "600",
+      feedWidth: '600',
       topNavigation: false,
       noTweetButton: false,
       showMessageDrawer: false,
@@ -64,27 +66,29 @@ function restore_options() {
       noDirectMessageButton: false,
       noVerifiedOrgButton: false,
       noBlueButton: false,
+      noVerifiedButton: false,
     },
     function (items) {
-      document.getElementById("feed-width").value = items.feedWidth
-      document.getElementById("top-navigation").checked = items.topNavigation
-      document.getElementById("tweet").checked = items.noTweetButton
-      document.getElementById("message").checked = items.showMessageDrawer
-      document.getElementById("feed-borders").checked = items.feedBorders
-      document.getElementById("borders").checked = items.noBorders
-      document.getElementById("like").checked = items.noLikes
-      document.getElementById("retweet").checked = items.noRetweets
-      document.getElementById("explore").checked = items.noExploreButton
-      document.getElementById("notifications").checked =
+      document.getElementById('feed-width').value = items.feedWidth
+      document.getElementById('top-navigation').checked = items.topNavigation
+      document.getElementById('tweet').checked = items.noTweetButton
+      document.getElementById('message').checked = items.showMessageDrawer
+      document.getElementById('feed-borders').checked = items.feedBorders
+      document.getElementById('borders').checked = items.noBorders
+      document.getElementById('like').checked = items.noLikes
+      document.getElementById('retweet').checked = items.noRetweets
+      document.getElementById('explore').checked = items.noExploreButton
+      document.getElementById('notifications').checked =
         items.noNotificationsButton
-      document.getElementById("bookmarks").checked = items.noBookmarksButton
-      document.getElementById("lists").checked = items.noListsButton
-      document.getElementById("direct-message").checked =
+      document.getElementById('bookmarks').checked = items.noBookmarksButton
+      document.getElementById('lists').checked = items.noListsButton
+      document.getElementById('direct-message').checked =
         item.noDirectMessageButton
-      document.getElementById("verified-org").checked = item.noVerifiedOrgButton
-      document.getElementById("blue-button").checked = item.noBlueButton
+      document.getElementById('verified-org').checked = item.noVerifiedOrgButton
+      document.getElementById('blue-button').checked = item.noBlueButton
+      document.getElementById('verified').checked = item.noVerifiedButton
     }
   )
 }
-document.addEventListener("DOMContentLoaded", restore_options)
-document.getElementById("save").addEventListener("click", save_options)
+document.addEventListener('DOMContentLoaded', restore_options)
+document.getElementById('save').addEventListener('click', save_options)
