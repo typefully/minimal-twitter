@@ -12,10 +12,11 @@ function save_options() {
   var noNotificationsButton = document.getElementById('notifications').checked
   var noBookmarksButton = document.getElementById('bookmarks').checked
   var noListsButton = document.getElementById('lists').checked
-  var noDirectMessageButton = document.getElementById('direct-message').checked
-  var noVerifiedOrgButton = document.getElementById('verified-org').checked
-  var noBlueButton = document.getElementById('twitter-blue').checked
-  var noVerifiedButton = document.getElementById('verified').checked
+  var noCommunitiesButton = document.getElementById('communities').checked
+  // var noDirectMessageButton = document.getElementById('direct-message').checked
+  // var noVerifiedOrgButton = document.getElementById('verified-org').checked
+  // var noBlueButton = document.getElementById('twitter-blue').checked
+  // var noVerifiedButton = document.getElementById('verified').checked
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -30,10 +31,11 @@ function save_options() {
       noNotificationsButton: noNotificationsButton,
       noBookmarksButton: noBookmarksButton,
       noListsButton: noListsButton,
-      noDirectMessageButton: noDirectMessageButton,
-      noVerifiedOrgButton: noVerifiedOrgButton,
-      noBlueButton: noBlueButton,
-      noVerifiedButton: noVerifiedButton,
+      noCommunitiesButton: noCommunitiesButton,
+      // noDirectMessageButton: noDirectMessageButton,
+      // noVerifiedOrgButton: noVerifiedOrgButton,
+      // noBlueButton: noBlueButton,
+      // noVerifiedButton: noVerifiedButton,
     },
     function () {
       // Update status to let user know options were saved.
@@ -63,10 +65,11 @@ function restore_options() {
       noNotificationsButton: false,
       noBookmarksButton: false,
       noListsButton: false,
-      noDirectMessageButton: false,
-      noVerifiedOrgButton: false,
-      noBlueButton: false,
-      noVerifiedButton: false,
+      noCommunitiesButton: false,
+      // noDirectMessageButton: false,
+      // noVerifiedOrgButton: false,
+      // noBlueButton: false,
+      // noVerifiedButton: false,
     },
     function (items) {
       document.getElementById('feed-width').value = items.feedWidth
@@ -82,11 +85,12 @@ function restore_options() {
         items.noNotificationsButton
       document.getElementById('bookmarks').checked = items.noBookmarksButton
       document.getElementById('lists').checked = items.noListsButton
-      document.getElementById('direct-message').checked =
-        item.noDirectMessageButton
-      document.getElementById('verified-org').checked = item.noVerifiedOrgButton
-      document.getElementById('blue-button').checked = item.noBlueButton
-      document.getElementById('verified').checked = item.noVerifiedButton
+      document.getElementById('communities').checked = items.noCommunitiesButton
+      // document.getElementById('direct-message').checked =
+      //   item.noDirectMessageButton
+      // document.getElementById('verified-org').checked = item.noVerifiedOrgButton
+      // document.getElementById('blue-button').checked = item.noBlueButton
+      // document.getElementById('verified').checked = item.noVerifiedButton
     }
   )
 }
