@@ -13,10 +13,9 @@ function save_options() {
   var noBookmarksButton = document.getElementById('bookmarks').checked
   var noListsButton = document.getElementById('lists').checked
   var noCommunitiesButton = document.getElementById('communities').checked
-  // var noDirectMessageButton = document.getElementById('direct-message').checked
-  // var noVerifiedOrgButton = document.getElementById('verified-org').checked
+  var noDirectMessagesButton = document.getElementById('direct-messages').checked
+  var noVerifiedButton = document.getElementById('verified').checked
   // var noBlueButton = document.getElementById('twitter-blue').checked
-  // var noVerifiedButton = document.getElementById('verified').checked
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -32,10 +31,9 @@ function save_options() {
       noBookmarksButton: noBookmarksButton,
       noListsButton: noListsButton,
       noCommunitiesButton: noCommunitiesButton,
-      // noDirectMessageButton: noDirectMessageButton,
-      // noVerifiedOrgButton: noVerifiedOrgButton,
+      noDirectMessagesButton: noDirectMessagesButton,
+      noVerifiedButton: noVerifiedButton,
       // noBlueButton: noBlueButton,
-      // noVerifiedButton: noVerifiedButton,
     },
     function () {
       // Update status to let user know options were saved.
@@ -66,7 +64,8 @@ function restore_options() {
       noBookmarksButton: false,
       noListsButton: false,
       noCommunitiesButton: false,
-      // noDirectMessageButton: false,
+      noDirectMessagesButton: false,
+      noVerifiedButton: false,
       // noVerifiedOrgButton: false,
       // noBlueButton: false,
       // noVerifiedButton: false,
@@ -86,11 +85,9 @@ function restore_options() {
       document.getElementById('bookmarks').checked = items.noBookmarksButton
       document.getElementById('lists').checked = items.noListsButton
       document.getElementById('communities').checked = items.noCommunitiesButton
-      // document.getElementById('direct-message').checked =
-      //   item.noDirectMessageButton
-      // document.getElementById('verified-org').checked = item.noVerifiedOrgButton
+      document.getElementById('direct-messages').checked = items.noDirectMessagesButton
+      document.getElementById('verified').checked = items.noVerifiedButton
       // document.getElementById('blue-button').checked = item.noBlueButton
-      // document.getElementById('verified').checked = item.noVerifiedButton
     }
   )
 }

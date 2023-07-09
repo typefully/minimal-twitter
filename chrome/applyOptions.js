@@ -20,10 +20,9 @@ chrome.storage.sync.get(
     noBookmarksButton: false,
     noListsButton: false,
     noCommunitiesButton: false,
-    // noDirectMessageButton: false,
-    // noVerifiedOrgButton: false,
+    noDirectMessagesButton: false,
+    noVerifiedButton: false,
     // noBlueButton: false,
-    // noVerifiedButton: false,
   },
   function (items) {
     if (items.feedWidth === '700') {
@@ -140,17 +139,17 @@ chrome.storage.sync.get(
       }`)
     }
 
-    // if (items.noDirectMessageButton === true) {
-    //   addStyles(`a[data-testid="AppTabBar_DirectMessage_Link"] {
-    //     display: none !important;
-    //   }`)
-    // }
+    if (items.noDirectMessagesButton === true) {
+      addStyles(`a[aria-label="Direct Messages"] {
+        display: none;
+      }`)
+    }
 
-    // if (items.noVerifiedOrgButton === true) {
-    //   addStyles(`a[aria-label="Verified Organizations"] {
-    //     display: none;
-    //   }`)
-    // }
+    if (items.noVerifiedButton === true) {
+      addStyles(`a[aria-label="Verified"] {
+        display: none;
+      }`)
+    }
 
     // if (items.noBlueButton === true) {
     //   addStyles(`a[aria-label="Twitter Blue"] {
@@ -158,10 +157,5 @@ chrome.storage.sync.get(
     //   }`)
     // }
 
-    // if (items.noVerifiedButton === true) {
-    //   addStyles(`a[aria-label="Verified"] {
-    //     display: none;
-    //   }`)
-    // }
   }
 )
