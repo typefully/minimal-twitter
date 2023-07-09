@@ -12,10 +12,9 @@ function save_options() {
   var noNotificationsButton = document.getElementById('notifications').checked
   var noBookmarksButton = document.getElementById('bookmarks').checked
   var noListsButton = document.getElementById('lists').checked
-  var noCommunitiesButton = document.getElementById('communities').checked
   var noDirectMessagesButton = document.getElementById('direct-messages').checked
   var noVerifiedButton = document.getElementById('verified').checked
-  // var noBlueButton = document.getElementById('twitter-blue').checked
+  var noCommunitiesButton = document.getElementById('communities').checked
   chrome.storage.sync.set(
     {
       feedWidth: feedWidth,
@@ -30,10 +29,9 @@ function save_options() {
       noNotificationsButton: noNotificationsButton,
       noBookmarksButton: noBookmarksButton,
       noListsButton: noListsButton,
-      noCommunitiesButton: noCommunitiesButton,
       noDirectMessagesButton: noDirectMessagesButton,
       noVerifiedButton: noVerifiedButton,
-      // noBlueButton: noBlueButton,
+      noCommunitiesButton: noCommunitiesButton,
     },
     function () {
       // Update status to let user know options were saved.
@@ -63,12 +61,9 @@ function restore_options() {
       noNotificationsButton: false,
       noBookmarksButton: false,
       noListsButton: false,
-      noCommunitiesButton: false,
       noDirectMessagesButton: false,
       noVerifiedButton: false,
-      // noVerifiedOrgButton: false,
-      // noBlueButton: false,
-      // noVerifiedButton: false,
+      noCommunitiesButton: false,
     },
     function (items) {
       document.getElementById('feed-width').value = items.feedWidth
@@ -84,10 +79,9 @@ function restore_options() {
         items.noNotificationsButton
       document.getElementById('bookmarks').checked = items.noBookmarksButton
       document.getElementById('lists').checked = items.noListsButton
-      document.getElementById('communities').checked = items.noCommunitiesButton
       document.getElementById('direct-messages').checked = items.noDirectMessagesButton
       document.getElementById('verified').checked = items.noVerifiedButton
-      // document.getElementById('blue-button').checked = item.noBlueButton
+      document.getElementById('communities').checked = items.noCommunitiesButton
     }
   )
 }

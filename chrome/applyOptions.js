@@ -19,10 +19,9 @@ chrome.storage.sync.get(
     noNotificationsButton: false,
     noBookmarksButton: false,
     noListsButton: false,
-    noCommunitiesButton: false,
     noDirectMessagesButton: false,
     noVerifiedButton: false,
-    // noBlueButton: false,
+    noCommunitiesButton: false,
   },
   function (items) {
     if (items.feedWidth === '700') {
@@ -133,12 +132,6 @@ chrome.storage.sync.get(
       }`)
     }
 
-    if (items.noCommunitiesButton === true) {
-      addStyles(`a[aria-label="Communities"] {
-        display: none;
-      }`)
-    }
-
     if (items.noDirectMessagesButton === true) {
       addStyles(`a[aria-label="Direct Messages"] {
         display: none;
@@ -151,11 +144,10 @@ chrome.storage.sync.get(
       }`)
     }
 
-    // if (items.noBlueButton === true) {
-    //   addStyles(`a[aria-label="Twitter Blue"] {
-    //     display: none;
-    //   }`)
-    // }
-
+    if (items.noCommunitiesButton === true) {
+      addStyles(`a[aria-label="Communities"] {
+        display: none;
+      }`)
+    }
   }
 )
