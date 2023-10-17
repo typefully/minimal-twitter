@@ -174,6 +174,51 @@ export const changeTwitterBlueButton = (twitterBlueButton) => {
   }
 };
 
+// Function to add Verified Orgs
+export const addVerifiedOrgsButton = () => {
+  if (document.querySelector(selectors.sidebarLinks.verifiedOrgs)) return;
+
+  const profileNode = document.querySelector(
+    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
+  );
+
+  if (profileNode) {
+    const verifiedOrgsButton = profileNode.cloneNode(true);
+
+    verifiedOrgsButton.id = "mt-verifiedOrgsNode";
+    verifiedOrgsButton.href += "/i/verified-orgs-signup";
+    verifiedOrgsButton.ariaLabel = "Verified Orgs";
+    verifiedOrgsButton.removeAttribute("data-testid");
+    verifiedOrgsButton.firstChild.firstChild.firstChild.innerHTML =
+      svgAssets.verifiedOrgs.normal;
+    verifiedOrgsButton.firstChild.lastChild.firstChild.innerText =
+      "Verified Orgs";
+    profileNode.insertAdjacentElement("beforebegin", verifiedOrgsButton);
+  }
+};
+
+// Function to change Verified Organizations in Navigation
+export const changeVerifiedOrgsButton = (verifiedOrgs) => {
+  switch (verifiedOrgs) {
+    case "off":
+      removeElement("mt-verifiedOrgsButtonNode");
+      addStyles(
+        "mt-verifiedOrgsButton",
+        `
+        ${selectors.sidebarLinks.verifiedOrgs} {
+          display: none;
+        }
+        `
+      );
+      break;
+
+    case "on":
+      removeElement("mt-verifiedOrgsButton");
+      addTwitterBlueButton();
+      break;
+  }
+};
+
 // Function to add Communities button
 export const addTopicsButton = () => {
   if (document.querySelector(selectors.sidebarLinks.topics)) return;

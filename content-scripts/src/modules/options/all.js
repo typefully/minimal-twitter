@@ -30,6 +30,7 @@ import {
   changeTopicsButton,
   changeTwitterBlueButton,
   changeUnreadCountBadge,
+  changeVerifiedOrgsButton,
 } from "./navigation";
 import {
   changeFollowingTimeline,
@@ -66,6 +67,7 @@ export const userPreferences = [
   "circlesButton",
   "listsButton",
   "twitterBlueButton",
+  "verifiedOrgsButton",
   "typefullyGrowTab",
   "profileButton",
   "navigationButtonsLabelsHover",
@@ -112,6 +114,7 @@ export const injectAllChanges = (data) => {
   changeListsButton(data?.listsButton); // Lists Button
   changeProfileButton(data?.profileButton); // Profile Button
   changeTwitterBlueButton(data?.twitterBlueButton); // Twitter Blue Button
+  changeVerifiedOrgsButton(data?.verifiedOrgsButton); // Twitter Blue Button
   changeNavigationButtonsLabelsHover(data?.navigationButtonsLabelsHover); // Navigation Buttons Labels on Hover
   changeNavigationButtonsLabels(data?.navigationButtonsLabels); // Navigation Buttons Labels
   changeNavigationCenter(data?.navigationCenter); // Center Navigation

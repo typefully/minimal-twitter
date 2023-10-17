@@ -6,6 +6,7 @@ import {
   addListsButton,
   addTopicsButton,
   addTwitterBlueButton,
+  addVerifiedOrgsButton,
 } from "./options/navigation";
 import {
   changeFollowingTimeline,
@@ -261,6 +262,7 @@ export const addResizeListener = () => {
       removeElement("mt-communitiesButton");
       removeElement("mt-topicsButton");
       removeElement("mt-circlesButton");
+      removeElement("mt-verifiedOrgsButton");
       removeElement("mt-twitterBlueButton");
       removeElement("mt-typefullyGrowButton");
 
@@ -269,6 +271,7 @@ export const addResizeListener = () => {
         "communitiesButton",
         "topicsButton",
         "circlesButton",
+        "verifiedOrgsButton",
         "twitterBlueButton",
         "typefullyGrowTab",
       ]);
@@ -277,6 +280,7 @@ export const addResizeListener = () => {
       if (data?.communitiesButton === "on") addCommunitiesButton();
       if (data?.topicsButton === "on") addTopicsButton();
       if (data?.circlesButton === "on") addCirclesButton();
+      if (data?.verifiedOrgs === "on") addVerifiedOrgsButton();
       if (data?.twitterBlueButton === "on") addTwitterBlueButton();
       if (data?.typefullyGrowTab === "on") {
         clearTimeout(gt);

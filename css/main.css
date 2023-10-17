@@ -168,7 +168,8 @@ a[href*="quick_promote_web"] {
 #mt-communitiesButtonNode > div > div[dir],
 #mt-topicsButtonNode > div > div[dir],
 #mt-circlesButtonNode > div > div[dir],
-#mt-twitterBlueButtonNode > div > div[dir] {
+#mt-twitterBlueButtonNode > div > div[dir],
+#mt-verifiedOrgsButtonNode > div > div[dir] {
   font-weight: 400;
 }
 
@@ -176,7 +177,8 @@ a[href*="quick_promote_web"] {
 #mt-communitiesButtonNode:hover > div,
 #mt-topicsButtonNode:hover > div,
 #mt-circlesButtonNode:hover > div,
-#mt-twitterBlueButtonNode:hover > div {
+#mt-twitterBlueButtonNode:hover > div,
+#mt-verifiedOrgsButtonNode:hover > div {
   background-color: rgba(var(--glyphs-color-rgb), 0.1);
 }
 
@@ -186,7 +188,8 @@ a[href*="quick_promote_web"] {
   #mt-communitiesButtonNode > div > div[dir],
   #mt-topicsButtonNode > div > div[dir],
   #mt-circlesButtonNode > div > div[dir],
-  #mt-twitterBlueButtonNode > div > div[dir] {
+  #mt-twitterBlueButtonNode > div > div[dir],
+  #mt-verifiedOrgsButtonNode > div > div[dir] {
     display: none;
   }
 }
