@@ -4,14 +4,15 @@ import addStyles from "../utilities/addStyles";
 import removeElement from "../utilities/removeElement";
 import { getStorage } from "../utilities/storage";
 
-// Function to change Home Button
-export const changeHomeButton = (homeButton) => {
-  switch (homeButton) {
+// Utilities
+
+export const changeSidebarSetting = (sidebarSelector, state, onAdd) => {
+  switch (state) {
     case "off":
       addStyles(
-        "mt-homeButton",
+        `mt-${sidebarSelector}`,
         `
-        ${selectors.sidebarLinks.home} {
+        ${selectors.sidebarLinks[sidebarSelector]} {
           display: none;
         }
         `
@@ -19,404 +20,100 @@ export const changeHomeButton = (homeButton) => {
       break;
 
     case "on":
-      removeElement("mt-homeButton");
+      removeElement(`mt-${sidebarSelector}`);
+      onAdd?.();
       break;
   }
 };
 
-// Function to change Explore Button
-export const changeExploreButton = (exploreButton) => {
-  switch (exploreButton) {
-    case "off":
-      addStyles(
-        "mt-exploreButton",
-        `
-        ${selectors.sidebarLinks.explore} {
-          display: none;
-        }
-        `
-      );
-      break;
+export const addSidebarButton = ({ name, href, svgAsset }) => {
+  if (document.querySelector(`nav[role="navigation"] > a[aria-label="${name}"]`)) return;
 
-    case "on":
-      removeElement("mt-exploreButton");
-      break;
+  const templateNode = document.querySelector('nav[role="navigation"] > a[role="link"][data-testid="AppTabBar_Profile_Link"]');
+
+  if (templateNode) {
+    const node = templateNode.cloneNode(true);
+
+    node.href = href;
+    node.ariaLabel = name;
+    node.removeAttribute("data-testid");
+    node.firstChild.firstChild.firstChild.innerHTML = svgAsset;
+    node.firstChild.lastChild.firstChild.innerText = name;
+    templateNode.insertAdjacentElement("beforebegin", node);
   }
 };
 
-// Function to change Notifications Button
-export const changeNotificationsButton = (notificationsButton) => {
-  switch (notificationsButton) {
-    case "off":
-      addStyles(
-        "mt-notificationsButton",
-        `
-        ${selectors.sidebarLinks.notifications} {
-          display: none;
-        }
-        `
-      );
-      break;
+// Functions
 
-    case "on":
-      removeElement("mt-notificationsButton");
-      break;
-  }
-};
+export const changeHomeButton = (state) => changeSidebarSetting("home", state);
+export const changeExploreButton = (state) => changeSidebarSetting("explore", state);
+export const changeNotificationsButton = (state) => changeSidebarSetting("notifications", state);
+export const changeMessagesButton = (state) => changeSidebarSetting("messages", state);
+export const changeBookmarksButton = (state) => changeSidebarSetting("bookmarks", state);
+export const changeTopArticlesButton = (state) => changeSidebarSetting("articles", state);
+export const changeTwitterBlueButton = (state) => changeSidebarSetting("twitterBlue", state, addTwitterBlueButton);
+export const changeVerifiedOrgsButton = (state) => changeSidebarSetting("verifiedOrgs", state, addVerifiedOrgsButton);
+export const changeTopicsButton = (state) => changeSidebarSetting("topics", state, addTopicsButton);
+export const changeCirclesButton = (state) => changeSidebarSetting("circles", state, addCirclesButton);
+export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
+export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
+export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
 
-// Function to change Messages Button
-export const changeMessagesButton = (messagesButton) => {
-  switch (messagesButton) {
-    case "off":
-      addStyles(
-        "mt-messagesButton",
-        `
-        ${selectors.sidebarLinks.messages} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-messagesButton");
-      break;
-  }
-};
-
-// Function to change Bookmarks Button
-export const changeBookmarksButton = (bookmarksButton) => {
-  switch (bookmarksButton) {
-    case "off":
-      addStyles(
-        "mt-bookmarksButton",
-        `
-        ${selectors.sidebarLinks.bookmarks} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-bookmarksButton");
-      break;
-  }
-};
-
-// Function to change Top Articles Button
-export const changeTopArticlesButton = (topArticlesButton) => {
-  switch (topArticlesButton) {
-    case "off":
-      addStyles(
-        "mt-topArticlesButton",
-        `
-        ${selectors.sidebarLinks.articles} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-topArticlesButton");
-      break;
-  }
-};
-
-// Function to add Twitter Blue button
-let bt; // Twitter Blue button timeout
+let bt;
 export const addTwitterBlueButton = () => {
   clearTimeout(bt);
 
   if (document.querySelector(selectors.sidebarLinks.twitterBlue)) return;
 
   bt = setTimeout(() => {
-    const profileNode = document.querySelector(
-      'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-    );
-
-    if (profileNode) {
-      const twitterBlueButton = profileNode.cloneNode(true);
-
-      twitterBlueButton.id = "mt-twitterBlueButtonNode";
-      twitterBlueButton.href = "/settings/twitter_blue";
-      twitterBlueButton.ariaLabel = "Minimal Twitter Twitter Blue";
-      twitterBlueButton.removeAttribute("data-testid");
-      twitterBlueButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.twitterBlue.normal;
-      twitterBlueButton.firstChild.lastChild.firstChild.innerText =
-        "Twitter Blue";
-      profileNode.insertAdjacentElement("beforebegin", twitterBlueButton);
-    }
+    addSidebarButton({
+      name: "Twitter Blue",
+      href: "/settings/twitter_blue",
+      svgAsset: svgAssets.twitterBlue.normal,
+    });
   }, 500);
 };
 
-// Function to change Twitter Blue in Navigation
-export const changeTwitterBlueButton = (twitterBlueButton) => {
-  switch (twitterBlueButton) {
-    case "off":
-      removeElement("mt-twitterBlueButtonNode");
-      addStyles(
-        "mt-twitterBlueButton",
-        `
-        ${selectors.sidebarLinks.twitterBlue} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-twitterBlueButton");
-      addTwitterBlueButton();
-      break;
-  }
-};
-
-// Function to add Verified Orgs
 export const addVerifiedOrgsButton = () => {
-  if (document.querySelector(selectors.sidebarLinks.verifiedOrgs)) return;
-
-  const profileNode = document.querySelector(
-    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-  );
-
-  if (profileNode) {
-    const verifiedOrgsButton = profileNode.cloneNode(true);
-
-    verifiedOrgsButton.id = "mt-verifiedOrgsNode";
-    verifiedOrgsButton.href += "/i/verified-orgs-signup";
-    verifiedOrgsButton.ariaLabel = "Verified Orgs";
-    verifiedOrgsButton.removeAttribute("data-testid");
-    verifiedOrgsButton.firstChild.firstChild.firstChild.innerHTML =
-      svgAssets.verifiedOrgs.normal;
-    verifiedOrgsButton.firstChild.lastChild.firstChild.innerText =
-      "Verified Orgs";
-    profileNode.insertAdjacentElement("beforebegin", verifiedOrgsButton);
-  }
+  addSidebarButton({
+    name: "Verified Orgs",
+    href: "/i/verified-orgs-signup",
+    svgAsset: svgAssets.verifiedOrgs.normal,
+  });
 };
 
-// Function to change Verified Organizations in Navigation
-export const changeVerifiedOrgsButton = (verifiedOrgs) => {
-  switch (verifiedOrgs) {
-    case "off":
-      removeElement("mt-verifiedOrgsButtonNode");
-      addStyles(
-        "mt-verifiedOrgsButton",
-        `
-        ${selectors.sidebarLinks.verifiedOrgs} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-verifiedOrgsButton");
-      addTwitterBlueButton();
-      break;
-  }
-};
-
-// Function to add Communities button
 export const addTopicsButton = () => {
-  if (document.querySelector(selectors.sidebarLinks.topics)) return;
-
-  const profileNode = document.querySelector(
-    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-  );
-
-  if (profileNode) {
-    const topicsButton = profileNode.cloneNode(true);
-
-    topicsButton.id = "mt-topicsButtonNode";
-    topicsButton.href += "/topics";
-    topicsButton.ariaLabel = "Minimal Twitter Topics";
-    topicsButton.removeAttribute("data-testid");
-    topicsButton.firstChild.firstChild.firstChild.innerHTML =
-      svgAssets.topics.normal;
-    topicsButton.firstChild.lastChild.firstChild.innerText = "Topics";
-    profileNode.insertAdjacentElement("beforebegin", topicsButton);
-  }
+  addSidebarButton({
+    name: "Topics",
+    href: "/topics",
+    svgAsset: svgAssets.topics.normal,
+  });
 };
 
-// Function to change Communities Button
-export const changeTopicsButton = (topicsButton) => {
-  switch (topicsButton) {
-    case "off":
-      removeElement("mt-topicsButtonNode");
-      addStyles(
-        "mt-topicsButton",
-        `
-        ${selectors.sidebarLinks.topics} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-topicsButton");
-      addTopicsButton();
-      break;
-  }
-};
-
-// Function to add Communities button
 export const addCirclesButton = () => {
-  if (document.querySelector(selectors.sidebarLinks.circles)) return;
-
-  const profileNode = document.querySelector(
-    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-  );
-
-  if (profileNode) {
-    const circlesButton = profileNode.cloneNode(true);
-
-    circlesButton.id = "mt-circlesButtonNode";
-    circlesButton.href = "/i/circles";
-    circlesButton.ariaLabel = "Minimal Twitter Circles";
-    circlesButton.removeAttribute("data-testid");
-    circlesButton.firstChild.firstChild.firstChild.innerHTML =
-      svgAssets.circles.normal;
-    circlesButton.firstChild.lastChild.firstChild.innerText = "Circles";
-    profileNode.insertAdjacentElement("beforebegin", circlesButton);
-  }
+  addSidebarButton({
+    name: "Circles",
+    href: "/i/circles",
+    svgAsset: svgAssets.circles.normal,
+  });
 };
 
-// Function to change Communities Button
-export const changeCirclesButton = (circlesButton) => {
-  switch (circlesButton) {
-    case "off":
-      removeElement("mt-circlesButtonNode");
-      addStyles(
-        "mt-circlesButton",
-        `
-        ${selectors.sidebarLinks.circles} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-circlesButton");
-      addCirclesButton();
-      break;
-  }
-};
-
-// Function to add Communities button
 export const addCommunitiesButton = () => {
-  if (document.querySelector(selectors.sidebarLinks.communities)) return;
-
-  const profileNode = document.querySelector(
-    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-  );
-
-  if (profileNode) {
-    const communitiesButton = profileNode.cloneNode(true);
-
-    communitiesButton.id = "mt-communitiesButtonNode";
-    communitiesButton.href += "/communities";
-    communitiesButton.ariaLabel = "Minimal Twitter Communities";
-    communitiesButton.removeAttribute("data-testid");
-    communitiesButton.firstChild.firstChild.firstChild.innerHTML =
-      svgAssets.communities.normal;
-    communitiesButton.firstChild.lastChild.firstChild.innerText = "Communities";
-    profileNode.insertAdjacentElement("beforebegin", communitiesButton);
-  }
+  addSidebarButton({
+    name: "Communities",
+    href: "/communities",
+    svgAsset: svgAssets.communities.normal,
+  });
 };
 
-// Function to change Communities Button
-export const changeCommunitiesButton = (communitiesButton) => {
-  switch (communitiesButton) {
-    case "off":
-      removeElement("mt-communitiesButtonNode");
-      addStyles(
-        "mt-communitiesButton",
-        // Add important below to override it coming back: https://github.com/typefully/minimal-twitter/issues/156#issuecomment-1412600111
-        `
-        ${selectors.sidebarLinks.communities} {
-          display: none !important;  
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-communitiesButton");
-      addCommunitiesButton();
-      break;
-  }
-};
-
-// Function to add Lists button
 export const addListsButton = () => {
-  if (document.querySelector(selectors.sidebarLinks.lists)) return;
-
-  const profileNode = document.querySelector(
-    'a[role="link"][data-testid="AppTabBar_Profile_Link"]'
-  );
-
-  if (profileNode) {
-    const listsButton = profileNode.cloneNode(true);
-
-    listsButton.id = "mt-listsButtonNode";
-    listsButton.href += "/lists";
-    listsButton.ariaLabel = "Minimal Twitter Lists";
-    listsButton.removeAttribute("data-testid");
-    listsButton.firstChild.firstChild.firstChild.innerHTML =
-      svgAssets.lists.normal;
-    listsButton.firstChild.lastChild.firstChild.innerText = "Lists";
-    profileNode.insertAdjacentElement("beforebegin", listsButton);
-  }
+  addSidebarButton({
+    name: "Lists",
+    href: "/lists",
+    svgAsset: svgAssets.lists.normal,
+  });
 };
 
-// Function to change Lists Button
-export const changeListsButton = (listsButton) => {
-  switch (listsButton) {
-    case "off":
-      removeElement("mt-listsButtonNode");
-      addStyles(
-        "mt-listsButton",
-        `
-        ${selectors.sidebarLinks.lists} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-listsButton");
-      addListsButton();
-      break;
-  }
-};
-
-// Function to change Profile Button
-export const changeProfileButton = (profileButton) => {
-  switch (profileButton) {
-    case "off":
-      addStyles(
-        "mt-profileButton",
-        `
-        ${selectors.sidebarLinks.profile} {
-          display: none;
-        }
-        `
-      );
-      break;
-
-    case "on":
-      removeElement("mt-profileButton");
-      break;
-  }
-};
-
-// Function to change Unread Count Badge
 export const changeUnreadCountBadge = (unreadCountBadge) => {
   switch (unreadCountBadge) {
     case "on":
@@ -436,7 +133,6 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
   }
 };
 
-// Function to remove Navigation Button Labels on Hover
 const removeHover = () => {
   addStyles(
     "mt-navigationButtonsLabelsHover",
@@ -461,10 +157,7 @@ const removeHover = () => {
   );
 };
 
-// Function to change Navigation Button Labels on Hover
-export const changeNavigationButtonsLabelsHover = async (
-  navigationButtonsLabelsHover
-) => {
+export const changeNavigationButtonsLabelsHover = async (navigationButtonsLabelsHover) => {
   switch (navigationButtonsLabelsHover) {
     case "off":
       const data = await getStorage(["navigationButtonsLabels"]);
@@ -481,10 +174,7 @@ export const changeNavigationButtonsLabelsHover = async (
   }
 };
 
-// Function to change Navigation Button Labels
-export const changeNavigationButtonsLabels = async (
-  navigationButtonsLabels
-) => {
+export const changeNavigationButtonsLabels = async (navigationButtonsLabels) => {
   switch (navigationButtonsLabels) {
     case "on":
       removeElement("mt-navigationButtonsLabelsHover");
@@ -511,7 +201,6 @@ export const changeNavigationButtonsLabels = async (
   }
 };
 
-// Function to change Navigation Vertical Centering
 export const changeNavigationCenter = (navigationCenter) => {
   switch (navigationCenter) {
     case "on":

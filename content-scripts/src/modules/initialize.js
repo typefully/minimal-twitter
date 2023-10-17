@@ -1,26 +1,10 @@
 import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
-import {
-  addCirclesButton,
-  addCommunitiesButton,
-  addListsButton,
-  addTopicsButton,
-  addTwitterBlueButton,
-  addVerifiedOrgsButton,
-} from "./options/navigation";
-import {
-  changeFollowingTimeline,
-  changeRecentMedia,
-  changeTimelineTabs,
-  changeTrendsHomeTimeline,
-} from "./options/timeline";
+import { addCirclesButton, addCommunitiesButton, addListsButton, addTopicsButton, addTwitterBlueButton, addVerifiedOrgsButton } from "./options/navigation";
+import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
-import {
-  addTypefullyPlug,
-  addTypefullyReplyPlug,
-  saveCurrentReplyToLink,
-} from "./typefully";
+import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
 import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
 import removeElement from "./utilities/removeElement";
 import { getStorage } from "./utilities/storage";
@@ -28,8 +12,7 @@ import throttle from "./utilities/throttle";
 
 // Function to reveal Search Filters
 const revealSearchFilters = (advancedSearch) => {
-  const searchFilters =
-    advancedSearch.parentElement.parentElement.parentElement;
+  const searchFilters = advancedSearch.parentElement.parentElement.parentElement;
   if (!searchFilters.classList.contains("searchFilters")) {
     searchFilters.classList = searchFilters.classList + " searchFilters";
   }
@@ -38,12 +21,8 @@ const revealSearchFilters = (advancedSearch) => {
 
 // Function to set search bar width to length of placeholder
 const searchBarWidthReset = (searchBar) => {
-  if (
-    !window.location.pathname.includes("/search") &&
-    !window.location.pathname.includes("/explore")
-  ) {
-    const searchBarPlaceholderWidth =
-      searchBar.getAttribute("placeholder").length;
+  if (!window.location.pathname.includes("/search") && !window.location.pathname.includes("/explore")) {
+    const searchBarPlaceholderWidth = searchBar.getAttribute("placeholder").length;
 
     searchBar.style.width = `${searchBarPlaceholderWidth + 4}ch`; // + 4 to make sure it's wider than the placeholder itself, leaving some right padding
   }
@@ -70,17 +49,11 @@ export const addStylesheets = async () => {
   head.appendChild(typefullyStylesheet);
   head.insertBefore(externalStylesheet, typefullyStylesheet.nextSibling);
 
-  const mainStylesheetFromCDN = await fetch(
-    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`
-  );
-  const typefullyStylesheetFromCDN = await fetch(
-    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css?t=${Date.now()}`
-  );
+  const mainStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`);
+  const typefullyStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css?t=${Date.now()}`);
   const mainText = (await mainStylesheetFromCDN.text()).trim();
   const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
-  const styleSheetText = document.createTextNode(
-    mainText.concat("\n\n").concat(typefullyText)
-  );
+  const styleSheetText = document.createTextNode(mainText.concat("\n\n").concat(typefullyText));
 
   externalStylesheet.appendChild(styleSheetText);
 };
@@ -137,19 +110,13 @@ export const observe = () => {
       hideViewCount();
       changeRecentMedia();
 
-      const searchBar = document.querySelector(
-        '[data-testid="SearchBox_Search_Input"]'
-      );
-      const advancedSearch = document.querySelector(
-        `[data-testid="searchFiltersAdvancedSearch"]`
-      );
+      const searchBar = document.querySelector('[data-testid="SearchBox_Search_Input"]');
+      const advancedSearch = document.querySelector(`[data-testid="searchFiltersAdvancedSearch"]`);
 
       if (searchBar) searchBarWidthReset(searchBar);
       if (advancedSearch) revealSearchFilters(advancedSearch);
 
-      const scheduleButton = document.querySelector(
-        'div[data-testid="scheduleOption"]'
-      );
+      const scheduleButton = document.querySelector('div[data-testid="scheduleOption"]');
       if (scheduleButton) addWriterModeButton(scheduleButton);
 
       return;
@@ -181,9 +148,7 @@ const mutationIsNotRelevant = (mutationsList) => {
 
     // Engagement counts
     if (
-      (el?.nodeName === "SPAN" &&
-        el?.firstChild?.nodeName === "SPAN" &&
-        el?.firstChild?.firstChild?.nodeName === "SPAN") ||
+      (el?.nodeName === "SPAN" && el?.firstChild?.nodeName === "SPAN" && el?.firstChild?.firstChild?.nodeName === "SPAN") ||
       el?.parentNode?.parentNode?.getAttribute("data-testid") === "like"
     ) {
       return true;
@@ -215,29 +180,17 @@ const mutationIsNotRelevant = (mutationsList) => {
     if (el?.nodeName === "STYLE") return true;
 
     // DM drawer
-    if (
-      el?.closest("[data-testid='DMDrawer']") ||
-      t?.closest("[data-testid='DMDrawer']")
-    )
-      return true;
+    if (el?.closest("[data-testid='DMDrawer']") || t?.closest("[data-testid='DMDrawer']")) return true;
 
     // Trends drawer
-    if (
-      el?.closest("[data-testid='sidebarColumn']") ||
-      t?.closest("[data-testid='sidebarColumn']")
-    )
-      return true;
+    if (el?.closest("[data-testid='sidebarColumn']") || t?.closest("[data-testid='sidebarColumn']")) return true;
 
     // Ignore text only nodes
     if (el?.nodeName === "#text") return true;
 
     // Ignore info button on tweets
     // it's a > div > div > div[data-testid="caret"]
-    if (
-      el?.nodeName === "DIV" &&
-      el?.firstChild?.firstChild?.firstChild?.getAttribute("data-testid") ===
-        "caret"
-    ) {
+    if (el?.nodeName === "DIV" && el?.firstChild?.firstChild?.firstChild?.getAttribute("data-testid") === "caret") {
       return true;
     }
 
@@ -266,15 +219,7 @@ export const addResizeListener = () => {
       removeElement("mt-twitterBlueButton");
       removeElement("mt-typefullyGrowButton");
 
-      const data = await getStorage([
-        "listsButton",
-        "communitiesButton",
-        "topicsButton",
-        "circlesButton",
-        "verifiedOrgsButton",
-        "twitterBlueButton",
-        "typefullyGrowTab",
-      ]);
+      const data = await getStorage(["listsButton", "communitiesButton", "topicsButton", "circlesButton", "verifiedOrgsButton", "twitterBlueButton", "typefullyGrowTab"]);
 
       if (data?.listsButton === "on") addListsButton();
       if (data?.communitiesButton === "on") addCommunitiesButton();
