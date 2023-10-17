@@ -2,7 +2,7 @@ import selectors from "../../selectors";
 import { showGrowTab } from "../grow-tab";
 import svgAssets from "../svgAssets";
 import addStyles from "../utilities/addStyles";
-import removeElement from "../utilities/removeElement";
+import { removeElementById } from "../utilities/removeElement";
 import { getStorage } from "../utilities/storage";
 
 // Function to change Typefully Composer Buttons
@@ -24,7 +24,7 @@ export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
       break;
 
     case "on":
-      removeElement("mt-typefullyComposerButtons");
+      removeElementById("mt-typefullyComposerButtons");
       break;
   }
 };
@@ -33,7 +33,7 @@ export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
 export const changeGrowButton = (growButton) => {
   switch (growButton) {
     case "off":
-      removeElement("mt-typefullyGrowButton");
+      removeElementById("mt-typefullyGrowButton");
       break;
 
     case "on":
@@ -43,12 +43,18 @@ export const changeGrowButton = (growButton) => {
 };
 
 // Function to add Grow button
-export const addGrowButton = async () => {
+export const addGrowButton = async (forced) => {
   const userSetting = await getStorage("typefullyGrowTab");
   if (userSetting !== "on") return;
 
-  const exists = document.querySelector("#mt-typefullyGrowButton");
-  if (exists) return;
+  const existingElement = document.querySelector("#mt-typefullyGrowButton");
+  if (existingElement) {
+    if (forced) {
+      existingElement.remove();
+    } else {
+      return;
+    }
+  }
 
   const profileNode = document.querySelector(selectors.sidebarLinks.profile);
 
@@ -59,14 +65,11 @@ export const addGrowButton = async () => {
     growButton.id = "mt-typefullyGrowButton";
     growButton.ariaLabel = "Typefully Grow";
     growButton.style.cursor = "pointer";
-    growButton.firstChild.firstChild.firstChild.innerHTML =
-      svgAssets.grow.normal;
+    growButton.firstChild.firstChild.firstChild.innerHTML = svgAssets.grow.normal;
 
     growButton.onclick = () => {
-      growButton.firstChild.firstChild.firstChild.innerHTML =
-        svgAssets.grow.selected;
-      if (growButton.querySelector("span"))
-        growButton.querySelector("span").style.fontWeight = "700";
+      growButton.firstChild.firstChild.firstChild.innerHTML = svgAssets.grow.selected;
+      if (growButton.querySelector("span")) growButton.querySelector("span").style.fontWeight = "700";
       showGrowTab();
     };
 

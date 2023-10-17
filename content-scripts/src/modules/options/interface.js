@@ -1,6 +1,6 @@
 import selectors from "../../selectors";
 import addStyles from "../utilities/addStyles";
-import removeElement from "../utilities/removeElement";
+import { removeElementById } from "../utilities/removeElement";
 import { getStorage } from "../utilities/storage";
 
 // Function to change the title notification count
@@ -17,10 +17,7 @@ export const changeTitleNotifications = (tf) => {
     const favicon = document.querySelector('link[rel="shortcut icon"]');
 
     if (titleNotifications === "on") {
-      favicon.setAttribute(
-        "href",
-        favicon.href.replace("twitter.ico", "twitter-pip.2.ico")
-      );
+      favicon.setAttribute("href", favicon.href.replace("twitter.ico", "twitter-pip.2.ico"));
     } else {
       if (document.title.charAt(0) === "(") {
         document.title = document.title.split(" ").slice(1).join(" ");
@@ -57,9 +54,7 @@ export const changeInterFont = (interFont) => {
         `
         @font-face {
           font-family: 'Inter';
-          src: url('${chrome.runtime.getURL(
-            "fonts/inter-subset.woff2"
-          )}') format('woff2');
+          src: url('${chrome.runtime.getURL("fonts/inter-subset.woff2")}') format('woff2');
         }
 
         div, span, input, textarea {
@@ -70,7 +65,7 @@ export const changeInterFont = (interFont) => {
       break;
 
     case "off":
-      removeElement("mt-interFont");
+      removeElementById("mt-interFont");
       break;
   }
 };
@@ -90,7 +85,7 @@ export const changeTweetButton = (tweetButton) => {
       break;
 
     case "on":
-      removeElement("mt-tweetButton");
+      removeElementById("mt-tweetButton");
       break;
   }
 };
@@ -119,7 +114,7 @@ export const changeHideSearchBar = (searchBar) => {
       break;
 
     case "on":
-      removeElement("mt-searchBar");
+      removeElementById("mt-searchBar");
       addStyles(
         "mt-trendsHomeTimeline-more",
         `@media only screen and (min-width: 1265px) {
@@ -153,7 +148,7 @@ export const changeTransparentSearchBar = (transparentSearch) => {
       break;
 
     case "off":
-      removeElement("mt-transparentSearch");
+      removeElementById("mt-transparentSearch");
       break;
   }
 };

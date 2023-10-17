@@ -1,34 +1,18 @@
 import svgAssets from "./svgAssets";
 import addStyles from "./utilities/addStyles";
 import addTooltip from "./utilities/addTooltip";
-import removeElement from "./utilities/removeElement";
+import { removeElementById } from "./utilities/removeElement";
 
 // Function to add "Continue Thread in Typefully"
 export const addTypefullyPlug = () => {
-  const modal = document.querySelector(
-    '[aria-labelledby="modal-header"][role="dialog"]'
-  );
-  const tweetComposeArea = modal?.querySelector(
-    "div.public-DraftStyleDefault-block"
-  );
+  const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
+  const tweetComposeArea = modal?.querySelector("div.public-DraftStyleDefault-block");
   const tweet2Exist = document.querySelector(`[data-testid="tweetTextarea_1"]`);
-  const tweetButtonInlineDisabled = document.querySelector(
-    `[data-testid="tweetButtonInline"][aria-disabled]`
-  );
-  const tweetButtonInlineNotDisabled = document.querySelector(
-    `[data-testid="tweetButtonInline"]:not([aria-disabled])`
-  );
+  const tweetButtonInlineDisabled = document.querySelector(`[data-testid="tweetButtonInline"][aria-disabled]`);
+  const tweetButtonInlineNotDisabled = document.querySelector(`[data-testid="tweetButtonInline"]:not([aria-disabled])`);
 
-  if (
-    modal &&
-    tweet2Exist &&
-    tweetComposeArea &&
-    !document.getElementById("typefully-link")
-  ) {
-    const typefullyLinkElement = createTypefullyLinkElement(
-      "typefully-link",
-      "typefully-save-draft-button"
-    );
+  if (modal && tweet2Exist && tweetComposeArea && !document.getElementById("typefully-link")) {
+    const typefullyLinkElement = createTypefullyLinkElement("typefully-link", "typefully-save-draft-button");
     const typefullyLogo = createTypefullyLogo();
     const typefullyText = document.createElement("span");
 
@@ -42,26 +26,15 @@ export const addTypefullyPlug = () => {
     modal.appendChild(typefullyLinkElement);
   }
 
-  if (
-    tweetButtonInlineDisabled &&
-    document.getElementById("typefully-link-inline")
-  ) {
-    removeElement("typefully-link-inline");
-    removeElement("mt-inlinetweetbutton");
+  if (tweetButtonInlineDisabled && document.getElementById("typefully-link-inline")) {
+    removeElementById("typefully-link-inline");
+    removeElementById("mt-inlinetweetbutton");
   }
 
-  if (
-    tweetButtonInlineNotDisabled &&
-    !document.getElementById("typefully-link-inline")
-  ) {
-    const tweetButtonInline = document.querySelector(
-      `[data-testid="tweetButtonInline"]`
-    );
+  if (tweetButtonInlineNotDisabled && !document.getElementById("typefully-link-inline")) {
+    const tweetButtonInline = document.querySelector(`[data-testid="tweetButtonInline"]`);
     const container = tweetButtonInline.parentElement;
-    const typefullyLinkElement = createTypefullyLinkElement(
-      "typefully-link-inline",
-      "typefully-save-draft-button ghost"
-    );
+    const typefullyLinkElement = createTypefullyLinkElement("typefully-link-inline", "typefully-save-draft-button ghost");
     const typefullyLogo = createTypefullyLogo();
 
     addTooltip(typefullyLinkElement, {
@@ -97,9 +70,7 @@ export const saveCurrentReplyToLink = () => {
     const linkElement = ev.target;
     const tweet = linkElement.closest('[data-testid="tweet"]');
     const tweetLinks = tweet.querySelectorAll("a[role='link']");
-    const tweetLink = Array.from(tweetLinks).find((link) =>
-      link.href.includes("/status/")
-    ).href;
+    const tweetLink = Array.from(tweetLinks).find((link) => link.href.includes("/status/")).href;
     sessionStorage.setItem("typefully-replying-to", tweetLink);
   }
 
@@ -111,16 +82,11 @@ export const saveCurrentReplyToLink = () => {
 
 // Function to add "Reply with Typefully"
 export const addTypefullyReplyPlug = () => {
-  const modal = document.querySelector(
-    '[aria-labelledby="modal-header"][role="dialog"]'
-  );
+  const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
   const toolbar = modal && modal.querySelector('[data-testid="toolBar"]');
-  const replyButton =
-    modal && modal.querySelector('[data-testid="tweetButton"]');
+  const replyButton = modal && modal.querySelector('[data-testid="tweetButton"]');
 
-  const tweetComposeArea = modal?.querySelector(
-    "div.public-DraftStyleDefault-block"
-  );
+  const tweetComposeArea = modal?.querySelector("div.public-DraftStyleDefault-block");
 
   const replyingToLink = sessionStorage.getItem("typefully-replying-to");
 
@@ -135,10 +101,7 @@ export const addTypefullyReplyPlug = () => {
   ) {
     sessionStorage.removeItem("typefully-replying-to");
 
-    const typefullyReplyLinkElement = createTypefullyLinkElement(
-      "typefully-reply-link",
-      "typefully-reply-button"
-    );
+    const typefullyReplyLinkElement = createTypefullyLinkElement("typefully-reply-link", "typefully-reply-button");
     typefullyReplyLinkElement.addEventListener("click", () => {
       getCurrentTextAndSendToTypefully(replyingToLink);
     });
@@ -179,31 +142,19 @@ export const getCurrentTextAndSendToTypefully = (replyingToLink) => {
   let typefullyContent = "";
 
   while (true) {
-    if (
-      document.querySelector(
-        `[data-testid="tweetTextarea_${tweetTextAreaNumber}"]`
-      )
-    ) {
+    if (document.querySelector(`[data-testid="tweetTextarea_${tweetTextAreaNumber}"]`)) {
       if (tweetTextAreaNumber > 0) {
         typefullyContent = `${typefullyContent}\n\n\n\n\n`;
       }
 
-      let tweetTextItems = Array.from(
-        document.querySelectorAll(
-          `[data-testid="tweetTextarea_${tweetTextAreaNumber}"] [data-text="true"]`
-        )
-      );
+      let tweetTextItems = Array.from(document.querySelectorAll(`[data-testid="tweetTextarea_${tweetTextAreaNumber}"] [data-text="true"]`));
 
       // remove trailing newlines at end of tweets (there is always one last <br> on the first tweet DOM node)
-      tweetTextItems = tweetTextItems.filter(
-        (item, index) =>
-          !(item.tagName === "BR" && index === tweetTextItems.length - 1)
-      );
+      tweetTextItems = tweetTextItems.filter((item, index) => !(item.tagName === "BR" && index === tweetTextItems.length - 1));
 
       tweetTextItems.forEach((item, index) => {
         const isLastItem = index === tweetTextItems.length - 1;
-        const isTagOrMention = (item) =>
-          !!item.parentElement.parentElement.attributes.style;
+        const isTagOrMention = (item) => !!item.parentElement.parentElement.attributes.style;
 
         // handle hard break (2 newlines) within single tweet
         if (item.tagName === "BR" && !isLastItem) {

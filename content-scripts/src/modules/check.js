@@ -1,6 +1,6 @@
 import selectors from "../selectors";
 import addStyles from "./utilities/addStyles";
-import removeElement from "./utilities/removeElement";
+import { removeElementById } from "./utilities/removeElement";
 
 // Function to check url for /following or /followers
 export const checkUrlForFollow = () => {
@@ -23,6 +23,6 @@ export const checkUrlForFollow = () => {
         `
     );
   } else {
-    removeElement("mt-followOverride");
+    removeElementById("mt-followOverride");
   }
 };

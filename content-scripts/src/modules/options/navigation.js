@@ -1,7 +1,7 @@
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles from "../utilities/addStyles";
-import removeElement from "../utilities/removeElement";
+import { removeElementById } from "../utilities/removeElement";
 import { getStorage } from "../utilities/storage";
 
 // Utilities
@@ -20,14 +20,21 @@ export const changeSidebarSetting = (sidebarSelector, state, onAdd) => {
       break;
 
     case "on":
-      removeElement(`mt-${sidebarSelector}`);
+      removeElementById(`mt-${sidebarSelector}`);
       onAdd?.();
       break;
   }
 };
 
-export const addSidebarButton = ({ name, href, svgAsset }) => {
-  if (document.querySelector(`nav[role="navigation"] > a[aria-label="${name}"]`)) return;
+export const addSidebarButton = ({ name, href, svgAsset, forced }) => {
+  const existingElement = document.querySelector(`nav[role="navigation"] > a[aria-label="${name}"]`);
+  if (existingElement) {
+    if (forced) {
+      existingElement.remove();
+    } else {
+      return;
+    }
+  }
 
   const templateNode = document.querySelector('nav[role="navigation"] > a[role="link"][data-testid="AppTabBar_Profile_Link"]');
 
@@ -60,7 +67,7 @@ export const changeListsButton = (state) => changeSidebarSetting("lists", state,
 export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
 
 let bt;
-export const addTwitterBlueButton = () => {
+export const addTwitterBlueButton = (forced) => {
   clearTimeout(bt);
 
   if (document.querySelector(selectors.sidebarLinks.twitterBlue)) return;
@@ -70,54 +77,60 @@ export const addTwitterBlueButton = () => {
       name: "Twitter Blue",
       href: "/settings/twitter_blue",
       svgAsset: svgAssets.twitterBlue.normal,
+      forced,
     });
   }, 500);
 };
 
-export const addVerifiedOrgsButton = () => {
+export const addVerifiedOrgsButton = (forced) => {
   addSidebarButton({
     name: "Verified Orgs",
     href: "/i/verified-orgs-signup",
     svgAsset: svgAssets.verifiedOrgs.normal,
+    forced,
   });
 };
 
-export const addTopicsButton = () => {
+export const addTopicsButton = (forced) => {
   addSidebarButton({
     name: "Topics",
     href: "/topics",
     svgAsset: svgAssets.topics.normal,
+    forced,
   });
 };
 
-export const addCirclesButton = () => {
+export const addCirclesButton = (forced) => {
   addSidebarButton({
     name: "Circles",
     href: "/i/circles",
     svgAsset: svgAssets.circles.normal,
+    forced,
   });
 };
 
-export const addCommunitiesButton = () => {
+export const addCommunitiesButton = (forced) => {
   addSidebarButton({
     name: "Communities",
     href: "/communities",
     svgAsset: svgAssets.communities.normal,
+    forced,
   });
 };
 
-export const addListsButton = () => {
+export const addListsButton = (forced) => {
   addSidebarButton({
     name: "Lists",
     href: "/lists",
     svgAsset: svgAssets.lists.normal,
+    forced,
   });
 };
 
 export const changeUnreadCountBadge = (unreadCountBadge) => {
   switch (unreadCountBadge) {
     case "on":
-      removeElement("mt-unreadCountBadge");
+      removeElementById("mt-unreadCountBadge");
       break;
 
     case "off":
@@ -169,7 +182,7 @@ export const changeNavigationButtonsLabelsHover = async (navigationButtonsLabels
       break;
 
     case "on":
-      removeElement("mt-navigationButtonsLabelsHover");
+      removeElementById("mt-navigationButtonsLabelsHover");
       break;
   }
 };
@@ -177,7 +190,7 @@ export const changeNavigationButtonsLabelsHover = async (navigationButtonsLabels
 export const changeNavigationButtonsLabels = async (navigationButtonsLabels) => {
   switch (navigationButtonsLabels) {
     case "on":
-      removeElement("mt-navigationButtonsLabelsHover");
+      removeElementById("mt-navigationButtonsLabelsHover");
       addStyles(
         "mt-navigationButtonsLabels",
         `
@@ -195,7 +208,7 @@ export const changeNavigationButtonsLabels = async (navigationButtonsLabels) => 
       if (data?.navigationButtonsLabelsHover !== "off") return;
 
       removeHover();
-      removeElement("mt-navigationButtonsLabels");
+      removeElementById("mt-navigationButtonsLabels");
 
       break;
   }
@@ -216,7 +229,7 @@ export const changeNavigationCenter = (navigationCenter) => {
       break;
 
     case "off":
-      removeElement("mt-navigationCenter");
+      removeElementById("mt-navigationCenter");
       break;
   }
 };

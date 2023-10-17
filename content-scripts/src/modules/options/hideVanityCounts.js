@@ -1,5 +1,5 @@
 import addStyles from "../utilities/addStyles";
-import removeElement from "../utilities/removeElement";
+import { removeElementById } from "../utilities/removeElement";
 
 // Function to change Reply Count
 export const changeReplyCount = (replyCount) => {
@@ -16,7 +16,7 @@ export const changeReplyCount = (replyCount) => {
       break;
 
     case "show":
-      removeElement("mt-replyCount");
+      removeElementById("mt-replyCount");
       break;
   }
 };
@@ -39,7 +39,7 @@ export const changeRetweetCount = (retweetCount) => {
       break;
 
     case "show":
-      removeElement("mt-retweetCount");
+      removeElementById("mt-retweetCount");
       break;
   }
 };
@@ -61,7 +61,7 @@ export const changeLikeCount = (likeCount) => {
       break;
 
     case "show":
-      removeElement("mt-likeCount");
+      removeElementById("mt-likeCount");
       break;
   }
 };
@@ -82,7 +82,7 @@ export const changeFollowCount = (followCount) => {
       break;
 
     case "show":
-      removeElement("mt-followCount");
+      removeElementById("mt-followCount");
       break;
   }
 };

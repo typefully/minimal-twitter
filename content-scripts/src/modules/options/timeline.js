@@ -1,7 +1,7 @@
 import selectors from "../../selectors";
 import { checkUrlForFollow } from "../check";
 import addStyles from "../utilities/addStyles";
-import removeElement from "../utilities/removeElement";
+import { removeElementById } from "../utilities/removeElement";
 import { getStorage } from "../utilities/storage";
 
 // Function to change Timeline Width
@@ -83,7 +83,7 @@ export const changeTimelineWidth = (timelineWidth) => {
 export const changeTimelineBorders = (timelineBorders) => {
   switch (timelineBorders) {
     case "on":
-      removeElement("mt-timelineBorders");
+      removeElementById("mt-timelineBorders");
       break;
 
     case "off":
@@ -105,7 +105,7 @@ export const changeTimelineBorders = (timelineBorders) => {
 export const changeTweetBorders = (tweetBorders) => {
   switch (tweetBorders) {
     case "on":
-      removeElement("mt-tweetBorders");
+      removeElementById("mt-tweetBorders");
       break;
 
     case "off":
@@ -128,7 +128,7 @@ export const changeTweetBorders = (tweetBorders) => {
 export const changeStickyHeader = (stickyHeader) => {
   switch (stickyHeader) {
     case "on":
-      removeElement("mt-stickyHeader");
+      removeElementById("mt-stickyHeader");
       break;
 
     case "off":
@@ -159,7 +159,7 @@ export const changePromotedPosts = (removePromotedPosts) => {
       break;
 
     case "on":
-      removeElement("mt-removePromotedPosts");
+      removeElementById("mt-removePromotedPosts");
       break;
   }
 };
@@ -168,7 +168,7 @@ export const changePromotedPosts = (removePromotedPosts) => {
 export const changeWhoToFollow = (removeWhoToFollow) => {
   switch (removeWhoToFollow) {
     case "off":
-      removeElement("mt-removeWhoToFollow");
+      removeElementById("mt-removeWhoToFollow");
       break;
 
     case "on":
@@ -191,7 +191,7 @@ export const changeWhoToFollow = (removeWhoToFollow) => {
 export const changeTopicsToFollow = (removeTopicsToFollow) => {
   switch (removeTopicsToFollow) {
     case "off":
-      removeElement("mt-removeTopicsToFollow");
+      removeElementById("mt-removeTopicsToFollow");
       break;
 
     case "on":
@@ -213,19 +213,14 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 };
 
 export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
-  if (
-    writerMode === "on" ||
-    window.location.pathname.includes("compose/tweet") ||
-    !window.location.pathname.includes("/home") ||
-    !window.location.pathname === "/"
-  ) {
-    removeElement("mt-removeTimelineTabs");
+  if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
+    removeElementById("mt-removeTimelineTabs");
     return;
   }
 
   switch (removeTimelineTabs) {
     case "off":
-      removeElement("mt-removeTimelineTabs");
+      removeElementById("mt-removeTimelineTabs");
       break;
 
     case "on":
@@ -245,12 +240,10 @@ export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
 
 // Function to change Recent Media on Profiles
 export const changeRecentMedia = async (recentMedia) => {
-  const userProfile = document.querySelector(
-    'meta[content*="twitter://user?screen_name="]'
-  );
+  const userProfile = document.querySelector('meta[content*="twitter://user?screen_name="]');
 
   if (!userProfile) {
-    removeElement("mt-recentMedia");
+    removeElementById("mt-recentMedia");
     return;
   }
 
@@ -264,7 +257,7 @@ export const changeRecentMedia = async (recentMedia) => {
   const run = (rm) => {
     switch (rm) {
       case "off":
-        removeElement("mt-recentMedia");
+        removeElementById("mt-recentMedia");
         sidebarPhotoGrid.classList.remove("mt-recentMedia-photoGrid");
         break;
 
@@ -303,19 +296,14 @@ export const changeRecentMedia = async (recentMedia) => {
 
 // Function to change Show Trends on Home Timeline
 export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
-  if (
-    writerMode === "on" ||
-    window.location.pathname.includes("compose/tweet") ||
-    !window.location.pathname.includes("/home") ||
-    !window.location.pathname === "/"
-  ) {
-    removeElement("mt-trendsHomeTimeline");
+  if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
+    removeElementById("mt-trendsHomeTimeline");
     return;
   }
 
   switch (trendsHomeTimeline) {
     case "off":
-      removeElement("mt-trendsHomeTimeline");
+      removeElementById("mt-trendsHomeTimeline");
       break;
 
     case "on":
@@ -338,6 +326,10 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
               visibility: visible;
               position: fixed;
               right: 16px;
+              top: 0px;
+              max-height: 78vh;
+              overflow: auto;
+              width: 300px;
               border-radius: 16px;
               border-color: var(--border-color);
               border-width: 1px;
@@ -348,7 +340,6 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
               animation-duration: 0s;
               animation-fill-mode: forwards;
               animation-delay: 500ms;
-              width: 300px;
               margin-top: 4px;
             }
 
@@ -366,25 +357,17 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
 export const changeFollowingTimeline = (followingTimeline) => {
   if (followingTimeline !== "on") return;
 
-  const tablist = document.querySelector(
-    "div[data-testid='ScrollSnap-List'][role='tablist']"
-  );
-  const selectedTab = document.querySelector(
-    "div[data-testid='ScrollSnap-List'][role='tablist'] a[href='/home'][aria-selected='true']"
-  );
+  const tablist = document.querySelector("div[data-testid='ScrollSnap-List'][role='tablist']");
+  const selectedTab = document.querySelector("div[data-testid='ScrollSnap-List'][role='tablist'] a[href='/home'][aria-selected='true']");
 
   // Check if there's a selected tab
   if (!tablist || !selectedTab) return;
 
-  const selectedTabText = selectedTab
-    .querySelector("div[dir='ltr'] > span")
-    .textContent.toLowerCase();
+  const selectedTabText = selectedTab.querySelector("div[dir='ltr'] > span").textContent.toLowerCase();
 
   if (selectedTabText === "following") return;
 
-  const secondTab = tablist.querySelector(
-    "div[role='presentation']:nth-child(2) a"
-  );
+  const secondTab = tablist.querySelector("div[role='presentation']:nth-child(2) a");
 
   secondTab.click(); // Following tab is second tab
 };
@@ -397,21 +380,15 @@ export const changeLatestTweets = (latestTweets) => {
 
   const showLatestTweets = () => {
     // Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
-    const latestSelected = !!document.querySelector(
-      "div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']"
-    );
+    const latestSelected = !!document.querySelector("div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']");
     // Check if there's a menu button
-    const menuitem = document.querySelector(
-      "div[role='menuitem'][tabindex='0']"
-    );
+    const menuitem = document.querySelector("div[role='menuitem'][tabindex='0']");
 
     if (latestSelected || !menuitem) return;
 
     const run = () => {
       // Check if the nav bar with "Home" and "Latest Tweets" exists
-      const optionBarExists = !!document.querySelector(
-        "div[data-testid='ScrollSnap-List']"
-      );
+      const optionBarExists = !!document.querySelector("div[data-testid='ScrollSnap-List']");
 
       if (!optionBarExists) {
         /*
@@ -419,12 +396,8 @@ export const changeLatestTweets = (latestTweets) => {
             1. Click the Timeline Options button
             2. Click the first option in the popup
           */
-        const timelineOptions = document.querySelector(
-          "div[aria-label='Timeline options']"
-        );
-        const topTweetsOn = document.querySelector(
-          "div[aria-label='Top Tweets on']"
-        );
+        const timelineOptions = document.querySelector("div[aria-label='Timeline options']");
+        const topTweetsOn = document.querySelector("div[aria-label='Top Tweets on']");
 
         const clickMenuButton = (isTimelineOptions) => {
           clearTimeout(lt1);
@@ -433,9 +406,7 @@ export const changeLatestTweets = (latestTweets) => {
 
             if (isTimelineOptions) {
               // Click the "Latest Tweets" nav bar option
-              const latestTweetsNavBarOption = document.querySelector(
-                "div[data-testid='ScrollSnap-List'] > div:last-child > a"
-              );
+              const latestTweetsNavBarOption = document.querySelector("div[data-testid='ScrollSnap-List'] > div:last-child > a");
               latestTweetsNavBarOption && latestTweetsNavBarOption.click();
             }
           }, 100);
@@ -479,7 +450,7 @@ export const removeTweetFormatting = (removeTweetFormatting) => {
       break;
 
     case "off":
-      removeElement("mt-removeTweetFormatting");
+      removeElementById("mt-removeTweetFormatting");
       break;
   }
 };

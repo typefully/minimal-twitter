@@ -16,15 +16,6 @@ a[href*="quick_promote_web"] {
   visibility: hidden;
 }
 
-/* Hide sidebar */
-[data-testid="sidebarColumn"] {
-  visibility: hidden;
-  width: 0;
-  margin: 0;
-  padding: 0;
-  z-index: 1;
-}
-
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
@@ -149,18 +140,6 @@ a[href*="quick_promote_web"] {
   div[style="left: -8px; width: 306px;"] {
     left: unset;
     width: 374px;
-  }
-
-  /* Search Filters Custom Class */
-  .searchFilters {
-    visibility: visible;
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    width: 240px;
-  }
-  .searchFilters > div > div:first-child {
-    display: none;
   }
 }
 

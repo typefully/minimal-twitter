@@ -1,6 +1,6 @@
 import svgAssets from "./svgAssets";
 import { getCurrentTheme } from "./utilities/colors";
-import removeElement from "./utilities/removeElement";
+import { removeElementById } from "./utilities/removeElement";
 
 let gt; // Grow Tab timeout
 export const showGrowTab = () => {
@@ -15,10 +15,7 @@ export const showGrowTab = () => {
   const growTab = document.createElement("iframe");
   growTab.id = "typefully-grow-tab";
 
-  const screenName = document
-    .querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)
-    .getAttribute("href")
-    .replace("/", "");
+  const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`).getAttribute("href").replace("/", "");
 
   growTab.src = `https://typefully.com/grow?mt-embed=true&mt-theme=${getCurrentTheme()}&mt-screen-name=${screenName}`;
 
@@ -59,12 +56,11 @@ export const removeGrowTab = () => {
   document.body.style.overflow = "auto";
 
   if (growTab) {
-    removeElement("typefully-grow-tab");
+    removeElementById("typefully-grow-tab");
   }
 
   if (growButton && growButton.firstChild.firstChild.firstChild) {
-    growButton.firstChild.firstChild.firstChild.innerHTML =
-      svgAssets.grow.normal;
+    growButton.firstChild.firstChild.firstChild.innerHTML = svgAssets.grow.normal;
     growButton.querySelector("span").style.fontWeight = "400";
   }
 

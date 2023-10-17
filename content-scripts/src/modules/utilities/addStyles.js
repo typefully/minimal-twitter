@@ -1,9 +1,9 @@
-import removeElement from "./removeElement";
+import { removeElementById } from "./removeElement";
 
 // Utility function to inject CSS into page
 export default function addStyles(id, css) {
   // First remove before adding
-  removeElement(id);
+  removeElementById(id);
 
   const head = document.querySelector("head");
   const style = document.createElement("style");
