@@ -107,7 +107,7 @@ a[href*="quick_promote_web"] {
 }
 
 /* Reveal searchbar and search filters at desktop breakpoint */
-@media only screen and (min-width: 1265px) {
+@media only screen and (min-width: 1100px) {
   /* Reveal searchbar */
   [data-testid="sidebarColumn"] form[role="search"] {
     visibility: visible;
