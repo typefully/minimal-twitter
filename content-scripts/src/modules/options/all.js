@@ -7,10 +7,10 @@ import {
 } from "./hideVanityCounts";
 import hideViewCount from "./hideViewCount";
 import {
+  changeHideSearchBar,
   changeInterFont,
-  changeSearchBar1,
-  changeSearchBar2,
   changeTitleNotifications,
+  changeTransparentSearchBar,
   changeTweetButton,
 } from "./interface";
 import {
@@ -122,8 +122,8 @@ export const injectAllChanges = (data) => {
   changeLikeCount(data?.likeCount); // Hide Like Count
   changeFollowCount(data?.followCount); // Hide Follow
   changeTweetButton(data?.tweetButton); // Hide Tweet Button
-  changeSearchBar1(data?.searchBar); // Hide Search Bar
-  changeSearchBar2(data?.transparentSearch); // Transparent Search Bar
+  changeHideSearchBar(data?.searchBar); // Hide Search Bar
+  changeTransparentSearchBar(data?.transparentSearch); // Transparent Search Bar
   changePromotedPosts(data?.removePromotedPosts); // Remove Promoted Posts
   changeWhoToFollow(data?.removeWhoToFollow); // Who to Follow
   changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow

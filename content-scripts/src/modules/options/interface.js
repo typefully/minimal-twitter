@@ -95,31 +95,26 @@ export const changeTweetButton = (tweetButton) => {
   }
 };
 
-// Function to change Search Bar 1
-export const changeSearchBar1 = (searchBar) => {
+export const changeHideSearchBar = (searchBar) => {
   switch (searchBar) {
     case "off":
       addStyles(
         "mt-searchBar",
-        `
-        ${selectors.searchBox} {
+        `${selectors.searchBox} {
           display: none;
           visibility: hidden;
-        }
-        `
+        }`
       );
       addStyles(
         "mt-trendsHomeTimeline-more",
-        `
-        @media only screen and (min-width: 1265px) {
+        `@media only screen and (min-width: 1265px) {
           ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
             top: 12px !important;
           }
           .mt-recentMedia-photoGrid {
             top: 12px !important;
           }
-        }
-        `
+        }`
       );
       break;
 
@@ -127,23 +122,20 @@ export const changeSearchBar1 = (searchBar) => {
       removeElement("mt-searchBar");
       addStyles(
         "mt-trendsHomeTimeline-more",
-        `
-        @media only screen and (min-width: 1265px) {
+        `@media only screen and (min-width: 1265px) {
           ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
             top: unset !important;
           }
           .mt-recentMedia-photoGrid {
             top: unset !important;
           }
-        }
-        `
+        }`
       );
       break;
   }
 };
 
-// Function to change Search Bar 2
-export const changeSearchBar2 = (transparentSearch) => {
+export const changeTransparentSearchBar = (transparentSearch) => {
   switch (transparentSearch) {
     case "on":
       addStyles(

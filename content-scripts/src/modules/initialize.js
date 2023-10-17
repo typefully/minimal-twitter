@@ -44,7 +44,7 @@ const searchBarWidthReset = (searchBar) => {
     const searchBarPlaceholderWidth =
       searchBar.getAttribute("placeholder").length;
 
-    searchBar.style.width = `${searchBarPlaceholderWidth + 1}ch`;
+    searchBar.style.width = `${searchBarPlaceholderWidth + 4}ch`; // + 4 to make sure it's wider than the placeholder itself, leaving some right padding
   }
 };
 
