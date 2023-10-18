@@ -1,3 +1,19 @@
+import {
+  KeyFollowingTimeline,
+  KeyHideViewCount,
+  KeyLatestTweets,
+  KeyRecentMedia,
+  KeyRemovePromotedPosts,
+  KeyRemoveTimelineTabs,
+  KeyRemoveTopicsToFollow,
+  KeyRemoveTweetFormatting,
+  KeyRemoveWhoToFollow,
+  KeyStickyHeader,
+  KeyTimelineBorders,
+  KeyTrendsHomeTimeline,
+  KeyTweetBorders,
+  KeyWriterMode
+} from "../../../storage-keys"
 import useMounted from "../../utilities/hooks/useMounted"
 import TimelineWidthSlider from "../controls/TimelineWidthSlider"
 import VanityCheckboxes from "../controls/VanityCheckboxes"
@@ -17,65 +33,65 @@ const TimelineSection = () => {
         <ControlsWrapper id="user-control-timeline">
           <TimelineWidthSlider />
           <Separator />
-          <SwitchControl label="Zen Writer Mode" storageKey="writerMode" />
+          <SwitchControl label="Zen Writer Mode" storageKey={KeyWriterMode} />
           <SwitchControl
             label="Timeline Borders"
-            storageKey="timelineBorders"
+            storageKey={KeyTimelineBorders}
             defaultState={true}
           />
           <SwitchControl
             label="Tweet Borders"
-            storageKey="tweetBorders"
+            storageKey={KeyTweetBorders}
             defaultState={true}
           />
           <SwitchControl
             label="Sticky Header"
-            storageKey="stickyHeader"
+            storageKey={KeyStickyHeader}
             defaultState={true}
           />
           <SwitchControl
             label="Trends on Home Timeline"
-            storageKey="trendsHomeTimeline"
+            storageKey={KeyTrendsHomeTimeline}
           />
           <SwitchControl
             label="Recent Media on Profiles"
-            storageKey="recentMedia"
+            storageKey={KeyRecentMedia}
           />
           <Separator />
           <VanityCheckboxes />
           <LocalStorageCheckboxControl
             label="Remove View Count from Tweets"
-            storageKey="hideViewCount"
+            storageKey={KeyHideViewCount}
             defaultState={true}
           />
           <LocalStorageCheckboxControl
             label="Remove Promoted Posts"
-            storageKey="removePromotedPosts"
+            storageKey={KeyRemovePromotedPosts}
             defaultState={true}
           />
           <LocalStorageCheckboxControl
             label="Remove Who to Follow"
-            storageKey="removeWhoToFollow"
+            storageKey={KeyRemoveWhoToFollow}
           />
           <LocalStorageCheckboxControl
             label="Remove Topics to Follow"
-            storageKey="removeTopicsToFollow"
+            storageKey={KeyRemoveTopicsToFollow}
           />
           <LocalStorageCheckboxControl
             label={`Remove "For you / Following" Tabs`}
-            storageKey="removeTimelineTabs"
+            storageKey={KeyRemoveTimelineTabs}
           />
           <LocalStorageCheckboxControl
             label={`Always use "Following" Tab`}
-            storageKey="followingTimeline"
+            storageKey={KeyFollowingTimeline}
           />
           <LocalStorageCheckboxControl
             label="Always Latest Tweets (if available)"
-            storageKey="latestTweets"
+            storageKey={KeyLatestTweets}
           />
           <LocalStorageCheckboxControl
             label="Remove Tweet Formatting"
-            storageKey="removeTweetFormatting"
+            storageKey={KeyRemoveTweetFormatting}
           />
         </ControlsWrapper>
       ) : (

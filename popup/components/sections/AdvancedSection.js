@@ -3,6 +3,7 @@ import CodeMirror from "@uiw/react-codemirror"
 import debounce from "lodash.debounce"
 import { useCallback, useEffect, useState } from "react"
 
+import { KeyCssTextEdited } from "../../../storage-keys"
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import SectionLabel from "../ui/SectionLabel"
 
@@ -14,7 +15,7 @@ const AdvancedSection = () => {
   const onChange = useCallback((value) => {
     const saveCSSTextEdited = debounce(async () => {
       try {
-        await setStorage({ cssTextEdited: value })
+        await setStorage({ [KeyCssTextEdited]: value })
       } catch (error) {
         console.warn(error)
       }
@@ -26,7 +27,7 @@ const AdvancedSection = () => {
   useEffect(() => {
     const getCSSTextEdited = async () => {
       try {
-        const userDefault = await getStorage("cssTextEdited")
+        const userDefault = await getStorage(KeyCssTextEdited)
         userDefault && setCSSTextEdited(userDefault)
       } catch (error) {
         console.warn(error)

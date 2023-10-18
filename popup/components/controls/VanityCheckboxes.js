@@ -145,32 +145,32 @@ const VanityCheckboxes = () => {
           />
         }
         checked={hideAll}
-        onCheckedChange={onCheckedChange}
+        onCheckedChange={(checked) => onCheckedChange("all", checked)}
       />
       {showVanityCheckboxes && (
         <div className="pl-3 flex flex-col gap-4 mb-2">
           <CheckboxControl
             id="reply"
             label="Hide Reply Count from Tweets"
-            onCheckedChange={onCheckedChange}
+            onCheckedChange={(checked) => onCheckedChange("reply", checked)}
             checked={hideReply}
           />
           <CheckboxControl
             id="retweet"
             label="Hide Retweet Count from Tweets"
-            onCheckedChange={onCheckedChange}
+            onCheckedChange={(checked) => onCheckedChange("retweet", checked)}
             checked={hideRetweet}
           />
           <CheckboxControl
             id="like"
             label="Hide Like Count from Tweets"
-            onCheckedChange={onCheckedChange}
+            onCheckedChange={(checked) => onCheckedChange("like", checked)}
             checked={hideLike}
           />
           <CheckboxControl
             id="follow"
             label="Hide Follower/Following Count"
-            onCheckedChange={onCheckedChange}
+            onCheckedChange={(checked) => onCheckedChange("follow", checked)}
             checked={hideFollow}
           />
         </div>

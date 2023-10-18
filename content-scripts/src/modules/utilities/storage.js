@@ -10,8 +10,8 @@
 */
 export const getStorage = async (k) => {
   const promise = new Promise((resolve, _reject) => {
-    const storageKey = Array.isArray(k) ? k : [k];
-    chrome?.storage?.local.get(storageKey, (data) => {
+    const storageKeys = Array.isArray(k) ? k : [k];
+    chrome?.storage?.local.get(storageKeys, (data) => {
       return resolve(Array.isArray(k) ? data : data[k]);
     });
   });

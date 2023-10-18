@@ -1,3 +1,16 @@
+import {
+  KeyCirclesButton,
+  KeyCommunitiesButton,
+  KeyFollowingTimeline,
+  KeyListsButton,
+  KeyRemoveTimelineTabs,
+  KeyTopicsButton,
+  KeyTrendsHomeTimeline,
+  KeyTwitterBlueButton,
+  KeyTypefullyGrowTab,
+  KeyVerifiedOrgsButton,
+  KeyWriterMode,
+} from "../../../storage-keys";
 import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
 import { addCirclesButton, addCommunitiesButton, addListsButton, addTopicsButton, addTwitterBlueButton, addVerifiedOrgsButton } from "./options/navigation";
@@ -5,8 +18,8 @@ import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeT
 import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
-import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
-import hideSidebar from "./utilities/hideSidebar";
+import { extractColorsAsRootVars } from "./utilities/colors";
+import hideRightSidebar from "./utilities/hideRightSidebar";
 import { getStorage } from "./utilities/storage";
 import throttle from "./utilities/throttle";
 
@@ -56,46 +69,23 @@ export const observe = () => {
     if (!mutationsList.length) return;
     if (mutationIsNotRelevant(mutationsList)) return;
 
-    if (!colorsAreSet()) {
-      extractColorsAsRootVars(); // Extract colors first
-    }
+    extractColorsAsRootVars(); // Extract colors first
 
     const runDocumentMutations = throttle(async () => {
-      const data = await getStorage([
-        "listsButton",
-        "communitiesButton",
-        "topicsButton",
-        "circlesButton",
-        "twitterBlueButton",
-        "typefullyGrowTab",
-        "followingTimeline",
-        "trendsHomeTimeline",
-        "removeTimelineTabs",
-        "writerMode",
-      ]);
+      const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs]);
 
-      if (data?.writerMode === "on") {
-        changeWriterMode(data?.writerMode);
-      } else {
-        changeTimelineTabs(data?.removeTimelineTabs, data?.writerMode);
-        changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode);
-        changeFollowingTimeline(data?.followingTimeline);
-        addTypefullyPlug();
+      if (data) {
+        if (data[KeyWriterMode] === "on") {
+          changeWriterMode(data[KeyWriterMode]);
+        } else {
+          changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
+          changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
+          changeFollowingTimeline(data[KeyFollowingTimeline]);
+          addTypefullyPlug();
+        }
       }
 
-      hideSidebar();
-
-      if (data?.listsButton === "on") addListsButton();
-      if (data?.communitiesButton === "on") addCommunitiesButton();
-      if (data?.topicsButton === "on") addTopicsButton();
-      if (data?.circlesButton === "on") addCirclesButton();
-      if (data?.twitterBlueButton === "on") addTwitterBlueButton();
-      if (data?.typefullyGrowTab === "on") {
-        clearTimeout(mt);
-        mt = setTimeout(() => {
-          addGrowButton();
-        });
-      }
+      await addSidebarButtons();
 
       saveCurrentReplyToLink();
       addTypefullyReplyPlug();
@@ -110,7 +100,7 @@ export const observe = () => {
       const scheduleButton = document.querySelector('div[data-testid="scheduleOption"]');
       if (scheduleButton) addWriterModeButton(scheduleButton);
 
-      hideSidebar();
+      hideRightSidebar();
 
       return;
     }, 1000);
@@ -204,20 +194,27 @@ export const addResizeListener = () => {
   window.addEventListener(
     "resize",
     throttle(async () => {
-      const data = await getStorage(["listsButton", "communitiesButton", "topicsButton", "circlesButton", "verifiedOrgsButton", "twitterBlueButton", "typefullyGrowTab"]);
-
-      if (data?.listsButton === "on") addListsButton(true);
-      if (data?.communitiesButton === "on") addCommunitiesButton(true);
-      if (data?.topicsButton === "on") addTopicsButton(true);
-      if (data?.circlesButton === "on") addCirclesButton(true);
-      if (data?.verifiedOrgs === "on") addVerifiedOrgsButton(true);
-      if (data?.twitterBlueButton === "on") addTwitterBlueButton(true);
-      if (data?.typefullyGrowTab === "on") {
-        clearTimeout(gt);
-        gt = setTimeout(() => {
-          addGrowButton(true);
-        });
-      }
+      await addSidebarButtons(true);
     }, 1000)
   );
 };
+
+// Use "forced" when you want to re-add a button even if it's already there
+async function addSidebarButtons(forced) {
+  const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyCirclesButton, KeyVerifiedOrgsButton, KeyTwitterBlueButton, KeyTypefullyGrowTab]);
+
+  if (!data) return;
+
+  if (data[KeyListsButton] === "on") addListsButton(forced);
+  if (data[KeyCommunitiesButton] === "on") addCommunitiesButton(forced);
+  if (data[KeyTopicsButton] === "on") addTopicsButton(forced);
+  if (data[KeyCirclesButton] === "on") addCirclesButton(forced);
+  if (data[KeyTwitterBlueButton] === "on") addTwitterBlueButton(forced);
+  if (data[KeyVerifiedOrgsButton] === "on") addVerifiedOrgsButton(forced);
+  if (data[KeyTypefullyGrowTab] === "on") {
+    clearTimeout(mt);
+    mt = setTimeout(() => {
+      addGrowButton(forced);
+    }, 500);
+  }
+}

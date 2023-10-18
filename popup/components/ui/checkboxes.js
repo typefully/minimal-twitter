@@ -1,9 +1,8 @@
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox"
 import { CheckIcon } from "@radix-ui/react-icons"
 import { styled } from "@stitches/react"
-import { useEffect, useState } from "react"
 
-import { getStorage, setStorage } from "../../utilities/chromeStorage"
+import useStorageKeyState from "../../utilities/useStorageKeyState"
 
 const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   position: "relative",
@@ -38,7 +37,7 @@ export const CheckboxControl = ({
     </div>
     <div className="grid rounded-full cursor-pointer w-5 place-items-center hover:bg-twitterAccentFour">
       <StyledCheckbox
-        onCheckedChange={(checked) => onCheckedChange(id, checked)}
+        onCheckedChange={onCheckedChange}
         checked={checked}
         id={id}
         className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree"
@@ -57,36 +56,14 @@ export const LocalStorageCheckboxControl = ({
   storageKey,
   defaultState = false
 }) => {
-  const [localState, setLocalState] = useState(defaultState)
-
-  useEffect(() => {
-    const getDefaultState = async () => {
-      try {
-        const userSetting = await getStorage(storageKey)
-        userSetting && setLocalState(userSetting === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getDefaultState()
-  }, [storageKey])
-
-  const handleCheckedChange = async (id, checked) => {
-    setLocalState(checked)
-    try {
-      await setStorage({ [storageKey]: checked ? "on" : "off" })
-    } catch (error) {
-      console.warn(error)
-    }
-  }
+  const [checked, setChecked] = useStorageKeyState(storageKey, defaultState)
 
   return (
     <CheckboxControl
       id={storageKey}
       label={label}
-      onCheckedChange={handleCheckedChange}
-      checked={localState}
+      onCheckedChange={setChecked}
+      checked={checked}
     />
   )
 }

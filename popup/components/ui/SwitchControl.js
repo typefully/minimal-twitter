@@ -1,28 +1,14 @@
 import * as SwitchPrimitive from "@radix-ui/react-switch"
 import { styled } from "@stitches/react"
-import { useEffect, useState } from "react"
 
-import { getStorage, setStorage } from "../../utilities/chromeStorage"
+import useStorageKeyState from "../../utilities/useStorageKeyState"
 
 export default function SwitchControl({
   label,
   storageKey,
   defaultState = false
 }) {
-  const [localState, setLocalState] = useState(defaultState)
-
-  useEffect(() => {
-    const getDefaultState = async () => {
-      try {
-        const userDefault = await getStorage(storageKey)
-        userDefault && setLocalState(userDefault === "on" ? true : false)
-      } catch (error) {
-        console.warn(error)
-      }
-    }
-
-    getDefaultState()
-  }, [storageKey])
+  const [checked, setChecked] = useStorageKeyState(storageKey, defaultState)
 
   return (
     <div className="flex items-center justify-between w-full">
@@ -30,15 +16,8 @@ export default function SwitchControl({
         {label}
       </label>
       <StyledSwitch
-        onCheckedChange={async (checked) => {
-          setLocalState(checked)
-          try {
-            await setStorage({ [storageKey]: checked ? "on" : "off" })
-          } catch (error) {
-            console.warn(error)
-          }
-        }}
-        checked={localState}
+        onCheckedChange={setChecked}
+        checked={checked}
         id={storageKey}
       >
         <StyledThumb />
