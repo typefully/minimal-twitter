@@ -23,7 +23,8 @@ import {
 } from "../../../storage-keys";
 import SectionLabel from "../ui/SectionLabel";
 
-import useStorageKeyState from "../../utilities/useStorageKeyState";
+import { useEffect, useState } from "react";
+import useStorageKeyState, { useStorageValue } from "../../utilities/useStorageKeyState";
 import Separator from "../ui/Separator";
 import SwitchControl from "../ui/SwitchControl";
 
@@ -175,37 +176,46 @@ const TypefullyGrow = () => (
   </UserButton>
 );
 
-const NavigationSection = () => (
-  <section className="flex flex-col gap-y-2">
-    <SectionLabel htmlFor="user-control-navigation">Navigation</SectionLabel>
-    <div id="user-control-navigation">
-      <form className="p-3 pb-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
-        <div className="flex items-center pb-4 gap-y-3 gap-x-6 mx-auto flex-wrap">
-          <Home />
-          <Explore />
-          <Notifications />
-          <Messages />
-          <Bookmarks />
-          <TopArticles />
-          <Lists />
-          <Communities />
-          <Topics />
-          <Circles />
-          <TwitterBlue />
-          <VerifiedOrgs />
-          <TypefullyGrow />
-          <Profile />
-        </div>
-        <div className="flex flex-col gap-y-4">
-          <Separator />
-          <SwitchControl label="Labels" storageKey={KeyNavigationButtonsLabels} />
-          <SwitchControl label="Labels on Hover" storageKey={KeyNavigationButtonsLabelsHover} />
-          <SwitchControl label="Center Vertically" storageKey={KeyNavigationCenter} />
-          <SwitchControl label="Unread Count Badge" storageKey={KeyUnreadCountBadge} />
-        </div>
-      </form>
-    </div>
-  </section>
-);
+const NavigationSection = () => {
+  const showLabels = useStorageValue();
+  const [labelsShown, setLabelsShown] = useState(false);
+
+  useEffect(() => {
+    setLabelsShown(showLabels);
+  }, [showLabels]);
+
+  return (
+    <section className="flex flex-col gap-y-2">
+      <SectionLabel htmlFor="user-control-navigation">Navigation</SectionLabel>
+      <div id="user-control-navigation">
+        <form className="p-3 pb-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
+          <div className="flex items-center pb-4 gap-y-3 gap-x-6 mx-auto flex-wrap">
+            <Home />
+            <Explore />
+            <Notifications />
+            <Messages />
+            <Bookmarks />
+            <TopArticles />
+            <Lists />
+            <Communities />
+            <Topics />
+            <Circles />
+            <TwitterBlue />
+            <VerifiedOrgs />
+            <TypefullyGrow />
+            <Profile />
+          </div>
+          <div className="flex flex-col gap-y-4">
+            <Separator />
+            <SwitchControl label="Show Labels" storageKey={KeyNavigationButtonsLabels} onChange={setLabelsShown} />
+            <SwitchControl disabled={labelsShown} label="Show Labels on Hover" storageKey={KeyNavigationButtonsLabelsHover} />
+            <SwitchControl label="Center Vertically" storageKey={KeyNavigationCenter} />
+            <SwitchControl label="Unread Count Badge" storageKey={KeyUnreadCountBadge} />
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+};
 
 export default NavigationSection;

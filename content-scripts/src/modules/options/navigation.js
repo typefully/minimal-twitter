@@ -69,7 +69,7 @@ export const addGrowButton = (forced) => {
   clearTimeout(tm2);
   tm2 = setTimeout(() => {
     addSidebarButton({
-      name: "Typefully Analytics",
+      name: "Analytics",
       forced,
       svgAsset: svgAssets.grow.normal,
       onClick: () => {
@@ -132,7 +132,7 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
   }
 };
 
-const removeHover = () => {
+const removeLabelsShownOnHover = () => {
   addStyles(
     "navigationButtonsLabelsHover",
     `
@@ -156,11 +156,10 @@ const removeHover = () => {
   );
 };
 
-export const changeNavigationButtonsLabelsHover = async (navigationButtonsLabelsHover) => {
-  switch (navigationButtonsLabelsHover) {
+export const changeNavigationButtonsLabelsHover = async (setting) => {
+  switch (setting) {
     case "off":
-      removeHover();
-
+      removeLabelsShownOnHover();
       break;
 
     case "on":
@@ -169,8 +168,8 @@ export const changeNavigationButtonsLabelsHover = async (navigationButtonsLabels
   }
 };
 
-export const changeNavigationButtonsLabels = async (navigationButtonsLabels) => {
-  switch (navigationButtonsLabels) {
+export const changeNavigationButtonsLabels = async (setting) => {
+  switch (setting) {
     case "on":
       removeStyles("navigationButtonsLabelsHover");
       addStyles(
@@ -188,7 +187,7 @@ export const changeNavigationButtonsLabels = async (navigationButtonsLabels) => 
       const setting = await getStorage(KeyNavigationButtonsLabelsHover);
       if (setting !== "off") return;
 
-      removeHover();
+      removeLabelsShownOnHover();
       removeStyles("navigationButtonsLabels");
 
       break;

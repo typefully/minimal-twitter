@@ -22,7 +22,7 @@ selectors.sidebarLinks = {
   lists: `a[href*="lists"][role="link"][aria-label]`,
   twitterBlue: `a[href*="blue"][role="link"][aria-label]`,
   verifiedOrgs: `a[href*="verified-orgs"][role="link"][aria-label]`,
-  grow: `.mt-sidebar-button[aria-label="Typefully Analytics"]`,
+  grow: `.mt-sidebar-button[aria-label="Analytics"]`,
 };
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;
 selectors.rightSidebar = `[data-testid="sidebarColumn"]`;

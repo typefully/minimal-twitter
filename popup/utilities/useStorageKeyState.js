@@ -39,3 +39,24 @@ export default function useStorageKeyState(storageKey) {
 
   return [state, setState];
 }
+
+export function useStorageValue(storageKey) {
+  const [value, setValue] = useState(null);
+
+  useEffect(() => {
+    const getInitialState = async () => {
+      try {
+        const savedSetting = await getStorage(storageKey);
+        if (savedSetting !== undefined) {
+          setValue(savedSetting);
+        }
+      } catch (error) {
+        console.warn(error);
+      }
+    };
+
+    getInitialState();
+  }, [storageKey]);
+
+  return value;
+}
