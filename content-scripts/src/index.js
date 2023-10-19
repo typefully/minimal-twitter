@@ -1,5 +1,6 @@
+import { allSettingsKeys } from "../../storage-keys";
 import { addMutationsOnDomChanges, addMutationsOnNavigation, addMutationsOnResize, addStylesheets } from "./modules/initialize";
-import { injectAllChanges, userPreferences } from "./modules/options/all";
+import { injectAllChanges } from "./modules/options/all";
 import constructNewData from "./modules/utilities/constructNewData";
 import { getStorage } from "./modules/utilities/storage";
 
@@ -24,7 +25,7 @@ const init = async () => {
   addMutationsOnResize();
 
   // Inject user preferences
-  const allData = await getStorage(userPreferences);
+  const allData = await getStorage(allSettingsKeys);
   injectAllChanges(allData);
 };
 

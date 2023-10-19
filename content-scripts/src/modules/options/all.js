@@ -6,6 +6,7 @@ import {
   KeyExploreButton,
   KeyFollowCount,
   KeyFollowingTimeline,
+  KeyHideViewCount,
   KeyHomeButton,
   KeyInterFont,
   KeyLikeCount,
@@ -43,7 +44,7 @@ import {
 } from "../../../../storage-keys";
 import { changeCustomCss } from "./advanced";
 import { changeFollowCount, changeLikeCount, changeReplyCount, changeRetweetCount } from "./hideVanityCounts";
-import hideViewCount from "./hideViewCount";
+import changeHideViewCounts from "./hideViewCount";
 import { changeHideSearchBar, changeInterFont, changeTitleNotifications, changeTransparentSearchBar, changeTweetButton } from "./interface";
 import {
   changeBookmarksButton,
@@ -81,56 +82,16 @@ import {
 import { changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
 
-// Array of user preferences, passed to `injectAllChanges`
-export const userPreferences = [
-  KeyTimelineWidth,
-  KeyRemoveTimelineBorders,
-  KeyRemoveTweetBorders,
-  KeyStickyHeader,
-  KeyHomeButton,
-  KeyExploreButton,
-  KeyNotificationsButton,
-  KeyMessagesButton,
-  KeyBookmarksButton,
-  KeyTopArticlesButton,
-  KeyCommunitiesButton,
-  KeyTopicsButton,
-  KeyCirclesButton,
-  KeyListsButton,
-  KeyTwitterBlueButton,
-  KeyVerifiedOrgsButton,
-  KeyTypefullyGrowTab,
-  KeyProfileButton,
-  KeyNavigationButtonsLabelsHover,
-  KeyNavigationButtonsLabels,
-  KeyNavigationCenter,
-  KeyUnreadCountBadge,
-  KeyWriterMode,
-  KeyReplyCount,
-  KeyRetweetCount,
-  KeyLikeCount,
-  KeyFollowCount,
-  KeyTweetButton,
-  KeySearchBar,
-  KeyTransparentSearch,
-  KeyRemovePromotedPosts,
-  KeyRemoveWhoToFollow,
-  KeyRemoveTopicsToFollow,
-  KeyRemoveTimelineTabs,
-  KeyFollowingTimeline,
-  KeyTrendsHomeTimeline,
-  KeyRecentMedia,
-  KeyTypefullyComposerButtons,
-  KeyInterFont,
-  KeyTitleNotifications,
-  KeyCustomCss,
-];
-
 export const injectAllChanges = (data) => {
-  changeTimelineWidth(data[KeyTimelineWidth]); // Timeline Width
-  changeTimelineBorders(data[KeyRemoveTimelineBorders]); // Timeline Borders
-  changeTweetBorders(data[KeyRemoveTweetBorders]); // Timeline Borders
-  changeStickyHeader(data[KeyStickyHeader]); // Sticky Header
+  changeTimelineWidth(data[KeyTimelineWidth]);
+  changeTimelineBorders(data[KeyRemoveTimelineBorders]);
+  changeTweetBorders(data[KeyRemoveTweetBorders]);
+  changeStickyHeader(data[KeyStickyHeader]);
+  changeNavigationButtonsLabelsHover(data[KeyNavigationButtonsLabelsHover]);
+  changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
+  changeNavigationCenter(data[KeyNavigationCenter]);
+  changeUnreadCountBadge(data[KeyUnreadCountBadge]);
+  changeWriterMode(data[KeyWriterMode]);
 
   // Sidebar
   changeHomeButton(data[KeyHomeButton]);
@@ -148,30 +109,28 @@ export const injectAllChanges = (data) => {
   changeVerifiedOrgsButton(data[KeyVerifiedOrgsButton]);
   changeGrowButton(data[KeyTypefullyGrowTab]);
 
-  changeNavigationButtonsLabelsHover(data[KeyNavigationButtonsLabelsHover]); // Navigation Buttons Labels on Hover
-  changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]); // Navigation Buttons Labels
-  changeNavigationCenter(data[KeyNavigationCenter]); // Center Navigation
-  changeUnreadCountBadge(data[KeyUnreadCountBadge]); // Unread Count Badge
-  changeWriterMode(data[KeyWriterMode]); // Writer Mode
-  changeReplyCount(data[KeyReplyCount]); // Hide Reply Count
-  changeRetweetCount(data[KeyRetweetCount]); // Hide Retweet Count
-  changeLikeCount(data[KeyLikeCount]); // Hide Like Count
-  changeFollowCount(data[KeyFollowCount]); // Hide Follow
-  changeTweetButton(data[KeyTweetButton]); // Hide Tweet Button
-  changeHideSearchBar(data[KeySearchBar]); // Hide Search Bar
-  changeTransparentSearchBar(data[KeyTransparentSearch]); // Transparent Search Bar
-  changePromotedPosts(data[KeyRemovePromotedPosts]); // Remove Promoted Posts
-  changeWhoToFollow(data[KeyRemoveWhoToFollow]); // Who to Follow
-  changeTopicsToFollow(data[KeyRemoveTopicsToFollow]); // Topics to Follow
-  changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]); // For you / Following tabs
+  // Timeline
+  changeFollowingTimeline(data[KeyFollowingTimeline]);
+  changeHideViewCounts(data[KeyHideViewCount]);
+  changeRecentMedia(data[KeyRecentMedia]);
+  changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
+  changePromotedPosts(data[KeyRemovePromotedPosts]);
+  changeWhoToFollow(data[KeyRemoveWhoToFollow]);
+  changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
+  changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
+  changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]);
+  changeFollowCount(data[KeyFollowCount]);
+  changeReplyCount(data[KeyReplyCount]);
+  changeRetweetCount(data[KeyRetweetCount]);
+  changeLikeCount(data[KeyLikeCount]);
 
-  changeFollowingTimeline(data[KeyFollowingTimeline]); // Always Show Following Timeline
-  changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]); // Show Trends on Home Timeline
-  changeRecentMedia(data[KeyRecentMedia]); // Show Recent Media on Profiles
-  changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]); // Typefully Composer Buttons
-  changeInterFont(data[KeyInterFont]); // Change `font-family` to Inter
-  changeTitleNotifications(data[KeyTitleNotifications]); // Change Title Notifications
-  changeCustomCss(data[KeyCustomCss]); // Change User Edited CSS
+  // Interface
+  changeInterFont(data[KeyInterFont]);
+  changeHideSearchBar(data[KeySearchBar]);
+  changeTransparentSearchBar(data[KeyTransparentSearch]);
+  changeTitleNotifications(data[KeyTitleNotifications]);
+  changeTweetButton(data[KeyTweetButton]);
 
-  hideViewCount(); // Hide View Counts (checks setting internally)
+  // Advanced
+  changeCustomCss(data[KeyCustomCss]);
 };
