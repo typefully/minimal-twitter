@@ -30,19 +30,14 @@ ${description ? `<span class="description">${description}</span>` : ""}`;
     const rect = element.getBoundingClientRect();
 
     tooltip.style.top = `${rect.bottom + 10}px`;
-    tooltip.style.left = `${
-      rect.left + rect.width / 2 - tooltip.offsetWidth / 2
-    }px`;
+    tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
     tooltip.style.right = "auto";
 
     // If the tooltip is outside the viewport, move it inside with 10px margin
     if (tooltip.offsetLeft < 10) {
       tooltip.style.left = "10px";
       tooltip.style.right = "auto";
-    } else if (
-      tooltip.offsetLeft + tooltip.offsetWidth >
-      window.innerWidth - 10
-    ) {
+    } else if (tooltip.offsetLeft + tooltip.offsetWidth > window.innerWidth - 10) {
       tooltip.style.right = "10px";
       tooltip.style.left = "auto";
     }

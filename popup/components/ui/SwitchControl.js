@@ -1,25 +1,21 @@
-import * as SwitchPrimitive from "@radix-ui/react-switch"
-import { styled } from "@stitches/react"
+import * as SwitchPrimitive from "@radix-ui/react-switch";
+import { styled } from "@stitches/react";
 
-import useStorageKeyState from "../../utilities/useStorageKeyState"
+import useStorageKeyState from "../../utilities/useStorageKeyState";
 
 export default function SwitchControl({ label, storageKey }) {
-  const [checked, setChecked] = useStorageKeyState(storageKey)
+  const [checked, setChecked] = useStorageKeyState(storageKey);
 
   return (
     <div className="flex items-center justify-between w-full">
       <label htmlFor={storageKey} className="text-[15px] font-medium">
         {label}
       </label>
-      <StyledSwitch
-        onCheckedChange={setChecked}
-        checked={checked}
-        id={storageKey}
-      >
+      <StyledSwitch onCheckedChange={setChecked} checked={checked} id={storageKey}>
         <StyledThumb />
       </StyledSwitch>
     </div>
-  )
+  );
 }
 
 const StyledSwitch = styled(SwitchPrimitive.Root, {
@@ -33,8 +29,8 @@ const StyledSwitch = styled(SwitchPrimitive.Root, {
   display: "flex",
   alignItems: "center",
   cursor: "pointer",
-  '&[data-state="checked"]': { backgroundColor: "#6bc9fb" }
-})
+  '&[data-state="checked"]': { backgroundColor: "#6bc9fb" },
+});
 
 const StyledThumb = styled(SwitchPrimitive.Thumb, {
   display: "block",
@@ -48,6 +44,6 @@ const StyledThumb = styled(SwitchPrimitive.Thumb, {
   willChange: "transform",
   '&[data-state="checked"]': {
     backgroundColor: "#1d9bf0",
-    transform: "translateX(20px)"
-  }
-})
+    transform: "translateX(20px)",
+  },
+});

@@ -9,7 +9,7 @@ const Footer = () => {
         Done
       </button>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

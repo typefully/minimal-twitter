@@ -1,12 +1,6 @@
-import {
-  KeyInterFont,
-  KeySearchBar,
-  KeyTitleNotifications,
-  KeyTransparentSearch,
-  KeyTweetButton
-} from "../../../storage-keys"
-import SectionLabel from "../ui/SectionLabel"
-import SwitchControl from "../ui/SwitchControl"
+import { KeyInterFont, KeySearchBar, KeyTitleNotifications, KeyTransparentSearch, KeyTweetButton } from "../../../storage-keys";
+import SectionLabel from "../ui/SectionLabel";
+import SwitchControl from "../ui/SwitchControl";
 
 const InterfaceSection = () => (
   <section className="flex flex-col gap-y-2">
@@ -17,20 +11,14 @@ const InterfaceSection = () => (
           <div className="flex flex-col gap-y-4">
             <SwitchControl label="Inter Font" storageKey={KeyInterFont} />
             <SwitchControl label="Search Bar" storageKey={KeySearchBar} />
-            <SwitchControl
-              label="Transparent Search Bar"
-              storageKey={KeyTransparentSearch}
-            />
+            <SwitchControl label="Transparent Search Bar" storageKey={KeyTransparentSearch} />
             <SwitchControl label="Tweet Button" storageKey={KeyTweetButton} />
-            <SwitchControl
-              label="Notifications in Title"
-              storageKey={KeyTitleNotifications}
-            />
+            <SwitchControl label="Notifications in Title" storageKey={KeyTitleNotifications} />
           </div>
         </div>
       </form>
     </div>
   </section>
-)
+);
 
-export default InterfaceSection
+export default InterfaceSection;

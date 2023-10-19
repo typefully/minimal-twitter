@@ -1,9 +1,9 @@
-import * as SliderPrimitive from "@radix-ui/react-slider"
-import { styled } from "@stitches/react"
-import { useEffect, useState } from "react"
+import * as SliderPrimitive from "@radix-ui/react-slider";
+import { styled } from "@stitches/react";
+import { useEffect, useState } from "react";
 
-import { KeyTimelineWidth } from "../../../storage-keys"
-import { getStorage, setStorage } from "../../utilities/chromeStorage"
+import { KeyTimelineWidth } from "../../../storage-keys";
+import { getStorage, setStorage } from "../../utilities/chromeStorage";
 
 const StyledSlider = styled(SliderPrimitive.Root, {
   position: "relative",
@@ -15,15 +15,15 @@ const StyledSlider = styled(SliderPrimitive.Root, {
   cursor: "pointer",
 
   '&[data-orientation="horizontal"]': {
-    height: 20
+    height: 20,
   },
 
   '&[data-orientation="vertical"]': {
     flexDirection: "column",
     width: 20,
-    height: 100
-  }
-})
+    height: 100,
+  },
+});
 
 const StyledTrack = styled(SliderPrimitive.Track, {
   backgroundColor: "#8ecdf8",
@@ -32,8 +32,8 @@ const StyledTrack = styled(SliderPrimitive.Track, {
   borderRadius: "9999px",
 
   '&[data-orientation="horizontal"]': { height: 4 },
-  '&[data-orientation="vertical"]': { width: 4 }
-})
+  '&[data-orientation="vertical"]': { width: 4 },
+});
 
 const StyledRange = styled(SliderPrimitive.Range, {
   position: "absolute",
@@ -41,8 +41,8 @@ const StyledRange = styled(SliderPrimitive.Range, {
   alignItems: "center",
   backgroundColor: "#1DA1F2",
   borderRadius: "9999px",
-  height: "100%"
-})
+  height: "100%",
+});
 
 const StyledThumb = styled(SliderPrimitive.Thumb, {
   all: "unset",
@@ -51,28 +51,27 @@ const StyledThumb = styled(SliderPrimitive.Thumb, {
   height: 16,
   backgroundColor: "#1DA1F2",
   borderRadius: 10,
-  boxShadow:
-    "rgb(101 119 134 / 20%) 0px 0px 7px, rgb(101 119 134 / 15%) 0px 1px 3px 1px",
+  boxShadow: "rgb(101 119 134 / 20%) 0px 0px 7px, rgb(101 119 134 / 15%) 0px 1px 3px 1px",
   "&:hover": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` },
-  "&:focus": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` }
-})
+  "&:focus": { boxShadow: `0 0 0 5px rgba(29, 155, 240, 0.1)` },
+});
 
 const TimelineWidthSlider = () => {
-  const [userTrack, setUserTrack] = useState(700)
-  const trackDots = [600, 650, 700, 750, 800]
+  const [userTrack, setUserTrack] = useState(700);
+  const trackDots = [600, 650, 700, 750, 800];
 
   useEffect(() => {
     const getUserDefaultTimelineWidth = async () => {
       try {
-        const userDefaultTimelineWidth = await getStorage(KeyTimelineWidth)
-        userDefaultTimelineWidth && setUserTrack(userDefaultTimelineWidth)
+        const userDefaultTimelineWidth = await getStorage(KeyTimelineWidth);
+        userDefaultTimelineWidth && setUserTrack(userDefaultTimelineWidth);
       } catch (error) {
-        console.warn(error)
+        console.warn(error);
       }
-    }
+    };
 
-    getUserDefaultTimelineWidth()
-  }, [])
+    getUserDefaultTimelineWidth();
+  }, []);
 
   return (
     <form>
@@ -81,11 +80,11 @@ const TimelineWidthSlider = () => {
         <StyledSlider
           onValueChange={async (value) => {
             if (value && value[0]) {
-              setUserTrack(value[0])
+              setUserTrack(value[0]);
               try {
-                await setStorage({ timelineWidth: value[0] })
+                await setStorage({ timelineWidth: value[0] });
               } catch (error) {
-                console.warn(error)
+                console.warn(error);
               }
             }
           }}
@@ -106,7 +105,7 @@ const TimelineWidthSlider = () => {
                 title={`${track}px`}
                 style={{
                   left: `${Math.abs(((800 - track) / 200) * 100 - 100)}%`,
-                  backgroundColor: track > userTrack ? "#8ecdf8" : "#1d9bf0"
+                  backgroundColor: track > userTrack ? "#8ecdf8" : "#1d9bf0",
                 }}
                 className="absolute w-3 h-3 rounded-full"
               ></span>
@@ -116,7 +115,7 @@ const TimelineWidthSlider = () => {
         <span className="text-lg font-medium">800px</span>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default TimelineWidthSlider
+export default TimelineWidthSlider;

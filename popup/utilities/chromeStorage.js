@@ -1,5 +1,5 @@
-import throttle from "lodash.throttle"
-import { defaultPreferences } from "../../storage-keys"
+import throttle from "lodash.throttle";
+import { defaultPreferences } from "../../storage-keys";
 
 /*--
 - Docs: https://developer.chrome.com/docs/extensions/reference/storage/
@@ -8,31 +8,31 @@ import { defaultPreferences } from "../../storage-keys"
 
 export const getStorage = (storageKeyOrKeys) => {
   if (Array.isArray(storageKeyOrKeys)) {
-    return getMultipleStorageKeys(storageKeyOrKeys)
+    return getMultipleStorageKeys(storageKeyOrKeys);
   } else {
-    return getSingleStorageKey(storageKeyOrKeys)
+    return getSingleStorageKey(storageKeyOrKeys);
   }
-}
+};
 
 const getSingleStorageKey = (key) => {
   return new Promise((resolve, _reject) => {
     chrome?.storage?.local.get([key], (data) => {
-      resolve(data[key] ?? defaultPreferences[key]) // Fallback to the default preference
-    })
-  })
-}
+      resolve(data[key] ?? defaultPreferences[key]); // Fallback to the default preference
+    });
+  });
+};
 
 const getMultipleStorageKeys = (keysArray) => {
   return new Promise((resolve, _reject) => {
     chrome?.storage?.local.get(keysArray, (data) => {
       const res = keysArray.reduce((acc, cur) => {
-        acc[cur] = data[cur] ?? defaultPreferences[cur] // For each key, fallback to the default preference
-        return acc
-      }, {})
-      resolve(res)
-    })
-  })
-}
+        acc[cur] = data[cur] ?? defaultPreferences[cur]; // For each key, fallback to the default preference
+        return acc;
+      }, {});
+      resolve(res);
+    });
+  });
+};
 
 /*--
 - Set storage with storage.local
@@ -45,8 +45,8 @@ const getMultipleStorageKeys = (keysArray) => {
 export const setStorage = throttle(async (kv) => {
   const promise = new Promise((resolve, _reject) => {
     chrome?.storage?.local.set(kv, () => {
-      return resolve(kv)
-    })
-  })
-  return promise
-}, 500)
+      return resolve(kv);
+    });
+  });
+  return promise;
+}, 500);

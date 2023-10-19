@@ -1,8 +1,5 @@
 module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}"
-  ],
+  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -17,9 +14,9 @@ module.exports = {
         twitterAccentTwoDark: "#38444d",
         twitterAccentThree: "#1d9bf0",
         twitterAccentFour: "#1d9bf01a",
-        twitterAccentFive: "#1a8cd8"
-      }
-    }
+        twitterAccentFive: "#1a8cd8",
+      },
+    },
   },
-  plugins: []
-}
+  plugins: [],
+};

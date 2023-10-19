@@ -1,12 +1,7 @@
 import svgAssets from "../svgAssets";
 import { getStorage, setStorage } from "./storage";
 
-export default async function addTypefullyBox(
-  rootElement,
-  storageKey,
-  innerHTML,
-  options = {}
-) {
+export default async function addTypefullyBox(rootElement, storageKey, innerHTML, options = {}) {
   const { withArrow } = options ?? {};
 
   const key = "tp-box-seen:" + storageKey;

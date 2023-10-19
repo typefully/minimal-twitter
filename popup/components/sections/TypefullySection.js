@@ -1,17 +1,14 @@
-import ControlsWrapper from "../ui/ControlsWrapper"
-import SectionLabel from "../ui/SectionLabel"
-import SwitchControl from "../ui/SwitchControl"
+import ControlsWrapper from "../ui/ControlsWrapper";
+import SectionLabel from "../ui/SectionLabel";
+import SwitchControl from "../ui/SwitchControl";
 
 const TypefullySection = () => (
   <section className="flex flex-col gap-y-2">
     <SectionLabel htmlFor="user-control-typefully">Typefully</SectionLabel>
     <ControlsWrapper id="user-control-typefully">
-      <SwitchControl
-        label="Composer Buttons"
-        storageKey="typefullyComposerButtons"
-      />
+      <SwitchControl label="Composer Buttons" storageKey="typefullyComposerButtons" />
     </ControlsWrapper>
   </section>
-)
+);
 
-export default TypefullySection
+export default TypefullySection;

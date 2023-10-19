@@ -1,7 +1,7 @@
-import Main from "../components/Main"
-import Footer from "../components/sections/Footer"
-import Header from "../components/sections/Header"
-import Container from "../components/ui/Container"
+import Main from "../components/Main";
+import Footer from "../components/sections/Footer";
+import Header from "../components/sections/Header";
+import Container from "../components/ui/Container";
 
 const IndexPage = () => (
   <Container>
@@ -9,6 +9,6 @@ const IndexPage = () => (
     <Main />
     <Footer />
   </Container>
-)
+);
 
-export default IndexPage
+export default IndexPage;
