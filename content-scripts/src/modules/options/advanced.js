@@ -1,17 +1,13 @@
-import { removeElementById } from "../utilities/removeElement";
-
-// Function to change user edited CSS
-export const changeCSSTextEdited = (cssTextEdited) => {
-  if (cssTextEdited) {
-    // First remove before adding
-    removeElementById("cssTextEdited");
-
+export const changeCustomCss = (cssText) => {
+  const existingStyleEl = document.getElementById("custom-css");
+  if (existingStyleEl) {
+    existingStyleEl.textContent = cssText;
+  } else {
     const externalStylesheet = document.getElementById("mt-external-stylesheet");
     const head = document.querySelector("head");
-    const style = document.createElement("style");
-    style.id = "cssTextEdited";
-    style.textContent = `${cssTextEdited}`;
-    head.insertBefore(style, externalStylesheet.nextSibling);
+    const styleEl = document.createElement("style");
+    styleEl.id = "custom-css";
+    styleEl.textContent = cssText;
+    head.insertBefore(styleEl, externalStylesheet.nextSibling);
   }
-  return;
 };

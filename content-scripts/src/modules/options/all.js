@@ -2,7 +2,7 @@ import {
   KeyBookmarksButton,
   KeyCirclesButton,
   KeyCommunitiesButton,
-  KeyCssTextEdited,
+  KeyCustomCss,
   KeyExploreButton,
   KeyFollowCount,
   KeyFollowingTimeline,
@@ -41,7 +41,7 @@ import {
   KeyVerifiedOrgsButton,
   KeyWriterMode,
 } from "../../../../storage-keys";
-import { changeCSSTextEdited } from "./advanced";
+import { changeCustomCss } from "./advanced";
 import { changeFollowCount, changeLikeCount, changeReplyCount, changeRetweetCount } from "./hideVanityCounts";
 import hideViewCount from "./hideViewCount";
 import { changeHideSearchBar, changeInterFont, changeTitleNotifications, changeTransparentSearchBar, changeTweetButton } from "./interface";
@@ -123,7 +123,7 @@ export const userPreferences = [
   KeyTypefullyComposerButtons,
   KeyInterFont,
   KeyTitleNotifications,
-  KeyCssTextEdited,
+  KeyCustomCss,
 ];
 
 export const injectAllChanges = (data) => {
@@ -171,7 +171,7 @@ export const injectAllChanges = (data) => {
   changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]); // Typefully Composer Buttons
   changeInterFont(data[KeyInterFont]); // Change `font-family` to Inter
   changeTitleNotifications(data[KeyTitleNotifications]); // Change Title Notifications
-  changeCSSTextEdited(data[KeyCssTextEdited]); // Change User Edited CSS
+  changeCustomCss(data[KeyCustomCss]); // Change User Edited CSS
 
   hideViewCount(); // Hide View Counts (checks setting internally)
 };

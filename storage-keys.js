@@ -39,7 +39,7 @@ export const KeyRecentMedia = "recentMedia";
 export const KeyTypefullyComposerButtons = "typefullyComposerButtons";
 export const KeyInterFont = "interFont";
 export const KeyTitleNotifications = "titleNotifications";
-export const KeyCssTextEdited = "cssTextEdited";
+export const KeyCustomCss = "customCss";
 export const KeyHideViewCount = "hideViewCount";
 
 export const defaultPreferences = {
@@ -83,6 +83,6 @@ export const defaultPreferences = {
   [KeyTypefullyComposerButtons]: "on",
   [KeyInterFont]: "off",
   [KeyTitleNotifications]: "on",
-  [KeyCssTextEdited]: "",
+  [KeyCustomCss]: "",
   [KeyHideViewCount]: "on",
 };
