@@ -1,4 +1,3 @@
-import { KeyTypefullyGrowTab } from "../../../storage-keys"
 import ControlsWrapper from "../ui/ControlsWrapper"
 import SectionLabel from "../ui/SectionLabel"
 import SwitchControl from "../ui/SwitchControl"
@@ -11,7 +10,6 @@ const TypefullySection = () => (
         label="Composer Buttons"
         storageKey="typefullyComposerButtons"
       />
-      <SwitchControl label="Grow Tab" storageKey={KeyTypefullyGrowTab} />
     </ControlsWrapper>
   </section>
 )

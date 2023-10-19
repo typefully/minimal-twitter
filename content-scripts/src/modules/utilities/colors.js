@@ -17,6 +17,8 @@ const extractColor = (selector, varName) => {
     let color;
     if (varName.includes("bg")) {
       color = window.getComputedStyle(element).backgroundColor;
+    } else if (varName.includes("border")) {
+      color = window.getComputedStyle(element).borderColor;
     } else {
       color = window.getComputedStyle(element).color;
     }

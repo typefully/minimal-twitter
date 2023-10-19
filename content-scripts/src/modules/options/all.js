@@ -8,7 +8,6 @@ import {
   KeyFollowingTimeline,
   KeyHomeButton,
   KeyInterFont,
-  KeyLatestTweets,
   KeyLikeCount,
   KeyListsButton,
   KeyMessagesButton,
@@ -19,22 +18,21 @@ import {
   KeyProfileButton,
   KeyRecentMedia,
   KeyRemovePromotedPosts,
+  KeyRemoveTimelineBorders,
   KeyRemoveTimelineTabs,
   KeyRemoveTopicsToFollow,
-  KeyRemoveTweetFormatting,
+  KeyRemoveTweetBorders,
   KeyRemoveWhoToFollow,
   KeyReplyCount,
   KeyRetweetCount,
   KeySearchBar,
   KeyStickyHeader,
-  KeyTimelineBorders,
   KeyTimelineWidth,
   KeyTitleNotifications,
   KeyTopArticlesButton,
   KeyTopicsButton,
   KeyTransparentSearch,
   KeyTrendsHomeTimeline,
-  KeyTweetBorders,
   KeyTweetButton,
   KeyTwitterBlueButton,
   KeyTypefullyComposerButtons,
@@ -69,7 +67,6 @@ import {
 } from "./navigation";
 import {
   changeFollowingTimeline,
-  changeLatestTweets,
   changePromotedPosts,
   changeRecentMedia,
   changeStickyHeader,
@@ -80,7 +77,6 @@ import {
   changeTrendsHomeTimeline,
   changeTweetBorders,
   changeWhoToFollow,
-  removeTweetFormatting,
 } from "./timeline";
 import { changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
@@ -88,8 +84,8 @@ import { changeWriterMode } from "./writer-mode";
 // Array of user preferences, passed to `injectAllChanges`
 export const userPreferences = [
   KeyTimelineWidth,
-  KeyTimelineBorders,
-  KeyTweetBorders,
+  KeyRemoveTimelineBorders,
+  KeyRemoveTweetBorders,
   KeyStickyHeader,
   KeyHomeButton,
   KeyExploreButton,
@@ -122,8 +118,6 @@ export const userPreferences = [
   KeyRemoveTopicsToFollow,
   KeyRemoveTimelineTabs,
   KeyFollowingTimeline,
-  KeyLatestTweets,
-  KeyRemoveTweetFormatting,
   KeyTrendsHomeTimeline,
   KeyRecentMedia,
   KeyTypefullyComposerButtons,
@@ -134,8 +128,8 @@ export const userPreferences = [
 
 export const injectAllChanges = (data) => {
   changeTimelineWidth(data[KeyTimelineWidth]); // Timeline Width
-  changeTimelineBorders(data[KeyTimelineBorders]); // Timeline Borders
-  changeTweetBorders(data[KeyTweetBorders]); // Timeline Borders
+  changeTimelineBorders(data[KeyRemoveTimelineBorders]); // Timeline Borders
+  changeTweetBorders(data[KeyRemoveTweetBorders]); // Timeline Borders
   changeStickyHeader(data[KeyStickyHeader]); // Sticky Header
 
   // Sidebar
@@ -172,8 +166,6 @@ export const injectAllChanges = (data) => {
   changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]); // For you / Following tabs
 
   changeFollowingTimeline(data[KeyFollowingTimeline]); // Always Show Following Timeline
-  changeLatestTweets(data[KeyLatestTweets]); // Always Show Latest Tweets
-  removeTweetFormatting(data[KeyRemoveTweetFormatting]); // Always Show Latest Tweets
   changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]); // Show Trends on Home Timeline
   changeRecentMedia(data[KeyRecentMedia]); // Show Recent Media on Profiles
   changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]); // Typefully Composer Buttons

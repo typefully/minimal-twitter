@@ -144,7 +144,7 @@ const VanityCheckboxes = () => {
     <>
       <CheckboxControl
         id="all"
-        label="Hide Vanity Counts"
+        label="Engagements Under Posts"
         labelExtras={
           <ToggleChevron
             pressed={showVanityCheckboxes}
@@ -158,25 +158,25 @@ const VanityCheckboxes = () => {
         <div className="pl-3 flex flex-col gap-4 mb-2">
           <CheckboxControl
             id="reply"
-            label="Hide Reply Count from Tweets"
+            label="Reply Count from Tweets"
             onCheckedChange={(checked) => onCheckedChange("reply", checked)}
             checked={hideReply}
           />
           <CheckboxControl
             id="retweet"
-            label="Hide Retweet Count from Tweets"
+            label="Retweet Count from Tweets"
             onCheckedChange={(checked) => onCheckedChange("retweet", checked)}
             checked={hideRetweet}
           />
           <CheckboxControl
             id="like"
-            label="Hide Like Count from Tweets"
+            label="Like Count from Tweets"
             onCheckedChange={(checked) => onCheckedChange("like", checked)}
             checked={hideLike}
           />
           <CheckboxControl
             id="follow"
-            label="Hide Follower/Following Count"
+            label="Follower/Following Count"
             onCheckedChange={(checked) => onCheckedChange("follow", checked)}
             checked={hideFollow}
           />

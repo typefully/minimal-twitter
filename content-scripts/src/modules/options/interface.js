@@ -118,7 +118,7 @@ export const changeHideSearchBar = (searchBar) => {
         "trendsHomeTimeline-more",
         `@media only screen and (min-width: 1265px) {
           ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
-            top: unset !important;
+            top: unset;
           }
           .mt-recentMedia-photoGrid {
             top: unset !important;

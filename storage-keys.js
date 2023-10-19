@@ -10,8 +10,8 @@ export const KeyTrendsHomeTimeline = "trendsHomeTimeline";
 export const KeyRemoveTimelineTabs = "removeTimelineTabs";
 export const KeyWriterMode = "writerMode";
 export const KeyTimelineWidth = "timelineWidth";
-export const KeyTimelineBorders = "timelineBorders";
-export const KeyTweetBorders = "tweetBorders";
+export const KeyRemoveTimelineBorders = "timelineBorders";
+export const KeyRemoveTweetBorders = "tweetBorders";
 export const KeyStickyHeader = "stickyHeader";
 export const KeyHomeButton = "homeButton";
 export const KeyExploreButton = "exploreButton";
@@ -35,8 +35,6 @@ export const KeyTransparentSearch = "transparentSearch";
 export const KeyRemovePromotedPosts = "removePromotedPosts";
 export const KeyRemoveWhoToFollow = "removeWhoToFollow";
 export const KeyRemoveTopicsToFollow = "removeTopicsToFollow";
-export const KeyLatestTweets = "latestTweets";
-export const KeyRemoveTweetFormatting = "removeTweetFormatting";
 export const KeyRecentMedia = "recentMedia";
 export const KeyTypefullyComposerButtons = "typefullyComposerButtons";
 export const KeyInterFont = "interFont";
@@ -46,8 +44,8 @@ export const KeyHideViewCount = "hideViewCount";
 
 export const defaultPreferences = {
   [KeyTimelineWidth]: 700,
-  [KeyTimelineBorders]: "on",
-  [KeyTweetBorders]: "on",
+  [KeyRemoveTimelineBorders]: "off",
+  [KeyRemoveTweetBorders]: "off",
   [KeyStickyHeader]: "on",
   [KeyHomeButton]: "on",
   [KeyExploreButton]: "on",
@@ -80,12 +78,11 @@ export const defaultPreferences = {
   [KeyRemoveTopicsToFollow]: "on",
   [KeyRemoveTimelineTabs]: "off",
   [KeyFollowingTimeline]: "off",
-  [KeyLatestTweets]: "off",
-  [KeyRemoveTweetFormatting]: "off",
   [KeyTrendsHomeTimeline]: "off",
   [KeyRecentMedia]: "off",
   [KeyTypefullyComposerButtons]: "on",
   [KeyInterFont]: "off",
   [KeyTitleNotifications]: "on",
-  [KeyCssTextEdited]: "off",
+  [KeyCssTextEdited]: "",
+  [KeyHideViewCount]: "on",
 };

@@ -3,25 +3,29 @@ import CodeMirror from "@uiw/react-codemirror"
 import debounce from "lodash.debounce"
 import { useCallback, useEffect, useState } from "react"
 
+import { removeElementById } from "../../../content-scripts/src/modules/utilities/removeElement"
 import { KeyCssTextEdited } from "../../../storage-keys"
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import SectionLabel from "../ui/SectionLabel"
 
 const AdvancedSection = () => {
   const [showEditor, setShowEditor] = useState(false)
-  const [cssTextMain, setCSSTextMain] = useState("")
   const [cssTextEdited, setCSSTextEdited] = useState("")
 
-  const onChange = useCallback((value) => {
-    const saveCSSTextEdited = debounce(async () => {
-      try {
-        await setStorage({ [KeyCssTextEdited]: value })
-      } catch (error) {
-        console.warn(error)
-      }
-    }, 1000)
+  const saveCSSTextEdited = debounce(async (value) => {
+    const newCss = (value || "").trim()
+    try {
+      await setStorage({ [KeyCssTextEdited]: newCss })
+    } catch (error) {
+      console.warn(error)
+    }
+    if (newCss.length === 0) {
+      removeElementById("cssTextEdited")
+    }
+  }, 1000)
 
-    saveCSSTextEdited()
+  const onChange = useCallback((value) => {
+    saveCSSTextEdited(value)
   }, [])
 
   useEffect(() => {
@@ -35,20 +39,6 @@ const AdvancedSection = () => {
     }
 
     getCSSTextEdited()
-  }, [])
-
-  useEffect(() => {
-    const fetchCSS = async () => {
-      const mainStylesheet = await fetch(
-        `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`
-      )
-
-      const mainCSS = (await mainStylesheet.text()).trim()
-
-      setCSSTextMain(mainCSS)
-    }
-
-    fetchCSS()
   }, [])
 
   return (
@@ -67,13 +57,12 @@ const AdvancedSection = () => {
           </>
         ) : (
           <>
-            <span> (CSS Editor)</span>
             <span> · </span>
             <button
-              onClick={() => setCSSTextEdited(cssTextMain)}
+              onClick={() => setShowEditor(false)}
               className="text-twitterBlue"
             >
-              Reset to Default
+              Hide CSS Editor
             </button>
           </>
         )}
@@ -86,7 +75,8 @@ const AdvancedSection = () => {
           <CodeMirror
             className="w-full text-sm"
             theme="dark"
-            value={cssTextEdited || cssTextMain}
+            value={cssTextEdited}
+            placeholder="// Write custom CSS here..."
             height="300px"
             extensions={[css()]}
             onChange={onChange}

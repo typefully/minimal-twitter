@@ -82,11 +82,11 @@ export const changeTimelineWidth = (timelineWidth) => {
 // Function to change Timeline Borders
 export const changeTimelineBorders = (timelineBorders) => {
   switch (timelineBorders) {
-    case "on":
+    case "off":
       removeStyles("timelineBorders");
       break;
 
-    case "off":
+    case "on":
       addStyles(
         "timelineBorders",
         `
@@ -104,11 +104,11 @@ export const changeTimelineBorders = (timelineBorders) => {
 // Function to change Tweet Borders
 export const changeTweetBorders = (tweetBorders) => {
   switch (tweetBorders) {
-    case "on":
+    case "off":
       removeStyles("tweetBorders");
       break;
 
-    case "off":
+    case "on":
       addStyles(
         "tweetBorders",
         `
@@ -326,7 +326,7 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
               visibility: visible;
               position: fixed;
               right: 16px;
-              top: 0px;
+              top: 66px;
               max-height: 78vh;
               overflow: auto;
               width: 300px;
@@ -432,25 +432,5 @@ export const changeLatestTweets = (latestTweets) => {
     document.addEventListener("DOMContentLoaded", showLatestTweets);
   } else {
     showLatestTweets();
-  }
-};
-
-export const removeTweetFormatting = (removeTweetFormatting) => {
-  switch (removeTweetFormatting) {
-    case "on":
-      addStyles(
-        "removeTweetFormatting",
-        `
-        ${selectors.tweetSpan} {
-           font-weight: 400;
-           font-style: normal;
-        }
-        `
-      );
-      break;
-
-    case "off":
-      removeStyles("removeTweetFormatting");
-      break;
   }
 };
