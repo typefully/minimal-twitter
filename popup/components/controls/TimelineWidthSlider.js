@@ -2,6 +2,7 @@ import * as SliderPrimitive from "@radix-ui/react-slider"
 import { styled } from "@stitches/react"
 import { useEffect, useState } from "react"
 
+import { KeyTimelineWidth } from "../../../storage-keys"
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 
 const StyledSlider = styled(SliderPrimitive.Root, {
@@ -63,7 +64,7 @@ const TimelineWidthSlider = () => {
   useEffect(() => {
     const getUserDefaultTimelineWidth = async () => {
       try {
-        const userDefaultTimelineWidth = await getStorage("timelineWidth")
+        const userDefaultTimelineWidth = await getStorage(KeyTimelineWidth)
         userDefaultTimelineWidth && setUserTrack(userDefaultTimelineWidth)
       } catch (error) {
         console.warn(error)

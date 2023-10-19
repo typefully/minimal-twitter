@@ -16,20 +16,12 @@ const InterfaceSection = () => (
         <div className="w-full py-4">
           <div className="flex flex-col gap-y-4">
             <SwitchControl label="Inter Font" storageKey={KeyInterFont} />
-            <SwitchControl
-              label="Search Bar"
-              storageKey={KeySearchBar}
-              defaultState={true}
-            />
+            <SwitchControl label="Search Bar" storageKey={KeySearchBar} />
             <SwitchControl
               label="Transparent Search Bar"
               storageKey={KeyTransparentSearch}
             />
-            <SwitchControl
-              label="Tweet Button"
-              storageKey={KeyTweetButton}
-              defaultState={true}
-            />
+            <SwitchControl label="Tweet Button" storageKey={KeyTweetButton} />
             <SwitchControl
               label="Notifications in Title"
               storageKey={KeyTitleNotifications}

@@ -10,13 +10,8 @@ const TypefullySection = () => (
       <SwitchControl
         label="Composer Buttons"
         storageKey="typefullyComposerButtons"
-        defaultState={true}
       />
-      <SwitchControl
-        label="Grow Tab"
-        storageKey={KeyTypefullyGrowTab}
-        defaultState={true}
-      />
+      <SwitchControl label="Grow Tab" storageKey={KeyTypefullyGrowTab} />
     </ControlsWrapper>
   </section>
 )

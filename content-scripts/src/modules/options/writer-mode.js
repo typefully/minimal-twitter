@@ -1,11 +1,18 @@
+import { KeyWriterMode } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import { createTypefullyLinkElement, createTypefullyLogo, getCurrentTextAndSendToTypefully } from "../typefully";
-import addStyles from "../utilities/addStyles";
+import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import addTooltip, { hideAllTooltips } from "../utilities/addTooltip";
 import addTypefullyBox from "../utilities/addTypefullyBox";
-import { removeElementById } from "../utilities/removeElement";
 import { getStorage, setStorage } from "../utilities/storage";
+
+const escKeyListener = async (event) => {
+  if (event.key === "Escape") {
+    event.preventDefault();
+    toggleWriterMode();
+  }
+};
 
 let t; // Typefully Plug timeout
 let zt1; // Zen Writer Mode timeout 1
@@ -14,15 +21,17 @@ export const changeWriterMode = (writerMode) => {
   if (window.location.pathname.includes("/home") || window.location.pathname === "/" || window.location.pathname.includes("/compose/tweet")) {
     switch (writerMode) {
       case "on":
-        if (document.getElementById("mt-writerMode")) return;
+        document.addEventListener("keydown", escKeyListener);
+
+        if (stylesExist("writerMode")) return;
 
         clearTimeout(zt1);
         zt1 = setTimeout(() => {
-          document.title = "Zen Writer Mode / Twitter";
+          document.title = "Writer Mode";
         }, 500);
 
         addStyles(
-          "mt-writerMode",
+          "writerMode",
           `
             body {
               padding-left: 0;
@@ -78,19 +87,21 @@ export const changeWriterMode = (writerMode) => {
         break;
 
       case "off":
-        if (!document.getElementById("mt-writerMode")) break;
+        document.removeEventListener("keydown", escKeyListener);
+
+        if (!stylesExist("writerMode")) break;
 
         clearTimeout(zt2);
         zt2 = setTimeout(() => {
           document.title = "Twitter";
         }, 500);
 
-        removeElementById("mt-writerMode");
+        removeStyles("writerMode");
         removeTypefullyPlugFromWriterMode();
         break;
     }
   } else {
-    removeElementById("mt-writerMode");
+    removeStyles("writerMode");
     removeTypefullyPlugFromWriterMode();
     return;
   }
@@ -151,9 +162,8 @@ export const addWriterModeButton = async (scheduleButton) => {
   if (!window.location.pathname.includes("/home") || !window.location.pathname === "/" || document.getElementById("mt-writer-mode-composer-button")) {
     return;
   }
-
   const writerModeButton = scheduleButton.cloneNode(true);
-  const userSetting = await getStorage("writerMode");
+  const userSetting = await getStorage(KeyWriterMode);
 
   writerModeButton.id = "mt-writer-mode-composer-button";
   writerModeButton.removeAttribute("data-testid");
@@ -183,7 +193,7 @@ export const addWriterModeButton = async (scheduleButton) => {
     scheduleButton.parentNode.appendChild(writerModeButton);
 
     addStyles(
-      "mt-writer-mode-composer-button-style",
+      "writer-mode-composer-button-style",
       `
       #mt-writer-mode-composer-button:hover {
         background-color: rgba(var(--accent-color-rgb), 0.1);
@@ -194,7 +204,7 @@ export const addWriterModeButton = async (scheduleButton) => {
 };
 
 const toggleWriterMode = async () => {
-  const userSetting = await getStorage("writerMode");
+  const userSetting = await getStorage(KeyWriterMode);
 
   const writerModeButton = document.querySelector("#mt-writer-mode-composer-button");
 

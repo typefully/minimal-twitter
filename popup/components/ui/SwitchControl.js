@@ -3,12 +3,8 @@ import { styled } from "@stitches/react"
 
 import useStorageKeyState from "../../utilities/useStorageKeyState"
 
-export default function SwitchControl({
-  label,
-  storageKey,
-  defaultState = false
-}) {
-  const [checked, setChecked] = useStorageKeyState(storageKey, defaultState)
+export default function SwitchControl({ label, storageKey }) {
+  const [checked, setChecked] = useStorageKeyState(storageKey)
 
   return (
     <div className="flex items-center justify-between w-full">

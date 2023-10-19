@@ -1,7 +1,8 @@
+import { KeyNavigationButtonsLabelsHover } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
-import addStyles from "../utilities/addStyles";
-import { removeElementById } from "../utilities/removeElement";
+import addStyles, { removeStyles } from "../utilities/addStyles";
+import { addSidebarButton } from "../utilities/sidebar";
 import { getStorage } from "../utilities/storage";
 
 // Utilities
@@ -10,43 +11,17 @@ export const changeSidebarSetting = (sidebarSelector, state, onAdd) => {
   switch (state) {
     case "off":
       addStyles(
-        `mt-${sidebarSelector}`,
-        `
-        ${selectors.sidebarLinks[sidebarSelector]} {
+        sidebarSelector,
+        `${selectors.sidebarLinks[sidebarSelector]} {
           display: none;
-        }
-        `
+        }`
       );
       break;
 
     case "on":
-      removeElementById(`mt-${sidebarSelector}`);
+      removeStyles(sidebarSelector);
       onAdd?.();
       break;
-  }
-};
-
-export const addSidebarButton = ({ name, href, svgAsset, forced }) => {
-  const existingElement = document.querySelector(`nav[role="navigation"] > a[aria-label="${name}"]`);
-  if (existingElement) {
-    if (forced) {
-      existingElement.remove();
-    } else {
-      return;
-    }
-  }
-
-  const templateNode = document.querySelector('nav[role="navigation"] > a[role="link"][data-testid="AppTabBar_Profile_Link"]');
-
-  if (templateNode) {
-    const node = templateNode.cloneNode(true);
-
-    node.href = href;
-    node.ariaLabel = name;
-    node.removeAttribute("data-testid");
-    node.firstChild.firstChild.firstChild.innerHTML = svgAsset;
-    node.firstChild.lastChild.firstChild.innerText = name;
-    templateNode.insertAdjacentElement("beforebegin", node);
   }
 };
 
@@ -65,21 +40,19 @@ export const changeCirclesButton = (state) => changeSidebarSetting("circles", st
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
 export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
+export const changeGrowButton = (state) => changeSidebarSetting("grow", state, addGrowButton);
 
-let bt;
+let tm1;
 export const addTwitterBlueButton = (forced) => {
-  clearTimeout(bt);
-
-  if (document.querySelector(selectors.sidebarLinks.twitterBlue)) return;
-
-  bt = setTimeout(() => {
+  clearTimeout(tm1);
+  tm1 = setTimeout(() => {
     addSidebarButton({
       name: "Twitter Blue",
       href: "/settings/twitter_blue",
       svgAsset: svgAssets.twitterBlue.normal,
       forced,
     });
-  }, 500);
+  }, 250);
 };
 
 export const addVerifiedOrgsButton = (forced) => {
@@ -91,10 +64,26 @@ export const addVerifiedOrgsButton = (forced) => {
   });
 };
 
+let tm2;
+export const addGrowButton = (forced) => {
+  clearTimeout(tm2);
+  tm2 = setTimeout(() => {
+    addSidebarButton({
+      name: "Typefully Analytics",
+      forced,
+      svgAsset: svgAssets.grow.normal,
+      onClick: () => {
+        const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)?.getAttribute("href").replace("/", "");
+        if (screenName) window.open(`https://typefully.com/grow?mt-screen-name=${screenName}`, "_blank");
+      },
+    });
+  }, 500);
+};
+
 export const addTopicsButton = (forced) => {
   addSidebarButton({
     name: "Topics",
-    href: "/topics",
+    userHref: "/topics",
     svgAsset: svgAssets.topics.normal,
     forced,
   });
@@ -112,7 +101,7 @@ export const addCirclesButton = (forced) => {
 export const addCommunitiesButton = (forced) => {
   addSidebarButton({
     name: "Communities",
-    href: "/communities",
+    userHref: "/communities",
     svgAsset: svgAssets.communities.normal,
     forced,
   });
@@ -121,7 +110,7 @@ export const addCommunitiesButton = (forced) => {
 export const addListsButton = (forced) => {
   addSidebarButton({
     name: "Lists",
-    href: "/lists",
+    userHref: "/lists",
     svgAsset: svgAssets.lists.normal,
     forced,
   });
@@ -130,17 +119,14 @@ export const addListsButton = (forced) => {
 export const changeUnreadCountBadge = (unreadCountBadge) => {
   switch (unreadCountBadge) {
     case "on":
-      removeElementById("mt-unreadCountBadge");
+      removeStyles("unreadCountBadge");
       break;
-
     case "off":
       addStyles(
-        "mt-unreadCountBadge",
-        `
-        ${selectors.leftSidebarLinks} div[dir][aria-label][aria-live] {
+        "unreadCountBadge",
+        `${selectors.leftSidebarLinks} div[dir][aria-label][aria-live] {
           display: none;
-        }
-        `
+        }`
       );
       break;
   }
@@ -148,7 +134,7 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
 
 const removeHover = () => {
   addStyles(
-    "mt-navigationButtonsLabelsHover",
+    "navigationButtonsLabelsHover",
     `
     ${selectors.leftSidebarLinks} div + div[dir] {
       display: none;
@@ -173,16 +159,12 @@ const removeHover = () => {
 export const changeNavigationButtonsLabelsHover = async (navigationButtonsLabelsHover) => {
   switch (navigationButtonsLabelsHover) {
     case "off":
-      const data = await getStorage(["navigationButtonsLabels"]);
-
-      if (data?.navigationButtonsLabels === "on") return;
-
       removeHover();
 
       break;
 
     case "on":
-      removeElementById("mt-navigationButtonsLabelsHover");
+      removeStyles("navigationButtonsLabelsHover");
       break;
   }
 };
@@ -190,9 +172,9 @@ export const changeNavigationButtonsLabelsHover = async (navigationButtonsLabels
 export const changeNavigationButtonsLabels = async (navigationButtonsLabels) => {
   switch (navigationButtonsLabels) {
     case "on":
-      removeElementById("mt-navigationButtonsLabelsHover");
+      removeStyles("navigationButtonsLabelsHover");
       addStyles(
-        "mt-navigationButtonsLabels",
+        "navigationButtonsLabels",
         `
         ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span,
         ${selectors.accountSwitcherButton} > div:not(:first-child) {
@@ -203,12 +185,11 @@ export const changeNavigationButtonsLabels = async (navigationButtonsLabels) => 
       break;
 
     case "off":
-      const data = await getStorage(["navigationButtonsLabelsHover"]);
-
-      if (data?.navigationButtonsLabelsHover !== "off") return;
+      const setting = await getStorage(KeyNavigationButtonsLabelsHover);
+      if (setting !== "off") return;
 
       removeHover();
-      removeElementById("mt-navigationButtonsLabels");
+      removeStyles("navigationButtonsLabels");
 
       break;
   }
@@ -218,7 +199,7 @@ export const changeNavigationCenter = (navigationCenter) => {
   switch (navigationCenter) {
     case "on":
       addStyles(
-        "mt-navigationCenter",
+        "navigationCenter",
         `
         ${selectors.leftSidebar} > div > div > div {
           justify-content: center;
@@ -229,7 +210,7 @@ export const changeNavigationCenter = (navigationCenter) => {
       break;
 
     case "off":
-      removeElementById("mt-navigationCenter");
+      removeStyles("navigationCenter");
       break;
   }
 };

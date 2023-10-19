@@ -14,7 +14,12 @@ export const getCurrentTheme = () => {
 const extractColor = (selector, varName) => {
   const element = document.querySelector(selector);
   if (element) {
-    const color = window.getComputedStyle(element).color;
+    let color;
+    if (varName.includes("bg")) {
+      color = window.getComputedStyle(element).backgroundColor;
+    } else {
+      color = window.getComputedStyle(element).color;
+    }
     const root = document.documentElement;
     const existingColor = root.style.getPropertyValue(`--${varName}-color`);
 

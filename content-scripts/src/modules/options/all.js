@@ -52,6 +52,7 @@ import {
   changeCirclesButton,
   changeCommunitiesButton,
   changeExploreButton,
+  changeGrowButton,
   changeHomeButton,
   changeListsButton,
   changeMessagesButton,
@@ -81,7 +82,7 @@ import {
   changeWhoToFollow,
   removeTweetFormatting,
 } from "./timeline";
-import { changeGrowButton, changeTypefullyComposerButtons } from "./typefully";
+import { changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
 
 // Array of user preferences, passed to `injectAllChanges`

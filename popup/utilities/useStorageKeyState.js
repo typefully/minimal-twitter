@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import { getStorage, setStorage } from "./chromeStorage"
 
-export default function useStorageKeyState(storageKey, defaultState) {
-  const [state, setState] = useState(defaultState)
+export default function useStorageKeyState(storageKey) {
+  const [state, setState] = useState(false)
 
-  console.log("init", storageKey, defaultState)
+  console.log("init", storageKey)
 
   useEffect(() => {
     const getInitialState = async () => {
@@ -17,11 +17,7 @@ export default function useStorageKeyState(storageKey, defaultState) {
           )
           setState(savedSetting === "on" ? true : false)
         } else {
-          console.log(
-            `❌ Value not found, setting ${storageKey} to default: ${defaultState}`
-          )
-          setState(defaultState)
-          await setStorage({ [storageKey]: defaultState ? "on" : "off" })
+          console.log(`❌ Value not found`)
         }
       } catch (error) {
         console.warn(error)
@@ -29,7 +25,7 @@ export default function useStorageKeyState(storageKey, defaultState) {
     }
 
     getInitialState()
-  }, [storageKey, defaultState])
+  }, [storageKey])
 
   const prevState = useRef(state)
 

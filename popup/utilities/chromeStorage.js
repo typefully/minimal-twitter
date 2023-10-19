@@ -1,23 +1,37 @@
 import throttle from "lodash.throttle"
+import { defaultPreferences } from "../../storage-keys"
 
 /*--
 - Docs: https://developer.chrome.com/docs/extensions/reference/storage/
 - Use storage.local to allow user to store customizations
 --*/
 
-/*
-- Get storage with storage.local
-- k => "[key]" (String)
-- Don't need to throttle
-*/
-export const getStorage = async (k) => {
-  const promise = new Promise((resolve, _reject) => {
-    const storageKey = Array.isArray(k) ? k : [k]
-    chrome?.storage?.local.get(storageKey, (data) => {
-      return resolve(Array.isArray(k) ? data : data[k])
+export const getStorage = (storageKeyOrKeys) => {
+  if (Array.isArray(storageKeyOrKeys)) {
+    return getMultipleStorageKeys(storageKeyOrKeys)
+  } else {
+    return getSingleStorageKey(storageKeyOrKeys)
+  }
+}
+
+const getSingleStorageKey = (key) => {
+  return new Promise((resolve, _reject) => {
+    chrome?.storage?.local.get([key], (data) => {
+      resolve(data[key] ?? defaultPreferences[key]) // Fallback to the default preference
     })
   })
-  return promise
+}
+
+const getMultipleStorageKeys = (keysArray) => {
+  return new Promise((resolve, _reject) => {
+    chrome?.storage?.local.get(keysArray, (data) => {
+      const res = keysArray.reduce((acc, cur) => {
+        acc[cur] = data[cur] ?? defaultPreferences[cur] // For each key, fallback to the default preference
+        return acc
+      }, {})
+      resolve(res)
+    })
+  })
 }
 
 /*--

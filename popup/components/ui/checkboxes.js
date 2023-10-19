@@ -51,12 +51,8 @@ export const CheckboxControl = ({
 )
 
 // Renamed CheckboxControl to LocalStorageCheckboxControl
-export const LocalStorageCheckboxControl = ({
-  label,
-  storageKey,
-  defaultState = false
-}) => {
-  const [checked, setChecked] = useStorageKeyState(storageKey, defaultState)
+export const LocalStorageCheckboxControl = ({ label, storageKey }) => {
+  const [checked, setChecked] = useStorageKeyState(storageKey)
 
   return (
     <CheckboxControl

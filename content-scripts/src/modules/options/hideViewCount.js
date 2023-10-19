@@ -1,3 +1,4 @@
+import { KeyHideViewCount } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import { getStorage } from "../utilities/storage";
 
@@ -6,9 +7,9 @@ export default async function hideViewCount() {
 
   if (!viewCounts.length) return;
 
-  const data = await getStorage(["hideViewCount"]);
+  const setting = await getStorage(KeyHideViewCount);
 
-  if (data?.hideViewCount === "off") {
+  if (setting === "off") {
     viewCounts.forEach((el) => {
       el.parentElement && (el.parentElement.style.display = "flex");
     });

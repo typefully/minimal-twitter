@@ -37,18 +37,9 @@ const TimelineSection = () => {
           <SwitchControl
             label="Timeline Borders"
             storageKey={KeyTimelineBorders}
-            defaultState={true}
           />
-          <SwitchControl
-            label="Tweet Borders"
-            storageKey={KeyTweetBorders}
-            defaultState={true}
-          />
-          <SwitchControl
-            label="Sticky Header"
-            storageKey={KeyStickyHeader}
-            defaultState={true}
-          />
+          <SwitchControl label="Tweet Borders" storageKey={KeyTweetBorders} />
+          <SwitchControl label="Sticky Header" storageKey={KeyStickyHeader} />
           <SwitchControl
             label="Trends on Home Timeline"
             storageKey={KeyTrendsHomeTimeline}
@@ -62,12 +53,10 @@ const TimelineSection = () => {
           <LocalStorageCheckboxControl
             label="Remove View Count from Tweets"
             storageKey={KeyHideViewCount}
-            defaultState={true}
           />
           <LocalStorageCheckboxControl
             label="Remove Promoted Posts"
             storageKey={KeyRemovePromotedPosts}
-            defaultState={true}
           />
           <LocalStorageCheckboxControl
             label="Remove Who to Follow"

@@ -1,8 +1,4 @@
-import {
-  addResizeListener,
-  addStylesheets,
-  observe,
-} from "./modules/initialize";
+import { addMutationsOnDomChanges, addMutationsOnNavigation, addMutationsOnResize, addStylesheets } from "./modules/initialize";
 import { injectAllChanges, userPreferences } from "./modules/options/all";
 import constructNewData from "./modules/utilities/constructNewData";
 import { getStorage } from "./modules/utilities/storage";
@@ -22,18 +18,14 @@ chrome.storage.onChanged.addListener((changes) => {
 - Get Chrome Storage and inject respective styles
 --*/
 const init = async () => {
-  // Adds main stylesheet and any additional stylesheets
   addStylesheets();
-
-  // Start MutationObserver
-  observe();
-
-  // Watch for resize events
-  addResizeListener();
+  addMutationsOnDomChanges();
+  addMutationsOnNavigation();
+  addMutationsOnResize();
 
   // Inject user preferences
-  const data = await getStorage(userPreferences);
-  injectAllChanges(data);
+  const allData = await getStorage(userPreferences);
+  injectAllChanges(allData);
 };
 
 init();

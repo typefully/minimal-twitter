@@ -32,8 +32,8 @@ const StyledToggle = styled(TogglePrimitive.Root, {
   "&[data-state=off]:hover": { borderColor: "rgba(255, 255, 255, 0.5)" }
 })
 
-const UserButton = ({ storageKey, children, defaultState = true }) => {
-  const [pressed, setPressed] = useStorageKeyState(storageKey, defaultState)
+const UserButton = ({ storageKey, children }) => {
+  const [pressed, setPressed] = useStorageKeyState(storageKey)
 
   return (
     <StyledToggle
@@ -141,7 +141,7 @@ const Circles = () => (
 )
 
 const TwitterBlue = () => (
-  <UserButton storageKey={KeyTwitterBlueButton} defaultState={false}>
+  <UserButton storageKey={KeyTwitterBlueButton}>
     <path
       className="fill-current"
       d="M15.704 8.99c.457-.05.891-.17 1.296-.35-.302.45-.685.84-1.125 1.15.004.1.006.19.006.29 0 2.94-2.269 6.32-6.421 6.32-1.274 0-2.46-.37-3.459-1 .177.02.357.03.539.03a4.55 4.55 0 002.803-.95 2.26 2.26 0 01-2.109-1.54c.138.03.28.04.425.04.206 0 .405-.03.595-.08a2.228 2.228 0 01-1.811-2.18v-.03c.305.17.652.27 1.023.28a2.215 2.215 0 01-1.004-1.85c0-.4.111-.78.305-1.11a6.48 6.48 0 004.652 2.32 2.266 2.266 0 01-.058-.51c0-1.23 1.01-2.22 2.256-2.22.649 0 1.235.27 1.647.7.514-.1.997-.28 1.433-.54-.168.52-.526.96-.992 1.23zM2 21h15a5.498 5.498 0 004.115-9.15.262.262 0 01-.023-.32A5.48 5.48 0 0022 8.5C22 5.46 19.538 3 16.5 3H2v18zM16.5 5a3.502 3.502 0 012.38 6.07.995.995 0 00.111 1.55A3.502 3.502 0 0117 19H4V5h12.5z"
@@ -150,7 +150,7 @@ const TwitterBlue = () => (
 )
 
 const VerifiedOrgs = () => (
-  <UserButton storageKey={KeyVerifiedOrgsButton} defaultState={false}>
+  <UserButton storageKey={KeyVerifiedOrgsButton}>
     <path
       className="fill-current"
       d="M7.323 2h11.443l-3 5h6.648L6.586 22.83 7.847 14H2.523l4.8-12zm1.354 2l-3.2 8h4.676l-.739 5.17L17.586 9h-5.352l3-5H8.677z"
@@ -168,7 +168,7 @@ const Profile = () => (
 )
 
 const TypefullyGrow = () => (
-  <UserButton storageKey={KeyTypefullyGrowTab} defaultState={true}>
+  <UserButton storageKey={KeyTypefullyGrowTab}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -208,7 +208,6 @@ const NavigationSection = () => (
           <SwitchControl
             label="Labels on Hover"
             storageKey={KeyNavigationButtonsLabelsHover}
-            defaultState={true}
           />
           <SwitchControl
             label="Center Vertically"
@@ -217,7 +216,6 @@ const NavigationSection = () => (
           <SwitchControl
             label="Unread Count Badge"
             storageKey={KeyUnreadCountBadge}
-            defaultState={true}
           />
         </div>
       </form>

@@ -1,22 +1,19 @@
-import addStyles from "../utilities/addStyles";
-import { removeElementById } from "../utilities/removeElement";
+import addStyles, { removeStyles } from "../utilities/addStyles";
 
 // Function to change Reply Count
 export const changeReplyCount = (replyCount) => {
   switch (replyCount) {
     case "hide":
       addStyles(
-        "mt-replyCount",
-        `
-        [data-testid="reply"] span { 
+        "replyCount",
+        `[data-testid="reply"] span { 
           visibility: hidden;
-        }
-        `
+        }`
       );
       break;
 
     case "show":
-      removeElementById("mt-replyCount");
+      removeStyles("replyCount");
       break;
   }
 };
@@ -26,20 +23,18 @@ export const changeRetweetCount = (retweetCount) => {
   switch (retweetCount) {
     case "hide":
       addStyles(
-        "mt-retweetCount",
-        `
-        [href$="/retweets"],
+        "retweetCount",
+        `[href$="/retweets"],
         [href$="/retweets/with_comments"],
         [data-testid="retweet"] span,
         [data-testid="unretweet"] span {
           visibility: hidden; 
-        }
-        `
+        }`
       );
       break;
 
     case "show":
-      removeElementById("mt-retweetCount");
+      removeStyles("retweetCount");
       break;
   }
 };
@@ -49,19 +44,17 @@ export const changeLikeCount = (likeCount) => {
   switch (likeCount) {
     case "hide":
       addStyles(
-        "mt-likeCount",
-        `
-        [href$="/likes"][href*="/status/"],
+        "likeCount",
+        `[href$="/likes"][href*="/status/"],
         [data-testid="like"] span,
         [data-testid="unlike"] span {
            visibility: hidden; 
-        }
-        `
+        }`
       );
       break;
 
     case "show":
-      removeElementById("mt-likeCount");
+      removeStyles("likeCount");
       break;
   }
 };
@@ -71,18 +64,16 @@ export const changeFollowCount = (followCount) => {
   switch (followCount) {
     case "hide":
       addStyles(
-        "mt-followCount",
-        `
-        [href$="/following"][dir][role="link"],
+        "followCount",
+        `[href$="/following"][dir][role="link"],
         [href$="/followers"][dir][role="link"] {
           display: none;
-        }
-        `
+        }`
       );
       break;
 
     case "show":
-      removeElementById("mt-followCount");
+      removeStyles("followCount");
       break;
   }
 };

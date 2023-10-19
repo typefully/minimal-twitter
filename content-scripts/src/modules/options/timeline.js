@@ -1,7 +1,7 @@
+import { KeyRecentMedia } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import { checkUrlForFollow } from "../check";
-import addStyles from "../utilities/addStyles";
-import { removeElementById } from "../utilities/removeElement";
+import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
 // Function to change Timeline Width
@@ -9,7 +9,7 @@ export const changeTimelineWidth = (timelineWidth) => {
   switch (timelineWidth) {
     case 600:
       addStyles(
-        "mt-timelineWidth",
+        "timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
@@ -23,7 +23,7 @@ export const changeTimelineWidth = (timelineWidth) => {
 
     case 650:
       addStyles(
-        "mt-timelineWidth",
+        "timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
@@ -37,7 +37,7 @@ export const changeTimelineWidth = (timelineWidth) => {
 
     case 700:
       addStyles(
-        "mt-timelineWidth",
+        "timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
@@ -51,7 +51,7 @@ export const changeTimelineWidth = (timelineWidth) => {
 
     case 750:
       addStyles(
-        "mt-timelineWidth",
+        "timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
@@ -65,7 +65,7 @@ export const changeTimelineWidth = (timelineWidth) => {
 
     case 800:
       addStyles(
-        "mt-timelineWidth",
+        "timelineWidth",
         `
         @media only screen and (min-width: 988px) {
           ${selectors.mainColumn} {
@@ -83,12 +83,12 @@ export const changeTimelineWidth = (timelineWidth) => {
 export const changeTimelineBorders = (timelineBorders) => {
   switch (timelineBorders) {
     case "on":
-      removeElementById("mt-timelineBorders");
+      removeStyles("timelineBorders");
       break;
 
     case "off":
       addStyles(
-        "mt-timelineBorders",
+        "timelineBorders",
         `
         @media only screen and (min-width: 988px) {
           div${selectors.mainColumn} {
@@ -105,12 +105,12 @@ export const changeTimelineBorders = (timelineBorders) => {
 export const changeTweetBorders = (tweetBorders) => {
   switch (tweetBorders) {
     case "on":
-      removeElementById("mt-tweetBorders");
+      removeStyles("tweetBorders");
       break;
 
     case "off":
       addStyles(
-        "mt-tweetBorders",
+        "tweetBorders",
         `
         ${selectors.mainWrapper} section > div > div > div > div {
           border-style: hidden;
@@ -128,12 +128,12 @@ export const changeTweetBorders = (tweetBorders) => {
 export const changeStickyHeader = (stickyHeader) => {
   switch (stickyHeader) {
     case "on":
-      removeElementById("mt-stickyHeader");
+      removeStyles("stickyHeader");
       break;
 
     case "off":
       addStyles(
-        "mt-stickyHeader",
+        "stickyHeader",
         `
         ${selectors.mainColumn} > div > div {
           position: unset;
@@ -149,7 +149,7 @@ export const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
     case "off":
       addStyles(
-        "mt-removePromotedPosts",
+        "removePromotedPosts",
         `
         [data-testid="placementTracking"] article {
           display: flex;
@@ -159,7 +159,7 @@ export const changePromotedPosts = (removePromotedPosts) => {
       break;
 
     case "on":
-      removeElementById("mt-removePromotedPosts");
+      removeStyles("removePromotedPosts");
       break;
   }
 };
@@ -168,12 +168,12 @@ export const changePromotedPosts = (removePromotedPosts) => {
 export const changeWhoToFollow = (removeWhoToFollow) => {
   switch (removeWhoToFollow) {
     case "off":
-      removeElementById("mt-removeWhoToFollow");
+      removeStyles("removeWhoToFollow");
       break;
 
     case "on":
       addStyles(
-        "mt-removeWhoToFollow",
+        "removeWhoToFollow",
         `
         ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
         ${selectors.mainColumn} div[data-testid="UserCell"] {
@@ -191,12 +191,12 @@ export const changeWhoToFollow = (removeWhoToFollow) => {
 export const changeTopicsToFollow = (removeTopicsToFollow) => {
   switch (removeTopicsToFollow) {
     case "off":
-      removeElementById("mt-removeTopicsToFollow");
+      removeStyles("removeTopicsToFollow");
       break;
 
     case "on":
       addStyles(
-        "mt-removeTopicsToFollow",
+        "removeTopicsToFollow",
         `
         ${selectors.mainColumn} section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"],
         ${selectors.mainColumn} a[href*="/i/flow/topics_selector"],
@@ -214,20 +214,20 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
 
 export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
   if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
-    removeElementById("mt-removeTimelineTabs");
+    removeStyles("removeTimelineTabs");
     return;
   }
 
   switch (removeTimelineTabs) {
     case "off":
-      removeElementById("mt-removeTimelineTabs");
+      removeStyles("removeTimelineTabs");
       break;
 
     case "on":
-      if (document.getElementById("mt-removeTimelineTabs")) return;
+      if (stylesExist("removeTimelineTabs")) return;
 
       addStyles(
-        "mt-removeTimelineTabs",
+        "removeTimelineTabs",
         `
         ${selectors.timelineTabs} {
           display: none;
@@ -243,7 +243,7 @@ export const changeRecentMedia = async (recentMedia) => {
   const userProfile = document.querySelector('meta[content*="twitter://user?screen_name="]');
 
   if (!userProfile) {
-    removeElementById("mt-recentMedia");
+    removeStyles("recentMedia");
     return;
   }
 
@@ -257,13 +257,13 @@ export const changeRecentMedia = async (recentMedia) => {
   const run = (rm) => {
     switch (rm) {
       case "off":
-        removeElementById("mt-recentMedia");
+        removeStyles("recentMedia");
         sidebarPhotoGrid.classList.remove("mt-recentMedia-photoGrid");
         break;
 
       case "on":
         addStyles(
-          "mt-recentMedia",
+          "recentMedia",
           `
             @media only screen and (min-width: 1265px) {
               .mt-recentMedia-photoGrid {
@@ -289,28 +289,28 @@ export const changeRecentMedia = async (recentMedia) => {
   if (recentMedia) {
     run(recentMedia);
   } else {
-    const data = await getStorage(["recentMedia"]);
-    run(data?.recentMedia);
+    const setting = await getStorage(KeyRecentMedia);
+    run(setting);
   }
 };
 
 // Function to change Show Trends on Home Timeline
 export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
   if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
-    removeElementById("mt-trendsHomeTimeline");
+    removeStyles("trendsHomeTimeline");
     return;
   }
 
   switch (trendsHomeTimeline) {
     case "off":
-      removeElementById("mt-trendsHomeTimeline");
+      removeStyles("trendsHomeTimeline");
       break;
 
     case "on":
-      if (document.getElementById("mt-trendsHomeTimeline")) return;
+      if (stylesExist("trendsHomeTimeline")) return;
 
       addStyles(
-        "mt-trendsHomeTimeline",
+        "trendsHomeTimeline",
         `
           @keyframes render {
             from {
@@ -439,7 +439,7 @@ export const removeTweetFormatting = (removeTweetFormatting) => {
   switch (removeTweetFormatting) {
     case "on":
       addStyles(
-        "mt-removeTweetFormatting",
+        "removeTweetFormatting",
         `
         ${selectors.tweetSpan} {
            font-weight: 400;
@@ -450,7 +450,7 @@ export const removeTweetFormatting = (removeTweetFormatting) => {
       break;
 
     case "off":
-      removeElementById("mt-removeTweetFormatting");
+      removeStyles("removeTweetFormatting");
       break;
   }
 };

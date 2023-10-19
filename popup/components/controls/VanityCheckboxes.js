@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react"
+import {
+  KeyAllVanity,
+  KeyFollowCount,
+  KeyLikeCount,
+  KeyReplyCount,
+  KeyRetweetCount
+} from "../../../storage-keys"
 import { getStorage, setStorage } from "../../utilities/chromeStorage"
 import ToggleChevron from "../ui/ToggleChevron"
 import { CheckboxControl } from "../ui/checkboxes"
@@ -14,7 +21,7 @@ const VanityCheckboxes = () => {
   useEffect(() => {
     const getUserDefaultAll = async () => {
       try {
-        const userDefaultAll = await getStorage("allVanity")
+        const userDefaultAll = await getStorage(KeyAllVanity)
         if (userDefaultAll) {
           setHideAll(userDefaultAll === "hide" ? true : false)
         }
@@ -24,7 +31,7 @@ const VanityCheckboxes = () => {
     }
     const getUserDefaultReply = async () => {
       try {
-        const userDefaultReply = await getStorage("replyCount")
+        const userDefaultReply = await getStorage(KeyReplyCount)
         userDefaultReply &&
           setHideReply(userDefaultReply === "hide" ? true : false)
       } catch (error) {
@@ -33,7 +40,7 @@ const VanityCheckboxes = () => {
     }
     const getUserDefaultLike = async () => {
       try {
-        const userDefaultLike = await getStorage("likeCount")
+        const userDefaultLike = await getStorage(KeyLikeCount)
         userDefaultLike &&
           setHideLike(userDefaultLike === "hide" ? true : false)
       } catch (error) {
@@ -42,7 +49,7 @@ const VanityCheckboxes = () => {
     }
     const getUserDefaultRetweet = async () => {
       try {
-        const userDefaultRetweet = await getStorage("retweetCount")
+        const userDefaultRetweet = await getStorage(KeyRetweetCount)
         userDefaultRetweet &&
           setHideRetweet(userDefaultRetweet === "hide" ? true : false)
       } catch (error) {
@@ -51,7 +58,7 @@ const VanityCheckboxes = () => {
     }
     const getUserDefaultFollow = async () => {
       try {
-        const userDefaultFollow = await getStorage("followCount")
+        const userDefaultFollow = await getStorage(KeyFollowCount)
         userDefaultFollow &&
           setHideFollow(userDefaultFollow === "hide" ? true : false)
       } catch (error) {
@@ -76,11 +83,11 @@ const VanityCheckboxes = () => {
         setHideFollow(checked)
         try {
           await setStorage({
-            allVanity: checked ? "hide" : "show",
-            replyCount: checked ? "hide" : "show",
-            retweetCount: checked ? "hide" : "show",
-            likeCount: checked ? "hide" : "show",
-            followCount: checked ? "hide" : "show"
+            [KeyAllVanity]: checked ? "hide" : "show",
+            [KeyReplyCount]: checked ? "hide" : "show",
+            [KeyRetweetCount]: checked ? "hide" : "show",
+            [KeyLikeCount]: checked ? "hide" : "show",
+            [KeyFollowCount]: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -91,7 +98,7 @@ const VanityCheckboxes = () => {
         setHideReply(checked)
         try {
           await setStorage({
-            replyCount: checked ? "hide" : "show"
+            [KeyReplyCount]: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -102,7 +109,7 @@ const VanityCheckboxes = () => {
         setHideRetweet(checked)
         try {
           await setStorage({
-            retweetCount: checked ? "hide" : "show"
+            [KeyRetweetCount]: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -113,7 +120,7 @@ const VanityCheckboxes = () => {
         setHideLike(checked)
         try {
           await setStorage({
-            likeCount: checked ? "hide" : "show"
+            [KeyLikeCount]: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)
@@ -124,7 +131,7 @@ const VanityCheckboxes = () => {
         setHideFollow(checked)
         try {
           await setStorage({
-            followCount: checked ? "hide" : "show"
+            [KeyFollowCount]: checked ? "hide" : "show"
           })
         } catch (error) {
           console.warn(error)

@@ -1,6 +1,5 @@
 import selectors from "../selectors";
-import addStyles from "./utilities/addStyles";
-import { removeElementById } from "./utilities/removeElement";
+import addStyles, { removeStyles } from "./utilities/addStyles";
 
 // Function to check url for /following or /followers
 export const checkUrlForFollow = () => {
@@ -14,15 +13,13 @@ export const checkUrlForFollow = () => {
     if (document.getElementById("mt-followOverride")) return;
 
     addStyles(
-      "mt-followOverride",
-      `
-        ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
+      "followOverride",
+      `${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
         ${selectors.mainColumn} div[data-testid="UserCell"] {
           display: block;
-        }
-        `
+        }`
     );
   } else {
-    removeElementById("mt-followOverride");
+    removeStyles("followOverride");
   }
 };

@@ -1,22 +1,21 @@
+import { KeyTitleNotifications } from "../../../../storage-keys";
 import selectors from "../../selectors";
-import addStyles from "../utilities/addStyles";
-import { removeElementById } from "../utilities/removeElement";
+import addStyles, { removeStyles } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
 // Function to change the title notification count
 let nt; // Title Notifications timeout
 export const changeTitleNotifications = (tf) => {
   const run = async () => {
-    let titleNotifications = tf;
+    let setting = tf;
 
     if (!tf) {
-      const data = await getStorage(["titleNotifications"]);
-      titleNotifications = data?.titleNotifications;
+      setting = await getStorage(KeyTitleNotifications);
     }
 
     const favicon = document.querySelector('link[rel="shortcut icon"]');
 
-    if (titleNotifications === "on") {
+    if (setting === "on") {
       favicon.setAttribute("href", favicon.href.replace("twitter.ico", "twitter-pip.2.ico"));
     } else {
       if (document.title.charAt(0) === "(") {
@@ -50,7 +49,7 @@ export const changeInterFont = (interFont) => {
   switch (interFont) {
     case "on":
       addStyles(
-        "mt-interFont",
+        "interFont",
         `
         @font-face {
           font-family: 'Inter';
@@ -65,7 +64,7 @@ export const changeInterFont = (interFont) => {
       break;
 
     case "off":
-      removeElementById("mt-interFont");
+      removeStyles("interFont");
       break;
   }
 };
@@ -75,7 +74,7 @@ export const changeTweetButton = (tweetButton) => {
   switch (tweetButton) {
     case "off":
       addStyles(
-        "mt-tweetButton",
+        "tweetButton",
         `
         [data-testid="SideNav_NewTweet_Button"] {
           visibility: hidden;
@@ -85,7 +84,7 @@ export const changeTweetButton = (tweetButton) => {
       break;
 
     case "on":
-      removeElementById("mt-tweetButton");
+      removeStyles("tweetButton");
       break;
   }
 };
@@ -94,14 +93,14 @@ export const changeHideSearchBar = (searchBar) => {
   switch (searchBar) {
     case "off":
       addStyles(
-        "mt-searchBar",
+        "searchBar",
         `${selectors.searchBox} {
           display: none;
           visibility: hidden;
         }`
       );
       addStyles(
-        "mt-trendsHomeTimeline-more",
+        "trendsHomeTimeline-more",
         `@media only screen and (min-width: 1265px) {
           ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
             top: 12px !important;
@@ -114,9 +113,9 @@ export const changeHideSearchBar = (searchBar) => {
       break;
 
     case "on":
-      removeElementById("mt-searchBar");
+      removeStyles("searchBar");
       addStyles(
-        "mt-trendsHomeTimeline-more",
+        "trendsHomeTimeline-more",
         `@media only screen and (min-width: 1265px) {
           ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
             top: unset !important;
@@ -134,7 +133,7 @@ export const changeTransparentSearchBar = (transparentSearch) => {
   switch (transparentSearch) {
     case "on":
       addStyles(
-        "mt-transparentSearch",
+        "transparentSearch",
         `
         ${selectors.searchBox} > div:nth-child(1) > div {
           background-color: transparent;
@@ -148,7 +147,7 @@ export const changeTransparentSearchBar = (transparentSearch) => {
       break;
 
     case "off":
-      removeElementById("mt-transparentSearch");
+      removeStyles("transparentSearch");
       break;
   }
 };

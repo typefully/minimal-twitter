@@ -1,5 +1,5 @@
 import svgAssets from "./svgAssets";
-import addStyles from "./utilities/addStyles";
+import addStyles, { removeStyles } from "./utilities/addStyles";
 import addTooltip from "./utilities/addTooltip";
 import { removeElementById } from "./utilities/removeElement";
 
@@ -28,7 +28,7 @@ export const addTypefullyPlug = () => {
 
   if (tweetButtonInlineDisabled && document.getElementById("typefully-link-inline")) {
     removeElementById("typefully-link-inline");
-    removeElementById("mt-inlinetweetbutton");
+    removeStyles("inlinetweetbutton");
   }
 
   if (tweetButtonInlineNotDisabled && !document.getElementById("typefully-link-inline")) {
@@ -49,13 +49,11 @@ export const addTypefullyPlug = () => {
     container.appendChild(typefullyLinkElement);
 
     addStyles(
-      "mt-inlinetweetbutton",
-      `
-      [data-testid="tweetButtonInline"] {
+      "inlinetweetbutton",
+      `[data-testid="tweetButtonInline"] {
         margin-left: 8px;
         order: 2;
-      }
-    `
+      }`
     );
   }
 };
