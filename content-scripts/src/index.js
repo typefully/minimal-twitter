@@ -10,8 +10,14 @@ import { getStorage } from "./modules/utilities/storage";
 - Inject styles in respond to changes
 --*/
 chrome.storage.onChanged.addListener(async (changes) => {
+  if (
+    changes[KeyExtensionStatus]?.oldValue && // No old value means it's a fresh install
+    changes[KeyExtensionStatus]?.newValue !== changes[KeyExtensionStatus]?.oldValue // The status has actually changed
+  )
+    window.location.reload();
+
   const status = await getStorage(KeyExtensionStatus);
-  if (changes[KeyExtensionStatus]) window.location.reload();
+  if (status === "off") return;
 
   const newChangesData = constructNewData(changes);
   injectAllChanges(newChangesData);
@@ -23,7 +29,6 @@ chrome.storage.onChanged.addListener(async (changes) => {
 --*/
 const init = async () => {
   const status = await getStorage(KeyExtensionStatus);
-  console.log({ status });
   if (status === "off") return;
 
   addStylesheets();
