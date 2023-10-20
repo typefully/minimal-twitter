@@ -53,7 +53,7 @@ const TimelineSection = () => {
       )}
       <p className="pt-1 pb-2 text-xs text-center font-medium leading-5 dark:text-twitterAccentDark text-twitterAccentOne">
         View more Twitter display settings{" "}
-        <a href="https://twitter.com/i/display" target="_blank" rel="noreferrer" className="text-twitterBlue hover:underline">
+        <a href="https://twitter.com/i/display" target="_blank" rel="noreferrer" className="text-xPremium hover:underline">
           here
         </a>
         .

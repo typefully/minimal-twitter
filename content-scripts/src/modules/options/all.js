@@ -26,6 +26,7 @@ import {
   KeyReplyCount,
   KeyRetweetCount,
   KeySearchBar,
+  KeySidebarLogo,
   KeyStickyHeader,
   KeyTimelineWidth,
   KeyTitleNotifications,
@@ -34,22 +35,22 @@ import {
   KeyTransparentSearch,
   KeyTrendsHomeTimeline,
   KeyTweetButton,
-  KeyTwitterBlueButton,
   KeyTypefullyComposerButtons,
   KeyTypefullyGrowTab,
   KeyUnreadCountBadge,
   KeyVerifiedOrgsButton,
   KeyWriterMode,
+  KeyXPremiumButton,
 } from "../../../../storage-keys";
 import { changeCustomCss } from "./advanced";
 import { changeFollowCount, changeLikeCount, changeReplyCount, changeRetweetCount } from "./hideVanityCounts";
 import changeHideViewCounts from "./hideViewCount";
 import { changeHideSearchBar, changeInterFont, changeTitleNotifications, changeTransparentSearchBar, changeTweetButton } from "./interface";
 import {
+  changeAnalyticsButton,
   changeBookmarksButton,
   changeCommunitiesButton,
   changeExploreButton,
-  changeGrowButton,
   changeHomeButton,
   changeListsButton,
   changeMessagesButton,
@@ -58,11 +59,12 @@ import {
   changeNavigationCenter,
   changeNotificationsButton,
   changeProfileButton,
+  changeSidebarLogo,
   changeTopArticlesButton,
   changeTopicsButton,
-  changeTwitterBlueButton,
   changeUnreadCountBadge,
   changeVerifiedOrgsButton,
+  changeXPremiumButton,
 } from "./navigation";
 import {
   changeFollowingTimeline,
@@ -92,6 +94,7 @@ export const injectAllChanges = (data) => {
   changeWriterMode(data[KeyWriterMode]);
 
   // Sidebar
+  changeSidebarLogo(data[KeySidebarLogo]);
   changeHomeButton(data[KeyHomeButton]);
   changeExploreButton(data[KeyExploreButton]);
   changeNotificationsButton(data[KeyNotificationsButton]);
@@ -102,9 +105,9 @@ export const injectAllChanges = (data) => {
   changeTopicsButton(data[KeyTopicsButton]);
   changeListsButton(data[KeyListsButton]);
   changeProfileButton(data[KeyProfileButton]);
-  changeTwitterBlueButton(data[KeyTwitterBlueButton]);
+  changeXPremiumButton(data[KeyXPremiumButton]);
   changeVerifiedOrgsButton(data[KeyVerifiedOrgsButton]);
-  changeGrowButton(data[KeyTypefullyGrowTab]);
+  changeAnalyticsButton(data[KeyTypefullyGrowTab]);
 
   // Timeline
   changeFollowingTimeline(data[KeyFollowingTimeline]);

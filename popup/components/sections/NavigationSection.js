@@ -13,12 +13,13 @@ import {
   KeyNavigationCenter,
   KeyNotificationsButton,
   KeyProfileButton,
+  KeySidebarLogo,
   KeyTopArticlesButton,
   KeyTopicsButton,
-  KeyTwitterBlueButton,
   KeyTypefullyGrowTab,
   KeyUnreadCountBadge,
   KeyVerifiedOrgsButton,
+  KeyXPremiumButton,
 } from "../../../storage-keys";
 import SectionLabel from "../ui/SectionLabel";
 
@@ -42,7 +43,7 @@ const IconButton = ({ storageKey, label, children }) => {
         pressed={pressed}
         title={`Toggle ${startCase(storageKey)}`}
         aria-label={`Toggle ${startCase(storageKey)}`}
-        className="dark:bg-twitterBgTwoDark bg-twitterBgTwo p-3 w-fit rounded-full border-[3px] border-twitterBlue dark:text-white text-black"
+        className="dark:bg-twitterBgTwoDark bg-twitterBgTwo p-3 w-fit rounded-full border-[3px] border-xPremium dark:text-white text-black"
       >
         <svg width={25} height={25} aria-hidden="true" viewBox="0 0 24 24">
           {children}
@@ -134,8 +135,8 @@ const Topics = () => (
   </IconButton>
 );
 
-const TwitterBlue = () => (
-  <IconButton storageKey={KeyTwitterBlueButton} label="Premium">
+const XPremium = () => (
+  <IconButton storageKey={KeyXPremiumButton} label="Premium">
     <path
       className="fill-current"
       d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
@@ -192,13 +193,14 @@ const NavigationSection = () => {
             <Lists />
             <Communities />
             <Topics />
-            <TwitterBlue />
+            <XPremium />
             <VerifiedOrgs />
             <TypefullyGrow />
             <Profile />
           </div>
           <div className="flex flex-col gap-y-4">
             <Separator />
+            <SwitchControl label="𝕏 Logo" storageKey={KeySidebarLogo} />
             <SwitchControl label="Show Labels" storageKey={KeyNavigationButtonsLabels} onChange={setLabelsShown} />
             <SwitchControl disabled={labelsShown} label="Show Labels on Hover" storageKey={KeyNavigationButtonsLabelsHover} />
             <SwitchControl label="Center Vertically" storageKey={KeyNavigationCenter} />

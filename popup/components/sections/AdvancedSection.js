@@ -43,14 +43,14 @@ const AdvancedSection = () => {
         {!showEditor ? (
           <>
             <span> · </span>
-            <button onClick={() => setShowEditor(true)} className="text-twitterBlue">
+            <button onClick={() => setShowEditor(true)} className="text-xPremium">
               Show CSS Editor
             </button>
           </>
         ) : (
           <>
             <span> · </span>
-            <button onClick={() => setShowEditor(false)} className="text-twitterBlue">
+            <button onClick={() => setShowEditor(false)} className="text-xPremium">
               Hide CSS Editor
             </button>
           </>

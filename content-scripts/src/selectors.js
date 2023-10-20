@@ -9,6 +9,7 @@ selectors.leftSidebar = `header[role="banner"]`;
 selectors.leftSidebarLinks = `${selectors.leftSidebar} nav[role="navigation"]`;
 selectors.leftSidebarUnreadBadge = `${selectors.leftSidebarLinks} a svg + div[dir]`;
 selectors.sidebarLinks = {
+  logo: `${selectors.leftSidebar} div:first-child > div:first-child div:first-child > div:first-child > h1:only-child[role="heading"]`,
   home: `[data-testid="AppTabBar_Home_Link"]`,
   explore: `[data-testid="AppTabBar_Explore_Link"]`,
   notifications: `[data-testid="AppTabBar_Notifications_Link"]`,
@@ -20,9 +21,9 @@ selectors.sidebarLinks = {
   communities: `a[href*=communities]`,
   profile: `[data-testid="AppTabBar_Profile_Link"]`,
   lists: `a[href*="lists"][role="link"][aria-label]`,
-  twitterBlue: `a[href*="blue"][role="link"][aria-label]`,
+  xPremium: `a[href*="blue"][role="link"][aria-label]`,
   verifiedOrgs: `a[href*="verified-orgs"][role="link"][aria-label]`,
-  grow: `.mt-sidebar-button[aria-label="Analytics"]`,
+  analytics: `.mt-sidebar-button[aria-label="Analytics"]`,
 };
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;
 selectors.rightSidebar = `[data-testid="sidebarColumn"]`;

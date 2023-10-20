@@ -2,7 +2,7 @@ export const KeyExtensionStatus = "extensionStatus";
 export const KeyListsButton = "listsButton";
 export const KeyCommunitiesButton = "communitiesButton";
 export const KeyTopicsButton = "topicsButton";
-export const KeyTwitterBlueButton = "twitterBlueButton";
+export const KeyXPremiumButton = "xPremiumButton";
 export const KeyVerifiedOrgsButton = "verifiedOrgsButton";
 export const KeyTypefullyGrowTab = "typefullyGrowTab";
 export const KeyFollowingTimeline = "followingTimeline";
@@ -13,6 +13,7 @@ export const KeyTimelineWidth = "timelineWidth";
 export const KeyRemoveTimelineBorders = "timelineBorders";
 export const KeyRemoveTweetBorders = "tweetBorders";
 export const KeyStickyHeader = "stickyHeader";
+export const KeySidebarLogo = "sidebarLogo";
 export const KeyHomeButton = "homeButton";
 export const KeyExploreButton = "exploreButton";
 export const KeyNotificationsButton = "notificationsButton";
@@ -47,7 +48,7 @@ export const allSettingsKeys = [
   KeyListsButton,
   KeyCommunitiesButton,
   KeyTopicsButton,
-  KeyTwitterBlueButton,
+  KeyXPremiumButton,
   KeyVerifiedOrgsButton,
   KeyTypefullyGrowTab,
   KeyFollowingTimeline,
@@ -58,6 +59,7 @@ export const allSettingsKeys = [
   KeyRemoveTimelineBorders,
   KeyRemoveTweetBorders,
   KeyStickyHeader,
+  KeySidebarLogo,
   KeyHomeButton,
   KeyExploreButton,
   KeyNotificationsButton,
@@ -94,6 +96,7 @@ export const defaultPreferences = {
   [KeyRemoveTimelineBorders]: "off",
   [KeyRemoveTweetBorders]: "off",
   [KeyStickyHeader]: "on",
+  [KeySidebarLogo]: "on",
   [KeyHomeButton]: "on",
   [KeyExploreButton]: "on",
   [KeyNotificationsButton]: "on",
@@ -103,7 +106,7 @@ export const defaultPreferences = {
   [KeyCommunitiesButton]: "on",
   [KeyTopicsButton]: "off",
   [KeyListsButton]: "on",
-  [KeyTwitterBlueButton]: "off",
+  [KeyXPremiumButton]: "off",
   [KeyVerifiedOrgsButton]: "off",
   [KeyTypefullyGrowTab]: "on",
   [KeyProfileButton]: "on",

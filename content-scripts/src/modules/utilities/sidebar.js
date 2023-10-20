@@ -32,7 +32,7 @@ const createNewElement = ({ profileNode, name, href, userHref, onClick, svgAsset
       newNode.onclick = () => onClick(newNode);
     }
 
-    newNode.ariaLabel = name;
+    newNode.setAttribute("aria-label", name);
     newNode.removeAttribute("data-testid");
     newNode.classList.add("mt-sidebar-button"); // To style it in main.css
     newNode.firstChild.firstChild.firstChild.innerHTML = svgAsset;

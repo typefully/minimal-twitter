@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        twitterBlue: "#1DA1F2",
+        xPremium: "#1DA1F2",
         twitterBgOne: "#ffffff",
         twitterBgOneDark: "#15202b",
         twitterBgTwo: "#f7f9f9",

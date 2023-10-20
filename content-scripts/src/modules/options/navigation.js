@@ -25,28 +25,29 @@ export const changeSidebarSetting = (sidebarSelector, state, onAdd) => {
 
 // Functions
 
+export const changeSidebarLogo = (state) => changeSidebarSetting("logo", state);
 export const changeHomeButton = (state) => changeSidebarSetting("home", state);
 export const changeExploreButton = (state) => changeSidebarSetting("explore", state);
 export const changeNotificationsButton = (state) => changeSidebarSetting("notifications", state);
 export const changeMessagesButton = (state) => changeSidebarSetting("messages", state);
 export const changeBookmarksButton = (state) => changeSidebarSetting("bookmarks", state);
 export const changeTopArticlesButton = (state) => changeSidebarSetting("articles", state);
-export const changeTwitterBlueButton = (state) => changeSidebarSetting("twitterBlue", state, addTwitterBlueButton);
+export const changeXPremiumButton = (state) => changeSidebarSetting("xPremium", state, addXPremiumButton);
 export const changeVerifiedOrgsButton = (state) => changeSidebarSetting("verifiedOrgs", state, addVerifiedOrgsButton);
 export const changeTopicsButton = (state) => changeSidebarSetting("topics", state, addTopicsButton);
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
 export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
-export const changeGrowButton = (state) => changeSidebarSetting("grow", state, addGrowButton);
+export const changeAnalyticsButton = (state) => changeSidebarSetting("analytics", state, addAnalyticsButton);
 
 let tm1;
-export const addTwitterBlueButton = (forced) => {
+export const addXPremiumButton = (forced) => {
   clearTimeout(tm1);
   tm1 = setTimeout(() => {
     addSidebarButton({
       name: "Twitter Blue",
       href: "/settings/twitter_blue",
-      svgAsset: svgAssets.twitterBlue.normal,
+      svgAsset: svgAssets.xPremium.normal,
       forced,
     });
   }, 250);
@@ -62,7 +63,7 @@ export const addVerifiedOrgsButton = (forced) => {
 };
 
 let tm2;
-export const addGrowButton = (forced) => {
+export const addAnalyticsButton = (forced) => {
   clearTimeout(tm2);
   tm2 = setTimeout(() => {
     addSidebarButton({
