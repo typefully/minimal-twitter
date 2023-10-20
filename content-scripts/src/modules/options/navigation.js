@@ -34,7 +34,6 @@ export const changeTopArticlesButton = (state) => changeSidebarSetting("articles
 export const changeTwitterBlueButton = (state) => changeSidebarSetting("twitterBlue", state, addTwitterBlueButton);
 export const changeVerifiedOrgsButton = (state) => changeSidebarSetting("verifiedOrgs", state, addVerifiedOrgsButton);
 export const changeTopicsButton = (state) => changeSidebarSetting("topics", state, addTopicsButton);
-export const changeCirclesButton = (state) => changeSidebarSetting("circles", state, addCirclesButton);
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
 export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
@@ -83,15 +82,6 @@ export const addTopicsButton = (forced) => {
     name: "Topics",
     userHref: "/topics",
     svgAsset: svgAssets.topics.normal,
-    forced,
-  });
-};
-
-export const addCirclesButton = (forced) => {
-  addSidebarButton({
-    name: "Circles",
-    href: "/i/circles",
-    svgAsset: svgAssets.circles.normal,
     forced,
   });
 };

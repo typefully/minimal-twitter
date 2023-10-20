@@ -1,5 +1,4 @@
 import {
-  KeyCirclesButton,
   KeyCommunitiesButton,
   KeyFollowingTimeline,
   KeyListsButton,
@@ -13,7 +12,7 @@ import {
 } from "../../../storage-keys";
 import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
-import { addCirclesButton, addCommunitiesButton, addGrowButton, addListsButton, addTopicsButton, addTwitterBlueButton, addVerifiedOrgsButton } from "./options/navigation";
+import { addCommunitiesButton, addGrowButton, addListsButton, addTopicsButton, addTwitterBlueButton, addVerifiedOrgsButton } from "./options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
@@ -123,14 +122,13 @@ export const addMutationsOnResize = () => {
 
 // Use "forced" when you want to re-add a button even if it's already there
 async function addSidebarButtons(forced) {
-  const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyCirclesButton, KeyVerifiedOrgsButton, KeyTwitterBlueButton, KeyTypefullyGrowTab]);
+  const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyVerifiedOrgsButton, KeyTwitterBlueButton, KeyTypefullyGrowTab]);
 
   if (!data) return;
 
   if (data[KeyListsButton] === "on") addListsButton(forced);
   if (data[KeyCommunitiesButton] === "on") addCommunitiesButton(forced);
   if (data[KeyTopicsButton] === "on") addTopicsButton(forced);
-  if (data[KeyCirclesButton] === "on") addCirclesButton(forced);
   if (data[KeyTwitterBlueButton] === "on") addTwitterBlueButton(forced);
   if (data[KeyVerifiedOrgsButton] === "on") addVerifiedOrgsButton(forced);
   if (data[KeyTypefullyGrowTab] === "on") addGrowButton(forced);

@@ -2,7 +2,6 @@ export const KeyExtensionStatus = "extensionStatus";
 export const KeyListsButton = "listsButton";
 export const KeyCommunitiesButton = "communitiesButton";
 export const KeyTopicsButton = "topicsButton";
-export const KeyCirclesButton = "circlesButton";
 export const KeyTwitterBlueButton = "twitterBlueButton";
 export const KeyVerifiedOrgsButton = "verifiedOrgsButton";
 export const KeyTypefullyGrowTab = "typefullyGrowTab";
@@ -48,7 +47,6 @@ export const allSettingsKeys = [
   KeyListsButton,
   KeyCommunitiesButton,
   KeyTopicsButton,
-  KeyCirclesButton,
   KeyTwitterBlueButton,
   KeyVerifiedOrgsButton,
   KeyTypefullyGrowTab,
@@ -104,7 +102,6 @@ export const defaultPreferences = {
   [KeyTopArticlesButton]: "off",
   [KeyCommunitiesButton]: "on",
   [KeyTopicsButton]: "off",
-  [KeyCirclesButton]: "off",
   [KeyListsButton]: "on",
   [KeyTwitterBlueButton]: "off",
   [KeyVerifiedOrgsButton]: "off",

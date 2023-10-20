@@ -1,6 +1,5 @@
 import {
   KeyBookmarksButton,
-  KeyCirclesButton,
   KeyCommunitiesButton,
   KeyCustomCss,
   KeyExploreButton,
@@ -48,7 +47,6 @@ import changeHideViewCounts from "./hideViewCount";
 import { changeHideSearchBar, changeInterFont, changeTitleNotifications, changeTransparentSearchBar, changeTweetButton } from "./interface";
 import {
   changeBookmarksButton,
-  changeCirclesButton,
   changeCommunitiesButton,
   changeExploreButton,
   changeGrowButton,
@@ -101,7 +99,6 @@ export const injectAllChanges = (data) => {
   changeBookmarksButton(data[KeyBookmarksButton]);
   changeTopArticlesButton(data[KeyTopArticlesButton]);
   changeCommunitiesButton(data[KeyCommunitiesButton]);
-  changeCirclesButton(data[KeyCirclesButton]);
   changeTopicsButton(data[KeyTopicsButton]);
   changeListsButton(data[KeyListsButton]);
   changeProfileButton(data[KeyProfileButton]);
