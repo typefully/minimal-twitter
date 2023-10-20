@@ -11,12 +11,14 @@ import {
   KeyVerifiedOrgsButton,
   KeyWriterMode,
 } from "../../../storage-keys";
+import selectors from "../selectors";
 import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
 import { addCirclesButton, addCommunitiesButton, addGrowButton, addListsButton, addTopicsButton, addTwitterBlueButton, addVerifiedOrgsButton } from "./options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
+import addStyles from "./utilities/addStyles";
 import { extractColorsAsRootVars } from "./utilities/colors";
 import debounce from "./utilities/debounce";
 import hideRightSidebar from "./utilities/hideRightSidebar";
@@ -25,12 +27,23 @@ import { getStorage } from "./utilities/storage";
 import throttle from "./utilities/throttle";
 
 // Function to set search bar width to length of placeholder
-const searchBarWidthReset = (searchBar) => {
-  if (!window.location.pathname.includes("/search") && !window.location.pathname.includes("/explore")) {
-    const searchBarPlaceholderWidth = searchBar.getAttribute("placeholder").length;
+const searchBarWidthReset = () => {
+  const searchInput = document.querySelector(selectors.searchBoxInput);
 
-    searchBar.style.width = `${searchBarPlaceholderWidth + 4}ch`; // + 4 to make sure it's wider than the placeholder itself, leaving some right padding
-  }
+  if (!searchInput) return;
+
+  if (window.location.pathname.includes("/search") || window.location.pathname.includes("/explore")) return;
+
+  if (document.activeElement === searchInput) return;
+
+  const searchBarPlaceholderWidth = searchInput.getAttribute("placeholder").length;
+
+  addStyles(
+    "searchInputWidth",
+    `${selectors.searchBoxInput} {
+      width: ${searchBarPlaceholderWidth + 4}ch;
+    }`
+  );
 };
 
 // Function to add main stylesheet
@@ -86,8 +99,7 @@ const runDocumentMutations = throttle(async () => {
   changeRecentMedia();
   hideRightSidebar();
 
-  const searchBar = document.querySelector('[data-testid="SearchBox_Search_Input"]');
-  if (searchBar) searchBarWidthReset(searchBar);
+  searchBarWidthReset();
 
   const scheduleButton = document.querySelector('div[data-testid="scheduleOption"]');
   if (scheduleButton) addWriterModeButton(scheduleButton);

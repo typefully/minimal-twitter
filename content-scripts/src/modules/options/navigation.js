@@ -1,9 +1,7 @@
-import { KeyNavigationButtonsLabelsHover } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { addSidebarButton } from "../utilities/sidebar";
-import { getStorage } from "../utilities/storage";
 
 // Utilities
 
@@ -126,6 +124,9 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
         "unreadCountBadge",
         `${selectors.leftSidebarLinks} div[dir][aria-label][aria-live] {
           display: none;
+        }
+        ${selectors.accountSwitcherButton} > div > svg+div[aria-label] {
+          display: none;
         }`
       );
       break;
@@ -184,9 +185,6 @@ export const changeNavigationButtonsLabels = async (setting) => {
       break;
 
     case "off":
-      const setting = await getStorage(KeyNavigationButtonsLabelsHover);
-      if (setting !== "off") return;
-
       removeLabelsShownOnHover();
       removeStyles("navigationButtonsLabels");
 
