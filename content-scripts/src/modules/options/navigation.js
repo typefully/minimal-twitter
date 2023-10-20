@@ -32,12 +32,12 @@ export const changeNotificationsButton = (state) => changeSidebarSetting("notifi
 export const changeMessagesButton = (state) => changeSidebarSetting("messages", state);
 export const changeBookmarksButton = (state) => changeSidebarSetting("bookmarks", state);
 export const changeTopArticlesButton = (state) => changeSidebarSetting("articles", state);
+export const changeVerifiedOrgsButton = (state) => changeSidebarSetting("verifiedOrgs", state);
+export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
 export const changeXPremiumButton = (state) => changeSidebarSetting("xPremium", state, addXPremiumButton);
-export const changeVerifiedOrgsButton = (state) => changeSidebarSetting("verifiedOrgs", state, addVerifiedOrgsButton);
 export const changeTopicsButton = (state) => changeSidebarSetting("topics", state, addTopicsButton);
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
-export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
 export const changeAnalyticsButton = (state) => changeSidebarSetting("analytics", state, addAnalyticsButton);
 
 let tm1;
@@ -50,16 +50,7 @@ export const addXPremiumButton = (forced) => {
       svgAsset: svgAssets.xPremium.normal,
       forced,
     });
-  }, 250);
-};
-
-export const addVerifiedOrgsButton = (forced) => {
-  addSidebarButton({
-    name: "Verified Orgs",
-    href: "/i/verified-orgs-signup",
-    svgAsset: svgAssets.verifiedOrgs.normal,
-    forced,
-  });
+  }, 1);
 };
 
 let tm2;
@@ -75,7 +66,7 @@ export const addAnalyticsButton = (forced) => {
         if (screenName) window.open(`https://typefully.com/grow?mt-screen-name=${screenName}`, "_blank");
       },
     });
-  }, 500);
+  }, 2);
 };
 
 export const addTopicsButton = (forced) => {

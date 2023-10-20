@@ -6,13 +6,12 @@ import {
   KeyTopicsButton,
   KeyTrendsHomeTimeline,
   KeyTypefullyGrowTab,
-  KeyVerifiedOrgsButton,
   KeyWriterMode,
   KeyXPremiumButton,
 } from "../../../storage-keys";
 import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
-import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addVerifiedOrgsButton, addXPremiumButton } from "./options/navigation";
+import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton } from "./options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
@@ -122,7 +121,7 @@ export const addMutationsOnResize = () => {
 
 // Use "forced" when you want to re-add a button even if it's already there
 async function addSidebarButtons(forced) {
-  const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyVerifiedOrgsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
+  const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
 
   if (!data) return;
 
@@ -130,6 +129,5 @@ async function addSidebarButtons(forced) {
   if (data[KeyCommunitiesButton] === "on") addCommunitiesButton(forced);
   if (data[KeyTopicsButton] === "on") addTopicsButton(forced);
   if (data[KeyXPremiumButton] === "on") addXPremiumButton(forced);
-  if (data[KeyVerifiedOrgsButton] === "on") addVerifiedOrgsButton(forced);
   if (data[KeyTypefullyGrowTab] === "on") addAnalyticsButton(forced);
 }
