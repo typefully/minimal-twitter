@@ -138,13 +138,14 @@ const VanityCheckboxes = () => {
         labelExtras={<ToggleChevron pressed={showVanityCheckboxes} onClick={setShowVanityCheckboxes} />}
         checked={hideAll}
         onCheckedChange={(checked) => onCheckedChange("all", checked)}
+        crossedIcon
       />
       {showVanityCheckboxes && (
         <div className="pl-3 flex flex-col gap-4 mb-2">
-          <CheckboxControl id="reply" label="Reply Count from Tweets" onCheckedChange={(checked) => onCheckedChange("reply", checked)} checked={hideReply} />
-          <CheckboxControl id="retweet" label="Retweet Count from Tweets" onCheckedChange={(checked) => onCheckedChange("retweet", checked)} checked={hideRetweet} />
-          <CheckboxControl id="like" label="Like Count from Tweets" onCheckedChange={(checked) => onCheckedChange("like", checked)} checked={hideLike} />
-          <CheckboxControl id="follow" label="Follower/Following Count" onCheckedChange={(checked) => onCheckedChange("follow", checked)} checked={hideFollow} />
+          <CheckboxControl crossedIcon id="reply" label="Reply Count from Tweets" onCheckedChange={(checked) => onCheckedChange("reply", checked)} checked={hideReply} />
+          <CheckboxControl crossedIcon id="retweet" label="Retweet Count from Tweets" onCheckedChange={(checked) => onCheckedChange("retweet", checked)} checked={hideRetweet} />
+          <CheckboxControl crossedIcon id="like" label="Like Count from Tweets" onCheckedChange={(checked) => onCheckedChange("like", checked)} checked={hideLike} />
+          <CheckboxControl crossedIcon id="follow" label="Follower/Following Count" onCheckedChange={(checked) => onCheckedChange("follow", checked)} checked={hideFollow} />
         </div>
       )}
     </>

@@ -3,6 +3,7 @@ import { getStorage, setStorage } from "./chromeStorage";
 
 export default function useStorageKeyState(storageKey) {
   const [state, setState] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const getInitialState = async () => {
@@ -13,6 +14,8 @@ export default function useStorageKeyState(storageKey) {
         }
       } catch (error) {
         console.warn(error);
+      } finally {
+        setLoaded(true);
       }
     };
 
@@ -37,7 +40,7 @@ export default function useStorageKeyState(storageKey) {
     prevState.current = state;
   }, [storageKey, state]);
 
-  return [state, setState];
+  return [state, setState, loaded];
 }
 
 export function useStorageValue(storageKey) {

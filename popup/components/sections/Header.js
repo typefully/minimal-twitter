@@ -1,7 +1,7 @@
 import createTweetLink from "../../utilities/createTweetLink";
 
 const tweet = {
-  text: "Love this Minimal Theme for Twitter by @typefully.",
+  text: "Love this Minimal Theme for 𝕏 by @typefully.",
   url: "https://typefully.com/minimal-twitter",
 };
 
@@ -35,7 +35,7 @@ const Header = () => (
       </h1>
     </div>
     <p className="pt-3 pb-3 text-sm font-medium leading-5 dark:text-twitterAccentOneDark text-twitterAccentOne">
-      Grow on Twitter with{" "}
+      Built by{" "}
       <a href="https://typefully.com/?ref=minimal-twitter" target="_blank" rel="noreferrer" className="text-twitterBlue hover:underline font-bold cursor-pointer ml-1">
         <TypefullyGlyph />
         Typefully

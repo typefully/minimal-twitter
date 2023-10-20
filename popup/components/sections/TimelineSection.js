@@ -38,13 +38,13 @@ const TimelineSection = () => {
           <Separator />
           <SectionLabel>Remove Distracting Elements</SectionLabel>
           <VanityCheckboxes />
-          <LocalStorageCheckboxControl label="View Count from Tweets" storageKey={KeyHideViewCount} />
-          <LocalStorageCheckboxControl label="Promoted Posts" storageKey={KeyRemovePromotedPosts} />
-          <LocalStorageCheckboxControl label="Who to Follow Suggestions" storageKey={KeyRemoveWhoToFollow} />
-          <LocalStorageCheckboxControl label="Topics to Follow Suggestions" storageKey={KeyRemoveTopicsToFollow} />
-          <LocalStorageCheckboxControl label={`Timeline Tabs (For you, Following, lists...)`} storageKey={KeyRemoveTimelineTabs} />
-          <LocalStorageCheckboxControl label="Timeline Borders" storageKey={KeyRemoveTimelineBorders} />
-          <LocalStorageCheckboxControl label="Tweet Borders" storageKey={KeyRemoveTweetBorders} />
+          <LocalStorageCheckboxControl label="View Count from Tweets" storageKey={KeyHideViewCount} crossedIcon />
+          <LocalStorageCheckboxControl label="Promoted Posts" storageKey={KeyRemovePromotedPosts} crossedIcon />
+          <LocalStorageCheckboxControl label="Who to Follow Suggestions" storageKey={KeyRemoveWhoToFollow} crossedIcon />
+          <LocalStorageCheckboxControl label="Topics to Follow Suggestions" storageKey={KeyRemoveTopicsToFollow} crossedIcon />
+          <LocalStorageCheckboxControl label={`Timeline Tabs (For you, Following, lists...)`} storageKey={KeyRemoveTimelineTabs} crossedIcon />
+          <LocalStorageCheckboxControl label="Timeline Borders" storageKey={KeyRemoveTimelineBorders} crossedIcon />
+          <LocalStorageCheckboxControl label="Tweet Borders" storageKey={KeyRemoveTweetBorders} crossedIcon />
           <Separator />
           <LocalStorageCheckboxControl label={`Always use "Following" Tab`} storageKey={KeyFollowingTimeline} />
         </ControlsWrapper>

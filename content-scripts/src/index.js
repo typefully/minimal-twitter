@@ -1,4 +1,4 @@
-import { allSettingsKeys } from "../../storage-keys";
+import { KeyExtensionStatus, allSettingsKeys } from "../../storage-keys";
 import { addMutationsOnDomChanges, addMutationsOnNavigation, addMutationsOnResize, addStylesheets } from "./modules/initialize";
 import { injectAllChanges } from "./modules/options/all";
 import constructNewData from "./modules/utilities/constructNewData";
@@ -9,7 +9,10 @@ import { getStorage } from "./modules/utilities/storage";
 - Listen to Chrome Storage changes
 - Inject styles in respond to changes
 --*/
-chrome.storage.onChanged.addListener((changes) => {
+chrome.storage.onChanged.addListener(async (changes) => {
+  const status = await getStorage(KeyExtensionStatus);
+  if (changes[KeyExtensionStatus]) window.location.reload();
+
   const newChangesData = constructNewData(changes);
   injectAllChanges(newChangesData);
 });
@@ -19,6 +22,10 @@ chrome.storage.onChanged.addListener((changes) => {
 - Get Chrome Storage and inject respective styles
 --*/
 const init = async () => {
+  const status = await getStorage(KeyExtensionStatus);
+  console.log({ status });
+  if (status === "off") return;
+
   addStylesheets();
   addMutationsOnDomChanges();
   addMutationsOnNavigation();

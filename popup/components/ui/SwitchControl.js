@@ -4,23 +4,25 @@ import { styled } from "@stitches/react";
 import useStorageKeyState from "../../utilities/useStorageKeyState";
 
 export default function SwitchControl({ label, disabled, storageKey, onChange }) {
-  const [checked, setChecked] = useStorageKeyState(storageKey);
+  const [checked, setChecked, loaded] = useStorageKeyState(storageKey);
 
   return (
     <div className={"flex items-center justify-between w-full" + (disabled ? " opacity-50 pointer-events-none" : "")}>
       <label htmlFor={storageKey} className="text-[15px] font-medium">
         {label}
       </label>
-      <StyledSwitch
-        onCheckedChange={(checked) => {
-          setChecked(checked);
-          onChange && onChange(checked);
-        }}
-        checked={checked}
-        id={storageKey}
-      >
-        <StyledThumb />
-      </StyledSwitch>
+      {loaded && (
+        <StyledSwitch
+          onCheckedChange={(checked) => {
+            setChecked(checked);
+            onChange && onChange(checked);
+          }}
+          checked={checked}
+          id={storageKey}
+        >
+          <StyledThumb />
+        </StyledSwitch>
+      )}
     </div>
   );
 }

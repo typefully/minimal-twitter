@@ -1,3 +1,4 @@
+export const KeyExtensionStatus = "extensionStatus";
 export const KeyListsButton = "listsButton";
 export const KeyCommunitiesButton = "communitiesButton";
 export const KeyTopicsButton = "topicsButton";
@@ -43,6 +44,7 @@ export const KeyCustomCss = "customCss";
 export const KeyHideViewCount = "hideViewCount";
 
 export const allSettingsKeys = [
+  KeyExtensionStatus,
   KeyListsButton,
   KeyCommunitiesButton,
   KeyTopicsButton,
@@ -89,6 +91,7 @@ export const allSettingsKeys = [
 ];
 
 export const defaultPreferences = {
+  [KeyExtensionStatus]: "on",
   [KeyTimelineWidth]: 700,
   [KeyRemoveTimelineBorders]: "off",
   [KeyRemoveTweetBorders]: "off",

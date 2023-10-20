@@ -11,40 +11,19 @@ import {
   KeyVerifiedOrgsButton,
   KeyWriterMode,
 } from "../../../storage-keys";
-import selectors from "../selectors";
 import { checkUrlForFollow } from "./check";
 import hideViewCount from "./options/hideViewCount";
 import { addCirclesButton, addCommunitiesButton, addGrowButton, addListsButton, addTopicsButton, addTwitterBlueButton, addVerifiedOrgsButton } from "./options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
-import addStyles from "./utilities/addStyles";
 import { extractColorsAsRootVars } from "./utilities/colors";
 import debounce from "./utilities/debounce";
 import hideRightSidebar from "./utilities/hideRightSidebar";
 import isMutationSkippable from "./utilities/isMutationSkippable";
+import { addSmallerSearchBarStyle } from "./utilities/other-styles";
 import { getStorage } from "./utilities/storage";
 import throttle from "./utilities/throttle";
-
-// Function to set search bar width to length of placeholder
-const searchBarWidthReset = () => {
-  const searchInput = document.querySelector(selectors.searchBoxInput);
-
-  if (!searchInput) return;
-
-  if (window.location.pathname.includes("/search") || window.location.pathname.includes("/explore")) return;
-
-  if (document.activeElement === searchInput) return;
-
-  const searchBarPlaceholderWidth = searchInput.getAttribute("placeholder").length;
-
-  addStyles(
-    "searchInputWidth",
-    `${selectors.searchBoxInput} {
-      width: ${searchBarPlaceholderWidth + 4}ch;
-    }`
-  );
-};
 
 // Function to add main stylesheet
 export const addStylesheets = async () => {
@@ -98,8 +77,7 @@ const runDocumentMutations = throttle(async () => {
   hideViewCount();
   changeRecentMedia();
   hideRightSidebar();
-
-  searchBarWidthReset();
+  addSmallerSearchBarStyle();
 
   const scheduleButton = document.querySelector('div[data-testid="scheduleOption"]');
   if (scheduleButton) addWriterModeButton(scheduleButton);
