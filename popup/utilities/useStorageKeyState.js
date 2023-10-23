@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { defaultPreferences } from "../../storage-keys";
 import { getStorage, setStorage } from "./chromeStorage";
 
 export default function useStorageKeyState(storageKey) {
@@ -44,7 +45,7 @@ export default function useStorageKeyState(storageKey) {
 }
 
 export function useStorageValue(storageKey) {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(defaultPreferences[storageKey]);
 
   useEffect(() => {
     const getInitialState = async () => {

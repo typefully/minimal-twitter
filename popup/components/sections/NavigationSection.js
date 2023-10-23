@@ -20,6 +20,7 @@ import {
   KeyUnreadCountBadge,
   KeyVerifiedOrgsButton,
   KeyXPremiumButton,
+  defaultPreferences,
 } from "../../../storage-keys";
 import SectionLabel from "../ui/SectionLabel";
 
@@ -171,12 +172,12 @@ const TypefullyGrow = () => (
 );
 
 const NavigationSection = () => {
-  const showLabels = useStorageValue(KeyNavigationButtonsLabels);
-  const [labelsShown, setLabelsShown] = useState(false);
+  const initialShowLabels = useStorageValue(KeyNavigationButtonsLabels);
+  const [labelsShown, setLabelsShown] = useState(defaultPreferences[KeyNavigationButtonsLabels] === "on");
 
   useEffect(() => {
-    setLabelsShown(showLabels);
-  }, [showLabels]);
+    setLabelsShown(initialShowLabels === "on");
+  }, [initialShowLabels]);
 
   return (
     <section className="flex flex-col gap-y-2">
