@@ -171,7 +171,7 @@ const TypefullyGrow = () => (
 );
 
 const NavigationSection = () => {
-  const showLabels = useStorageValue();
+  const showLabels = useStorageValue(KeyNavigationButtonsLabels);
   const [labelsShown, setLabelsShown] = useState(false);
 
   useEffect(() => {

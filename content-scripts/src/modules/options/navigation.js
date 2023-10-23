@@ -104,7 +104,7 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
     case "off":
       addStyles(
         "unreadCountBadge",
-        `${selectors.leftSidebarLinks} div[dir][aria-label][aria-live] {
+        `${selectors.leftSidebarUnreadBadge} {
           display: none;
         }
         ${selectors.accountSwitcherButton} > div > svg+div[aria-label] {

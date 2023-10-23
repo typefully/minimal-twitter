@@ -6,10 +6,17 @@ import { defaultPreferences } from "../../../../storage-keys";
 --*/
 
 export const getStorage = (storageKeyOrKeys) => {
-  if (Array.isArray(storageKeyOrKeys)) {
-    return getMultipleStorageKeys(storageKeyOrKeys);
-  } else {
-    return getSingleStorageKey(storageKeyOrKeys);
+  try {
+    if (typeof storageKeyOrKeys !== "string" && !Array.isArray(storageKeyOrKeys)) {
+      throw new Error("storageKeyOrKeys must be a string or an array of strings");
+    }
+    if (Array.isArray(storageKeyOrKeys)) {
+      return getMultipleStorageKeys(storageKeyOrKeys);
+    } else {
+      return getSingleStorageKey(storageKeyOrKeys);
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
 
