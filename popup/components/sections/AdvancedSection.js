@@ -43,21 +43,21 @@ const AdvancedSection = () => {
         {!showEditor ? (
           <>
             <span> · </span>
-            <button onClick={() => setShowEditor(true)} className="text-xPremium">
+            <button onClick={() => setShowEditor(true)} className="text-x-premium">
               Show CSS Editor
             </button>
           </>
         ) : (
           <>
             <span> · </span>
-            <button onClick={() => setShowEditor(false)} className="text-xPremium">
+            <button onClick={() => setShowEditor(false)} className="text-x-premium">
               Hide CSS Editor
             </button>
           </>
         )}
       </SectionLabel>
       {showEditor && (
-        <div className="flex flex-col items-center justify-between dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl relative overflow-hidden" id="user-control-advanced">
+        <div className="flex flex-col items-center justify-between dark:bg-x-bgTwoDark bg-x-bgTwo rounded-2xl relative overflow-hidden" id="user-control-advanced">
           <CodeMirror className="w-full text-sm" theme="dark" value={cssText} placeholder="// Write custom CSS here..." height="300px" extensions={[css()]} onChange={onChange} />
         </div>
       )}

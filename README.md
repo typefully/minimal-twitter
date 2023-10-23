@@ -3,14 +3,15 @@
 </p>
 
 <h1 align="center">
-  Minimal Twitter by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>
+  Minimal Theme for Twitter / 𝕏<br/>
+  by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>
 </h1>
 
 Available on [Chrome](https://chrome.google.com/webstore/detail/pobhoodpcipjmedfenaigbeloiidbflp), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/minimaltwitter/), and [Safari](https://apps.apple.com/it/app/minimal-twitter/id1668204600) — or via [manual installation](./MANUAL_INSTALLATION.MD).
 
 ![Hero](.github/assets/hero.png)
 
-Minimal Theme for Twitter is a browser extension originally made by [Thomas Wang](https://thomas.wang), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team. To contribute / see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
+**Minimal Theme for Twitter / X** is a browser extension originally made by [Thomas Wang](https://thomas.wang), and now developed by the [Typefully](https://typefully.com/?ref=minimal-twitter) team. To contribute / see development instructions, go to [CONTRIBUTING](./.github/CONTRIBUTING.md).
 
 ## Description
 

@@ -33,7 +33,7 @@ body,
 }
 
 body {
-  @apply antialiased dark:bg-twitterBgOneDark bg-twitterBgOne;
+  @apply antialiased dark:bg-x-bgOneDark bg-x-bgOne;
 }
 
 #__next {

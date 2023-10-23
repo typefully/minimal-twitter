@@ -43,7 +43,7 @@ const IconButton = ({ storageKey, label, children }) => {
         pressed={pressed}
         title={`Toggle ${startCase(storageKey)}`}
         aria-label={`Toggle ${startCase(storageKey)}`}
-        className="dark:bg-twitterBgTwoDark bg-twitterBgTwo p-3 w-fit rounded-full border-[3px] border-xPremium dark:text-white text-black"
+        className="dark:bg-x-bgTwoDark bg-x-bgTwo p-3 w-fit rounded-full border-[3px] border-x-premium dark:text-white text-black"
       >
         <svg width={25} height={25} aria-hidden="true" viewBox="0 0 24 24">
           {children}
@@ -182,7 +182,7 @@ const NavigationSection = () => {
     <section className="flex flex-col gap-y-2">
       <SectionLabel htmlFor="user-control-navigation">Left Navigation</SectionLabel>
       <div id="user-control-navigation">
-        <form className="p-3 pb-4 dark:bg-twitterBgTwoDark bg-twitterBgTwo rounded-2xl">
+        <form className="p-3 pb-4 dark:bg-x-bgTwoDark bg-x-bgTwo rounded-2xl">
           <div className="grid grid-cols-5 pb-4 gap-y-2 gap-x-4 mx-auto flex-wrap">
             <Home />
             <Explore />

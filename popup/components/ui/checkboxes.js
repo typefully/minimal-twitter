@@ -29,8 +29,8 @@ export const CheckboxControl = ({ id, label, labelExtras, onCheckedChange, check
       </label>
       {labelExtras}
     </div>
-    <div className="grid rounded-full cursor-pointer w-5 place-items-center hover:bg-twitterAccentFour">
-      <StyledCheckbox onCheckedChange={onCheckedChange} checked={checked} id={id} className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-twitterAccentThree">
+    <div className="grid rounded-full cursor-pointer w-5 place-items-center hover:bg-x-accent4">
+      <StyledCheckbox onCheckedChange={onCheckedChange} checked={checked} id={id} className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-x-accent3">
         <CheckboxPrimitive.Indicator className="text-white">{crossedIcon ? <Cross2Icon /> : <CheckIcon />}</CheckboxPrimitive.Indicator>
       </StyledCheckbox>
     </div>
