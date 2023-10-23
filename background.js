@@ -10,5 +10,10 @@ chrome.runtime.onInstalled.addListener((object) => {
         chrome.tabs.reload(tab.id);
       });
     });
+    chrome.tabs.query({ url: "*://x.com/*" }, (tabs) => {
+      tabs.forEach((tab) => {
+        chrome.tabs.reload(tab.id);
+      });
+    });
   }
 });

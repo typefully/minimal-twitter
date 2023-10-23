@@ -44,7 +44,11 @@ const MANIFEST_CHROME = {
   content_scripts: [
     {
       run_at: "document_end",
-      matches: ["https://twitter.com/*", "https://mobile.twitter.com/*"],
+      matches: [
+        "https://twitter.com/*",
+        "https://mobile.twitter.com/*",
+        "https://x.com/*",
+      ],
       js: ["dist/main.js"],
     },
   ],
@@ -57,7 +61,11 @@ const MANIFEST_CHROME = {
         "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css",
         "https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css",
       ],
-      matches: ["https://twitter.com/*", "https://mobile.twitter.com/*"],
+      matches: [
+        "https://twitter.com/*",
+        "https://mobile.twitter.com/*",
+        "https://x.com/*",
+      ],
     },
   ],
   action: {
@@ -86,7 +94,11 @@ const MANIFEST_FIREFOX = {
   content_scripts: [
     {
       run_at: "document_idle",
-      matches: ["https://twitter.com/*", "https://mobile.twitter.com/*"],
+      matches: [
+        "https://twitter.com/*",
+        "https://mobile.twitter.com/*",
+        "https://x.com/*",
+      ],
       js: ["dist/main.js"],
     },
   ],
