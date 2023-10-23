@@ -44,8 +44,8 @@ export const addStylesheets = async () => {
   head.appendChild(typefullyStylesheet);
   head.insertBefore(externalStylesheet, typefullyStylesheet.nextSibling);
 
-  const mainStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`);
-  const typefullyStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css?t=${Date.now()}`);
+  const mainStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@6.0/css/main.css?t=${Date.now()}`);
+  const typefullyStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@6.0/css/typefully.css?t=${Date.now()}`);
   const mainText = (await mainStylesheetFromCDN.text()).trim();
   const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
   const styleSheetText = document.createTextNode(mainText.concat("\n\n").concat(typefullyText));
