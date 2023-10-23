@@ -63,7 +63,7 @@ export const addAnalyticsButton = (forced) => {
       svgAsset: svgAssets.grow.normal,
       onClick: () => {
         const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)?.getAttribute("href").replace("/", "");
-        if (screenName) window.open(`https://typefully.com/grow?mt-screen-name=${screenName}`, "_blank");
+        if (screenName) window.open(`https://typefully.com/grow?ref=minimal-twitter&mt-screen-name=${screenName}`, "_blank");
       },
     });
   }, 2);
