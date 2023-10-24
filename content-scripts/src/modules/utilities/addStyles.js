@@ -1,13 +1,12 @@
 import { removeElementById } from "./removeElement";
 
-// Utility function to inject CSS into page
 export default function addStyles(id, css) {
   removeElementById("mt-style-" + id);
 
   const head = document.querySelector("head");
   const style = document.createElement("style");
   style.id = "mt-style-" + id;
-  style.textContent = `${css}`;
+  style.textContent = css.trim().split("\n").join("");
   head.appendChild(style);
 }
 

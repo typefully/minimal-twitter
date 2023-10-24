@@ -1,26 +1,28 @@
 import selectors from "../../selectors";
+import addStyles, { removeStyles, stylesExist } from "./addStyles";
 
 export default async function hideRightSidebar() {
-  const sidebar = document.querySelector(selectors.rightSidebar);
-
   const isSearchPage = window.location.pathname === "/search";
 
-  if (!sidebar) return;
-
-  if (sidebar.style.visibility === "hidden") return;
-
   if (isSearchPage) {
-    sidebar.style.marginLeft = "12px";
+    removeStyles("hide-sidebar");
     removeOtherSections();
     setTimeout(() => {
       removeOtherSections();
     }, 500); // Sometimes the trends appear with a delay
   } else {
-    sidebar.style.visibility = "hidden";
-    sidebar.style.width = "0";
-    sidebar.style.margin = "0";
-    sidebar.style.padding = "0";
-    sidebar.style.zIndex = "1";
+    if (stylesExist("hide-sidebar")) return;
+
+    addStyles(
+      "hide-sidebar",
+      `${selectors.rightSidebar} {
+        visibility: hidden;
+        width: 0;
+        margin: 0;
+        padding: 0;
+        z-index: 1;
+      }`
+    );
   }
 }
 

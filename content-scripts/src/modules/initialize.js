@@ -10,7 +10,7 @@ import {
   KeyXPremiumButton,
 } from "../../../storage-keys";
 import { checkUrlForFollow } from "./check";
-import hideViewCount from "./options/hideViewCount";
+import changeHideViewCounts from "./options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton } from "./options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
@@ -53,7 +53,7 @@ export const addStylesheets = async () => {
   externalStylesheet.appendChild(styleSheetText);
 };
 
-const runDocumentMutations = throttle(async () => {
+export const runDocumentMutations = throttle(async () => {
   extractColorsAsRootVars();
 
   const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs]);
@@ -72,7 +72,7 @@ const runDocumentMutations = throttle(async () => {
   saveCurrentReplyToLink();
   addTypefullyReplyPlug();
   checkUrlForFollow();
-  hideViewCount();
+  changeHideViewCounts();
   changeRecentMedia();
   hideRightSidebar();
   addSmallerSearchBarStyle();
@@ -81,7 +81,7 @@ const runDocumentMutations = throttle(async () => {
   if (scheduleButton) addWriterModeButton(scheduleButton);
 
   return;
-}, 250);
+}, 50);
 
 // Function to start MutationObserver
 export const addMutationsOnDomChanges = () => {
@@ -97,14 +97,12 @@ export const addMutationsOnDomChanges = () => {
   });
 };
 
-function runPageLoadMutations() {
-  addSidebarButtons(false);
-  runDocumentMutations();
-}
-
-export const addMutationsOnNavigation = () => {
-  window.onload = runPageLoadMutations;
-  window.addEventListener("popstate", runPageLoadMutations);
+export const addMutationsOnPageLoad = () => {
+  // Inject on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    addSidebarButtons(false);
+    runDocumentMutations();
+  });
 };
 
 // On resize, remove and re-add the sidebar buttons, because their original

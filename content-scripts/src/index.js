@@ -1,5 +1,5 @@
 import { KeyExtensionStatus, allSettingsKeys } from "../../storage-keys";
-import { addMutationsOnDomChanges, addMutationsOnNavigation, addMutationsOnResize, addStylesheets } from "./modules/initialize";
+import { addMutationsOnDomChanges, addMutationsOnPageLoad, addMutationsOnResize, addStylesheets } from "./modules/initialize";
 import { injectAllChanges } from "./modules/options/all";
 import constructNewData from "./modules/utilities/constructNewData";
 import { getStorage } from "./modules/utilities/storage";
@@ -33,7 +33,7 @@ const init = async () => {
 
   addStylesheets();
   addMutationsOnDomChanges();
-  addMutationsOnNavigation();
+  addMutationsOnPageLoad();
   addMutationsOnResize();
 
   // Inject user preferences

@@ -106,6 +106,11 @@ a[href*="quick_promote_web"] {
   }
 }
 
+/* Add some margin to the right sidebar, since it shows in the search page — see hideRightSidebar.js */
+[data-testid="sidebarColumn"] {
+  margin-left: 12px;
+}
+
 /* Reveal searchbar and search filters at desktop breakpoint */
 @media only screen and (min-width: 1100px) {
   /* Reveal searchbar */
