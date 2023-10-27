@@ -48,27 +48,16 @@ a[href*="quick_promote_web"] {
     padding-top: 4px;
   }
 
-  /* Navigation buttons labels and Account button label on hover */
+  /* Sidebar labels */
+  header[role="banner"] nav[role="navigation"]:hover > * > div {
+    backdrop-filter: blur(12px);
+  }
   header[role="banner"]
     nav[role="navigation"]
     *
-    div[dir]:not([aria-label])
-    > span,
-  [data-testid="SideNav_AccountSwitcher_Button"] > div:not(:first-child) {
-    display: inline-block;
-    opacity: 0;
-    transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  header[role="banner"]
-    nav[role="navigation"]:hover
-    *
-    div[dir]:not([aria-label])
-    > span,
-  [data-testid="SideNav_AccountSwitcher_Button"]:hover > div:not(:first-child) {
-    opacity: 1;
-  }
-  header[role="banner"] nav[role="navigation"]:hover > * > div {
-    backdrop-filter: blur(12px);
+    div:last-child
+    > span:only-child {
+    font-size: 18px;
   }
 
   /* Align account button with floating tweet button */

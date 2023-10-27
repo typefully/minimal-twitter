@@ -26,6 +26,10 @@ selectors.sidebarLinks = {
   analytics: `.mt-sidebar-button[aria-label="Analytics"]`,
 };
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;
+selectors.leftSidebarLabel = `${selectors.leftSidebarLinks} * div:last-child > span:only-child`;
+selectors.accountSwitcherLabel = `${selectors.accountSwitcherButton} > div:not(:first-child)`;
+selectors.leftSidebarLabel_hover = `${selectors.leftSidebarLinks}:hover * div:last-child > span:only-child`;
+selectors.accountSwitcherLabel_hover = `${selectors.accountSwitcherButton}:hover > div:not(:first-child)`;
 selectors.rightSidebar = `[data-testid="sidebarColumn"]`;
 // Timeline
 selectors.tweetCounts = `[role="group"][id*="id__"]:only-child`;

@@ -115,38 +115,23 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
   }
 };
 
-const removeLabelsShownOnHover = () => {
-  addStyles(
-    "navigationButtonsLabelsHover",
-    `
-    ${selectors.leftSidebarLinks} div + div[dir] {
-      display: none;
-    }
-    ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span {
-      display: none;
-    }
-    ${selectors.leftSidebar} > div > div > div > div:last-child {
-      width: fit-content;
-    }
-    ${selectors.accountSwitcherButton} {
-      bottom: 12px;
-      width: fit-content;
-    }
-    ${selectors.accountSwitcherButton} > div:not(:first-child) {
-      display: none;
-    }
-    `
-  );
-};
-
 export const changeNavigationButtonsLabelsHover = async (setting) => {
   switch (setting) {
     case "off":
-      removeLabelsShownOnHover();
+      removeStyles("showLabelsOnHover");
       break;
 
     case "on":
-      removeStyles("navigationButtonsLabelsHover");
+      removeStyles("removeSidebarLinkHoverEffect");
+      addStyles(
+        "showLabelsOnHover",
+        `
+        ${selectors.leftSidebarLabel_hover},
+        ${selectors.accountSwitcherLabel_hover} {
+          opacity: 1;
+        }
+        `
+      );
       break;
   }
 };
@@ -154,21 +139,37 @@ export const changeNavigationButtonsLabelsHover = async (setting) => {
 export const changeNavigationButtonsLabels = async (setting) => {
   switch (setting) {
     case "on":
-      removeStyles("navigationButtonsLabelsHover");
-      addStyles(
-        "navigationButtonsLabels",
-        `
-        ${selectors.leftSidebarLinks} * div[dir]:not([aria-label]) > span,
-        ${selectors.accountSwitcherButton} > div:not(:first-child) {
-          opacity: 1;
-        }
-        `
-      );
+      removeStyles("hideLabels");
+      removeStyles("removeSidebarLinkHoverEffect");
       break;
 
     case "off":
-      removeLabelsShownOnHover();
-      removeStyles("navigationButtonsLabels");
+      addStyles(
+        "removeSidebarLinkHoverEffect",
+        `
+        ${selectors.leftSidebarLinks} > * {
+          max-width: 80px;
+        }
+        ${selectors.leftSidebarLinks} > * > div:first-child {
+          background: none !important;
+        }
+        ${selectors.accountSwitcherButton} {
+          background: none !important;
+        }
+        `
+      );
+
+      addStyles(
+        "hideLabels",
+        `
+        ${selectors.leftSidebarLabel},
+        ${selectors.accountSwitcherLabel} {
+          display: inline-block;
+          opacity: 0;
+          transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        `
+      );
 
       break;
   }
