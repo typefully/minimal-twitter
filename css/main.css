@@ -59,6 +59,10 @@ a[href*="quick_promote_web"] {
     > span:only-child {
     font-size: 18px;
   }
+  /* Account switcher */
+  header[role="banner"] > div > div > div > div:last-child {
+    margin-bottom: 0px !important;
+  }
 
   /* Align account button with floating tweet button */
   [data-testid="SideNav_AccountSwitcher_Button"] {
