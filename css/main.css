@@ -37,12 +37,6 @@ a[href*="quick_promote_web"] {
     max-width: unset;
   }
 
-  /* Nudge engagement row 81px right */
-  /* In default timeline: 506px - 425px */
-  div[aria-label][role="group"][id^="id__"] {
-    margin-right: 81px;
-  }
-
   /* Fix navigation to left */
   header[role="banner"] {
     position: fixed;
