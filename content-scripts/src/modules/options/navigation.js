@@ -50,7 +50,7 @@ export const addXPremiumButton = (forced) => {
       svgAsset: svgAssets.xPremium.normal,
       forced,
     });
-  }, 1);
+  }, 100);
 };
 
 let tm2;
@@ -66,7 +66,7 @@ export const addAnalyticsButton = (forced) => {
         if (screenName) window.open(`https://typefully.com/grow?ref=minimal-twitter&mt-screen-name=${screenName}`, "_blank");
       },
     });
-  }, 2);
+  }, 200);
 };
 
 export const addTopicsButton = (forced) => {
