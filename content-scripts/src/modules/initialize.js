@@ -13,13 +13,7 @@ import {
   changeTimelineTabs,
   changeTrendsHomeTimeline,
 } from "./options/timeline";
-import { addGrowButton } from "./options/typefully";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
-import {
-  addTypefullyPlug,
-  addTypefullyReplyPlug,
-  saveCurrentReplyToLink,
-} from "./typefully";
 import { colorsAreSet, extractColorsAsRootVars } from "./utilities/colors";
 import removeElement from "./utilities/removeElement";
 import { getStorage } from "./utilities/storage";
@@ -52,33 +46,23 @@ const searchBarWidthReset = (searchBar) => {
 export const addStylesheets = async () => {
   const head = document.querySelector("head");
   const mainStylesheet = document.createElement("link");
-  const typefullyStylesheet = document.createElement("link");
   const externalStylesheet = document.createElement("style");
 
   mainStylesheet.rel = "stylesheet";
   mainStylesheet.type = "text/css";
   mainStylesheet.href = chrome.runtime.getURL("css/main.css");
 
-  typefullyStylesheet.rel = "stylesheet";
-  typefullyStylesheet.type = "text/css";
-  typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
-
   externalStylesheet.id = "mt-external-stylesheet";
 
   head.appendChild(mainStylesheet);
-  head.appendChild(typefullyStylesheet);
-  head.insertBefore(externalStylesheet, typefullyStylesheet.nextSibling);
+  head.insertBefore(externalStylesheet);
 
   const mainStylesheetFromCDN = await fetch(
     `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/main.css?t=${Date.now()}`
   );
-  const typefullyStylesheetFromCDN = await fetch(
-    `https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@5.1/css/typefully.css?t=${Date.now()}`
-  );
   const mainText = (await mainStylesheetFromCDN.text()).trim();
-  const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
   const styleSheetText = document.createTextNode(
-    mainText.concat("\n\n").concat(typefullyText)
+    mainText.concat("\n\n")
   );
 
   externalStylesheet.appendChild(styleSheetText);
@@ -102,7 +86,6 @@ export const observe = () => {
         "topicsButton",
         "circlesButton",
         "twitterBlueButton",
-        "typefullyGrowTab",
         "followingTimeline",
         "trendsHomeTimeline",
         "removeTimelineTabs",
@@ -115,7 +98,6 @@ export const observe = () => {
         changeTimelineTabs(data?.removeTimelineTabs, data?.writerMode);
         changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode);
         changeFollowingTimeline(data?.followingTimeline);
-        addTypefullyPlug();
       }
 
       if (data?.listsButton === "on") addListsButton();
@@ -123,15 +105,8 @@ export const observe = () => {
       if (data?.topicsButton === "on") addTopicsButton();
       if (data?.circlesButton === "on") addCirclesButton();
       if (data?.twitterBlueButton === "on") addTwitterBlueButton();
-      if (data?.typefullyGrowTab === "on") {
-        clearTimeout(mt);
-        mt = setTimeout(() => {
-          addGrowButton();
-        });
-      }
 
       saveCurrentReplyToLink();
-      addTypefullyReplyPlug();
       checkUrlForFollow();
       hideViewCount();
       changeRecentMedia();
@@ -173,7 +148,6 @@ const mutationIsNotRelevant = (mutationsList) => {
     // Minimal Twitter injected elements
     if (
       el?.id?.startsWith("mt-") ||
-      el?.id?.startsWith("typefully-") ||
       t?.className?.startsWith("mt-") // For example .mt-tooltip ends up here
     )
       return true;
@@ -235,7 +209,7 @@ const mutationIsNotRelevant = (mutationsList) => {
     if (
       el?.nodeName === "DIV" &&
       el?.firstChild?.firstChild?.firstChild?.getAttribute("data-testid") ===
-        "caret"
+      "caret"
     ) {
       return true;
     }
@@ -244,7 +218,7 @@ const mutationIsNotRelevant = (mutationsList) => {
     if (el?.nodeName === "path") return true;
 
     return false;
-  } catch (e) {}
+  } catch (e) { }
 
   return false;
 };
@@ -262,7 +236,6 @@ export const addResizeListener = () => {
       removeElement("mt-topicsButton");
       removeElement("mt-circlesButton");
       removeElement("mt-twitterBlueButton");
-      removeElement("mt-typefullyGrowButton");
 
       const data = await getStorage([
         "listsButton",
@@ -270,7 +243,6 @@ export const addResizeListener = () => {
         "topicsButton",
         "circlesButton",
         "twitterBlueButton",
-        "typefullyGrowTab",
       ]);
 
       if (data?.listsButton === "on") addListsButton();
@@ -278,12 +250,6 @@ export const addResizeListener = () => {
       if (data?.topicsButton === "on") addTopicsButton();
       if (data?.circlesButton === "on") addCirclesButton();
       if (data?.twitterBlueButton === "on") addTwitterBlueButton();
-      if (data?.typefullyGrowTab === "on") {
-        clearTimeout(gt);
-        gt = setTimeout(() => {
-          addGrowButton();
-        });
-      }
     }, 1000)
   );
 };

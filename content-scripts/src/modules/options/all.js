@@ -46,7 +46,6 @@ import {
   changeWhoToFollow,
   removeTweetFormatting,
 } from "./timeline";
-import { changeGrowButton, changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
 
 // Array of user preferences, passed to `injectAllChanges`
@@ -66,7 +65,6 @@ export const userPreferences = [
   "circlesButton",
   "listsButton",
   "twitterBlueButton",
-  "typefullyGrowTab",
   "profileButton",
   "navigationButtonsLabelsHover",
   "navigationButtonsLabels",
@@ -89,7 +87,6 @@ export const userPreferences = [
   "removeTweetFormatting",
   "trendsHomeTimeline",
   "recentMedia",
-  "typefullyComposerButtons",
   "interFont",
   "titleNotifications",
   "cssTextEdited",
@@ -128,13 +125,11 @@ export const injectAllChanges = (data) => {
   changeWhoToFollow(data?.removeWhoToFollow); // Who to Follow
   changeTopicsToFollow(data?.removeTopicsToFollow); // Topics to Follow
   changeTimelineTabs(data?.removeTimelineTabs, data?.writerMode); // For you / Following tabs
-  changeGrowButton(data?.typefullyGrowTab); // Typefully Grow Button
   changeFollowingTimeline(data?.followingTimeline); // Always Show Following Timeline
   changeLatestTweets(data?.latestTweets); // Always Show Latest Tweets
   removeTweetFormatting(data?.removeTweetFormatting); // Always Show Latest Tweets
   changeTrendsHomeTimeline(data?.trendsHomeTimeline, data?.writerMode); // Show Trends on Home Timeline
   changeRecentMedia(data?.recentMedia); // Show Recent Media on Profiles
-  changeTypefullyComposerButtons(data?.typefullyComposerButtons); // Typefully Composer Buttons
   changeInterFont(data?.interFont); // Change `font-family` to Inter
   changeTitleNotifications(data?.titleNotifications); // Change Title Notifications
   changeCSSTextEdited(data?.cssTextEdited); // Change User Edited CSS
