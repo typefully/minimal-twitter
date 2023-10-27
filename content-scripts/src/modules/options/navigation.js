@@ -122,7 +122,7 @@ export const changeNavigationButtonsLabelsHover = async (setting) => {
       break;
 
     case "on":
-      removeStyles("removeSidebarLinkHoverEffect");
+      removeStyles("removeLabels");
       addStyles(
         "showLabelsOnHover",
         `
@@ -140,22 +140,17 @@ export const changeNavigationButtonsLabels = async (setting) => {
   switch (setting) {
     case "on":
       removeStyles("hideLabels");
-      removeStyles("removeSidebarLinkHoverEffect");
+      removeStyles("removeLabels");
       break;
 
     case "off":
       addStyles(
-        "removeSidebarLinkHoverEffect",
+        "removeLabels",
         `
-        ${selectors.leftSidebarLinks} > * {
-          max-width: 80px;
+        ${selectors.leftSidebarLinks} > * > div > div + div:last-child {
+          display: none;
         }
-        ${selectors.leftSidebarLinks} > * > div:first-child {
-          background: none !important;
-        }
-        ${selectors.accountSwitcherButton} {
-          background: none !important;
-        }
+
         `
       );
 
