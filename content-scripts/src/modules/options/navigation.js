@@ -1,7 +1,9 @@
+import { KeyNavigationButtonsLabels, KeyNavigationButtonsLabelsHover } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { addSidebarButton } from "../utilities/sidebar";
+import { getStorage } from "../utilities/storage";
 
 // Utilities
 
@@ -115,10 +117,27 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
   }
 };
 
+const addStyleToRemoveLabels = () => {
+  addStyles(
+    "removeLabels",
+    `
+        ${selectors.leftSidebarLinks} > * > div > div + div:last-child {
+          display: none;
+        }
+        ${selectors.leftSidebarLinks} > * {
+          max-width: 80px;
+        }
+        `
+  );
+};
+
 export const changeNavigationButtonsLabelsHover = async (setting) => {
+  const labelsHidden = (await getStorage(KeyNavigationButtonsLabels)) === "off";
+
   switch (setting) {
     case "off":
       removeStyles("showLabelsOnHover");
+      labelsHidden && addStyleToRemoveLabels();
       break;
 
     case "on":
@@ -137,6 +156,8 @@ export const changeNavigationButtonsLabelsHover = async (setting) => {
 };
 
 export const changeNavigationButtonsLabels = async (setting) => {
+  const showLabelsOnHover = (await getStorage(KeyNavigationButtonsLabelsHover)) === "on";
+
   switch (setting) {
     case "on":
       removeStyles("hideLabels");
@@ -144,16 +165,7 @@ export const changeNavigationButtonsLabels = async (setting) => {
       break;
 
     case "off":
-      addStyles(
-        "removeLabels",
-        `
-        ${selectors.leftSidebarLinks} > * > div > div + div:last-child {
-          display: none;
-        }
-
-        `
-      );
-
+      !showLabelsOnHover && addStyleToRemoveLabels();
       addStyles(
         "hideLabels",
         `

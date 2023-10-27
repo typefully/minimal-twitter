@@ -87,8 +87,8 @@ export const injectAllChanges = (data) => {
   changeTimelineBorders(data[KeyRemoveTimelineBorders]);
   changeTweetBorders(data[KeyRemoveTweetBorders]);
   changeStickyHeader(data[KeyStickyHeader]);
-  changeNavigationButtonsLabelsHover(data[KeyNavigationButtonsLabelsHover]);
   changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
+  changeNavigationButtonsLabelsHover(data[KeyNavigationButtonsLabelsHover]);
   changeNavigationCenter(data[KeyNavigationCenter]);
   changeUnreadCountBadge(data[KeyUnreadCountBadge]);
   changeWriterMode(data[KeyWriterMode]);
