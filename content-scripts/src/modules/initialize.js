@@ -1,6 +1,7 @@
 import {
   KeyCommunitiesButton,
   KeyFollowingTimeline,
+  KeyHideViewCount,
   KeyListsButton,
   KeyRemoveTimelineTabs,
   KeyTopicsButton,
@@ -56,7 +57,7 @@ export const addStylesheets = async () => {
 export const runDocumentMutations = throttle(async () => {
   extractColorsAsRootVars();
 
-  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs]);
+  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideViewCount]);
 
   if (data) {
     if (data[KeyWriterMode] === "on") {
@@ -65,6 +66,7 @@ export const runDocumentMutations = throttle(async () => {
       changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
       changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
       changeFollowingTimeline(data[KeyFollowingTimeline]);
+      changeHideViewCounts(data[KeyHideViewCount]);
       addTypefullyPlug();
     }
   }
@@ -72,7 +74,6 @@ export const runDocumentMutations = throttle(async () => {
   saveCurrentReplyToLink();
   addTypefullyReplyPlug();
   checkUrlForFollow();
-  changeHideViewCounts();
   changeRecentMedia();
   hideRightSidebar();
   addSmallerSearchBarStyle();
