@@ -8,6 +8,7 @@ selectors.timelineTabs = `${selectors.mainColumn} > div > div:nth-of-type(1) > d
 selectors.leftSidebar = `header[role="banner"]`;
 selectors.leftSidebarLinks = `${selectors.leftSidebar} nav[role="navigation"]`;
 selectors.leftSidebarUnreadBadge = `${selectors.leftSidebarLinks} a svg + div[aria-label]:only-of-type`;
+selectors.sidebarLink = `[role="link"][aria-label]`;
 selectors.sidebarLinks = {
   logo: `${selectors.leftSidebar} div:first-child > div:first-child div:first-child > div:first-child > h1:only-child[role="heading"]`,
   home: `[data-testid="AppTabBar_Home_Link"]`,
@@ -20,9 +21,10 @@ selectors.sidebarLinks = {
   circles: `a[href*=circles]`,
   communities: `a[href*=communities]`,
   profile: `[data-testid="AppTabBar_Profile_Link"]`,
-  lists: `a[href*="lists"][role="link"][aria-label]`,
-  xPremium: `a[href*="blue"][role="link"][aria-label]`,
-  verifiedOrgs: `a[href*="verified-orgs"][role="link"][aria-label]`,
+  lists: `a[href*="lists"]${selectors.sidebarLink}`,
+  xPremium: `a[href*="twitter_blue"]${selectors.sidebarLink}`,
+  verifiedOrgs: `a[href*="verified-orgs"]${selectors.sidebarLink}`,
+  verifiedChoose: `a[href*="verified-choose"]${selectors.sidebarLink}`,
   analytics: `.mt-sidebar-button[aria-label="Analytics"]`,
 };
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;

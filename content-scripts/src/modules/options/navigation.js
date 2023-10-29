@@ -34,25 +34,18 @@ export const changeNotificationsButton = (state) => changeSidebarSetting("notifi
 export const changeMessagesButton = (state) => changeSidebarSetting("messages", state);
 export const changeBookmarksButton = (state) => changeSidebarSetting("bookmarks", state);
 export const changeTopArticlesButton = (state) => changeSidebarSetting("articles", state);
-export const changeVerifiedOrgsButton = (state) => changeSidebarSetting("verifiedOrgs", state);
 export const changeProfileButton = (state) => changeSidebarSetting("profile", state);
-export const changeXPremiumButton = (state) => changeSidebarSetting("xPremium", state, addXPremiumButton);
 export const changeTopicsButton = (state) => changeSidebarSetting("topics", state, addTopicsButton);
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
 export const changeAnalyticsButton = (state) => changeSidebarSetting("analytics", state, addAnalyticsButton);
-
-let tm1;
-export const addXPremiumButton = (forced) => {
-  clearTimeout(tm1);
-  tm1 = setTimeout(() => {
-    addSidebarButton({
-      name: "Twitter Blue",
-      href: "/settings/twitter_blue",
-      svgAsset: svgAssets.xPremium.normal,
-      forced,
-    });
-  }, 100);
+export const changeVerifiedOrgsButton = (state) => {
+  changeSidebarSetting("verifiedOrgs", state);
+  changeSidebarSetting("verifiedChoose", state);
+};
+export const changeXPremiumButton = (state) => {
+  changeSidebarSetting("xPremium", state);
+  changeSidebarSetting("verifiedChoose", state);
 };
 
 let tm2;
