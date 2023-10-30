@@ -163,7 +163,9 @@ export const addWriterModeButton = async () => {
     `${selectors.mainColumn} nav[role="navigation"] [role="tablist"][data-testid="ScrollSnap-List"] div[role="presentation"]:last-child div[role="button"]`
   );
   // X recently wrapped these buttons in a div
-  const composerButton = composerButtonInner.parentNode;
+  const composerButton = composerButtonInner?.parentNode;
+
+  if (!composerButton) return;
 
   if (!window.location.pathname.includes("/home") || !window.location.pathname === "/" || document.getElementById("mt-writer-mode-composer-button")) {
     return;

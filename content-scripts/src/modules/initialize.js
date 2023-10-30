@@ -15,6 +15,7 @@ import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButt
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
+import addStyleSheet from "./utilities/addStyleSheet";
 import { extractColorsAsRootVars } from "./utilities/colors";
 import debounce from "./utilities/debounce";
 import hideRightSidebar from "./utilities/hideRightSidebar";
@@ -25,32 +26,15 @@ import throttle from "./utilities/throttle";
 
 // Function to add main stylesheet
 export const addStylesheets = async () => {
-  const head = document.querySelector("head");
-  const mainStylesheet = document.createElement("link");
-  const typefullyStylesheet = document.createElement("link");
-  const externalStylesheet = document.createElement("style");
+  addStyleSheet("main", chrome.runtime.getURL("css/main.css"));
+  addStyleSheet("typefully", chrome.runtime.getURL("css/typefully.css"));
 
-  mainStylesheet.rel = "stylesheet";
-  mainStylesheet.type = "text/css";
-  mainStylesheet.href = chrome.runtime.getURL("css/main.css");
-
-  typefullyStylesheet.rel = "stylesheet";
-  typefullyStylesheet.type = "text/css";
-  typefullyStylesheet.href = chrome.runtime.getURL("css/typefully.css");
-
-  externalStylesheet.id = "mt-external-stylesheet";
-
-  head.appendChild(mainStylesheet);
-  head.appendChild(typefullyStylesheet);
-  head.insertBefore(externalStylesheet, typefullyStylesheet.nextSibling);
-
+  // Load cached CSS
   const mainStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@6.0/css/main.css?t=${Date.now()}`);
   const typefullyStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@6.0/css/typefully.css?t=${Date.now()}`);
   const mainText = (await mainStylesheetFromCDN.text()).trim();
   const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
-  const styleSheetText = document.createTextNode(mainText.concat("\n\n").concat(typefullyText));
-
-  externalStylesheet.appendChild(styleSheetText);
+  addStyleSheet("external", null, mainText.concat("\n\n").concat(typefullyText));
 };
 
 export const runDocumentMutations = throttle(async () => {
