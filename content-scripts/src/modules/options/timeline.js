@@ -1,6 +1,5 @@
 import { KeyRecentMedia } from "../../../../storage-keys";
 import selectors from "../../selectors";
-import { checkUrlForFollow } from "../check";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
@@ -162,29 +161,6 @@ export const changePromotedPosts = (removePromotedPosts) => {
       removeStyles("removePromotedPosts");
       break;
   }
-};
-
-// Function to change Who to Follow
-export const changeWhoToFollow = (removeWhoToFollow) => {
-  switch (removeWhoToFollow) {
-    case "off":
-      removeStyles("removeWhoToFollow");
-      break;
-
-    case "on":
-      addStyles(
-        "removeWhoToFollow",
-        `
-        ${selectors.mainColumn} a[href*="/i/connect_people?user_id="],
-        ${selectors.mainColumn} div[data-testid="UserCell"] {
-          display: none;
-        }
-        `
-      );
-      break;
-  }
-
-  checkUrlForFollow();
 };
 
 // Function to change Topics to Follow

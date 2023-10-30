@@ -9,7 +9,6 @@ import {
   KeyWriterMode,
   KeyXPremiumButton,
 } from "../../../storage-keys";
-import { checkUrlForFollow } from "./check";
 import changeHideViewCounts from "./options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton } from "./options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
@@ -55,7 +54,6 @@ export const runDocumentMutations = throttle(async () => {
 
   saveCurrentReplyToLink();
   addTypefullyReplyPlug();
-  checkUrlForFollow();
   changeHideViewCounts();
   changeRecentMedia();
   hideRightSidebar();

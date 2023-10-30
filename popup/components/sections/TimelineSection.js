@@ -7,7 +7,6 @@ import {
   KeyRemoveTimelineTabs,
   KeyRemoveTopicsToFollow,
   KeyRemoveTweetBorders,
-  KeyRemoveWhoToFollow,
   KeyStickyHeader,
   KeyTrendsHomeTimeline,
   KeyWriterMode,
@@ -40,7 +39,6 @@ const TimelineSection = () => {
           <VanityCheckboxes />
           <LocalStorageCheckboxControl label="View Count from Tweets" storageKey={KeyHideViewCount} crossedIcon />
           <LocalStorageCheckboxControl label="Promoted Posts" storageKey={KeyRemovePromotedPosts} crossedIcon />
-          <LocalStorageCheckboxControl label="Who to Follow Suggestions" storageKey={KeyRemoveWhoToFollow} crossedIcon />
           <LocalStorageCheckboxControl label="Topics to Follow Suggestions" storageKey={KeyRemoveTopicsToFollow} crossedIcon />
           <LocalStorageCheckboxControl label={`Timeline Tabs (For you, Following, lists...)`} storageKey={KeyRemoveTimelineTabs} crossedIcon />
           <LocalStorageCheckboxControl label="Timeline Borders" storageKey={KeyRemoveTimelineBorders} crossedIcon />
