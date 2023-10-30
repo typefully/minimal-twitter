@@ -9,7 +9,7 @@ export default async function changeHideViewCounts(setting) {
     viewCounts.forEach((el) => {
       el.parentElement && (el.parentElement.style.display = "flex");
     });
-  } else {
+  } else if (setting === "on") {
     viewCounts.forEach((el) => {
       el.parentElement && (el.parentElement.style.display = "none");
     });
