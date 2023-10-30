@@ -29,8 +29,8 @@ export const addStylesheets = async () => {
   addStyleSheet("typefully", chrome.runtime.getURL("css/typefully.css"));
 
   // Load cached CSS
-  const mainStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@6.0/css/main.css?t=${Date.now()}`);
-  const typefullyStylesheetFromCDN = await fetch(`https://cdn.jsdelivr.net/gh/typefully/minimal-twitter@6.0/css/typefully.css?t=${Date.now()}`);
+  const mainStylesheetFromCDN = await fetch("https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/main.css");
+  const typefullyStylesheetFromCDN = await fetch("https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/typefully.css");
   const mainText = (await mainStylesheetFromCDN.text()).trim();
   const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
   addStyleSheet("external", null, mainText.concat("\n\n").concat(typefullyText));
