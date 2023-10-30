@@ -76,9 +76,7 @@ export const runDocumentMutations = throttle(async () => {
   changeRecentMedia();
   hideRightSidebar();
   addSmallerSearchBarStyle();
-
-  const scheduleButton = document.querySelector('div[data-testid="scheduleOption"]');
-  if (scheduleButton) addWriterModeButton(scheduleButton);
+  addWriterModeButton();
 
   return;
 }, 50);

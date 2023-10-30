@@ -158,25 +158,31 @@ export const removeTypefullyPlugFromWriterMode = () => {
 };
 
 // Function to add an expand icon to the buttons in the tweet composer
-export const addWriterModeButton = async (scheduleButton) => {
+export const addWriterModeButton = async () => {
+  const composerButtonInner = document.querySelector(
+    `${selectors.mainColumn} nav[role="navigation"] [role="tablist"][data-testid="ScrollSnap-List"] div[role="presentation"]:last-child div[role="button"]`
+  );
+  // X recently wrapped these buttons in a div
+  const composerButton = composerButtonInner.parentNode;
+
   if (!window.location.pathname.includes("/home") || !window.location.pathname === "/" || document.getElementById("mt-writer-mode-composer-button")) {
     return;
   }
-  const writerModeButton = scheduleButton.cloneNode(true);
+  const writerModeButton = composerButton.cloneNode(true);
   const userSetting = await getStorage(KeyWriterMode);
 
   writerModeButton.id = "mt-writer-mode-composer-button";
   writerModeButton.removeAttribute("data-testid");
 
   if (userSetting === "on") {
-    writerModeButton.firstChild.firstChild.firstChild.innerHTML = svgAssets.composerWriterMode.selected;
+    writerModeButton.firstChild.firstChild.firstChild.firstChild.innerHTML = svgAssets.composerWriterMode.selected;
 
     addTooltip(writerModeButton, {
       id: "writer-mode",
       title: "Close Zen Writer Mode",
     });
   } else {
-    writerModeButton.firstChild.firstChild.firstChild.innerHTML = svgAssets.composerWriterMode.normal;
+    writerModeButton.firstChild.firstChild.firstChild.firstChild.innerHTML = svgAssets.composerWriterMode.normal;
 
     addTooltip(writerModeButton, {
       id: "writer-mode",
@@ -190,13 +196,14 @@ export const addWriterModeButton = async (scheduleButton) => {
     writerModeButton.remove();
     return;
   } else {
-    scheduleButton.parentNode.appendChild(writerModeButton);
+    composerButton.parentNode.appendChild(writerModeButton);
 
     addStyles(
       "writer-mode-composer-button-style",
       `
       #mt-writer-mode-composer-button:hover {
         background-color: rgba(var(--accent-color-rgb), 0.1);
+        border-radius: 9999px;
       }
       `
     );
