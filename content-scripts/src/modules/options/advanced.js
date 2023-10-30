@@ -4,6 +4,7 @@ export const changeCustomCss = (cssText) => {
     existingStyleEl.textContent = cssText;
   } else {
     const externalStylesheet = document.getElementById("mt-external-stylesheet");
+    if (!externalStylesheet) return;
     const head = document.querySelector("head");
     const styleEl = document.createElement("style");
     styleEl.id = "custom-css";

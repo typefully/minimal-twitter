@@ -512,7 +512,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 6.0.2;
+				MARKETING_VERSION = 6.0.4;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -545,7 +545,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 6.0.2;
+				MARKETING_VERSION = 6.0.4;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -568,7 +568,7 @@
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Minimal Twitter.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = P9N9H4Q4HK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -582,7 +582,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 6.0.2;
+				MARKETING_VERSION = 6.0.4;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -606,7 +606,7 @@
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Minimal Twitter.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = P9N9H4Q4HK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -620,7 +620,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 6.0.2;
+				MARKETING_VERSION = 6.0.4;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
