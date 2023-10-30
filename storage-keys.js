@@ -130,5 +130,5 @@ export const defaultPreferences = {
   [KeyInterFont]: "off",
   [KeyTitleNotifications]: "on",
   [KeyCustomCss]: "",
-  [KeyHideViewCount]: "on",
+  [KeyHideViewCount]: "off",
 };
