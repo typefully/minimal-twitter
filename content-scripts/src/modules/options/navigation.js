@@ -47,8 +47,8 @@ export const addXPremiumButton = (forced) => {
   clearTimeout(tm1);
   tm1 = setTimeout(() => {
     addSidebarButton({
-      name: "Twitter Blue",
-      href: "/settings/twitter_blue",
+      name: "Premium",
+      href: "/settings/premium",
       svgAsset: svgAssets.xPremium.normal,
       forced,
     });
