@@ -5,6 +5,7 @@ import {
   KeyBookmarksButton,
   KeyCommunitiesButton,
   KeyExploreButton,
+  KeyGrokButton,
   KeyHomeButton,
   KeyListsButton,
   KeyMessagesButton,
@@ -145,6 +146,16 @@ const XPremium = () => (
   </IconButton>
 );
 
+const Grok = () => (
+  <IconButton storageKey={KeyGrokButton} label="Grok">
+    <path
+      d="M18 4.1H6C4.95 4.1 4.1 4.95 4.1 6V18C4.1 19.05 4.95 19.9 6 19.9H18C19.05 19.9 19.9 19.05 19.9 18V6C19.9 4.95 19.05 4.1 18 4.1ZM6 2H18C20.21 2 22 3.79 22 6V18C22 20.21 20.21 22 18 22H6C3.79 22 2 20.21 2 18V6C2 3.79 3.79 2 6 2Z"
+      className="fill-current"
+    />
+    <path d="M6.68 17.8L14.788 6.22H17.32L9.21 17.8H6.68Z" className="fill-current" />
+  </IconButton>
+);
+
 const VerifiedOrgs = () => (
   <IconButton storageKey={KeyVerifiedOrgsButton} label="Verified Orgs">
     <path className="fill-current" d="M7.323 2h11.443l-3 5h6.648L6.586 22.83 7.847 14H2.523l4.8-12zm1.354 2l-3.2 8h4.676l-.739 5.17L17.586 9h-5.352l3-5H8.677z"></path>
@@ -189,6 +200,7 @@ const NavigationSection = () => {
             <Explore />
             <Notifications />
             <Messages />
+            <Grok />
             <Bookmarks />
             <TopArticles />
             <Lists />

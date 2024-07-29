@@ -5,6 +5,7 @@ import {
   KeyExploreButton,
   KeyFollowCount,
   KeyFollowingTimeline,
+  KeyGrokButton,
   KeyHideViewCount,
   KeyHomeButton,
   KeyInterFont,
@@ -50,6 +51,7 @@ import {
   changeBookmarksButton,
   changeCommunitiesButton,
   changeExploreButton,
+  changeGrokButton,
   changeHomeButton,
   changeListsButton,
   changeMessagesButton,
@@ -104,6 +106,7 @@ export const injectAllChanges = (data) => {
   changeListsButton(data[KeyListsButton]);
   changeProfileButton(data[KeyProfileButton]);
   changeXPremiumButton(data[KeyXPremiumButton]);
+  changeGrokButton(data[KeyGrokButton]);
   changeVerifiedOrgsButton(data[KeyVerifiedOrgsButton]);
   changeAnalyticsButton(data[KeyTypefullyGrowTab]);
 

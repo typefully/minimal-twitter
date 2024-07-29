@@ -5,6 +5,7 @@ export const KeyTopicsButton = "topicsButton";
 export const KeyXPremiumButton = "xPremiumButton";
 export const KeyVerifiedOrgsButton = "verifiedOrgsButton";
 export const KeyTypefullyGrowTab = "typefullyGrowTab";
+export const KeyGrokButton = "grokButton";
 export const KeyFollowingTimeline = "followingTimeline";
 export const KeyTrendsHomeTimeline = "trendsHomeTimeline";
 export const KeyRemoveTimelineTabs = "removeTimelineTabs";
@@ -50,6 +51,7 @@ export const allSettingsKeys = [
   KeyXPremiumButton,
   KeyVerifiedOrgsButton,
   KeyTypefullyGrowTab,
+  KeyGrokButton,
   KeyFollowingTimeline,
   KeyTrendsHomeTimeline,
   KeyRemoveTimelineTabs,
@@ -105,6 +107,7 @@ export const defaultPreferences = {
   [KeyTopicsButton]: "off",
   [KeyListsButton]: "on",
   [KeyXPremiumButton]: "off",
+  [KeyGrokButton]: "on",
   [KeyVerifiedOrgsButton]: "off",
   [KeyTypefullyGrowTab]: "on",
   [KeyProfileButton]: "on",
