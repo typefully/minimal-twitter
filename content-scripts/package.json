@@ -3,11 +3,11 @@
   "source": "src/index.js",
   "main": "dist/main.js",
   "scripts": {
-    "watch": "parcel watch",
-    "build": "parcel build"
+    "watch": "rollup -c rollup.config.mjs --watch",
+    "build": "rollup -c rollup.config.mjs"
   },
   "devDependencies": {
-    "parcel": "^2.8.0"
+    "rollup": "^4.19.1"
   },
   "license": "MIT"
 }
