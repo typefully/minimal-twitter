@@ -15,7 +15,9 @@ export const addSidebarButton = ({ name, href, userHref, onClick, svgAsset, forc
   if (existingElement) {
     if (forced) {
       existingElement.replaceWith(newNode);
-    } // Otherwise it's early returned before
+    } else {
+      newNode.remove();
+    }
   } else {
     profileNode.insertAdjacentElement("beforebegin", newNode);
   }
