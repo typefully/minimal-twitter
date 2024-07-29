@@ -21,7 +21,7 @@ selectors.sidebarLinks = {
   communities: `${selectors.leftSidebar} a[href*=communities]`,
   profile: `${selectors.leftSidebar} [data-testid="AppTabBar_Profile_Link"]`,
   lists: `${selectors.leftSidebar} a[href*="lists"][role="link"][aria-label]`,
-  xPremium: `${selectors.leftSidebar} a[href*="verified"][role="link"][aria-label]`,
+  xPremium: `${selectors.leftSidebar} a[href*="premium"][role="link"][aria-label]`,
   verifiedOrgs: `${selectors.leftSidebar} a[href*="verified-orgs"][role="link"][aria-label]`,
   analytics: `${selectors.leftSidebar} .mt-sidebar-button[aria-label="Analytics"]`,
 };
