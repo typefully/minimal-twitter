@@ -6,7 +6,7 @@ If you have a good idea, [start a discussion](https://github.com/typefully/minim
 
 First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed.
 
-✨ **New**: `bundle-extension.js` now bundles and zips everything. `Run yarn && yarn bundle` at the root directory and you'll get a [bundle](../bundle) directory that looks like this:
+✨ **New**: `bundle-extension.js` now bundles and zips everything. Run `yarn && yarn bundle` at the root directory and you'll get a [bundle](../bundle) directory that looks like this:
 
 ```
 📂 bundle
