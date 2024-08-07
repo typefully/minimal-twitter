@@ -249,7 +249,7 @@ export const changeRecentMedia = async (recentMedia) => {
                 top: 70px;
                 width: 300px;
               }
-              
+
               [data-testid="primaryColumn"] {
                 transform: translateX(-64px);
               }
@@ -339,9 +339,11 @@ export const changeFollowingTimeline = (followingTimeline) => {
   // Check if there's a selected tab
   if (!tablist || !selectedTab) return;
 
+  // get localized "Following" text
+  const secondTabText = tablist.querySelector("div[role='presentation']:nth-of-type(2) span").textContent.toLowerCase();
   const selectedTabText = selectedTab.querySelector("div[dir='ltr'] > span").textContent.toLowerCase();
 
-  if (selectedTabText === "following") return;
+  if (secondTabText === selectedTabText) return;
 
   const secondTab = tablist.querySelector("div[role='presentation']:nth-child(2) a");
 
