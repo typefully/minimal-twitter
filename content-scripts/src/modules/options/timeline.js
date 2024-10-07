@@ -339,9 +339,11 @@ export const changeFollowingTimeline = (followingTimeline) => {
   // Check if there's a selected tab
   if (!tablist || !selectedTab) return;
 
+  // Get localized "Following" text (it's the second tab)
+  const followingTabText = tablist.querySelector("div[role='presentation']:nth-of-type(2) span").textContent.toLowerCase();
   const selectedTabText = selectedTab.querySelector("div[dir='ltr'] > span").textContent.toLowerCase();
 
-  if (selectedTabText === "following") return;
+  if (selectedTabText === followingTabText) return; // Already on the "Following" tab
 
   const secondTab = tablist.querySelector("div[role='presentation']:nth-child(2) a");
 
