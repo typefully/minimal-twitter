@@ -66,7 +66,7 @@ export const changeFollowCount = (followCount) => {
       addStyles(
         "followCount",
         `[href$="/following"][dir][role="link"],
-        [href$="/followers"][dir][role="link"] {
+        [href*="followers"][dir][role="link"] {
           display: none;
         }`
       );
