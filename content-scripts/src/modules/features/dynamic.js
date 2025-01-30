@@ -26,6 +26,7 @@ import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeT
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "../typefully";
 import hideRightSidebar from "../utilities/hideRightSidebar";
+import { updateLeftSidebarPositioning } from "../utilities/leftSidebarPosition";
 import { addSmallerSearchBarStyle } from "../utilities/other-styles";
 import { getStorage } from "../utilities/storage";
 import throttle from "../utilities/throttle";
@@ -38,6 +39,7 @@ export const dynamicFeatures = {
     changeRecentMedia();
     hideRightSidebar();
     addSmallerSearchBarStyle();
+    updateLeftSidebarPositioning();
   },
   sidebarButtons: async () => {
     const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);

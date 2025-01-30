@@ -37,8 +37,7 @@ a[href*="quick_promote_web"] {
 
   /* Fix navigation to left */
   header[role="banner"] {
-    position: fixed;
-    left: 0;
+    align-items: flex-start;
   }
 
   /* Align Twitter navigation icon with search */
@@ -74,13 +73,6 @@ a[href*="quick_promote_web"] {
   }
   header[role="banner"] > div > div > div {
     overflow: visible; /* Safari overflow issue: https://bugs.webkit.org/show_bug.cgi?id=160953 */
-  }
-}
-
-/* Add padding equal to navigation size when between 1000px-1265px */
-@media only screen and (min-width: 1000px) and (max-width: 1265px) {
-  body {
-    padding-left: 88px;
   }
 }
 
