@@ -5,6 +5,7 @@ import { createTypefullyLinkElement, createTypefullyLogo, getCurrentTextAndSendT
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import addTooltip, { hideAllTooltips } from "../utilities/addTooltip";
 import addTypefullyBox from "../utilities/addTypefullyBox";
+import { createTypefullyUrl } from "../utilities/createTypefullyUrl";
 import { getStorage, setStorage } from "../utilities/storage";
 
 const escKeyListener = async (event) => {
@@ -130,6 +131,10 @@ export const addTypefullyPlugToWriterMode = async () => {
 
     /* ----------------- Typefully box callout with explanation ---------------- */
 
+    const url = createTypefullyUrl({
+      utm_content: "writer-mode-callout",
+    });
+
     addTypefullyBox(
       main,
       "writer-mode",
@@ -139,7 +144,7 @@ export const addTypefullyPlugToWriterMode = async () => {
   <li>📈 Track your growth with insights and metrics</li>
   <li>📆 Schedule for later</li>
 </ul>
-<p>Powered by <a href="https://typefully.com/?ref=minimal-twitter">Typefully</a>, the makers of the Minimal Twitter extension.</p>`,
+<p>Powered by <a href="${url}" target="_blank">Typefully</a>, the makers of the Minimal Twitter extension.</p>`,
       {
         withArrow: true,
       }

@@ -1,3 +1,4 @@
+import { createTypefullyUrl } from "../../../content-scripts/src/modules/utilities/createTypefullyUrl";
 import createTweetLink from "../../utilities/createTweetLink";
 
 const tweet = {
@@ -36,7 +37,7 @@ const Header = () => (
     </div>
     <p className="pt-3 pb-3 text-sm font-medium leading-5 dark:text-x-accent1Dark text-x-accent1">
       Join top creators on{" "}
-      <a href="https://typefully.com/?ref=minimal-twitter" target="_blank" rel="noreferrer" className="text-x-premium hover:underline font-bold cursor-pointer ml-1">
+      <a href={createTypefullyUrl({ utm_content: "popup-header-link" })} target="_blank" rel="noreferrer" className="text-x-premium hover:underline font-bold cursor-pointer ml-1">
         <TypefullyGlyph />
         Typefully
       </a>

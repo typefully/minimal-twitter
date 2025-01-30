@@ -2,6 +2,7 @@ import { KeyNavigationButtonsLabels, KeyNavigationButtonsLabelsHover } from "../
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles, { removeStyles } from "../utilities/addStyles";
+import { createTypefullyUrl } from "../utilities/createTypefullyUrl";
 import { addSidebarButton } from "../utilities/sidebar";
 import { getStorage } from "../utilities/storage";
 
@@ -65,7 +66,13 @@ export const addAnalyticsButton = () => {
       svgAsset: svgAssets.grow.normal,
       onClick: () => {
         const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)?.getAttribute("href").replace("/", "");
-        if (screenName) window.open(`https://typefully.com/grow?ref=minimal-twitter&mt-screen-name=${screenName}`, "_blank");
+
+        const url = createTypefullyUrl({
+          utm_content: "sidebar-grow-button",
+          "mt-screen-name": screenName,
+        });
+
+        if (screenName) window.open(url, "_blank");
       },
     });
   }, 200);

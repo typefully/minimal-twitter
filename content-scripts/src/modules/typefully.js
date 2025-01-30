@@ -1,6 +1,7 @@
 import svgAssets from "./svgAssets";
 import addStyles, { removeStyles } from "./utilities/addStyles";
 import addTooltip from "./utilities/addTooltip";
+import { createTypefullyUrl } from "./utilities/createTypefullyUrl";
 import { removeElementById } from "./utilities/removeElement";
 
 // Function to add "Continue Thread in Typefully"
@@ -175,12 +176,11 @@ export const getCurrentTextAndSendToTypefully = (replyingToLink) => {
     tweetTextAreaNumber = tweetTextAreaNumber + 1;
   }
 
-  // With URLSearchParams
-  const url = new URL("https://typefully.com/");
-  url.searchParams.set("ref", "minimal-twitter");
-  url.searchParams.set("new", typefullyContent);
-  if (replyingToLink) {
-    url.searchParams.set("replyTo", replyingToLink);
-  }
+  const url = createTypefullyUrl({
+    utm_content: "save-draft-button",
+    new: typefullyContent,
+    ...(replyingToLink && { replyTo: replyingToLink }),
+  });
+
   window.open(url.toString());
 };
