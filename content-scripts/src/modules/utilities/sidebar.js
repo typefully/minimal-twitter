@@ -1,24 +1,38 @@
-// The html structure of buttons (i.e. if it has a label or not) changes based on viewport size,
-// so when adding sidebar buttons on subsequent renders after page load, we used the `forced`
-// parameter to re-add the element so that it's displayed correctly.
+export const addSidebarButton = ({ name, href, userHref, onClick, svgAsset }) => {
+  // Let's find all sidebar buttons with the same name
+  const existingElements = [
+    ...document.querySelectorAll(`nav[role="navigation"] > [aria-label="${name}"]`),
+    ...document.querySelectorAll(`nav[role="navigation"] > [aria-label="${name.toLowerCase()}"]`),
+  ];
 
-export const addSidebarButton = ({ name, href, userHref, onClick, svgAsset, forced }) => {
-  const existingElement = document.querySelector(`nav[role="navigation"] > [aria-label="${name}"]`);
-
-  if (existingElement && !forced) return;
-
+  // We base new sidebar buttons on the existing "Profile" one, so let's get it:
   const profileNode = document.querySelector('nav[role="navigation"] > a[role="link"][data-testid="AppTabBar_Profile_Link"]');
-  if (!profileNode) return;
+  if (!profileNode) {
+    return;
+  }
 
-  const newNode = createNewElement({ name, href, userHref, onClick, svgAsset, profileNode });
+  // It might happen when resizing the page that a sidebar button is added by X
+  // again dynamically while we also added it — so when we find more than one,
+  // we remove all but the first one to fix this:
+  if (existingElements.length > 1) {
+    existingElements.slice(1).forEach((element) => element.remove());
+  }
+
+  // We're left with a single existing element:
+  const existingElement = existingElements[0];
 
   if (existingElement) {
-    if (forced) {
-      existingElement.replaceWith(newNode);
-    } else {
-      newNode.remove();
+    const hasChanged =
+      (profileNode.querySelector("span") && !existingElement.querySelector("span")) || (!profileNode.querySelector("span") && existingElement.querySelector("span"));
+
+    if (!hasChanged) {
+      return;
     }
+
+    const newNode = createNewElement({ name, href, userHref, onClick, svgAsset, profileNode });
+    existingElement.replaceWith(newNode);
   } else {
+    const newNode = createNewElement({ name, href, userHref, onClick, svgAsset, profileNode });
     profileNode.insertAdjacentElement("beforebegin", newNode);
   }
 };

@@ -1,0 +1,77 @@
+/**
+ * Dynamic features that respond to Twitter's DOM updates:
+ * - Writer mode
+ * - Navigation buttons
+ * - Timeline customizations
+ * - View counts
+ * - Typefully integration
+ * Applied via MutationObserver on relevant DOM changes
+ */
+
+import {
+  KeyCommunitiesButton,
+  KeyFollowingTimeline,
+  KeyHideGrokDrawer,
+  KeyListsButton,
+  KeyRemoveTimelineTabs,
+  KeyTopicsButton,
+  KeyTrendsHomeTimeline,
+  KeyTypefullyGrowTab,
+  KeyWriterMode,
+  KeyXPremiumButton,
+} from "../../../../storage-keys";
+import changeHideViewCounts from "../options/hideViewCount";
+import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer } from "../options/navigation";
+import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "../options/timeline";
+import { changeWriterMode } from "../options/writerMode";
+import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "../typefully";
+import hideRightSidebar from "../utilities/hideRightSidebar";
+import { addSmallerSearchBarStyle } from "../utilities/other-styles";
+import { getStorage } from "../utilities/storage";
+import throttle from "../utilities/throttle";
+
+export const dynamicFeatures = {
+  general: () => {
+    saveCurrentReplyToLink();
+    addTypefullyReplyPlug();
+    changeHideViewCounts();
+    changeRecentMedia();
+    hideRightSidebar();
+    addSmallerSearchBarStyle();
+  },
+  sidebarButtons: async () => {
+    const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
+
+    if (!data) return;
+
+    if (data[KeyListsButton] === "on") addListsButton();
+    if (data[KeyCommunitiesButton] === "on") addCommunitiesButton();
+    if (data[KeyTopicsButton] === "on") addTopicsButton();
+    if (data[KeyXPremiumButton] === "on") addXPremiumButton();
+    if (data[KeyTypefullyGrowTab] === "on") addAnalyticsButton();
+  },
+  writerMode: async (data) => {
+    if (data[KeyWriterMode] === "on") {
+      changeWriterMode(data[KeyWriterMode]);
+    } else {
+      changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
+      changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
+      changeFollowingTimeline(data[KeyFollowingTimeline]);
+      addTypefullyPlug();
+    }
+  },
+};
+
+export const runDynamicFeatures = throttle(async () => {
+  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer]);
+
+  if (data) {
+    dynamicFeatures.general();
+    await dynamicFeatures.sidebarButtons();
+    await dynamicFeatures.writerMode(data);
+
+    // The Grok drawer appears dynamically, so we need to handle it here as well
+    // as in the static features module
+    hideGrokDrawer(data?.[KeyHideGrokDrawer]);
+  }
+}, 50);

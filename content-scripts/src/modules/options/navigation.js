@@ -44,25 +44,23 @@ export const changeListsButton = (state) => changeSidebarSetting("lists", state,
 export const changeAnalyticsButton = (state) => changeSidebarSetting("analytics", state, addAnalyticsButton);
 
 let tm1;
-export const addXPremiumButton = (forced) => {
+export const addXPremiumButton = () => {
   clearTimeout(tm1);
   tm1 = setTimeout(() => {
     addSidebarButton({
       name: "Premium",
       href: "/settings/premium",
       svgAsset: svgAssets.xPremium.normal,
-      forced,
     });
   }, 100);
 };
 
 let tm2;
-export const addAnalyticsButton = (forced) => {
+export const addAnalyticsButton = () => {
   clearTimeout(tm2);
   tm2 = setTimeout(() => {
     addSidebarButton({
       name: "Analytics",
-      forced,
       svgAsset: svgAssets.grow.normal,
       onClick: () => {
         const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)?.getAttribute("href").replace("/", "");
@@ -72,30 +70,27 @@ export const addAnalyticsButton = (forced) => {
   }, 200);
 };
 
-export const addTopicsButton = (forced) => {
+export const addTopicsButton = () => {
   addSidebarButton({
     name: "Topics",
     userHref: "/topics",
     svgAsset: svgAssets.topics.normal,
-    forced,
   });
 };
 
-export const addCommunitiesButton = (forced) => {
+export const addCommunitiesButton = () => {
   addSidebarButton({
     name: "Communities",
     userHref: "/communities",
     svgAsset: svgAssets.communities.normal,
-    forced,
   });
 };
 
-export const addListsButton = (forced) => {
+export const addListsButton = () => {
   addSidebarButton({
     name: "Lists",
     userHref: "/lists",
     svgAsset: svgAssets.lists.normal,
-    forced,
   });
 };
 

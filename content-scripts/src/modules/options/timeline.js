@@ -111,8 +111,8 @@ export const changeTweetBorders = (tweetBorders) => {
       addStyles(
         "tweetBorders",
         `
-        ${selectors.mainWrapper} section > div > div > div > div {
-          border-style: hidden;
+        ${selectors.mainWrapper} section > div > div > div > div[role="separator"] {
+          display: none;
         }
         ${selectors.mainColumn} > div > div:empty {
           background: transparent;

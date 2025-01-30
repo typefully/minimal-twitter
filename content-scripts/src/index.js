@@ -1,44 +1,41 @@
-import { KeyExtensionStatus, allSettingsKeys } from "../../storage-keys";
-import { addMutationsOnDomChanges, addMutationsOnPageLoad, addMutationsOnResize, addStylesheets } from "./modules/initialize";
-import { injectAllChanges } from "./modules/options/all";
+import { KeyExtensionStatus } from "../../storage-keys";
+import { applyStaticFeatures } from "./modules/features/static";
+import { initializeExtension } from "./modules/initialize";
 import constructNewData from "./modules/utilities/constructNewData";
 import { getStorage } from "./modules/utilities/storage";
 
-/*--
-- Docs: https://developer.chrome.com/docs/extensions/reference/storage/#synchronous-response-to-storage-updates
-- Listen to Chrome Storage changes
-- Inject styles in respond to changes
---*/
+/**
+ * Extension Lifecycle:
+ * 1. Extension Load:
+ *    - Initialize observers, listeners, styles
+ *    - Apply static features
+ *    - Start dynamic feature monitoring
+ *
+ * 2. Settings Changes:
+ *    - Reapply affected static features
+ *    - Dynamic features auto-update on DOM changes
+ */
+
+// Listen to settings changes
 chrome.storage.onChanged.addListener(async (changes) => {
-  if (
-    changes[KeyExtensionStatus]?.oldValue && // No old value means it's a fresh install
-    changes[KeyExtensionStatus]?.newValue !== changes[KeyExtensionStatus]?.oldValue // The status has actually changed
-  )
+  if (changes[KeyExtensionStatus]?.newValue !== changes[KeyExtensionStatus]?.oldValue) {
     window.location.reload();
+    return;
+  }
 
   const status = await getStorage(KeyExtensionStatus);
   if (status === "off") return;
 
-  const newChangesData = constructNewData(changes);
-  injectAllChanges(newChangesData);
+  const newData = constructNewData(changes);
+  applyStaticFeatures(newData);
 });
 
-/*--
-- Initializing function, runs once at start
-- Get Chrome Storage and inject respective styles
---*/
+// Initialize extension
 const init = async () => {
   const status = await getStorage(KeyExtensionStatus);
   if (status === "off") return;
 
-  addStylesheets();
-  addMutationsOnDomChanges();
-  addMutationsOnPageLoad();
-  addMutationsOnResize();
-
-  // Inject user preferences
-  const allData = await getStorage(allSettingsKeys);
-  injectAllChanges(allData);
+  await initializeExtension();
 };
 
 init();
