@@ -6,6 +6,7 @@
  */
 
 import {
+  KeyArticlesButton,
   KeyBookmarksButton,
   KeyCommunitiesButton,
   KeyCustomCss,
@@ -38,7 +39,6 @@ import {
   KeyStickyHeader,
   KeyTimelineWidth,
   KeyTitleNotifications,
-  KeyTopArticlesButton,
   KeyTopicsButton,
   KeyTransparentSearch,
   KeyTrendsHomeTimeline,
@@ -56,6 +56,7 @@ import changeHideViewCounts from "../options/hideViewCount";
 import { changeHideSearchBar, changeInterFont, changeTitleNotifications, changeTransparentSearchBar, changeTweetButton } from "../options/interface";
 import {
   changeAnalyticsButton,
+  changeArticlesButton,
   changeBookmarksButton,
   changeCommunitiesButton,
   changeExploreButton,
@@ -69,7 +70,6 @@ import {
   changeNotificationsButton,
   changeProfileButton,
   changeSidebarLogo,
-  changeTopArticlesButton,
   changeTopicsButton,
   changeUnreadCountBadge,
   changeVerifiedOrgsButton,
@@ -132,7 +132,7 @@ export const staticFeatures = {
     changeNotificationsButton(data[KeyNotificationsButton]);
     changeMessagesButton(data[KeyMessagesButton]);
     changeBookmarksButton(data[KeyBookmarksButton]);
-    changeTopArticlesButton(data[KeyTopArticlesButton]);
+    changeArticlesButton(data[KeyArticlesButton]);
     changeCommunitiesButton(data[KeyCommunitiesButton]);
     changeTopicsButton(data[KeyTopicsButton]);
     changeListsButton(data[KeyListsButton]);

@@ -2,6 +2,7 @@ import * as TogglePrimitive from "@radix-ui/react-toggle";
 import { styled } from "@stitches/react";
 import startCase from "lodash.startcase";
 import {
+  KeyArticlesButton,
   KeyBookmarksButton,
   KeyCommunitiesButton,
   KeyExploreButton,
@@ -16,7 +17,6 @@ import {
   KeyNotificationsButton,
   KeyProfileButton,
   KeySidebarLogo,
-  KeyTopArticlesButton,
   KeyTopicsButton,
   KeyTypefullyGrowTab,
   KeyUnreadCountBadge,
@@ -102,12 +102,22 @@ const Bookmarks = () => (
   </IconButton>
 );
 
-const TopArticles = () => (
-  <IconButton storageKey={KeyTopArticlesButton} label="Top Articles">
+const Articles = () => (
+  <IconButton storageKey={KeyArticlesButton} label="Articles">
     <path
       className="fill-current"
-      d="M11 1.28v.09c0 1.79 0 3.53-.829 5.18-.42-.78-1.061-1.36-1.707-1.94l-.268-.24c-.501 1-1.151 1.98-1.807 2.97C4.959 9.5 3.5 11.7 3.5 14.25c0 2.52.949 4.55 2.538 5.94 1.437 1.26 3.334 1.94 5.378 2.04.122.01.539.02.584.02 4.615 0 8.5-3.37 8.5-8C20.5 8.29 15.797 4 11 1.28zm2.534 18.08c-.521.56-1.144.87-1.681.89-.111 0-.221-.01-.331-.01-.454-.05-.684-.23-.82-.41-.192-.24-.313-.64-.313-1.14 0-.75.362-1.26 1.214-2.02.166-.14.35-.3.548-.46.47-.4 1.017-.86 1.56-1.41l.031.07c.35.83.647 1.78.647 2.54 0 .65-.317 1.38-.855 1.95zm2.572-.42c.18-.48.283-1 .283-1.53 0-1.17-.429-2.43-.804-3.32-.194-.46-.388-.85-.533-1.13-.073-.14-1.02-1.78-1.02-1.78l-.901 1.23c-.678.92-1.425 1.55-2.18 2.19-.224.19-.449.38-.673.58-.94.83-1.889 1.85-1.889 3.51 0 .22.014.44.047.67C6.673 18.38 5.5 16.6 5.5 14.25c0-2.01 1.133-3.61 2.246-5.18.284-.4.568-.8.831-1.21.419.89.419 2.18.173 3.08l.117-.11c1.971-1.7 3.514-3.03 3.969-6.06.632.47 1.415 1.12 2.195 1.93 1.79 1.84 3.469 4.42 3.469 7.55 0 1.92-.921 3.61-2.394 4.69z"
-    />
+      d="M7.164 2c-.53 0-1.039.21-1.414.586L2.586 5.75C2.21 6.125 2 6.634 2 7.164V21c0 .552.448 1 1 1h5.25c.552 0 1-.448 1-1s-.448-1-1-1H4V7.164L7.164 4h9.586v3.25c0 .552.448 1 1 1s1-.448 1-1V3c0-.552-.448-1-1-1H7.164z"
+    ></path>
+    <path
+      className="fill-current"
+      d="M7.75 6.25c-.552 0-1 .448-1 1s.448 1 1 1h6.5c.552 0 1-.448 1-1s-.448-1-1-1h-6.5zm-2.5 4.5c0-.552.448-1 1-1h6.5c.552 0 1 .448 1 1s-.448 1-1 1h-6.5c-.552 0-1-.448-1-1z"
+    ></path>
+    <path
+      className="fill-current"
+      clip-rule="evenodd"
+      d="M18.75 9.086l4.414 4.414-8.5 8.5H10.25v-4.414l8.5-8.5zm1.586 4.414l-1.586-1.586L17.664 13l1.586 1.586 1.086-1.086zm-8.086 4.914l4-4L17.836 16l-4 4H12.25v-1.586z"
+      fill-rule="evenodd"
+    ></path>
   </IconButton>
 );
 
@@ -201,12 +211,12 @@ const NavigationSection = () => {
             <Notifications />
             <Messages />
             <Grok />
-            <Bookmarks />
-            <TopArticles />
-            <Lists />
-            <Communities />
-            <Topics />
             <XPremium />
+            <Lists />
+            <Bookmarks />
+            <Communities />
+            <Articles />
+            <Topics />
             <VerifiedOrgs />
             <TypefullyGrow />
             <Profile />
