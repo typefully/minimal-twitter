@@ -50,13 +50,6 @@ a[href*="quick_promote_web"] {
   header[role="banner"] nav[role="navigation"]:hover > * > div {
     backdrop-filter: blur(12px);
   }
-  header[role="banner"]
-    nav[role="navigation"]
-    *
-    div:last-child
-    > span:only-child {
-    font-size: 18px;
-  }
   /* Account switcher */
   header[role="banner"] > div > div > div > div:last-child {
     margin-bottom: 0px !important;
