@@ -1,0 +1,25 @@
+---
+description: Add or improve feature settings in the extension.
+globs: *.js
+---
+This project is a browser extension that customizes the look and behavior of x.com (Twitter).
+
+The /content-scripts/ folder contain all the code of the various features and customizations and it applies it as well.
+
+Features are either [static.js](mdc:content-scripts/src/modules/features/static.js) or [dynamic.js](mdc:content-scripts/src/modules/features/dynamic.js), depending whether they can just be applied once, or need to be reapplied while the content of the page changes.
+
+The features code is applied in [initialize.js](mdc:content-scripts/src/modules/initialize.js).
+
+The various settings and features themselves have unique keys in [storage-keys.js](mdc:storage-keys.js), and their actual code that affects x.com can be found in the /content-scripts/src/modules/options/ folder.
+
+The UI to customize these features and settings is instead in the /popup/ folder.
+
+So, for each new feature or feature to edit, a related UI component needs to be added or updated in the most appropriate section.
+
+For example, to make a new setting to toggle a sidebar, you would:
+- Ask the user what the default should be
+- Create a [storage-keys.js](mdc:storage-keys.js) key (it needs to be in allSettingsKeys and defaultPreferences too)
+- Write the code in [navigation.js](mdc:content-scripts/src/modules/options/navigation.js) by following what similar settings do in that file
+- Add it among the [static.js](mdc:content-scripts/src/modules/features/static.js) features
+- Add a related toggle in [NavigationSection.js](mdc:popup/components/sections/NavigationSection.js)
+- If a new glyph is required, add it to the [svgAssets.js](mdc:content-scripts/src/modules/svgAssets.js)
