@@ -20,6 +20,7 @@ export const KeyExploreButton = "exploreButton";
 export const KeyNotificationsButton = "notificationsButton";
 export const KeyMessagesButton = "messagesButton";
 export const KeyBookmarksButton = "bookmarksButton";
+export const KeyJobsButton = "jobsButton";
 export const KeyArticlesButton = "articles";
 export const KeyProfileButton = "profileButton";
 export const KeyNavigationButtonsLabelsHover = "navigationButtonsLabelsHover";
@@ -87,16 +88,17 @@ export const allSettingsKeys = [
   KeyExploreButton,
   KeyNotificationsButton,
   KeyMessagesButton,
-  KeyBookmarksButton,
-  KeyArticlesButton,
-  KeyCommunitiesButton,
-  KeyTopicsButton,
-  KeyListsButton,
-  KeyProfileButton,
-  KeyXPremiumButton,
   KeyGrokButton,
+  KeyXPremiumButton,
+  KeyListsButton,
+  KeyBookmarksButton,
+  KeyJobsButton,
+  KeyCommunitiesButton,
+  KeyArticlesButton,
+  KeyTopicsButton,
   KeyVerifiedOrgsButton,
   KeyTypefullyGrowTab,
+  KeyProfileButton,
 
   // Advanced Features
   KeyCustomCss,
@@ -134,7 +136,7 @@ export const defaultPreferences = {
   [KeyNavigationButtonsLabelsHover]: "on",
   [KeyNavigationCenter]: "off",
   [KeyUnreadCountBadge]: "off",
-  [KeyHideGrokDrawer]: "off",
+  [KeyHideGrokDrawer]: "on",
 
   // Interface Features
   [KeyInterFont]: "off",
@@ -148,16 +150,17 @@ export const defaultPreferences = {
   [KeyExploreButton]: "on",
   [KeyNotificationsButton]: "on",
   [KeyMessagesButton]: "on",
-  [KeyBookmarksButton]: "on",
-  [KeyArticlesButton]: "on",
-  [KeyCommunitiesButton]: "on",
-  [KeyTopicsButton]: "off",
-  [KeyListsButton]: "on",
-  [KeyProfileButton]: "on",
+  [KeyGrokButton]: "off",
   [KeyXPremiumButton]: "off",
-  [KeyGrokButton]: "on",
+  [KeyListsButton]: "on",
+  [KeyBookmarksButton]: "on",
+  [KeyJobsButton]: "off",
+  [KeyCommunitiesButton]: "on",
+  [KeyArticlesButton]: "off",
+  [KeyTopicsButton]: "off",
   [KeyVerifiedOrgsButton]: "off",
   [KeyTypefullyGrowTab]: "on",
+  [KeyProfileButton]: "on",
 
   // Advanced Features
   [KeyCustomCss]: "",

@@ -18,6 +18,7 @@ import {
   KeyHideViewCount,
   KeyHomeButton,
   KeyInterFont,
+  KeyJobsButton,
   KeyLikeCount,
   KeyListsButton,
   KeyMessagesButton,
@@ -62,6 +63,7 @@ import {
   changeExploreButton,
   changeGrokButton,
   changeHomeButton,
+  changeJobsButton,
   changeListsButton,
   changeMessagesButton,
   changeNavigationButtonsLabels,
@@ -132,6 +134,7 @@ export const staticFeatures = {
     changeNotificationsButton(data[KeyNotificationsButton]);
     changeMessagesButton(data[KeyMessagesButton]);
     changeBookmarksButton(data[KeyBookmarksButton]);
+    changeJobsButton(data[KeyJobsButton]);
     changeArticlesButton(data[KeyArticlesButton]);
     changeCommunitiesButton(data[KeyCommunitiesButton]);
     changeTopicsButton(data[KeyTopicsButton]);
