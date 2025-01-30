@@ -3,7 +3,6 @@ import selectors from "../../selectors";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
-// Function to change Timeline Width
 export const changeTimelineWidth = (timelineWidth) => {
   switch (timelineWidth) {
     case 600:
@@ -78,7 +77,6 @@ export const changeTimelineWidth = (timelineWidth) => {
   }
 };
 
-// Function to change Timeline Borders
 export const changeTimelineBorders = (timelineBorders) => {
   switch (timelineBorders) {
     case "off":
@@ -100,7 +98,6 @@ export const changeTimelineBorders = (timelineBorders) => {
   }
 };
 
-// Function to change Tweet Borders
 export const changeTweetBorders = (tweetBorders) => {
   switch (tweetBorders) {
     case "off":
@@ -123,7 +120,6 @@ export const changeTweetBorders = (tweetBorders) => {
   }
 };
 
-// Function to change Sticky Header
 export const changeStickyHeader = (stickyHeader) => {
   switch (stickyHeader) {
     case "on":
@@ -143,7 +139,6 @@ export const changeStickyHeader = (stickyHeader) => {
   }
 };
 
-// Function to change Promoted Posts
 export const changePromotedPosts = (removePromotedPosts) => {
   switch (removePromotedPosts) {
     case "off":
@@ -163,7 +158,6 @@ export const changePromotedPosts = (removePromotedPosts) => {
   }
 };
 
-// Function to change Topics to Follow
 export const changeTopicsToFollow = (removeTopicsToFollow) => {
   switch (removeTopicsToFollow) {
     case "off":
@@ -214,7 +208,6 @@ export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
   }
 };
 
-// Function to change Recent Media on Profiles
 export const changeRecentMedia = async (recentMedia) => {
   const userProfile = document.querySelector('meta[content*="twitter://user?screen_name="]');
 
@@ -270,7 +263,6 @@ export const changeRecentMedia = async (recentMedia) => {
   }
 };
 
-// Function to change Show Trends on Home Timeline
 export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
   if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
     removeStyles("trendsHomeTimeline");
@@ -329,7 +321,6 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
   }
 };
 
-// Function to change Following Timeline
 export const changeFollowingTimeline = (followingTimeline) => {
   if (followingTimeline !== "on") return;
 
@@ -350,7 +341,6 @@ export const changeFollowingTimeline = (followingTimeline) => {
   secondTab.click(); // Following tab is second tab
 };
 
-// Function to change Latest Tweets
 let lt1; // Latest Tweets timeout 1
 let lt2; // Latest Tweets timeout 2
 export const changeLatestTweets = (latestTweets) => {
