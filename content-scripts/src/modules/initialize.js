@@ -1,6 +1,7 @@
 import {
   KeyCommunitiesButton,
   KeyFollowingTimeline,
+  KeyHideGrokDrawer,
   KeyListsButton,
   KeyRemoveTimelineTabs,
   KeyTopicsButton,
@@ -10,7 +11,7 @@ import {
   KeyXPremiumButton,
 } from "../../../storage-keys";
 import changeHideViewCounts from "./options/hideViewCount";
-import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton } from "./options/navigation";
+import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer } from "./options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "./options/timeline";
 import { addWriterModeButton, changeWriterMode } from "./options/writer-mode";
 import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "./typefully";
@@ -39,7 +40,7 @@ export const addStylesheets = async () => {
 export const runDocumentMutations = throttle(async () => {
   extractColorsAsRootVars();
 
-  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs]);
+  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer]);
 
   if (data) {
     if (data[KeyWriterMode] === "on") {
@@ -59,6 +60,7 @@ export const runDocumentMutations = throttle(async () => {
   hideRightSidebar();
   addSmallerSearchBarStyle();
   addWriterModeButton();
+  hideGrokDrawer(data?.[KeyHideGrokDrawer]);
 
   return;
 }, 50);

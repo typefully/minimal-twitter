@@ -29,6 +29,7 @@ Refine and clean up the Twitter interface, and customize your experience:
 - Remove "Who to Follow" and other suggestions
 - Hide the Search Bar
 - Hide the Tweet button
+- Hide Grok AI elements
 - And more...
 
 ## By the makers of Typefully

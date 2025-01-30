@@ -6,6 +6,7 @@ import {
   KeyCommunitiesButton,
   KeyExploreButton,
   KeyGrokButton,
+  KeyHideGrokDrawer,
   KeyHomeButton,
   KeyListsButton,
   KeyMessagesButton,
@@ -149,10 +150,9 @@ const XPremium = () => (
 const Grok = () => (
   <IconButton storageKey={KeyGrokButton} label="Grok">
     <path
-      d="M18 4.1H6C4.95 4.1 4.1 4.95 4.1 6V18C4.1 19.05 4.95 19.9 6 19.9H18C19.05 19.9 19.9 19.05 19.9 18V6C19.9 4.95 19.05 4.1 18 4.1ZM6 2H18C20.21 2 22 3.79 22 6V18C22 20.21 20.21 22 18 22H6C3.79 22 2 20.21 2 18V6C2 3.79 3.79 2 6 2Z"
       className="fill-current"
-    />
-    <path d="M6.68 17.8L14.788 6.22H17.32L9.21 17.8H6.68Z" className="fill-current" />
+      d="M2.205 7.423L11.745 21h4.241L6.446 7.423H2.204zm4.237 7.541L2.2 21h4.243l2.12-3.017-2.121-3.02zM16.957 0L9.624 10.435l2.122 3.02L21.2 0h-4.243zm.767 6.456V21H21.2V1.51l-3.476 4.946z"
+    ></path>
   </IconButton>
 );
 
@@ -218,6 +218,7 @@ const NavigationSection = () => {
             <SwitchControl disabled={labelsShown} label="Show Labels on Hover" storageKey={KeyNavigationButtonsLabelsHover} />
             <SwitchControl label="Center Vertically" storageKey={KeyNavigationCenter} />
             <SwitchControl label="Unread Count Badge" storageKey={KeyUnreadCountBadge} />
+            <SwitchControl label="Hide Grok Drawer" storageKey={KeyHideGrokDrawer} />
           </div>
         </form>
       </div>

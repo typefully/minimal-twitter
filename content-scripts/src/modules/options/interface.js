@@ -76,7 +76,7 @@ export const changeTweetButton = (tweetButton) => {
       addStyles(
         "tweetButton",
         `
-        [data-testid="SideNav_NewTweet_Button"] {
+        ${selectors.tweetButton} {
           visibility: hidden;
         }
         `

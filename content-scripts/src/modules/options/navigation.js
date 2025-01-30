@@ -202,3 +202,19 @@ export const changeNavigationCenter = (navigationCenter) => {
       break;
   }
 };
+
+export const hideGrokDrawer = (state) => {
+  switch (state) {
+    case "on":
+      addStyles(
+        "grokDrawer",
+        `${selectors.grokDrawer} {
+          display: none !important;
+        }`
+      );
+      break;
+    case "off":
+      removeStyles("grokDrawer");
+      break;
+  }
+};

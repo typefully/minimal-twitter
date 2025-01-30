@@ -6,6 +6,7 @@ import {
   KeyFollowCount,
   KeyFollowingTimeline,
   KeyGrokButton,
+  KeyHideGrokDrawer,
   KeyHideViewCount,
   KeyHomeButton,
   KeyInterFont,
@@ -66,6 +67,7 @@ import {
   changeUnreadCountBadge,
   changeVerifiedOrgsButton,
   changeXPremiumButton,
+  hideGrokDrawer,
 } from "./navigation";
 import {
   changeFollowingTimeline,
@@ -83,18 +85,34 @@ import { changeTypefullyComposerButtons } from "./typefully";
 import { changeWriterMode } from "./writer-mode";
 
 export const injectAllChanges = (data) => {
+  // Timeline
   changeTimelineWidth(data[KeyTimelineWidth]);
   changeTimelineBorders(data[KeyRemoveTimelineBorders]);
   changeTweetBorders(data[KeyRemoveTweetBorders]);
   changeStickyHeader(data[KeyStickyHeader]);
+  changeWriterMode(data[KeyWriterMode]);
+  changeFollowingTimeline(data[KeyFollowingTimeline]);
+  changeHideViewCounts(data[KeyHideViewCount]);
+  changeRecentMedia(data[KeyRecentMedia]);
+  changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
+  changePromotedPosts(data[KeyRemovePromotedPosts]);
+  changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
+  changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
+  changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]);
+  changeFollowCount(data[KeyFollowCount]);
+  changeReplyCount(data[KeyReplyCount]);
+  changeRetweetCount(data[KeyRetweetCount]);
+  changeLikeCount(data[KeyLikeCount]);
+
+  // Navigation
+  changeSidebarLogo(data[KeySidebarLogo]);
   changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
   changeNavigationButtonsLabelsHover(data[KeyNavigationButtonsLabelsHover]);
   changeNavigationCenter(data[KeyNavigationCenter]);
   changeUnreadCountBadge(data[KeyUnreadCountBadge]);
-  changeWriterMode(data[KeyWriterMode]);
+  hideGrokDrawer(data[KeyHideGrokDrawer]);
 
   // Sidebar
-  changeSidebarLogo(data[KeySidebarLogo]);
   changeHomeButton(data[KeyHomeButton]);
   changeExploreButton(data[KeyExploreButton]);
   changeNotificationsButton(data[KeyNotificationsButton]);
@@ -109,20 +127,6 @@ export const injectAllChanges = (data) => {
   changeGrokButton(data[KeyGrokButton]);
   changeVerifiedOrgsButton(data[KeyVerifiedOrgsButton]);
   changeAnalyticsButton(data[KeyTypefullyGrowTab]);
-
-  // Timeline
-  changeFollowingTimeline(data[KeyFollowingTimeline]);
-  changeHideViewCounts(data[KeyHideViewCount]);
-  changeRecentMedia(data[KeyRecentMedia]);
-  changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
-  changePromotedPosts(data[KeyRemovePromotedPosts]);
-  changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
-  changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
-  changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]);
-  changeFollowCount(data[KeyFollowCount]);
-  changeReplyCount(data[KeyReplyCount]);
-  changeRetweetCount(data[KeyRetweetCount]);
-  changeLikeCount(data[KeyLikeCount]);
 
   // Interface
   changeInterFont(data[KeyInterFont]);

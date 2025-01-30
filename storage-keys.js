@@ -42,6 +42,7 @@ export const KeyInterFont = "interFont";
 export const KeyTitleNotifications = "titleNotifications";
 export const KeyCustomCss = "customCss";
 export const KeyHideViewCount = "hideViewCount";
+export const KeyHideGrokDrawer = "hideGrokDrawer";
 
 export const allSettingsKeys = [
   KeyExtensionStatus,

@@ -32,6 +32,8 @@ selectors.accountSwitcherLabel = `${selectors.accountSwitcherButton} > div:not(:
 selectors.leftSidebarLabel_hover = `${selectors.leftSidebarLinks}:hover * div:last-child > span:only-child`;
 selectors.accountSwitcherLabel_hover = `${selectors.accountSwitcherButton}:hover > div:not(:first-child)`;
 selectors.rightSidebar = `[data-testid="sidebarColumn"]`;
+// Add Grok drawer selector
+selectors.grokDrawer = `[data-testid="GrokDrawer"]`;
 // Timeline
 selectors.tweetCounts = `[role="group"][id*="id__"]:only-child`;
 selectors.viewCount = selectors.tweetCounts + " a[href*='/analytics']";
@@ -45,5 +47,6 @@ selectors.modalExternalWrapper = `div[role="group"]`;
 selectors.modalBackground = `${selectors.modalExternalWrapper} > div:empty`;
 selectors.modalWrapper = `div[aria-labelledby="modal-header"][role="dialog"]`;
 selectors.modalUi = `${selectors.modalWrapper} > div`;
+selectors.tweetButton = `[data-testid="SideNav_NewTweet_Button"]`;
 
 export default selectors;
