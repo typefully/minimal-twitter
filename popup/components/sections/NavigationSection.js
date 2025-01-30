@@ -239,7 +239,7 @@ const NavigationSection = () => {
             <SwitchControl disabled={labelsShown} label="Show Labels on Hover" storageKey={KeyNavigationButtonsLabelsHover} />
             <SwitchControl label="Center Vertically" storageKey={KeyNavigationCenter} />
             <SwitchControl label="Unread Count Badge" storageKey={KeyUnreadCountBadge} />
-            <SwitchControl label="Hide Grok Drawer" storageKey={KeyHideGrokDrawer} />
+            <SwitchControl label="Hide Grok Drawer Button" storageKey={KeyHideGrokDrawer} />
           </div>
         </form>
       </div>
