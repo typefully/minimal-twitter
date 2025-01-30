@@ -1,6 +1,5 @@
 import addStyles, { removeStyles } from "../utilities/addStyles";
 
-// Function to change Reply Count
 export const changeReplyCount = (replyCount) => {
   switch (replyCount) {
     case "hide":
@@ -18,7 +17,6 @@ export const changeReplyCount = (replyCount) => {
   }
 };
 
-// Function to change Retweet Count
 export const changeRetweetCount = (retweetCount) => {
   switch (retweetCount) {
     case "hide":
@@ -39,7 +37,6 @@ export const changeRetweetCount = (retweetCount) => {
   }
 };
 
-// Function to change Like Count
 export const changeLikeCount = (likeCount) => {
   switch (likeCount) {
     case "hide":
@@ -59,14 +56,13 @@ export const changeLikeCount = (likeCount) => {
   }
 };
 
-// Function to change Follow Count
-export const changeFollowCount = (followCount) => {
+export const changeFollowingAndFollowersCounts = (followCount) => {
   switch (followCount) {
     case "hide":
       addStyles(
         "followCount",
-        `[href$="/following"][dir][role="link"],
-        [href$="/followers"][dir][role="link"] {
+        `[href$="following"][dir][role="link"],
+        [href$="followers"][dir][role="link"] {
           display: none;
         }`
       );

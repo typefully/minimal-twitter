@@ -52,7 +52,7 @@ import {
   KeyXPremiumButton,
 } from "../../../../storage-keys";
 import { changeCustomCss } from "../options/customCss";
-import { changeFollowCount, changeLikeCount, changeReplyCount, changeRetweetCount } from "../options/hideVanityCounts";
+import { changeFollowingAndFollowersCounts, changeLikeCount, changeReplyCount, changeRetweetCount } from "../options/hideVanityCounts";
 import changeHideViewCounts from "../options/hideViewCount";
 import { changeHideSearchBar, changeInterFont, changeTitleNotifications, changeTransparentSearchBar, changeTweetButton } from "../options/interface";
 import {
@@ -108,7 +108,7 @@ export const staticFeatures = {
     changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
     changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
     changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]);
-    changeFollowCount(data[KeyFollowCount]);
+    changeFollowingAndFollowersCounts(data[KeyFollowCount]);
     changeReplyCount(data[KeyReplyCount]);
     changeRetweetCount(data[KeyRetweetCount]);
     changeLikeCount(data[KeyLikeCount]);
