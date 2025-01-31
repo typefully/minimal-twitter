@@ -24,7 +24,7 @@ import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer } from "../options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
-import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "../typefully";
+import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
 import { updateLeftSidebarPositioning } from "../utilities/leftSidebarPosition";
 import { addSmallerSearchBarStyle } from "../utilities/other-styles";
