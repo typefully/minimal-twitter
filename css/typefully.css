@@ -5,6 +5,8 @@
   text-decoration: none;
   padding-left: 22px;
   padding-right: 22px;
+  min-height: 40px;
+  min-width: 190px;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 15px;
@@ -24,6 +26,7 @@
   background-color: transparent;
   border: 1px solid rgba(var(--accent-color-rgb), 0.3);
   color: var(--accent-color);
+  min-width: 0;
 }
 
 .typefully-reply-button:hover,
@@ -39,15 +42,6 @@ body.mt-writerMode-on .typefully-save-draft-button {
 .typefully-reply-button svg,
 .typefully-save-draft-button svg {
   margin: 0 3px 0 -8px;
-}
-
-.typefully-save-draft-button {
-  min-height: 40px;
-  order: 1;
-}
-
-.typefully-reply-button {
-  min-height: 36px;
 }
 
 #typefully-link,

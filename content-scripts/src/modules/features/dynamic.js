@@ -24,7 +24,7 @@ import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer } from "../options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
-import { addTypefullyPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "../typefullyPlugs";
+import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
 import { updateLeftSidebarPositioning } from "../utilities/leftSidebarPosition";
 import { addSmallerSearchBarStyle } from "../utilities/other-styles";
@@ -33,13 +33,16 @@ import throttle from "../utilities/throttle";
 
 export const dynamicFeatures = {
   general: () => {
-    saveCurrentReplyToLink();
-    addTypefullyReplyPlug();
     changeHideViewCounts();
     changeRecentMedia();
     hideRightSidebar();
     addSmallerSearchBarStyle();
     updateLeftSidebarPositioning();
+  },
+  typefullyPlugs: () => {
+    saveCurrentReplyToLink();
+    addTypefullyReplyPlug();
+    addTypefullyComposerPlug();
   },
   sidebarButtons: async () => {
     const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
@@ -59,7 +62,6 @@ export const dynamicFeatures = {
       changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
       changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
       changeFollowingTimeline(data[KeyFollowingTimeline]);
-      addTypefullyPlug();
     }
   },
 };
@@ -69,6 +71,7 @@ export const runDynamicFeatures = throttle(async () => {
 
   if (data) {
     dynamicFeatures.general();
+    dynamicFeatures.typefullyPlugs();
     await dynamicFeatures.sidebarButtons();
     await dynamicFeatures.writerMode(data);
 

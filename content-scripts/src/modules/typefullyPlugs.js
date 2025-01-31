@@ -4,62 +4,80 @@ import addTooltip from "./utilities/addTooltip";
 import { createTypefullyUrl } from "./utilities/createTypefullyUrl";
 import { removeElementById } from "./utilities/removeElement";
 
-// Function to add "Continue Thread in Typefully"
-export const addTypefullyPlug = () => {
+const MODAL_PLUG_ID = "typefully-link";
+const INLINE_PLUG_ID = "typefully-link-inline";
+const REPLY_PLUG_ID = "typefully-reply-link";
+
+// Function to add "Continue draft in Typefully" in the page inline composer and the modal composer
+export const addTypefullyComposerPlug = () => {
+  const existingReplyPlug = document.getElementById(REPLY_PLUG_ID);
+
+  // If there's a reply plug already, let's not add this regular plug
+  if (existingReplyPlug) return;
+
   const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
   const tweetComposeArea = modal?.querySelector("div.public-DraftStyleDefault-block");
-  const tweet2Exist = document.querySelector(`[data-testid="tweetTextarea_1"]`);
   const tweetButtonInlineDisabled = document.querySelector(`[data-testid="tweetButtonInline"][aria-disabled]`);
   const tweetButtonInlineNotDisabled = document.querySelector(`[data-testid="tweetButtonInline"]:not([aria-disabled])`);
 
-  if (modal && tweet2Exist && tweetComposeArea && !document.getElementById("typefully-link")) {
-    const typefullyLinkElement = createTypefullyLinkElement("typefully-link", "typefully-save-draft-button");
+  // Modal plug
+  if (modal && tweetComposeArea && !document.getElementById(MODAL_PLUG_ID)) {
+    const element = createTypefullyLinkElement(MODAL_PLUG_ID, "typefully-save-draft-button");
     const typefullyLogo = createTypefullyLogo();
     const typefullyText = document.createElement("span");
 
-    typefullyLinkElement.addEventListener("click", () => {
+    element.addEventListener("click", () => {
       getCurrentTextAndSendToTypefully();
     });
 
     typefullyText.innerText = "Save draft to Typefully";
-    typefullyLinkElement.appendChild(typefullyLogo);
-    typefullyLinkElement.appendChild(typefullyText);
-    modal.appendChild(typefullyLinkElement);
+    element.appendChild(typefullyLogo);
+    element.appendChild(typefullyText);
+    modal.appendChild(element);
+
+    addTooltip(element, {
+      id: "typefully-tooltip",
+      description: "Save all your post ideas, enhance with AI, schedule, and boost engagement.",
+    });
   }
 
-  if (tweetButtonInlineDisabled && document.getElementById("typefully-link-inline")) {
-    removeElementById("typefully-link-inline");
-    removeStyles("inlinetweetbutton");
+  if (tweetButtonInlineDisabled && document.getElementById(INLINE_PLUG_ID)) {
+    removeElementById(INLINE_PLUG_ID);
+    removeStyles(INLINE_PLUG_ID);
   }
 
-  if (tweetButtonInlineNotDisabled && !document.getElementById("typefully-link-inline")) {
+  // Inline plug
+  if (tweetButtonInlineNotDisabled && !document.getElementById(INLINE_PLUG_ID)) {
     const tweetButtonInline = document.querySelector(`[data-testid="tweetButtonInline"]`);
     const container = tweetButtonInline.parentElement;
-    const typefullyLinkElement = createTypefullyLinkElement("typefully-link-inline", "typefully-save-draft-button ghost");
+    const element = createTypefullyLinkElement(INLINE_PLUG_ID, "typefully-save-draft-button ghost");
     const typefullyLogo = createTypefullyLogo();
 
-    addTooltip(typefullyLinkElement, {
-      id: "save-draft",
-      title: "Save this draft to Typefully",
-    });
-
-    typefullyLinkElement.addEventListener("click", () => {
+    element.addEventListener("click", () => {
       getCurrentTextAndSendToTypefully();
     });
-    typefullyLinkElement.appendChild(typefullyLogo);
-    container.appendChild(typefullyLinkElement);
+    element.appendChild(typefullyLogo);
+    container.appendChild(element);
 
     addStyles(
-      "inlinetweetbutton",
+      INLINE_PLUG_ID,
       `[data-testid="tweetButtonInline"] {
         margin-left: 8px;
         order: 2;
       }`
     );
+
+    addTooltip(element, {
+      id: "typefully-tooltip",
+      title: "Save draft in Typefully",
+      description: "Save all your post ideas, enhance with AI, schedule, and boost engagement.",
+    });
   }
 };
 
-// Function to save current reply
+const REPLY_TO_STORAGE_KEY = "typefully-replying-to";
+
+// Function to save current reply-to link so we can use it in the plug below
 export const saveCurrentReplyToLink = () => {
   const reply = Array.from(document.querySelectorAll('[data-testid="reply"]'));
 
@@ -70,7 +88,7 @@ export const saveCurrentReplyToLink = () => {
     const tweet = linkElement.closest('[data-testid="tweet"]');
     const tweetLinks = tweet.querySelectorAll("a[role='link']");
     const tweetLink = Array.from(tweetLinks).find((link) => link.href.includes("/status/")).href;
-    sessionStorage.setItem("typefully-replying-to", tweetLink);
+    sessionStorage.setItem(REPLY_TO_STORAGE_KEY, tweetLink);
   }
 
   reply.forEach((replyButton) => {
@@ -81,40 +99,41 @@ export const saveCurrentReplyToLink = () => {
 
 // Function to add "Reply with Typefully"
 export const addTypefullyReplyPlug = () => {
-  const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
-  const toolbar = modal && modal.querySelector('[data-testid="toolBar"]');
-  const replyButton = modal && modal.querySelector('[data-testid="tweetButton"]');
+  setTimeout(() => {
+    const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
+    const toolbar = modal && modal.querySelector('[data-testid="toolBar"]');
+    const replyButton = modal && modal.querySelector('[data-testid="tweetButton"]');
 
-  const tweetComposeArea = modal?.querySelector("div.public-DraftStyleDefault-block");
+    const tweetComposeArea = modal?.querySelector("div.public-DraftStyleDefault-block");
 
-  const replyingToLink = sessionStorage.getItem("typefully-replying-to");
+    const replyingToLink = sessionStorage.getItem(REPLY_TO_STORAGE_KEY);
 
-  if (
-    modal &&
-    toolbar &&
-    replyButton &&
-    replyingToLink &&
-    // tweet2Exist &&
-    tweetComposeArea &&
-    !document.getElementById("typefully-reply-link")
-  ) {
-    sessionStorage.removeItem("typefully-replying-to");
+    if (modal && toolbar && replyButton && replyingToLink && tweetComposeArea && !document.getElementById(REPLY_PLUG_ID)) {
+      sessionStorage.removeItem(REPLY_TO_STORAGE_KEY);
 
-    const typefullyReplyLinkElement = createTypefullyLinkElement("typefully-reply-link", "typefully-reply-button");
-    typefullyReplyLinkElement.addEventListener("click", () => {
-      getCurrentTextAndSendToTypefully(replyingToLink);
-    });
+      const typefullyReplyLinkElement = createTypefullyLinkElement(REPLY_PLUG_ID, "typefully-reply-button");
+      typefullyReplyLinkElement.addEventListener("click", () => {
+        getCurrentTextAndSendToTypefully(replyingToLink);
+      });
 
-    const typefullyLogo = createTypefullyLogo();
+      const typefullyLogo = createTypefullyLogo();
 
-    const typefullyText = document.createElement("span");
-    typefullyText.innerText = "Reply with Typefully";
+      const typefullyText = document.createElement("span");
+      typefullyText.innerText = "Reply with Typefully";
 
-    typefullyReplyLinkElement.appendChild(typefullyLogo);
-    typefullyReplyLinkElement.appendChild(typefullyText);
+      typefullyReplyLinkElement.appendChild(typefullyLogo);
+      typefullyReplyLinkElement.appendChild(typefullyText);
 
-    modal.appendChild(typefullyReplyLinkElement);
-  }
+      const existingDraftPlug = document.getElementById(MODAL_PLUG_ID);
+
+      if (existingDraftPlug) {
+        existingDraftPlug.replaceWith(typefullyReplyLinkElement);
+      } else {
+        modal.appendChild(typefullyReplyLinkElement);
+      }
+    }
+    // A small delay so let the regular drag plug appear first, so we can replace it
+  }, 100);
 };
 
 /* ----------------------------- Typefully Utils ---------------------------- */

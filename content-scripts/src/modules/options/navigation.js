@@ -67,10 +67,13 @@ export const addAnalyticsButton = () => {
       onClick: () => {
         const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)?.getAttribute("href").replace("/", "");
 
-        const url = createTypefullyUrl({
-          utm_content: "sidebar-grow-button",
-          "mt-screen-name": screenName,
-        });
+        const url = createTypefullyUrl(
+          {
+            utm_content: "sidebar-grow-button",
+            "mt-screen-name": screenName,
+          },
+          "grow"
+        );
 
         if (screenName) window.open(url, "_blank");
       },
