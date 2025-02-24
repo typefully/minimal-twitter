@@ -12,6 +12,7 @@ import {
   KeyCommunitiesButton,
   KeyFollowingTimeline,
   KeyHideGrokDrawer,
+  KeyHideViewCount,
   KeyListsButton,
   KeyRemoveTimelineTabs,
   KeyTopicsButton,
@@ -32,8 +33,10 @@ import { getStorage } from "../utilities/storage";
 import throttle from "../utilities/throttle";
 
 export const dynamicFeatures = {
-  general: () => {
-    changeHideViewCounts();
+  general: async () => {
+    const data = await getStorage([KeyHideViewCount]);
+
+    changeHideViewCounts(data[KeyHideViewCount]);
     changeRecentMedia();
     hideRightSidebar();
     addSmallerSearchBarStyle();
