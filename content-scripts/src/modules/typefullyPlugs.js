@@ -1,3 +1,4 @@
+import selectors from "../selectors";
 import svgAssets from "./svgAssets";
 import addStyles, { removeStyles } from "./utilities/addStyles";
 import addTooltip from "./utilities/addTooltip";
@@ -35,9 +36,21 @@ export const addTypefullyComposerPlug = () => {
     element.appendChild(typefullyLogo);
     element.appendChild(typefullyText);
 
+    const url = createTypefullyUrl({
+      utm_content: "save-draft-callout",
+    });
+
+    const innerHTML = `<ul>
+  <li>💬 Share your drafts and get comments</li>
+  <li>🤖 Improve your tweets with AI</li>
+  <li>📈 Track your growth with insights and metrics</li>
+  <li>📆 Schedule for later</li>
+</ul>
+<p>Powered by <a href="${url}" target="_blank">Typefully</a>, the makers of the Minimal Twitter extension.</p>`;
+
     addTypefullyBox(
       modal,
-      "save-draft-callout",
+      innerHTML,
       {
         withArrow: true,
       }
@@ -139,6 +152,26 @@ export const addTypefullyReplyPlug = () => {
     }
     // A small delay so let the regular drag plug appear first, so we can replace it
   }, 100);
+};
+
+export const addTypefullySecurityAndAccountAccessPlug = () => {
+  const securityAndAccountAccess = document.querySelector(selectors.securityAndAccountAccess);
+
+  if (securityAndAccountAccess && !document.getElementById("typefully-callout-box")) {
+    const url = createTypefullyUrl({
+      utm_content: "typefully-teams-callout"
+    });
+
+    const innerHTML = `<p>You can use <a href="${url}" target="_blank">Typefully</a> to easily collaborate on multiple Twitter accounts with your team or clients and to share & comment on draft posts.</p>`;
+
+    addTypefullyBox(
+      securityAndAccountAccess,
+      innerHTML,
+      {
+        withArrow: false,
+      }
+    );
+  }
 };
 
 /* ----------------------------- Typefully Utils ---------------------------- */

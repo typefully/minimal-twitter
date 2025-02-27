@@ -50,5 +50,7 @@ selectors.modalBackground = `${selectors.modalExternalWrapper} > div:empty`;
 selectors.modalWrapper = `div[aria-labelledby="modal-header"][role="dialog"]`;
 selectors.modalUi = `${selectors.modalWrapper} > div`;
 selectors.tweetButton = `[data-testid="SideNav_NewTweet_Button"]`;
+// Settings
+selectors.securityAndAccountAccess = `[data-testid="accountAccessScreen"]`;
 
 export default selectors;

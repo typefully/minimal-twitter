@@ -25,7 +25,7 @@ import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer } from "../options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
-import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink } from "../typefullyPlugs";
+import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
 import { updateLeftSidebarPositioning } from "../utilities/leftSidebarPosition";
 import { addSmallerSearchBarStyle } from "../utilities/other-styles";
@@ -46,6 +46,7 @@ export const dynamicFeatures = {
     saveCurrentReplyToLink();
     addTypefullyReplyPlug();
     addTypefullyComposerPlug();
+    addTypefullySecurityAndAccountAccessPlug();
   },
   sidebarButtons: async () => {
     const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
