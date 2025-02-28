@@ -174,9 +174,8 @@ export const getCurrentTextAndSendToTypefully = (replyingToLink) => {
         const isLastItem = index === tweetTextItems.length - 1;
         const isTagOrMention = (item) => !!item.parentElement.parentElement.attributes.style;
 
-        // handle hard break (2 newlines) within single tweet
-        if (item.tagName === "BR" && !isLastItem) {
-          typefullyContent += "\n\n";
+        if (item.tagName === "BR" && !isLastItem && index !== 0) {
+          typefullyContent += "\n";
         }
         // handle regular text (<span> elements)
         else {
