@@ -52,6 +52,10 @@ body.mt-writerMode-on .typefully-save-draft-button {
   visibility: visible;
 }
 
+#typefully-writermode-link {
+  order: 1 !important;
+}
+
 #typefully-link-inline {
   margin: 0 0 0 12px;
   min-height: 36px;
