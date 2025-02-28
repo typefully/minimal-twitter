@@ -131,9 +131,9 @@ export const defaultPreferences = {
   [KeyLikeCount]: "on",
 
   // Navigation Features
-  [KeySidebarLogo]: "on",
+  [KeySidebarLogo]: "off",
   [KeyNavigationButtonsLabels]: "off",
-  [KeyNavigationButtonsLabelsHover]: "on",
+  [KeyNavigationButtonsLabelsHover]: "off",
   [KeyNavigationCenter]: "off",
   [KeyUnreadCountBadge]: "off",
   [KeyHideGrokDrawer]: "on",
@@ -150,7 +150,7 @@ export const defaultPreferences = {
   [KeyExploreButton]: "on",
   [KeyNotificationsButton]: "on",
   [KeyMessagesButton]: "on",
-  [KeyGrokButton]: "off",
+  [KeyGrokButton]: "on",
   [KeyXPremiumButton]: "off",
   [KeyListsButton]: "on",
   [KeyBookmarksButton]: "on",
