@@ -43,6 +43,7 @@ selectors.tweetSpan = `${selectors.tweet} div > div:only-child > span:only-child
 // Search
 selectors.searchBox = `${selectors.rightSidebar} form[role="search"]`;
 selectors.searchBoxInput = `${selectors.searchBox} input:only-child`;
+selectors.searchListBox = `${selectors.searchBox} div[role="listbox"]`;
 // Modals
 selectors.modalExternalWrapper = `div[role="group"]`;
 selectors.modalBackground = `${selectors.modalExternalWrapper} > div:empty`;
