@@ -3,6 +3,7 @@ import addStyles, { removeStyles } from "./utilities/addStyles";
 import addTooltip from "./utilities/addTooltip";
 import { createTypefullyUrl } from "./utilities/createTypefullyUrl";
 import { removeElementById } from "./utilities/removeElement";
+import addTypefullyBox from "./utilities/addTypefullyBox";
 
 const MODAL_PLUG_ID = "typefully-link";
 const INLINE_PLUG_ID = "typefully-link-inline";
@@ -33,12 +34,16 @@ export const addTypefullyComposerPlug = () => {
     typefullyText.innerText = "Save draft to Typefully";
     element.appendChild(typefullyLogo);
     element.appendChild(typefullyText);
-    modal.appendChild(element);
 
-    addTooltip(element, {
-      id: "typefully-tooltip",
-      description: "Save all your post ideas, enhance with AI, schedule, and boost engagement.",
-    });
+    addTypefullyBox(
+      modal,
+      "save-draft-callout",
+      {
+        withArrow: true,
+      }
+    );
+
+    modal.appendChild(element);
   }
 
   if (tweetButtonInlineDisabled && document.getElementById(INLINE_PLUG_ID)) {

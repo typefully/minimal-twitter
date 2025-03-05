@@ -18,7 +18,6 @@
   justify-content: center;
   align-items: center;
   margin: 20px auto;
-  order: 99;
   z-index: 2;
   cursor: pointer;
 }
@@ -48,7 +47,7 @@ body.mt-writerMode-on .typefully-save-draft-button {
 #typefully-link-inline,
 #typefully-reply-link,
 #typefully-writermode-link,
-#typefully-writermode-box {
+#typefully-callout-box {
   visibility: visible;
 }
 
@@ -78,13 +77,13 @@ body.mt-writerMode-on .typefully-save-draft-button {
   }
 }
 
-#typefully-writermode-box {
+#typefully-callout-box {
   font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
   color: var(--main-text-color);
   width: auto;
   max-width: 100%;
-  --bg-color: rgba(var(--secondary-text-color-rgb), 0.08);
+  --bg-color: #f2f3f4;
   background: var(--bg-color);
   border-radius: 20px;
   padding: 6px 20px;
@@ -94,32 +93,32 @@ body.mt-writerMode-on .typefully-save-draft-button {
   order: 2;
 }
 
-#typefully-writermode-box h3,
-#typefully-writermode-box p {
+#typefully-callout-box h3,
+#typefully-callout-box p {
   margin: 10px 0;
 }
 
-#typefully-writermode-box p,
-#typefully-writermode-box li {
+#typefully-callout-box p,
+#typefully-callout-box li {
   color: var(--secondary-text-color);
 }
 
-#typefully-writermode-box ul {
+#typefully-callout-box ul {
   margin: 14px 0;
   padding-left: 0px;
   list-style: none;
 }
 
-#typefully-writermode-box li {
+#typefully-callout-box li {
   margin: 6px 0;
 }
 
-#typefully-writermode-box a {
+#typefully-callout-box a {
   color: var(--accent-color);
   text-decoration: none;
 }
 
-#typefully-writermode-box #box-close-button {
+#typefully-callout-box #box-close-button {
   position: absolute;
   top: 18px;
   right: 18px;
@@ -128,11 +127,11 @@ body.mt-writerMode-on .typefully-save-draft-button {
   color: var(--secondary-text-color);
 }
 
-#typefully-writermode-box #box-close-button:hover {
+#typefully-callout-box #box-close-button:hover {
   opacity: 1;
 }
 
-#typefully-writermode-box #box-arrow {
+#typefully-callout-box #box-arrow {
   position: absolute;
   top: -12px;
   line-height: 0;
@@ -152,11 +151,11 @@ body.mt-writerMode-on .typefully-save-draft-button {
   }
 }
 
-#typefully-writermode-box {
+#typefully-callout-box {
   animation: fadeIn 0.3s ease-out both;
 }
 
-#typefully-writermode-box {
+#typefully-callout-box {
   animation-delay: 0.1s;
 }
 
