@@ -11,7 +11,7 @@ export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
         #typefully-link-inline,
         #typefully-reply-link, 
         #typefully-writermode-link, 
-        #typefully-writermode-box {
+        #typefully-callout-box {
           display: none;
         }
         `
