@@ -168,6 +168,7 @@ export const addTypefullySecurityAndAccountAccessPlug = () => {
       securityAndAccountAccess,
       innerHTML,
       {
+        className: "typefully-teams-box",
         withArrow: false,
       }
     );

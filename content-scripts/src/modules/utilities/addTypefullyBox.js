@@ -2,7 +2,7 @@ import svgAssets from "../svgAssets";
 import { getStorage, setStorage } from "./storage";
 
 export default async function addTypefullyBox(rootElement, innerHTML, options = {}) {
-  const { withArrow } = options ?? {};
+  const { withArrow, className } = options ?? {};
 
   const key = "tp-box-seen:typefully-callout";
 
@@ -11,7 +11,7 @@ export default async function addTypefullyBox(rootElement, innerHTML, options = 
   if (seen !== "true") {
     const typefullyBox = document.createElement("div");
     typefullyBox.id = "typefully-callout-box";
-    typefullyBox.className = "typefully-box";
+    typefullyBox.className = className ?? "typefully-box";
 
     typefullyBox.innerHTML = innerHTML;
 
