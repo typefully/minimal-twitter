@@ -11,7 +11,8 @@ export const changeTypefullyEnhancementsButtons = (typefullyEnhancementsButtons)
         #typefully-link-inline,
         #typefully-reply-link, 
         #typefully-writermode-link, 
-        #typefully-callout-box {
+        #typefully-callout-box,
+        #typefully-schedule-button {
           display: none;
         }
         `

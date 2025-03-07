@@ -9,6 +9,7 @@ import addTypefullyBox from "./utilities/addTypefullyBox";
 const MODAL_PLUG_ID = "typefully-link";
 const INLINE_PLUG_ID = "typefully-link-inline";
 const REPLY_PLUG_ID = "typefully-reply-link";
+const SCHEDULE_PLUG_ID = "typefully-schedule-link";
 
 // Function to add "Continue draft in Typefully" in the page inline composer and the modal composer
 export const addTypefullyComposerPlug = () => {
@@ -175,6 +176,43 @@ export const addTypefullySecurityAndAccountAccessPlug = () => {
   }
 };
 
+export const addTypefullySchedulePlug = () => {
+  const scheduleConfirmButton = document.querySelector('[data-testid="scheduledConfirmationPrimaryAction"]');
+
+  if (scheduleConfirmButton && !document.getElementById("typefully-schedule-button")) {
+    const scheduleButton = scheduleConfirmButton.cloneNode(true);
+
+    // remove data-testid from the scheduleButton
+    scheduleButton.removeAttribute("data-testid");
+
+    // remove any elements inside the scheduleButton
+    scheduleButton.innerHTML = "";
+
+    const element = createTypefullyLinkElement(SCHEDULE_PLUG_ID, "typefully-schedule-link");
+    const typefullyLogo = createTypefullyLogo();
+    const typefullyText = document.createElement("div");
+
+    element.addEventListener("click", () => {
+      getCurrentTextAndSendToTypefully(null, "schedule-button");
+    });
+
+    typefullyText.innerText = "Schedule with Typefully";
+    element.appendChild(typefullyLogo);
+    element.appendChild(typefullyText);
+
+    scheduleButton.appendChild(element);
+    scheduleButton.id = "typefully-schedule-button";
+
+    addTooltip(scheduleButton, {
+      id: "typefully-schedule-tooltip",
+      title: "Schedule with Typefully",
+      description: "Grow an audience faster with Typefully's social media scheduling tool.",
+    });
+
+    scheduleConfirmButton.parentElement.insertBefore(scheduleButton, scheduleConfirmButton);
+  }
+}
+
 /* ----------------------------- Typefully Utils ---------------------------- */
 
 export const createTypefullyLinkElement = (id, className) => {
@@ -194,7 +232,7 @@ export const createTypefullyLogo = () => {
   return typefullyLogo;
 };
 
-export const getCurrentTextAndSendToTypefully = (replyingToLink) => {
+export const getCurrentTextAndSendToTypefully = (replyingToLink, utm_content) => {
   let tweetTextAreaNumber = 0;
   let typefullyContent = "";
 
@@ -234,7 +272,7 @@ export const getCurrentTextAndSendToTypefully = (replyingToLink) => {
   }
 
   const url = createTypefullyUrl({
-    utm_content: "save-draft-button",
+    utm_content: utm_content ?? "save-draft-button",
     new: typefullyContent,
     ...(replyingToLink && { replyTo: replyingToLink }),
   });

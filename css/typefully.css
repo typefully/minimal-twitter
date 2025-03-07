@@ -171,3 +171,23 @@ button .typefully-logo:only-child,
 [role="button"] .typefully-logo:only-child {
   margin: 0 -9px -4px 3px;
 }
+
+#typefully-schedule-button {
+  color: white;
+  background-color: var(--accent-color) !important;
+  padding-left: 22px;
+  padding-right: 22px;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.typefully-schedule-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
