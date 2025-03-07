@@ -44,7 +44,7 @@ import {
   KeyTransparentSearch,
   KeyTrendsHomeTimeline,
   KeyTweetButton,
-  KeyTypefullyComposerButtons,
+  KeyTypefullyEnhancementsButtons,
   KeyTypefullyGrowTab,
   KeyUnreadCountBadge,
   KeyVerifiedOrgsButton,
@@ -90,7 +90,7 @@ import {
   changeTrendsHomeTimeline,
   changeTweetBorders,
 } from "../options/timeline";
-import { changeTypefullyComposerButtons } from "../options/typefully";
+import { changeTypefullyEnhancementsButtons } from "../options/typefully";
 import { changeWriterMode } from "../options/writerMode";
 
 export const staticFeatures = {
@@ -107,7 +107,7 @@ export const staticFeatures = {
     changePromotedPosts(data[KeyRemovePromotedPosts]);
     changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
     changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
-    changeTypefullyComposerButtons(data[KeyTypefullyComposerButtons]);
+    changeTypefullyEnhancementsButtons(data[KeyTypefullyEnhancementsButtons]);
     changeFollowingAndFollowersCounts(data[KeyFollowCount]);
     changeReplyCount(data[KeyReplyCount]);
     changeRetweetCount(data[KeyRetweetCount]);

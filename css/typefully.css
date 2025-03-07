@@ -43,6 +43,10 @@ body.mt-writerMode-on .typefully-save-draft-button {
   margin: 0 3px 0 -8px;
 }
 
+.typefully-teams-box {
+  margin: 20px !important;
+}
+
 #typefully-link,
 #typefully-link-inline,
 #typefully-reply-link,
@@ -86,7 +90,7 @@ body.mt-writerMode-on .typefully-save-draft-button {
   --bg-color: #f2f3f4;
   background: var(--bg-color);
   border-radius: 20px;
-  padding: 6px 20px;
+  padding: 6px 25px;
   line-height: 1.4;
   position: relative;
   margin: 8px auto 16px;

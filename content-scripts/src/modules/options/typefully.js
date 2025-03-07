@@ -1,11 +1,11 @@
 import addStyles, { removeStyles } from "../utilities/addStyles";
 
 // Function to change Typefully Composer Buttons
-export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
-  switch (typefullyComposerButtons) {
+export const changeTypefullyEnhancementsButtons = (typefullyEnhancementsButtons) => {
+  switch (typefullyEnhancementsButtons) {
     case "off":
       addStyles(
-        "typefullyComposerButtons",
+        "typefullyEnhancementsButtons",
         `
         #typefully-link, 
         #typefully-link-inline,
@@ -19,7 +19,7 @@ export const changeTypefullyComposerButtons = (typefullyComposerButtons) => {
       break;
 
     case "on":
-      removeStyles("typefullyComposerButtons");
+      removeStyles("typefullyEnhancementsButtons");
       break;
   }
 };
