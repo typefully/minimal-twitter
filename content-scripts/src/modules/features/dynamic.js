@@ -23,7 +23,7 @@ import {
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer } from "../options/navigation";
-import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline } from "../options/timeline";
+import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline, addMediaDownloadButtons } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug, addTypefullySchedulePlug } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
@@ -41,6 +41,7 @@ export const dynamicFeatures = {
     hideRightSidebar();
     addSmallerSearchBarStyle();
     updateLeftSidebarPositioning();
+    addMediaDownloadButtons();
   },
   typefullyPlugs: () => {
     saveCurrentReplyToLink();

@@ -2,6 +2,8 @@ import { KeyRecentMedia } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
+import { createTypefullyLogo } from "../typefullyPlugs";
+import { createTypefullyMediaDownloadUrl } from "../utilities/createTypefullyUrl";
 
 export const changeTimelineWidth = (timelineWidth) => {
   switch (timelineWidth) {
@@ -402,3 +404,138 @@ export const changeLatestTweets = (latestTweets) => {
     showLatestTweets();
   }
 };
+
+export const addMediaDownloadButtons = () => {
+  const bookmarkButtons = document.querySelectorAll("button[data-testid='bookmark']");
+
+  bookmarkButtons.forEach((bookmarkButton) => {
+    const parent = bookmarkButton.parentElement;
+    const ancestor = parent?.parentElement;
+
+    const sharePostButton = ancestor.lastElementChild;
+    // ensure we don't add the event listener twice
+    if (!sharePostButton.classList.contains("typefully-enhanced-share")) {
+      sharePostButton.classList.add("typefully-enhanced-share");
+
+      sharePostButton.addEventListener("click", () => {
+        const tweet = sharePostButton.closest("article[data-testid='tweet']");
+        if (!tweet) return;
+
+        const tweetLinkElements = tweet.querySelectorAll("a[href*='/status/']");
+        if (tweetLinkElements.length === 0) return;
+
+        let tweetHref;
+        let tweetUrl;
+
+        for (const tweetLinkElement of tweetLinkElements) {
+          // Pattern: /{username}/status/{postId}
+          if (tweetLinkElement.getAttribute("href").match(/\/([^\/]+)\/status\/(\d+)$/)) {
+            tweetHref = tweetLinkElement.getAttribute("href");
+            tweetUrl = tweetLinkElement.href;
+            break;
+          }
+        }
+
+        if (!tweetHref) return;
+
+        let videoTweetElement = tweet.querySelector("div[data-testid='previewInterstitial']");
+        let gifTweetElement = tweet.querySelector("button[aria-label='Play this GIF']");
+        let photoTweetElement = tweet.querySelector(`a[href*='${tweetHref}/photo']`);
+
+        let hasPhoto = false;
+        let hasVideo = false;
+        let hasGif = false;
+
+        if (tweetHref.includes('photo') || photoTweetElement) {
+          hasPhoto = true;
+        }
+
+        if (videoTweetElement) {
+          hasVideo = true;
+        }
+
+        if (gifTweetElement) {
+          hasGif = true;
+        }
+
+        // if the video tweet contains the gif tweet, make hasVideo as false.
+        if (videoTweetElement && videoTweetElement.contains(gifTweetElement)) {
+          hasVideo = false;
+        }
+
+        if (!hasVideo && !hasPhoto && !hasGif) return;
+        
+        const links = tweet.querySelectorAll("div[role='link']");
+        let quoteTweetLink;
+
+        const userName = tweet.querySelector("div[data-testid='User-Name']");
+
+        for (const link of links) {
+          if (!userName.contains(link) && link.hasAttribute("data-testid") !== "tweet-text-show-more-link") {
+            quoteTweetLink = link;
+            break;
+          }
+        }
+
+        // check if video/photo/gif is in a quote tweet.
+        // if it is, don't show the download button.
+        if (quoteTweetLink && ((quoteTweetLink.contains(videoTweetElement) || quoteTweetLink.contains(photoTweetElement)
+          || quoteTweetLink.contains(gifTweetElement)) && quoteTweetLink.hasAttribute("data-testid") !== "tweet-text-show-more-link")) return;
+
+        setTimeout(() => {
+          const dropdown = document.querySelector("div[data-testid='Dropdown']");
+          if (!dropdown) return;
+
+          const options = dropdown.querySelectorAll("div[role='menuitem']");
+          if (!options) return;
+
+          const optionToClone = options[options.length - 1];
+
+          if (hasPhoto) {
+            addDropdownOption(dropdown, "image", tweetUrl, optionToClone);
+          }
+
+          if (hasGif) {
+            addDropdownOption(dropdown, "gif", tweetUrl, optionToClone);
+          } else if (hasVideo) {
+            addDropdownOption(dropdown, "video", tweetUrl, optionToClone);
+          }
+        }, 500);
+      });
+    }
+  });
+};
+
+const addDropdownOption = (dropdown, downloadType, tweetUrl, optionToClone) => {
+  const downloadWithTypefullyOption = optionToClone.cloneNode(true);
+  downloadWithTypefullyOption.id = `typefully-${downloadType}-download-button`;
+
+  downloadWithTypefullyOption.innerHTML = "";
+
+  const typefullyLogo = createTypefullyLogo();
+  const typefullyText = document.createElement("div");
+
+  downloadWithTypefullyOption.addEventListener("click", () => {
+    let url;
+
+    if (downloadType === "gif" || downloadType === "video" || downloadType === "image") {
+      url = createTypefullyMediaDownloadUrl({
+        utm_content: `download-${downloadType}-button`,
+        tweet_url: tweetUrl,
+      }, downloadType);
+    }
+
+    window.open(url.toString());
+  });
+
+  if (downloadType === "gif") {
+    typefullyText.innerText = "Download GIF with Typefully";
+  } else {
+    typefullyText.innerText = `Download ${downloadType} with Typefully`;
+  }
+
+  downloadWithTypefullyOption.appendChild(typefullyLogo);
+  downloadWithTypefullyOption.appendChild(typefullyText);
+
+  dropdown.appendChild(downloadWithTypefullyOption);
+}
