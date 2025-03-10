@@ -406,9 +406,13 @@ export const changeLatestTweets = (latestTweets) => {
 };
 
 export const addMediaDownloadButtons = () => {
-  const sharePostButtons = document.querySelectorAll("button[aria-label='Share post']");
+  const bookmarkButtons = document.querySelectorAll("button[data-testid='bookmark']");
 
-  sharePostButtons.forEach((sharePostButton) => {
+  bookmarkButtons.forEach((bookmarkButton) => {
+    const parent = bookmarkButton.parentElement;
+    const ancestor = parent?.parentElement;
+
+    const sharePostButton = ancestor.lastElementChild;
     // ensure we don't add the event listener twice
     if (!sharePostButton.classList.contains("typefully-enhanced-share")) {
       sharePostButton.classList.add("typefully-enhanced-share");
