@@ -410,8 +410,8 @@ export const addMediaDownloadButtons = () => {
 
   sharePostButtons.forEach((sharePostButton) => {
     // ensure we don't add the event listener twice
-    if (!sharePostButton.classList.contains("typefully-sharePostButton")) {
-      sharePostButton.classList.add("typefully-sharePostButton");
+    if (!sharePostButton.classList.contains("typefully-enhanced-share")) {
+      sharePostButton.classList.add("typefully-enhanced-share");
 
       sharePostButton.addEventListener("click", () => {
         const tweet = sharePostButton.closest("article[data-testid='tweet']");
