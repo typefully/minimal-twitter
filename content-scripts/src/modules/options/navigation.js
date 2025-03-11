@@ -212,12 +212,17 @@ export const changeNavigationCenter = (navigationCenter) => {
 export const hideGrokDrawer = (state) => {
   switch (state) {
     case "on":
-      addStyles(
-        "grokDrawer",
-        `${selectors.grokDrawer} {
-          display: none !important;
-        }`
-      );
+      const grokDrawer = document.querySelector(selectors.grokDrawer);
+      // If typefully-grok-drawer-enabled class is present because we added it when grok button from a post is clicked.
+      // We don't want to hide the drawer in this case.
+      if (grokDrawer && !grokDrawer.classList.contains("typefully-grok-drawer-enabled")) {
+        addStyles(
+          "grokDrawer",
+          `${selectors.grokDrawer} {
+            display: none !important;
+          }`
+        );
+      }
       break;
     case "off":
       removeStyles("grokDrawer");

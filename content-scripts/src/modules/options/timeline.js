@@ -1,4 +1,4 @@
-import { KeyRecentMedia } from "../../../../storage-keys";
+import { KeyRecentMedia, KeyHideGrokDrawer } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
@@ -538,4 +538,68 @@ const addDropdownOption = (dropdown, downloadType, tweetUrl, optionToClone) => {
   downloadWithTypefullyOption.appendChild(typefullyText);
 
   dropdown.appendChild(downloadWithTypefullyOption);
+}
+
+export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
+  const grokClickListener = () => {
+    const grokDrawer = document.querySelector(selectors.grokDrawer);
+    grokDrawer.classList.add("typefully-grok-drawer-enabled");
+    removeStyles("grokDrawer");
+  }
+
+  if (hideGrokDrawer === "off") {
+    // remove event click listener from all grok buttons, when hideGrokDrawer is off
+    const grokSvgs = document.querySelectorAll(selectors.grokSvg);
+    grokSvgs.forEach((svg) => {
+      const grokButton = svg.closest("button");
+      if (grokButton) {
+        grokButton.removeEventListener("click", grokClickListener);
+      }
+    });
+
+    return;
+  }
+
+  let grokSvgs = document.querySelectorAll(selectors.grokSvg);
+  grokSvgs = Array.from(grokSvgs).filter((svg) => svg.closest("button"));
+
+  grokSvgs.forEach((svg) => {
+    const grokButton = svg.closest("button");
+
+    if (!grokButton) return;
+
+    grokButton.addEventListener("click", grokClickListener);
+  });
+
+  const grokDrawer = document.querySelector(selectors.grokDrawer);
+  if (!grokDrawer) return;
+
+  const grokDrawerHeader = document.querySelector(selectors.grokDrawerHeader);
+  if (!grokDrawerHeader) return;
+
+  const observer = new ResizeObserver(async (entries) => {
+    const entry = entries[0];
+
+    // if entry has one child and it is a button, it means the drawer is closed.
+    // Remove the drawer if hideGrokDrawer is on.
+    if (entry.target.children.length === 1 && entry.target.children[0].tagName === "BUTTON") {
+      grokDrawer.classList.remove("typefully-grok-drawer-enabled");
+      let hideGrokDrawer = await getStorage(KeyHideGrokDrawer);
+
+      if (hideGrokDrawer === "on") {
+        addStyles(
+          "grokDrawer",
+          `${selectors.grokDrawer} {
+          display: none !important;
+        }`
+        );
+      }
+      observer.disconnect();
+    }
+  });
+
+  // observe the grok drawer header to determine if the drawer has to be hidden or not.
+  if (grokDrawerHeader) {
+    observer.observe(grokDrawerHeader);
+  }
 }
