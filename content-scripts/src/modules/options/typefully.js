@@ -12,7 +12,10 @@ export const changeTypefullyEnhancementsButtons = (typefullyEnhancementsButtons)
         #typefully-reply-link, 
         #typefully-writermode-link, 
         #typefully-callout-box,
-        #typefully-schedule-button {
+        #typefully-schedule-button,
+        #typefully-image-download-button,
+        #typefully-gif-download-button,
+        #typefully-video-download-button {
           display: none;
         }
         `

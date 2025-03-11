@@ -186,6 +186,31 @@ button .typefully-logo:only-child,
   align-items: center;
 }
 
+#typefully-image-download-button,
+#typefully-gif-download-button,
+#typefully-video-download-button {
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 15px;
+  font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#typefully-image-download-button:hover,
+#typefully-gif-download-button:hover,
+#typefully-video-download-button:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+#typefully-image-download-button .typefully-logo,
+#typefully-gif-download-button .typefully-logo,
+#typefully-video-download-button .typefully-logo {
+  padding-right: 11px;
+}
+
 .typefully-schedule-link {
   display: flex;
   justify-content: center;
