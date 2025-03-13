@@ -544,7 +544,6 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   const grokClickListener = () => {
     const grokDrawer = document.querySelector(selectors.grokDrawer);
     grokDrawer.classList.add("typefully-grok-drawer-enabled");
-    removeStyles("grokDrawer");
   }
 
   if (hideGrokDrawer === "off") {
