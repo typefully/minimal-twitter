@@ -23,7 +23,6 @@ export const KeyBookmarksButton = "bookmarksButton";
 export const KeyJobsButton = "jobsButton";
 export const KeyArticlesButton = "articles";
 export const KeyProfileButton = "profileButton";
-export const KeyNavigationButtonsLabelsHover = "navigationButtonsLabelsHover";
 export const KeyNavigationButtonsLabels = "navigationButtonsLabels";
 export const KeyNavigationCenter = "navigationCenter";
 export const KeyUnreadCountBadge = "unreadCountBadge";
@@ -71,7 +70,6 @@ export const allSettingsKeys = [
   // Navigation Features
   KeySidebarLogo,
   KeyNavigationButtonsLabels,
-  KeyNavigationButtonsLabelsHover,
   KeyNavigationCenter,
   KeyUnreadCountBadge,
   KeyHideGrokDrawer,
@@ -132,8 +130,7 @@ export const defaultPreferences = {
 
   // Navigation Features
   [KeySidebarLogo]: "off",
-  [KeyNavigationButtonsLabels]: "off",
-  [KeyNavigationButtonsLabelsHover]: "off",
+  [KeyNavigationButtonsLabels]: "never",
   [KeyNavigationCenter]: "off",
   [KeyUnreadCountBadge]: "off",
   [KeyHideGrokDrawer]: "on",

@@ -1,10 +1,8 @@
-import { KeyNavigationButtonsLabels, KeyNavigationButtonsLabelsHover } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { createTypefullyUrl } from "../utilities/createTypefullyUrl";
 import { addSidebarButton } from "../utilities/sidebar";
-import { getStorage } from "../utilities/storage";
 
 // Utilities
 
@@ -138,52 +136,45 @@ const addStyleToRemoveLabels = () => {
   );
 };
 
-export const changeNavigationButtonsLabelsHover = async (setting) => {
-  const labelsHidden = (await getStorage(KeyNavigationButtonsLabels)) === "off";
-
-  switch (setting) {
-    case "off":
-      removeStyles("showLabelsOnHover");
-      labelsHidden && addStyleToRemoveLabels();
-      break;
-
-    case "on":
-      removeStyles("removeLabels");
-      addStyles(
-        "showLabelsOnHover",
-        `
-        ${selectors.leftSidebarLabel_hover},
-        ${selectors.accountSwitcherLabel_hover} {
-          opacity: 1;
-        }
-        `
-      );
-      break;
-  }
+const addStyleToShowLabelsOnHover = () => {
+  addStyles(
+    "hideLabels",
+    `
+    ${selectors.leftSidebarLabel},
+    ${selectors.accountSwitcherLabel} {
+      display: inline-block;
+      opacity: 0;
+      transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    `
+  );
+  addStyles(
+    "showLabelsOnHover",
+    `
+    ${selectors.leftSidebarLabel_hover},
+    ${selectors.accountSwitcherLabel_hover} {
+      opacity: 1;
+    }
+    `
+  );
 };
 
 export const changeNavigationButtonsLabels = async (setting) => {
-  const showLabelsOnHover = (await getStorage(KeyNavigationButtonsLabelsHover)) === "on";
-
   switch (setting) {
-    case "on":
+    case "never":
+      addStyleToRemoveLabels();
+      removeStyles("showLabelsOnHover");
+
+      break;
+    case "always":
       removeStyles("hideLabels");
       removeStyles("removeLabels");
-      break;
+      removeStyles("showLabelsOnHover");
 
-    case "off":
-      !showLabelsOnHover && addStyleToRemoveLabels();
-      addStyles(
-        "hideLabels",
-        `
-        ${selectors.leftSidebarLabel},
-        ${selectors.accountSwitcherLabel} {
-          display: inline-block;
-          opacity: 0;
-          transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        `
-      );
+      break;
+    case "hover":
+      removeStyles("removeLabels");
+      addStyleToShowLabelsOnHover();
 
       break;
   }

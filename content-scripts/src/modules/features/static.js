@@ -23,7 +23,6 @@ import {
   KeyListsButton,
   KeyMessagesButton,
   KeyNavigationButtonsLabels,
-  KeyNavigationButtonsLabelsHover,
   KeyNavigationCenter,
   KeyNotificationsButton,
   KeyProfileButton,
@@ -67,7 +66,6 @@ import {
   changeListsButton,
   changeMessagesButton,
   changeNavigationButtonsLabels,
-  changeNavigationButtonsLabelsHover,
   changeNavigationCenter,
   changeNotificationsButton,
   changeProfileButton,
@@ -116,7 +114,6 @@ export const staticFeatures = {
   navigation: (data) => {
     changeSidebarLogo(data[KeySidebarLogo]);
     changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
-    changeNavigationButtonsLabelsHover(data[KeyNavigationButtonsLabelsHover]);
     changeNavigationCenter(data[KeyNavigationCenter]);
     changeUnreadCountBadge(data[KeyUnreadCountBadge]);
     hideGrokDrawer(data[KeyHideGrokDrawer]);
