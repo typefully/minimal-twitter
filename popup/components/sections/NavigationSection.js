@@ -13,7 +13,6 @@ import {
   KeyListsButton,
   KeyMessagesButton,
   KeyNavigationButtonsLabels,
-  KeyNavigationButtonsLabelsHover,
   KeyNavigationCenter,
   KeyNotificationsButton,
   KeyProfileButton,
@@ -23,11 +22,10 @@ import {
   KeyUnreadCountBadge,
   KeyVerifiedOrgsButton,
   KeyXPremiumButton,
-  defaultPreferences,
 } from "../../../storage-keys";
 import SectionLabel from "../ui/SectionLabel";
+import { SegmentedControl } from "../ui/SegmentedControl";
 
-import { useEffect, useState } from "react";
 import useStorageKeyState, { useStorageValue } from "../../utilities/useStorageKeyState";
 import Separator from "../ui/Separator";
 import SwitchControl from "../ui/SwitchControl";
@@ -204,11 +202,6 @@ const Jobs = () => (
 
 const NavigationSection = () => {
   const initialShowLabels = useStorageValue(KeyNavigationButtonsLabels);
-  const [labelsShown, setLabelsShown] = useState(defaultPreferences[KeyNavigationButtonsLabels] === "on");
-
-  useEffect(() => {
-    setLabelsShown(initialShowLabels === "on");
-  }, [initialShowLabels]);
 
   return (
     <section className="flex flex-col gap-y-2">
@@ -235,8 +228,26 @@ const NavigationSection = () => {
           <div className="flex flex-col gap-y-4">
             <Separator />
             <SwitchControl label="𝕏 Logo" storageKey={KeySidebarLogo} />
-            <SwitchControl label="Show Labels" storageKey={KeyNavigationButtonsLabels} onChange={setLabelsShown} />
-            <SwitchControl disabled={labelsShown} label="Show Labels on Hover" storageKey={KeyNavigationButtonsLabelsHover} />
+            <div className="flex items-center gap-x-4">
+              <span className="text-[15px] font-medium whitespace-nowrap">Show Labels</span>
+              <SegmentedControl
+                storageKey={KeyNavigationButtonsLabels}
+                segments={[
+                  {
+                    value: "never",
+                    label: "Never"
+                  },
+                  {
+                    value: "hover",
+                    label: "On Hover"
+                  },
+                  {
+                    value: "always",
+                    label: "Always"
+                  }
+                ]}
+              />
+            </div>
             <SwitchControl label="Center Vertically" storageKey={KeyNavigationCenter} />
             <SwitchControl label="Unread Count Badge" storageKey={KeyUnreadCountBadge} />
             <SwitchControl label="Hide Grok Drawer Button" storageKey={KeyHideGrokDrawer} />
