@@ -26,7 +26,7 @@ import {
 import SectionLabel from "../ui/SectionLabel";
 import { SegmentedControl } from "../ui/SegmentedControl";
 
-import useStorageKeyState, { useStorageValue } from "../../utilities/useStorageKeyState";
+import useStorageKeyState from "../../utilities/useStorageKeyState";
 import Separator from "../ui/Separator";
 import SwitchControl from "../ui/SwitchControl";
 
@@ -201,8 +201,6 @@ const Jobs = () => (
 );
 
 const NavigationSection = () => {
-  const initialShowLabels = useStorageValue(KeyNavigationButtonsLabels);
-
   return (
     <section className="flex flex-col gap-y-2">
       <SectionLabel htmlFor="user-control-navigation">Left Navigation</SectionLabel>

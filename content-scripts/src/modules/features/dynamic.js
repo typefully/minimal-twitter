@@ -20,9 +20,10 @@ import {
   KeyTypefullyGrowTab,
   KeyWriterMode,
   KeyXPremiumButton,
+  KeyNavigationButtonsLabels
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
-import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer } from "../options/navigation";
+import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline, addMediaDownloadButtons, enableGrokDrawerOnGrokButtonClick } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug, addTypefullySchedulePlug } from "../typefullyPlugs";
@@ -51,6 +52,9 @@ export const dynamicFeatures = {
     addTypefullySecurityAndAccountAccessPlug();
     addTypefullySchedulePlug();
   },
+  navigation: (data) => {
+    changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
+  },
   sidebarButtons: async () => {
     const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
 
@@ -74,13 +78,14 @@ export const dynamicFeatures = {
 };
 
 export const runDynamicFeatures = throttle(async () => {
-  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer]);
+  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer, KeyNavigationButtonsLabels]);
 
   if (data) {
     dynamicFeatures.general();
     dynamicFeatures.typefullyPlugs();
     await dynamicFeatures.sidebarButtons();
     await dynamicFeatures.writerMode(data);
+    dynamicFeatures.navigation(data);
 
     // The Grok drawer appears dynamically, so we need to handle it here as well
     // as in the static features module
