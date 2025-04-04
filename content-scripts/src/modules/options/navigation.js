@@ -3,7 +3,6 @@ import svgAssets from "../svgAssets";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { createTypefullyUrl } from "../utilities/createTypefullyUrl";
 import { addSidebarButton } from "../utilities/sidebar";
-import { updateLeftSidebarPositioning } from "../utilities/leftSidebarPosition";
 
 // Utilities
 
@@ -127,16 +126,13 @@ const addStyleToRemoveLabels = () => {
   addStyles(
     "removeLabels",
     `
-        ${selectors.leftSidebarLinks} > * > div > div + div:last-child {
-          display: none;
-        }
-        ${selectors.leftSidebarLinks} > * {
-          max-width: 80px;
-        }
-        ${selectors.accountSwitcherLabel} {
-          display: none;
-        }
-        `
+    ${selectors.leftSidebarLinks} > * > div > div + div:last-child {
+      display: none;
+    }
+    ${selectors.accountSwitcherLabel} {
+      display: none;
+    }
+    `
   );
 };
 
@@ -163,76 +159,47 @@ const addStyleToShowLabelsOnHover = () => {
   );
 };
 
-const addStyleToDecreaseSidebarWidthOnHover = () => {
-  addStyles(
-    "sidebarWidthDecrease",
-    `
-    @media (min-width: 1000px) {
-      main[role="main"] {
-        align-items: flex-start !important;
-      }
-    }
-    `
-  );
-};
-
-const addStyleToDecreaseSidebarWidthOnNeverShowLabels = () => {
-  addStyles(
-    "sidebarWidthDecrease",
-    `
-    @media (min-width: 1000px) {
-      ${selectors.leftSidebar} > div {
-        width: 0;
-      }
-      ${selectors.leftSidebar} {
-        position: fixed;
-      }
-      ${selectors.leftSidebar} > div > div > div {
-        width: 70px;
-      }
-    }
-    `
-  );
-};
-
 export const changeNavigationButtonsLabels = async (setting) => {
   const isMessagesPage = window.location.pathname.startsWith("/messages");
   const isSearchPage = window.location.pathname.startsWith("/search");
+
+  if (isMessagesPage || isSearchPage) {
+    removeStyles("navigation-position");
+    addStyles(
+      "customDMsAndSearchStyle",
+      `
+${selectors.leftSidebar} {
+flex: 0.5 1 auto;
+}
+@media only screen and (min-width: 1200px) {
+  ${selectors.leftSidebar} {
+    flex: 0.3 1 auto;
+  }
+}
+${selectors.mainWrapper} {
+align-items: flex-start;
+}
+`
+    );
+  } else {
+    removeStyles("customDMsAndSearchStyle");
+  }
 
   switch (setting) {
     case "never":
       addStyleToRemoveLabels();
       removeStyles("showLabelsOnHover");
-      removeStyles("sidebarWidthDecrease");
 
-      if (isSearchPage) {
-        removeStyles("navigation-position");
-      }
-
-      if (isMessagesPage || isSearchPage) {
-        addStyleToDecreaseSidebarWidthOnNeverShowLabels();
-      }
       break;
     case "always":
       removeStyles("hideLabels");
       removeStyles("removeLabels");
       removeStyles("showLabelsOnHover");
-      removeStyles("sidebarWidthDecrease");
-
-      if (isMessagesPage || isSearchPage) {
-        removeStyles("navigation-position");
-      }
 
       break;
     case "hover":
       removeStyles("removeLabels");
-      removeStyles("sidebarWidthDecrease");
       addStyleToShowLabelsOnHover();
-
-      if (isMessagesPage || isSearchPage) {
-        removeStyles("navigation-position")
-        addStyleToDecreaseSidebarWidthOnHover();
-      }
 
       break;
   }
