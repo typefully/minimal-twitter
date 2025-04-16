@@ -49,9 +49,10 @@ import {
   KeyVerifiedOrgsButton,
   KeyWriterMode,
   KeyXPremiumButton,
+  KeyBookmarkCount,
 } from "../../../../storage-keys";
 import { changeCustomCss } from "../options/customCss";
-import { changeFollowingAndFollowersCounts, changeLikeCount, changeReplyCount, changeRetweetCount } from "../options/hideVanityCounts";
+import { changeFollowingAndFollowersCounts, changeLikeCount, changeReplyCount, changeRetweetCount, changeBookmarkCount } from "../options/hideVanityCounts";
 import changeHideViewCounts from "../options/hideViewCount";
 import { changeHideSearchBar, changeInterFont, changeTitleNotifications, changeTransparentSearchBar, changeTweetButton } from "../options/interface";
 import {
@@ -110,6 +111,7 @@ export const staticFeatures = {
     changeReplyCount(data[KeyReplyCount]);
     changeRetweetCount(data[KeyRetweetCount]);
     changeLikeCount(data[KeyLikeCount]);
+    changeBookmarkCount(data[KeyBookmarkCount])
   },
   navigation: (data) => {
     changeSidebarLogo(data[KeySidebarLogo]);

@@ -73,3 +73,21 @@ export const changeFollowingAndFollowersCounts = (followCount) => {
       break;
   }
 };
+
+export const changeBookmarkCount = (bookmarkCount) => {
+  switch (bookmarkCount) {
+    case "hide":
+      addStyles(
+        "bookmarkCount",
+        `[data-testid="bookmark"] span,
+        [data-testid="removeBookmark"] span {
+           visibility: hidden; 
+        }`
+      );
+      break;
+
+    case "show":
+      removeStyles("bookmarkCount");
+      break;
+  }
+}
