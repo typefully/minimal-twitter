@@ -31,6 +31,7 @@ export const KeyReplyCount = "replyCount";
 export const KeyRetweetCount = "retweetCount";
 export const KeyLikeCount = "likeCount";
 export const KeyFollowCount = "followCount";
+export const KeyBookmarkCount = "bookmarkCount";
 export const KeyTweetButton = "tweetButton";
 export const KeySearchBar = "searchBar";
 export const KeyTransparentSearch = "transparentSearch";
