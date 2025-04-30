@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { KeyAllVanity, KeyFollowCount, KeyLikeCount, KeyReplyCount, KeyRetweetCount } from "../../../storage-keys";
+import { KeyAllVanity, KeyFollowCount, KeyLikeCount, KeyReplyCount, KeyRetweetCount, KeyBookmarkCount } from "../../../storage-keys";
 import { getStorage, setStorage } from "../../utilities/chromeStorage";
 import ToggleChevron from "../ui/ToggleChevron";
 import { CheckboxControl } from "../ui/checkboxes";
@@ -11,6 +11,7 @@ const VanityCheckboxes = () => {
   const [hideRetweet, setHideRetweet] = useState(false);
   const [hideLike, setHideLike] = useState(false);
   const [hideFollow, setHideFollow] = useState(false);
+  const [hideBookmark, setHideBookmark] = useState(false);
 
   useEffect(() => {
     const getUserDefaultAll = async () => {
@@ -55,12 +56,21 @@ const VanityCheckboxes = () => {
         console.warn(error);
       }
     };
+    const getUserDefaultBookmark = async () => {
+      try {
+        const userDefaultBookmark = await getStorage(KeyBookmarkCount);
+        userDefaultBookmark && setHideBookmark(userDefaultBookmark === "hide" ? true : false);
+      } catch (error) {
+        console.warn(error);
+      }
+    };
 
     getUserDefaultAll();
     getUserDefaultReply();
     getUserDefaultLike();
     getUserDefaultRetweet();
     getUserDefaultFollow();
+    getUserDefaultBookmark();
   }, []);
 
   const onCheckedChange = async (type, checked) => {
@@ -71,6 +81,7 @@ const VanityCheckboxes = () => {
         setHideRetweet(checked);
         setHideLike(checked);
         setHideFollow(checked);
+        setHideBookmark(checked);
         try {
           await setStorage({
             [KeyAllVanity]: checked ? "hide" : "show",
@@ -78,6 +89,7 @@ const VanityCheckboxes = () => {
             [KeyRetweetCount]: checked ? "hide" : "show",
             [KeyLikeCount]: checked ? "hide" : "show",
             [KeyFollowCount]: checked ? "hide" : "show",
+            [KeyBookmarkCount]: checked ? "hide": "show",
           });
         } catch (error) {
           console.warn(error);
@@ -127,6 +139,17 @@ const VanityCheckboxes = () => {
           console.warn(error);
         }
         break;
+      
+      case "bookmark":
+        setHideBookmark(checked);
+        try {
+          await setStorage({
+            [KeyBookmarkCount]: checked ? "hide" : "show",
+          });
+        } catch (error) {
+          console.warn(error);
+        }
+        break;
     }
   };
 
@@ -146,6 +169,7 @@ const VanityCheckboxes = () => {
           <CheckboxControl crossedIcon id="retweet" label="Retweet Count from Tweets" onCheckedChange={(checked) => onCheckedChange("retweet", checked)} checked={hideRetweet} />
           <CheckboxControl crossedIcon id="like" label="Like Count from Tweets" onCheckedChange={(checked) => onCheckedChange("like", checked)} checked={hideLike} />
           <CheckboxControl crossedIcon id="follow" label="Follower/Following Count" onCheckedChange={(checked) => onCheckedChange("follow", checked)} checked={hideFollow} />
+          <CheckboxControl crossedIcon id="bookmark" label="Bookmark Count from Tweets" onCheckedChange={(checked) => onCheckedChange("bookmark", checked)} checked={hideBookmark} />
         </div>
       )}
     </>
