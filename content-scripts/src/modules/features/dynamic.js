@@ -20,7 +20,8 @@ import {
   KeyTypefullyGrowTab,
   KeyWriterMode,
   KeyXPremiumButton,
-  KeyNavigationButtonsLabels
+  KeyNavigationButtonsLabels,
+  KeyTitleNotifications
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
@@ -32,6 +33,7 @@ import { updateLeftSidebarPositioning } from "../utilities/leftSidebarPosition";
 import { addSmallerSearchBarStyle } from "../utilities/other-styles";
 import { getStorage } from "../utilities/storage";
 import throttle from "../utilities/throttle";
+import { changeTitleNotifications } from "../options/interface";
 
 export const dynamicFeatures = {
   general: async () => {
@@ -44,6 +46,9 @@ export const dynamicFeatures = {
     updateLeftSidebarPositioning();
     addMediaDownloadButtons();
     enableGrokDrawerOnGrokButtonClick(data[KeyHideGrokDrawer]);
+  },
+  interface: (data) => {
+    changeTitleNotifications(data[KeyTitleNotifications]);
   },
   typefullyPlugs: () => {
     saveCurrentReplyToLink();
@@ -78,7 +83,7 @@ export const dynamicFeatures = {
 };
 
 export const runDynamicFeatures = throttle(async () => {
-  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer, KeyNavigationButtonsLabels]);
+  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer, KeyNavigationButtonsLabels, KeyTitleNotifications]);
 
   if (data) {
     dynamicFeatures.general();
@@ -86,6 +91,7 @@ export const runDynamicFeatures = throttle(async () => {
     await dynamicFeatures.sidebarButtons();
     await dynamicFeatures.writerMode(data);
     dynamicFeatures.navigation(data);
+    dynamicFeatures.interface(data);
 
     // The Grok drawer appears dynamically, so we need to handle it here as well
     // as in the static features module
