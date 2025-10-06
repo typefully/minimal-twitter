@@ -11,7 +11,3 @@ export const createTypefullyUrl = (extraParams, pathname) => {
   });
   return url.toString();
 };
-
-export const createTypefullyMediaDownloadUrl = (extraParams, downloadType) => {
-  return createTypefullyUrl(extraParams, `tools/twitter-${downloadType}-downloader`);
-};
