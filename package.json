@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "node ./bundle-extension.js",
-    "bundle": "node ./bundle-extension.js"
+    "bundle": "node ./bundle-extension.js",
+    "version": "node ./bump-version.js"
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
