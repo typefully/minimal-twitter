@@ -148,6 +148,40 @@ To add a new feature toggle:
 - Safari: Converted from Firefox build using xcrun safari-web-extension-converter
 - Manifests defined in `bundle-extension.js`
 
-## Versioning
+## Releasing Updates
 
-Version is defined in `bundle-extension.js` in the `manifest` object. To bump the version, search and replace the current version string across the entire repo.
+### Version Bump
+
+Run `yarn bump-version` to bump the version (prompts for patch/minor/major). This automatically updates:
+- `bundle-extension.js` - main version number
+- Xcode project (`project.pbxproj`) - MARKETING_VERSION and CURRENT_PROJECT_VERSION (build number incremented by 1)
+
+Then run `yarn build` to create bundles for submission to browser stores.
+
+### Update Screen Behavior
+
+Controlled in `background.js`. By default, the welcome page only opens on fresh installs.
+
+To show an update screen for major releases, modify `background.js`:
+
+```js
+// Show welcome page on both install AND update
+if (object.reason !== "install" && object.reason !== "update") {
+  return;
+}
+
+const targetUrl = `https://typefully.com/minimal-twitter/welcome${
+  object.reason === "update" ? "?updated=true" : ""
+}`;
+```
+
+To disable update screen (default):
+
+```js
+// Only show welcome page on fresh install
+if (object.reason !== "install") {
+  return;
+}
+
+const targetUrl = `https://typefully.com/minimal-twitter/welcome`;
+```
