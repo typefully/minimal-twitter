@@ -334,7 +334,7 @@ export const changeFollowingTimeline = (followingTimeline) => {
   if (!followingTabSpan) return;
 
   const followingTabText = followingTabSpan.textContent.toLowerCase();
-  const selectedTabSpan = selectedTab.querySelector("div[dir='ltr'] > span");
+  const selectedTabSpan = selectedTab.querySelector(selectors.timelineTabText);
   if (!selectedTabSpan) return;
 
   const selectedTabText = selectedTabSpan.textContent.toLowerCase();
@@ -354,15 +354,15 @@ export const changeLatestTweets = (latestTweets) => {
 
   const showLatestTweets = () => {
     // Check if the "Latest Tweets" options is already selected to avoid unnecessary clicks
-    const latestSelected = !!document.querySelector("div[data-testid='ScrollSnap-List'] > div:last-child > a[aria-selected='true']");
+    const latestSelected = !!document.querySelector(`${selectors.timelineTablist} > div:last-child > a[aria-selected='true']`);
     // Check if there's a menu button
-    const menuitem = document.querySelector("div[role='menuitem'][tabindex='0']");
+    const menuitem = document.querySelector(selectors.menuItem);
 
     if (latestSelected || !menuitem) return;
 
     const run = () => {
       // Check if the nav bar with "Home" and "Latest Tweets" exists
-      const optionBarExists = !!document.querySelector("div[data-testid='ScrollSnap-List']");
+      const optionBarExists = !!document.querySelector(selectors.timelineTablist);
 
       if (!optionBarExists) {
         /*
@@ -370,8 +370,8 @@ export const changeLatestTweets = (latestTweets) => {
             1. Click the Timeline Options button
             2. Click the first option in the popup
           */
-        const timelineOptions = document.querySelector("div[aria-label='Timeline options']");
-        const topTweetsOn = document.querySelector("div[aria-label='Top Tweets on']");
+        const timelineOptions = document.querySelector(selectors.timelineOptions);
+        const topTweetsOn = document.querySelector(selectors.topTweetsOn);
 
         const clickMenuButton = (isTimelineOptions) => {
           clearTimeout(lt1);
@@ -380,7 +380,7 @@ export const changeLatestTweets = (latestTweets) => {
 
             if (isTimelineOptions) {
               // Click the "Latest Tweets" nav bar option
-              const latestTweetsNavBarOption = document.querySelector("div[data-testid='ScrollSnap-List'] > div:last-child > a");
+              const latestTweetsNavBarOption = document.querySelector(`${selectors.timelineTablist} > div:last-child > a`);
               latestTweetsNavBarOption && latestTweetsNavBarOption.click();
             }
           }, 100);
