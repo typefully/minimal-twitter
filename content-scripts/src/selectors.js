@@ -37,6 +37,10 @@ selectors.rightSidebar = `[data-testid="sidebarColumn"]`;
 selectors.grokDrawer = `[data-testid="GrokDrawer"]`;
 selectors.grokDrawerHeader = `div[data-testid="GrokDrawerHeader"]`;
 // Timeline
+selectors.timelineTablist = `div[data-testid='ScrollSnap-List'][role='tablist']`;
+selectors.timelineTab = `div[role='tab']`;
+selectors.timelineTabPresentation = `div[role='presentation']`;
+selectors.timelineTabSelected = `div[role='tab'][aria-selected='true']`;
 selectors.tweetCounts = `[role="group"][id*="id__"]:only-child`;
 selectors.viewCount = selectors.tweetCounts + " a[href*='/analytics']";
 selectors.tweet = `[data-testid="tweet"][role="article"]`;

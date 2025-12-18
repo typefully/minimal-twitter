@@ -1,4 +1,4 @@
-import { KeyRecentMedia, KeyHideGrokDrawer } from "../../../../storage-keys";
+import { KeyHideGrokDrawer, KeyRecentMedia } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
@@ -324,21 +324,27 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
 export const changeFollowingTimeline = (followingTimeline) => {
   if (followingTimeline !== "on") return;
 
-  const tablist = document.querySelector("div[data-testid='ScrollSnap-List'][role='tablist']");
-  const selectedTab = document.querySelector("div[data-testid='ScrollSnap-List'][role='tablist'] a[href='/home'][aria-selected='true']");
+  const tablist = document.querySelector(selectors.timelineTablist);
+  const selectedTab = document.querySelector(`${selectors.timelineTablist} ${selectors.timelineTabSelected}`);
 
-  // Check if there's a selected tab
   if (!tablist || !selectedTab) return;
 
   // Get localized "Following" text (it's the second tab)
-  const followingTabText = tablist.querySelector("div[role='presentation']:nth-of-type(2) span").textContent.toLowerCase();
-  const selectedTabText = selectedTab.querySelector("div[dir='ltr'] > span").textContent.toLowerCase();
+  const followingTabSpan = tablist.querySelector(`${selectors.timelineTabPresentation}:nth-of-type(2) span`);
+  if (!followingTabSpan) return;
+
+  const followingTabText = followingTabSpan.textContent.toLowerCase();
+  const selectedTabSpan = selectedTab.querySelector("div[dir='ltr'] > span");
+  if (!selectedTabSpan) return;
+
+  const selectedTabText = selectedTabSpan.textContent.toLowerCase();
 
   if (selectedTabText === followingTabText) return; // Already on the "Following" tab
 
-  const secondTab = tablist.querySelector("div[role='presentation']:nth-child(2) a");
+  const secondTab = tablist.querySelector(`${selectors.timelineTabPresentation}:nth-child(2) ${selectors.timelineTab}`);
+  if (!secondTab) return;
 
-  secondTab.click(); // Following tab is second tab
+  secondTab.click();
 };
 
 let lt1; // Latest Tweets timeout 1
@@ -403,12 +409,11 @@ export const changeLatestTweets = (latestTweets) => {
   }
 };
 
-
 export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   const grokClickListener = () => {
     const grokDrawer = document.querySelector(selectors.grokDrawer);
     grokDrawer.classList.add("typefully-grok-drawer-enabled");
-  }
+  };
 
   if (hideGrokDrawer === "off") {
     // remove event click listener from all grok buttons, when hideGrokDrawer is off
@@ -465,4 +470,4 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   if (grokDrawerHeader) {
     observer.observe(grokDrawerHeader);
   }
-}
+};
