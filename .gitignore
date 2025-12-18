@@ -45,3 +45,4 @@ bundle/firefox
 
 # xcode project
 xcuserdata/
+.claude
