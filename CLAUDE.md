@@ -152,11 +152,20 @@ To add a new feature toggle:
 
 ### Version Bump
 
-Run `yarn bump-version` to bump the version (prompts for patch/minor/major). This automatically updates:
-- `bundle-extension.js` - main version number
-- Xcode project (`project.pbxproj`) - MARKETING_VERSION and CURRENT_PROJECT_VERSION (build number incremented by 1)
+1. Run `yarn bump-version` (prompts for patch/minor/major). This automatically updates:
+   - `bundle-extension.js` - main version number
+   - Xcode project (`project.pbxproj`) - MARKETING_VERSION and CURRENT_PROJECT_VERSION (build number incremented by 1)
 
-Then run `yarn build` to create bundles for submission to browser stores.
+2. Run `yarn build` to create bundles for all browsers
+
+3. Commit and tag:
+   ```bash
+   git add . && git commit -m "Bump version to X.Y.Z"
+   git tag vX.Y.Z
+   git push && git push --tags
+   ```
+
+4. Submit bundles to browser stores (Chrome Web Store, Firefox Add-ons, App Store via Xcode)
 
 ### Update Screen Behavior
 
