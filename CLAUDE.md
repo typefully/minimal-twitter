@@ -31,10 +31,25 @@ Requires [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/).
 - `cd popup && yarn check:prettier` - Check code formatting
 - `cd popup && yarn write:prettier` - Format code with Prettier
 
+### Development Workflow
+
+1. Run `yarn build` at root once to build everything initially
+2. For content-script changes: `cd content-scripts && yarn watch` (auto-rebuilds on save)
+3. For popup changes: `cd popup && yarn build` (no watch mode, must rebuild manually)
+
+**Important:** `yarn watch` builds to `content-scripts/dist/`, but the extension loads from `bundle/chrome/dist/`. To sync changes during development, either:
+
+- Run `yarn build` at root after changes (slow, rebuilds everything)
+- Or create a symlink once: `rm -rf bundle/chrome/dist && ln -s ../../content-scripts/dist bundle/chrome/dist`
+
+Then load the extension in your browser (see below).
+
 ### Loading Extension for Testing
 
 - Chrome/Edge: Load `bundle/chrome` folder at `chrome://extensions` (enable Developer mode)
 - Firefox: Load `bundle/firefox/manifest.json` at `about:debugging#/runtime/this-firefox`
+
+After making changes, refresh the extension in `chrome://extensions` to reload.
 
 ## Architecture
 
