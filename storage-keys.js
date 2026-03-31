@@ -9,7 +9,6 @@ export const KeyGrokButton = "grokButton";
 export const KeyFollowingTimeline = "followingTimeline";
 export const KeyTrendsHomeTimeline = "trendsHomeTimeline";
 export const KeyRemoveTimelineTabs = "removeTimelineTabs";
-export const KeyWriterMode = "writerMode";
 export const KeyTimelineWidth = "timelineWidth";
 export const KeyRemoveTimelineBorders = "timelineBorders";
 export const KeyRemoveTweetBorders = "tweetBorders";
@@ -53,7 +52,6 @@ export const allSettingsKeys = [
   KeyRemoveTimelineBorders,
   KeyRemoveTweetBorders,
   KeyStickyHeader,
-  KeyWriterMode,
   KeyFollowingTimeline,
   KeyHideViewCount,
   KeyRecentMedia,
@@ -114,7 +112,6 @@ export const defaultPreferences = {
   [KeyRemoveTimelineBorders]: "off",
   [KeyRemoveTweetBorders]: "off",
   [KeyStickyHeader]: "on",
-  [KeyWriterMode]: "off",
   [KeyFollowingTimeline]: "off",
   [KeyHideViewCount]: "off",
   [KeyRecentMedia]: "off",

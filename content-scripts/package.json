@@ -1,5 +1,6 @@
 {
   "name": "minimal-twitter-content-scripts",
+  "packageManager": "yarn@1.22.22",
   "source": "src/index.js",
   "main": "dist/main.js",
   "scripts": {

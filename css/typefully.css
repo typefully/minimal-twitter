@@ -33,11 +33,6 @@
   filter: brightness(0.94);
 }
 
-body.mt-writerMode-on .typefully-save-draft-button {
-  background-color: rgba(var(--accent-color-rgb), 0.1);
-  color: var(--accent-color);
-}
-
 .typefully-reply-button svg,
 .typefully-save-draft-button svg {
   margin: 0 3px 0 -8px;
@@ -50,13 +45,8 @@ body.mt-writerMode-on .typefully-save-draft-button {
 #typefully-link,
 #typefully-link-inline,
 #typefully-reply-link,
-#typefully-writermode-link,
 #typefully-callout-box {
   visibility: visible;
-}
-
-#typefully-writermode-link {
-  order: 1 !important;
 }
 
 #typefully-link-inline {

@@ -1,6 +1,7 @@
 {
   "name": "minimal-twitter-popup",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "next dev",
     "lint": "next lint",

@@ -182,8 +182,8 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
   }
 };
 
-export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
-  if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
+export const changeTimelineTabs = (removeTimelineTabs) => {
+  if (window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
     removeStyles("removeTimelineTabs");
     return;
   }
@@ -263,8 +263,8 @@ export const changeRecentMedia = async (recentMedia) => {
   }
 };
 
-export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
-  if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
+export const changeTrendsHomeTimeline = (trendsHomeTimeline) => {
+  if (window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
     removeStyles("trendsHomeTimeline");
     return;
   }

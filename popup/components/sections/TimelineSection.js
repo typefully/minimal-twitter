@@ -9,7 +9,6 @@ import {
   KeyRemoveTweetBorders,
   KeyStickyHeader,
   KeyTrendsHomeTimeline,
-  KeyWriterMode,
 } from "../../../storage-keys";
 import useMounted from "../../utilities/hooks/useMounted";
 import TimelineWidthSlider from "../controls/TimelineWidthSlider";
@@ -30,7 +29,6 @@ const TimelineSection = () => {
         <ControlsWrapper id="user-control-timeline">
           <TimelineWidthSlider />
           <Separator />
-          <SwitchControl label="Zen Writer Mode" storageKey={KeyWriterMode} />
           <SwitchControl label="Sticky Header" storageKey={KeyStickyHeader} />
           <SwitchControl label="Trends on Home Timeline" storageKey={KeyTrendsHomeTimeline} />
           <SwitchControl label="Recent Media on Profiles" storageKey={KeyRecentMedia} />

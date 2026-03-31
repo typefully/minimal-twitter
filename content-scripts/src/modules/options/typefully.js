@@ -10,7 +10,6 @@ export const changeTypefullyEnhancementsButtons = (typefullyEnhancementsButtons)
         #typefully-link, 
         #typefully-link-inline,
         #typefully-reply-link, 
-        #typefully-writermode-link, 
         #typefully-callout-box,
         #typefully-schedule-button,
         #typefully-image-download-button,
