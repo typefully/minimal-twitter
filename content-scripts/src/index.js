@@ -16,19 +16,31 @@ import { getStorage } from "./modules/utilities/storage";
  *    - Dynamic features auto-update on DOM changes
  */
 
+const hasStorageApi = () => Boolean(chrome?.storage?.local);
+
 // Listen to settings changes
-chrome.storage.onChanged.addListener(async (changes) => {
-  if (changes[KeyExtensionStatus]?.newValue !== changes[KeyExtensionStatus]?.oldValue) {
-    window.location.reload();
-    return;
+try {
+  if (hasStorageApi()) {
+    chrome.storage.onChanged.addListener(async (changes) => {
+      try {
+        if (changes[KeyExtensionStatus]?.newValue !== changes[KeyExtensionStatus]?.oldValue) {
+          window.location.reload();
+          return;
+        }
+
+        const status = await getStorage(KeyExtensionStatus);
+        if (status === "off") return;
+
+        const newData = constructNewData(changes);
+        applyStaticFeatures(newData);
+      } catch {
+        // Existing tabs can keep stale content scripts after the extension reloads.
+      }
+    });
   }
-
-  const status = await getStorage(KeyExtensionStatus);
-  if (status === "off") return;
-
-  const newData = constructNewData(changes);
-  applyStaticFeatures(newData);
-});
+} catch {
+  // Existing tabs can keep stale content scripts after the extension reloads.
+}
 
 // Initialize extension
 const init = async () => {
@@ -38,4 +50,6 @@ const init = async () => {
   await initializeExtension();
 };
 
-init();
+init().catch(() => {
+  // Existing tabs can keep stale content scripts after the extension reloads.
+});
