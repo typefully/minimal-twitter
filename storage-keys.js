@@ -5,6 +5,7 @@ export const KeyTopicsButton = "topicsButton";
 export const KeyXPremiumButton = "xPremiumButton";
 export const KeyVerifiedOrgsButton = "verifiedOrgsButton";
 export const KeyTypefullyGrowTab = "typefullyGrowTab";
+export const KeyZenWriterModeButton = "zenWriterModeButton";
 export const KeyGrokButton = "grokButton";
 export const KeyFollowingTimeline = "followingTimeline";
 export const KeyTrendsHomeTimeline = "trendsHomeTimeline";
@@ -96,6 +97,7 @@ export const allSettingsKeys = [
   KeyTopicsButton,
   KeyVerifiedOrgsButton,
   KeyTypefullyGrowTab,
+  KeyZenWriterModeButton,
   KeyProfileButton,
 
   // Advanced Features
@@ -157,6 +159,7 @@ export const defaultPreferences = {
   [KeyTopicsButton]: "off",
   [KeyVerifiedOrgsButton]: "off",
   [KeyTypefullyGrowTab]: "on",
+  [KeyZenWriterModeButton]: "on",
   [KeyProfileButton]: "on",
 
   // Advanced Features

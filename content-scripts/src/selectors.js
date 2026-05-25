@@ -25,6 +25,7 @@ selectors.sidebarLinks = {
   xPremium: `${selectors.leftSidebar} a[href*="premium"][role="link"][aria-label]`,
   verifiedOrgs: `${selectors.leftSidebar} a[href*="verified-orgs"][role="link"][aria-label]`,
   analytics: `${selectors.leftSidebar} .mt-sidebar-button[aria-label="Analytics"]`,
+  zenWriterMode: `${selectors.leftSidebar} .mt-sidebar-button[aria-label="Zen Writer Mode"]`,
   grok: `${selectors.leftSidebar} a[href*="grok"][role="link"][aria-label]`,
 };
 selectors.accountSwitcherButton = `[data-testid="SideNav_AccountSwitcher_Button"]`;

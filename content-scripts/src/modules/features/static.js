@@ -49,6 +49,7 @@ import {
   KeyVerifiedOrgsButton,
   KeyWriterMode,
   KeyXPremiumButton,
+  KeyZenWriterModeButton,
 } from "../../../../storage-keys";
 import { changeCustomCss } from "../options/customCss";
 import { changeFollowingAndFollowersCounts, changeLikeCount, changeReplyCount, changeRetweetCount } from "../options/hideVanityCounts";
@@ -75,6 +76,7 @@ import {
   updateZenWriterModeButtonState,
   changeVerifiedOrgsButton,
   changeXPremiumButton,
+  changeZenWriterModeButton,
   hideGrokDrawer,
 } from "../options/navigation";
 import {
@@ -143,6 +145,7 @@ export const staticFeatures = {
     changeGrokButton(data[KeyGrokButton]);
     changeVerifiedOrgsButton(data[KeyVerifiedOrgsButton]);
     changeAnalyticsButton(data[KeyTypefullyGrowTab]);
+    changeZenWriterModeButton(data[KeyZenWriterModeButton]);
   },
   advanced: (data) => {
     changeCustomCss(data[KeyCustomCss]);

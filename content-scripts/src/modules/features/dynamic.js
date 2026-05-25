@@ -21,7 +21,8 @@ import {
   KeyTypefullyGrowTab,
   KeyWriterMode,
   KeyXPremiumButton,
-  KeyNavigationButtonsLabels
+  KeyNavigationButtonsLabels,
+  KeyZenWriterModeButton
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, addZenWriterModeButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
@@ -56,7 +57,7 @@ export const dynamicFeatures = {
     changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
   },
   sidebarButtons: async (writerMode) => {
-    const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
+    const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab, KeyZenWriterModeButton]);
 
     if (!data) return;
 
@@ -65,7 +66,7 @@ export const dynamicFeatures = {
     if (data[KeyTopicsButton] === "on") addTopicsButton();
     if (data[KeyXPremiumButton] === "on") addXPremiumButton();
     if (data[KeyTypefullyGrowTab] === "on") addAnalyticsButton();
-    addZenWriterModeButton(writerMode);
+    if (data[KeyZenWriterModeButton] === "on") addZenWriterModeButton(writerMode);
   },
   writerMode: async (data) => {
     if (data[KeyWriterMode] === "on") {

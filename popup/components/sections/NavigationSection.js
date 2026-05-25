@@ -22,6 +22,7 @@ import {
   KeyUnreadCountBadge,
   KeyVerifiedOrgsButton,
   KeyXPremiumButton,
+  KeyZenWriterModeButton,
 } from "../../../storage-keys";
 import SectionLabel from "../ui/SectionLabel";
 import { SegmentedControl } from "../ui/SegmentedControl";
@@ -191,6 +192,19 @@ const TypefullyGrow = () => (
   </IconButton>
 );
 
+const ZenWriterMode = () => (
+  <IconButton storageKey={KeyZenWriterModeButton} label="Zen Mode">
+    <path
+      className="fill-current"
+      d="M12.49 0c2.12.07 4.06.68 5.85 1.78 1.82 1.12 3.22 2.63 4.22 4.51 1.14 2.15 1.62 4.44 1.38 6.86-.3 3.04-1.57 5.62-3.82 7.7-1.74 1.61-3.81 2.61-6.16 2.98-2.39.39-4.71.09-6.9-.93-2.99-1.38-5.1-3.61-6.27-6.68-1.13-2.99-1.04-5.97.23-8.9C2.14 4.75 3.94 2.79 6.41 1.45 8.29.43 10.32-.04 12.49 0ZM2.42 7.07c-.86 1.66-1.29 3.42-1.23 5.29.04 1.34.26 2.64.81 3.86 1.15 2.56 2.98 4.46 5.54 5.65 1.41.65 2.89.99 4.45.98 2.41-.01 4.22-1.49 4.94-3.45.73-2 .38-3.86-.99-5.51-.89-1.08-2.04-1.68-3.42-1.89-.55-.08-1.13-.1-1.65-.29-2.15-.76-3.44-2.25-3.74-4.54-.31-2.39.99-4.64 3.09-5.72l.25-.12-.07-.01C8.78 1.55 7.31 2.13 5.97 3.05 4.45 4.08 3.29 5.43 2.42 7.07Zm11.26-.35c.01-.14.04-.29.02-.43-.09-.96-.91-1.64-1.87-1.56-.91.07-1.6.9-1.54 1.85.06.97.96 1.7 1.93 1.57.74-.1 1.26-.6 1.46-1.43Z"
+    />
+    <path
+      className="fill-current"
+      d="M13.56 17.98c-.26.8-.97 1.28-1.75 1.19-.78-.09-1.39-.71-1.44-1.48-.06-.83.44-1.52 1.26-1.72.76-.19 1.53.2 1.86.95.15.34.18.69.07 1.06Z"
+    />
+  </IconButton>
+);
+
 const Jobs = () => (
   <IconButton storageKey={KeyJobsButton} label="Jobs">
     <path
@@ -221,6 +235,7 @@ const NavigationSection = () => {
             <Topics />
             <VerifiedOrgs />
             <TypefullyGrow />
+            <ZenWriterMode />
             <Profile />
           </div>
           <div className="flex flex-col gap-y-4">

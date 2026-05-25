@@ -44,6 +44,7 @@ export const changeTopicsButton = (state) => changeSidebarSetting("topics", stat
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
 export const changeAnalyticsButton = (state) => changeSidebarSetting("analytics", state, addAnalyticsButton);
+export const changeZenWriterModeButton = (state) => changeSidebarSetting("zenWriterMode", state, addZenWriterModeButton);
 
 export const addZenWriterModeButton = (writerMode) => {
   addSidebarButton({
