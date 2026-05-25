@@ -162,6 +162,7 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
   switch (removeTopicsToFollow) {
     case "off":
       removeStyles("removeTopicsToFollow");
+      document.querySelectorAll(".mt-whoToFollow").forEach((section) => section.classList.remove("mt-whoToFollow"));
       break;
 
     case "on":
@@ -173,14 +174,32 @@ export const changeTopicsToFollow = (removeTopicsToFollow) => {
         ${selectors.mainColumn} a[href*="/i/topics/picker/home"] {
           display: none;
         }
+        .mt-whoToFollow {
+          display: none;
+        }
         [aria-label="Lists timeline"] section[aria-labelledby^="accessible-list-"] > div[aria-label$="Carousel"] {
           display: flex;
         }
         `
       );
+      hideWhoToFollowSuggestions();
       break;
   }
 };
+
+function hideWhoToFollowSuggestions() {
+  const suggestionSections = document.querySelectorAll(`${selectors.mainColumn} section[aria-labelledby^="accessible-list-"]`);
+
+  suggestionSections.forEach((section) => {
+    if (section.closest('[aria-label="Lists timeline"]')) return;
+
+    const headingText = section.querySelector('h2, [role="heading"]')?.textContent?.trim().toLowerCase();
+
+    if (headingText === "who to follow") {
+      section.classList.add("mt-whoToFollow");
+    }
+  });
+}
 
 export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
   if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {

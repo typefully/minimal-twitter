@@ -15,6 +15,7 @@ import {
   KeyHideViewCount,
   KeyListsButton,
   KeyRemoveTimelineTabs,
+  KeyRemoveTopicsToFollow,
   KeyTopicsButton,
   KeyTrendsHomeTimeline,
   KeyTypefullyGrowTab,
@@ -24,7 +25,7 @@ import {
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
-import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline, enableGrokDrawerOnGrokButtonClick } from "../options/timeline";
+import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTopicsToFollow, changeTrendsHomeTimeline, enableGrokDrawerOnGrokButtonClick } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug, addTypefullySchedulePlug } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
@@ -70,6 +71,7 @@ export const dynamicFeatures = {
       changeWriterMode(data[KeyWriterMode]);
     } else {
       changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
+      changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
       changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
       changeFollowingTimeline(data[KeyFollowingTimeline]);
     }
@@ -77,7 +79,15 @@ export const dynamicFeatures = {
 };
 
 export const runDynamicFeatures = throttle(async () => {
-  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer, KeyNavigationButtonsLabels]);
+  const data = await getStorage([
+    KeyWriterMode,
+    KeyFollowingTimeline,
+    KeyTrendsHomeTimeline,
+    KeyRemoveTimelineTabs,
+    KeyRemoveTopicsToFollow,
+    KeyHideGrokDrawer,
+    KeyNavigationButtonsLabels,
+  ]);
 
   if (data) {
     dynamicFeatures.general();
