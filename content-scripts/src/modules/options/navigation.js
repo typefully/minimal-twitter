@@ -1,8 +1,10 @@
+import { KeyWriterMode } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { createTypefullyUrl } from "../utilities/createTypefullyUrl";
 import { addSidebarButton } from "../utilities/sidebar";
+import { getStorage, setStorage } from "../utilities/storage";
 
 // Utilities
 
@@ -42,6 +44,30 @@ export const changeTopicsButton = (state) => changeSidebarSetting("topics", stat
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
 export const changeAnalyticsButton = (state) => changeSidebarSetting("analytics", state, addAnalyticsButton);
+
+export const addZenWriterModeButton = (writerMode) => {
+  addSidebarButton({
+    name: "Zen Writer Mode",
+    svgAsset: svgAssets.zenWriterMode.normal,
+    onClick: async () => {
+      const writerMode = await getStorage(KeyWriterMode);
+      await setStorage({ [KeyWriterMode]: writerMode === "on" ? "off" : "on" });
+      updateZenWriterModeButtonState(writerMode === "on" ? "off" : "on");
+    },
+  });
+
+  updateZenWriterModeButtonState(writerMode);
+};
+
+export const updateZenWriterModeButtonState = async (writerMode) => {
+  const button = document.querySelector('nav[role="navigation"] > [aria-label="Zen Writer Mode"]');
+
+  if (!button) return;
+
+  const state = writerMode ?? (await getStorage(KeyWriterMode));
+  button.classList.add("mt-zen-writer-mode-button");
+  button.classList.toggle("mt-zen-writer-mode-button-active", state === "on");
+};
 
 let tm1;
 export const addXPremiumButton = () => {

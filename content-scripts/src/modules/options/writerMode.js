@@ -50,9 +50,17 @@ export const changeWriterMode = (writerMode) => {
               width: 100%;
               max-width: 100%;
             }
-            ${selectors.leftSidebar},
             ${selectors.rightSidebar},
             ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
+              overflow: hidden;
+              visibility: hidden;
+              opacity: 0;
+              width: 0;
+              height: 0;
+            }
+            ${selectors.leftSidebar} nav[role="navigation"] > *:not([aria-label="Zen Writer Mode"]),
+            ${selectors.accountSwitcherButton},
+            ${selectors.tweetButton} {
               overflow: hidden;
               visibility: hidden;
               opacity: 0;

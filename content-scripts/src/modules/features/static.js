@@ -72,6 +72,7 @@ import {
   changeSidebarLogo,
   changeTopicsButton,
   changeUnreadCountBadge,
+  updateZenWriterModeButtonState,
   changeVerifiedOrgsButton,
   changeXPremiumButton,
   hideGrokDrawer,
@@ -106,6 +107,7 @@ export const staticFeatures = {
     changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
     changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
     changeTypefullyEnhancementsButtons(data[KeyTypefullyEnhancementsButtons]);
+    updateZenWriterModeButtonState(data[KeyWriterMode]);
     changeFollowingAndFollowersCounts(data[KeyFollowCount]);
     changeReplyCount(data[KeyReplyCount]);
     changeRetweetCount(data[KeyRetweetCount]);

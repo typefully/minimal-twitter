@@ -24,7 +24,7 @@ import {
   KeyNavigationButtonsLabels
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
-import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
+import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, addZenWriterModeButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
 import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTopicsToFollow, changeTrendsHomeTimeline, enableGrokDrawerOnGrokButtonClick } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug, addTypefullySchedulePlug } from "../typefullyPlugs";
@@ -55,7 +55,7 @@ export const dynamicFeatures = {
   navigation: (data) => {
     changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
   },
-  sidebarButtons: async () => {
+  sidebarButtons: async (writerMode) => {
     const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
 
     if (!data) return;
@@ -65,6 +65,7 @@ export const dynamicFeatures = {
     if (data[KeyTopicsButton] === "on") addTopicsButton();
     if (data[KeyXPremiumButton] === "on") addXPremiumButton();
     if (data[KeyTypefullyGrowTab] === "on") addAnalyticsButton();
+    addZenWriterModeButton(writerMode);
   },
   writerMode: async (data) => {
     if (data[KeyWriterMode] === "on") {
@@ -92,7 +93,7 @@ export const runDynamicFeatures = throttle(async () => {
   if (data) {
     dynamicFeatures.general();
     dynamicFeatures.typefullyPlugs();
-    await dynamicFeatures.sidebarButtons();
+    await dynamicFeatures.sidebarButtons(data[KeyWriterMode]);
     await dynamicFeatures.writerMode(data);
     dynamicFeatures.navigation(data);
 

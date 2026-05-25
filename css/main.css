@@ -125,6 +125,23 @@ a[href*="quick_promote_web"] {
   background-color: rgba(var(--glyphs-color-rgb), 0.1);
 }
 
+.mt-zen-writer-mode-button > div {
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mt-zen-writer-mode-button-active > div {
+  background-color: rgba(var(--accent-color-rgb), 0.1);
+  box-shadow: 0 0 0 1px rgba(var(--accent-color-rgb), 0.22), 0 0 18px rgba(var(--accent-color-rgb), 0.18);
+}
+
+.mt-zen-writer-mode-button-active svg {
+  color: rgb(var(--accent-color-rgb));
+}
+
+.mt-zen-writer-mode-button svg path {
+  fill: currentColor;
+}
+
 /* Don't show label at smaller screens */
 @media only screen and (max-width: 1264px) {
   .mt-sidebar-button > div > div[dir] {
