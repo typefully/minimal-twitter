@@ -22,11 +22,28 @@ import {
   KeyWriterMode,
   KeyXPremiumButton,
   KeyNavigationButtonsLabels,
-  KeyZenWriterModeButton
+  KeyZenWriterModeButton,
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
-import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, addZenWriterModeButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
-import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTopicsToFollow, changeTrendsHomeTimeline, enableGrokDrawerOnGrokButtonClick } from "../options/timeline";
+import { addFocusPostMenuItem } from "../options/focusPost";
+import {
+  addAnalyticsButton,
+  addCommunitiesButton,
+  addListsButton,
+  addTopicsButton,
+  addXPremiumButton,
+  addZenWriterModeButton,
+  hideGrokDrawer,
+  changeNavigationButtonsLabels,
+} from "../options/navigation";
+import {
+  changeFollowingTimeline,
+  changeRecentMedia,
+  changeTimelineTabs,
+  changeTopicsToFollow,
+  changeTrendsHomeTimeline,
+  enableGrokDrawerOnGrokButtonClick,
+} from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug, addTypefullySchedulePlug } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
@@ -45,6 +62,7 @@ export const dynamicFeatures = {
     addSmallerSearchBarStyle();
     updateLeftSidebarPositioning();
     enableGrokDrawerOnGrokButtonClick(data[KeyHideGrokDrawer]);
+    addFocusPostMenuItem();
   },
   typefullyPlugs: () => {
     saveCurrentReplyToLink();
