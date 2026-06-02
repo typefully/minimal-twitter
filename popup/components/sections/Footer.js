@@ -104,25 +104,8 @@ const Footer = () => {
           Import Settings
         </button>
       </div>
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="application/json,.json"
-        className="hidden"
-        onChange={importSettings}
-      />
-      {status && (
-        <p className="text-xs font-medium dark:text-x-accentDark text-x-accent1">
-          {status}
-        </p>
-      )}
-      <button
-        onClick={() => window.close()}
-        type="button"
-        className="inline-flex items-center px-4 py-2 text-[15px] font-bold text-white border border-transparent rounded-full shadow-sm bg-x-accent3 hover:bg-x-accent5 focus:outline-none w-fit"
-      >
-        Done
-      </button>
+      <input ref={fileInputRef} type="file" accept="application/json,.json" className="hidden" onChange={importSettings} />
+      {status && <p className="text-xs font-medium dark:text-x-accentDark text-x-accent1">{status}</p>}
     </footer>
   );
 };

@@ -3,45 +3,68 @@ import selectors from "../../selectors";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
-// Function to change the title notification count
-let nt; // Title Notifications timeout
-export const changeTitleNotifications = (tf) => {
-  const run = async () => {
-    let setting = tf;
+// Function to change title and favicon notification indicators
+const titleNotificationRegex = /^(?:\(\d[\d,]*\+?\)\s*)+/;
+const notificationFaviconRegex = /(^|\/)twitter-pip(?:\.[^./]+)*\.ico/;
+let titleNotificationsObserver;
+let titleNotificationsSetting;
+let titleNotificationsTimeout;
 
-    if (!tf) {
-      setting = await getStorage(KeyTitleNotifications);
-    }
+const getFavicons = () => document.querySelectorAll('link[rel~="icon"]');
 
-    const favicon = document.querySelector('link[rel="shortcut icon"]');
+const stripTitleNotificationCount = () => {
+  const title = document.title.replace(titleNotificationRegex, "");
 
-    if (setting === "on") {
-      favicon.setAttribute("href", favicon.href.replace("twitter.ico", "twitter-pip.2.ico"));
-    } else {
-      if (document.title.charAt(0) === "(") {
-        document.title = document.title.split(" ").slice(1).join(" ");
-      }
+  if (title !== document.title) {
+    document.title = title;
+  }
+};
 
-      if (document.title.charAt(0) === "(") {
-        document.title = document.title.split(" ").slice(1).join(" ");
-      }
+const updateFaviconNotificationState = (enabled) => {
+  getFavicons().forEach((favicon) => {
+    const href = favicon.getAttribute("href");
+    if (!href) return;
 
-      clearTimeout(nt);
-      nt = setTimeout(() => {
-        favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
-      });
-    }
-  };
-
-  run();
-
-  const observer = new MutationObserver(() => {
-    run();
+    const nextHref = enabled ? href.replace("twitter.ico", "twitter-pip.2.ico") : href.replace(notificationFaviconRegex, "$1twitter.ico");
+    if (nextHref !== href) favicon.setAttribute("href", nextHref);
   });
-  const config = { subtree: true, characterData: true, childList: true };
-  const target = document.querySelector("title");
+};
 
-  if (target) observer.observe(target, config);
+const applyTitleNotificationsPreference = () => {
+  if (titleNotificationsSetting === "on") {
+    updateFaviconNotificationState(true);
+    return;
+  }
+
+  stripTitleNotificationCount();
+  updateFaviconNotificationState(false);
+
+  clearTimeout(titleNotificationsTimeout);
+  titleNotificationsTimeout = setTimeout(() => {
+    updateFaviconNotificationState(false);
+  });
+};
+
+const observeTitleNotifications = () => {
+  if (titleNotificationsObserver) return;
+
+  titleNotificationsObserver = new MutationObserver(() => {
+    applyTitleNotificationsPreference();
+  });
+
+  titleNotificationsObserver.observe(document.head || document.documentElement, {
+    attributes: true,
+    attributeFilter: ["href"],
+    characterData: true,
+    childList: true,
+    subtree: true,
+  });
+};
+
+export const changeTitleNotifications = async (tf) => {
+  titleNotificationsSetting = tf ?? (await getStorage(KeyTitleNotifications));
+  applyTitleNotificationsPreference();
+  observeTitleNotifications();
 };
 
 // Function to change to Inter Font
@@ -59,7 +82,7 @@ export const changeInterFont = (interFont) => {
         div, span, input, textarea {
           font-family: Inter, TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
         }
-        `
+        `,
       );
       break;
 
@@ -79,7 +102,7 @@ export const changeTweetButton = (tweetButton) => {
         ${selectors.tweetButton} {
           visibility: hidden;
         }
-        `
+        `,
       );
       break;
 
@@ -97,7 +120,7 @@ export const changeHideSearchBar = (searchBar) => {
         `${selectors.searchBox} {
           display: none;
           visibility: hidden;
-        }`
+        }`,
       );
       addStyles(
         "trendsHomeTimeline-more",
@@ -108,7 +131,7 @@ export const changeHideSearchBar = (searchBar) => {
           .mt-recentMedia-photoGrid {
             top: 12px !important;
           }
-        }`
+        }`,
       );
       break;
 
@@ -123,7 +146,7 @@ export const changeHideSearchBar = (searchBar) => {
           .mt-recentMedia-photoGrid {
             top: unset !important;
           }
-        }`
+        }`,
       );
       break;
   }
@@ -142,7 +165,7 @@ export const changeTransparentSearchBar = (transparentSearch) => {
           transform: translateX(2ch);
           margin-left: -2.5ch;
         }
-        `
+        `,
       );
       break;
 

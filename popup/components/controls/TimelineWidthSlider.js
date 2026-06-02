@@ -75,6 +75,12 @@ const TimelineWidthSlider = () => {
 
   return (
     <form>
+      <div className="mb-2">
+        <span className="text-[15px] font-medium">Timeline Width</span>
+        <p className="text-xs leading-4 dark:text-gray-400 text-gray-500">
+          Sets the desktop width of the central timeline column. Use 600px for a tighter reading column or 800px when you want posts, media, and threads to have more room.
+        </p>
+      </div>
       <div className="flex items-center gap-x-3">
         <span className="text-xs font-medium">600px</span>
         <StyledSlider

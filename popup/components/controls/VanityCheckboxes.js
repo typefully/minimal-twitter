@@ -135,6 +135,7 @@ const VanityCheckboxes = () => {
       <CheckboxControl
         id="all"
         label="Engagements Under Posts"
+        description="Hides the visible numbers that make posts feel like scoreboards: reply totals, repost totals, like totals, and follower/following counts. The underlying buttons and profiles still work."
         labelExtras={<ToggleChevron pressed={showVanityCheckboxes} onClick={setShowVanityCheckboxes} />}
         checked={hideAll}
         onCheckedChange={(checked) => onCheckedChange("all", checked)}
@@ -142,10 +143,38 @@ const VanityCheckboxes = () => {
       />
       {showVanityCheckboxes && (
         <div className="pl-3 flex flex-col gap-4 mb-2">
-          <CheckboxControl crossedIcon id="reply" label="Reply Count from Tweets" onCheckedChange={(checked) => onCheckedChange("reply", checked)} checked={hideReply} />
-          <CheckboxControl crossedIcon id="retweet" label="Retweet Count from Tweets" onCheckedChange={(checked) => onCheckedChange("retweet", checked)} checked={hideRetweet} />
-          <CheckboxControl crossedIcon id="like" label="Like Count from Tweets" onCheckedChange={(checked) => onCheckedChange("like", checked)} checked={hideLike} />
-          <CheckboxControl crossedIcon id="follow" label="Follower/Following Count" onCheckedChange={(checked) => onCheckedChange("follow", checked)} checked={hideFollow} />
+          <CheckboxControl
+            crossedIcon
+            id="reply"
+            label="Reply Count from Tweets"
+            description="Hides only the numeric reply total shown under posts. You can still open the replies or use the reply action."
+            onCheckedChange={(checked) => onCheckedChange("reply", checked)}
+            checked={hideReply}
+          />
+          <CheckboxControl
+            crossedIcon
+            id="retweet"
+            label="Retweet Count from Tweets"
+            description="Hides repost and quote-post totals under posts while keeping the repost menu and action available."
+            onCheckedChange={(checked) => onCheckedChange("retweet", checked)}
+            checked={hideRetweet}
+          />
+          <CheckboxControl
+            crossedIcon
+            id="like"
+            label="Like Count from Tweets"
+            description="Hides like totals in timelines and tweet detail pages while keeping the like button itself visible."
+            onCheckedChange={(checked) => onCheckedChange("like", checked)}
+            checked={hideLike}
+          />
+          <CheckboxControl
+            crossedIcon
+            id="follow"
+            label="Follower/Following Count"
+            description="Hides follower and following totals on profiles so accounts are not visually framed around audience size."
+            onCheckedChange={(checked) => onCheckedChange("follow", checked)}
+            checked={hideFollow}
+          />
         </div>
       )}
     </>
