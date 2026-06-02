@@ -5,12 +5,30 @@ import { getStorage } from "../utilities/storage";
 
 // Function to change title and favicon notification indicators
 const titleNotificationRegex = /^(?:\(\d[\d,]*\+?\)\s*)+/;
-const notificationFaviconRegex = /(^|\/)twitter-pip(?:\.[^./]+)*\.ico/;
+const notificationFaviconRegex = /(^|\/)twitter-pip(?:\.[^./?#]+)*\.ico(?:[?#].*)?$/;
+const codexFaviconBadgeMarker = "data-codex-favicon-badge";
+const fallbackXFavicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='black'/%3E%3Cpath fill='white' d='M18.7 14.1 28.1 3h-2.2l-8.1 9.6L11.3 3H3.8l9.9 14.4L3.8 29h2.2l8.7-10.2 6.9 10.2h7.5L18.7 14.1Zm-3.1 3.6-1-1.4L6.7 4.7h3.2l6.4 9.4 1 1.4 8.3 12.1h-3.2l-6.8-9.9Z'/%3E%3C/svg%3E";
 let titleNotificationsObserver;
 let titleNotificationsSetting;
 let titleNotificationsTimeout;
+let cleanFaviconHref;
 
 const getFavicons = () => document.querySelectorAll('link[rel~="icon"]');
+
+const isNotificationFavicon = (href) => notificationFaviconRegex.test(href);
+
+const isCodexFaviconBadge = (href) => href.includes(codexFaviconBadgeMarker);
+
+const rememberCleanFavicon = () => {
+  getFavicons().forEach((favicon) => {
+    const href = favicon.getAttribute("href");
+
+    if (!href || isNotificationFavicon(href) || isCodexFaviconBadge(href)) return;
+
+    cleanFaviconHref = href;
+  });
+};
 
 const stripTitleNotificationCount = () => {
   const title = document.title.replace(titleNotificationRegex, "");
@@ -21,12 +39,15 @@ const stripTitleNotificationCount = () => {
 };
 
 const updateFaviconNotificationState = (enabled) => {
+  rememberCleanFavicon();
+
+  if (enabled) return;
+
   getFavicons().forEach((favicon) => {
     const href = favicon.getAttribute("href");
-    if (!href) return;
+    if (!href || !isNotificationFavicon(href)) return;
 
-    const nextHref = enabled ? href.replace("twitter.ico", "twitter-pip.2.ico") : href.replace(notificationFaviconRegex, "$1twitter.ico");
-    if (nextHref !== href) favicon.setAttribute("href", nextHref);
+    favicon.setAttribute("href", cleanFaviconHref || fallbackXFavicon);
   });
 };
 
