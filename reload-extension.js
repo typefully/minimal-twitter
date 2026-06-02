@@ -8,6 +8,7 @@ const extensionId = process.argv[2] || process.env.MINIMAL_TWITTER_EXTENSION_ID;
 const browserApp = process.env.MINIMAL_TWITTER_BROWSER_APP || "Helium";
 const bundleDirectory = "bundle/chrome";
 const reloadPage = "dev-reload.html";
+const foreground = process.argv.includes("--foreground");
 
 if (!extensionId) {
   console.error("Usage: yarn reload:chrome <extension-id>");
@@ -22,6 +23,35 @@ const cacheBuster = encodeURIComponent(
 );
 const reloadUrl = `chrome-extension://${extensionId}/dev-reload.html?t=${cacheBuster}`;
 
-await open("open", ["-a", browserApp, reloadUrl]);
+const reloadInBackground = async () => {
+  await open("osascript", [
+    "-e",
+    `tell application "${browserApp}"`,
+    "-e",
+    "set targetWindow to front window",
+    "-e",
+    "set previousTabIndex to active tab index of targetWindow",
+    "-e",
+    `make new tab at end of tabs of targetWindow with properties {URL:"${reloadUrl}"}`,
+    "-e",
+    "delay 0.2",
+    "-e",
+    "set active tab index of targetWindow to previousTabIndex",
+    "-e",
+    "end tell",
+  ]);
+};
 
-console.log(`Opened ${reloadUrl} in ${browserApp}`);
+if (foreground) {
+  await open("open", ["-a", browserApp, reloadUrl]);
+} else {
+  try {
+    await reloadInBackground();
+  } catch (error) {
+    await open("open", ["-g", "-a", browserApp, reloadUrl]);
+    console.warn(`Background reload failed; opened ${reloadUrl} without activating ${browserApp}.`);
+    console.warn(error.message);
+  }
+}
+
+console.log(`Reloaded ${reloadUrl} in ${browserApp}${foreground ? "" : " without changing the active tab"}`);

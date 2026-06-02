@@ -4,6 +4,8 @@ const focusPostMenuItemId = "mt-focus-post-menu-item";
 const focusPostLabel = "Focus this post";
 const menuContextMaxAge = 5000;
 const tweetMenuButtonSelector = '[data-testid="caret"], [aria-label="More"]';
+const menuSelector = '[role="menu"]';
+const menuItemSelector = '[role="menuitem"]';
 
 let menuContext;
 let isClickListenerAttached = false;
@@ -115,8 +117,8 @@ const injectFocusPostMenuItem = () => {
   const tweet = getFreshMenuTweet();
   if (!tweet) return;
 
-  const firstMenuItem = document.querySelector(selectors.menuItem);
-  const menu = firstMenuItem?.closest('[role="menu"]') || firstMenuItem?.parentElement;
+  const menu = document.querySelector(menuSelector) || document.querySelector(selectors.menuItem)?.parentElement;
+  const firstMenuItem = menu?.querySelector(menuItemSelector) || document.querySelector(selectors.menuItem);
   if (!firstMenuItem || !menu) return;
 
   const focusPostMenuItem = buildFocusPostMenuItem(firstMenuItem, tweet);
