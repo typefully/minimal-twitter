@@ -138,7 +138,7 @@ const bundle = async (manifest, bundleDirectory) => {
             process.stdout.cursorTo(0);
             spinner = P[P.indexOf(spinner) + 1] || P[0];
             process.stdout.write(
-              `${spinner}   Building popup and content scripts...`
+              `${spinner}   Building popup and content scripts...`,
             );
           }, 250);
         };
@@ -152,7 +152,7 @@ const bundle = async (manifest, bundleDirectory) => {
         } catch (error) {
           clearInterval(intervalId);
           console.error(
-            `Error running build script for ${directory}: ${error}`
+            `Error running build script for ${directory}: ${error}`,
           );
           reject(error);
         }
@@ -178,10 +178,6 @@ const bundle = async (manifest, bundleDirectory) => {
     await copyFile("background.js", `${bundleDirectory}/background.js`);
     console.log(`🚗  Moved background.js to bundle.`);
 
-    // Bundle developer reload page
-    await copyFile("dev-reload.html", `${bundleDirectory}/dev-reload.html`);
-    console.log(`🚗  Moved dev-reload.html to bundle.`);
-
     // Bundle css
     await copy("css", `${bundleDirectory}/css`);
     console.log(`🚗  Moved css to bundle.`);
@@ -198,7 +194,7 @@ const bundle = async (manifest, bundleDirectory) => {
     await writeFile(
       `${bundleDirectory}/manifest.json`,
       Buffer.from(JSON.stringify(manifest, null, 2)),
-      "utf8"
+      "utf8",
     );
 
     // Done.
@@ -213,8 +209,8 @@ const bundle = async (manifest, bundleDirectory) => {
     console.log(
       `🧬  Zipped \`${bundleDirectory}\` to \`bundle/${bundleDirectory.replace(
         "bundle/",
-        ""
-      )}.zip\`.`
+        "",
+      )}.zip\`.`,
     );
   } catch (error) {
     console.error(error);
@@ -275,7 +271,7 @@ rl.question(
     }
 
     rl.close();
-  }
+  },
 );
 
 rl.on("close", () => {
