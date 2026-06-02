@@ -13,5 +13,7 @@
   } else {
     document.body.textContent = "Reloading Minimal Twitter...";
     chrome.runtime.reload();
+    window.close();
+    setTimeout(() => window.close(), 100);
   }
 </script>
