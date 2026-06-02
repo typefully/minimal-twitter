@@ -178,6 +178,10 @@ const bundle = async (manifest, bundleDirectory) => {
     await copyFile("background.js", `${bundleDirectory}/background.js`);
     console.log(`🚗  Moved background.js to bundle.`);
 
+    // Bundle developer reload page
+    await copyFile("dev-reload.html", `${bundleDirectory}/dev-reload.html`);
+    console.log(`🚗  Moved dev-reload.html to bundle.`);
+
     // Bundle css
     await copy("css", `${bundleDirectory}/css`);
     console.log(`🚗  Moved css to bundle.`);

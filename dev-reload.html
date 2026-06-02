@@ -1,0 +1,13 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Reload Minimal Twitter</title>
+<script type="module">
+  const manifest = chrome.runtime.getManifest();
+
+  if (manifest.update_url) {
+    document.body.textContent = "Dev reload is disabled for store installs.";
+  } else {
+    document.body.textContent = "Reloading Minimal Twitter...";
+    chrome.runtime.reload();
+  }
+</script>
