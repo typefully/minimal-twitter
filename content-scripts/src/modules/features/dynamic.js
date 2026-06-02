@@ -25,7 +25,6 @@ import {
   KeyZenWriterModeButton,
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
-import { addFocusPostMenuItem } from "../options/focusPost";
 import {
   addAnalyticsButton,
   addCommunitiesButton,
@@ -62,7 +61,6 @@ export const dynamicFeatures = {
     addSmallerSearchBarStyle();
     updateLeftSidebarPositioning();
     enableGrokDrawerOnGrokButtonClick(data[KeyHideGrokDrawer]);
-    addFocusPostMenuItem();
   },
   typefullyPlugs: () => {
     saveCurrentReplyToLink();
