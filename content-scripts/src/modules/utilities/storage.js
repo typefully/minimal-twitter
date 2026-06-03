@@ -20,23 +20,60 @@ export const getStorage = (storageKeyOrKeys) => {
   }
 };
 
+const getDefaultStorageValue = (key) => defaultPreferences[key];
+
+const getDefaultStorageValues = (keysArray) => {
+  return keysArray.reduce((acc, cur) => {
+    acc[cur] = getDefaultStorageValue(cur);
+    return acc;
+  }, {});
+};
+
 const getSingleStorageKey = (key) => {
-  return new Promise((resolve, _reject) => {
-    chrome?.storage?.local.get([key], (data) => {
-      resolve(data[key] ?? defaultPreferences[key]); // Fallback to the default preference
-    });
+  return new Promise((resolve) => {
+    try {
+      if (!chrome?.storage?.local) {
+        resolve(getDefaultStorageValue(key));
+        return;
+      }
+
+      chrome?.storage?.local.get([key], (data) => {
+        if (chrome.runtime?.lastError) {
+          resolve(getDefaultStorageValue(key));
+          return;
+        }
+
+        resolve(data[key] ?? getDefaultStorageValue(key));
+      });
+    } catch (error) {
+      resolve(getDefaultStorageValue(key));
+    }
   });
 };
 
 const getMultipleStorageKeys = (keysArray) => {
-  return new Promise((resolve, _reject) => {
-    chrome?.storage?.local.get(keysArray, (data) => {
-      const res = keysArray.reduce((acc, cur) => {
-        acc[cur] = data[cur] ?? defaultPreferences[cur]; // For each key, fallback to the default preference
-        return acc;
-      }, {});
-      resolve(res);
-    });
+  return new Promise((resolve) => {
+    try {
+      if (!chrome?.storage?.local) {
+        resolve(getDefaultStorageValues(keysArray));
+        return;
+      }
+
+      chrome?.storage?.local.get(keysArray, (data) => {
+        if (chrome.runtime?.lastError) {
+          resolve(getDefaultStorageValues(keysArray));
+          return;
+        }
+
+        const res = keysArray.reduce((acc, cur) => {
+          acc[cur] = data[cur] ?? getDefaultStorageValue(cur);
+          return acc;
+        }, {});
+        resolve(res);
+      });
+    } catch (error) {
+      resolve(getDefaultStorageValues(keysArray));
+    }
   });
 };
 
@@ -49,10 +86,19 @@ const getMultipleStorageKeys = (keysArray) => {
   - 60000 ms / 120 operations = 500 ms/operation
 --*/
 export const setStorage = async (kv) => {
-  const promise = new Promise((resolve, _reject) => {
-    chrome?.storage?.local.set(kv, () => {
+  const promise = new Promise((resolve) => {
+    try {
+      if (!chrome?.storage?.local) {
+        resolve(kv);
+        return;
+      }
+
+      chrome?.storage?.local.set(kv, () => {
+        return resolve(kv);
+      });
+    } catch (error) {
       return resolve(kv);
-    });
+    }
   });
   return promise;
 };

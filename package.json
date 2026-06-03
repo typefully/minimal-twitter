@@ -4,7 +4,8 @@
   "scripts": {
     "build": "node ./bundle-extension.js",
     "bundle": "node ./bundle-extension.js",
-    "bump-version": "node ./bump-version.js"
+    "bump-version": "node ./bump-version.js",
+    "reload:chrome": "node ./reload-extension.js"
   },
   "dependencies": {
     "fs-extra": "^11.1.0",

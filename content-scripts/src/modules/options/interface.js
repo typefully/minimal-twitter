@@ -3,45 +3,89 @@ import selectors from "../../selectors";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
-// Function to change the title notification count
-let nt; // Title Notifications timeout
-export const changeTitleNotifications = (tf) => {
-  const run = async () => {
-    let setting = tf;
+// Function to change title and favicon notification indicators
+const titleNotificationRegex = /^(?:\(\d[\d,]*\+?\)\s*)+/;
+const notificationFaviconRegex = /(^|\/)twitter-pip(?:\.[^./?#]+)*\.ico(?:[?#].*)?$/;
+const codexFaviconBadgeMarker = "data-codex-favicon-badge";
+const fallbackXFavicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='black'/%3E%3Cpath fill='white' d='M18.7 14.1 28.1 3h-2.2l-8.1 9.6L11.3 3H3.8l9.9 14.4L3.8 29h2.2l8.7-10.2 6.9 10.2h7.5L18.7 14.1Zm-3.1 3.6-1-1.4L6.7 4.7h3.2l6.4 9.4 1 1.4 8.3 12.1h-3.2l-6.8-9.9Z'/%3E%3C/svg%3E";
+let titleNotificationsObserver;
+let titleNotificationsSetting;
+let titleNotificationsTimeout;
+let cleanFaviconHref;
 
-    if (!tf) {
-      setting = await getStorage(KeyTitleNotifications);
-    }
+const getFavicons = () => document.querySelectorAll('link[rel~="icon"]');
 
-    const favicon = document.querySelector('link[rel="shortcut icon"]');
+const isNotificationFavicon = (href) => notificationFaviconRegex.test(href);
 
-    if (setting === "on") {
-      favicon.setAttribute("href", favicon.href.replace("twitter.ico", "twitter-pip.2.ico"));
-    } else {
-      if (document.title.charAt(0) === "(") {
-        document.title = document.title.split(" ").slice(1).join(" ");
-      }
+const isCodexFaviconBadge = (href) => href.includes(codexFaviconBadgeMarker);
 
-      if (document.title.charAt(0) === "(") {
-        document.title = document.title.split(" ").slice(1).join(" ");
-      }
+const rememberCleanFavicon = () => {
+  getFavicons().forEach((favicon) => {
+    const href = favicon.getAttribute("href");
 
-      clearTimeout(nt);
-      nt = setTimeout(() => {
-        favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
-      });
-    }
-  };
+    if (!href || isNotificationFavicon(href) || isCodexFaviconBadge(href)) return;
 
-  run();
-
-  const observer = new MutationObserver(() => {
-    run();
+    cleanFaviconHref = href;
   });
-  const config = { subtree: true, characterData: true, childList: true };
-  const target = document.querySelector("title");
+};
 
-  if (target) observer.observe(target, config);
+const stripTitleNotificationCount = () => {
+  const title = document.title.replace(titleNotificationRegex, "");
+
+  if (title !== document.title) {
+    document.title = title;
+  }
+};
+
+const updateFaviconNotificationState = (enabled) => {
+  rememberCleanFavicon();
+
+  if (enabled) return;
+
+  getFavicons().forEach((favicon) => {
+    const href = favicon.getAttribute("href");
+    if (!href || !isNotificationFavicon(href)) return;
+
+    favicon.setAttribute("href", cleanFaviconHref || fallbackXFavicon);
+  });
+};
+
+const applyTitleNotificationsPreference = () => {
+  if (titleNotificationsSetting === "on") {
+    updateFaviconNotificationState(true);
+    return;
+  }
+
+  stripTitleNotificationCount();
+  updateFaviconNotificationState(false);
+
+  clearTimeout(titleNotificationsTimeout);
+  titleNotificationsTimeout = setTimeout(() => {
+    updateFaviconNotificationState(false);
+  });
+};
+
+const observeTitleNotifications = () => {
+  if (titleNotificationsObserver) return;
+
+  titleNotificationsObserver = new MutationObserver(() => {
+    applyTitleNotificationsPreference();
+  });
+
+  titleNotificationsObserver.observe(document.head || document.documentElement, {
+    attributes: true,
+    attributeFilter: ["href"],
+    characterData: true,
+    childList: true,
+    subtree: true,
+  });
+};
+
+export const changeTitleNotifications = async (tf) => {
+  titleNotificationsSetting = tf ?? (await getStorage(KeyTitleNotifications));
+  applyTitleNotificationsPreference();
+  observeTitleNotifications();
 };
 
 // Function to change to Inter Font
@@ -59,7 +103,7 @@ export const changeInterFont = (interFont) => {
         div, span, input, textarea {
           font-family: Inter, TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
         }
-        `
+        `,
       );
       break;
 
@@ -79,7 +123,7 @@ export const changeTweetButton = (tweetButton) => {
         ${selectors.tweetButton} {
           visibility: hidden;
         }
-        `
+        `,
       );
       break;
 
@@ -97,7 +141,7 @@ export const changeHideSearchBar = (searchBar) => {
         `${selectors.searchBox} {
           display: none;
           visibility: hidden;
-        }`
+        }`,
       );
       addStyles(
         "trendsHomeTimeline-more",
@@ -108,7 +152,7 @@ export const changeHideSearchBar = (searchBar) => {
           .mt-recentMedia-photoGrid {
             top: 12px !important;
           }
-        }`
+        }`,
       );
       break;
 
@@ -123,7 +167,7 @@ export const changeHideSearchBar = (searchBar) => {
           .mt-recentMedia-photoGrid {
             top: unset !important;
           }
-        }`
+        }`,
       );
       break;
   }
@@ -142,7 +186,7 @@ export const changeTransparentSearchBar = (transparentSearch) => {
           transform: translateX(2ch);
           margin-left: -2.5ch;
         }
-        `
+        `,
       );
       break;
 

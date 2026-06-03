@@ -5,6 +5,7 @@ export const KeyTopicsButton = "topicsButton";
 export const KeyXPremiumButton = "xPremiumButton";
 export const KeyVerifiedOrgsButton = "verifiedOrgsButton";
 export const KeyTypefullyGrowTab = "typefullyGrowTab";
+export const KeyZenWriterModeButton = "zenWriterModeButton";
 export const KeyGrokButton = "grokButton";
 export const KeyFollowingTimeline = "followingTimeline";
 export const KeyTrendsHomeTimeline = "trendsHomeTimeline";
@@ -43,6 +44,7 @@ export const KeyTitleNotifications = "titleNotifications";
 export const KeyCustomCss = "customCss";
 export const KeyHideViewCount = "hideViewCount";
 export const KeyHideGrokDrawer = "hideGrokDrawer";
+export const KeyAiSlopButton = "aiSlopButton";
 
 export const allSettingsKeys = [
   // Extension Status
@@ -61,6 +63,7 @@ export const allSettingsKeys = [
   KeyRemovePromotedPosts,
   KeyRemoveTopicsToFollow,
   KeyRemoveTimelineTabs,
+  KeyAiSlopButton,
   KeyTypefullyEnhancementsButtons,
   KeyFollowCount,
   KeyReplyCount,
@@ -96,6 +99,7 @@ export const allSettingsKeys = [
   KeyTopicsButton,
   KeyVerifiedOrgsButton,
   KeyTypefullyGrowTab,
+  KeyZenWriterModeButton,
   KeyProfileButton,
 
   // Advanced Features
@@ -122,6 +126,7 @@ export const defaultPreferences = {
   [KeyRemovePromotedPosts]: "on",
   [KeyRemoveTopicsToFollow]: "on",
   [KeyRemoveTimelineTabs]: "off",
+  [KeyAiSlopButton]: "on",
   [KeyTypefullyEnhancementsButtons]: "on",
   [KeyFollowCount]: "on",
   [KeyReplyCount]: "on",
@@ -157,6 +162,7 @@ export const defaultPreferences = {
   [KeyTopicsButton]: "off",
   [KeyVerifiedOrgsButton]: "off",
   [KeyTypefullyGrowTab]: "on",
+  [KeyZenWriterModeButton]: "on",
   [KeyProfileButton]: "on",
 
   // Advanced Features

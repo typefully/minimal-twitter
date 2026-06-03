@@ -6,6 +6,7 @@ import useStorageKeyState from "../../utilities/useStorageKeyState";
 
 const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   position: "relative",
+  backgroundColor: "var(--twitter-accent-three)",
   "&::after": {
     content: "",
     position: "absolute",
@@ -20,26 +21,27 @@ const StyledCheckbox = styled(CheckboxPrimitive.Root, {
   },
 });
 
-// New CheckboxControl component
-export const CheckboxControl = ({ id, label, labelExtras, onCheckedChange, checked, crossedIcon }) => (
-  <div className="flex items-center justify-between w-full">
-    <div className="flex items-center content-start gap-2">
-      <label htmlFor={id} className="text-[15px] font-medium">
-        {label}
-      </label>
-      {labelExtras}
+export const CheckboxControl = ({ id, label, description, labelExtras, onCheckedChange, checked, crossedIcon }) => (
+  <div className="w-full">
+    <div className="flex items-center justify-between w-full gap-x-3">
+      <div className="flex items-center content-start gap-2">
+        <label htmlFor={id} className="text-[15px] font-medium">
+          {label}
+        </label>
+        {labelExtras}
+      </div>
+      <div className="grid rounded-full cursor-pointer w-5 shrink-0 place-items-center hover:bg-x-accent4">
+        <StyledCheckbox onCheckedChange={onCheckedChange} checked={checked} id={id} className="flex items-center justify-center w-5 h-5 rounded-[4px]">
+          <CheckboxPrimitive.Indicator className="text-white">{crossedIcon ? <Cross2Icon /> : <CheckIcon />}</CheckboxPrimitive.Indicator>
+        </StyledCheckbox>
+      </div>
     </div>
-    <div className="grid rounded-full cursor-pointer w-5 place-items-center hover:bg-x-accent4">
-      <StyledCheckbox onCheckedChange={onCheckedChange} checked={checked} id={id} className="flex items-center justify-center w-5 h-5 rounded-[4px] bg-x-accent3">
-        <CheckboxPrimitive.Indicator className="text-white">{crossedIcon ? <Cross2Icon /> : <CheckIcon />}</CheckboxPrimitive.Indicator>
-      </StyledCheckbox>
-    </div>
+    {description && <p className="mt-0.5 text-xs leading-4 dark:text-gray-400 text-gray-500">{description}</p>}
   </div>
 );
 
-// Renamed CheckboxControl to LocalStorageCheckboxControl
-export const LocalStorageCheckboxControl = ({ label, storageKey, crossedIcon }) => {
+export const LocalStorageCheckboxControl = ({ label, description, storageKey, crossedIcon }) => {
   const [checked, setChecked] = useStorageKeyState(storageKey);
 
-  return <CheckboxControl id={storageKey} label={label} onCheckedChange={setChecked} checked={checked} crossedIcon={crossedIcon} />;
+  return <CheckboxControl id={storageKey} label={label} description={description} onCheckedChange={setChecked} checked={checked} crossedIcon={crossedIcon} />;
 };

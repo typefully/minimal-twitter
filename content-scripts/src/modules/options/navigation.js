@@ -1,26 +1,43 @@
+import { KeyWriterMode } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import svgAssets from "../svgAssets";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 import { createTypefullyUrl } from "../utilities/createTypefullyUrl";
 import { addSidebarButton } from "../utilities/sidebar";
+import { getStorage, setStorage } from "../utilities/storage";
 
 // Utilities
 
 export const changeSidebarSetting = (sidebarSelector, state, onAdd) => {
   switch (state) {
     case "off":
+      removeStyles(`${sidebarSelector}-force-show`);
       addStyles(
         sidebarSelector,
         `${selectors.sidebarLinks[sidebarSelector]} {
           display: none;
-        }`
+        }`,
       );
       break;
 
     case "on":
       removeStyles(sidebarSelector);
+      removeStyles(`${sidebarSelector}-force-show`);
       onAdd?.();
       break;
+  }
+};
+
+const changeExploreButtonSetting = (state) => {
+  changeSidebarSetting("explore", state);
+
+  if (state === "on") {
+    addStyles(
+      "explore-force-show",
+      `${selectors.sidebarLinks.explore} {
+        display: flex !important;
+      }`,
+    );
   }
 };
 
@@ -28,7 +45,7 @@ export const changeSidebarSetting = (sidebarSelector, state, onAdd) => {
 
 export const changeSidebarLogo = (state) => changeSidebarSetting("logo", state);
 export const changeHomeButton = (state) => changeSidebarSetting("home", state);
-export const changeExploreButton = (state) => changeSidebarSetting("explore", state);
+export const changeExploreButton = (state) => changeExploreButtonSetting(state);
 export const changeNotificationsButton = (state) => changeSidebarSetting("notifications", state);
 export const changeMessagesButton = (state) => changeSidebarSetting("messages", state);
 export const changeBookmarksButton = (state) => changeSidebarSetting("bookmarks", state);
@@ -42,6 +59,31 @@ export const changeTopicsButton = (state) => changeSidebarSetting("topics", stat
 export const changeCommunitiesButton = (state) => changeSidebarSetting("communities", state, addCommunitiesButton);
 export const changeListsButton = (state) => changeSidebarSetting("lists", state, addListsButton);
 export const changeAnalyticsButton = (state) => changeSidebarSetting("analytics", state, addAnalyticsButton);
+export const changeZenWriterModeButton = (state) => changeSidebarSetting("zenWriterMode", state, addZenWriterModeButton);
+
+export const addZenWriterModeButton = (writerMode) => {
+  addSidebarButton({
+    name: "Zen Writer Mode",
+    svgAsset: svgAssets.zenWriterMode.normal,
+    onClick: async () => {
+      const writerMode = await getStorage(KeyWriterMode);
+      await setStorage({ [KeyWriterMode]: writerMode === "on" ? "off" : "on" });
+      updateZenWriterModeButtonState(writerMode === "on" ? "off" : "on");
+    },
+  });
+
+  updateZenWriterModeButtonState(writerMode);
+};
+
+export const updateZenWriterModeButtonState = async (writerMode) => {
+  const button = document.querySelector('nav[role="navigation"] > [aria-label="Zen Writer Mode"]');
+
+  if (!button) return;
+
+  const state = writerMode ?? (await getStorage(KeyWriterMode));
+  button.classList.add("mt-zen-writer-mode-button");
+  button.classList.toggle("mt-zen-writer-mode-button-active", state === "on");
+};
 
 let tm1;
 export const addXPremiumButton = () => {
@@ -70,7 +112,7 @@ export const addAnalyticsButton = () => {
             utm_content: "sidebar-grow-button",
             "mt-screen-name": screenName,
           },
-          "grow"
+          "grow",
         );
 
         if (screenName) window.open(url, "_blank");
@@ -116,7 +158,7 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
         }
         ${selectors.accountSwitcherButton} > div > svg+div[aria-label] {
           display: none;
-        }`
+        }`,
       );
       break;
   }
@@ -132,7 +174,7 @@ const addStyleToRemoveLabels = () => {
     ${selectors.accountSwitcherLabel} {
       display: none;
     }
-    `
+    `,
   );
 };
 
@@ -146,7 +188,7 @@ const addStyleToShowLabelsOnHover = () => {
       opacity: 0;
       transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    `
+    `,
   );
   addStyles(
     "showLabelsOnHover",
@@ -155,7 +197,7 @@ const addStyleToShowLabelsOnHover = () => {
     ${selectors.accountSwitcherLabel_hover} {
       opacity: 1;
     }
-    `
+    `,
   );
 };
 
@@ -179,7 +221,7 @@ flex: 0.5 1 auto;
 ${selectors.mainWrapper} {
 align-items: flex-start;
 }
-`
+`,
     );
   } else {
     removeStyles("customDMsAndSearchStyle");
@@ -215,7 +257,7 @@ export const changeNavigationCenter = (navigationCenter) => {
           justify-content: center;
           padding-top: 0;
         }
-        `
+        `,
       );
       break;
 
@@ -234,7 +276,7 @@ export const hideGrokDrawer = (state) => {
         "grokDrawer",
         `${selectors.grokDrawer}:not(.typefully-grok-drawer-enabled) {
           display: none !important;
-        }`
+        }`,
       );
       break;
     case "off":

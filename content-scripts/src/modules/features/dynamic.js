@@ -9,22 +9,42 @@
  */
 
 import {
+  KeyAiSlopButton,
   KeyCommunitiesButton,
   KeyFollowingTimeline,
   KeyHideGrokDrawer,
   KeyHideViewCount,
   KeyListsButton,
   KeyRemoveTimelineTabs,
+  KeyRemoveTopicsToFollow,
   KeyTopicsButton,
   KeyTrendsHomeTimeline,
   KeyTypefullyGrowTab,
   KeyWriterMode,
   KeyXPremiumButton,
-  KeyNavigationButtonsLabels
+  KeyNavigationButtonsLabels,
+  KeyZenWriterModeButton,
 } from "../../../../storage-keys";
+import { changeAiSlopButton } from "../options/aiSlopButton";
 import changeHideViewCounts from "../options/hideViewCount";
-import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
-import { changeFollowingTimeline, changeRecentMedia, changeTimelineTabs, changeTrendsHomeTimeline, enableGrokDrawerOnGrokButtonClick } from "../options/timeline";
+import {
+  addAnalyticsButton,
+  addCommunitiesButton,
+  addListsButton,
+  addTopicsButton,
+  addXPremiumButton,
+  addZenWriterModeButton,
+  hideGrokDrawer,
+  changeNavigationButtonsLabels,
+} from "../options/navigation";
+import {
+  changeFollowingTimeline,
+  changeRecentMedia,
+  changeTimelineTabs,
+  changeTopicsToFollow,
+  changeTrendsHomeTimeline,
+  enableGrokDrawerOnGrokButtonClick,
+} from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug, addTypefullySchedulePlug } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
@@ -35,9 +55,10 @@ import throttle from "../utilities/throttle";
 
 export const dynamicFeatures = {
   general: async () => {
-    const data = await getStorage([KeyHideViewCount, KeyHideGrokDrawer]);
+    const data = await getStorage([KeyHideViewCount, KeyHideGrokDrawer, KeyAiSlopButton]);
 
     changeHideViewCounts(data[KeyHideViewCount]);
+    changeAiSlopButton(data[KeyAiSlopButton]);
     changeRecentMedia();
     hideRightSidebar();
     addSmallerSearchBarStyle();
@@ -54,8 +75,8 @@ export const dynamicFeatures = {
   navigation: (data) => {
     changeNavigationButtonsLabels(data[KeyNavigationButtonsLabels]);
   },
-  sidebarButtons: async () => {
-    const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab]);
+  sidebarButtons: async (writerMode) => {
+    const data = await getStorage([KeyListsButton, KeyCommunitiesButton, KeyTopicsButton, KeyXPremiumButton, KeyTypefullyGrowTab, KeyZenWriterModeButton]);
 
     if (!data) return;
 
@@ -64,12 +85,14 @@ export const dynamicFeatures = {
     if (data[KeyTopicsButton] === "on") addTopicsButton();
     if (data[KeyXPremiumButton] === "on") addXPremiumButton();
     if (data[KeyTypefullyGrowTab] === "on") addAnalyticsButton();
+    if (data[KeyZenWriterModeButton] === "on") addZenWriterModeButton(writerMode);
   },
   writerMode: async (data) => {
     if (data[KeyWriterMode] === "on") {
       changeWriterMode(data[KeyWriterMode]);
     } else {
       changeTimelineTabs(data[KeyRemoveTimelineTabs], data[KeyWriterMode]);
+      changeTopicsToFollow(data[KeyRemoveTopicsToFollow]);
       changeTrendsHomeTimeline(data[KeyTrendsHomeTimeline], data[KeyWriterMode]);
       changeFollowingTimeline(data[KeyFollowingTimeline]);
     }
@@ -77,12 +100,20 @@ export const dynamicFeatures = {
 };
 
 export const runDynamicFeatures = throttle(async () => {
-  const data = await getStorage([KeyWriterMode, KeyFollowingTimeline, KeyTrendsHomeTimeline, KeyRemoveTimelineTabs, KeyHideGrokDrawer, KeyNavigationButtonsLabels]);
+  const data = await getStorage([
+    KeyWriterMode,
+    KeyFollowingTimeline,
+    KeyTrendsHomeTimeline,
+    KeyRemoveTimelineTabs,
+    KeyRemoveTopicsToFollow,
+    KeyHideGrokDrawer,
+    KeyNavigationButtonsLabels,
+  ]);
 
   if (data) {
     dynamicFeatures.general();
     dynamicFeatures.typefullyPlugs();
-    await dynamicFeatures.sidebarButtons();
+    await dynamicFeatures.sidebarButtons(data[KeyWriterMode]);
     await dynamicFeatures.writerMode(data);
     dynamicFeatures.navigation(data);
 
