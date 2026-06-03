@@ -8,6 +8,7 @@ const extensionId = process.argv[2] || process.env.MINIMAL_TWITTER_EXTENSION_ID;
 const browserApp = process.env.MINIMAL_TWITTER_BROWSER_APP || "Helium";
 const bundleDirectory = "bundle/chrome";
 const reloadPage = "dev-reload.html";
+const reloadScript = "dev-reload.js";
 const foreground = process.argv.includes("--foreground");
 
 if (!extensionId) {
@@ -17,6 +18,7 @@ if (!extensionId) {
 
 await mkdir(bundleDirectory, { recursive: true });
 await copyFile(reloadPage, path.join(bundleDirectory, reloadPage));
+await copyFile(reloadScript, path.join(bundleDirectory, reloadScript));
 
 const cacheBuster = encodeURIComponent(
   `${Date.now()}-${Math.random().toString(36).slice(2)}`,

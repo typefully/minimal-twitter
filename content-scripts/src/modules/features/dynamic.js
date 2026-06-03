@@ -9,6 +9,7 @@
  */
 
 import {
+  KeyAiSlopButton,
   KeyCommunitiesButton,
   KeyFollowingTimeline,
   KeyHideGrokDrawer,
@@ -24,6 +25,7 @@ import {
   KeyNavigationButtonsLabels,
   KeyZenWriterModeButton,
 } from "../../../../storage-keys";
+import { changeAiSlopButton } from "../options/aiSlopButton";
 import changeHideViewCounts from "../options/hideViewCount";
 import {
   addAnalyticsButton,
@@ -53,9 +55,10 @@ import throttle from "../utilities/throttle";
 
 export const dynamicFeatures = {
   general: async () => {
-    const data = await getStorage([KeyHideViewCount, KeyHideGrokDrawer]);
+    const data = await getStorage([KeyHideViewCount, KeyHideGrokDrawer, KeyAiSlopButton]);
 
     changeHideViewCounts(data[KeyHideViewCount]);
+    changeAiSlopButton(data[KeyAiSlopButton]);
     changeRecentMedia();
     hideRightSidebar();
     addSmallerSearchBarStyle();

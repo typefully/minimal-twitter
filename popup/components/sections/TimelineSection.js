@@ -1,4 +1,5 @@
 import {
+  KeyAiSlopButton,
   KeyFollowingTimeline,
   KeyHideViewCount,
   KeyRecentMedia,
@@ -70,6 +71,11 @@ const TimelineSection = () => {
             description="Hides recommendation modules that ask you to follow topics or accounts while browsing timelines and profile pages."
             storageKey={KeyRemoveTopicsToFollow}
             crossedIcon
+          />
+          <LocalStorageCheckboxControl
+            label="AI Slop Button"
+            description='Adds a tiny "ai slop" action to posts. Clicking it asks X to report the post as spam and then block the author.'
+            storageKey={KeyAiSlopButton}
           />
           <LocalStorageCheckboxControl
             label={`Timeline Tabs (For you, Following, lists...)`}

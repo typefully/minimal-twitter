@@ -44,6 +44,7 @@ export const KeyTitleNotifications = "titleNotifications";
 export const KeyCustomCss = "customCss";
 export const KeyHideViewCount = "hideViewCount";
 export const KeyHideGrokDrawer = "hideGrokDrawer";
+export const KeyAiSlopButton = "aiSlopButton";
 
 export const allSettingsKeys = [
   // Extension Status
@@ -62,6 +63,7 @@ export const allSettingsKeys = [
   KeyRemovePromotedPosts,
   KeyRemoveTopicsToFollow,
   KeyRemoveTimelineTabs,
+  KeyAiSlopButton,
   KeyTypefullyEnhancementsButtons,
   KeyFollowCount,
   KeyReplyCount,
@@ -124,6 +126,7 @@ export const defaultPreferences = {
   [KeyRemovePromotedPosts]: "on",
   [KeyRemoveTopicsToFollow]: "on",
   [KeyRemoveTimelineTabs]: "off",
+  [KeyAiSlopButton]: "on",
   [KeyTypefullyEnhancementsButtons]: "on",
   [KeyFollowCount]: "on",
   [KeyReplyCount]: "on",
