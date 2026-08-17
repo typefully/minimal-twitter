@@ -4,7 +4,39 @@ If you have a good idea, [start a discussion](https://github.com/typefully/minim
 
 ## Development / Building / Bundling the Extension
 
-First, install [pnpm](https://pnpm.io/installation). The supported version is pinned in the root `package.json`.
+Install Node.js 20 or newer and [pnpm](https://pnpm.io/installation). The
+supported versions are declared in the root `package.json`.
+
+### Chrome development
+
+Install dependencies and start the development watcher:
+
+```sh
+pnpm install
+pnpm dev
+```
+
+The command builds `bundle/chrome-dev`; load that directory once from
+`chrome://extensions` using **Load unpacked**. Keep `pnpm dev` running. Changes
+to content scripts, CSS, extension assets, and the popup are rebuilt
+automatically. The development extension then reloads itself and refreshes open
+X/Twitter tabs.
+
+To launch Chrome automatically with a dedicated development profile instead,
+run:
+
+```sh
+pnpm dev:fresh
+```
+
+The dedicated profile is stored in `.chrome-dev-profile`, so its login and
+extension state are kept between sessions. Do not use that profile for regular
+browsing.
+
+The popup uses a static Next.js export, so popup changes trigger a rebuild and
+extension reload rather than React hot module replacement.
+
+### Release bundles
 
 ✨ **New**: `bundle-extension.js` now bundles and zips everything. Run `pnpm install && pnpm bundle` at the root directory and you'll get a [bundle](../bundle) directory that looks like this:
 
@@ -55,14 +87,14 @@ pnpm bundle # runs the `bundle-extension.js` script
 				<li>Open <code>chrome://extensions</code> or <code>edge://extensions</code></li>
         <li>Turn on the <strong>Developer mode</strong> toggle</li>
 				<li>Click on the <strong>Load unpacked</strong> button</li>
-				<li>Select the folder <code>minimal-twitter/extension</code></li>
+				<li>Select the folder <code>bundle/chrome-dev</code></li>
 			</ol>
 		</td>
 		<td width="33.33%">
 			<ol>
 				<li>Open <code>about:debugging#/runtime/this-firefox</code></li>
 				<li>Click on the <strong>Load Temporary Add-on...</strong> button</li>
-				<li>Select the file <code>minimal-twitter/extension/manifest.json</code></li>
+				<li>Select the file <code>bundle/firefox/manifest.json</code></li>
 			</ol>
 		</td>
       <td width="33.33%">

@@ -1,7 +1,7 @@
 import { css } from "@codemirror/lang-css";
 import CodeMirror from "@uiw/react-codemirror";
 import debounce from "lodash.debounce";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { KeyCustomCss } from "../../../storage-keys";
 import { getStorage, setStorage } from "../../utilities/chromeStorage";
 import SectionLabel from "../ui/SectionLabel";
@@ -10,18 +10,25 @@ const AdvancedSection = () => {
   const [showEditor, setShowEditor] = useState(false);
   const [cssText, setCssText] = useState("");
 
-  const syncCss = debounce(async (css) => {
-    try {
-      await setStorage({ [KeyCustomCss]: css });
-    } catch (error) {
-      console.warn(error);
-    }
-  }, 1000);
+  const syncCss = useMemo(
+    () =>
+      debounce(async (css) => {
+        try {
+          await setStorage({ [KeyCustomCss]: css });
+        } catch (error) {
+          console.warn(error);
+        }
+      }, 1000),
+    [],
+  );
 
-  const onChange = useCallback((value) => {
-    const newCss = (value || "").trim();
-    syncCss(newCss);
-  }, []);
+  const onChange = useCallback(
+    (value) => {
+      const newCss = (value || "").trim();
+      syncCss(newCss);
+    },
+    [syncCss],
+  );
 
   useEffect(() => {
     const setInitialSavedCss = async () => {

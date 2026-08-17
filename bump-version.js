@@ -3,15 +3,15 @@
 import fs from 'fs';
 import readline from 'readline';
 
-const BUNDLE_FILE = './bundle-extension.js';
+const MANIFEST_FILE = './extension-manifests.js';
 const XCODE_PROJECT = './bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj/project.pbxproj';
 
-// Read current version from bundle-extension.js
+// Read current version from the shared extension manifest source.
 function getCurrentVersion() {
-  const content = fs.readFileSync(BUNDLE_FILE, 'utf8');
+  const content = fs.readFileSync(MANIFEST_FILE, 'utf8');
   const versionMatch = content.match(/version:\s*"(\d+\.\d+\.\d+)"/);
   if (!versionMatch) {
-    throw new Error('Could not find version in bundle-extension.js');
+    throw new Error(`Could not find version in ${MANIFEST_FILE}`);
   }
   return versionMatch[1];
 }
@@ -42,14 +42,14 @@ function bumpVersion(version, type) {
   }
 }
 
-// Update version in bundle-extension.js
+// Update the version used by every browser manifest.
 function updateVersion(newVersion) {
-  const content = fs.readFileSync(BUNDLE_FILE, 'utf8');
+  const content = fs.readFileSync(MANIFEST_FILE, 'utf8');
   const updatedContent = content.replace(
     /version:\s*"\d+\.\d+\.\d+"/,
     `version: "${newVersion}"`
   );
-  fs.writeFileSync(BUNDLE_FILE, updatedContent, 'utf8');
+  fs.writeFileSync(MANIFEST_FILE, updatedContent, 'utf8');
 }
 
 // Get current build number from Xcode project
@@ -115,7 +115,7 @@ async function main() {
     console.log(`Bumping ${bumpType} version: ${currentVersion} → ${newVersion} (build ${currentBuildNumber} → ${newBuildNumber})`);
 
     updateVersion(newVersion);
-    console.log(`✓ Version updated to ${newVersion} in ${BUNDLE_FILE}`);
+    console.log(`✓ Version updated to ${newVersion} in ${MANIFEST_FILE}`);
 
     updateXcodeProject(newVersion, newBuildNumber);
     console.log(`✓ Xcode project updated to ${newVersion} (build ${newBuildNumber})`);

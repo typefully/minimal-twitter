@@ -12,7 +12,7 @@ Repository: https://github.com/typefully/minimal-twitter
 
 ### Building the Extension
 
-Requires [pnpm](https://pnpm.io/installation). The repository pins the supported pnpm version in `package.json`.
+Requires Node.js 20 or newer and [pnpm](https://pnpm.io/installation). The repository declares the supported versions in `package.json`.
 
 - `pnpm build` or `pnpm bundle` - Builds and bundles the extension for all browsers (prompts for browser choice)
 - Builds both popup (Next.js) and content-scripts (Rollup) automatically
@@ -33,23 +33,18 @@ Requires [pnpm](https://pnpm.io/installation). The repository pins the supported
 
 ### Development Workflow
 
-1. Run `pnpm install`, then `pnpm build` at root once to build everything initially
-2. For content-script changes: `cd content-scripts && pnpm watch` (auto-rebuilds on save)
-3. For popup changes: `cd popup && pnpm build` (no watch mode, must rebuild manually)
+1. Run `pnpm install`, then `pnpm dev` at the repository root.
+2. Load `bundle/chrome-dev` once from `chrome://extensions` using **Load unpacked**.
+3. Keep the command running. Content-script, CSS, asset, and popup changes rebuild automatically; the development extension reloads itself and refreshes open X/Twitter tabs.
 
-**Important:** `pnpm watch` builds to `content-scripts/dist/`, but the extension loads from `bundle/chrome/dist/`. To sync changes during development, either:
-
-- Run `pnpm build` at root after changes (slow, rebuilds everything)
-- Or create a symlink once: `rm -rf bundle/chrome/dist && ln -s ../../content-scripts/dist bundle/chrome/dist`
-
-Then load the extension in your browser (see below).
+Use `pnpm dev:fresh` to launch Chrome automatically with the dedicated
+`.chrome-dev-profile` instead.
 
 ### Loading Extension for Testing
 
-- Chrome/Edge: Load `bundle/chrome` folder at `chrome://extensions` (enable Developer mode)
+- Chrome/Edge development: Load `bundle/chrome-dev` at `chrome://extensions` (enable Developer mode)
+- Chrome/Edge release bundle: Load `bundle/chrome`
 - Firefox: Load `bundle/firefox/manifest.json` at `about:debugging#/runtime/this-firefox`
-
-After making changes, refresh the extension in `chrome://extensions` to reload.
 
 ## Architecture
 
@@ -146,14 +141,14 @@ To add a new feature toggle:
 - Chrome: Manifest V3 with service worker background
 - Firefox: Manifest V2 with background scripts
 - Safari: Converted from Firefox build using xcrun safari-web-extension-converter
-- Manifests defined in `bundle-extension.js`
+- Manifests defined in `extension-manifests.js`
 
 ## Releasing Updates
 
 ### Version Bump
 
 1. Run `pnpm bump-version` (prompts for patch/minor/major). This automatically updates:
-   - `bundle-extension.js` - main version number
+   - `extension-manifests.js` - main version number
    - Xcode project (`project.pbxproj`) - MARKETING_VERSION and CURRENT_PROJECT_VERSION (build number incremented by 1)
 
 2. Run `pnpm build` to create bundles for all browsers

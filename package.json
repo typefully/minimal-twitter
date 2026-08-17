@@ -3,10 +3,16 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.17.0",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "node ./bundle-extension.js",
     "bundle": "node ./bundle-extension.js",
-    "bump-version": "node ./bump-version.js"
+    "bump-version": "node ./bump-version.js",
+    "dev": "node ./scripts/dev-chrome.mjs",
+    "dev:fresh": "node ./scripts/dev-chrome.mjs --launch",
+    "test": "node --test"
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
@@ -14,6 +20,8 @@
     "zip-local": "^0.3.5"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13"
+    "@types/fs-extra": "^9.0.13",
+    "chokidar": "^4.0.3",
+    "web-ext": "^10.6.0"
   }
 }

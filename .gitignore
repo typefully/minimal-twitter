@@ -40,7 +40,9 @@ package-lock.json
 out
 dist
 bundle/chrome
+bundle/chrome-dev
 bundle/firefox
+.chrome-dev-profile
 .vscode
 
 # xcode project
