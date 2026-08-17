@@ -12,7 +12,8 @@ a[href*="quick_promote_web"] {
 }
 
 /* Hide Messages Drawer */
-[data-testid="DMDrawer"] {
+[data-testid="DMDrawer"],
+[data-testid="chat-drawer-root"] {
   visibility: hidden;
 }
 
