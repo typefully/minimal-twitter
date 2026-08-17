@@ -1,0 +1,5 @@
+packages:
+  - "content-scripts"
+  - "popup"
+
+autoInstallPeers: false

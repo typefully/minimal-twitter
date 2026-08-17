@@ -12,34 +12,34 @@ Repository: https://github.com/typefully/minimal-twitter
 
 ### Building the Extension
 
-Requires [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/).
+Requires [pnpm](https://pnpm.io/installation). The repository pins the supported pnpm version in `package.json`.
 
-- `yarn build` or `yarn bundle` - Builds and bundles the extension for all browsers (prompts for browser choice)
+- `pnpm build` or `pnpm bundle` - Builds and bundles the extension for all browsers (prompts for browser choice)
 - Builds both popup (Next.js) and content-scripts (Rollup) automatically
 - Creates bundled packages in `/bundle/` directory for Chrome, Firefox, and Safari
 
 ### Content Scripts (content-scripts/)
 
-- `cd content-scripts && yarn watch` - Watch mode for content script development
-- `cd content-scripts && yarn build` - Build content scripts only
+- `cd content-scripts && pnpm watch` - Watch mode for content script development
+- `cd content-scripts && pnpm build` - Build content scripts only
 
 ### Popup UI (popup/)
 
-- `cd popup && yarn dev` - Development server for popup UI (Next.js)
-- `cd popup && yarn build` - Build popup for production
-- `cd popup && yarn lint` - Run ESLint
-- `cd popup && yarn check:prettier` - Check code formatting
-- `cd popup && yarn write:prettier` - Format code with Prettier
+- `cd popup && pnpm dev` - Development server for popup UI (Next.js)
+- `cd popup && pnpm build` - Build popup for production
+- `cd popup && pnpm lint` - Run ESLint
+- `cd popup && pnpm check:prettier` - Check code formatting
+- `cd popup && pnpm write:prettier` - Format code with Prettier
 
 ### Development Workflow
 
-1. Run `yarn build` at root once to build everything initially
-2. For content-script changes: `cd content-scripts && yarn watch` (auto-rebuilds on save)
-3. For popup changes: `cd popup && yarn build` (no watch mode, must rebuild manually)
+1. Run `pnpm install`, then `pnpm build` at root once to build everything initially
+2. For content-script changes: `cd content-scripts && pnpm watch` (auto-rebuilds on save)
+3. For popup changes: `cd popup && pnpm build` (no watch mode, must rebuild manually)
 
-**Important:** `yarn watch` builds to `content-scripts/dist/`, but the extension loads from `bundle/chrome/dist/`. To sync changes during development, either:
+**Important:** `pnpm watch` builds to `content-scripts/dist/`, but the extension loads from `bundle/chrome/dist/`. To sync changes during development, either:
 
-- Run `yarn build` at root after changes (slow, rebuilds everything)
+- Run `pnpm build` at root after changes (slow, rebuilds everything)
 - Or create a symlink once: `rm -rf bundle/chrome/dist && ln -s ../../content-scripts/dist bundle/chrome/dist`
 
 Then load the extension in your browser (see below).
@@ -152,11 +152,11 @@ To add a new feature toggle:
 
 ### Version Bump
 
-1. Run `yarn bump-version` (prompts for patch/minor/major). This automatically updates:
+1. Run `pnpm bump-version` (prompts for patch/minor/major). This automatically updates:
    - `bundle-extension.js` - main version number
    - Xcode project (`project.pbxproj`) - MARKETING_VERSION and CURRENT_PROJECT_VERSION (build number incremented by 1)
 
-2. Run `yarn build` to create bundles for all browsers
+2. Run `pnpm build` to create bundles for all browsers
 
 3. Commit and tag:
    ```bash

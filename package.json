@@ -1,6 +1,8 @@
 {
   "name": "minimal-twitter",
+  "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.17.0",
   "scripts": {
     "build": "node ./bundle-extension.js",
     "bundle": "node ./bundle-extension.js",

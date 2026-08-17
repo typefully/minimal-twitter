@@ -4,9 +4,9 @@ If you have a good idea, [start a discussion](https://github.com/typefully/minim
 
 ## Development / Building / Bundling the Extension
 
-First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable) installed.
+First, install [pnpm](https://pnpm.io/installation). The supported version is pinned in the root `package.json`.
 
-✨ **New**: `bundle-extension.js` now bundles and zips everything. Run `yarn && yarn bundle` at the root directory and you'll get a [bundle](../bundle) directory that looks like this:
+✨ **New**: `bundle-extension.js` now bundles and zips everything. Run `pnpm install && pnpm bundle` at the root directory and you'll get a [bundle](../bundle) directory that looks like this:
 
 ```
 📂 bundle
@@ -21,26 +21,16 @@ First, you must have [classic yarn](https://classic.yarnpkg.com/lang/en/docs/ins
 ### Popup
 
 ```sh
-cd popup
-```
-
-```sh
-yarn # must run yarn once first before you can build
-yarn build # to build and export Next.js app
+pnpm --dir popup build # build and export the Next.js app
 ```
 
 ### Content Scripts
 
-We also use [parcel](https://parceljs.org) to build the `content_scripts` for the extension.
+We use [Rollup](https://rollupjs.org) to build the content scripts for the extension.
 
 ```sh
-cd content-scripts
-```
-
-```sh
-yarn # must run yarn once first before you can build
-yarn build # to build the content_scripts
-yarn watch # watch for changes and build automatically
+pnpm --dir content-scripts build # build the content scripts
+pnpm --dir content-scripts watch # watch for changes and build automatically
 ```
 
 After you have built both `popup` and `content-scripts` you can bundle the extension for `Chrome`, `Firefox`, and `Safari`:
@@ -48,12 +38,7 @@ After you have built both `popup` and `content-scripts` you can bundle the exten
 ### Bundle Script
 
 ```sh
-cd .. # go back to the root directory
-```
-
-```sh
-yarn # must run yarn once first before you can bundle
-yarn bundle # Runs the `bundle-extension.js` script
+pnpm bundle # runs the `bundle-extension.js` script
 ```
 
 ## Load Extension

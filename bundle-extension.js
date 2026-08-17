@@ -146,7 +146,7 @@ const bundle = async (manifest, bundleDirectory) => {
         startBuilding();
 
         try {
-          await runCommand(`cd ./${directory} && yarn && yarn build`);
+          await runCommand(`pnpm --dir ./${directory} build`);
           clearInterval(intervalId);
           resolve();
         } catch (error) {
