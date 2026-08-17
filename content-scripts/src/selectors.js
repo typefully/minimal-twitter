@@ -39,9 +39,6 @@ selectors.grokDrawerHeader = `div[data-testid="GrokDrawerHeader"]`;
 // Timeline
 selectors.timelineTablist = `div[data-testid='ScrollSnap-List'][role='tablist']`;
 selectors.timelineTab = `div[role='tab']`;
-selectors.timelineTabPresentation = `div[role='presentation']`;
-selectors.timelineTabSelected = `div[role='tab'][aria-selected='true']`;
-selectors.timelineTabText = `div[dir='ltr'] > span`;
 selectors.timelineOptions = `div[aria-label='Timeline options']`;
 selectors.topTweetsOn = `div[aria-label='Top Tweets on']`;
 selectors.menuItem = `div[role='menuitem'][tabindex='0']`;
