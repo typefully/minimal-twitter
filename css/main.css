@@ -26,12 +26,15 @@ a[href*="quick_promote_web"] {
     overflow-x: clip;
   }
 
-  /* Match widths for timeline */
+  /* Match widths for timeline without overriding X Chat's message widths */
   [data-testid="primaryColumn"] {
     margin: 0 auto;
   }
   [data-testid="primaryColumn"] > div > div:last-child,
-  [data-testid="primaryColumn"] > div > div:last-child div {
+  [data-testid="primaryColumn"]
+    > div
+    > div:last-child
+    div:not([data-testid="dm-message-list-container"] *) {
     max-width: unset;
   }
 
@@ -89,10 +92,11 @@ a[href*="quick_promote_web"] {
     position: fixed;
     top: 12px;
     right: 16px;
+    width: auto;
   }
 
   /* Match size of input the placeholder content */
-  [data-testid="sidebarColumn"] input[placeholder="Search Twitter"] {
+  [data-testid="sidebarColumn"] form[role="search"] input[role="combobox"] {
     width: 150px;
   }
 
