@@ -131,10 +131,8 @@ export const changeTransparentSearchBar = (transparentSearch) => {
         `
         ${selectors.searchBox} > div:nth-child(1) > div {
           background-color: transparent;
-        }
-        ${selectors.searchBoxInput} {
-          transform: translateX(2ch);
-          margin-left: -2.5ch;
+          /* Keep the border's dimensions so toggling this setting never shifts the search layout. */
+          border-color: transparent;
         }
         `
       );
