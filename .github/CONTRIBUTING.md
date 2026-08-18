@@ -38,7 +38,7 @@ extension reload rather than React hot module replacement.
 
 ### Release bundles
 
-✨ **New**: `bundle-extension.js` now bundles and zips everything. Run `pnpm install && pnpm bundle` at the root directory and you'll get a [bundle](../bundle) directory that looks like this:
+Run `pnpm install && pnpm bundle` at the root, then enter `All` at the prompt. This creates the Chrome and Firefox release bundles:
 
 ```
 📂 bundle
@@ -47,8 +47,9 @@ extension reload rather than React hot module replacement.
 └ 📁 safari
 └ 📄 chrome.zip
 └ 📄 firefox.zip
-└ 📄 safari.zip
 ```
+
+For Safari, open the existing `bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj`. It packages the generated Firefox bundle; do not regenerate the project for an update because the converter resets its release version and build number.
 
 ### Popup
 
@@ -65,7 +66,7 @@ pnpm --dir content-scripts build # build the content scripts
 pnpm --dir content-scripts watch # watch for changes and build automatically
 ```
 
-After you have built both `popup` and `content-scripts` you can bundle the extension for `Chrome`, `Firefox`, and `Safari`:
+After you have built both `popup` and `content-scripts`, use the bundle script to create the Chrome and Firefox artifacts:
 
 ### Bundle Script
 
@@ -99,7 +100,7 @@ pnpm bundle # runs the `bundle-extension.js` script
 		</td>
       <td width="33.33%">
 			<ol>
-				<li>Open <code>bundle/safari/Minimal Theme for Twitter/Minimal Theme for Twitter.xcodeproj</code>
+				<li>Open <code>bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj</code>
         </li>
 				<li>Click the Play button in Xcode ("start the active scheme")</li>
 				<li><a href="https://developer.apple.com/documentation/safariservices/safari_web_extensions/running_your_safari_web_extension#3744467">Configure Safari in macOS to run unsigned extensions</a></li>

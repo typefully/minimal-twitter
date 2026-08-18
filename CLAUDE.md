@@ -16,7 +16,8 @@ Requires Node.js 20 or newer and [pnpm](https://pnpm.io/installation). The repos
 
 - `pnpm build` or `pnpm bundle` - Interactively builds the popup and content scripts, then creates the selected release bundle under `/bundle/`
 - Run the release bundler in a PTY and enter the exact choice `Chrome`, `Firefox`, `Safari`, or `All`. Do not pipe the answer: closing stdin can terminate the async build early with a false successful exit.
-- `All` builds Chrome and Firefox; choose `Safari` separately to run the Xcode converter. For Chrome or Firefox, wait for the final `Bundled` and `Zipped` messages. For Safari, wait for the command to return and verify the Xcode project under `bundle/safari/`. Always verify the expected artifact because the bundler currently catches build errors instead of returning a failing exit code.
+- `All` builds Chrome and Firefox. For an existing Safari release, do not choose `Safari`: the converter regenerates the tracked Xcode project and resets its release version/build. The existing project reads `bundle/firefox` directly, so build `All`, then archive `bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj` in Xcode. Use the `Safari` choice only to create a project from scratch, before restoring its metadata and running `pnpm bump-version`.
+- Wait for the final `Bundled` and `Zipped` messages for both Chrome and Firefox, then verify the ZIPs explicitly because the bundler currently catches build errors instead of returning a failing exit code.
 
 ### Content Scripts (content-scripts/)
 
@@ -162,7 +163,7 @@ To add a new feature toggle:
 
 - Chrome: Manifest V3 with service worker background
 - Firefox: Manifest V2 with background scripts
-- Safari: Converted from Firefox build using xcrun safari-web-extension-converter
+- Safari: The tracked Xcode project packages the generated Firefox bundle; `xcrun safari-web-extension-converter` is only needed to create that project from scratch
 - Manifests defined in `extension-manifests.js`
 
 ## Releasing Updates
@@ -173,16 +174,19 @@ To add a new feature toggle:
    - `extension-manifests.js` - main version number
    - Xcode project (`project.pbxproj`) - MARKETING_VERSION and CURRENT_PROJECT_VERSION (build number incremented by 1)
 
-2. Run `pnpm build` to create bundles for all browsers
+2. Run `pnpm build` in a PTY and enter `All`. Wait for both ZIPs, run `unzip -t` on them, and confirm both embedded manifests contain the new version.
 
-3. Commit and tag:
+3. Open the existing `bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj` in Xcode. Test and archive the macOS scheme without regenerating the project.
+
+4. Stage only the intended release files, then commit and tag:
    ```bash
-   git add . && git commit -m "Bump version to X.Y.Z"
+   git add extension-manifests.js bundle/chrome.zip bundle/firefox.zip "bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj/project.pbxproj"
+   git commit -m "chore: bump version to X.Y.Z"
    git tag vX.Y.Z
    git push && git push --tags
    ```
 
-4. Submit bundles to browser stores (Chrome Web Store, Firefox Add-ons, App Store via Xcode)
+5. Submit `bundle/chrome.zip`, `bundle/firefox.zip`, and the Xcode archive to their respective stores.
 
 ### Update Screen Behavior
 

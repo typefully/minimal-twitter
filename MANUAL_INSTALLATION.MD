@@ -1,15 +1,16 @@
 # Install Manually
 
-Open the [bundle](./bundle) folder. Here you'll find all the packages zipped up:
+Open the [bundle](./bundle) folder. Chrome and Firefox have zipped packages; Safari uses the tracked Xcode project:
+
 - [chrome.zip](./bundle/chrome.zip)
 - [firefox.zip](./bundle/firefox.zip)
-- [safari.zip](./bundle//safari.zip)
+- [Safari Xcode project](./bundle/safari/Minimal%20Twitter/Minimal%20Twitter.xcodeproj)
 
 ```
 📂 bundle
 └ 📄 chrome.zip
 └ 📄 firefox.zip
-└ 📄 safari.zip
+└ 📁 safari
 ```
 
 Open them and follow the instructions below based on which browser you'd like to install the extension on:
@@ -38,7 +39,7 @@ Open them and follow the instructions below based on which browser you'd like to
 		</td>
       <td width="33.33%">
 			<ol>
-				<li>Open <code>bundle/safari/Minimal Theme for Twitter/Minimal Theme for Twitter.xcodeproj</code>
+				<li>Open <code>bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj</code>
         </li>
 				<li>Click the Play button in Xcode ("start the active scheme")</li>
 				<li><a href="https://developer.apple.com/documentation/safariservices/safari_web_extensions/running_your_safari_web_extension#3744467">Configure Safari in macOS to run unsigned extensions</a></li>

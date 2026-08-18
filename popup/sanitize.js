@@ -11,7 +11,7 @@ const getFilesInDirectoryRecursively = async (directory) => {
     dirents.map((dirent) => {
       const res = resolve(directory, dirent.name);
       return dirent.isDirectory() ? getFilesInDirectoryRecursively(res) : res;
-    })
+    }),
   );
   return Array.prototype.concat(...files);
 };
@@ -28,6 +28,6 @@ const getFilesInDirectoryRecursively = async (directory) => {
         const data = await readFile(file, "utf8");
         const result = data.replace(/\/_next\//g, "/next/").replace(/\\\/_next\\\//g, "\\/next\\/");
         await writeFile(file, result, "utf8");
-      })
+      }),
   );
 })();

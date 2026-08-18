@@ -233,16 +233,16 @@ const NavigationSection = () => {
                 segments={[
                   {
                     value: "never",
-                    label: "Never"
+                    label: "Never",
                   },
                   {
                     value: "hover",
-                    label: "On Hover"
+                    label: "On Hover",
                   },
                   {
                     value: "always",
-                    label: "Always"
-                  }
+                    label: "Always",
+                  },
                 ]}
               />
             </div>
