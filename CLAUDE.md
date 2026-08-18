@@ -14,9 +14,9 @@ Repository: https://github.com/typefully/minimal-twitter
 
 Requires Node.js 20 or newer and [pnpm](https://pnpm.io/installation). The repository declares the supported versions in `package.json`.
 
-- `pnpm build` or `pnpm bundle` - Builds and bundles the extension for all browsers (prompts for browser choice)
-- Builds both popup (Next.js) and content-scripts (Rollup) automatically
-- Creates bundled packages in `/bundle/` directory for Chrome, Firefox, and Safari
+- `pnpm build` or `pnpm bundle` - Interactively builds the popup and content scripts, then creates the selected release bundle under `/bundle/`
+- Run the release bundler in a PTY and enter the exact choice `Chrome`, `Firefox`, `Safari`, or `All`. Do not pipe the answer: closing stdin can terminate the async build early with a false successful exit.
+- `All` builds Chrome and Firefox; choose `Safari` separately to run the Xcode converter. For Chrome or Firefox, wait for the final `Bundled` and `Zipped` messages. For Safari, wait for the command to return and verify the Xcode project under `bundle/safari/`. Always verify the expected artifact because the bundler currently catches build errors instead of returning a failing exit code.
 
 ### Content Scripts (content-scripts/)
 
@@ -37,14 +37,36 @@ Requires Node.js 20 or newer and [pnpm](https://pnpm.io/installation). The repos
 2. Load `bundle/chrome-dev` once from `chrome://extensions` using **Load unpacked**.
 3. Keep the command running. Content-script, CSS, asset, and popup changes rebuild automatically; the development extension reloads itself and refreshes open X/Twitter tabs.
 
-Use `pnpm dev:fresh` to launch Chrome automatically with the dedicated
-`.chrome-dev-profile` instead.
+Use `pnpm dev:fresh` for a self-contained run: it builds and automatically loads `bundle/chrome-dev`, opens the welcome page and `x.com`, and keeps cookies and extension storage in `.chrome-dev-profile`. If needed, the user signs into X once in that profile and chooses **Keep** if Chrome asks to review the unpacked extension. Closing that Chrome instance stops the watcher.
+
+Authentication handoff: if the development browser reaches X's login flow, stop browser automation and ask the user to sign in. Never enter, request, copy, or store their credentials. Resume testing after the user confirms login is complete. `.chrome-dev-profile` persists across runs in the same checkout or worktree, but a fresh worktree gets a separate profile and may require another sign-in.
+
+### Validation and Browser Testing
+
+- Prefer the root `pnpm dev` workflow for iteration. It stages the complete development extension; standalone popup or content-script watchers do not provide the same reload behavior.
+- Wait for `[dev] Changes ready (...)` and the X tab refresh to complete before judging a browser change. Manual rebuilding is normally unnecessary; reload manually if the browser remains stale or the watcher reports a failure.
+- Run the checks that match the changed area: `pnpm test` for the Node test suite; `pnpm --dir content-scripts build` for content scripts; and `pnpm --dir popup lint`, `pnpm --dir popup check:prettier`, plus `pnpm --dir popup build` for popup changes.
+- There is no automated browser suite. Test affected settings in the unpacked development extension on `x.com`; inspect the page console for content-script errors and `chrome://extensions` for manifest or service-worker errors.
+- Test the popup from the installed extension action. `pnpm --dir popup dev` is not representative because the popup depends on extension-only APIs such as `chrome.storage`.
+- When extension-aware Chrome DevTools tools are available, use them to install or reload `bundle/chrome-dev`, trigger the extension action, and inspect the popup, service worker, and affected X page. Otherwise use the manual loading workflow below.
+- For Chrome API or manifest changes, use the Chrome team's `chrome-extensions` and `modern-web-guidance` skills when available; otherwise consult the current official Chrome extension documentation.
+- When permissions, host permissions, data handling, or store-submission metadata changes, create or update `CHROMEWEBSTORE.md` with the matching Chrome Web Store justification.
+
+For agent-driven browser inspection without extension-aware Chrome DevTools tools, run `pnpm dev`, then launch the browser separately from a second PTY using a free debugging port (replace `9224` if occupied):
+
+```sh
+pnpm exec web-ext run --target chromium --source-dir bundle/chrome-dev --start-url https://x.com --chromium-profile .chrome-dev-profile --profile-create-if-missing --keep-profile-changes --no-reload --args=--remote-debugging-port=9224
+```
+
+Attach browser automation to `http://127.0.0.1:9224`. This command replaces the browser-launching part of `pnpm dev:fresh`; do not run both at once.
 
 ### Loading Extension for Testing
 
 - Chrome/Edge development: Load `bundle/chrome-dev` at `chrome://extensions` (enable Developer mode)
 - Chrome/Edge release bundle: Load `bundle/chrome`
 - Firefox: Load `bundle/firefox/manifest.json` at `about:debugging#/runtime/this-firefox`
+
+When the user explicitly prefers testing in their existing signed-in Chrome instead of signing into a per-worktree profile, use Chrome DevTools MCP with `--autoConnect`. The user must enable **Allow remote debugging for this browser instance** at `chrome://inspect/#remote-debugging` for that browser session. This is not required for the explicit debugging-port workflow above.
 
 ## Architecture
 
