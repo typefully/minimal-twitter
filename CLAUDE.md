@@ -33,7 +33,7 @@ Requires Node.js 20 or newer and [pnpm](https://pnpm.io/installation). The repos
 
 ### Development Workflow
 
-1. Run `pnpm install`, then `pnpm dev` at the repository root.
+1. Run `./workspace-setup.sh init`, then `pnpm dev` at the repository root. Codex-managed worktrees run the setup step automatically.
 2. Load `bundle/chrome-dev` once from `chrome://extensions` using **Load unpacked**.
 3. Keep the command running. Content-script, CSS, asset, and popup changes rebuild automatically; the development extension reloads itself and refreshes open X/Twitter tabs.
 

@@ -1,0 +1,20 @@
+version = 1
+name = "minimal-twitter"
+
+[setup]
+script = "./workspace-setup.sh init"
+
+[[actions]]
+name = "Run extension"
+command = "pnpm dev"
+icon = "run"
+
+[[actions]]
+name = "Test"
+command = "pnpm test"
+icon = "test"
+
+[[actions]]
+name = "Lint popup"
+command = "pnpm --dir popup lint"
+icon = "tool"
