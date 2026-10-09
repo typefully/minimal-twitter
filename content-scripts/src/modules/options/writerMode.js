@@ -36,7 +36,7 @@ export const changeWriterMode = (writerMode) => {
           `
             body {
               padding-left: 0;
-              overflow: hidden;
+              overflow: auto;
             }
             ${selectors.mainColumn} {
               border-style: hidden;
