@@ -4,7 +4,6 @@ const selectors = {};
 selectors.mainWrapper = `main[role="main"]`;
 selectors.mainColumn = `[data-testid="primaryColumn"]`;
 selectors.topHeader = `${selectors.mainColumn} > div > div:nth-of-type(1)`;
-selectors.timelineTabs = `${selectors.mainColumn} > div:first-child > div:first-child > div:first-child > div:only-child > nav:only-child`;
 selectors.leftSidebar = `header[role="banner"]`;
 selectors.leftSidebarLinks = `${selectors.leftSidebar} nav[role="navigation"]`;
 selectors.leftSidebarUnreadBadge = `${selectors.leftSidebarLinks} a svg + div[aria-label]:only-of-type`;
@@ -38,6 +37,8 @@ selectors.grokDrawer = `[data-testid="GrokDrawer"]`;
 selectors.grokDrawerHeader = `div[data-testid="GrokDrawerHeader"]`;
 // Timeline
 selectors.timelineTablist = `div[data-testid='ScrollSnap-List'][role='tablist']`;
+// Row holding the Home tabs and the "Manage timelines" button
+selectors.timelineTabs = `${selectors.topHeader} div:has(> div > nav[role="navigation"] ${selectors.timelineTablist})`;
 selectors.timelineTab = `div[role='tab']`;
 selectors.timelineOptions = `div[aria-label='Timeline options']`;
 selectors.topTweetsOn = `div[aria-label='Top Tweets on']`;
