@@ -17,6 +17,12 @@ a[href*="quick_promote_web"] {
   visibility: hidden;
 }
 
+/* Timeline Tabs fix for 6.5.0 and earlier, whose selector no longer matches X Home.
+   Their content script still injects this style element only while the setting applies. */
+html:has(style#mt-style-removeTimelineTabs) [data-testid="primaryColumn"] > div > div:nth-of-type(1) div:has(> div > nav[role="navigation"] div[data-testid="ScrollSnap-List"][role="tablist"]) {
+  display: none;
+}
+
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
