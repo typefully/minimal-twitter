@@ -10,6 +10,7 @@ export const changeTimelineWidth = (timelineWidth) => {
     @media only screen and (min-width: 988px) {
       ${selectors.mainWrapper} {
         --x-main-column-width: ${timelineWidth}px;
+        --x-timeline-max-width: ${timelineWidth}px;
       }
     }
     `
