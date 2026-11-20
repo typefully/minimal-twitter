@@ -10,7 +10,7 @@ export const addSmallerSearchBarStyle = () => {
 
   if (document.activeElement === searchInput) return;
 
-  const searchBarPlaceholderWidth = searchInput.getAttribute("placeholder").length;
+  const searchBarPlaceholderWidth = (searchInput.getAttribute("placeholder") || "Search").length;
 
   addStyles(
     "searchInputWidth",

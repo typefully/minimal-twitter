@@ -6,29 +6,34 @@ export default async function hideRightSidebar() {
 
   if (isSearchPage) {
     removeStyles("hide-sidebar");
-    removeOtherSections();
-    setTimeout(() => {
-      removeOtherSections();
-    }, 500); // Sometimes the trends appear with a delay
+    if (stylesExist("search-sidebar")) return;
+
+    addStyles(
+      "search-sidebar",
+      `${selectors.rightSidebar} section:not(:has(a[href^="/search-advanced"])) {
+        display: none;
+      }`
+    );
   } else {
+    removeStyles("search-sidebar");
     if (stylesExist("hide-sidebar")) return;
 
     addStyles(
       "hide-sidebar",
       `${selectors.rightSidebar} {
+        position: fixed;
         visibility: hidden;
         width: 0;
         margin: 0;
         padding: 0;
         z-index: 1;
+      }
+      @media only screen and (min-width: 1000px) {
+        div:has(> ${selectors.rightSidebar}) {
+          grid-template-columns: var(--x-main-column-width) !important;
+          justify-content: center;
+        }
       }`
     );
   }
-}
-
-function removeOtherSections() {
-  const sidebar = document.querySelector(selectors.rightSidebar);
-  if (!sidebar) return;
-  sidebar.querySelector(`aside[role="complementary"]`)?.parentElement?.remove();
-  sidebar.querySelector(`section[role="region"]`)?.parentElement?.parentElement?.remove();
 }

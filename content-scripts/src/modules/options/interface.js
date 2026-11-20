@@ -14,6 +14,7 @@ export const changeTitleNotifications = (tf) => {
     }
 
     const favicon = document.querySelector('link[rel="shortcut icon"]');
+    if (!favicon) return;
 
     if (setting === "on") {
       favicon.setAttribute("href", favicon.href.replace("twitter.ico", "twitter-pip.2.ico"));
@@ -102,7 +103,7 @@ export const changeHideSearchBar = (searchBar) => {
       addStyles(
         "trendsHomeTimeline-more",
         `@media only screen and (min-width: 1265px) {
-          ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+          ${selectors.trendsSection} {
             top: 12px !important;
           }
         }`
@@ -114,7 +115,7 @@ export const changeHideSearchBar = (searchBar) => {
       addStyles(
         "trendsHomeTimeline-more",
         `@media only screen and (min-width: 1265px) {
-          ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+          ${selectors.trendsSection} {
             top: unset;
           }
         }`
@@ -129,7 +130,7 @@ export const changeTransparentSearchBar = (transparentSearch) => {
       addStyles(
         "transparentSearch",
         `
-        ${selectors.searchBox} > div:nth-child(1) > div {
+        ${selectors.searchBox} [data-slot="xds-combobox-input-group"] {
           background-color: transparent;
           /* Keep the border's dimensions so toggling this setting never shifts the search layout. */
           border-color: transparent;

@@ -1,3 +1,5 @@
+import selectors from "../../selectors";
+
 export default function isMutationSkippable(mutationsList) {
   const a = mutationsList[0]?.addedNodes[0]; // First added node
   const r = mutationsList[0]?.removedNodes[0]; // First removed node
@@ -15,21 +17,18 @@ export default function isMutationSkippable(mutationsList) {
       return true;
 
     // Engagement counts
-    if (t.closest(`[data-testid="like"]`) || t.closest(`[data-testid="retweet"]` || t.closest(`[data-testid="reply"]`))) {
+    if (t.closest("[data-engagement-action]")) {
       return true;
     }
 
     // Inside the sidebar
-    if (t.closest(`nav[role="navigation"]`)) return true;
-
-    // Sidebar itself
-    if (t?.nodeName === "NAV" && t?.getAttribute("role") === "navigation") return true;
+    if (t.closest(selectors.leftSidebarLinks)) return true;
 
     // <head> changes
     if (t.closest("head")) return true;
 
     // User Avatar changes
-    if (el?.closest("[data-testid^='UserAvatar-Container']") || t?.closest("[data-testid^='UserAvatar-Container']")) return true;
+    if (el?.closest("[data-post-avatar]") || t?.closest("[data-post-avatar]")) return true;
 
     // Post media
     if (el?.closest("[data-testid='tweetPhoto']")) return true;
@@ -60,10 +59,10 @@ export default function isMutationSkippable(mutationsList) {
     if (el?.nodeName === "STYLE") return true;
 
     // DM drawer
-    if (el?.closest("[data-testid='DMDrawer']") || t?.closest("[data-testid='DMDrawer']")) return true;
+    if (el?.closest(selectors.chatDrawer) || t?.closest(selectors.chatDrawer)) return true;
 
     // Trends drawer
-    if (el?.closest("[data-testid='sidebarColumn']") || t?.closest("[data-testid='sidebarColumn']")) return true;
+    if (el?.closest(selectors.rightSidebar) || t?.closest(selectors.rightSidebar)) return true;
 
     // Ignore text only nodes
     if (el?.nodeName === "#text") return true;

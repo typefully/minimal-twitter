@@ -6,140 +6,69 @@
 
 /* Remove Promoted Posts */
 /* Keep article combinator or it will remove all videos as well */
+/* Ads are the only timeline posts without a timestamp link to their own status */
 [data-testid="placementTracking"] article,
+main li:has(> [role="link"] > article):not(:has(> [role="link"] > article a[href*="/status/"]:not([href$="/analytics"], [href*="/photo/"], [href*="/video/"]))),
 a[href*="quick_promote_web"] {
   display: none;
 }
 
 /* Hide Messages Drawer */
 [data-testid="DMDrawer"],
-[data-testid="chat-drawer-root"] {
+[data-testid="chat-drawer-root"],
+[data-slot="xds-dock-window"]:has(> [data-slot="xds-dock-launcher"] svg[data-icon="icon-chat"]) {
   visibility: hidden;
 }
 
 /* Timeline Tabs fix for 6.5.0 and earlier, whose selector no longer matches X Home.
    Their content script still injects this style element only while the setting applies. */
-html:has(style#mt-style-removeTimelineTabs) [data-testid="primaryColumn"] > div > div:nth-of-type(1) div:has(> div > nav[role="navigation"] div[data-testid="ScrollSnap-List"][role="tablist"]) {
+html:has(style#mt-style-removeTimelineTabs) [data-testid="primaryColumn"] > div > div:nth-of-type(1) div:has(> div > nav[role="navigation"] div[data-testid="ScrollSnap-List"][role="tablist"]),
+html:has(style#mt-style-removeTimelineTabs) main header[data-page-header] > div:has([role="tablist"]) {
   display: none;
 }
 
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
+  /* Let the page span the viewport so the timeline centers on it */
+  body > div:has(main) {
+    max-width: none !important;
+  }
+
   /* Center the Timeline */
   /* Prevent horizontal scroll */
-  main[role="main"] {
-    align-items: center;
+  div:has(> div > main) {
+    justify-content: center;
     overflow-x: clip;
   }
 
-  /* Match widths for timeline without overriding X Chat's message widths */
-  [data-testid="primaryColumn"] {
-    margin: 0 auto;
-  }
-  [data-testid="primaryColumn"] > div > div:last-child,
-  [data-testid="primaryColumn"]
-    > div
-    > div:last-child
-    div:not([data-testid="dm-message-list-container"] *) {
-    max-width: unset;
-  }
-
-  /* Fix navigation to left */
-  header[role="banner"] {
-    align-items: flex-start;
-  }
-
-  /* Align Twitter navigation icon with search */
-  h1[role="heading"] {
-    padding-top: 4px;
-  }
-
-  /* Sidebar labels */
-  header[role="banner"] nav[role="navigation"]:hover > * > div {
-    backdrop-filter: blur(12px);
-  }
-  /* Account switcher */
-  header[role="banner"] > div > div > div > div:last-child {
-    margin-bottom: 0px !important;
-  }
-
-  /* Align account button with floating tweet button */
-  [data-testid="SideNav_AccountSwitcher_Button"] {
-    bottom: 12px;
-  }
-
-  /* Shrink space if there are a lot of items in left navigation */
-  header[role="banner"] > div > div > div > div:first-child {
-    flex-shrink: 1;
-    overflow-y: auto;
-  }
-
   /* Floating Tweet Button */
-  [data-testid="SideNav_NewTweet_Button"] {
+  #sidebar-compose-post {
     position: fixed;
     right: 16px;
     bottom: 24px;
+    width: auto;
+    z-index: 3;
   }
-  header[role="banner"] > div > div > div {
-    overflow: visible; /* Safari overflow issue: https://bugs.webkit.org/show_bug.cgi?id=160953 */
-  }
-}
-
-/* Add some margin to the right sidebar, since it shows in the search page — see hideRightSidebar.js */
-[data-testid="sidebarColumn"] {
-  margin-left: 12px;
 }
 
 /* Reveal searchbar and search filters at desktop breakpoint */
 @media only screen and (min-width: 1100px) {
   /* Reveal searchbar */
-  [data-testid="sidebarColumn"] form[role="search"] {
+  main + aside form[role="search"] {
     visibility: visible;
     position: fixed;
     top: 12px;
     right: 16px;
     width: auto;
-  }
-
-  /* Match size of input the placeholder content */
-  [data-testid="sidebarColumn"] form[role="search"] input[role="combobox"] {
-    width: 150px;
+    z-index: 3;
   }
 
   /* Match size of focused search container to its dropdown */
   /* Add blur filter to search container for overlap */
-  [data-testid="sidebarColumn"] form[role="search"]:focus-within {
+  main + aside form[role="search"]:focus-within {
     width: 374px;
     backdrop-filter: blur(12px);
-  }
-
-  [data-testid="sidebarColumn"] form[role="search"] input:focus {
-    width: 100% !important;
-  }
-
-  /* Reset width and left positioning to align search dropdown */
-  div[style*="left: -12px"] {
-    left: unset;
-  }
-  div[style="left: -8px; width: 306px;"] {
-    left: unset;
-    width: 374px;
-  }
-}
-
-.mt-sidebar-button > div > div[dir] {
-  font-weight: 400;
-}
-
-.mt-sidebar-button:hover > div {
-  background-color: rgba(var(--glyphs-color-rgb), 0.1);
-}
-
-/* Don't show label at smaller screens */
-@media only screen and (max-width: 1264px) {
-  .mt-sidebar-button > div > div[dir] {
-    display: none;
   }
 }
 

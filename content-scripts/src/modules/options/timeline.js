@@ -1,80 +1,19 @@
-import { KeyHideGrokDrawer } from "../../../../storage-keys";
 import selectors from "../../selectors";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
-import { getStorage } from "../utilities/storage";
 
 export const changeTimelineWidth = (timelineWidth) => {
-  switch (timelineWidth) {
-    case 600:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 600px;
-            max-width: 600px;
-          }
-        }
-        `
-      );
-      break;
+  if (![600, 650, 700, 750, 800].includes(timelineWidth)) return;
 
-    case 650:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 650px;
-            max-width: 650px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 700:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 700px;
-            max-width: 700px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 750:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 750px;
-            max-width: 750px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 800:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 800px;
-            max-width: 800px;
-          }
-        }
-        `
-      );
-      break;
-  }
+  addStyles(
+    "timelineWidth",
+    `
+    @media only screen and (min-width: 988px) {
+      ${selectors.mainWrapper} {
+        --x-main-column-width: ${timelineWidth}px;
+      }
+    }
+    `
+  );
 };
 
 export const changeTimelineBorders = (timelineBorders) => {
@@ -88,8 +27,8 @@ export const changeTimelineBorders = (timelineBorders) => {
         "timelineBorders",
         `
         @media only screen and (min-width: 988px) {
-          div${selectors.mainColumn} {
-            border-style: hidden;
+          ${selectors.mainColumn} {
+            border-style: hidden !important;
           }
         }
         `.trim()
@@ -108,11 +47,8 @@ export const changeTweetBorders = (tweetBorders) => {
       addStyles(
         "tweetBorders",
         `
-        ${selectors.mainWrapper} section > div > div > div > div[role="separator"] {
-          display: none;
-        }
-        ${selectors.mainColumn} > div > div:empty {
-          background: transparent;
+        ${selectors.mainColumn} li > div[role="link"] {
+          border-bottom-color: transparent;
         }
         `.trim()
       );
@@ -130,7 +66,7 @@ export const changeStickyHeader = (stickyHeader) => {
       addStyles(
         "stickyHeader",
         `
-        ${selectors.mainColumn} > div > div {
+        ${selectors.topHeader} {
           position: unset;
         }
         `
@@ -145,8 +81,8 @@ export const changePromotedPosts = (removePromotedPosts) => {
       addStyles(
         "removePromotedPosts",
         `
-        [data-testid="placementTracking"] article {
-          display: flex;
+        ${selectors.promotedPost} {
+          display: list-item;
         }
         `
       );
@@ -235,7 +171,7 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
             }
           }
           @media only screen and (min-width: 1265px) {
-            ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
+            ${selectors.trendsSection} {
               visibility: visible;
               position: fixed;
               right: 16px;
@@ -256,7 +192,7 @@ export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
               margin-top: 4px;
             }
 
-            [data-testid="primaryColumn"] {
+            ${selectors.mainColumn} {
               transform: translateX(-64px);
             }
           }
@@ -325,68 +261,5 @@ export const changeLatestTweets = (latestTweets) => {
     document.addEventListener("DOMContentLoaded", showLatestTweets);
   } else {
     showLatestTweets();
-  }
-};
-
-export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
-  const grokClickListener = () => {
-    const grokDrawer = document.querySelector(selectors.grokDrawer);
-    grokDrawer.classList.add("typefully-grok-drawer-enabled");
-  };
-
-  if (hideGrokDrawer === "off") {
-    // remove event click listener from all grok buttons, when hideGrokDrawer is off
-    const grokSvgs = document.querySelectorAll(selectors.grokSvg);
-    grokSvgs.forEach((svg) => {
-      const grokButton = svg.closest("button");
-      if (grokButton) {
-        grokButton.removeEventListener("click", grokClickListener);
-      }
-    });
-
-    return;
-  }
-
-  let grokSvgs = document.querySelectorAll(selectors.grokSvg);
-  grokSvgs = Array.from(grokSvgs).filter((svg) => svg.closest("button"));
-
-  grokSvgs.forEach((svg) => {
-    const grokButton = svg.closest("button");
-
-    if (!grokButton) return;
-
-    grokButton.addEventListener("click", grokClickListener);
-  });
-
-  const grokDrawer = document.querySelector(selectors.grokDrawer);
-  if (!grokDrawer) return;
-
-  const grokDrawerHeader = document.querySelector(selectors.grokDrawerHeader);
-  if (!grokDrawerHeader) return;
-
-  const observer = new ResizeObserver(async (entries) => {
-    const entry = entries[0];
-
-    // if entry has one child and it is a button, it means the drawer is closed.
-    // Remove the drawer if hideGrokDrawer is on.
-    if (entry.target.children.length === 1 && entry.target.children[0].tagName === "BUTTON") {
-      grokDrawer.classList.remove("typefully-grok-drawer-enabled");
-      let hideGrokDrawer = await getStorage(KeyHideGrokDrawer);
-
-      if (hideGrokDrawer === "on") {
-        addStyles(
-          "grokDrawer",
-          `${selectors.grokDrawer} {
-          display: none !important;
-        }`
-        );
-      }
-      observer.disconnect();
-    }
-  });
-
-  // observe the grok drawer header to determine if the drawer has to be hidden or not.
-  if (grokDrawerHeader) {
-    observer.observe(grokDrawerHeader);
   }
 };

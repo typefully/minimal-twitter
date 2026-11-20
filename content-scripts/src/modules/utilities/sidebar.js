@@ -1,12 +1,14 @@
+import selectors from "../../selectors";
+
 export const addSidebarButton = ({ name, href, userHref, onClick, svgAsset }) => {
   // Let's find all sidebar buttons with the same name
   const existingElements = [
-    ...document.querySelectorAll(`nav[role="navigation"] > [aria-label="${name}"]`),
-    ...document.querySelectorAll(`nav[role="navigation"] > [aria-label="${name.toLowerCase()}"]`),
+    ...document.querySelectorAll(`${selectors.leftSidebarLinks} > [aria-label="${name}"]`),
+    ...document.querySelectorAll(`${selectors.leftSidebarLinks} > [aria-label="${name.toLowerCase()}"]`),
   ];
 
   // We base new sidebar buttons on the existing "Profile" one, so let's get it:
-  const profileNode = document.querySelector('nav[role="navigation"] > a[role="link"][data-testid="AppTabBar_Profile_Link"]');
+  const profileNode = document.querySelector(selectors.sidebarLinks.profile);
   if (!profileNode) {
     return;
   }
@@ -18,48 +20,45 @@ export const addSidebarButton = ({ name, href, userHref, onClick, svgAsset }) =>
     existingElements.slice(1).forEach((element) => element.remove());
   }
 
-  // We're left with a single existing element:
-  const existingElement = existingElements[0];
+  if (existingElements.length) return;
 
-  if (existingElement) {
-    const hasChanged =
-      (profileNode.querySelector("span") && !existingElement.querySelector("span")) || (!profileNode.querySelector("span") && existingElement.querySelector("span"));
-
-    if (!hasChanged) {
-      return;
-    }
-
-    const newNode = createNewElement({ name, href, userHref, onClick, svgAsset, profileNode });
-    existingElement.replaceWith(newNode);
-  } else {
-    const newNode = createNewElement({ name, href, userHref, onClick, svgAsset, profileNode });
-    profileNode.insertAdjacentElement("beforebegin", newNode);
-  }
+  const newNode = createNewElement({ name, href, userHref, onClick, svgAsset, profileNode });
+  if (newNode) profileNode.insertAdjacentElement("beforebegin", newNode);
 };
 
 const createNewElement = ({ profileNode, name, href, userHref, onClick, svgAsset }) => {
-  let newNode;
+  const newNode = profileNode.cloneNode(true);
 
   try {
-    if (href || userHref) {
-      newNode = profileNode.cloneNode(true);
-      if (href) newNode.href = href;
-      if (userHref) newNode.href += userHref;
+    if (href) {
+      newNode.setAttribute("href", href);
+    } else if (userHref) {
+      newNode.setAttribute("href", profileNode.getAttribute("href") + userHref);
     } else if (onClick) {
-      newNode = document.createElement("div");
-      newNode.innerHTML = profileNode.innerHTML;
+      newNode.removeAttribute("href");
+      newNode.setAttribute("role", "button");
       newNode.style.cursor = "pointer";
       newNode.onclick = () => onClick(newNode);
     }
 
     newNode.setAttribute("aria-label", name);
-    newNode.removeAttribute("data-testid");
-    newNode.classList.add("mt-sidebar-button"); // To style it in main.css
-    newNode.firstChild.firstChild.firstChild.innerHTML = svgAsset;
-    newNode.firstChild.lastChild.firstChild.innerText = name;
+    newNode.removeAttribute("id");
+    newNode.removeAttribute("data-status");
+    newNode.classList.remove("active");
+    newNode.classList.add("mt-sidebar-button");
+
+    const [icon, selectedIcon] = newNode.querySelectorAll("svg");
+    icon.removeAttribute("data-icon");
+    icon.setAttribute("viewBox", "0 0 24 24");
+    icon.innerHTML = svgAsset;
+    icon.closest("span")?.classList.remove("opacity-0");
+    selectedIcon?.closest("span")?.remove();
+
+    newNode.firstElementChild.lastElementChild.firstElementChild.innerText = name;
   } catch (error) {
     console.log(`❌ Error creating ${name} sidebar button`);
     console.warn(error);
+    return null;
   }
 
   return newNode;

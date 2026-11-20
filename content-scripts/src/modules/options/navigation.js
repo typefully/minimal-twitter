@@ -63,7 +63,7 @@ export const addAnalyticsButton = () => {
       name: "Analytics",
       svgAsset: svgAssets.grow.normal,
       onClick: () => {
-        const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)?.getAttribute("href").replace("/", "");
+        const screenName = document.querySelector(selectors.sidebarLinks.profile)?.getAttribute("href").replace("/", "");
 
         const url = createTypefullyUrl(
           {
@@ -113,54 +113,41 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
         "unreadCountBadge",
         `${selectors.leftSidebarUnreadBadge} {
           display: none;
-        }
-        ${selectors.accountSwitcherButton} > div > svg+div[aria-label] {
-          display: none;
         }`
       );
       break;
   }
 };
 
+const collapsedLabelsStyle = `
+    ${selectors.leftSidebarRail},
+    ${selectors.leftSidebarRail} * {
+      --x-sidebar-expanded: 0 !important;
+    }
+    `;
+
 const addStyleToRemoveLabels = () => {
-  addStyles(
-    "removeLabels",
-    `
-    ${selectors.leftSidebarLinks} > * > div > div + div:last-child {
-      display: none;
-    }
-    ${selectors.accountSwitcherLabel} {
-      display: none;
-    }
-    `
-  );
+  addStyles("removeLabels", collapsedLabelsStyle);
 };
 
 const addStyleToShowLabelsOnHover = () => {
-  addStyles(
-    "hideLabels",
-    `
-    ${selectors.leftSidebarLabel},
-    ${selectors.accountSwitcherLabel} {
-      display: inline-block;
-      opacity: 0;
-      transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    `
-  );
+  addStyles("hideLabels", collapsedLabelsStyle);
   addStyles(
     "showLabelsOnHover",
     `
-    ${selectors.leftSidebarLabel_hover},
-    ${selectors.accountSwitcherLabel_hover} {
-      opacity: 1;
+    ${selectors.leftSidebarRail}:hover,
+    ${selectors.leftSidebarRail}:hover * {
+      --x-sidebar-expanded: 1 !important;
+    }
+    ${selectors.leftSidebarRail}:hover {
+      background-color: var(--body-bg-color);
     }
     `
   );
 };
 
 export const changeNavigationButtonsLabels = async (setting) => {
-  const isMessagesPage = window.location.pathname.startsWith("/messages");
+  const isMessagesPage = window.location.pathname.startsWith("/messages") || window.location.pathname.startsWith("/i/chat");
   const isSearchPage = window.location.pathname.startsWith("/search");
 
   if (isMessagesPage || isSearchPage) {
@@ -211,9 +198,8 @@ export const changeNavigationCenter = (navigationCenter) => {
       addStyles(
         "navigationCenter",
         `
-        ${selectors.leftSidebar} > div > div > div {
+        ${selectors.leftSidebarRail} [data-rail-overflow] {
           justify-content: center;
-          padding-top: 0;
         }
         `
       );
@@ -228,11 +214,10 @@ export const changeNavigationCenter = (navigationCenter) => {
 export const hideGrokDrawer = (state) => {
   switch (state) {
     case "on":
-      // If typefully-grok-drawer-enabled class is present because we added it when grok button from a post is clicked.
-      // We don't want to hide the drawer in this case.
+      // Only hide the closed launcher, so Grok still opens from a post's Grok button.
       addStyles(
         "grokDrawer",
-        `${selectors.grokDrawer}:not(.typefully-grok-drawer-enabled) {
+        `${selectors.grokDrawer}[data-closed] {
           display: none !important;
         }`
       );

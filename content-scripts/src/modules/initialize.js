@@ -54,6 +54,12 @@ const addPageLoadListener = () => {
   });
 };
 
+const addInputListener = () => {
+  document.addEventListener("input", () => {
+    runDynamicFeatures();
+  });
+};
+
 const addResizeListener = () => {
   window.addEventListener(
     "resize",
@@ -72,6 +78,7 @@ export const initializeExtension = async () => {
 
   addMutationObserver();
   addPageLoadListener();
+  addInputListener();
   addResizeListener();
 
   extractColorsAsRootVars();

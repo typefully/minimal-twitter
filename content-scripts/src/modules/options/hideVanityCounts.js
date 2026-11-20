@@ -1,3 +1,4 @@
+import selectors from "../../selectors";
 import addStyles, { removeStyles } from "../utilities/addStyles";
 
 export const changeReplyCount = (replyCount) => {
@@ -5,7 +6,7 @@ export const changeReplyCount = (replyCount) => {
     case "hide":
       addStyles(
         "replyCount",
-        `[data-testid="reply"] span { 
+        `${selectors.engagementAction("reply")} svg + span {
           visibility: hidden;
         }`
       );
@@ -24,9 +25,8 @@ export const changeRetweetCount = (retweetCount) => {
         "retweetCount",
         `[href$="/retweets"],
         [href$="/retweets/with_comments"],
-        [data-testid="retweet"] span,
-        [data-testid="unretweet"] span {
-          visibility: hidden; 
+        ${selectors.engagementAction("retweet")} svg + span {
+          visibility: hidden;
         }`
       );
       break;
@@ -43,9 +43,8 @@ export const changeLikeCount = (likeCount) => {
       addStyles(
         "likeCount",
         `[href$="/likes"][href*="/status/"],
-        [data-testid="like"] span,
-        [data-testid="unlike"] span {
-           visibility: hidden; 
+        ${selectors.engagementAction("like")} svg + span {
+          visibility: hidden;
         }`
       );
       break;
@@ -61,8 +60,9 @@ export const changeFollowingAndFollowersCounts = (followCount) => {
     case "hide":
       addStyles(
         "followCount",
-        `[href$="following"][dir][role="link"],
-        [href$="followers"][dir][role="link"] {
+        `a[href$="/following"],
+        a[href$="/followers"],
+        a[href$="/verified_followers"] {
           display: none;
         }`
       );

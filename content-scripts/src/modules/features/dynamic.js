@@ -23,7 +23,7 @@ import {
 } from "../../../../storage-keys";
 import changeHideViewCounts from "../options/hideViewCount";
 import { addAnalyticsButton, addCommunitiesButton, addListsButton, addTopicsButton, addXPremiumButton, hideGrokDrawer, changeNavigationButtonsLabels } from "../options/navigation";
-import { changeTimelineTabs, changeTrendsHomeTimeline, enableGrokDrawerOnGrokButtonClick } from "../options/timeline";
+import { changeTimelineTabs, changeTrendsHomeTimeline } from "../options/timeline";
 import { changeWriterMode } from "../options/writerMode";
 import { addTypefullyComposerPlug, addTypefullyReplyPlug, saveCurrentReplyToLink, addTypefullySecurityAndAccountAccessPlug, addTypefullySchedulePlug } from "../typefullyPlugs";
 import hideRightSidebar from "../utilities/hideRightSidebar";
@@ -34,13 +34,12 @@ import throttle from "../utilities/throttle";
 
 export const dynamicFeatures = {
   general: async () => {
-    const data = await getStorage([KeyHideViewCount, KeyHideGrokDrawer]);
+    const data = await getStorage([KeyHideViewCount]);
 
     changeHideViewCounts(data[KeyHideViewCount]);
     hideRightSidebar();
     addSmallerSearchBarStyle();
     updateLeftSidebarPositioning();
-    enableGrokDrawerOnGrokButtonClick(data[KeyHideGrokDrawer]);
   },
   typefullyPlugs: () => {
     saveCurrentReplyToLink();

@@ -39,20 +39,13 @@ export const changeWriterMode = (writerMode) => {
               overflow: hidden;
             }
             ${selectors.mainColumn} {
-              border-style: hidden;
+              border-style: hidden !important;
               padding-top: 3vh;
               margin: 0 auto;
             }
-            ${selectors.mainWrapper} {
-              flex-basis: 100%;
-            }
-            ${selectors.mainWrapper} > div {
-              width: 100%;
-              max-width: 100%;
-            }
             ${selectors.leftSidebar},
             ${selectors.rightSidebar},
-            ${selectors.mainColumn} > div > div:not(:nth-of-type(1)):not(:nth-of-type(2)):not(:nth-of-type(3)) {
+            ${selectors.mainColumn} > div > :not(header, [data-media-upload-dropzone]) {
               overflow: hidden;
               visibility: hidden;
               opacity: 0;
@@ -60,7 +53,7 @@ export const changeWriterMode = (writerMode) => {
               height: 0;
             }
             ${selectors.topHeader} {
-              visibility: hidden;
+              display: none;
             }
             ${selectors.modalWrapper} {
               width: 100vw;
@@ -68,13 +61,8 @@ export const changeWriterMode = (writerMode) => {
               top: 0;
               border-radius: 0;
             }
-            div[role="group"] > div:empty {
-              background-color: var(--body-bg-color);
-            }
             ${selectors.modalUi} {
               border-radius: 0;
-            }
-            ${selectors.modalWrapper} > div > div > div {
               padding-bottom: 10vh;
             }
             `
@@ -110,7 +98,7 @@ export const changeWriterMode = (writerMode) => {
 
 export const addTypefullyPlugToWriterMode = async () => {
   if (window.location.pathname.includes("/home") || window.location.pathname === "/") {
-    const main = document.querySelector('main[role="main"]');
+    const main = document.querySelector(selectors.mainColumn);
 
     if (!main) return;
     if (document.getElementById("typefully-writermode-link")) return;

@@ -11,6 +11,10 @@ const INLINE_PLUG_ID = "typefully-link-inline";
 const REPLY_PLUG_ID = "typefully-reply-link";
 const SCHEDULE_PLUG_ID = "typefully-schedule-link";
 
+const getPostButton = (form) => Array.from(form?.querySelectorAll("button") ?? []).pop();
+const getModalComposer = () => document.querySelector(`${selectors.modalWrapper} ${selectors.composerForm}`);
+const getInlineComposer = () => document.querySelector(`${selectors.mainColumn} ${selectors.composerForm}`);
+
 // Function to add "Continue draft in Typefully" in the page inline composer and the modal composer
 export const addTypefullyComposerPlug = () => {
   const existingReplyPlug = document.getElementById(REPLY_PLUG_ID);
@@ -18,10 +22,11 @@ export const addTypefullyComposerPlug = () => {
   // If there's a reply plug already, let's not add this regular plug
   if (existingReplyPlug) return;
 
-  const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
-  const tweetComposeArea = modal?.querySelector("div.public-DraftStyleDefault-block");
-  const tweetButtonInlineDisabled = document.querySelector(`[data-testid="tweetButtonInline"][aria-disabled]`);
-  const tweetButtonInlineNotDisabled = document.querySelector(`[data-testid="tweetButtonInline"]:not([aria-disabled])`);
+  const modal = document.querySelector(selectors.modalWrapper);
+  const tweetComposeArea = getModalComposer();
+  const tweetButtonInline = getPostButton(getInlineComposer());
+  const tweetButtonInlineDisabled = tweetButtonInline?.disabled;
+  const tweetButtonInlineNotDisabled = tweetButtonInline && !tweetButtonInline.disabled;
 
   // Modal plug
   if (modal && tweetComposeArea && !document.getElementById(MODAL_PLUG_ID)) {
@@ -67,7 +72,6 @@ export const addTypefullyComposerPlug = () => {
 
   // Inline plug
   if (tweetButtonInlineNotDisabled && !document.getElementById(INLINE_PLUG_ID)) {
-    const tweetButtonInline = document.querySelector(`[data-testid="tweetButtonInline"]`);
     const container = tweetButtonInline.parentElement;
     const element = createTypefullyLinkElement(INLINE_PLUG_ID, "typefully-save-draft-button ghost");
     const typefullyLogo = createTypefullyLogo();
@@ -80,7 +84,7 @@ export const addTypefullyComposerPlug = () => {
 
     addStyles(
       INLINE_PLUG_ID,
-      `[data-testid="tweetButtonInline"] {
+      `${selectors.composerForm} button:has(+ #${INLINE_PLUG_ID}) {
         margin-left: 8px;
         order: 2;
       }`
@@ -98,16 +102,14 @@ const REPLY_TO_STORAGE_KEY = "typefully-replying-to";
 
 // Function to save current reply-to link so we can use it in the plug below
 export const saveCurrentReplyToLink = () => {
-  const reply = Array.from(document.querySelectorAll('[data-testid="reply"]'));
+  const reply = Array.from(document.querySelectorAll(selectors.engagementAction("reply")));
 
   if (!reply.length) return;
 
   function logLink(ev) {
-    const linkElement = ev.target;
-    const tweet = linkElement.closest('[data-testid="tweet"]');
-    const tweetLinks = tweet.querySelectorAll("a[role='link']");
-    const tweetLink = Array.from(tweetLinks).find((link) => link.href.includes("/status/")).href;
-    sessionStorage.setItem(REPLY_TO_STORAGE_KEY, tweetLink);
+    const tweet = ev.currentTarget.closest(selectors.tweet);
+    const tweetLink = tweet?.querySelector("a[href*='/status/']")?.href;
+    if (tweetLink) sessionStorage.setItem(REPLY_TO_STORAGE_KEY, tweetLink);
   }
 
   reply.forEach((replyButton) => {
@@ -119,15 +121,13 @@ export const saveCurrentReplyToLink = () => {
 // Function to add "Reply with Typefully"
 export const addTypefullyReplyPlug = () => {
   setTimeout(() => {
-    const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
-    const toolbar = modal && modal.querySelector('[data-testid="toolBar"]');
-    const replyButton = modal && modal.querySelector('[data-testid="tweetButton"]');
-
-    const tweetComposeArea = modal?.querySelector("div.public-DraftStyleDefault-block");
+    const modal = document.querySelector(selectors.modalWrapper);
+    const tweetComposeArea = getModalComposer();
+    const replyButton = getPostButton(tweetComposeArea);
 
     const replyingToLink = sessionStorage.getItem(REPLY_TO_STORAGE_KEY);
 
-    if (modal && toolbar && replyButton && replyingToLink && tweetComposeArea && !document.getElementById(REPLY_PLUG_ID)) {
+    if (modal && replyButton && replyingToLink && tweetComposeArea && !document.getElementById(REPLY_PLUG_ID)) {
       sessionStorage.removeItem(REPLY_TO_STORAGE_KEY);
 
       const typefullyReplyLinkElement = createTypefullyLinkElement(REPLY_PLUG_ID, "typefully-reply-button");
@@ -233,43 +233,10 @@ export const createTypefullyLogo = () => {
 };
 
 export const getCurrentTextAndSendToTypefully = (replyingToLink, utm_content) => {
-  let tweetTextAreaNumber = 0;
-  let typefullyContent = "";
-
-  while (true) {
-    if (document.querySelector(`[data-testid="tweetTextarea_${tweetTextAreaNumber}"]`)) {
-      if (tweetTextAreaNumber > 0) {
-        typefullyContent = `${typefullyContent}---typefully-split---`;
-      }
-
-      let tweetTextItems = Array.from(document.querySelectorAll(`[data-testid="tweetTextarea_${tweetTextAreaNumber}"] [data-text="true"]`));
-
-      // remove trailing newlines at end of tweets (there is always one last <br> on the first tweet DOM node)
-      tweetTextItems = tweetTextItems.filter((item, index) => !(item.tagName === "BR" && index === tweetTextItems.length - 1));
-
-      tweetTextItems.forEach((item, index) => {
-        const isLastItem = index === tweetTextItems.length - 1;
-        const isTagOrMention = (item) => !!item.parentElement.parentElement.attributes.style;
-
-        if (item.tagName === "BR" && !isLastItem && index !== 0) {
-          typefullyContent += "\n";
-        }
-        // handle regular text (<span> elements)
-        else {
-          typefullyContent = `${typefullyContent}${item.innerText}`;
-
-          // this handles non-hard breaks (just one newline) within a single tweet
-          if (!isLastItem && !isTagOrMention(tweetTextItems[index + 1])) {
-            typefullyContent += "\n";
-          }
-        }
-      });
-    } else {
-      break;
-    }
-
-    tweetTextAreaNumber = tweetTextAreaNumber + 1;
-  }
+  const composer = getModalComposer() ?? getInlineComposer();
+  const typefullyContent = Array.from(composer?.querySelectorAll("textarea") ?? [])
+    .map((textarea) => textarea.value)
+    .join("---typefully-split---");
 
   const url = createTypefullyUrl({
     utm_content: utm_content ?? "save-draft-button",

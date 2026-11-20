@@ -25,11 +25,11 @@ const extractColor = (selector, varName) => {
 
 export const extractColorsAsRootVars = () => {
   extractColor("body", "body-bg");
-  extractColor('[data-testid="primaryColumn"]', "border");
+  extractColor("main", "border");
   extractColor("h2 > span", "main-text");
   extractColor("div > span", "main-text");
   extractColor("a > time", "secondary-text");
-  extractColor("[data-testid='primaryColumn'] div[aria-haspopup='menu'] > div > div > svg", "secondary-text");
+  extractColor("main article a > time", "secondary-text");
   extractColor("a", "accent");
   extractColor("div > svg", "glyphs");
 };
