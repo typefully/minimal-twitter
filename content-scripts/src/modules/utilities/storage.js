@@ -6,6 +6,9 @@ import { defaultPreferences } from "../../../../storage-keys";
 --*/
 
 export const getStorage = (storageKeyOrKeys) => {
+  // After the extension reloads, scripts left in open tabs can't reach chrome.storage, so they stay idle.
+  if (!chrome.runtime?.id) return new Promise(() => {});
+
   try {
     if (typeof storageKeyOrKeys !== "string" && !Array.isArray(storageKeyOrKeys)) {
       throw new Error("storageKeyOrKeys must be a string or an array of strings");
