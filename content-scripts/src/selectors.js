@@ -3,6 +3,7 @@ const selectors = {};
 // Layout
 selectors.mainColumn = `main`;
 selectors.mainWrapper = `div:has(> main)`;
+selectors.pageWrapper = `body > div:has(main)`;
 selectors.topHeader = `${selectors.mainColumn} header[data-page-header]`;
 selectors.leftSidebar = `div:has(+ div > main)`;
 selectors.leftSidebarRail = `div:has(> div > [data-rail-overflow])`;
@@ -14,7 +15,7 @@ selectors.sidebarLinks = {
   explore: `${selectors.leftSidebarLinks} > a[href="/explore"]`,
   notifications: `${selectors.leftSidebarLinks} > a[href="/notifications"]`,
   messages: `${selectors.leftSidebarLinks} > :is(a[href="/i/chat"], a[href^="/messages"])`,
-  bookmarks: `${selectors.leftSidebarLinks} > :is(a[href*="bookmarks"], a[href="/i/history"])`,
+  bookmarks: `${selectors.leftSidebarLinks} > a[href*="bookmarks"]`,
   jobs: `${selectors.leftSidebarLinks} > a[href*="jobs"]`,
   articles: 'a[href="/compose/articles"]',
   topics: `${selectors.leftSidebarLinks} > a[href*="topics"]`,
@@ -27,6 +28,11 @@ selectors.sidebarLinks = {
   analytics: `${selectors.leftSidebarLinks} > .mt-sidebar-button[aria-label="Analytics"]`,
   grok: `${selectors.leftSidebarLinks} > a[href*="grok"]`,
 };
+selectors.accountSwitcherButton = `[data-rail-overflow] + div > button`;
+selectors.leftSidebarLabel = `${selectors.leftSidebarLinks} > a > span > span:last-child`;
+selectors.accountSwitcherLabel = `${selectors.accountSwitcherButton} > span:not(:first-child)`;
+selectors.leftSidebarLabel_hover = `${selectors.leftSidebarLinks}:hover > a > span > span:last-child`;
+selectors.accountSwitcherLabel_hover = `${selectors.accountSwitcherButton}:hover > span:not(:first-child)`;
 selectors.rightSidebar = `${selectors.mainColumn} + aside`;
 selectors.trendsSection = `${selectors.rightSidebar} section:has(> a[href="/explore"])`;
 selectors.dockWindow = `[data-slot="xds-dock-window"]`;

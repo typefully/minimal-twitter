@@ -119,28 +119,36 @@ export const changeUnreadCountBadge = (unreadCountBadge) => {
   }
 };
 
-const collapsedLabelsStyle = `
+const addStyleToRemoveLabels = () => {
+  addStyles(
+    "removeLabels",
+    `
     ${selectors.leftSidebarRail},
     ${selectors.leftSidebarRail} * {
       --x-sidebar-expanded: 0 !important;
     }
-    `;
-
-const addStyleToRemoveLabels = () => {
-  addStyles("removeLabels", collapsedLabelsStyle);
+    `
+  );
 };
 
 const addStyleToShowLabelsOnHover = () => {
-  addStyles("hideLabels", collapsedLabelsStyle);
+  addStyles(
+    "hideLabels",
+    `
+    ${selectors.leftSidebarLabel},
+    ${selectors.accountSwitcherLabel} {
+      display: inline-block;
+      opacity: 0;
+      transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    `
+  );
   addStyles(
     "showLabelsOnHover",
     `
-    ${selectors.leftSidebarRail}:hover,
-    ${selectors.leftSidebarRail}:hover * {
-      --x-sidebar-expanded: 1 !important;
-    }
-    ${selectors.leftSidebarRail}:hover {
-      background-color: var(--body-bg-color);
+    ${selectors.leftSidebarLabel_hover},
+    ${selectors.accountSwitcherLabel_hover} {
+      opacity: 1;
     }
     `
   );

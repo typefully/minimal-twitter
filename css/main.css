@@ -27,51 +27,6 @@ html:has(style#mt-style-removeTimelineTabs) main header[data-page-header] > div:
   display: none;
 }
 
-/* Twitter has a large screen breakpoint at 1000px */
-/* Twitter web's small screen styles (< 988px) are minimal */
-@media only screen and (min-width: 1000px) {
-  /* Let the page span the viewport so the timeline centers on it */
-  body > div:has(main) {
-    max-width: none !important;
-  }
-
-  /* Center the Timeline */
-  /* Prevent horizontal scroll */
-  div:has(> div > main) {
-    justify-content: center;
-    overflow-x: clip;
-  }
-
-  /* Floating Tweet Button */
-  #sidebar-compose-post {
-    position: fixed;
-    right: 16px;
-    bottom: 24px;
-    width: auto;
-    z-index: 3;
-  }
-}
-
-/* Reveal searchbar and search filters at desktop breakpoint */
-@media only screen and (min-width: 1100px) {
-  /* Reveal searchbar */
-  main + aside form[role="search"] {
-    visibility: visible;
-    position: fixed;
-    top: 12px;
-    right: 16px;
-    width: auto;
-    z-index: 3;
-  }
-
-  /* Match size of focused search container to its dropdown */
-  /* Add blur filter to search container for overlap */
-  main + aside form[role="search"]:focus-within {
-    width: 374px;
-    backdrop-filter: blur(12px);
-  }
-}
-
 .mt-tooltip {
   position: absolute;
   display: flex;
