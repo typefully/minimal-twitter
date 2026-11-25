@@ -115,6 +115,8 @@ When the user explicitly prefers testing in their existing signed-in Chrome inst
 
 **Selectors** (content-scripts/src/selectors.js): **Critical file** containing all CSS selectors for Twitter UI elements. When Twitter changes their DOM structure, selectors break and need updating here. Selectors primarily use `data-testid` attributes (most stable), ARIA attributes, and structural CSS selectors. When fixing broken features, check this file first.
 
+X serves two web apps: the legacy one these selectors target, and a rewrite (`<html data-app-version>`, Tailwind/XDS markup, no `data-testid`, `<main>` and `<aside>` landmarks, `data-engagement-action` on post actions) that reaches signed-in users country by country. Logged-out pages always get the rewrite, so open one (such as a public profile) to inspect it. Keep changes working on both, and scope old-layout CSS to an old-app element so it cannot leak into the rewrite.
+
 ### Popup UI Structure
 
 **Next.js app** (popup/):
