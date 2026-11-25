@@ -23,6 +23,12 @@ html:has(style#mt-style-removeTimelineTabs) [data-testid="primaryColumn"] > div 
   display: none;
 }
 
+/* 6.5.0 and earlier pad the body for the old fixed navigation (leftSidebarPosition.js),
+   which shifts X's rewritten web app: it has no header[role="banner"]. */
+html:has(style#mt-style-navigation-position) body:not(:has(header[role="banner"])) {
+  padding-left: 0;
+}
+
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {

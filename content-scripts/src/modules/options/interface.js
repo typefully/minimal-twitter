@@ -13,10 +13,12 @@ export const changeTitleNotifications = (tf) => {
       setting = await getStorage(KeyTitleNotifications);
     }
 
+    // X's rewritten web app only has <link rel="icon">, so the favicon may be missing:
+    // https://github.com/typefully/minimal-twitter/issues/267
     const favicon = document.querySelector('link[rel="shortcut icon"]');
 
     if (setting === "on") {
-      favicon.setAttribute("href", favicon.href.replace("twitter.ico", "twitter-pip.2.ico"));
+      favicon?.setAttribute("href", favicon.href.replace("twitter.ico", "twitter-pip.2.ico"));
     } else {
       if (document.title.charAt(0) === "(") {
         document.title = document.title.split(" ").slice(1).join(" ");
@@ -28,7 +30,7 @@ export const changeTitleNotifications = (tf) => {
 
       clearTimeout(nt);
       nt = setTimeout(() => {
-        favicon.setAttribute("href", favicon.href.replace("-pip.2", ""));
+        favicon?.setAttribute("href", favicon.href.replace("-pip.2", ""));
       });
     }
   };
