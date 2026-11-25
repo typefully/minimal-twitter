@@ -131,7 +131,8 @@ const addNewAppComposerPlugs = () => {
   const otherPlug = document.getElementById(replyingToLink ? MODAL_PLUG_ID : REPLY_PLUG_ID);
   if (otherPlug) {
     otherPlug.remove();
-    removeElementById("typefully-callout-box");
+    // Only the dialog's own callout: Writer Mode keeps one in <main> with the same id
+    modalBody?.querySelector("#typefully-callout-box")?.remove();
   }
 
   if (modalBody && !document.getElementById(plugId)) {

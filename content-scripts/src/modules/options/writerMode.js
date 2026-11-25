@@ -165,7 +165,8 @@ export const removeTypefullyPlugFromWriterMode = () => {
   const typefullyLinkElement = document.getElementById("typefully-writermode-link");
   typefullyLinkElement && typefullyLinkElement.remove();
 
-  const typefullyBox = document.getElementById("typefully-callout-box");
+  // Only Writer Mode's own callout in <main>: the composer dialog's shares the id
+  const typefullyBox = document.querySelector("main > #typefully-callout-box");
   typefullyBox && typefullyBox.remove();
 };
 

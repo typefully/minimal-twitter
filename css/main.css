@@ -343,7 +343,7 @@ html[data-app-version]:has(style#mt-style-tweetButton) #sidebar-compose-post {
 html[data-app-version]:has(style#mt-style-home) [data-rail-overflow] nav > a[href="/home"],
 html[data-app-version]:has(style#mt-style-explore) [data-rail-overflow] nav > a[href="/explore"],
 html[data-app-version]:has(style#mt-style-notifications) [data-rail-overflow] nav > a[href="/notifications"],
-html[data-app-version]:has(style#mt-style-messages) [data-rail-overflow] nav > a:is([href="/i/chat"], [href^="/messages"]),
+html[data-app-version]:has(style#mt-style-messages) [data-rail-overflow] nav > a:is([href="/i/chat"], [href="/messages"], [href^="/messages/"]),
 html[data-app-version]:has(style#mt-style-grok) [data-rail-overflow] nav > a[href*="grok"]:not(:has(svg[data-icon="icon-person"])),
 html[data-app-version]:has(style#mt-style-xPremium) [data-rail-overflow] nav > a[href*="premium"]:not(:has(svg[data-icon="icon-person"])),
 html[data-app-version]:has(style#mt-style-bookmarks) [data-rail-overflow] nav > a:is([href="/i/history"], [href*="bookmarks"]):not(:has(svg[data-icon="icon-person"])),
