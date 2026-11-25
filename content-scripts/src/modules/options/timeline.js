@@ -283,6 +283,9 @@ const grokClickListener = () => {
   grokDrawer?.classList.add("typefully-grok-drawer-enabled");
 };
 
+// The drawer header this runs a ResizeObserver on, so repeated passes don't stack observers
+let observedGrokDrawerHeader = null;
+
 export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   if (hideGrokDrawer === "off") {
     // remove event click listener from all grok buttons, when hideGrokDrawer is off
@@ -312,8 +315,9 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   if (!grokDrawer) return;
 
   const grokDrawerHeader = document.querySelector(selectors.grokDrawerHeader);
-  if (!grokDrawerHeader) return;
+  if (!grokDrawerHeader || grokDrawerHeader === observedGrokDrawerHeader) return;
 
+  observedGrokDrawerHeader = grokDrawerHeader;
   const observer = new ResizeObserver(async (entries) => {
     const entry = entries[0];
 
@@ -332,6 +336,7 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
         );
       }
       observer.disconnect();
+      observedGrokDrawerHeader = null;
     }
   });
 
