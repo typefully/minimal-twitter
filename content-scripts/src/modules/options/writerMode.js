@@ -26,7 +26,11 @@ export const changeWriterMode = (writerMode) => {
       case "on":
         document.addEventListener("keydown", escKeyListener);
 
-        if (stylesExist("writerMode")) return;
+        if (stylesExist("writerMode")) {
+          // Writer Mode can start on the composer route, where the plug isn't added, so add it once back on Home
+          addTypefullyPlugToWriterMode();
+          return;
+        }
 
         clearTimeout(zt1);
         zt1 = setTimeout(() => {
