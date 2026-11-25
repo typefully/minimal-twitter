@@ -13,7 +13,7 @@ selectors.sidebarLinks = {
   explore: `${selectors.leftSidebar} [data-testid="AppTabBar_Explore_Link"]`,
   notifications: `${selectors.leftSidebar} [data-testid="AppTabBar_Notifications_Link"]`,
   messages: `${selectors.leftSidebar} [data-testid="AppTabBar_DirectMessage_Link"]`,
-  bookmarks: `${selectors.leftSidebar} a[href*="bookmarks"]`,
+  bookmarks: `${selectors.leftSidebar} a:is([href*="bookmarks"], [href="/i/history"])`,
   jobs: `${selectors.leftSidebar} a[href*="jobs"]`,
   articles: 'a[href="/compose/articles"]',
   topics: `${selectors.leftSidebar} a[href*=topics]`,

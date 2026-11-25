@@ -29,6 +29,11 @@ html[data-app-version]:has(style#mt-style-navigation-position) body {
   padding-left: 0;
 }
 
+/* X replaced the Bookmarks navigation link with History, which 6.5.0's injected selector doesn't match */
+html:has(style#mt-style-bookmarks) header[role="banner"] nav a[href="/i/history"] {
+  display: none;
+}
+
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
