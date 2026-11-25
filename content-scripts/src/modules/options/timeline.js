@@ -328,12 +328,14 @@ export const changeLatestTweets = (latestTweets) => {
   }
 };
 
-export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
-  const grokClickListener = () => {
-    const grokDrawer = document.querySelector(selectors.grokDrawer);
-    grokDrawer.classList.add("typefully-grok-drawer-enabled");
-  };
+// Module-level so the dynamic features pass can re-add it without stacking
+// listeners, and removeEventListener actually finds it.
+const grokClickListener = () => {
+  const grokDrawer = document.querySelector(selectors.grokDrawer);
+  grokDrawer?.classList.add("typefully-grok-drawer-enabled");
+};
 
+export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   if (hideGrokDrawer === "off") {
     // remove event click listener from all grok buttons, when hideGrokDrawer is off
     const grokSvgs = document.querySelectorAll(selectors.grokSvg);

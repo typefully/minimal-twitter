@@ -96,22 +96,23 @@ export const addTypefullyComposerPlug = () => {
 
 const REPLY_TO_STORAGE_KEY = "typefully-replying-to";
 
+// Module-level so re-adding it on every dynamic features pass is a no-op instead of
+// stacking another listener on each reply button.
+function logLink(ev) {
+  const linkElement = ev.target;
+  const tweet = linkElement.closest('[data-testid="tweet"]');
+  const tweetLinks = tweet.querySelectorAll("a[role='link']");
+  const tweetLink = Array.from(tweetLinks).find((link) => link.href.includes("/status/")).href;
+  sessionStorage.setItem(REPLY_TO_STORAGE_KEY, tweetLink);
+}
+
 // Function to save current reply-to link so we can use it in the plug below
 export const saveCurrentReplyToLink = () => {
   const reply = Array.from(document.querySelectorAll('[data-testid="reply"]'));
 
   if (!reply.length) return;
 
-  function logLink(ev) {
-    const linkElement = ev.target;
-    const tweet = linkElement.closest('[data-testid="tweet"]');
-    const tweetLinks = tweet.querySelectorAll("a[role='link']");
-    const tweetLink = Array.from(tweetLinks).find((link) => link.href.includes("/status/")).href;
-    sessionStorage.setItem(REPLY_TO_STORAGE_KEY, tweetLink);
-  }
-
   reply.forEach((replyButton) => {
-    replyButton.removeEventListener("click", logLink);
     replyButton.addEventListener("click", logLink);
   });
 };
