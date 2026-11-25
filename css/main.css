@@ -203,8 +203,8 @@ html[data-app-version]:not(:has(style#mt-style-removePromotedPosts)) main li[dat
 
 /* Hide the closed Chat launcher like the old Messages drawer, and Grok's with "Hide Grok Drawer".
    An open window (a post's Grok button opens one) stays visible. */
-html[data-app-version] [data-slot="xds-dock-window"][data-closed]:not(:has(> [data-slot="xds-dock-panel"][aria-label="Grok"])),
-html[data-app-version]:has(style#mt-style-grokDrawer) [data-slot="xds-dock-window"][data-closed]:has(> [data-slot="xds-dock-panel"][aria-label="Grok"]) {
+html[data-app-version] [data-slot="xds-dock-window"][data-closed]:not(:has(> [data-slot="xds-dock-launcher"] svg[data-icon="icon-logo-grok"])),
+html[data-app-version]:has(style#mt-style-grokDrawer) [data-slot="xds-dock-window"][data-closed]:has(> [data-slot="xds-dock-launcher"] svg[data-icon="icon-logo-grok"]) {
   display: none;
 }
 
@@ -239,6 +239,11 @@ html[data-app-version]:has(style#mt-style-grokDrawer) [data-slot="xds-dock-windo
     position: fixed;
     inset-inline-end: 16px;
     bottom: 24px;
+  }
+  /* Above X's Grok launcher, which takes the same corner when "Hide Grok Drawer" is off */
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle, style#mt-style-grokDrawer)):has([data-slot="xds-dock-launcher"] svg[data-icon="icon-logo-grok"]) #sidebar-compose-post {
+    inset-inline-end: 22px;
+    bottom: 92px;
   }
 
   html[data-app-version]:has(style#mt-style-hide-sidebar) main ~ aside {
@@ -374,7 +379,7 @@ html[data-app-version]:has(style#mt-style-followCount) a:is([href$="/following"]
 
 /* Zen Writer Mode (only injected on Home): just the composer */
 html[data-app-version]:has(style#mt-style-writerMode) :is(div:has(> div > [data-rail-overflow]), aside, main header, [data-slot="xds-dock"]),
-html[data-app-version]:has(style#mt-style-writerMode) main > div > :not([data-media-upload-dropzone]) {
+html[data-app-version]:has(style#mt-style-writerMode) main > div:first-child > :not([data-media-upload-dropzone]) {
   display: none;
 }
 html[data-app-version]:has(style#mt-style-writerMode) main {

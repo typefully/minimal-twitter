@@ -183,11 +183,11 @@ const addNewAppComposerPlugs = () => {
   });
 };
 
-// The composer's schedule picker is a calendar popover whose last button confirms
+// The composer's open schedule trigger points at its picker, whose last button confirms
 const getNewAppScheduleButton = () => {
-  if (!document.querySelector(selectors.newApp.composerForm)) return null;
+  const trigger = document.querySelector(selectors.newApp.composerScheduleTrigger);
+  const picker = trigger && document.getElementById(trigger.getAttribute("aria-controls"));
 
-  const picker = document.querySelector(`${selectors.newApp.root} [role="dialog"]:has([role="grid"])`);
   return picker ? [...picker.querySelectorAll(selectors.newApp.composerButton)].pop() : null;
 };
 
