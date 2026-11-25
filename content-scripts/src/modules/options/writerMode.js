@@ -19,7 +19,9 @@ let t; // Typefully Plug timeout
 let zt1; // Zen Writer Mode timeout 1
 let zt2; // Zen Writer Mode timeout 2
 export const changeWriterMode = (writerMode) => {
-  if (window.location.pathname.includes("/home") || window.location.pathname === "/" || window.location.pathname.includes("/compose/tweet")) {
+  // X now opens its composer at /compose/post (it was /compose/tweet), so keep Writer Mode on behind it
+  const { pathname } = window.location;
+  if (pathname.includes("/home") || pathname === "/" || pathname.includes("/compose/tweet") || pathname.includes("/compose/post")) {
     switch (writerMode) {
       case "on":
         document.addEventListener("keydown", escKeyListener);
