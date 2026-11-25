@@ -11,8 +11,21 @@ const INLINE_PLUG_ID = "typefully-link-inline";
 const REPLY_PLUG_ID = "typefully-reply-link";
 const SCHEDULE_PLUG_ID = "typefully-schedule-link";
 
+const SAVE_DRAFT_CALLOUT = (url) => `<ul>
+  <li>💬 Share your drafts and get comments</li>
+  <li>🤖 Improve your tweets with AI</li>
+  <li>📈 Track your growth with insights and metrics</li>
+  <li>📆 Schedule for later</li>
+</ul>
+<p>Powered by <a href="${url}" target="_blank">Typefully</a>, the makers of the Minimal Twitter extension.</p>`;
+
 // Function to add "Continue draft in Typefully" in the page inline composer and the modal composer
 export const addTypefullyComposerPlug = () => {
+  if (document.querySelector(selectors.newApp.root)) {
+    addNewAppComposerPlugs();
+    return;
+  }
+
   const existingReplyPlug = document.getElementById(REPLY_PLUG_ID);
 
   // If there's a reply plug already, let's not add this regular plug
@@ -41,21 +54,9 @@ export const addTypefullyComposerPlug = () => {
       utm_content: "save-draft-callout",
     });
 
-    const innerHTML = `<ul>
-  <li>💬 Share your drafts and get comments</li>
-  <li>🤖 Improve your tweets with AI</li>
-  <li>📈 Track your growth with insights and metrics</li>
-  <li>📆 Schedule for later</li>
-</ul>
-<p>Powered by <a href="${url}" target="_blank">Typefully</a>, the makers of the Minimal Twitter extension.</p>`;
-
-    addTypefullyBox(
-      modal,
-      innerHTML,
-      {
-        withArrow: true,
-      }
-    );
+    addTypefullyBox(modal, SAVE_DRAFT_CALLOUT(url), {
+      withArrow: true,
+    });
 
     modal.appendChild(element);
   }
@@ -117,8 +118,96 @@ export const saveCurrentReplyToLink = () => {
   });
 };
 
+/* ------------------------- X's rewritten web app ------------------------- */
+
+// Its composer is a plain <textarea> per post, and replies open it at /compose/post?in_reply_to=<id>
+const addNewAppComposerPlugs = () => {
+  const dialog = document.querySelector(selectors.newApp.composerDialog);
+  const modalBody = dialog?.querySelector('[data-slot="xds-modal-body"]');
+  const replyingTo = new URLSearchParams(window.location.search).get("in_reply_to");
+  const replyingToLink = /^\d+$/.test(replyingTo ?? "") ? getNewAppPostUrl(replyingTo) : null;
+  const plugId = replyingToLink ? REPLY_PLUG_ID : MODAL_PLUG_ID;
+
+  // X can keep the dialog mounted from a new post to a reply, so swap a plug made for the other one
+  const otherPlug = document.getElementById(replyingToLink ? MODAL_PLUG_ID : REPLY_PLUG_ID);
+  if (otherPlug) {
+    otherPlug.remove();
+    removeElementById("typefully-callout-box");
+  }
+
+  if (modalBody && !document.getElementById(plugId)) {
+    const element = replyingToLink
+      ? createTypefullyLinkElement(REPLY_PLUG_ID, "typefully-reply-button")
+      : createTypefullyLinkElement(MODAL_PLUG_ID, "typefully-save-draft-button");
+    const typefullyText = document.createElement("span");
+
+    typefullyText.innerText = replyingToLink ? "Reply with Typefully" : "Save draft to Typefully";
+    element.appendChild(createTypefullyLogo());
+    element.appendChild(typefullyText);
+    element.addEventListener("click", () => {
+      getCurrentTextAndSendToTypefully(replyingToLink);
+    });
+
+    if (!replyingToLink) {
+      addTypefullyBox(modalBody, SAVE_DRAFT_CALLOUT(createTypefullyUrl({ utm_content: "save-draft-callout" })), {
+        withArrow: true,
+      });
+    }
+
+    modalBody.appendChild(element);
+  }
+
+  // The inline composer's last button is Post, disabled until there's text
+  const inlineForm = document.querySelector(`main ${selectors.newApp.composerForm}`);
+  const postButton = inlineForm && [...inlineForm.querySelectorAll(selectors.newApp.composerButton)].pop();
+  const inlinePlug = document.getElementById(INLINE_PLUG_ID);
+
+  if (!postButton || postButton.disabled) {
+    inlinePlug?.remove();
+    return;
+  }
+
+  if (inlinePlug) return;
+
+  const element = createTypefullyLinkElement(INLINE_PLUG_ID, "typefully-save-draft-button ghost");
+  element.appendChild(createTypefullyLogo());
+  element.addEventListener("click", () => {
+    getCurrentTextAndSendToTypefully();
+  });
+  postButton.insertAdjacentElement("beforebegin", element);
+
+  addTooltip(element, {
+    id: "typefully-tooltip",
+    title: "Save draft in Typefully",
+    description: "Save all your post ideas, enhance with AI, schedule, and boost engagement.",
+  });
+};
+
+// The composer's schedule picker is a calendar popover whose last button confirms
+const getNewAppScheduleButton = () => {
+  if (!document.querySelector(selectors.newApp.composerForm)) return null;
+
+  const picker = document.querySelector(`${selectors.newApp.root} [role="dialog"]:has([role="grid"])`);
+  return picker ? [...picker.querySelectorAll(selectors.newApp.composerButton)].pop() : null;
+};
+
+const getNewAppPostUrl = (postId) => {
+  const postPath = document.querySelector(`[data-href$="/status/${postId}"]`)?.dataset.href;
+  return `https://x.com${postPath ?? `/i/status/${postId}`}`;
+};
+
+// One textarea per post in a thread, in the open dialog or else the page's inline composer
+const getNewAppComposerText = () => {
+  const composer = document.querySelector(selectors.newApp.composerDialog) ?? document.querySelector(`main ${selectors.newApp.composerForm}`);
+
+  return [...(composer?.querySelectorAll("textarea") ?? [])].map((textarea) => textarea.value).join("---typefully-split---");
+};
+
 // Function to add "Reply with Typefully"
 export const addTypefullyReplyPlug = () => {
+  // X's rewritten web app gets its reply plug from addNewAppComposerPlugs
+  if (document.querySelector(selectors.newApp.root)) return;
+
   setTimeout(() => {
     const modal = document.querySelector('[aria-labelledby="modal-header"][role="dialog"]');
     const toolbar = modal && modal.querySelector('[data-testid="toolBar"]');
@@ -178,13 +267,15 @@ export const addTypefullySecurityAndAccountAccessPlug = () => {
 };
 
 export const addTypefullySchedulePlug = () => {
-  const scheduleConfirmButton = document.querySelector('[data-testid="scheduledConfirmationPrimaryAction"]');
+  const scheduleConfirmButton = document.querySelector('[data-testid="scheduledConfirmationPrimaryAction"]') ?? getNewAppScheduleButton();
 
   if (scheduleConfirmButton && !document.getElementById("typefully-schedule-button")) {
     const scheduleButton = scheduleConfirmButton.cloneNode(true);
 
-    // remove data-testid from the scheduleButton
+    // remove data-testid from the scheduleButton, and anything that would make the clone submit or stay inert
     scheduleButton.removeAttribute("data-testid");
+    scheduleButton.removeAttribute("disabled");
+    scheduleButton.setAttribute("type", "button");
 
     // remove any elements inside the scheduleButton
     scheduleButton.innerHTML = "";
@@ -235,7 +326,7 @@ export const createTypefullyLogo = () => {
 
 export const getCurrentTextAndSendToTypefully = (replyingToLink, utm_content) => {
   let tweetTextAreaNumber = 0;
-  let typefullyContent = "";
+  let typefullyContent = document.querySelector(selectors.newApp.root) ? getNewAppComposerText() : "";
 
   while (true) {
     if (document.querySelector(`[data-testid="tweetTextarea_${tweetTextAreaNumber}"]`)) {

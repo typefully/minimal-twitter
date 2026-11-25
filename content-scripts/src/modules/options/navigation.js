@@ -63,7 +63,8 @@ export const addAnalyticsButton = () => {
       name: "Analytics",
       svgAsset: svgAssets.grow.normal,
       onClick: () => {
-        const screenName = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"]`)?.getAttribute("href").replace("/", "");
+        const profileLink = document.querySelector(`a[role="link"][data-testid="AppTabBar_Profile_Link"], ${selectors.newApp.navProfileLink}`);
+        const screenName = profileLink?.getAttribute("href").replace("/", "");
 
         const url = createTypefullyUrl(
           {

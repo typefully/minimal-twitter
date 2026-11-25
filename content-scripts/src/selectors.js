@@ -62,4 +62,15 @@ selectors.tweetButton = `[data-testid="SideNav_NewTweet_Button"]`;
 // Settings
 selectors.securityAndAccountAccess = `[data-testid="accountAccessScreen"]`;
 
+// X's rewritten web app has no data-testid attributes. Its layout rules live in css/main.css; these serve
+// the features that need JavaScript there.
+selectors.newApp = {};
+selectors.newApp.root = `html[data-app-version]`;
+selectors.newApp.nav = `[data-rail-overflow] nav`;
+selectors.newApp.navProfileLink = `${selectors.newApp.nav} > a:has(svg[data-icon="icon-person"])`;
+selectors.newApp.viewCount = `[role="group"] > :is(div:has(> a[href$="/analytics"]), [data-engagement-action="generic"])`;
+selectors.newApp.composerForm = `[data-media-upload-dropzone] form:has(textarea)`;
+selectors.newApp.composerDialog = `[role="dialog"][data-slot="xds-modal-surface"]:has([data-media-upload-dropzone] textarea)`;
+selectors.newApp.composerButton = `button[data-slot="xds-button"]`;
+
 export default selectors;

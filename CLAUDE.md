@@ -115,7 +115,9 @@ When the user explicitly prefers testing in their existing signed-in Chrome inst
 
 **Selectors** (content-scripts/src/selectors.js): **Critical file** containing all CSS selectors for Twitter UI elements. When Twitter changes their DOM structure, selectors break and need updating here. Selectors primarily use `data-testid` attributes (most stable), ARIA attributes, and structural CSS selectors. When fixing broken features, check this file first.
 
-X serves two web apps: the legacy one these selectors target, and a rewrite (`<html data-app-version>`, Tailwind/XDS markup, no `data-testid`, `<main>` and `<aside>` landmarks, `data-engagement-action` on post actions) that reaches signed-in users country by country. Logged-out pages always get the rewrite, so open one (such as a public profile) to inspect it. Keep changes working on both, and scope old-layout CSS to an old-app element so it cannot leak into the rewrite.
+X serves two web apps: the legacy one these selectors target, and a rewrite (`<html data-app-version>`, Tailwind/XDS markup, no `data-testid`) that reaches signed-in users country by country. Logged-out pages always get the rewrite, so open one (such as a public profile) to inspect it. Keep changes working on both, and scope old-layout CSS to an old-app element so it cannot leak into the rewrite.
+
+The rewrite's styling lives in the last section of `css/main.css`: each setting's rule keys on the `<style id="mt-style-…">` its content-script function injects, so installed versions get rule changes from the remote stylesheet without a store release. A new setting adds its rewrite rule there the same way; `selectors.newApp` holds the rewrite selectors that JavaScript features need. Its timeline is virtualized and keeps each item's first measured height, so hide timeline items by collapsing them to 1px from the start, as promoted posts do.
 
 ### Popup UI Structure
 

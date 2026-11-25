@@ -110,7 +110,8 @@ export const changeWriterMode = (writerMode) => {
 
 export const addTypefullyPlugToWriterMode = async () => {
   if (window.location.pathname.includes("/home") || window.location.pathname === "/") {
-    const main = document.querySelector('main[role="main"]');
+    // X's rewritten web app has a plain <main> around the timeline column
+    const main = document.querySelector('main[role="main"]') || document.querySelector(`${selectors.newApp.root} main`);
 
     if (!main) return;
     if (document.getElementById("typefully-writermode-link")) return;

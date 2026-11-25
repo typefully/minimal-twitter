@@ -3,78 +3,26 @@ import selectors from "../../selectors";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
+const timelineWidths = [600, 650, 700, 750, 800];
+
 export const changeTimelineWidth = (timelineWidth) => {
-  switch (timelineWidth) {
-    case 600:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 600px;
-            max-width: 600px;
-          }
-        }
-        `
-      );
-      break;
+  if (!timelineWidths.includes(timelineWidth)) return;
 
-    case 650:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 650px;
-            max-width: 650px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 700:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 700px;
-            max-width: 700px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 750:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 750px;
-            max-width: 750px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 800:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 800px;
-            max-width: 800px;
-          }
-        }
-        `
-      );
-      break;
-  }
+  addStyles(
+    "timelineWidth",
+    `
+    @media only screen and (min-width: 988px) {
+      ${selectors.mainColumn} {
+        width: ${timelineWidth}px;
+        max-width: ${timelineWidth}px;
+      }
+    }
+    /* X's rewritten web app reads this in css/main.css */
+    :root {
+      --mt-timeline-width: ${timelineWidth}px;
+    }
+    `
+  );
 };
 
 export const changeTimelineBorders = (timelineBorders) => {

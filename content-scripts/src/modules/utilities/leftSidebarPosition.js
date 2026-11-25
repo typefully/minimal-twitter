@@ -2,6 +2,11 @@ import selectors from "../../selectors";
 import addStyles from "./addStyles";
 
 export function updateLeftSidebarPositioning() {
+  // changeNavigationButtonsLabels removes this style on these pages, so adding it back on every
+  // pass made X's rewritten web app switch layouts back and forth
+  const { pathname } = window.location;
+  if (pathname.startsWith("/messages") || pathname.startsWith("/search")) return;
+
     addStyles(
       "navigation-position",
       `@media only screen and (min-width: 1000px) {
