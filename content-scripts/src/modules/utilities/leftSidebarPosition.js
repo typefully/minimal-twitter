@@ -16,9 +16,10 @@ export function updateLeftSidebarPositioning() {
         }
       }
       /* Add padding equal to navigation size when between 1000px-1265px */
-      /* Only with the old navigation: X's rewritten web app has no header[role="banner"], and the padding would shift its layout */
+      /* Only with the old navigation: X's rewritten web app has no header[role="banner"], and the padding would shift its layout.
+         :where() keeps a plain body's specificity, so Writer Mode's body rule can still override it. */
       @media only screen and (min-width: 1000px) and (max-width: 1265px) {
-        body:has(${selectors.leftSidebar}) {
+        body:where(:has(${selectors.leftSidebar})) {
           padding-left: 88px;
         }
       }`

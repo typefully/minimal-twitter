@@ -124,8 +124,7 @@ export const saveCurrentReplyToLink = () => {
 const addNewAppComposerPlugs = () => {
   const dialog = document.querySelector(selectors.newApp.composerDialog);
   const modalBody = dialog?.querySelector('[data-slot="xds-modal-body"]');
-  const replyingTo = new URLSearchParams(window.location.search).get("in_reply_to");
-  const replyingToLink = /^\d+$/.test(replyingTo ?? "") ? getNewAppPostUrl(replyingTo) : null;
+  const replyingToLink = getNewAppReplyingToLink();
   const plugId = replyingToLink ? REPLY_PLUG_ID : MODAL_PLUG_ID;
 
   // X can keep the dialog mounted from a new post to a reply, so swap a plug made for the other one
@@ -144,8 +143,9 @@ const addNewAppComposerPlugs = () => {
     typefullyText.innerText = replyingToLink ? "Reply with Typefully" : "Save draft to Typefully";
     element.appendChild(createTypefullyLogo());
     element.appendChild(typefullyText);
+    // Read the replied post at click time: X can keep the dialog, and this plug, from one reply to the next
     element.addEventListener("click", () => {
-      getCurrentTextAndSendToTypefully(replyingToLink);
+      getCurrentTextAndSendToTypefully(replyingToLink ? getNewAppReplyingToLink() : null);
     });
 
     if (!replyingToLink) {
@@ -157,12 +157,13 @@ const addNewAppComposerPlugs = () => {
     modalBody.appendChild(element);
   }
 
-  // The inline composer's last button is Post, disabled until there's text
+  // The inline composer's last button is Post. typefully.css hides the plug while Post is disabled (no text),
+  // since typing only toggles that attribute and the mutation observer doesn't watch attributes.
   const inlineForm = document.querySelector(`main ${selectors.newApp.composerForm}`);
   const postButton = inlineForm && [...inlineForm.querySelectorAll(selectors.newApp.composerButton)].pop();
   const inlinePlug = document.getElementById(INLINE_PLUG_ID);
 
-  if (!postButton || postButton.disabled) {
+  if (!postButton) {
     inlinePlug?.remove();
     return;
   }
@@ -189,6 +190,12 @@ const getNewAppScheduleButton = () => {
   const picker = trigger && document.getElementById(trigger.getAttribute("aria-controls"));
 
   return picker ? [...picker.querySelectorAll(selectors.newApp.composerButton)].pop() : null;
+};
+
+// Replies open the composer at /compose/post?in_reply_to=<id>
+const getNewAppReplyingToLink = () => {
+  const replyingTo = new URLSearchParams(window.location.search).get("in_reply_to");
+  return /^\d+$/.test(replyingTo ?? "") ? getNewAppPostUrl(replyingTo) : null;
 };
 
 const getNewAppPostUrl = (postId) => {

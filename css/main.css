@@ -297,6 +297,15 @@ html[data-app-version]:has(style#mt-style-grokDrawer) [data-slot="xds-dock-windo
   html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-searchBar):has(style#mt-style-hide-sidebar) main ~ aside > div > div > section:has(a[href^="/explore"]) {
     margin-top: 0;
   }
+  /* Shift the timeline 64px left, as the old app does, to clear the card */
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main {
+    margin-inline-start: max(88px, calc((100% - var(--x-main-column-width)) / 2 - 64px));
+  }
+}
+@media only screen and (min-width: 1280px) {
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)):not(:has(style#mt-style-removeLabels, style#mt-style-hideLabels)) main {
+    margin-inline-start: max(272px, calc((100% - var(--x-main-column-width)) / 2 - 64px));
+  }
 }
 
 /* Search Bar and Transparent Search Bar */
@@ -373,7 +382,7 @@ html[data-app-version]:has(style#mt-style-likeCount) [data-engagement-action="li
 }
 html[data-app-version]:has(style#mt-style-retweetCount) main a:is([href$="/retweets"], [href$="/quotes"]),
 html[data-app-version]:has(style#mt-style-likeCount) main a[href$="/likes"][href*="/status/"],
-html[data-app-version]:has(style#mt-style-followCount) a:is([href$="/following"], [href$="followers"]) {
+html[data-app-version]:has(style#mt-style-followCount) a:is([href$="/following"], [href$="/followers"], [href$="/verified_followers"]) {
   display: none;
 }
 

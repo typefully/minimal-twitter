@@ -283,8 +283,15 @@ const grokClickListener = () => {
   grokDrawer?.classList.add("typefully-grok-drawer-enabled");
 };
 
-// The drawer header this runs a ResizeObserver on, so repeated passes don't stack observers
+// One ResizeObserver at a time, on the current drawer header, so repeated passes don't stack observers
+let grokDrawerHeaderObserver = null;
 let observedGrokDrawerHeader = null;
+
+const stopObservingGrokDrawerHeader = () => {
+  grokDrawerHeaderObserver?.disconnect();
+  grokDrawerHeaderObserver = null;
+  observedGrokDrawerHeader = null;
+};
 
 export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   if (hideGrokDrawer === "off") {
@@ -296,6 +303,7 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
         grokButton.removeEventListener("click", grokClickListener);
       }
     });
+    stopObservingGrokDrawerHeader();
 
     return;
   }
@@ -317,6 +325,7 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   const grokDrawerHeader = document.querySelector(selectors.grokDrawerHeader);
   if (!grokDrawerHeader || grokDrawerHeader === observedGrokDrawerHeader) return;
 
+  stopObservingGrokDrawerHeader();
   observedGrokDrawerHeader = grokDrawerHeader;
   const observer = new ResizeObserver(async (entries) => {
     const entry = entries[0];
@@ -335,13 +344,11 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
         }`
         );
       }
-      observer.disconnect();
-      observedGrokDrawerHeader = null;
+      if (observer === grokDrawerHeaderObserver) stopObservingGrokDrawerHeader();
     }
   });
 
   // observe the grok drawer header to determine if the drawer has to be hidden or not.
-  if (grokDrawerHeader) {
-    observer.observe(grokDrawerHeader);
-  }
+  grokDrawerHeaderObserver = observer;
+  observer.observe(grokDrawerHeader);
 };

@@ -70,6 +70,9 @@ html[data-app-version] #typefully-link-inline {
   margin: 0;
   order: 0;
 }
+html[data-app-version] #typefully-link-inline:has(+ button:disabled) {
+  display: none;
+}
 
 #mt-typefullyGrowButton {
   width: 100%;
