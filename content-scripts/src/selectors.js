@@ -13,7 +13,7 @@ selectors.sidebarLinks = {
   explore: `${selectors.leftSidebar} [data-testid="AppTabBar_Explore_Link"]`,
   notifications: `${selectors.leftSidebar} [data-testid="AppTabBar_Notifications_Link"]`,
   messages: `${selectors.leftSidebar} [data-testid="AppTabBar_DirectMessage_Link"]`,
-  bookmarks: `${selectors.leftSidebar} a[href*="bookmarks"]`,
+  bookmarks: `${selectors.leftSidebar} a:is([href*="bookmarks"], [href="/i/history"])`,
   jobs: `${selectors.leftSidebar} a[href*="jobs"]`,
   articles: 'a[href="/compose/articles"]',
   topics: `${selectors.leftSidebar} a[href*=topics]`,
@@ -61,5 +61,17 @@ selectors.modalUi = `${selectors.modalWrapper} > div`;
 selectors.tweetButton = `[data-testid="SideNav_NewTweet_Button"]`;
 // Settings
 selectors.securityAndAccountAccess = `[data-testid="accountAccessScreen"]`;
+
+// X's rewritten web app has no data-testid attributes. Its layout rules live in css/main.css; these serve
+// the features that need JavaScript there.
+selectors.newApp = {};
+selectors.newApp.root = `html[data-app-version]`;
+selectors.newApp.nav = `[data-rail-overflow] nav`;
+selectors.newApp.navProfileLink = `${selectors.newApp.nav} > a:has(svg[data-icon="icon-person"])`;
+selectors.newApp.viewCount = `[role="group"] > :is(div:has(> a[href$="/analytics"]), [data-engagement-action="generic"])`;
+selectors.newApp.composerForm = `[data-media-upload-dropzone] form:has(textarea)`;
+selectors.newApp.composerDialog = `[role="dialog"][data-slot="xds-modal-surface"]:has([data-media-upload-dropzone] textarea)`;
+selectors.newApp.composerButton = `button[data-slot="xds-button"]`;
+selectors.newApp.composerScheduleTrigger = `${selectors.newApp.composerForm} button[aria-expanded="true"][aria-controls]:has(svg[data-icon="icon-calendar-schedule"])`;
 
 export default selectors;

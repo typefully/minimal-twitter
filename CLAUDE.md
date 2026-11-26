@@ -89,7 +89,7 @@ When the user explicitly prefers testing in their existing signed-in Chrome inst
 
 **Initialization** (content-scripts/src/modules/initialize.js):
 
-1. Loads stylesheets (local + CDN in production)
+1. Loads the bundled stylesheets, and in production starts fetching the CDN copy without waiting for it
 2. Applies static features once
 3. Runs dynamic features
 4. Sets up MutationObserver for DOM changes
@@ -114,6 +114,10 @@ When the user explicitly prefers testing in their existing signed-in Chrome inst
 - Functions typically add/remove CSS classes or inject styles to enable/disable features
 
 **Selectors** (content-scripts/src/selectors.js): **Critical file** containing all CSS selectors for Twitter UI elements. When Twitter changes their DOM structure, selectors break and need updating here. Selectors primarily use `data-testid` attributes (most stable), ARIA attributes, and structural CSS selectors. When fixing broken features, check this file first.
+
+X serves two web apps: the legacy one these selectors target, and a rewrite (`<html data-app-version>`, Tailwind/XDS markup, no `data-testid`) that reaches signed-in users country by country. Logged-out pages always get the rewrite, so open one (such as a public profile) to inspect it. X serves paths the rewrite lacks from the legacy app even to migrated accounts, so a signed-in account reaches the legacy app by opening one (such as `/i/topics/picker/home`) and then clicking Home, which stays in the legacy app's client-side router. Keep changes working on both, and scope old-layout CSS to an old-app element so it cannot leak into the rewrite.
+
+The rewrite's styling lives in the last section of `css/main.css`: each setting's rule keys on the `<style id="mt-style-…">` its content-script function injects, so installed versions get rule changes from the remote stylesheet without a store release. A new setting adds its rewrite rule there the same way; `selectors.newApp` holds the rewrite selectors that JavaScript features need. Its timeline is virtualized and keeps each item's first measured height, so hide timeline items by collapsing them to 1px from the start, as promoted posts do.
 
 ### Popup UI Structure
 
@@ -155,7 +159,7 @@ To add a new feature toggle:
 ## CSS and Styling
 
 - Main styles: `/css/main.css` and `/css/typefully.css`
-- In production, extension loads cached versions from GitHub CDN
+- In production, the extension also fetches the latest versions from GitHub's main branch in the background, into an element placed before the settings' styles. Settings never wait for that fetch: X's timeline keeps each post's first measured height, so a style that lands after the first posts render leaves gaps or overlaps
 - In development mode, only loads local CSS files
 - Content scripts inject styles dynamically via `addStyleSheet()` and `addStyles()` utilities
 

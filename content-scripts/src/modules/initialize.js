@@ -16,21 +16,30 @@ import { getStorage } from "./utilities/storage";
  * - Extracts Twitter theme colors
  */
 
+const fetchStylesheetsFromCDN = async (stylesheet) => {
+  try {
+    const texts = await Promise.all(
+      ["main", "typefully"].map(async (name) => {
+        const response = await fetch(`https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/${name}.css`);
+        return (await response.text()).trim();
+      })
+    );
+    stylesheet.textContent = texts.join("\n\n");
+  } catch (error) {
+    console.error("Can't fetch stylesheets from CDN", error);
+  }
+};
+
 export const addStylesheets = async () => {
   addStyleSheet("main", chrome.runtime.getURL("css/main.css"));
   addStyleSheet("typefully", chrome.runtime.getURL("css/typefully.css"));
 
   // Only fetch from CDN in production
   if (!(await isDevelopmentMode())) {
-    try {
-      const mainStylesheetFromCDN = await fetch("https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/main.css");
-      const typefullyStylesheetFromCDN = await fetch("https://raw.githubusercontent.com/typefully/minimal-twitter/main/css/typefully.css");
-      const mainText = (await mainStylesheetFromCDN.text()).trim();
-      const typefullyText = (await typefullyStylesheetFromCDN.text()).trim();
-      addStyleSheet("external", null, mainText.concat("\n\n").concat(typefullyText));
-    } catch (error) {
-      console.error("Can't fetch stylesheets from CDN", error);
-    }
+    // Settings apply with the bundled stylesheets without waiting for the CDN: X's timeline keeps each post's
+    // first measured height, so a setting that lands after the first posts render leaves gaps or overlaps.
+    // The CDN copy fills an element added now, so it still comes before the settings' styles in the cascade.
+    fetchStylesheetsFromCDN(addStyleSheet("external", null, "/* Loading from CDN */"));
   } else {
     console.log("🚧 Development mode, not adding CDN-cached stylesheets");
   }

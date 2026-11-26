@@ -65,6 +65,15 @@ body.mt-writerMode-on .typefully-save-draft-button {
   order: 1;
 }
 
+/* X's rewritten web app: the plug sits before the Post button, and the row's gap spaces it */
+html[data-app-version] #typefully-link-inline {
+  margin: 0;
+  order: 0;
+}
+html[data-app-version] #typefully-link-inline:has(+ button:disabled) {
+  display: none;
+}
+
 #mt-typefullyGrowButton {
   width: 100%;
   display: flex;

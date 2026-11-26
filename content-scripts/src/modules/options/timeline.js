@@ -3,78 +3,26 @@ import selectors from "../../selectors";
 import addStyles, { removeStyles, stylesExist } from "../utilities/addStyles";
 import { getStorage } from "../utilities/storage";
 
+const timelineWidths = [600, 650, 700, 750, 800];
+
 export const changeTimelineWidth = (timelineWidth) => {
-  switch (timelineWidth) {
-    case 600:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 600px;
-            max-width: 600px;
-          }
-        }
-        `
-      );
-      break;
+  if (!timelineWidths.includes(timelineWidth)) return;
 
-    case 650:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 650px;
-            max-width: 650px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 700:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 700px;
-            max-width: 700px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 750:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 750px;
-            max-width: 750px;
-          }
-        }
-        `
-      );
-      break;
-
-    case 800:
-      addStyles(
-        "timelineWidth",
-        `
-        @media only screen and (min-width: 988px) {
-          ${selectors.mainColumn} {
-            width: 800px;
-            max-width: 800px;
-          }
-        }
-        `
-      );
-      break;
-  }
+  addStyles(
+    "timelineWidth",
+    `
+    @media only screen and (min-width: 988px) {
+      ${selectors.mainColumn} {
+        width: ${timelineWidth}px;
+        max-width: ${timelineWidth}px;
+      }
+    }
+    /* X's rewritten web app reads this in css/main.css */
+    :root {
+      --mt-timeline-width: ${timelineWidth}px;
+    }
+    `
+  );
 };
 
 export const changeTimelineBorders = (timelineBorders) => {
@@ -209,7 +157,8 @@ export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
 };
 
 export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
-  if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
+  // The popup passes only the changed setting, so also check Writer Mode's style
+  if (writerMode === "on" || stylesExist("writerMode") || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
     removeStyles("trendsHomeTimeline");
     return;
   }
@@ -328,12 +277,24 @@ export const changeLatestTweets = (latestTweets) => {
   }
 };
 
-export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
-  const grokClickListener = () => {
-    const grokDrawer = document.querySelector(selectors.grokDrawer);
-    grokDrawer.classList.add("typefully-grok-drawer-enabled");
-  };
+// Module-level so the dynamic features pass can re-add it without stacking
+// listeners, and removeEventListener actually finds it.
+const grokClickListener = () => {
+  const grokDrawer = document.querySelector(selectors.grokDrawer);
+  grokDrawer?.classList.add("typefully-grok-drawer-enabled");
+};
 
+// One ResizeObserver at a time, on the current drawer header, so repeated passes don't stack observers
+let grokDrawerHeaderObserver = null;
+let observedGrokDrawerHeader = null;
+
+const stopObservingGrokDrawerHeader = () => {
+  grokDrawerHeaderObserver?.disconnect();
+  grokDrawerHeaderObserver = null;
+  observedGrokDrawerHeader = null;
+};
+
+export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   if (hideGrokDrawer === "off") {
     // remove event click listener from all grok buttons, when hideGrokDrawer is off
     const grokSvgs = document.querySelectorAll(selectors.grokSvg);
@@ -343,6 +304,7 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
         grokButton.removeEventListener("click", grokClickListener);
       }
     });
+    stopObservingGrokDrawerHeader();
 
     return;
   }
@@ -362,8 +324,10 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
   if (!grokDrawer) return;
 
   const grokDrawerHeader = document.querySelector(selectors.grokDrawerHeader);
-  if (!grokDrawerHeader) return;
+  if (!grokDrawerHeader || grokDrawerHeader === observedGrokDrawerHeader) return;
 
+  stopObservingGrokDrawerHeader();
+  observedGrokDrawerHeader = grokDrawerHeader;
   const observer = new ResizeObserver(async (entries) => {
     const entry = entries[0];
 
@@ -381,12 +345,11 @@ export const enableGrokDrawerOnGrokButtonClick = (hideGrokDrawer) => {
         }`
         );
       }
-      observer.disconnect();
+      if (observer === grokDrawerHeaderObserver) stopObservingGrokDrawerHeader();
     }
   });
 
   // observe the grok drawer header to determine if the drawer has to be hidden or not.
-  if (grokDrawerHeader) {
-    observer.observe(grokDrawerHeader);
-  }
+  grokDrawerHeaderObserver = observer;
+  observer.observe(grokDrawerHeader);
 };

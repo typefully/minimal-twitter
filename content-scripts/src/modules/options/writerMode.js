@@ -19,12 +19,18 @@ let t; // Typefully Plug timeout
 let zt1; // Zen Writer Mode timeout 1
 let zt2; // Zen Writer Mode timeout 2
 export const changeWriterMode = (writerMode) => {
-  if (window.location.pathname.includes("/home") || window.location.pathname === "/" || window.location.pathname.includes("/compose/tweet")) {
+  // X now opens its composer at /compose/post (it was /compose/tweet), so keep Writer Mode on behind it
+  const { pathname } = window.location;
+  if (pathname.includes("/home") || pathname === "/" || pathname.includes("/compose/tweet") || pathname.includes("/compose/post")) {
     switch (writerMode) {
       case "on":
         document.addEventListener("keydown", escKeyListener);
 
-        if (stylesExist("writerMode")) return;
+        if (stylesExist("writerMode")) {
+          // Writer Mode can start on the composer route, where the plug isn't added, so add it once back on Home
+          addTypefullyPlugToWriterMode();
+          return;
+        }
 
         clearTimeout(zt1);
         zt1 = setTimeout(() => {
@@ -110,7 +116,8 @@ export const changeWriterMode = (writerMode) => {
 
 export const addTypefullyPlugToWriterMode = async () => {
   if (window.location.pathname.includes("/home") || window.location.pathname === "/") {
-    const main = document.querySelector('main[role="main"]');
+    // X's rewritten web app has a plain <main> around the timeline column
+    const main = document.querySelector('main[role="main"]') || document.querySelector(`${selectors.newApp.root} main`);
 
     if (!main) return;
     if (document.getElementById("typefully-writermode-link")) return;
@@ -158,7 +165,8 @@ export const removeTypefullyPlugFromWriterMode = () => {
   const typefullyLinkElement = document.getElementById("typefully-writermode-link");
   typefullyLinkElement && typefullyLinkElement.remove();
 
-  const typefullyBox = document.getElementById("typefully-callout-box");
+  // Only Writer Mode's own callout in <main>: the composer dialog's shares the id
+  const typefullyBox = document.querySelector("main > #typefully-callout-box");
   typefullyBox && typefullyBox.remove();
 };
 

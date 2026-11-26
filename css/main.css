@@ -23,6 +23,43 @@ html:has(style#mt-style-removeTimelineTabs) [data-testid="primaryColumn"] > div 
   display: none;
 }
 
+/* 6.5.0 and earlier pad the body for the old fixed navigation (leftSidebarPosition.js),
+   which shifts X's rewritten web app: it has no header[role="banner"]. */
+html[data-app-version]:has(style#mt-style-navigation-position) body {
+  padding-left: 0;
+}
+
+/* X replaced the Bookmarks navigation link with History, which 6.5.0's injected selector doesn't match */
+html:has(style#mt-style-bookmarks) header[role="banner"] nav a[href="/i/history"] {
+  display: none;
+}
+
+/* Trends on Home Timeline */
+@media only screen and (min-width: 1265px) {
+  /* 6.5.0 and earlier unset the card's top while the search bar shows, which drops it below the sidebar's hidden sections */
+  html:has(style#mt-style-trendsHomeTimeline):not(:has(style#mt-style-searchBar)) [data-testid="sidebarColumn"] section[aria-labelledby^="accessible-list-"] {
+    top: 66px;
+  }
+  /* With icon-only navigation, shift the timeline past 64px when needed to keep it 24px clear of the card
+     (100% is the column's own width here) */
+  html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-removeLabels, style#mt-style-hideLabels) [data-testid="primaryColumn"] {
+    transform: translateX(min(-64px, calc((100vw - 100%) / 2 - 340px)));
+  }
+}
+/* At exactly 1265px the body still has the navigation's 88px padding */
+@media only screen and (width: 1265px) {
+  html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-removeLabels, style#mt-style-hideLabels) [data-testid="primaryColumn"] {
+    transform: translateX(min(-64px, calc((100vw - 88px - 100%) / 2 - 340px)));
+  }
+}
+/* 6.5.0 and earlier keep the trends style when Trends is turned on during Writer Mode */
+html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-writerMode) [data-testid="primaryColumn"] {
+  transform: none;
+}
+html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-writerMode) [data-testid="sidebarColumn"] section[aria-labelledby^="accessible-list-"] {
+  display: none;
+}
+
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
@@ -178,4 +215,234 @@ html:has(style#mt-style-removeTimelineTabs) [data-testid="primaryColumn"] > div 
 .mt-tooltip .description {
   color: var(--secondary-text-color);
   font-size: 12.5px;
+}
+
+/* --------------------------------------------------------------------------------------------------------
+   X's rewritten web app (<html data-app-version>) has no data-testid attributes, so the rules above don't
+   match it. Each setting below keys on the <style id="mt-style-…"> element the content script injects for
+   that setting, which lets installed versions pick these rules up from this remotely loaded stylesheet.
+   -------------------------------------------------------------------------------------------------------- */
+
+/* Remove Promoted Posts. Ads have no timestamp link: a plain link ("Ad") sits right before the More button.
+   The timeline is virtualized and keeps an item's first measured height, so ads collapse to 1px from the
+   start instead of disappearing (0px makes it fall back to a 400px estimate). */
+html[data-app-version]:not(:has(style#mt-style-removePromotedPosts)) main li[data-index]:has(article div > a:not([href*="/status/"]) + button[data-slot="xds-menu-trigger"]) {
+  height: 1px !important;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+/* Hide the closed Chat launcher like the old Messages drawer, and Grok's with "Hide Grok Drawer".
+   An open window (a post's Grok button opens one) stays visible. */
+html[data-app-version] [data-slot="xds-dock-window"][data-closed]:not(:has(> [data-slot="xds-dock-launcher"] svg[data-icon="icon-logo-grok"])),
+html[data-app-version]:has(style#mt-style-grokDrawer) [data-slot="xds-dock-window"][data-closed]:has(> [data-slot="xds-dock-launcher"] svg[data-icon="icon-logo-grok"]) {
+  display: none;
+}
+
+/* Layout: navigation fixed to the left, timeline centered in the window, floating Post button and search.
+   X shows its right sidebar from 1024px, and expands the navigation from 1280px. */
+@media only screen and (min-width: 1024px) {
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) [class*="--x-main-column-width:"] {
+    --x-main-column-width: var(--mt-timeline-width, 700px);
+    max-width: none;
+  }
+
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) div:has(> div > [data-rail-overflow]) {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 20;
+  }
+
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) div:has(> main) {
+    display: block;
+  }
+
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main {
+    --x-timeline-max-width: 100%;
+    width: var(--x-main-column-width);
+    max-width: var(--x-main-column-width);
+    margin-inline: auto;
+  }
+
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) #sidebar-compose-post {
+    --x-sidebar-expanded: 0;
+    position: fixed;
+    inset-inline-end: 16px;
+    bottom: 24px;
+  }
+  /* Above X's Grok launcher, which takes the same corner when "Hide Grok Drawer" is off */
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle, style#mt-style-grokDrawer)):has([data-slot="xds-dock-launcher"] svg[data-icon="icon-logo-grok"]) #sidebar-compose-post {
+    inset-inline-end: 22px;
+    bottom: 92px;
+  }
+
+  html[data-app-version]:has(style#mt-style-hide-sidebar) main ~ aside {
+    position: fixed;
+    top: 0;
+    inset-inline-end: 0;
+    z-index: 20;
+    width: auto;
+    height: auto;
+  }
+  html[data-app-version]:has(style#mt-style-hide-sidebar) main ~ aside > div > div:first-child,
+  html[data-app-version]:has(style#mt-style-hide-sidebar) main ~ aside > div > div > :is(section, nav) {
+    display: none;
+  }
+  html[data-app-version]:has(style#mt-style-hide-sidebar) main ~ aside > div > div > div:has(form[role="search"]) {
+    align-self: flex-end;
+  }
+  html[data-app-version]:has(style#mt-style-hide-sidebar) main ~ aside form[role="search"] {
+    width: 150px;
+    transition: width 0.2s ease;
+  }
+  html[data-app-version]:has(style#mt-style-hide-sidebar) main ~ aside form[role="search"]:focus-within {
+    width: 350px;
+  }
+
+  /* Remove Timeline Borders */
+  html[data-app-version]:has(style#mt-style-timelineBorders) main {
+    border-inline-color: transparent;
+  }
+}
+
+/* From 1280px X expands the navigation to 256px: keep wide timelines clear of it */
+@media only screen and (min-width: 1280px) {
+  html[data-app-version]:has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)):not(:has(style#mt-style-removeLabels, style#mt-style-hideLabels)) main {
+    margin-inline-start: max(272px, calc((100% - var(--x-main-column-width)) / 2));
+  }
+  html[data-app-version]:has(style#mt-style-hideLabels) div:has(> [data-rail-overflow]):hover {
+    background-color: var(--x-bg-primary);
+  }
+}
+
+/* Trends on Home Timeline: the sidebar's trends card floats next to the timeline */
+@media only screen and (min-width: 1265px) {
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar) main ~ aside > div > div > section:has(a[href^="/explore"]) {
+    display: block;
+    width: 300px;
+    max-height: 78vh;
+    margin-top: 12px;
+    overflow: auto;
+  }
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-searchBar):has(style#mt-style-hide-sidebar) main ~ aside > div > div > section:has(a[href^="/explore"]) {
+    margin-top: 0;
+  }
+  /* Shift the timeline 64px left, as the old app does, and further if needed to keep it 24px clear of the card,
+     but never into the navigation: X's 72px icon rail here, its 256px expanded navigation from 1280px */
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar) {
+    --mt-trends-nav-end: 88px;
+  }
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle, style#mt-style-writerMode)) main {
+    margin-inline-start: max(var(--mt-trends-nav-end), min(calc((100% - var(--x-main-column-width)) / 2 - 64px), calc(100% - var(--x-main-column-width) - 348px)));
+  }
+  /* Once the timeline can't move further, the card narrows to the room beside it, then hides below 220px */
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main ~ aside {
+    container: mt-trends / inline-size;
+    width: min(348px, calc(100% - var(--mt-trends-nav-end) - var(--mt-timeline-width, 700px)));
+  }
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main ~ aside > div > div > section:has(a[href^="/explore"]) {
+    width: auto;
+  }
+  @container mt-trends (width < 268px) {
+    html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main ~ aside > div > div > section:has(a[href^="/explore"]) {
+      display: none;
+    }
+  }
+}
+@media only screen and (min-width: 1280px) {
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):not(:has(style#mt-style-removeLabels, style#mt-style-hideLabels)) {
+    --mt-trends-nav-end: 272px;
+  }
+}
+
+/* Search Bar and Transparent Search Bar */
+html[data-app-version]:has(style#mt-style-searchBar) main ~ aside form[role="search"] {
+  display: none;
+}
+html[data-app-version]:has(style#mt-style-transparentSearch) main ~ aside form[role="search"] [data-slot="xds-combobox-input-group"] {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* Navigation labels: "never" and "hover" collapse X's own sidebar to its icon rail */
+html[data-app-version]:has(style#mt-style-removeLabels) div:has(> [data-rail-overflow]),
+html[data-app-version]:has(style#mt-style-hideLabels) div:has(> [data-rail-overflow]):not(:hover) {
+  --x-sidebar-open: 0;
+}
+
+/* Sidebar Logo, Center Navigation, Post button */
+html[data-app-version]:has(style#mt-style-logo) div:has(> [data-rail-overflow]) > :first-child:not([data-rail-overflow]) {
+  display: none;
+}
+html[data-app-version]:has(style#mt-style-navigationCenter) [data-rail-overflow] {
+  justify-content: center;
+}
+html[data-app-version]:has(style#mt-style-tweetButton) #sidebar-compose-post {
+  visibility: hidden;
+}
+
+/* Navigation buttons. X moved Bookmarks into History, and the Profile link's href is the user's handle. */
+html[data-app-version]:has(style#mt-style-home) [data-rail-overflow] nav > a[href="/home"],
+html[data-app-version]:has(style#mt-style-explore) [data-rail-overflow] nav > a[href="/explore"],
+html[data-app-version]:has(style#mt-style-notifications) [data-rail-overflow] nav > a[href="/notifications"],
+html[data-app-version]:has(style#mt-style-messages) [data-rail-overflow] nav > a:is([href="/i/chat"], [href="/messages"], [href^="/messages/"]),
+html[data-app-version]:has(style#mt-style-grok) [data-rail-overflow] nav > a[href*="grok"]:not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-xPremium) [data-rail-overflow] nav > a[href*="premium"]:not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-bookmarks) [data-rail-overflow] nav > a:is([href="/i/history"], [href*="bookmarks"]):not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-jobs) [data-rail-overflow] nav > a[href*="jobs"]:not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-articles) [data-rail-overflow] nav > a[href="/compose/articles"],
+html[data-app-version]:has(style#mt-style-communities) [data-rail-overflow] nav > a[href*="communities"]:not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-topics) [data-rail-overflow] nav > a[href*="topics"]:not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-lists) [data-rail-overflow] nav > a[href*="lists"]:not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-verifiedOrgs) [data-rail-overflow] nav > a[href*="verified-orgs"]:not(:has(svg[data-icon="icon-person"])),
+html[data-app-version]:has(style#mt-style-profile) [data-rail-overflow] nav > a:has(svg[data-icon="icon-person"]),
+html[data-app-version]:has(style#mt-style-analytics) [data-rail-overflow] nav > .mt-sidebar-button[data-mt-name="Analytics"] {
+  display: none;
+}
+
+/* Unread Count Badge: the account button's dot, and badges added next to navigation icons */
+html[data-app-version]:has(style#mt-style-unreadCountBadge) div:has(> [data-rail-overflow]) button[data-slot="xds-menu-trigger"] .bg-btn-brand,
+html[data-app-version]:has(style#mt-style-unreadCountBadge) [data-rail-overflow] nav a span[aria-hidden="true"].relative > :not(:first-child) {
+  display: none;
+}
+
+/* Timeline Tabs (only injected on Home) */
+html[data-app-version]:has(style#mt-style-removeTimelineTabs) main header [data-orientation="horizontal"]:has([role="tablist"]) {
+  display: none;
+}
+
+/* Sticky Header off */
+html[data-app-version]:has(style#mt-style-stickyHeader) main header[data-page-header] {
+  position: static;
+}
+
+/* Remove Tweet Borders */
+html[data-app-version]:has(style#mt-style-tweetBorders) main li[data-index] > * {
+  border-bottom-color: transparent;
+}
+
+/* Vanity counts */
+html[data-app-version]:has(style#mt-style-replyCount) [data-engagement-action="reply"] span[dir],
+html[data-app-version]:has(style#mt-style-retweetCount) [data-engagement-action="retweet"] span[dir],
+html[data-app-version]:has(style#mt-style-likeCount) [data-engagement-action="like"] span[dir] {
+  visibility: hidden;
+}
+html[data-app-version]:has(style#mt-style-retweetCount) main a:is([href$="/retweets"], [href$="/quotes"]),
+html[data-app-version]:has(style#mt-style-likeCount) main a[href$="/likes"][href*="/status/"],
+html[data-app-version]:has(style#mt-style-followCount) a:is([href$="/following"], [href$="/followers"], [href$="/verified_followers"]) {
+  display: none;
+}
+
+/* Zen Writer Mode (only injected on Home): just the composer */
+html[data-app-version]:has(style#mt-style-writerMode) :is(div:has(> div > [data-rail-overflow]), aside, main header, [data-slot="xds-dock"]),
+html[data-app-version]:has(style#mt-style-writerMode) main > div:first-child > :not([data-media-upload-dropzone]) {
+  display: none;
+}
+html[data-app-version]:has(style#mt-style-writerMode) main {
+  padding-top: 3vh;
+  border-color: transparent;
+}
+html[data-app-version]:has(style#mt-style-writerMode) main textarea {
+  min-height: 40vh;
 }

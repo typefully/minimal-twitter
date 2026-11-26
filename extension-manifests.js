@@ -73,7 +73,8 @@ export const MANIFEST_FIREFOX = {
   },
   content_scripts: [
     {
-      run_at: "document_idle",
+      // As in Chrome: X's timeline keeps each post's first measured height, so styles must land before posts render
+      run_at: "document_end",
       matches: contentScriptMatches,
       js: ["dist/main.js"],
     },
