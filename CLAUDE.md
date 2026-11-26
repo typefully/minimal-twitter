@@ -89,7 +89,7 @@ When the user explicitly prefers testing in their existing signed-in Chrome inst
 
 **Initialization** (content-scripts/src/modules/initialize.js):
 
-1. Loads stylesheets (local + CDN in production)
+1. Loads the bundled stylesheets, and in production starts fetching the CDN copy without waiting for it
 2. Applies static features once
 3. Runs dynamic features
 4. Sets up MutationObserver for DOM changes
@@ -159,7 +159,7 @@ To add a new feature toggle:
 ## CSS and Styling
 
 - Main styles: `/css/main.css` and `/css/typefully.css`
-- In production, extension loads cached versions from GitHub CDN
+- In production, the extension also fetches the latest versions from GitHub's main branch in the background, into an element placed before the settings' styles. Settings never wait for that fetch: X's timeline keeps each post's first measured height, so a style that lands after the first posts render leaves gaps or overlaps
 - In development mode, only loads local CSS files
 - Content scripts inject styles dynamically via `addStyleSheet()` and `addStyles()` utilities
 
