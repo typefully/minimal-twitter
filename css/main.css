@@ -40,16 +40,24 @@ html:has(style#mt-style-bookmarks) header[role="banner"] nav a[href="/i/history"
   html:has(style#mt-style-trendsHomeTimeline):not(:has(style#mt-style-searchBar)) [data-testid="sidebarColumn"] section[aria-labelledby^="accessible-list-"] {
     top: 66px;
   }
-  /* With icon-only navigation, shift the timeline past 64px when needed to keep it 24px clear of the card */
+  /* With icon-only navigation, shift the timeline past 64px when needed to keep it 24px clear of the card
+     (100% is the column's own width here) */
   html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-removeLabels, style#mt-style-hideLabels) [data-testid="primaryColumn"] {
-    transform: translateX(min(-64px, calc((100vw - var(--mt-timeline-width, 700px)) / 2 - 340px)));
+    transform: translateX(min(-64px, calc((100vw - 100%) / 2 - 340px)));
   }
 }
 /* At exactly 1265px the body still has the navigation's 88px padding */
 @media only screen and (width: 1265px) {
   html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-removeLabels, style#mt-style-hideLabels) [data-testid="primaryColumn"] {
-    transform: translateX(min(-64px, calc((100vw - 88px - var(--mt-timeline-width, 700px)) / 2 - 340px)));
+    transform: translateX(min(-64px, calc((100vw - 88px - 100%) / 2 - 340px)));
   }
+}
+/* 6.5.0 and earlier keep the trends style when Trends is turned on during Writer Mode */
+html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-writerMode) [data-testid="primaryColumn"] {
+  transform: none;
+}
+html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-writerMode) [data-testid="sidebarColumn"] section[aria-labelledby^="accessible-list-"] {
+  display: none;
 }
 
 /* Twitter has a large screen breakpoint at 1000px */
@@ -325,7 +333,7 @@ html[data-app-version]:has(style#mt-style-grokDrawer) [data-slot="xds-dock-windo
   html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar) {
     --mt-trends-nav-end: 88px;
   }
-  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main {
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle, style#mt-style-writerMode)) main {
     margin-inline-start: max(var(--mt-trends-nav-end), min(calc((100% - var(--x-main-column-width)) / 2 - 64px), calc(100% - var(--x-main-column-width) - 348px)));
   }
   /* Once the timeline can't move further, the card narrows to the room beside it, then hides below 220px */

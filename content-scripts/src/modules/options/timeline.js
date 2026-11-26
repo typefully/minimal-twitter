@@ -157,7 +157,8 @@ export const changeTimelineTabs = (removeTimelineTabs, writerMode) => {
 };
 
 export const changeTrendsHomeTimeline = (trendsHomeTimeline, writerMode) => {
-  if (writerMode === "on" || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
+  // The popup passes only the changed setting, so also check Writer Mode's style
+  if (writerMode === "on" || stylesExist("writerMode") || window.location.pathname.includes("compose/tweet") || !window.location.pathname.includes("/home") || !window.location.pathname === "/") {
     removeStyles("trendsHomeTimeline");
     return;
   }
