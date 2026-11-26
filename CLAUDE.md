@@ -180,7 +180,7 @@ To add a new feature toggle:
 
 2. Run `pnpm build` in a PTY and enter `All`. Wait for both ZIPs, run `unzip -t` on them, and confirm both embedded manifests contain the new version.
 
-3. Open the existing `bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj` in Xcode. Test and archive the macOS scheme without regenerating the project.
+3. Open the existing `bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj` in Xcode. Test and archive the macOS scheme without regenerating the project. From a shell: `xcodebuild archive -project "bundle/safari/Minimal Twitter/Minimal Twitter.xcodeproj" -scheme "Minimal Twitter (macOS)" -destination "generic/platform=macOS" -archivePath <path>.xcarchive -allowProvisioningUpdates`. Uploading the archive (Organizer, or `xcodebuild -exportArchive` with `method` `app-store-connect` and `destination` `upload`) needs an Apple account with App Store Connect access to the Typefully team in Xcode → Settings → Accounts.
 
 4. Stage only the intended release files, then commit and tag:
    ```bash
