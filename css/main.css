@@ -34,6 +34,24 @@ html:has(style#mt-style-bookmarks) header[role="banner"] nav a[href="/i/history"
   display: none;
 }
 
+/* Trends on Home Timeline */
+@media only screen and (min-width: 1265px) {
+  /* 6.5.0 and earlier unset the card's top while the search bar shows, which drops it below the sidebar's hidden sections */
+  html:has(style#mt-style-trendsHomeTimeline):not(:has(style#mt-style-searchBar)) [data-testid="sidebarColumn"] section[aria-labelledby^="accessible-list-"] {
+    top: 66px;
+  }
+  /* With icon-only navigation, shift the timeline past 64px when needed to keep it 24px clear of the card */
+  html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-removeLabels, style#mt-style-hideLabels) [data-testid="primaryColumn"] {
+    transform: translateX(min(-64px, calc((100vw - var(--mt-timeline-width, 700px)) / 2 - 340px)));
+  }
+}
+/* At exactly 1265px the body still has the navigation's 88px padding */
+@media only screen and (width: 1265px) {
+  html:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-removeLabels, style#mt-style-hideLabels) [data-testid="primaryColumn"] {
+    transform: translateX(min(-64px, calc((100vw - 88px - var(--mt-timeline-width, 700px)) / 2 - 340px)));
+  }
+}
+
 /* Twitter has a large screen breakpoint at 1000px */
 /* Twitter web's small screen styles (< 988px) are minimal */
 @media only screen and (min-width: 1000px) {
@@ -302,14 +320,31 @@ html[data-app-version]:has(style#mt-style-grokDrawer) [data-slot="xds-dock-windo
   html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-searchBar):has(style#mt-style-hide-sidebar) main ~ aside > div > div > section:has(a[href^="/explore"]) {
     margin-top: 0;
   }
-  /* Shift the timeline 64px left, as the old app does, to clear the card */
+  /* Shift the timeline 64px left, as the old app does, and further if needed to keep it 24px clear of the card,
+     but never into the navigation: X's 72px icon rail here, its 256px expanded navigation from 1280px */
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar) {
+    --mt-trends-nav-end: 88px;
+  }
   html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main {
-    margin-inline-start: max(88px, calc((100% - var(--x-main-column-width)) / 2 - 64px));
+    margin-inline-start: max(var(--mt-trends-nav-end), min(calc((100% - var(--x-main-column-width)) / 2 - 64px), calc(100% - var(--x-main-column-width) - 348px)));
+  }
+  /* Once the timeline can't move further, the card narrows to the room beside it, then hides below 220px */
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main ~ aside {
+    container: mt-trends / inline-size;
+    width: min(348px, calc(100% - var(--mt-trends-nav-end) - var(--mt-timeline-width, 700px)));
+  }
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main ~ aside > div > div > section:has(a[href^="/explore"]) {
+    width: auto;
+  }
+  @container mt-trends (width < 268px) {
+    html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)) main ~ aside > div > div > section:has(a[href^="/explore"]) {
+      display: none;
+    }
   }
 }
 @media only screen and (min-width: 1280px) {
-  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):has(style#mt-style-navigation-position):has(main[class*="max-w-(--x-main-column-width)"]):not(:has(style#mt-style-customDMsAndSearchStyle)):not(:has(style#mt-style-removeLabels, style#mt-style-hideLabels)) main {
-    margin-inline-start: max(272px, calc((100% - var(--x-main-column-width)) / 2 - 64px));
+  html[data-app-version]:has(style#mt-style-trendsHomeTimeline):has(style#mt-style-hide-sidebar):not(:has(style#mt-style-removeLabels, style#mt-style-hideLabels)) {
+    --mt-trends-nav-end: 272px;
   }
 }
 

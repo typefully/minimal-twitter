@@ -113,14 +113,8 @@ export const changeHideSearchBar = (searchBar) => {
 
     case "on":
       removeStyles("searchBar");
-      addStyles(
-        "trendsHomeTimeline-more",
-        `@media only screen and (min-width: 1265px) {
-          ${selectors.rightSidebar} section[aria-labelledby^="accessible-list-"] {
-            top: unset;
-          }
-        }`
-      );
+      // Keep the trends card's own top: unsetting it dropped the card below the sidebar's hidden sections
+      removeStyles("trendsHomeTimeline-more");
       break;
   }
 };
