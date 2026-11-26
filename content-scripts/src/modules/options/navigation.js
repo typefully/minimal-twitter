@@ -189,6 +189,7 @@ align-items: flex-start;
   switch (setting) {
     case "never":
       addStyleToRemoveLabels();
+      removeStyles("hideLabels");
       removeStyles("showLabelsOnHover");
 
       break;
